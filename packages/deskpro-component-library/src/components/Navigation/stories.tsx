@@ -49,6 +49,7 @@ storiesOf('Navigation',module)
 				name
 			}
 		}`)) */
-	.add('with text', () => (
+	.addDecorator(story => <div style={{ border: '1px solid green' }}>{story()}</div>)
+	.add('with local mocked data', () => (
 		<Navigation navData={testData}></Navigation>
 	));
