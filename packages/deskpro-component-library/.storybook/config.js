@@ -3,6 +3,7 @@ import { configure, addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../src/components/Theme';
+import Main from '../src/components/Main';
 
 const req = require.context('../src/components', true, /.stories.tsx$/);
 
@@ -12,7 +13,9 @@ function loadStories() {
 
 addDecorator((story) => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    {story()}
+    <Main>
+      {story()}
+    </Main>
   </ThemeProvider>
 ))
 

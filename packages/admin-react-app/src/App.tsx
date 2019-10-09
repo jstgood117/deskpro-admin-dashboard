@@ -1,14 +1,19 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 
 import AdminNav from "./components/Sidebar";
 import Router from "./components/Router";
 
+const Grid = styled.div`
+	display: inline-grid;
+	grid-template-columns: auto auto;
+`
 
 const App: React.SFC = () => (
-  <Fragment>
+  <Grid>
 		<AdminNav />
 		<Router />
-	</Fragment>
+	</Grid>
 )
 
 export default App;

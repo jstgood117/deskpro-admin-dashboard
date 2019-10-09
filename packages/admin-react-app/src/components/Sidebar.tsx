@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sidebar As SidebarRender } from 'deskpro-component-library';
+import { Sidebar } from 'deskpro-component-library';
 
 const testData = [
 	{
@@ -36,10 +36,19 @@ const testData = [
 			},			
 		]
 	},
+	{
+		'sectionName': 'Agents',
+		'navItems': [
+			{
+				'navItemName': 'Agent',
+				'url': '/agent',
+			},			
+		]
+	},
 ]
 
-const Sidebar: React.SFC = () => (
-  <SidebarRender navData={testData} />
+const SidebarWrapper: React.SFC = () => (
+  <Sidebar navData={testData} />
 );
 
-export default Sidebar;
+export default SidebarWrapper;

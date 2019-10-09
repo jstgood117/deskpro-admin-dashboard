@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 const MainStyled = styled.main`
 	background-color: #fff;
-	color: #000;
-	padding: 20px;
-	border: 1px solid green;
+	font-size: 14px;
+	font-family: ${props => props.theme.mainFont};
 `;
 
 export interface IProps {
