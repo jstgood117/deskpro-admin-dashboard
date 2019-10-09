@@ -3,7 +3,6 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { ITableColumns, ITableData } from '../../resources/interfaces';
 import { DeskproAdminTheme } from '../Theme';
-import { sort } from 'shelljs';
 
 const DataTable = require('ts-react-json-table');
 //const DataTable = require('react-data-table-component');
@@ -64,6 +63,10 @@ class Table extends Component<IProps, IState> {
 			// sort: false, 
 			data: this.props.data
 		};
+	}
+
+	componentWillReceiveProps() {
+			
 	}
 
 	onClickHeader = (e: any, column: string) => {

@@ -1,8 +1,10 @@
 import React, { ReactNode, SFC } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+import { DeskproAdminTheme } from '../Theme';
 
 const MainStyled = styled.main`
-	background-color: #fff;
+	padding: 34px;
 	font-size: 14px;
 	font-family: ${props => props.theme.mainFont};
 `;
@@ -12,11 +14,9 @@ export interface IProps {
 }
 
 const Main: SFC<IProps> = (props) => (
-	<MainStyled>{props.children}</MainStyled>
+  <ThemeProvider theme={DeskproAdminTheme}>
+		<MainStyled>{props.children}</MainStyled>
+	</ThemeProvider>
 );
-
-Main.defaultProps = {
-  children: null,
-};
 
 export default Main;

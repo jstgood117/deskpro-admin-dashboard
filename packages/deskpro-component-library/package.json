@@ -1,6 +1,6 @@
 {
   "name": "deskpro-component-library",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "",
   "keywords": [],
   "main": "dist/deskpro-component-library.umd.js",
@@ -9,7 +9,7 @@
   "files": [
     "dist"
   ],
-  "author": "Paul <paul@modezero.net>",
+  "author": "Deskpro",
   "repository": {
     "type": "git",
     "url": ""
@@ -135,7 +135,6 @@
     "@types/styled-components": "^4.1.19",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
-    "react-data-table-component": "^3.5.1",
     "react-docgen-typescript-loader": "^3.3.0",
     "react-router-dom": "^5.1.2",
     "styled-components": "^4.4.0",

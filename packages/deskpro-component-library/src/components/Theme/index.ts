@@ -1,5 +1,5 @@
 export const DeskproAdminTheme = {
-  mainFont: 'Leto, sans-serif',
+  mainFont: 'Lato, sans-serif',
   headerFont: 'Rubik, sans-serif',
 
   staticColour: '#4c4f50',
@@ -16,6 +16,7 @@ export const DeskproAdminTheme = {
   lightBlue: '#9FCCF3',
   warningColour: '#FD667F',
   successColour: '#5BB6B1',
+  pageHeader: '#E1EEFB',
 }
 
 export default {};

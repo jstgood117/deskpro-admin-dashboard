@@ -5,6 +5,11 @@
 
 // export { DeskproAdminTheme } from './Theme';
 export { default as Button } from './Button';
+export { default as Grid } from './Grid';
+export { default as Header } from './Grid';
 export { default as Main } from './Main';
 export { default as Sidebar } from './Sidebar';
+export { default as Table } from './Table';
 export { default as Text } from './Text';
+
+export { default as styled } from 'styled-components';

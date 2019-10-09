@@ -1,17 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { SFC } from 'react';
+import { styled, Grid } from 'deskpro-component-library';
 
-import AdminNav from "./components/Sidebar";
+import Sidebar from "./components/Sidebar";
 import Router from "./components/Router";
 
-const Grid = styled.div`
-	display: inline-grid;
-	grid-template-columns: auto auto;
-`
-
-const App: React.SFC = () => (
+const App: SFC = () => (
   <Grid>
-		<AdminNav />
+		<Sidebar />
 		<Router />
 	</Grid>
 )

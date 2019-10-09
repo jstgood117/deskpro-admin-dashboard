@@ -75,9 +75,4 @@ const Text: SFC<IProps & IStyleProps> = (props) => (
 	</ThemeProvider>
 );
 
-Text.defaultProps = {
-  children: null,
-  onClick: () => {},
-};
-
 export default Text;
