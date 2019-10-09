@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - "12"
+cache:
+  npm: true
+  directories:
+    - ./node_modules
+    - ./packages/admin-react-app/node_modules
+    - ./packages/deskpro-component-library/node_modules
+install:
+  - npm install
+  - npm run lerna bootstrap
+script:
+  - npm run lerna run --scope deskpro-component-library test:prod
+  - npm run lerna run --scope deskpro-admin-frontend test
+  - npm run lerna run --scope deskpro-component-library build-storybook
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GH_TOKEN
+    keep-history: true
+    local-dir: ./packages/deskpro-component-library/storybook-static
+    on:
+      branch: master
