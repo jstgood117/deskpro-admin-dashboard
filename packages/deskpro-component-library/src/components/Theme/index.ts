@@ -17,6 +17,8 @@ export const DeskproAdminTheme = {
   warningColour: '#FD667F',
   successColour: '#5BB6B1',
   pageHeader: '#E1EEFB',
+
+  pagePadding: '34px',
 }
 
 export default {};
