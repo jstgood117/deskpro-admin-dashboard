@@ -1,4 +1,4 @@
-import DummyClass from "../src/desktop-component-library"
+import DummyClass from "../src/deskpro-component-library"
 
 /**
  * Dummy test

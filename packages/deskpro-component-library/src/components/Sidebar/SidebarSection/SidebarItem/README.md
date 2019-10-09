@@ -1,20 +1,20 @@
 ---
-name: Navigation
+name: SidebarItem
 menu: Components
-route: /components/Navigation
+route: /components/SidebarItem
 ---
 
-import Navigation from './';
+import SidebarItem from './';
 import { Playground, Props } from 'docz';
 
-# Navigation
+# SidebarItem
 
 This component renders an HTML `<button>` and passes along all props.
 
-<Props of={Navigation} />
+<Props of={SidebarItem} />
 
 ## Example Usage
 
 <Playground>
-	<Navigation>I'm a Navigation!</Navigation>
+	<SidebarItem>I'm a SidebarItem!</SidebarItem>
 </Playground>

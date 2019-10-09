@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Main, Button } from 'desktop-component-library';
+import { Main, Button } from 'deskpro-component-library';
 
 const Page: React.SFC = () => (
   <Main>

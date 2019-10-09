@@ -1,11 +1,11 @@
 {
-  "name": "desktop-component-library",
+  "name": "deskpro-component-library",
   "version": "0.0.9",
   "description": "",
   "keywords": [],
-  "main": "dist/desktop-component-library.umd.js",
-  "module": "dist/desktop-component-library.es5.js",
-  "typings": "dist/types/desktop-component-library.d.ts",
+  "main": "dist/deskpro-component-library.umd.js",
+  "module": "dist/deskpro-component-library.es5.js",
+  "typings": "dist/types/deskpro-component-library.d.ts",
   "files": [
     "dist"
   ],

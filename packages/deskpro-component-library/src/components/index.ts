@@ -6,5 +6,5 @@
 // export { DeskproAdminTheme } from './Theme';
 export { default as Button } from './Button';
 export { default as Main } from './Main';
-export { default as Navigation } from './Navigation';
+export { default as Sidebar } from './Sidebar';
 export { default as Text } from './Text';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation } from 'desktop-component-library';
+import { Sidebar As SidebarRender } from 'deskpro-component-library';
 
 const testData = [
 	{
@@ -38,8 +38,8 @@ const testData = [
 	},
 ]
 
-const AdminNav: React.SFC = () => (
-  <Navigation navData={testData}></Navigation>
+const Sidebar: React.SFC = () => (
+  <SidebarRender navData={testData} />
 );
 
-export default AdminNav;
+export default Sidebar;

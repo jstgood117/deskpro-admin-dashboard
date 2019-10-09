@@ -11,6 +11,7 @@ export const IconSetup: SFC = () => (
 
 export const IconChannels: SFC = () => (
   <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11.2856 12.8993L11.5749 12.3858L11.0922 12.0478L7.71258 9.68141C7.72647 9.49716 7.72639 9.31196 7.71234 9.12773L10.8052 6.92927L11.2859 6.58756L10.9924 6.07598L10.1338 4.57959L9.77783 3.95916L9.19421 4.37274L5.79481 6.7817L5.73044 6.82731L5.67885 6.887L3.36662 9.56227L2.88079 10.1244L3.50249 10.5312L5.80708 12.0393L9.50522 14.6103L10.0919 15.0182L10.4426 14.3957L11.2856 12.8993Z" fill="white" stroke="#3A8DDE" stroke-width="1.3"/>
     <circle cx="3.68905" cy="9.38631" r="2.71405" fill="white"/>
     <circle cx="3.68905" cy="9.38631" r="2.71405" fill="#9FCCF3" fill-opacity="0.9"/>
     <circle cx="3.68905" cy="9.38631" r="2.71405" stroke="#3A8DDE" stroke-width="1.3"/>

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
 
-import NavigationItem from './NavigationItem';
+import SidebarItem from './SidebarItem';
 
 const testData = {
 	'navItemName': 'Dashboard',
@@ -13,11 +13,11 @@ const testData2 = {
 	'url': '/iframe.html',
 }
 
-storiesOf('NavigationItem',module)
+storiesOf('SidebarItem',module)
 	.addDecorator(checkA11y)
 	.add('with local mocked data', () => (
-		<NavigationItem key={0} navData={testData}></NavigationItem>
+		<SidebarItem key={0} navData={testData}></SidebarItem>
 	))
 	.add('active', () => (
-		<NavigationItem key={0} navData={testData2}></NavigationItem>
+		<SidebarItem key={0} navData={testData2}></SidebarItem>
 	));

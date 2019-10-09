@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
 
-import NavigationSection from './NavigationSection';
+import SidebarSection from './SidebarSection';
 
 const testData = {
 	'sectionName': 'Setup',
@@ -22,8 +22,8 @@ const testData = {
 	]
 }
 
-storiesOf('NavigationSection',module)
+storiesOf('SidebarSection',module)
 	.addDecorator(checkA11y)
 	.add('with local mocked data', () => (
-		<NavigationSection key={0} navData={testData}></NavigationSection>
+		<SidebarSection key={0} navData={testData}></SidebarSection>
 	));

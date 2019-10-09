@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 //import { checkA11y } from '@storybook/addon-a11y';
 //import { setupGraphiQL } from '@storybook/addon-graphql';
 
-import Navigation from './Navigation';
+import Sidebar from './Sidebar';
 
 //const graphiql = setupGraphiQL({ url: 'http://localhost:3000/graphql' });
 const testData = [
@@ -43,12 +43,12 @@ const testData = [
 	},
 ]
 
-storiesOf('Navigation',module)
+storiesOf('Sidebar',module)
 /*	.add('get nav items data', graphiql(`{
 			user(id: "1") {
 				name
 			}
 		}`)) */
 	.add('with local mocked data', () => (
-		<Navigation navData={testData}></Navigation>
+		<Sidebar navData={testData}></Sidebar>
 	));

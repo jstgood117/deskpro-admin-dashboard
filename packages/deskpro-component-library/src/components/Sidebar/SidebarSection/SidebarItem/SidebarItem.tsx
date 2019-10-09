@@ -7,7 +7,7 @@ interface IStyleProps {
   active?: boolean
 }
 
-const NavigationItemStyled = styled.li<IStyleProps>`
+const SidebarItemStyled = styled.li<IStyleProps>`
 	padding: 10px 10px 10px 44px;
 	list-style: none;
 
@@ -27,13 +27,13 @@ interface IProps {
 	navData: INavItemData;
 }
 
-const NavigationItem: SFC<IProps> = (props) => (
-	<NavigationItemStyled active={window.location.pathname === props.navData.url}>
+const SidebarItem: SFC<IProps> = (props) => (
+	<SidebarItemStyled active={window.location.pathname === props.navData.url}>
 		<a href={props.navData.url}>{props.navData.navItemName}</a>
-	</NavigationItemStyled>
+	</SidebarItemStyled>
 );
 
-NavigationItem.defaultProps = {
+SidebarItem.defaultProps = {
   key: 0,
 	navData: {
 		navItemName: '',
@@ -41,4 +41,4 @@ NavigationItem.defaultProps = {
 	},
 };
 
-export default NavigationItem;
+export default SidebarItem;

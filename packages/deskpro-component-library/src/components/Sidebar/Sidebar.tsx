@@ -3,10 +3,10 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 
-import NavigationSection from './NavigationSection';
+import SidebarSection from './SidebarSection';
 import { INavSectionData } from '../../resources/interfaces';
 
-const NavigationStyled = styled.nav`
+const SidebarStyled = styled.nav`
 	background-color: #e8ebed;
 	color: #000;
 	width: 200px;
@@ -18,14 +18,14 @@ interface IProps {
 	navData: INavSectionData[];
 }
 
-const Navigation: SFC<IProps> = (props) => (
+const Sidebar: SFC<IProps> = (props) => (
 	<ThemeProvider theme={DeskproAdminTheme}>
-		<NavigationStyled>{props.navData.map( (navSection, index) => <NavigationSection key={index} navData={navSection}></NavigationSection>)}</NavigationStyled>
+		<SidebarStyled>{props.navData.map( (navSection, index) => <SidebarSection key={index} navData={navSection}></SidebarSection>)}</SidebarStyled>
 	</ThemeProvider>
 );
 
-Navigation.defaultProps = {
+Sidebar.defaultProps = {
 	navData: [],
 };
 
-export default Navigation;
+export default Sidebar;
