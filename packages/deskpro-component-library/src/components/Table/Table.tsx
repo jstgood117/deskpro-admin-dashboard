@@ -65,15 +65,20 @@ class Table extends Component<IProps, IState> {
 		};
 	}
 
-	componentWillReceiveProps() {
-			
+	componentDidUpdate(prevProps: IProps) {
+		if (this.props.data.length !== prevProps.data.length) {
+			this.setState({ data: this.props.data });
+		}
 	}
 
 	onClickHeader = (e: any, column: string) => {
+		console.log(`>>> ${column}`);
 		let sortedData = this.state.data;
 		sortedData.sort( function( a: ITableData, b: ITableData ) {
+			console.log(a[column]);
 			return a[column] > b[column] ? 1 : -1;
-	 });
+		});
+
 		this.setState({ data: sortedData });
 	}
 

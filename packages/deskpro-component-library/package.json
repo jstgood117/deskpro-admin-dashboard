@@ -1,6 +1,6 @@
 {
   "name": "deskpro-component-library",
-  "version": "0.0.9",
+  "version": "0.0.13",
   "description": "",
   "keywords": [],
   "main": "dist/deskpro-component-library.umd.js",

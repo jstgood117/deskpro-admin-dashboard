@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SFC } from 'react';
 import { Sidebar } from 'deskpro-component-library';
 
 const testData = [
@@ -40,14 +40,18 @@ const testData = [
 		'sectionName': 'Agents',
 		'navItems': [
 			{
-				'navItemName': 'Agent',
+				'navItemName': 'Agent - REST',
 				'url': '/agent',
+			},			
+			{
+				'navItemName': 'Agent - GraphQL',
+				'url': '/agent2',
 			},			
 		]
 	},
 ]
 
-const SidebarWrapper: React.SFC = () => (
+const SidebarWrapper: SFC = () => (
   <Sidebar navData={testData} />
 );
 

@@ -28,21 +28,21 @@ const TextStyled = styled.p<IStyleProps>`
 	font-size: ${props => {
 		switch (props.styleType) {
 			case 'h1':
-				return '28pt';
+				return '28px';
 			case 'h2':
-				return '18pt';
+				return '18px';
 			case 'h3':
 			case 'h4':
-				return '16pt';
+				return '16px';
 			case 'h5':
 			case 'h6':
-				return '15pt';
+				return '15px';
 			case 'p1':
 			case 'p2':
-				return '14pt';
+				return '14px';
 			case 's1':
 			case 's2':
-				return '12pt';
+				return '12px';
 		}
 	}};
 
