@@ -1,20 +1,10 @@
----
-name: Header
-menu: Components
-route: /components/Header
----
-
-import Header from './';
-import { Playground, Props } from 'docz';
-
 # Header
 
 This component provides the main page header
 
-<Props of={Header} />
+# Header Component Contract
 
-## Example Usage
-
-<Playground>
-	<Header>I'm a Header!</Header>
-</Playground>
+* it has Props of:
+	children?: ReactNode - to be rendered within the button tag
+* it has no State
+* it always renders a <div> element, containing the rest of the component

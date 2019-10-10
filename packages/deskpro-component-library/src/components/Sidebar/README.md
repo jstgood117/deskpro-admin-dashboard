@@ -1,20 +1,11 @@
----
-name: Sidebar
-menu: Components
-route: /components/Sidebar
----
+# SidebarSection
 
-import Sidebar from './';
-import { Playground, Props } from 'docz';
+This component renders a vertical navigation menu for the Deskpro Admin
 
-# Sidebar
+# Sidebar Component Contract
 
-This component renders an HTML `<button>` and passes along all props.
-
-<Props of={Sidebar} />
-
-## Example Usage
-
-<Playground>
-	<Sidebar>I'm a Sidebar!</Sidebar>
-</Playground>
+* it has Props of:
+	navData - an array of ISidebarSection objects
+* it has no State
+* it always renders a <nav> element, containing the rest of the component
+* within the <nav> it shows as many SidebarSection components as there are sectionName in the navData

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Icon from '../../Icon';
 
 import SidebarItem from './SidebarItem';
-import { INavSectionData } from '../../../resources/interfaces';
+import { ISidebarSection } from '../../../resources/interfaces';
 
 const SidebarSectionStyled = styled.div`
 	position: relative;
@@ -22,27 +22,19 @@ const SidebarSectionList = styled.ul`
 	padding-inline-start: 0;
 `
 
-interface IProps {
+export interface IProps {
 	key: number;
-	navData: INavSectionData;
+	navData: ISidebarSection;
 }
 
 const SidebarSection: SFC<IProps> = (props) => (
 	<Fragment>
-		<SidebarSectionStyled>
+		{props.navData && props.navData.sectionName && <SidebarSectionStyled>
 			<Icon name={props.navData.sectionName} />
 			{props.navData.sectionName}
-		</SidebarSectionStyled>
-		<SidebarSectionList>{props.navData.navItems.map( (navItem, index) => <SidebarItem key={index} navData={navItem}></SidebarItem>)}</SidebarSectionList>
+		</SidebarSectionStyled>}
+		{props.navData && props.navData.navItems && <SidebarSectionList>{props.navData.navItems.map( (navItem, index) => <SidebarItem key={index} navData={navItem}></SidebarItem>)}</SidebarSectionList>}
 	</Fragment>
 );
-
-SidebarSection.defaultProps = {
-  key: 0,
-	navData: {
-		sectionName: '',
-		navItems: [],
-	},
-};
 
 export default SidebarSection;

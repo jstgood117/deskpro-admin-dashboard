@@ -1,20 +1,11 @@
----
-name: Text
-menu: Components
-route: /components/Text
----
-
-import Text from './';
-import { Playground, Props } from 'docz';
-
 # Text
 
 This component renders text for headers (h1, h2 etc) as well as <p> and <s>.
 
-<Props of={Text} />
+# Table Component Contract
 
-## Example Usage
-
-<Playground>
-	<Text>I'm a Text!</Text>
-</Playground>
+* it has Props of:
+	children?: ReactNode - to be rendered within the button tag
+	onClick?: function callback when button is clicked
+* it has no State
+* it always renders a <p> element, containing the rest of the component

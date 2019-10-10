@@ -2,7 +2,7 @@ import React, { SFC, Fragment } from "react";
 
 import { IconSetup, IconChannels, IconAgents, IconHelp } from "./SVG";
 
-interface IProps {
+export interface IProps {
   name: string;
 }
 

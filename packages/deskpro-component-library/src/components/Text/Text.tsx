@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 
-interface IStyleProps {
+export interface IStyleProps {
   styleType: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p1' | 'p2' | 's1' | 's2',
 }
 

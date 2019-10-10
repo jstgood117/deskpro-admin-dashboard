@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 
-interface IStyleProps {
+export interface IStyleProps {
   styleType: 'primary' | 'secondary' | 'tertiary',
 }
 
@@ -20,7 +20,7 @@ const ButtonStyled = styled.button<IStyleProps>`
 	}
 `;
 
-interface IProps {
+export interface IProps {
 	children?: ReactNode,
 	onClick?: (e:any) => void,
 }
@@ -30,10 +30,5 @@ const Button: SFC<IProps & IStyleProps> = (props) => (
 		<ButtonStyled onClick={props.onClick} styleType={props.styleType}>{props.children}</ButtonStyled>
 	</ThemeProvider>
 );
-
-Button.defaultProps = {
-  children: null,
-  onClick: () => {},
-};
 
 export default Button;

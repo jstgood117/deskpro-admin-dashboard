@@ -4,8 +4,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import { ITableColumns, ITableData } from '../../resources/interfaces';
 import { DeskproAdminTheme } from '../Theme';
 
-const DataTable = require('ts-react-json-table');
-//const DataTable = require('react-data-table-component');
+const JsonTable = require('ts-react-json-table');
+//const DataTable = require('react-tableData-table-component');
 
 const TableStyled = styled.div`
 	& table {
@@ -46,13 +46,13 @@ const TableStyled = styled.div`
 	}
 `
 
-interface IProps {
+export interface IProps {
 	columns?: ITableColumns[];
-	data: ITableData[];
+	tableData: ITableData[];
 }
 interface IState {
 //	sort: boolean;
-	data: ITableData[];
+	tableData: ITableData[];
 }
 
 class Table extends Component<IProps, IState> {
@@ -61,36 +61,36 @@ class Table extends Component<IProps, IState> {
 
 		this.state = { 
 			// sort: false, 
-			data: this.props.data
+			tableData: this.props.tableData
 		};
 	}
 
 	componentDidUpdate(prevProps: IProps) {
-		if (this.props.data.length !== prevProps.data.length) {
-			this.setState({ data: this.props.data });
+		if (this.props.tableData.length !== prevProps.tableData.length) {
+			this.setState({ tableData: this.props.tableData });
 		}
 	}
 
 	onClickHeader = (e: any, column: string) => {
-		console.log(`>>> ${column}`);
-		let sortedData = this.state.data;
+		console.log(`>>> clicked ${column}`);
+		let sortedData = this.state.tableData;
 		sortedData.sort( function( a: ITableData, b: ITableData ) {
 			console.log(a[column]);
 			return a[column] > b[column] ? 1 : -1;
 		});
 
-		this.setState({ data: sortedData });
+		this.setState({ tableData: sortedData });
 	}
 
 	render() {
 		return (
 			<ThemeProvider theme={DeskproAdminTheme}>
 				<TableStyled>
-					<DataTable
-						rows={this.state.data}
+					{this.state.tableData && <JsonTable
+						rows={this.state.tableData}
 						columns={this.props.columns}
 						onClickHeader={ this.onClickHeader }
-					/>
+					/>}
 				</TableStyled>
 			</ThemeProvider>
 		);
