@@ -2048,6 +2048,13 @@ async@^1.5.2:
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
+async@^2.5.0:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
+  integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
+  dependencies:
+    lodash "^4.17.14"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -3495,10 +3502,10 @@ des.js@^1.0.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
 
-deskpro-component-library@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/deskpro-component-library/-/deskpro-component-library-0.0.13.tgz#9815dcadc93dc23c5be61ea22327d02ff5dd5b21"
-  integrity sha512-Lprxy2bDREvjoRsrJZZs21ZsIh+pEvrSbtG/7f9k8BS513Dog2kCm7P2gY8Wgt9sAFdbns18IgpCjTh6oY5zMw==
+deskpro-component-library@^0.0.15:
+  version "0.0.15"
+  resolved "https://registry.yarnpkg.com/deskpro-component-library/-/deskpro-component-library-0.0.15.tgz#e38f10a37eee96415f14f85a219e0722e92e5913"
+  integrity sha512-MM6ea2UMohNfWJHvVNfOxWETalHyhi+YK9yOHkL+J2/4HDRGxY2mGINrAzjgmTqB6o3TRk0s9HZMo6aKJc//OA==
   dependencies:
     "@types/react-router-dom" "^5.1.0"
     "@types/styled-components" "^4.1.19"
@@ -3506,8 +3513,10 @@ deskpro-component-library@^0.0.13:
     babel-loader "^8.0.6"
     react-docgen-typescript-loader "^3.3.0"
     react-router-dom "^5.1.2"
+    source-map-loader "^0.2.4"
     styled-components "^4.4.0"
     ts-react-json-table "^0.1.2"
+    webpack "^4.41.0"
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -9300,6 +9309,14 @@ source-list-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
   integrity sha512-qnQ7gVMxGNxsiL4lEuJwe/To8UnK7fAnmbGEEH8RpLouuKbeEm0lhbQVFIrNSuB+G7tVrAlVsZgETT5nljf+Iw==
 
+source-map-loader@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/source-map-loader/-/source-map-loader-0.2.4.tgz#c18b0dc6e23bf66f6792437557c569a11e072271"
+  integrity sha512-OU6UJUty+i2JDpTItnizPrlpOIBLmQbWMuBg9q5bVtnHACqw1tn9nNwqJLbv0/00JjnJb/Ee5g5WS5vrRv7zIQ==
+  dependencies:
+    async "^2.5.0"
+    loader-utils "^1.1.0"
+
 source-map-resolve@^0.5.0, source-map-resolve@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/source-map-resolve/-/source-map-resolve-0.5.2.tgz#72e2cc34095543e43b2c62b2c4c10d4a9054f259"
@@ -10340,7 +10357,7 @@ webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack@4.41.0:
+webpack@4.41.0, webpack@^4.41.0:
   version "4.41.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.41.0.tgz#db6a254bde671769f7c14e90a1a55e73602fc70b"
   integrity sha512-yNV98U4r7wX1VJAj5kyMsu36T8RPPQntcb5fJLOsMz/pt/WrKC0Vp1bAlqPLkA1LegSwQwf6P+kAbyhRKVQ72g==

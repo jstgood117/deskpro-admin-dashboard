@@ -35,7 +35,7 @@ const Agent2: SFC = () => {
       </Header>
       {loading && <p>Loading...</p>}
       {error && <p>Error!</p>}
-      {data && <Table data={data.allPeople.people} columns={dataCols} />}
+      {data && <Table tableData={data.allPeople.people} columns={dataCols} />}
     </Main>
   );
 }

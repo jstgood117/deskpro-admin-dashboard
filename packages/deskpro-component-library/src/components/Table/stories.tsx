@@ -23,8 +23,8 @@ const testData = [
 
 storiesOf('Table',module)
 	.add('just rows', () => (
-		<Table data={testData} />
+		<Table tableData={testData} />
 	))
 	.add('rows and cols', () => (
-		<Table columns={testCols} data={testData} />
+		<Table columns={testCols} tableData={testData} />
 	));
