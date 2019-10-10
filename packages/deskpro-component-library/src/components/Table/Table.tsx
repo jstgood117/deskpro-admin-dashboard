@@ -1,24 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, forwardRef, LegacyRef } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import MaterialTable from 'material-table';
+import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
-import { ITableColumns, ITableData } from '../../resources/interfaces';
 import { DeskproAdminTheme } from '../Theme';
 
-const JsonTable = require('ts-react-json-table');
-//const DataTable = require('react-tableData-table-component');
+const tableIcons = {
+	FirstPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <FirstPage {...props} ref={ref} />),
+	LastPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <LastPage {...props} ref={ref} />),
+	NextPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <ChevronRight {...props} ref={ref} />),
+	PreviousPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <ChevronLeft {...props} ref={ref} />),
+};
 
 const TableStyled = styled.div`
-	& table {
-		width: 100%;
-		border-collapse: collapse;
+	& .MuiToolbar-regular {
+		min-height: 0;
+	}
+	& .MuiPaper-elevation2 {
+		box-shadow: none;
+	}
+	& .MuiSvgIcon-root {
+		fill: ${props => props.theme.greyLight};
+	}
 
+	& table {
 		& thead {
 			& tr {
 				border-top: 1px solid ${props => props.theme.greyLight};
 				border-bottom: 1px solid ${props => props.theme.greyLight};
 
 				& th {
-					text-align: left;
+					padding: 0;
 					line-height: 26px;
 					color: ${props => props.theme.greyDark};
 				}
@@ -29,6 +41,7 @@ const TableStyled = styled.div`
 				border-bottom: 1px solid ${props => props.theme.greyLighter};
 
 				& td {
+					padding: 0;
 					text-align: left;
 					line-height: 44px;
 					color: ${props => props.theme.staticColour};
@@ -47,12 +60,11 @@ const TableStyled = styled.div`
 `
 
 export interface IProps {
-	columns?: ITableColumns[];
-	tableData: ITableData[];
+	columns: any;
+	tableData: any;
 }
 interface IState {
-//	sort: boolean;
-	tableData: ITableData[];
+	tableData: any;
 }
 
 class Table extends Component<IProps, IState> {
@@ -60,8 +72,7 @@ class Table extends Component<IProps, IState> {
 		super(props);
 
 		this.state = { 
-			// sort: false, 
-			tableData: this.props.tableData
+			tableData: this.props.tableData,
 		};
 	}
 
@@ -71,25 +82,20 @@ class Table extends Component<IProps, IState> {
 		}
 	}
 
-	onClickHeader = (e: any, column: string) => {
-		console.log(`>>> clicked ${column}`);
-		let sortedData = this.state.tableData;
-		sortedData.sort( function( a: ITableData, b: ITableData ) {
-			console.log(a[column]);
-			return a[column] > b[column] ? 1 : -1;
-		});
-
-		this.setState({ tableData: sortedData });
-	}
-
 	render() {
 		return (
 			<ThemeProvider theme={DeskproAdminTheme}>
 				<TableStyled>
-					{this.state.tableData && <JsonTable
-						rows={this.state.tableData}
+					{this.state.tableData && <MaterialTable
+						data={this.state.tableData}
 						columns={this.props.columns}
-						onClickHeader={ this.onClickHeader }
+						options={{
+							pageSize: 2,
+							search: false,
+							showTitle: false,
+							selection: true,
+						}}
+						icons={tableIcons}
 					/>}
 				</TableStyled>
 			</ThemeProvider>

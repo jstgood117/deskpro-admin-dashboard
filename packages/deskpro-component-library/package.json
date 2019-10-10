@@ -142,15 +142,17 @@
     "typescript": "^3.6.4"
   },
   "dependencies": {
+    "@material-ui/core": "^4.5.0",
+    "@material-ui/icons": "^4.4.3",
     "@types/react-router-dom": "^5.1.0",
     "@types/styled-components": "^4.1.19",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
+    "material-table": "^1.52.0",
     "react-docgen-typescript-loader": "^3.3.0",
     "react-router-dom": "^5.1.2",
     "source-map-loader": "^0.2.4",
     "styled-components": "^4.4.0",
-    "ts-react-json-table": "^0.1.2",
     "webpack": "^4.41.0"
   }
 }

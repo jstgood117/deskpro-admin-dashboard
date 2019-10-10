@@ -4,15 +4,13 @@ import { storiesOf } from '@storybook/react';
 import Table from './Table';
 
 const testCols = [
-  { key: 'select', label: ' ', cell: function(item: any) {
-    return <input type='checkbox' id={item.id}></input>  
-  }},
-  { key: 'name', label: 'Name', cell: function(item: any) {
-    return <div><img src={item.avatar} />{item.name}</div>
-  }},
-  {key: 'email', label: 'Email'},
-  {key: 'phone', label: 'Phone'},
-]
+  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} />{rowData.name}</div> },
+  { title: 'Email', field: 'email' },
+  { title: 'Phone', field: 'phone' },
+  { title: 'Access', field: 'access' },
+  { title: 'Team', field: 'team' },
+  { title: 'Permission Group', field: 'group' },
+];
 const testData = [
   {"id": 75950,"name": "Louella Wallace","age": 24,"phone": "+44 (0)203 437 7302","avatar": "https://randomuser.me/api/portraits/men/49.jpg"},
   {"id": 80616,"name": "Hanson Perry","age": 36,"phone": "+44 (0)203 279 3708","color": "brown"},
@@ -22,9 +20,6 @@ const testData = [
 ];
 
 storiesOf('Table',module)
-	.add('just rows', () => (
-		<Table tableData={testData} />
-	))
-	.add('rows and cols', () => (
+	.add('with dummy data', () => (
 		<Table columns={testCols} tableData={testData} />
 	));
