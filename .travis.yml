@@ -8,7 +8,7 @@ install:
   - npm run lerna bootstrap
 script:
   - npm run lerna run --scope deskpro-component-library test:prod
-  - npm run lerna run --scope deskpro-admin-frontend test
+  #- npm run lerna run --scope deskpro-admin-frontend test
   - npm run lerna run --scope deskpro-component-library build-storybook
 deploy:
   - provider: pages
