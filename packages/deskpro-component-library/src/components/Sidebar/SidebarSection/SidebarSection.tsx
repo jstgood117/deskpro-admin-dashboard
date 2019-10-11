@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Icon from '../../Icon';
 
 import SidebarItem from './SidebarItem';
-import { ISidebarSection } from '../../../resources/interfaces';
+import SidebarSubSection from './SidebarSubSection';
+import { ISidebarItem } from '../../../resources/interfaces';
 
 const SidebarSectionStyled = styled.div`
 	position: relative;
@@ -24,16 +25,23 @@ const SidebarSectionList = styled.ul`
 
 export interface IProps {
 	key: number;
-	navData: ISidebarSection;
+	sectionName?: string;
+	navItems?: ISidebarItem[];
 }
 
 const SidebarSection: SFC<IProps> = (props) => (
 	<Fragment>
-		{props.navData && props.navData.sectionName && <SidebarSectionStyled>
-			<Icon name={props.navData.sectionName} />
-			{props.navData.sectionName}
+		{props.sectionName && <SidebarSectionStyled>
+			<Icon name={props.sectionName} />
+			{props.sectionName}
 		</SidebarSectionStyled>}
-		{props.navData && props.navData.navItems && <SidebarSectionList>{props.navData.navItems.map( (navItem, index) => <SidebarItem key={index} navData={navItem}></SidebarItem>)}</SidebarSectionList>}
+		{props.navItems && <SidebarSectionList>{props.navItems.map((navItem, index) => {
+			if (navItem.navItems) {
+				return <SidebarSubSection key={index} {...navItem}></SidebarSubSection>
+			}
+			return <SidebarItem key={index} {...navItem}></SidebarItem>
+		})}
+		</SidebarSectionList>}
 	</Fragment>
 );
 

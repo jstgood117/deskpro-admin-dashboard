@@ -19,7 +19,8 @@ describe("SidebarItem", () => {
   beforeEach(() => {
     props = {
       key: 0,
-      navData: undefined,
+      navItemName: undefined,
+      url: undefined,
     };
     mountedSidebarItem = undefined;
   });
@@ -29,26 +30,24 @@ describe("SidebarItem", () => {
     expect(elts.length).toBeGreaterThan(0);
   });
 
-  describe("when navData is undefined", () => {
-    beforeEach(() => {
-      props.navData = undefined;
-    });
-
+  describe("when props are undefined", () => {
     it("doesn't render anything else", () => {
       expect(wrapper(false).find('li').children().length).toBe(0);
     });
   });
 
-  describe("when navData is defined", () => {
+  describe("when navItemName and url are defined", () => {
     beforeEach(() => {
-      props.navData = {
-        navItemName: 'item 1',
-        url: '/page1'
-      };
+      props.navItemName = 'item 1';
+      props.url = '/page1';
     });
 
     it("renders the label", () => {
       expect(wrapper(false).text()).toContain('item 1');
+    });
+
+    it("renders the link", () => {
+//      expect(wrapper(false).text()).toContain('item 1');
     });
   });
 })

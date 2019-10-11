@@ -40,12 +40,8 @@ const testData = [
 		'sectionName': 'Agents',
 		'navItems': [
 			{
-				'navItemName': 'Agent - REST',
+				'navItemName': 'Agent',
 				'url': '/agent',
-			},			
-			{
-				'navItemName': 'Agent - GraphQL',
-				'url': '/agent2',
 			},			
 		]
 	},

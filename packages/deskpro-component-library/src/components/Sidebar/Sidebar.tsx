@@ -20,7 +20,7 @@ export interface IProps {
 
 const Sidebar: SFC<IProps> = (props) => (
 	<ThemeProvider theme={DeskproAdminTheme}>
-		<SidebarStyled>{props.navData && props.navData.map( (navSection, index) => <SidebarSection key={index} navData={navSection}>}</SidebarSection>)}</SidebarStyled>
+		<SidebarStyled>{props.navData && props.navData.map( (navSection, index) => <SidebarSection key={index} {...navSection}>}</SidebarSection>)}</SidebarStyled>
 	</ThemeProvider>
 );
 

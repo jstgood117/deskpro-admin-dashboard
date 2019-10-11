@@ -24,12 +24,14 @@ const SidebarItemStyled = styled.li<IStyleProps>`
 
 export interface IProps {
 	key: number;
-	navData: ISidebarItem;
+	navItemName: string;
+	url?: string;
+	navItems?: ISidebarItem[];
 }
 
 const SidebarItem: SFC<IProps> = (props) => (
-	<SidebarItemStyled active={props.navData ? window.location.pathname === props.navData.url : false}>
-		{props.navData && <a href={props.navData.url}>{props.navData.navItemName}</a>}
+	<SidebarItemStyled active={props.url ? window.location.pathname === props.url : false}>
+		{props.url && <a href={props.url}>{props.navItemName}</a>}
 	</SidebarItemStyled>
 );
 

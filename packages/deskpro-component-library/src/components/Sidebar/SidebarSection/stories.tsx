@@ -8,16 +8,37 @@ const testData = {
 	'sectionName': 'Setup',
 	'navItems': [
 		{
-			'navItemName': 'Dashboard',
-			'url': '/dashboard',
+			'navItemName': 'Item1',
+			'url': '/item1',
 		},			
 		{
-			'navItemName': 'Setup wizard',
-			'url': '/setup-wizard',
+			'navItemName': 'Item2',
+			'url': '/item2',
 		},			
 		{
-			'navItemName': 'Brands',
-			'url': '/brands',
+			'navItemName': 'SubMenu',
+			'navItems': [
+				{
+					'navItemName': 'SubItem1',
+					'url': '/subitem1',
+				},			
+				{
+					'navItemName': 'SubItem2',
+					'url': '/subitem2',
+				},			
+				{
+					'navItemName': 'SubItem3',
+					'url': '/subitem3',
+				},			
+				{
+					'navItemName': 'SubItem4',
+					'url': '/subitem4',
+				},			
+			]
+		},			
+		{
+			'navItemName': 'Item3',
+			'url': '/item3',
 		},			
 	]
 }
@@ -25,5 +46,5 @@ const testData = {
 storiesOf('SidebarSection',module)
 	.addDecorator(checkA11y)
 	.add('with local mocked data', () => (
-		<SidebarSection key={0} navData={testData}></SidebarSection>
+		<SidebarSection key={0} {...testData}></SidebarSection>
 	));

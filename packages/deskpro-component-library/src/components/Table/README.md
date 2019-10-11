@@ -5,19 +5,13 @@ This component renders an table populated by JSON data
 # Table Component Contract
 
 * it has Props of:
-	columns?: array of ITableColumns
-	tableData: array of JSON objects to be displayed as a table
-	pageSize?: number of rows per page
+	columns: array of objects to fit spec of material-table component
+	tableData: array of objects to be displayed as a table
 * it has State:
 	tableData: array of JSON objects to be displayed as a table
 * it always renders a <div> element, containing the rest of the component
-* if tableData is defined, within the <div> it shows a <MaterialTable> component (from ts-react-json-table)
-* if there are more rows than pageSize, show only pageSize rows and render the pagination buttons
+* if columns & tableData are defined, within the <div> it shows a <MaterialTable> component 
 
-TODO
+# material-table component
 
-* sorting
-* search
-*
-*
-*
+https://material-table.com/#/docs/all-props

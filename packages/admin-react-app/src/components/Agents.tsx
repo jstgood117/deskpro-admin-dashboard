@@ -1,50 +1,40 @@
-import React, { Component } from 'react';
+import React, { SFC } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 import { Main, Header, Table } from 'deskpro-component-library';
 
 const dataCols = [
-  { key: 'select', label: ' ', cell: function(item: any) {
-    return <input type='checkbox' id={item.id}></input>  
-  }},
-  { key: 'name', label: 'Name', cell: function(item: any) {
-    return <div id={item.name.first}><img src={item.picture.thumbnail} />{item.name.first} {item.name.last}</div>
-  }},
-  {key: 'email', label: 'Email'},
-  {key: 'phone', label: 'Phone'},
+  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} />{rowData.name}</div> },
+  { title: 'Birth Year', field: 'birthYear' },
 ];
 
-interface IProps {}
-interface IState {
-  results: []
+const QUERY_PEOPLE = gql`
+  {
+    allPeople {
+      people {
+        id,
+        name,
+        birthYear,
+      }
+    }
+  }
+`;
+
+const Agent: SFC = () => {
+  const { loading, error, data } = useQuery(QUERY_PEOPLE);
+    
+  return (
+    <Main>
+      <Header>
+        <h1>Agents</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+      </Header>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error, couldn't load data</p>}
+      {data && <Table tableData={data.allPeople.people} columns={dataCols} />}
+    </Main>
+  );
 }
 
-class AgentPage extends Component<IProps,IState> {
-  constructor(props: IProps) {
-    super(props);
-
-    this.state = { results: [] };
-  }
-
-  componentDidMount() {
-    fetch('https://randomuser.me/api/?results=30')
-      .then(res => res.json())
-      .then((res) => {
-        console.log(res.results);
-        this.setState({ results: res.results });
-      });
-  }
-
-  render() {
-    return (
-      <Main>
-        <Header>
-          <h1>Agents</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-        </Header>
-        <Table tableData={this.state.results} columns={dataCols} />
-      </Main>
-    );
-  }
-}
-
-export default AgentPage;
+export default Agent;
