@@ -4,10 +4,10 @@ import { Main, Header, Table } from 'deskpro-component-library';
 
 const dataCols = [
   { key: 'select', label: ' ', cell: function(item: any) {
-    return <input type='checkbox' id={item.id}></input>  
+    return <input type='checkbox' id={item.id}></input>
   }},
   { key: 'name', label: 'Name', cell: function(item: any) {
-    return <div id={item.name.first}><img src={item.picture.thumbnail} />{item.name.first} {item.name.last}</div>
+    return <div id={item.name.first}><img src={item.picture.thumbnail} alt="ava" />{item.name.first} {item.name.last}</div>
   }},
   {key: 'email', label: 'Email'},
   {key: 'phone', label: 'Phone'},
