@@ -6,8 +6,11 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import Sidebar from "./components/Sidebar";
 import Router from "./components/Router";
 
+const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
+console.log("API URL: " + apiUrl);
+
 const client = new ApolloClient({
-  uri: 'http://localhost:41049',
+  uri: apiUrl,
 });
 
 const App: SFC = () => (

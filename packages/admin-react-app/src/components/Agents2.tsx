@@ -6,27 +6,25 @@ import { Main, Header, Table } from 'deskpro-component-library';
 
 const dataCols = [
   { key: 'select', label: ' ', cell: function(item: any) {
-    return <input type='checkbox' id={item.id}></input>  
+    return <input type='checkbox' id={item.id}></input>
   }},
   {key: 'name', label: 'Name'},
-  {key: 'birthYear', label: 'Birth'},
+  {key: 'primary_email', label: 'Email'},
 ];
 
 const QUERY_PEOPLE = gql`
   {
-    allPeople {
-      people {
-        id,
-        name,
-        birthYear,
-      }
+    agents_getAgents {
+        id
+        name
+        primary_email
     }
   }
 `;
 
 const Agent2: SFC = () => {
   const { loading, error, data } = useQuery(QUERY_PEOPLE);
-    
+
   return (
     <Main>
       <Header>
@@ -35,7 +33,7 @@ const Agent2: SFC = () => {
       </Header>
       {loading && <p>Loading...</p>}
       {error && <p>Error!</p>}
-      {data && <Table tableData={data.allPeople.people} columns={dataCols} />}
+      {data && <Table tableData={data.agents_getAgents} columns={dataCols} />}
     </Main>
   );
 }
