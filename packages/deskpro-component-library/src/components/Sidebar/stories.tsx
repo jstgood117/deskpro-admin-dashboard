@@ -38,17 +38,34 @@ const testData = [
 			{
 				'navItemName': 'Messenger',
 				'url': '/messenger',
+				'navItems': [
+					{
+						'navItemName': 'Setup',
+						'url': '/messenger-setup',
+					},			
+					{
+						'navItemName': 'Departments',
+						'url': '/messenger-departments',
+					},			
+					{
+						'navItemName': 'Queues',
+						'url': '/messenger-queues',
+					},			
+				],
+			},			
+			{
+				'navItemName': 'Social',
+				'url': '/social',
+			},			
+			{
+				'navItemName': 'Voice',
+				'url': '/voice',
 			},			
 		]
 	},
 ]
 
 storiesOf('Sidebar',module)
-/*	.add('get nav items data', graphiql(`{
-			user(id: "1") {
-				name
-			}
-		}`)) */
-	.add('with local mocked data', () => (
+	.add('with dummy data', () => (
 		<Sidebar navData={testData}></Sidebar>
 	));

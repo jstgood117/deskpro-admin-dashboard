@@ -4,15 +4,16 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.2",
+    "@material-ui/core": "^4.5.0",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.11",
     "apollo-boost": "^0.4.4",
-    "deskpro-component-library": "^0.0.15",
+    "deskpro-component-library": "^0.0.20",
     "graphql": "^14.5.8",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.2.0",
     "typescript": "3.6.3"
   },
   "scripts": {

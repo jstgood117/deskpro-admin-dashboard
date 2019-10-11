@@ -7,7 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Router from "./components/Router";
 
 const client = new ApolloClient({
-  uri: 'http://localhost:41049',
+  uri: 'https://site40813.deskprodemo.com/admin-api/graphql',
 });
 
 const App: SFC = () => (

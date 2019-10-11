@@ -33,6 +33,20 @@ const testData = [
 			{
 				'navItemName': 'Messenger',
 				'url': '/messenger',
+/*				'navItems': [
+					{
+						'navItemName': 'Setup',
+						'url': '/messenger-setup',
+					},			
+					{
+						'navItemName': 'Departments',
+						'url': '/messenger-departments',
+					},			
+					{
+						'navItemName': 'Queues',
+						'url': '/messenger-queues',
+					},			
+				], */
 			},			
 		]
 	},

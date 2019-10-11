@@ -15,9 +15,9 @@ const testData2 = {
 
 storiesOf('SidebarItem',module)
 	.addDecorator(checkA11y)
-	.add('with local mocked data', () => (
-		<SidebarItem key={0} navData={testData}></SidebarItem>
+	.add('normal link', () => (
+		<SidebarItem key={0} {...testData}></SidebarItem>
 	))
-	.add('active', () => (
-		<SidebarItem key={0} navData={testData2}></SidebarItem>
+	.add('active link', () => (
+		<SidebarItem key={0} {...testData2}></SidebarItem>
 	));

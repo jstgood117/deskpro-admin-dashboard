@@ -90,7 +90,7 @@ class Table extends Component<IProps, IState> {
 						data={this.state.tableData}
 						columns={this.props.columns}
 						options={{
-							pageSize: 2,
+							pageSize: 20,
 							search: false,
 							showTitle: false,
 							selection: true,

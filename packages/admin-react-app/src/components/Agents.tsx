@@ -6,24 +6,22 @@ import { Main, Header, Table } from 'deskpro-component-library';
 
 const dataCols = [
   { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} />{rowData.name}</div> },
-  { title: 'Birth Year', field: 'birthYear' },
+  { title: 'Email', field: 'primary_email' },
 ];
 
-const QUERY_PEOPLE = gql`
-  {
-    allPeople {
-      people {
-        id,
-        name,
-        birthYear,
-      }
-    }
+const QUERY_PEOPLE = gql`{
+  agents_getAgents {
+    id
+    name
+    primary_email
   }
-`;
+}`
 
 const Agent: SFC = () => {
   const { loading, error, data } = useQuery(QUERY_PEOPLE);
     
+  if (data) console.log(data.agents_getAgents)
+  
   return (
     <Main>
       <Header>
@@ -32,7 +30,7 @@ const Agent: SFC = () => {
       </Header>
       {loading && <p>Loading...</p>}
       {error && <p>Error, couldn't load data</p>}
-      {data && <Table tableData={data.allPeople.people} columns={dataCols} />}
+      {data && <Table tableData={data.agents_getAgents} columns={dataCols} />}
     </Main>
   );
 }

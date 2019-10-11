@@ -45,6 +45,6 @@ const testData = {
 
 storiesOf('SidebarSection',module)
 	.addDecorator(checkA11y)
-	.add('with local mocked data', () => (
+	.add('with dummy data', () => (
 		<SidebarSection key={0} {...testData}></SidebarSection>
 	));
