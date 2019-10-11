@@ -2,11 +2,7 @@ language: node_js
 node_js:
   - "12"
 cache:
-  npm: true
-  directories:
-    - ./node_modules
-    - ./packages/admin-react-app/node_modules
-    - ./packages/deskpro-component-library/node_modules
+  npm: false
 install:
   - npm install
   - npm run lerna bootstrap
