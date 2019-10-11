@@ -1,7 +1,10 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { configure, mount, shallow } from 'enzyme';
 
 import Sidebar, { IProps } from './Sidebar';
+
+configure({adapter: new Adapter()});
 
 describe("Sidebar", () => {
   let props: IProps;

@@ -1,9 +1,12 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
 import SidebarSubSection, { IProps } from './SidebarSubSection';
-import { DeskproAdminTheme } from '../../../Theme';
+import { DeskproAdminTheme } from '../../../../Theme';
+
+configure({adapter: new Adapter()});
 
 describe("SidebarSubSection", () => {
   let props: IProps;
