@@ -1,11 +1,11 @@
-export interface INavItemData {
+export interface ISidebarItem {
 	navItemName: string;
 	url: string;
 }
 
-export interface INavSectionData {
-	sectionName: string;
-	navItems: INavItemData[];
+export interface ISidebarSection {
+	sectionName?: string;
+	navItems?: ISidebarItem[];
 }
 
 export interface ITableColumns {

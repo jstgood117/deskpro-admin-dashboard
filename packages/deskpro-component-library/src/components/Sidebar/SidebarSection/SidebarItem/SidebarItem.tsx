@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 
-import { INavItemData } from '../../../../resources/interfaces';
+import { ISidebarItem } from '../../../../resources/interfaces';
 
 interface IStyleProps {
   active?: boolean
@@ -22,23 +22,15 @@ const SidebarItemStyled = styled.li<IStyleProps>`
 	}
 `
 
-interface IProps {
+export interface IProps {
 	key: number;
-	navData: INavItemData;
+	navData: ISidebarItem;
 }
 
 const SidebarItem: SFC<IProps> = (props) => (
-	<SidebarItemStyled active={window.location.pathname === props.navData.url}>
-		<a href={props.navData.url}>{props.navData.navItemName}</a>
+	<SidebarItemStyled active={props.navData ? window.location.pathname === props.navData.url : false}>
+		{props.navData && <a href={props.navData.url}>{props.navData.navItemName}</a>}
 	</SidebarItemStyled>
 );
-
-SidebarItem.defaultProps = {
-  key: 0,
-	navData: {
-		navItemName: '',
-		url: '',
-	},
-};
 
 export default SidebarItem;

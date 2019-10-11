@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
 
 import SidebarSection from './SidebarSection';
-import { INavSectionData } from '../../resources/interfaces';
+import { ISidebarSection } from '../../resources/interfaces';
 
 const SidebarStyled = styled.nav`
 	background-color: #e8ebed;
@@ -14,18 +14,14 @@ const SidebarStyled = styled.nav`
 	font-size: 14px;
 `
 
-interface IProps {
-	navData: INavSectionData[];
+export interface IProps {
+	navData: ISidebarSection[];
 }
 
 const Sidebar: SFC<IProps> = (props) => (
 	<ThemeProvider theme={DeskproAdminTheme}>
-		<SidebarStyled>{props.navData.map( (navSection, index) => <SidebarSection key={index} navData={navSection}></SidebarSection>)}</SidebarStyled>
+		<SidebarStyled>{props.navData && props.navData.map( (navSection, index) => <SidebarSection key={index} navData={navSection}>}</SidebarSection>)}</SidebarStyled>
 	</ThemeProvider>
 );
-
-Sidebar.defaultProps = {
-	navData: [],
-};
 
 export default Sidebar;

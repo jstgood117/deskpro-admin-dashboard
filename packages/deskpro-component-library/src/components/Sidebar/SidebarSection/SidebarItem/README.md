@@ -1,20 +1,17 @@
----
-name: SidebarItem
-menu: Components
-route: /components/SidebarItem
----
-
-import SidebarItem from './';
-import { Playground, Props } from 'docz';
-
 # SidebarItem
 
-This component renders an HTML `<button>` and passes along all props.
+This component renders within SidebarSection component, depending on the data passed in
 
-<Props of={SidebarItem} />
+# SidebarItem Component Contract
 
-## Example Usage
+* it has Props of:
+	key - unique key
+	navData - ISidebarItem object
+* it has no State
+* it always renders a <li> element, containing the rest of the component
+* renders in an 'active' style if the item matches the current page
+* item is clickable, and should apply a react-router link (not a browser refresh)
 
-<Playground>
-	<SidebarItem>I'm a SidebarItem!</SidebarItem>
-</Playground>
+
+* some navigation items are sub-menus, shown with a chevron
+* sub-menus are clickable and opened the navigation items within

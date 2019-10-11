@@ -1,20 +1,14 @@
----
-name: SidebarSection
-menu: Components
-route: /components/SidebarSection
----
-
-import SidebarSection from './';
-import { Playground, Props } from 'docz';
-
 # SidebarSection
 
-This component renders an HTML `<button>` and passes along all props.
+This component renders within Sidebar component, depending on the data passed in
 
-<Props of={SidebarSection} />
+# SidebarSection Component Contract
 
-## Example Usage
-
-<Playground>
-	<SidebarSection>I'm a SidebarSection!</SidebarSection>
-</Playground>
+* it has Props of:
+	key - unique key
+	navData - ISidebarSection object
+* it has no State
+* it may render nothing
+* if sectionName is defined in navData, render the label and the associated icon
+* if icon is missing, only render the label
+* if navItems is defined in navData, render <ul> element, containing as many SidebarItem components as there are elements in navItems

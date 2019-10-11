@@ -1,20 +1,11 @@
----
-name: Grid
-menu: Components
-route: /components/Grid
----
-
-import Grid from './';
-import { Playground, Props } from 'docz';
-
 # Grid
 
 This component makes a simple grid to hold the Sidebar and main pages
 
-<Props of={Grid} />
+# Grid Component Contract
 
-## Example Usage
+* it has Props of:
+	children?: ReactNode - to be rendered within the button tag
+* it has no State
+* it always renders a <div> element, containing the rest of the component
 
-<Playground>
-	<Grid>I'm a Grid!</Grid>
-</Playground>

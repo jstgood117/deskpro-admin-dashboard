@@ -1,20 +1,10 @@
----
-name: Main
-menu: Components
-route: /components/Main
----
-
-import Main from './';
-import { Playground, Props } from 'docz';
-
 # Main
 
-This component restyles the <body> tag
+This component restyles the <main> tag
 
-<Props of={Main} />
+# Main Component Contract
 
-## Example Usage
-
-<Playground>
-	<Main>I'm a Main!</Main>
-</Playground>
+* it has Props of:
+	children?: ReactNode - to be rendered within the main tag
+* it has no State
+* it always renders a <main> element, containing the rest of the component
