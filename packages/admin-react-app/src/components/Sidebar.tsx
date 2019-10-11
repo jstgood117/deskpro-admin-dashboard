@@ -7,16 +7,16 @@ const testData = [
 		'navItems': [
 			{
 				'navItemName': 'Dashboard',
-				'url': '/dashboard',
-			},			
+				'url': '#/dashboard',
+			},
 			{
 				'navItemName': 'Setup wizard',
-				'url': '/setup-wizard',
-			},			
+				'url': '#/setup-wizard',
+			},
 			{
 				'navItemName': 'Brands',
-				'url': '/brands',
-			},			
+				'url': '#/brands',
+			},
 		]
 	},
 	{
@@ -24,16 +24,16 @@ const testData = [
 		'navItems': [
 			{
 				'navItemName': 'Email',
-				'url': '/email',
-			},			
+				'url': '#/email',
+			},
 			{
 				'navItemName': 'Forms',
-				'url': '/forms',
-			},			
+				'url': '#/forms',
+			},
 			{
 				'navItemName': 'Messenger',
-				'url': '/messenger',
-			},			
+				'url': '#/messenger',
+			},
 		]
 	},
 	{
@@ -41,12 +41,12 @@ const testData = [
 		'navItems': [
 			{
 				'navItemName': 'Agent - REST',
-				'url': '/agent',
-			},			
+				'url': '#/agent',
+			},
 			{
 				'navItemName': 'Agent - GraphQL',
-				'url': '/agent2',
-			},			
+				'url': '#/agent2',
+			},
 		]
 	},
 ]
