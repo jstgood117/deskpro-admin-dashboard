@@ -7,7 +7,7 @@ import Header from '../Header';
 import Table from '../Table';
 
 const dataCols = [
-  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} />{rowData.name}</div> },
+  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div> },
   { title: 'Email', field: 'primary_email' },
 ];
 

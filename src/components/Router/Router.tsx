@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 import Grid from '../Grid';
 import Sidebar from '../Sidebar';
@@ -7,7 +7,7 @@ import Agents from '../Agents';
 import Page from '../Page';
 
 const Router = () => (
-	<BrowserRouter>
+	<HashRouter>
   	<Grid>
 		  <Sidebar />
       <Switch>
@@ -15,7 +15,7 @@ const Router = () => (
         <Route component={Page} />
       </Switch>
     </Grid>
-	</BrowserRouter>
+	</HashRouter>
 );
 
 export default Router;

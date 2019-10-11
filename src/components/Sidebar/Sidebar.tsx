@@ -7,15 +7,15 @@ const testData = [
 		'navItems': [
 			{
 				'navItemName': 'Dashboard',
-				'url': '/dashboard',
+				'url': '#/dashboard',
 			},			
 			{
 				'navItemName': 'Setup wizard',
-				'url': '/setup-wizard',
+				'url': '#/setup-wizard',
 			},			
 			{
 				'navItemName': 'Brands',
-				'url': '/brands',
+				'url': '#/brands',
 			},			
 		]
 	},
@@ -24,27 +24,27 @@ const testData = [
 		'navItems': [
 			{
 				'navItemName': 'Email',
-				'url': '/email',
+				'url': '#/email',
 			},			
 			{
 				'navItemName': 'Forms',
-				'url': '/forms',
+				'url': '#/forms',
 			},			
 			{
 				'navItemName': 'Messenger',
-				'url': '/messenger',
+				'url': '#/messenger',
 				'navItems': [
 					{
 						'navItemName': 'Setup',
-						'url': '/messenger-setup',
+						'url': '#/messenger-setup',
 					},			
 					{
 						'navItemName': 'Departments',
-						'url': '/messenger-departments',
+						'url': '#/messenger-departments',
 					},			
 					{
 						'navItemName': 'Queues',
-						'url': '/messenger-queues',
+						'url': '#/messenger-queues',
 					},			
 				],
 			},			
@@ -55,7 +55,7 @@ const testData = [
 		'navItems': [
 			{
 				'navItemName': 'Agent',
-				'url': '/agent',
+				'url': '#/agent',
 			},			
 		]
 	},
