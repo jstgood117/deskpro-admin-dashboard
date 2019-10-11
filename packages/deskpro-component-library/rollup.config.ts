@@ -34,9 +34,11 @@ export default {
         'node_modules/process-es6/**'
       ],
       namedExports: {
-        'node_modules/react/index.js': ['Children', 'Component', 'PropTypes', 'createElement', 'Fragment', 'cloneElement','createContext'],
-        'node_modules/react-is/index.js': ['isElement','isValidElementType','ForwardRef'],
-        'node_modules/react-dom/index.js': ['render']
+        'node_modules/react/index.js': ['Children','cloneElement','Component','createContext','createElement','forwardRef','Fragment','isValidElement','memo','PropTypes','useCallback','useContext','useDebugValue','useEffect','useLayoutEffect','useMemo','useRef','useState'],
+        'node_modules/react-is/index.js': ['ForwardRef','isElement','isValidElementType'],
+        'node_modules/react-dom/index.js': ['render'],
+        'node_modules/prop-types/index.js': ['any','arrayOf','bool','func','element','instanceOf','node','number','object','oneOf','oneOfType','string'],
+        'node_modules/@material-ui/utils/index.js': ['chainPropTypes','elementAcceptingRef','elementTypeAcceptingRef','exactProp','getDisplayName','ponyfillGlobal','refType'],
       }
     }),
     // Allow node_modules resolution, so you can use 'external' to control
