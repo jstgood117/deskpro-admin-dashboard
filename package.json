@@ -1,7 +1,61 @@
 {
-  "name": "root",
+  "name": "deskpro-admin-frontend",
+  "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.2",
+    "@material-ui/core": "^4.5.0",
+    "@material-ui/icons": "^4.4.3",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.18",
+    "@types/node": "12.7.11",
+    "@types/styled-components": "^4.1.19",
+    "apollo-boost": "^0.4.4",
+    "enzyme": "^3.10.0",
+    "graphql": "^14.5.8",
+    "material-table": "^1.52.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.2.0",
+    "styled-components": "^4.4.0",
+    "typescript": "^3.6.4"
+  },
   "devDependencies": {
-    "lerna": "^3.16.4"
+    "@storybook/addon-a11y": "^5.2.3",
+    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-info": "^5.2.3",
+    "@storybook/addon-knobs": "^5.2.3",
+    "@storybook/react": "^5.2.3",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-router-dom": "^5.1.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "^6.26.3",
+    "jest": "^24.9.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "storybook-addon-jsx": "^7.1.6",
+    "ts-jest": "^24.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
