@@ -47,18 +47,18 @@ const SidebarSubSectionList = styled.ul`
 export interface IProps {
 	key: number;
 	path: string;
-	navItemName: string;
+	itemName: string;
 	navItems?: ISidebarItem[];
 }
 
 const SidebarSubSection: SFC<IProps> = (props) => {
 	const [openState, setOpenState] = useState(false);
-	const { path, navItemName, navItems } = props;
+	const { path, itemName, navItems } = props;
 
 	return (
 		<Fragment>
 			<SidebarSubSectionStyled onClick={() => setOpenState(!openState)}>
-				<div><FormattedMessage id={navItemName} /></div>
+				<div><FormattedMessage id={itemName} /></div>
 				{openState ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
 			</SidebarSubSectionStyled>
 			{navItems && openState && <SidebarSubSectionList>{navItems.map((navItem, index) => <SidebarItem key={index} path={path} {...navItem}></SidebarItem>)}

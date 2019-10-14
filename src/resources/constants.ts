@@ -2,7 +2,7 @@ import { IPageData } from "./interfaces";
 
 // export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
-export const testTranslations = {
+const testTranslations = {
   sidebarSetup: 'Setup',
   sidebarSetupDashboard: 'Dashboard',
   sidebarSetupSetupWizard: 'Setup wizard',
@@ -26,15 +26,15 @@ const testSidebarData = [
 		'sectionName': 'sidebarSetup',
 		'navItems': [
 			{
-				'navItemName': 'sidebarSetupDashboard',
+				'itemName': 'sidebarSetupDashboard',
 				'url': '/dashboard',
 			},			
 			{
-				'navItemName': 'sidebarSetupSetupWizard',
+				'itemName': 'sidebarSetupSetupWizard',
 				'url': '/setup-wizard',
 			},			
 			{
-				'navItemName': 'sidebarSetupBrands',
+				'itemName': 'sidebarSetupBrands',
 				'url': '/brands',
 			},			
 		]
@@ -43,27 +43,26 @@ const testSidebarData = [
 		'sectionName': 'sidebarChannels',
 		'navItems': [
 			{
-				'navItemName': 'sidebarChannelsEmail',
+				'itemName': 'sidebarChannelsEmail',
 				'url': '/email',
 			},			
 			{
-				'navItemName': 'sidebarChannelsForms',
+				'itemName': 'sidebarChannelsForms',
 				'url': '/forms',
 			},			
 			{
-				'navItemName': 'sidebarChannelsMessenger',
-				'url': '/messenger',
+				'itemName': 'sidebarChannelsMessenger',
 				'navItems': [
 					{
-						'navItemName': 'sidebarChannelsMessengerSetup',
+						'itemName': 'sidebarChannelsMessengerSetup',
 						'url': '/messenger-setup',
 					},			
 					{
-						'navItemName': 'sidebarChannelsMessengerDepartments',
+						'itemName': 'sidebarChannelsMessengerDepartments',
 						'url': '/messenger-departments',
 					},			
 					{
-						'navItemName': 'sidebarChannelsMessengerQueues',
+						'itemName': 'sidebarChannelsMessengerQueues',
 						'url': '/messenger-queues',
 					},			
 				],
@@ -74,16 +73,26 @@ const testSidebarData = [
 		'sectionName': 'sidebarAgents',
 		'navItems': [
 			{
-				'navItemName': 'sidebarAgentsAgent',
+				'itemName': 'sidebarAgentsAgent',
 				'url': '/agent',
 			},			
 		]
 	},
 ]
 
+export const testInitialData = {
+  initial: {
+    user: {
+      locale: 'en'
+    },
+    sidebar: testSidebarData,
+    translations: testTranslations,
+  }
+}
+
 const testTableColumns = [
-  { title: 'Name', field: 'formattedNameAvatar' },
-  { title: 'Email', field: 'primary_email' },
+  { title: 'Name', field: 'formattedNameAvatar', sorting: true },
+  { title: 'Email', field: 'primary_email', sorting: false },
 ];
 
 const testTableData = {
@@ -91,9 +100,16 @@ const testTableData = {
 }
 
 export const testPageData: IPageData = {
-  id: 'agents',
-  headerTitle: 'agentsTitle',
-  headerCopy: 'agentsCopy',
-  sidebarData: testSidebarData,
-  tableData: testTableData,
+  "path": "/agents",
+  "pageType": "standardTable",
+  "pageProps": {
+    "title": "admin.agents.page_title",
+    "description": "admin.agents.page_description",
+    "tables": [
+      {
+        "dataQuery": "query { agents_getAgents { id, name, primary_email }}",
+        "metadataQuery": "query { agents_getAgentsTableOptions ... } }" // returns testTableMeta into Tables component
+      }
+    ]
+  }
 }

@@ -23,7 +23,7 @@ describe("SidebarItem", () => {
     props = {
       key: 0,
       path: undefined,
-      navItemName: undefined,
+      itemName: undefined,
       url: undefined,
     };
     mountedSidebarItem = undefined;
@@ -40,9 +40,9 @@ describe("SidebarItem", () => {
     });
   });
 
-  describe("when navItemName and url are defined", () => {
+  describe("when itemName and url are defined", () => {
     beforeEach(() => {
-      props.navItemName = 'item 1';
+      props.itemName = 'item 1';
       props.url = '/page1';
     });
 

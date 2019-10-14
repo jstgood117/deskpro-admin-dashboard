@@ -1,7 +1,11 @@
-export interface ISidebarItem {
-	navItemName: string;
-	url?: string;
-	navItems?: ISidebarItem[]; // having this array turns this SidebarItem into a SidebarSubSection
+export interface IInitialData {
+	user: IUser,
+	sidebar: ISidebarSection[],
+	translations: ITranslation,
+}
+
+export interface IUser {
+	locale: string,
 }
 
 export interface ISidebarSection {
@@ -9,22 +13,41 @@ export interface ISidebarSection {
 	navItems?: ISidebarItem[];
 }
 
+export interface ISidebarItem {
+	itemName: string;
+	url?: string;
+	navItems?: ISidebarItem[]; // having this array turns this SidebarItem into a SidebarSubSection
+}
+
+export interface ITranslation {}
+
 export interface ITableColumn {
 	title: string;
 	field: string;
+	sorting?: boolean; // default false 
 }
 
 export interface ITableRow {}
 
 export interface ITableData {
 	columns: ITableColumn[];
-	rows?: ITableRow[];	
+	search?: boolean; // default false
+}
+
+export interface ITableQuery {
+	dataQuery: string,
+	metadataQuery: string,
+}
+
+export interface IPageProps {
+	title: string,
+	description?: string,
+	illustration?: string, // TBD whether this is a local link
+	tables?: ITableQuery[],
 }
 
 export interface IPageData {
-  id: string,
-  headerTitle: string,
-  headerCopy?: string,
-  sidebarData: ISidebarSection[],
-  tableData?: ITableData,
+	path: string,
+	pageType: string,
+	pageProps: IPageProps,
 }

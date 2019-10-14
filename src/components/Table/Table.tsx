@@ -1,9 +1,12 @@
-import React, { Component, forwardRef, LegacyRef } from 'react';
+import React, { forwardRef, LegacyRef, SFC, Fragment } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { useQuery } from '@apollo/react-hooks';
 import MaterialTable from 'material-table';
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
-import { DeskproAdminTheme } from '../Theme';
+import { ITableColumn, ITableRow } from '../../resources/interfaces';
+import { DocumentNode } from 'graphql';
+import { gql } from 'apollo-boost';
 
 const tableIcons = {
 	FirstPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <FirstPage {...props} ref={ref} />),
@@ -62,35 +65,24 @@ const TableStyled = styled.div`
 //, render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div>
 
 export interface IProps {
-	columns: any;
-	tableData: any;
-}
-interface IState {
-	tableData: any;
+	dataQuery: string,
+	metadataQuery: string,
 }
 
-class Table extends Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
+const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
+		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
+		const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
+		if (dataCols) console.log(dataCols)
+		if (dataRows) console.log(dataRows)
 
-		this.state = { 
-			tableData: this.props.tableData,
-		};
-	}
-
-	componentDidUpdate(prevProps: IProps) {
-		if (this.props.tableData.length !== prevProps.tableData.length) {
-			this.setState({ tableData: this.props.tableData });
-		}
-	}
-
-	render() {
 		return (
-			<ThemeProvider theme={DeskproAdminTheme}>
-				<TableStyled>
-					{this.state.tableData && <MaterialTable
-						data={this.state.tableData}
-						columns={this.props.columns}
+			<Fragment>
+				{(loadingCols || loadingRows) && <p>Loading...</p>}
+				{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
+				{dataCols && dataRows && <TableStyled>
+					<MaterialTable
+						data={dataRows}
+						columns={dataCols}
 						options={{
 							pageSize: 5,
 							search: false,
@@ -98,11 +90,11 @@ class Table extends Component<IProps, IState> {
 							selection: true,
 						}}
 						icons={tableIcons}
-					/>}
-				</TableStyled>
-			</ThemeProvider>
+					/>
+				</TableStyled>}
+			</Fragment>
 		);
 	}
-}
+	
 
 export default Table;

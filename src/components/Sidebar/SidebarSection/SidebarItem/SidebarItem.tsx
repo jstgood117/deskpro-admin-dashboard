@@ -26,7 +26,7 @@ const SidebarItemStyled = styled.li<IStyleProps>`
 export interface IProps {
 	key: number;
 	path: string;
-	navItemName: string;
+	itemName: string;
 	url?: string;
 }
 interface IState {
@@ -45,13 +45,13 @@ class SidebarItem extends Component<IProps,IState> {
 	}	
 
 	render() {
-		const { path, navItemName, url } = this.props;
+		const { path, itemName, url } = this.props;
 
 		return (
 			<Fragment>
 			{this.state.redirect && <Redirect push to={url} />}
 			<SidebarItemStyled active={url ? path === url : false} onClick={this.handleOnClick}>
-				<div><FormattedMessage id={navItemName} /></div>
+				<div><FormattedMessage id={itemName} /></div>
 			</SidebarItemStyled>
 			</Fragment>
 		);

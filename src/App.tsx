@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { SFC } from 'react';
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import {IntlProvider} from 'react-intl';
-import { MessageFormatElement } from 'intl-messageformat-parser';
 
-import { testTranslations } from './resources/constants';
+import { testInitialData } from './resources/constants';
 import Router from './components/Router';
+import { QUERY_INITIAL } from './resources/graphql';
 
 const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
 console.log("API URL: " + apiUrl);
@@ -14,40 +14,23 @@ const client = new ApolloClient({
 	uri: apiUrl,
 });
 
-interface IProps {};
-interface IState {
-	locale: string,
-	translations?: Record<string, string> | Record<string, MessageFormatElement[]>
-}
+const App: SFC = () => {
+/*	const { loading, error, data } = useQuery(QUERY_INITIAL);
+	if (data) console.log(data.initial) */
+	// test data for now
+	const loading = false;
+	const error = false;
+	const data = testInitialData;
 
-class App extends Component<IProps,IState> {
-	constructor(props: IProps) {
-		super(props);
-
-		this.state = {
-			locale: 'en-us', // does this come from API call?
-			translations: {}
-		};
-	}
-
-	componentDidMount() {
-		// Make API call get translation data
-		
-		this.setState({ translations: testTranslations });
-	}
-
-	render() {
-		if (this.state.translations) {
-			return (
-				<ApolloProvider client={client}>
-					<IntlProvider locale={this.state.locale} messages={this.state.translations}>
-						<Router />
-					</IntlProvider>
-				</ApolloProvider>
-			);
-		}
-		return null;
-	}
+  return (
+		<ApolloProvider client={client}>
+			{loading && <p>Loading...</p>}
+			{error && <p>Error, couldn't load data</p>}
+			{data && <IntlProvider locale={data.initial.user.locale} messages={data.initial.translations}>
+				<Router {...data.initial} />
+			</IntlProvider>}
+		</ApolloProvider>
+	);
 }
 
 export default App;

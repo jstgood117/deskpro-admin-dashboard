@@ -6,7 +6,7 @@ This component renders within SidebarSection component, depending on the data pa
 
 * it has Props of:
 	key - unique key
-	navItemName - text to display
+	itemName - text to display
 	navItems - array of SidebarItem objects
 * it has no State
 * it always renders a <li> element, containing the rest of the component
