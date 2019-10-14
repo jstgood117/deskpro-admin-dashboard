@@ -19,7 +19,8 @@ describe("Sidebar", () => {
 
   beforeEach(() => {
     props = {
-      navData: undefined,
+      data: undefined,
+      path: undefined,
     };
     mountedSidebar = undefined;
   });
@@ -29,9 +30,9 @@ describe("Sidebar", () => {
     expect(elts.length).toBeGreaterThan(0);
   });
 
-  describe("when navData is undefined", () => {
+  describe("when data is undefined", () => {
     beforeEach(() => {
-      props.navData = undefined;
+      props.data = undefined;
     });
 
     it("doesn't render anything else", () => {
@@ -39,9 +40,9 @@ describe("Sidebar", () => {
     });
   });
 
-  describe("when navData is defined with N sectionNames", () => {
+  describe("when data is defined with N sectionNames", () => {
     beforeEach(() => {
-      props.navData = [
+      props.data = [
         { sectionName: 'section 1' },
         { sectionName: 'section 2' },
         { sectionName: 'section 3' },
@@ -49,7 +50,7 @@ describe("Sidebar", () => {
     });
 
     it("renders N <SidebarSection>", () => {
-      expect(wrapper(true).find('SidebarSection').length).toBe(props.navData.length);
+      expect(wrapper(true).find('SidebarSection').length).toBe(props.data.length);
     });
 
   });

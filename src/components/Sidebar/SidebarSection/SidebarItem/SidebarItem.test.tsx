@@ -4,7 +4,7 @@ import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
 import SidebarItem, { IProps } from './SidebarItem';
-import { DeskproAdminTheme } from '../../../../Theme';
+import { DeskproAdminTheme } from '../../../Theme';
 
 configure({adapter: new Adapter()});
 
@@ -22,6 +22,7 @@ describe("SidebarItem", () => {
   beforeEach(() => {
     props = {
       key: 0,
+      path: undefined,
       navItemName: undefined,
       url: undefined,
     };

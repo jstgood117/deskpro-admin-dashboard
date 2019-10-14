@@ -3,7 +3,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 
 import SidebarSection, { IProps } from './SidebarSection';
-import Icon from '../../../Icon';
+import Icon from '../../Icon';
 
 configure({adapter: new Adapter()});
 
@@ -21,6 +21,7 @@ describe("SidebarSection", () => {
   beforeEach(() => {
     props = {
       key: 0,
+      path: undefined,
       sectionName: undefined,
       navItems: undefined,
     };
