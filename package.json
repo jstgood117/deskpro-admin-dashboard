@@ -16,16 +16,18 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "graphql": "^14.5.8",
+    "invariant": "^2.2.4",
     "material-table": "^1.52.0",
     "react": "^16.10.2",
-    "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "styled-components": "^4.4.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "warning": "^4.0.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.4",
     "@storybook/addon-a11y": "^5.2.3",
     "@storybook/addon-actions": "^5.2.3",
     "@storybook/addon-info": "^5.2.3",
@@ -36,7 +38,9 @@
     "@types/react-router-dom": "^5.1.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
     "jest": "^24.9.0",
+    "react-docgen-typescript-loader": "^3.3.0",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "storybook-addon-jsx": "^7.1.6",
     "ts-jest": "^24.1.0"
@@ -46,7 +50,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
