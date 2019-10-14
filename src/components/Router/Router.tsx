@@ -13,8 +13,8 @@ interface IProps {
 const Router: SFC<IProps> = (props) => (
 	<HashRouter>
     <Switch>
-      <Route exact path='/agent' component={Agents} {...props} />
-      <Route component={Page} />
+      <Route exact path='/agent' render={(p) => <Agents {...p} {...props} />} />
+      <Route render={(p) => <Page {...p} {...props} />} />
     </Switch>
 	</HashRouter>
 );

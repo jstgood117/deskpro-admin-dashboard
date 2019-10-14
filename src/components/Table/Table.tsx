@@ -1,12 +1,11 @@
 import React, { forwardRef, LegacyRef, SFC, Fragment } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import MaterialTable from 'material-table';
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
-import { ITableColumn, ITableRow } from '../../resources/interfaces';
-import { DocumentNode } from 'graphql';
-import { gql } from 'apollo-boost';
+import { testTableColumns } from '../../resources/constants';
 
 const tableIcons = {
 	FirstPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <FirstPage {...props} ref={ref} />),
@@ -70,10 +69,15 @@ export interface IProps {
 }
 
 const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
-		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
+	if (dataQuery && metadataQuery) {
+//		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
 		const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
-		if (dataCols) console.log(dataCols)
-		if (dataRows) console.log(dataRows)
+//		if (dataCols) console.log(dataCols)
+
+		// test data for now
+		const loadingCols = false;
+		const errorCols = false;
+		const dataCols = testTableColumns;
 
 		return (
 			<Fragment>
@@ -81,7 +85,7 @@ const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
 				{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
 				{dataCols && dataRows && <TableStyled>
 					<MaterialTable
-						data={dataRows}
+						data={dataRows.agents_getAgents}
 						columns={dataCols}
 						options={{
 							pageSize: 5,
@@ -95,6 +99,8 @@ const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
 			</Fragment>
 		);
 	}
+	return null;
+}
 	
 
 export default Table;

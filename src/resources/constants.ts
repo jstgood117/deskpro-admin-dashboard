@@ -17,11 +17,11 @@ const testTranslations = {
   sidebarAgents: 'Agents',
   sidebarAgentsAgent: 'Agent',
   // Agents page
-  agentsTitle: 'Agents',
-  agentsCopy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  'admin.agents.page_title': 'Agents',
+  'admin.agents.page_description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 }
 
-const testSidebarData = [
+export const testSidebarData = [
 	{
 		'sectionName': 'sidebarSetup',
 		'navItems': [
@@ -90,8 +90,9 @@ export const testInitialData = {
   }
 }
 
-const testTableColumns = [
-  { title: 'Name', field: 'formattedNameAvatar', sorting: true },
+export const testTableColumns = [
+//  { title: 'Name', field: 'formattedNameAvatar', sorting: true },
+  { title: 'Name', field: 'name', sorting: true },
   { title: 'Email', field: 'primary_email', sorting: false },
 ];
 
