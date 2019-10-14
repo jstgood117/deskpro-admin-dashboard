@@ -1,6 +1,8 @@
-export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
+import { IPageData } from "./interfaces";
 
-export const testSidebarData = [
+// export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
+
+const testSidebarData = [
 	{
 		'sectionName': 'Setup',
 		'navItems': [
@@ -59,3 +61,20 @@ export const testSidebarData = [
 		]
 	},
 ]
+
+const testTableColumns = [
+  { title: 'Name', field: 'formattedNameAvatar' },
+  { title: 'Email', field: 'primary_email' },
+];
+
+const testTableData = {
+  columns: testTableColumns,
+}
+
+export const testPageData: IPageData = {
+  id: 'agents',
+  headerTitle: 'Agents',
+  headerCopy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  sidebarData: testSidebarData,
+  tableData: testTableData,
+}

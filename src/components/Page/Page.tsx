@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import { testSidebarData } from '../../resources/constants';
+import { testPageData } from '../../resources/constants';
 
 import Main from '../Main';
 import Button from '../Button';
@@ -16,7 +16,7 @@ export interface IProps {
 
 const Page: SFC<IProps> = ({location}) => (
   <Grid>
-    <Sidebar path={location.pathname} data={testSidebarData} />
+    <Sidebar path={location.pathname} data={testPageData.sidebarData} />
     <Main>
       <Header>
         <h1>Generic Page</h1>

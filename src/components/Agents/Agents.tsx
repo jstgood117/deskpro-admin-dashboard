@@ -2,18 +2,13 @@ import React, { SFC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
-import { testSidebarData } from '../../resources/constants';
+import { testPageData } from '../../resources/constants';
 
 import Main from '../Main';
 import Header from '../Header';
 import Table from '../Table';
 import Grid from '../Grid';
 import Sidebar from '../Sidebar';
-
-const dataCols = [
-  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div> },
-  { title: 'Email', field: 'primary_email' },
-];
 
 const QUERY_PEOPLE = gql`{
   agents_getAgents {
@@ -36,7 +31,7 @@ const Agent: SFC<IProps> = ({location}) => {
   
   return (
     <Grid>
-      <Sidebar path={location.pathname} data={testSidebarData} />
+      <Sidebar path={location.pathname} data={testPageData.sidebarData} />
       <Main>
         <Header>
           <h1>Agents</h1>
@@ -44,7 +39,7 @@ const Agent: SFC<IProps> = ({location}) => {
         </Header>
         {loading && <p>Loading...</p>}
         {error && <p>Error, couldn't load data</p>}
-        {data && <Table tableData={data.agents_getAgents} columns={dataCols} />}
+        {data && <Table tableData={data.agents_getAgents} columns={testPageData.tableData.columns} />}
       </Main>
     </Grid>
   );
