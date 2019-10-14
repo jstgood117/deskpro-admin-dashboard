@@ -1,20 +1,27 @@
 language: node_js
 node_js:
-  - "12"
+- '12'
 cache:
   npm: false
 install:
-  - npm install
+- npm install
 script:
-  - npm run test
-  - npm run build
-  - npm run storybook:build
-  - .travis/prep-site.sh
+- npm run test
+- npm run build
+- npm run storybook:build
+- ".travis/prep-site.sh"
 deploy:
-  - provider: pages
-    skip_cleanup: true
-    github_token: $GH_TOKEN
-    keep-history: true
-    local-dir: ./gh-pages
-    on:
-      branch: master
+- provider: pages
+  skip_cleanup: true
+  github_token: "$GH_TOKEN"
+  keep-history: true
+  local-dir: "./gh-pages"
+  on:
+    branch: master
+notifications:
+  slack:
+    rooms:
+      - secure: "H12ZOw4Ap1ipxhwIC+MA+sYxFTc17IFD0L1Mi5ZPc1hFDkIK4XNXvVvCKKN94olhIWP67yu7e4K8K2ImmMr/2wfC1aT9cdbVWeVjT6oOdPps7M1Nx8YNnxNXY6FB+DLtuP7+TBjJmlhPNi2qBjYIq+ceah6CGNgAjl2TgCrCbH90vr1p5kT9yVuiTvjZGebNeEGAehbcQQNYhogVjtA4yEaoP2U5VyvZYXn5gOXWCT3AhuQCtu3eQn/RuXeWY6sF65JE7ZjTs/n1nbabEVXXLhAPs5qOS7KJVVOquIMx06uQpZ61Vkkj/4VtaBWrr+KGOn9Dw3OmOkRnjfIFwctiv+8SI0FfMuqWWKnoInDLf62pzQ6iqYLrPc04D2kiIdx9fXcfNG2ev8gGSbg2qvMpgGKomRlAiIsVZFHtYyLnfwio8KI4losQT1JqQDmz1GguzJI1SZwqaHxC2P9ixfCK7bfhVGb4sYk9rZF1Rok+Sjbl6EIvpBgCFL4+E7s0k82uCpTPm1ZMBRNLwj52ndbOcC/4fwk0BGXeaW756+OwEF7vG5rSwNpvUhPJI0IPmmynBk3Te+JLOy8rGpiXg/wFt6H9VvS2mxniNUjS5ZgveTJ/JWLkyl7/PXcnExCqUTP0shnd7cBVRmwN5cPa+bAVrfBYoZVRllrgtrNs/sJIoLc="
+    on_success: change
+    on_failure: always
+    on_pull_requests: false
