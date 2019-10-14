@@ -2,49 +2,68 @@ import { IPageData } from "./interfaces";
 
 // export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
+export const testTranslations = {
+  sidebarSetup: 'Setup',
+  sidebarSetupDashboard: 'Dashboard',
+  sidebarSetupSetupWizard: 'Setup wizard',
+  sidebarSetupBrands: 'Brands',
+  sidebarChannels: 'Channels',
+  sidebarChannelsEmail: 'Email',
+  sidebarChannelsForms: 'Forms',
+  sidebarChannelsMessenger: 'Messenger',
+  sidebarChannelsMessengerSetup: 'Setup',
+  sidebarChannelsMessengerDepartments: 'Departments',
+  sidebarChannelsMessengerQueues: 'Queues',
+  sidebarAgents: 'Agents',
+  sidebarAgentsAgent: 'Agent',
+  // Agents page
+  agentsTitle: 'Agents',
+  agentsCopy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+}
+
 const testSidebarData = [
 	{
-		'sectionName': 'Setup',
+		'sectionName': 'sidebarSetup',
 		'navItems': [
 			{
-				'navItemName': 'Dashboard',
+				'navItemName': 'sidebarSetupDashboard',
 				'url': '/dashboard',
 			},			
 			{
-				'navItemName': 'Setup wizard',
+				'navItemName': 'sidebarSetupSetupWizard',
 				'url': '/setup-wizard',
 			},			
 			{
-				'navItemName': 'Brands',
+				'navItemName': 'sidebarSetupBrands',
 				'url': '/brands',
 			},			
 		]
 	},
 	{
-		'sectionName': 'Channels',
+		'sectionName': 'sidebarChannels',
 		'navItems': [
 			{
-				'navItemName': 'Email',
+				'navItemName': 'sidebarChannelsEmail',
 				'url': '/email',
 			},			
 			{
-				'navItemName': 'Forms',
+				'navItemName': 'sidebarChannelsForms',
 				'url': '/forms',
 			},			
 			{
-				'navItemName': 'Messenger',
+				'navItemName': 'sidebarChannelsMessenger',
 				'url': '/messenger',
 				'navItems': [
 					{
-						'navItemName': 'Setup',
+						'navItemName': 'sidebarChannelsMessengerSetup',
 						'url': '/messenger-setup',
 					},			
 					{
-						'navItemName': 'Departments',
+						'navItemName': 'sidebarChannelsMessengerDepartments',
 						'url': '/messenger-departments',
 					},			
 					{
-						'navItemName': 'Queues',
+						'navItemName': 'sidebarChannelsMessengerQueues',
 						'url': '/messenger-queues',
 					},			
 				],
@@ -52,10 +71,10 @@ const testSidebarData = [
 		]
 	},
 	{
-		'sectionName': 'Agents',
+		'sectionName': 'sidebarAgents',
 		'navItems': [
 			{
-				'navItemName': 'Agent',
+				'navItemName': 'sidebarAgentsAgent',
 				'url': '/agent',
 			},			
 		]
@@ -73,8 +92,8 @@ const testTableData = {
 
 export const testPageData: IPageData = {
   id: 'agents',
-  headerTitle: 'Agents',
-  headerCopy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  headerTitle: 'agentsTitle',
+  headerCopy: 'agentsCopy',
   sidebarData: testSidebarData,
   tableData: testTableData,
 }

@@ -1,4 +1,5 @@
 import React, { SFC } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
@@ -34,8 +35,8 @@ const Agent: SFC<IProps> = ({location}) => {
       <Sidebar path={location.pathname} data={testPageData.sidebarData} />
       <Main>
         <Header>
-          <h1>Agents</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          <h1><FormattedMessage id={testPageData.headerTitle} /></h1>
+          <p><FormattedMessage id={testPageData.headerCopy} /></p>
         </Header>
         {loading && <p>Loading...</p>}
         {error && <p>Error, couldn't load data</p>}

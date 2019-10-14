@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 
 interface IStyleProps {
   active?: boolean
@@ -14,6 +15,11 @@ const SidebarItemStyled = styled.li<IStyleProps>`
 	&:hover {
 		background-color: #d4dbdf;
 		cursor: pointer;
+	}
+
+	& div {
+		margin-right: 10px;
+		overflow: hidden;
 	}
 `
 
@@ -45,7 +51,7 @@ class SidebarItem extends Component<IProps,IState> {
 			<Fragment>
 			{this.state.redirect && <Redirect push to={url} />}
 			<SidebarItemStyled active={url ? path === url : false} onClick={this.handleOnClick}>
-				{navItemName}
+				<div><FormattedMessage id={navItemName} /></div>
 			</SidebarItemStyled>
 			</Fragment>
 		);

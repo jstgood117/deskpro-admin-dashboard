@@ -1,4 +1,5 @@
 import React, { SFC, Fragment, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
@@ -27,14 +28,19 @@ const SidebarSubSectionStyled = styled.li<IStyleProps>`
 			fill: #4A4E4F;
 		}
 	}
+
+	& div {
+		margin-right: 15px;
+		overflow: hidden;
+	}
 `
 
 const SidebarSubSectionList = styled.ul`
 	margin: 0;
 	padding-inline-start: 0px;
 
-	& li a {
-		padding-left: 16px;
+	& li {
+		padding-left: 60px;
 	}
 `
 
@@ -52,7 +58,7 @@ const SidebarSubSection: SFC<IProps> = (props) => {
 	return (
 		<Fragment>
 			<SidebarSubSectionStyled onClick={() => setOpenState(!openState)}>
-				{navItemName}
+				<div><FormattedMessage id={navItemName} /></div>
 				{openState ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
 			</SidebarSubSectionStyled>
 			{navItems && openState && <SidebarSubSectionList>{navItems.map((navItem, index) => <SidebarItem key={index} path={path} {...navItem}></SidebarItem>)}
