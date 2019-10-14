@@ -1,0 +1,22 @@
+export declare const DeskproAdminTheme: {
+    mainFont: string;
+    headerFont: string;
+    staticColour: string;
+    textHover: string;
+    brandPrimary: string;
+    activeColour: string;
+    hoverColour: string;
+    secondaryColour: string;
+    greyDark: string;
+    static2Colour: string;
+    greyLight: string;
+    greyLighter: string;
+    greyLightest: string;
+    lightBlue: string;
+    warningColour: string;
+    successColour: string;
+    pageHeader: string;
+    pagePadding: string;
+};
+declare const _default: {};
+export default _default;
