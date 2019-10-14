@@ -1,10 +1,10 @@
 import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
-import Icon from '../../../Icon';
+import Icon from '../../Icon';
 
 import SidebarItem from './SidebarItem';
 import SidebarSubSection from './SidebarSubSection';
-import { ISidebarItem } from '../../../../resources/interfaces';
+import { ISidebarItem } from '../../../resources/interfaces';
 
 const SidebarSectionStyled = styled.div`
 	position: relative;
@@ -25,6 +25,7 @@ const SidebarSectionList = styled.ul`
 
 export interface IProps {
 	key: number;
+	path: string;
 	sectionName?: string;
 	navItems?: ISidebarItem[];
 }
@@ -37,9 +38,9 @@ const SidebarSection: SFC<IProps> = (props) => (
 		</SidebarSectionStyled>}
 		{props.navItems && <SidebarSectionList>{props.navItems.map((navItem, index) => {
 			if (navItem.navItems) {
-				return <SidebarSubSection key={index} {...navItem}></SidebarSubSection>
+				return <SidebarSubSection key={index} path={props.path} {...navItem}></SidebarSubSection>
 			}
-			return <SidebarItem key={index} {...navItem}></SidebarItem>
+			return <SidebarItem key={index} path={props.path} {...navItem}></SidebarItem>
 		})}
 		</SidebarSectionList>}
 	</Fragment>

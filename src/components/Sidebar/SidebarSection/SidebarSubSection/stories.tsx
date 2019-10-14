@@ -21,5 +21,5 @@ const testData = {
 
 storiesOf('SidebarSubSection',module)
 	.add('with dummy data', () => (
-		<div><SidebarSubSection key={0} {...testData} /></div>
+		<div><SidebarSubSection key={0} path='/' {...testData} /></div>
 	));

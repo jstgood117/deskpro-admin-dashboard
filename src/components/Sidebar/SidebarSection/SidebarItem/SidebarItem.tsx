@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router';
 import styled from 'styled-components';
 
@@ -19,6 +19,7 @@ const SidebarItemStyled = styled.li<IStyleProps>`
 
 export interface IProps {
 	key: number;
+	path: string;
 	navItemName: string;
 	url?: string;
 }
@@ -38,14 +39,15 @@ class SidebarItem extends Component<IProps,IState> {
 	}	
 
 	render() {
-		if (this.state.redirect) {
-			return <Redirect push to={this.props.url} />;
-		}
-		
+		const { path, navItemName, url } = this.props;
+
 		return (
-			<SidebarItemStyled active={this.props.url ? window.location.pathname === this.props.url : false} onClick={this.handleOnClick}>
-				{this.props.navItemName}
+			<Fragment>
+			{this.state.redirect && <Redirect push to={url} />}
+			<SidebarItemStyled active={url ? path === url : false} onClick={this.handleOnClick}>
+				{navItemName}
 			</SidebarItemStyled>
+			</Fragment>
 		);
 	}
 }

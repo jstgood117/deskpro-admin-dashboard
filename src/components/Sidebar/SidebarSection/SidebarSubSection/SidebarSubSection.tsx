@@ -2,7 +2,7 @@ import React, { SFC, Fragment, useState } from 'react';
 import styled from 'styled-components';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
-import { ISidebarItem } from '../../../../../resources/interfaces';
+import { ISidebarItem } from '../../../../resources/interfaces';
 import SidebarItem from '../SidebarItem';
 
 interface IStyleProps {}
@@ -40,20 +40,22 @@ const SidebarSubSectionList = styled.ul`
 
 export interface IProps {
 	key: number;
+	path: string;
 	navItemName: string;
 	navItems?: ISidebarItem[];
 }
 
 const SidebarSubSection: SFC<IProps> = (props) => {
 	const [openState, setOpenState] = useState(false);
+	const { path, navItemName, navItems } = props;
 
 	return (
 		<Fragment>
 			<SidebarSubSectionStyled onClick={() => setOpenState(!openState)}>
-				{props.navItemName}
+				{navItemName}
 				{openState ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
 			</SidebarSubSectionStyled>
-			{props.navItems && openState && <SidebarSubSectionList>{props.navItems.map((navItem, index) => <SidebarItem key={index} {...navItem}></SidebarItem>)}
+			{navItems && openState && <SidebarSubSectionList>{navItems.map((navItem, index) => <SidebarItem key={index} path={path} {...navItem}></SidebarItem>)}
 			</SidebarSubSectionList>}
 		</Fragment>
 	);
