@@ -5,12 +5,10 @@ cache:
   npm: false
 install:
   - npm install
-  - npm run lerna bootstrap
 script:
-  - npm run lerna run --scope deskpro-component-library test:prod
-  #- npm run lerna run --scope deskpro-admin-frontend test
-  - npm run lerna run --scope deskpro-component-library build-storybook
-  - npm run lerna run --scope deskpro-admin-frontend build
+  - npm run test
+  - npm run build
+  - npm run storybook:build
   - .travis/prep-site.sh
 deploy:
   - provider: pages
