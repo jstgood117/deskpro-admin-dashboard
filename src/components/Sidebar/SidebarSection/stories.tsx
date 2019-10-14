@@ -46,5 +46,5 @@ const testData = {
 storiesOf('SidebarSection',module)
 	.addDecorator(checkA11y)
 	.add('with dummy data', () => (
-		<SidebarSection key={0} {...testData}></SidebarSection>
+		<SidebarSection key={0} path='/' {...testData}></SidebarSection>
 	));

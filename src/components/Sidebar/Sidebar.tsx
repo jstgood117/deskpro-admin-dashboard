@@ -1,68 +1,27 @@
 import React, { SFC } from 'react';
-import Sidebar from './SidebarX';
+import styled, { ThemeProvider } from 'styled-components';
 
-const testData = [
-	{
-		'sectionName': 'Setup',
-		'navItems': [
-			{
-				'navItemName': 'Dashboard',
-				'url': '#/dashboard',
-			},			
-			{
-				'navItemName': 'Setup wizard',
-				'url': '#/setup-wizard',
-			},			
-			{
-				'navItemName': 'Brands',
-				'url': '#/brands',
-			},			
-		]
-	},
-	{
-		'sectionName': 'Channels',
-		'navItems': [
-			{
-				'navItemName': 'Email',
-				'url': '#/email',
-			},			
-			{
-				'navItemName': 'Forms',
-				'url': '#/forms',
-			},			
-			{
-				'navItemName': 'Messenger',
-				'url': '#/messenger',
-				'navItems': [
-					{
-						'navItemName': 'Setup',
-						'url': '#/messenger-setup',
-					},			
-					{
-						'navItemName': 'Departments',
-						'url': '#/messenger-departments',
-					},			
-					{
-						'navItemName': 'Queues',
-						'url': '#/messenger-queues',
-					},			
-				],
-			},			
-		]
-	},
-	{
-		'sectionName': 'Agents',
-		'navItems': [
-			{
-				'navItemName': 'Agent',
-				'url': '#/agent',
-			},			
-		]
-	},
-]
+import { ISidebarSection } from '../../resources/interfaces';
+import { DeskproAdminTheme } from '../Theme';
+import SidebarSection from './SidebarSection';
 
-const SidebarWrapper: SFC = () => (
-  <Sidebar navData={testData} />
+const SidebarStyled = styled.nav`
+	background-color: #e8ebed;
+	color: #000;
+	width: 200px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+`
+
+export interface IProps {
+	path: string;
+	data: ISidebarSection[];
+}
+
+const Sidebar: SFC<IProps> = (props) => (
+	<ThemeProvider theme={DeskproAdminTheme}>
+		<SidebarStyled>{props.data && props.data.map((navSection, index) => <SidebarSection key={index} path={props.path} {...navSection}>}</SidebarSection>)}</SidebarStyled>
+	</ThemeProvider>
 );
 
-export default SidebarWrapper;
+export default Sidebar;

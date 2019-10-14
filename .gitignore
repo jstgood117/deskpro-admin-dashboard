@@ -12,6 +12,7 @@
 /build
 /storybook-static
 /gh-pages
+.storybook/dist
 
 # misc
 **/.DS_Store

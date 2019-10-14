@@ -16,8 +16,8 @@ const testData2 = {
 storiesOf('SidebarItem',module)
 	.addDecorator(checkA11y)
 	.add('normal link', () => (
-		<SidebarItem key={0} {...testData}></SidebarItem>
+		<SidebarItem key={0} path='/' {...testData}></SidebarItem>
 	))
 	.add('active link', () => (
-		<SidebarItem key={0} {...testData2}></SidebarItem>
+		<SidebarItem key={0} path='/iframe.html' {...testData2}></SidebarItem>
 	));
