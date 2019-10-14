@@ -21,5 +21,5 @@ const testData = [
 
 storiesOf('Table',module)
 	.add('with dummy data', () => (
-		<Table columns={testCols} tableData={testData} />
+		<Table dataQuery='dQ' metadataQuery='mQ' />
 	));

@@ -24,7 +24,7 @@ describe("SidebarSubSection", () => {
     props = {
       key: 0,
       path: undefined,
-      navItemName: undefined,
+      itemName: undefined,
       navItems: undefined,
     };
     mountedSidebarSubSection = undefined;
@@ -39,9 +39,9 @@ describe("SidebarSubSection", () => {
 //    expect(wrapper(true).find('KeyboardArrowDownIcon').length).toBe(1);
   });
 
-  describe("when navItemName is defined", () => {
+  describe("when itemName is defined", () => {
     beforeEach(() => {
-      props.navItemName = 'item 1';
+      props.itemName = 'item 1';
     });
 
     it("renders the label", () => {
@@ -52,11 +52,11 @@ describe("SidebarSubSection", () => {
   describe("when navItems are defined", () => {
     beforeEach(() => {
       props.navItems = [
-        { navItemName: '1' },
-        { navItemName: '2' },
-        { navItemName: '3' },
-        { navItemName: '4' },
-        { navItemName: '5' },
+        { itemName: '1' },
+        { itemName: '2' },
+        { itemName: '3' },
+        { itemName: '4' },
+        { itemName: '5' },
       ]
     });
 

@@ -8,13 +8,13 @@ export interface IProps {
 
 const Icon: SFC<IProps> = (props) => {
   switch (props.name) {
-    case "Setup":
+    case "sidebarSetup":
       return <IconSetup />;
-    case "Channels":
+    case "sidebarChannels":
       return <IconChannels />;
-    case "Agents":
+    case "sidebarAgents":
       return <IconAgents />;
-    case "Help":
+    case "sidebarHelp":
       return <IconHelp />;
     default:
       return <Fragment />;

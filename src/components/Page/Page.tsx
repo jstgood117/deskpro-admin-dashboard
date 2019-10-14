@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import { testSidebarData } from '../../resources/constants';
+import { IUser, ISidebarSection, ITranslation } from '../../resources/interfaces';
 
 import Main from '../Main';
 import Button from '../Button';
@@ -10,13 +10,16 @@ import Grid from '../Grid';
 
 export interface IProps {
   location: {
-    pathname: string
-  }
+    pathname: string,
+  },
+  user: IUser,
+  sidebar: ISidebarSection[],
+  translations: ITranslation,
 }
 
-const Page: SFC<IProps> = ({location}) => (
+const Page: SFC<IProps> = ({location, sidebar}) => (
   <Grid>
-    <Sidebar path={location.pathname} data={testSidebarData} />
+    <Sidebar path={location.pathname} data={sidebar} />
     <Main>
       <Header>
         <h1>Generic Page</h1>

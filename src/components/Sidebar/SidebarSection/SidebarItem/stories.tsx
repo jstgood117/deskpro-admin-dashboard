@@ -5,11 +5,11 @@ import { checkA11y } from '@storybook/addon-a11y';
 import SidebarItem from './SidebarItem';
 
 const testData = {
-	'navItemName': 'Dashboard',
+	'itemName': 'Dashboard',
 	'url': '/dashboard',
 }
 const testData2 = {
-	'navItemName': 'ActivePage',
+	'itemName': 'ActivePage',
 	'url': '/iframe.html',
 }
 

@@ -5,15 +5,15 @@ import { checkA11y } from '@storybook/addon-a11y';
 import SidebarSubSection from './SidebarSubSection';
 
 const testData = {
-	navItemName: 'item1',
+	itemName: 'item1',
 	url: '/item1',
 	navItems: [
 		{
-			navItemName: 'sub-item1',
+			itemName: 'sub-item1',
 			url: '/subitem1',		
 		},
 		{
-			navItemName: 'sub-item2',
+			itemName: 'sub-item2',
 			url: '/subitem2',		
 		},
 	],

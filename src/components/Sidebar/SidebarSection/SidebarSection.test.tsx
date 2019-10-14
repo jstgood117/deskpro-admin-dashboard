@@ -53,11 +53,11 @@ describe("SidebarSection", () => {
   describe("when navItems are defined", () => {
     it("renders the correct number of <SidebarItem>", () => {
       props.navItems = [
-        { navItemName: '1' },
-        { navItemName: '2' },
-        { navItemName: '3' },
-        { navItemName: '4' },
-        { navItemName: '5' },
+        { itemName: '1' },
+        { itemName: '2' },
+        { itemName: '3' },
+        { itemName: '4' },
+        { itemName: '5' },
       ]
       expect(wrapper(true).find('SidebarItem').length).toBe(props.navItems.length);
     });
@@ -66,16 +66,16 @@ describe("SidebarSection", () => {
   describe("when navItems are defined with navItems inside", () => {    
     it("renders the correct number of <SidebarSubSection>", () => {
       props.navItems = [
-        { navItemName: '1',
+        { itemName: '1',
           navItems: [
-            { navItemName: '1' },
-            { navItemName: '2' },
-            { navItemName: '3' },
-            { navItemName: '4' },
-            { navItemName: '5' },
+            { itemName: '1' },
+            { itemName: '2' },
+            { itemName: '3' },
+            { itemName: '4' },
+            { itemName: '5' },
           ]
         },
-        { navItemName: '2',
+        { itemName: '2',
           navItems: [] },
       ]
       expect(wrapper(true).find('SidebarSubSection').length).toBe(props.navItems.length);

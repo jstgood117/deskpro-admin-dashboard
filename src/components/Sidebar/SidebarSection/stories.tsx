@@ -8,36 +8,36 @@ const testData = {
 	'sectionName': 'Setup',
 	'navItems': [
 		{
-			'navItemName': 'Item1',
+			'itemName': 'Item1',
 			'url': '/item1',
 		},			
 		{
-			'navItemName': 'Item2',
+			'itemName': 'Item2',
 			'url': '/item2',
 		},			
 		{
-			'navItemName': 'SubMenu',
+			'itemName': 'SubMenu',
 			'navItems': [
 				{
-					'navItemName': 'SubItem1',
+					'itemName': 'SubItem1',
 					'url': '/subitem1',
 				},			
 				{
-					'navItemName': 'SubItem2',
+					'itemName': 'SubItem2',
 					'url': '/subitem2',
 				},			
 				{
-					'navItemName': 'SubItem3',
+					'itemName': 'SubItem3',
 					'url': '/subitem3',
 				},			
 				{
-					'navItemName': 'SubItem4',
+					'itemName': 'SubItem4',
 					'url': '/subitem4',
 				},			
 			]
 		},			
 		{
-			'navItemName': 'Item3',
+			'itemName': 'Item3',
 			'url': '/item3',
 		},			
 	]

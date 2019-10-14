@@ -1,8 +1,10 @@
 import React, { SFC } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 
-import { testSidebarData } from '../../resources/constants';
+import { IUser, ISidebarSection, ITranslation } from '../../resources/interfaces';
+import { QUERY_PAGE } from '../../resources/graphql';
+import { testPageData } from '../../resources/constants';
 
 import Main from '../Main';
 import Header from '../Header';
@@ -10,41 +12,34 @@ import Table from '../Table';
 import Grid from '../Grid';
 import Sidebar from '../Sidebar';
 
-const dataCols = [
-  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div> },
-  { title: 'Email', field: 'primary_email' },
-];
-
-const QUERY_PEOPLE = gql`{
-  agents_getAgents {
-    id
-    name
-    primary_email
-  }
-}`
-
 export interface IProps {
   location: {
-    pathname: string
-  }
+    pathname: string,
+  },
+  user: IUser,
+  sidebar: ISidebarSection[],
+  translations: ITranslation,
 }
 
-const Agent: SFC<IProps> = ({location}) => {
-  const { loading, error, data } = useQuery(QUERY_PEOPLE);
-    
-  if (data) console.log(data.agents_getAgents)
+const Agent: SFC<IProps> = ({location, sidebar}) => {
+/*  const { loading, error, data } = useQuery(QUERY_PAGE, { variables: { path: '/agent' }});
+  if (data) console.log(data.page) */
+	// test data for now
+	const loading = false;
+	const error = false;
+	const data = testPageData;
   
   return (
     <Grid>
-      <Sidebar path={location.pathname} data={testSidebarData} />
+      <Sidebar path={location.pathname} data={sidebar} />
       <Main>
         <Header>
-          <h1>Agents</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          <h1><FormattedMessage id={data.pageProps.title} /></h1>
+          {data.pageProps.description && <p><FormattedMessage id={data.pageProps.description} /></p>}
         </Header>
         {loading && <p>Loading...</p>}
         {error && <p>Error, couldn't load data</p>}
-        {data && <Table tableData={data.agents_getAgents} columns={dataCols} />}
+        {data && data.pageProps && data.pageProps.tables && data.pageProps.tables.map((table, index) => <Table key={index} {...table} />)}
       </Main>
     </Grid>
   );
