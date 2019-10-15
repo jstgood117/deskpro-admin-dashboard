@@ -1,14 +1,11 @@
 import React, { SFC } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useQuery } from '@apollo/react-hooks';
 
-import { IUser, ISidebarSection, ITranslation, ITableQuery } from '../../resources/interfaces';
-import { QUERY_PAGE } from '../../resources/graphql';
-import { testPageData } from '../../resources/constants';
+import { ITableQuery } from '../../resources/interfaces';
 
 import Main from '../Main';
 import Header from '../Header';
-import Table from '../Table';
+import Table from '../Table/TableWrapper';
 
 export interface IProps {
   title: string,

@@ -1,7 +1,6 @@
-import React, { forwardRef, LegacyRef, SFC, Fragment } from 'react';
+import React, { SFC, Fragment } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
 import { testTableColumns } from '../../resources/constants';
 import Table from './Table';
