@@ -48,10 +48,11 @@ export interface IPageProps {
 	title: string,
 	description?: string,
 	illustration?: string, // TBD whether this is a local link
-	tables?: ITableQuery[],
+	tables?: ITableSetup[],
 }
 
-export interface ITableQuery {
+export interface ITableSetup {
 	dataQuery: string,
 	metadataQuery: string,
+	pageSize?: number,
 }
