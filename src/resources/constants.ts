@@ -2,7 +2,7 @@ import { IPageData } from "./interfaces";
 
 // export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
-const testTranslations = {
+export const testTranslations = {
   sidebarSetup: 'Setup',
   sidebarSetupDashboard: 'Dashboard',
   sidebarSetupSetupWizard: 'Setup wizard',

@@ -34,9 +34,10 @@ export interface ITableData {
 	search?: boolean; // default false
 }
 
-export interface ITableQuery {
-	dataQuery: string,
-	metadataQuery: string,
+export interface IPageData {
+	path: string,
+	pageType: string,
+	pageProps: IPageProps,
 }
 
 export interface IPageProps {
@@ -46,8 +47,7 @@ export interface IPageProps {
 	tables?: ITableQuery[],
 }
 
-export interface IPageData {
-	path: string,
-	pageType: string,
-	pageProps: IPageProps,
+export interface ITableQuery {
+	dataQuery: string,
+	metadataQuery: string,
 }
