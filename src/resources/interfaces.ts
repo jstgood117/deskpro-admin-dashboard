@@ -9,7 +9,7 @@ export interface IUser {
 }
 
 export interface ISidebarSection {
-	sectionName?: string;
+	sectionName: string;
 	navItems?: ISidebarItem[];
 }
 

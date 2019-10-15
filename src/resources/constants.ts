@@ -96,7 +96,7 @@ export const testTableColumns = [
   { title: 'Email', field: 'primary_email', sorting: false },
 ];
 
-const testTableData = {
+export const testTableData = {
   columns: testTableColumns,
 }
 

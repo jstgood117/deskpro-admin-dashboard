@@ -69,38 +69,34 @@ export interface IProps {
 }
 
 const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
-	if (dataQuery && metadataQuery) {
 //		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
-		const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
+	const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
 //		if (dataCols) console.log(dataCols)
 
-		// test data for now
-		const loadingCols = false;
-		const errorCols = false;
-		const dataCols = testTableColumns;
+	// test data for now
+	const loadingCols = false;
+	const errorCols = false;
+	const dataCols = testTableColumns;
 
-		return (
-			<Fragment>
-				{(loadingCols || loadingRows) && <p>Loading...</p>}
-				{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
-				{dataCols && dataRows && <TableStyled>
-					<MaterialTable
-						data={dataRows.agents_getAgents}
-						columns={dataCols}
-						options={{
-							pageSize: 5,
-							search: false,
-							showTitle: false,
-							selection: true,
-						}}
-						icons={tableIcons}
-					/>
-				</TableStyled>}
-			</Fragment>
-		);
-	}
-	return null;
+	return (
+		<Fragment>
+			{(loadingCols || loadingRows) && <p>Loading...</p>}
+			{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
+			{dataCols && dataRows && <TableStyled>
+				<MaterialTable
+					data={dataRows.agents_getAgents}
+					columns={dataCols}
+					options={{
+						pageSize: 5,
+						search: false,
+						showTitle: false,
+						selection: true,
+					}}
+					icons={tableIcons}
+				/>
+			</TableStyled>}
+		</Fragment>
+	);
 }
-	
 
 export default Table;
