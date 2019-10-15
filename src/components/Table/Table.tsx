@@ -66,6 +66,7 @@ export interface IProps {
 	columns: ITableColumn[],
 }
 
+<<<<<<< HEAD
 const Table: SFC<IProps> = ({data, columns}) => (
 	<Fragment>
 		<TableStyled>
@@ -83,5 +84,41 @@ const Table: SFC<IProps> = ({data, columns}) => (
 		</TableStyled>
 	</Fragment>
 )
+=======
+const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
+	const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
+	if (dataQuery && metadataQuery) {
+//		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
+//		if (dataCols) console.log(dataCols)
+
+		// test data for now
+		const loadingCols = false;
+		const errorCols = false;
+		const dataCols = testTableColumns;
+
+		return (
+			<Fragment>
+				{(loadingCols || loadingRows) && <p>Loading...</p>}
+				{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
+				{dataCols && dataRows && <TableStyled>
+					<MaterialTable
+						data={dataRows.agents_getAgents}
+						columns={dataCols}
+						options={{
+							pageSize: 5,
+							search: false,
+							showTitle: false,
+							selection: true,
+						}}
+						icons={tableIcons}
+					/>
+				</TableStyled>}
+			</Fragment>
+		);
+	}
+	return null;
+}
+	
+>>>>>>> 688df639b8d1bbddb694beb8a7487f2ee0f70b76
 
 export default Table;

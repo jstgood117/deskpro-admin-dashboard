@@ -1,22 +1,28 @@
 language: node_js
 node_js:
-  - "12"
+- '12'
 cache:
   npm: false
 install:
-  - npm install
-  - npm run lerna bootstrap
+- npm install
 script:
-  - npm run lerna run --scope deskpro-component-library test:prod
-  #- npm run lerna run --scope deskpro-admin-frontend test
-  - npm run lerna run --scope deskpro-component-library build-storybook
-  - npm run lerna run --scope deskpro-admin-frontend build
-  - .travis/prep-site.sh
+- npm run test
+- npm run build
+- npm run storybook:build
+- ".travis/prep-site.sh"
 deploy:
-  - provider: pages
-    skip_cleanup: true
-    github_token: $GH_TOKEN
-    keep-history: true
-    local-dir: ./gh-pages
-    on:
-      branch: master
+- provider: pages
+  skip_cleanup: true
+  github_token: "$GH_TOKEN"
+  keep-history: true
+  local-dir: "./gh-pages"
+  on:
+    branch: master
+notifications:
+  slack:
+    if: branch = master
+    on_success: always
+    on_failure: always
+    on_pull_requests: false
+    rooms:
+      secure: ZWdv1adp8Znm54qMWqr83ewxMgBENFE/Uo6X0fH4x3ZTrCztZKueHxa57KZ2GPHoW2YC/c1FDMkoZloREdryo+JvZr1rSuj7bSVjnEunOZCwJ5skaGbrVf90BX6l8ceLtHA3LzFxix911ewJ392zyxlLv1h4lsOwgS3Y0Z7VLzqo2zTWD6kg26t1Dx6psd4xxjVaqV8i8qXzG0ok8XyTPXveLxjiowI5FtuDvioOlZamo16eQtumZ6Ee9z47tDUGHbQuPSs2000//pcFL3khhENqy33zFDfqxekMcg4tUPUwYuv3Ef0CIHpw8DYZAhaYKfowm9xcy7KYFbTNUjEL37bFoHfb4tpA2nklD0jElBmkGSdgZxr6S98fPhYSomWXlfY7pBI7aopexyzjbnmQWNR9uGysC2H6ddtBq5wXUDDGFVXjEL3Q5v3d1PEL4RfFfZu4+VmNo1cdq53Gb9Qo/mBdHS8oZWn/XeSsPLGkZuVJXti0O7xsv6NbVz4zu+hsbR3n7lk29bOSJ0/dm0FM80v2jyTofbMFlNxWRLSQjJpMK84nqWux8X+IAtHVqqOfbbGJ6RAikYhmhM5Qq/VBTRpyapZqUwB8ioudJI2XVbqxsndWsGuJbXcqnJH1ZykOSmCKXmlp8KHI9MY7vY3vPKZla9NWzUAnZsjKDqWT68Q=
