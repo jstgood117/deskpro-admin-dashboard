@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
+import { IntlProvider } from 'react-intl';
 
 import SidebarSubSection from './SidebarSubSection';
 
@@ -18,8 +18,13 @@ const testData = {
 		},
 	],
 }
+const testTranslations = {
+  test: "Test",
+}
 
 storiesOf('SidebarSubSection',module)
 	.add('with dummy data', () => (
-		<div><SidebarSubSection key={0} path='/' {...testData} /></div>
+		<IntlProvider locale='en' messages={testTranslations}>
+			<div><SidebarSubSection key={0} path='/' {...testData} /></div>
+		</IntlProvider>
 	));
