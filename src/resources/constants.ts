@@ -119,7 +119,8 @@ export const testPageData: IPageData = {
     tables: [
       {
         "dataQuery": "query { agents_getAgents { id, name, primary_email }}",
-        "metadataQuery": "query { agents_getAgentsTableOptions ... } }" // returns testTableMeta into Tables component
+				"metadataQuery": "query { agents_getAgentsTableOptions ... } }",
+				"pageSize": 3,
       }
     ]
   }

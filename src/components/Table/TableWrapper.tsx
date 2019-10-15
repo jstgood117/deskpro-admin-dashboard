@@ -4,12 +4,7 @@ import { gql } from 'apollo-boost';
 
 import { testTableColumns } from '../../resources/constants';
 import Table from './Table';
-import { ITableColumn } from '../../resources/interfaces';
-
-export interface IProps {
-	dataQuery: string,
-	metadataQuery: string,
-}
+import { ITableColumn, ITableSetup } from '../../resources/interfaces';
 
 const formattedNameAvatar = (props: any) => {
 	const checkArr = Object.keys(props);
@@ -19,7 +14,7 @@ const formattedNameAvatar = (props: any) => {
 	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
 }
 
-const TableWrapper: SFC<IProps> = ({dataQuery, metadataQuery}) => {
+const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery}) => {
 //		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
 	const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
 //		if (dataCols) console.log(dataCols)
@@ -45,5 +40,10 @@ const TableWrapper: SFC<IProps> = ({dataQuery, metadataQuery}) => {
 		</Fragment>
 	);
 }
+
+// Default settings for the table
+TableWrapper.defaultProps = {
+	pageSize: 20,
+} 
 
 export default TableWrapper;
