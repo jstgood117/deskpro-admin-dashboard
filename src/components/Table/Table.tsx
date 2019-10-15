@@ -1,11 +1,9 @@
 import React, { forwardRef, LegacyRef, SFC, Fragment } from 'react';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 import MaterialTable from 'material-table';
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
-import { testTableColumns } from '../../resources/constants';
+import { ITableRow, ITableColumn } from '../../resources/interfaces';
 
 const tableIcons = {
 	FirstPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <FirstPage {...props} ref={ref} />),
@@ -61,46 +59,27 @@ const TableStyled = styled.div`
 	}
 `
 
-//, render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div>
-
 export interface IProps {
-	dataQuery: string,
-	metadataQuery: string,
+	data: ITableRow[],
+	columns: ITableColumn[],
 }
 
-const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
-	const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
-	if (dataQuery && metadataQuery) {
-//		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
-//		if (dataCols) console.log(dataCols)
-
-		// test data for now
-		const loadingCols = false;
-		const errorCols = false;
-		const dataCols = testTableColumns;
-
-		return (
-			<Fragment>
-				{(loadingCols || loadingRows) && <p>Loading...</p>}
-				{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
-				{dataCols && dataRows && <TableStyled>
-					<MaterialTable
-						data={dataRows.agents_getAgents}
-						columns={dataCols}
-						options={{
-							pageSize: 5,
-							search: false,
-							showTitle: false,
-							selection: true,
-						}}
-						icons={tableIcons}
-					/>
-				</TableStyled>}
-			</Fragment>
-		);
-	}
-	return null;
-}
-	
+const Table: SFC<IProps> = ({data, columns}) => (
+	<Fragment>
+		<TableStyled>
+			<MaterialTable
+				data={data}
+				columns={columns}
+				options={{
+					pageSize: 5,
+					search: false,
+					showTitle: false,
+					selection: true,
+				}}
+				icons={tableIcons}
+			/>
+		</TableStyled>
+	</Fragment>
+)
 
 export default Table;

@@ -20,7 +20,7 @@ describe("Icon", () => {
 
   beforeEach(() => {
     props = {
-      name: 'sidebarSetup'
+      name: 'admin.sidebar.setup'
     };
     mountedIcon = undefined;
   });

@@ -2,11 +2,11 @@ import React, { SFC } from 'react';
 
 import { IUser, ISidebarSection, ITranslation } from '../../resources/interfaces';
 
-import Main from '../Main';
-import Button from '../Button';
-import Header from '../Header';
+import { testPageData } from '../../resources/constants';
+
 import Sidebar from '../Sidebar';
 import Grid from '../Grid';
+import PageType from './PageType';
 
 export interface IProps {
   location: {
@@ -17,19 +17,20 @@ export interface IProps {
   translations: ITranslation,
 }
 
-const Page: SFC<IProps> = ({location, sidebar}) => (
-  <Grid>
-    <Sidebar path={location.pathname} data={sidebar} />
-    <Main>
-      <Header>
-        <h1>Generic Page</h1>
-        <p>This is the {location.pathname} page</p>
-      </Header>
-      <p><Button styleType='primary'>Primary</Button></p>
-      <p><Button styleType='secondary'>Secondary</Button></p>
-      <p><Button styleType='tertiary'>Tertiary</Button></p>
-    </Main>
-  </Grid>
-);
+const Page: SFC<IProps> = ({location, sidebar}) => {
+/*  const { loading, error, data } = useQuery(QUERY_PAGE, { variables: { path: '/agent' }});
+  if (data) console.log(data.page) */
+  // test data for now
+//  const loading = false;
+//  const error = false;
+  const data = testPageData;
+
+  return (
+    <Grid>
+      <Sidebar path={location.pathname} data={sidebar} />
+      <PageType {...data} />
+    </Grid>
+  );
+}
 
 export default Page;

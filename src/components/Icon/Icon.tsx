@@ -8,11 +8,11 @@ export interface IProps {
 
 const Icon: SFC<IProps> = (props) => {
   switch (props.name) {
-    case "sidebarSetup":
+    case "admin.sidebar.setup":
       return <IconSetup />;
-    case "sidebarChannels":
+    case "admin.sidebar.channels":
       return <IconChannels />;
-    case "sidebarAgents":
+    case "admin.sidebar.agents":
       return <IconAgents />;
     case "sidebarHelp":
       return <IconHelp />;

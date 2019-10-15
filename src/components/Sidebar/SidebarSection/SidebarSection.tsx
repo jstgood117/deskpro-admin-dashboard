@@ -27,24 +27,28 @@ const SidebarSectionList = styled.ul`
 export interface IProps {
 	key: number;
 	path: string;
-	sectionName?: string;
+	sectionName: string;
 	navItems?: ISidebarItem[];
 }
 
-const SidebarSection: SFC<IProps> = (props) => (
-	<Fragment>
-		{props.sectionName && <SidebarSectionStyled>
-			<Icon name={props.sectionName} />
-			<FormattedMessage id={props.sectionName} />
-		</SidebarSectionStyled>}
-		{props.navItems && <SidebarSectionList>{props.navItems.map((navItem, index) => {
-			if (navItem.navItems) {
-				return <SidebarSubSection key={index} path={props.path} {...navItem}></SidebarSubSection>
-			}
-			return <SidebarItem key={index} path={props.path} {...navItem}></SidebarItem>
-		})}
-		</SidebarSectionList>}
-	</Fragment>
-);
+const SidebarSection: SFC<IProps> = (props) => {
+	const { path, sectionName, navItems } = props;
+
+	return (
+		<Fragment>
+			<SidebarSectionStyled>
+				<Icon name={sectionName} />
+				<FormattedMessage id={sectionName} />
+			</SidebarSectionStyled>
+			{navItems && <SidebarSectionList>{navItems.map((navItem, index) => {
+				if (navItem.navItems) {
+					return <SidebarSubSection key={index} path={path} {...navItem}></SidebarSubSection>
+				}
+				return <SidebarItem key={index} path={path} {...navItem}></SidebarItem>
+			})}
+			</SidebarSectionList>}
+		</Fragment>
+	);
+}
 
 export default SidebarSection;

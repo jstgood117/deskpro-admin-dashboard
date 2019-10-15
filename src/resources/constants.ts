@@ -1,68 +1,67 @@
-import { IPageData } from "./interfaces";
+import { IPageData, ITableColumn } from "./interfaces";
 
 // export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
-const testTranslations = {
-  sidebarSetup: 'Setup',
-  sidebarSetupDashboard: 'Dashboard',
-  sidebarSetupSetupWizard: 'Setup wizard',
-  sidebarSetupBrands: 'Brands',
-  sidebarChannels: 'Channels',
-  sidebarChannelsEmail: 'Email',
-  sidebarChannelsForms: 'Forms',
-  sidebarChannelsMessenger: 'Messenger',
-  sidebarChannelsMessengerSetup: 'Setup',
-  sidebarChannelsMessengerDepartments: 'Departments',
-  sidebarChannelsMessengerQueues: 'Queues',
-  sidebarAgents: 'Agents',
-  sidebarAgentsAgent: 'Agent',
-  // Agents page
+export const testTranslations = {
+  'admin.sidebar.setup': 'Setup',
+  'admin.sidebar.setup.dashboard': 'Dashboard',
+  'admin.sidebar.setup.wizard': 'Setup wizard',
+  'admin.sidebar.setup.brands': 'Brands',
+  'admin.sidebar.channels': 'Channels',
+  'admin.sidebar.channels.email': 'Email',
+  'admin.sidebar.channels.forms': 'Forms',
+  'admin.sidebar.channels.messenger': 'Messenger',
+  'admin.sidebar.channels.messenger.setup': 'Setup',
+  'admin.sidebar.channels.messenger.departments': 'Departments',
+  'admin.sidebar.channels.messenger.queues': 'Queues',
+  'admin.sidebar.agents': 'Agents',
+  'admin.sidebar.agents.agent': 'Agent',
   'admin.agents.page_title': 'Agents',
   'admin.agents.page_description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 }
 
 export const testSidebarData = [
 	{
-		'sectionName': 'sidebarSetup',
+		'sectionName': 'admin.sidebar.setup',
 		'navItems': [
 			{
-				'itemName': 'sidebarSetupDashboard',
+				'itemName': 'admin.sidebar.setup.dashboard',
 				'url': '/dashboard',
 			},			
 			{
-				'itemName': 'sidebarSetupSetupWizard',
+				'itemName': 'admin.sidebar.setup.wizard',
 				'url': '/setup-wizard',
 			},			
 			{
-				'itemName': 'sidebarSetupBrands',
+				'itemName': 'admin.sidebar.setup.brands',
 				'url': '/brands',
 			},			
 		]
 	},
 	{
-		'sectionName': 'sidebarChannels',
+		'sectionName': 'admin.sidebar.channels',
 		'navItems': [
 			{
-				'itemName': 'sidebarChannelsEmail',
+				'itemName': 'admin.sidebar.channels.email',
 				'url': '/email',
 			},			
 			{
-				'itemName': 'sidebarChannelsForms',
+				'itemName': 'admin.sidebar.channels.forms',
 				'url': '/forms',
 			},			
 			{
-				'itemName': 'sidebarChannelsMessenger',
+				'itemName': 'admin.sidebar.channels.messenger',
 				'navItems': [
 					{
-						'itemName': 'sidebarChannelsMessengerSetup',
+						'itemName': 'admin.sidebar.channels.messenger.setup',
 						'url': '/messenger-setup',
 					},			
 					{
-						'itemName': 'sidebarChannelsMessengerDepartments',
+						'itemName': 'admin.sidebar.channels.messenger.departments',
 						'url': '/messenger-departments',
 					},			
 					{
-						'itemName': 'sidebarChannelsMessengerQueues',
+						'itemName': 'admin.sidebar.channels.messenger.queues',
 						'url': '/messenger-queues',
 					},			
 				],
@@ -70,10 +69,10 @@ export const testSidebarData = [
 		]
 	},
 	{
-		'sectionName': 'sidebarAgents',
+		'sectionName': 'admin.sidebar.agents',
 		'navItems': [
 			{
-				'itemName': 'sidebarAgentsAgent',
+				'itemName': 'admin.sidebar.agents.agent',
 				'url': '/agent',
 			},			
 		]
@@ -90,23 +89,30 @@ export const testInitialData = {
   }
 }
 
-export const testTableColumns = [
-//  { title: 'Name', field: 'formattedNameAvatar', sorting: true },
-  { title: 'Name', field: 'name', sorting: true },
-  { title: 'Email', field: 'primary_email', sorting: false },
+export const testTableColumns: ITableColumn[] = [
+	{ title: 'Name',
+		field: 'formattedNameAvatar',
+		props: {
+			name: 'name',
+			avatar: 'url',
+		},
+		sort: true,
+	},
+  { title: 'Name', field: 'name', sort: true },
+  { title: 'Email', field: 'primary_email', sort: false },
 ];
 
-const testTableData = {
+export const testTableData = {
   columns: testTableColumns,
 }
 
 export const testPageData: IPageData = {
-  "path": "/agents",
-  "pageType": "standardTable",
-  "pageProps": {
-    "title": "admin.agents.page_title",
-    "description": "admin.agents.page_description",
-    "tables": [
+  path: "/agents",
+  pageType: "standardTable",
+  pageProps: {
+    title: "admin.agents.page_title",
+    description: "admin.agents.page_description",
+    tables: [
       {
         "dataQuery": "query { agents_getAgents { id, name, primary_email }}",
         "metadataQuery": "query { agents_getAgentsTableOptions ... } }" // returns testTableMeta into Tables component

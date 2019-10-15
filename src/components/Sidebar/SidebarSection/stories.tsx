@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
+import { IntlProvider } from 'react-intl';
 
 import SidebarSection from './SidebarSection';
 
@@ -42,9 +43,14 @@ const testData = {
 		},			
 	]
 }
+const testTranslations = {
+  test: "Test",
+}
 
 storiesOf('SidebarSection',module)
 	.addDecorator(checkA11y)
 	.add('with dummy data', () => (
-		<SidebarSection key={0} path='/' {...testData}></SidebarSection>
+		<IntlProvider locale='en' messages={testTranslations}>
+			<SidebarSection key={0} path='/' {...testData}></SidebarSection>
+		</IntlProvider>
 	));

@@ -1982,6 +1982,14 @@
   dependencies:
     "@types/enzyme" "*"
 
+"@types/enzyme-react-intl@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/enzyme-react-intl/-/enzyme-react-intl-2.0.0.tgz#a545b3ccbae9fb76146bf7db876611a9e5006793"
+  integrity sha512-UphK8XgOkx+BN+9rMV4aV5JCB0qzbRjZJiOi2gb0Bk5aShAgXdpigpwqfo7kNl8xwOdmSbetvhErVi4Fb7yxTQ==
+  dependencies:
+    "@types/enzyme" "*"
+    "@types/react" "*"
+
 "@types/enzyme@*", "@types/enzyme@^3.10.3":
   version "3.10.3"
   resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.3.tgz#02b6c5ac7d0472005944a652e79045e2f6c66804"
@@ -5379,6 +5387,13 @@ enzyme-adapter-utils@^1.12.1:
     object.fromentries "^2.0.1"
     prop-types "^15.7.2"
     semver "^5.7.0"
+
+enzyme-react-intl@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/enzyme-react-intl/-/enzyme-react-intl-2.0.6.tgz#f708fb9015233893e4f6715c5163dad6c37e3012"
+  integrity sha512-pA4pUqDK//bTRWVc97hh7nfwANEX0ROhty6sW0ZKrq7ohOeyTAN45CuVQu0viRZBNyqHcEtCudo3/tl8HkXYWg==
+  optionalDependencies:
+    jsonfile "^4.0.0"
 
 enzyme-shallow-equal@^1.0.0:
   version "1.0.0"

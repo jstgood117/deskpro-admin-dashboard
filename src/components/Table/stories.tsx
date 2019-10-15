@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import Table from './Table';
 
 const testCols = [
-  { title: 'Name', field: 'name', render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} />{rowData.name}</div> },
+  { title: 'Name', field: 'name' },
   { title: 'Email', field: 'email' },
   { title: 'Phone', field: 'phone' },
   { title: 'Access', field: 'access' },
@@ -21,5 +21,5 @@ const testData = [
 
 storiesOf('Table',module)
 	.add('with dummy data', () => (
-		<Table dataQuery='dQ' metadataQuery='mQ' />
+    <Table data={testData} columns={testCols} />
 	));
