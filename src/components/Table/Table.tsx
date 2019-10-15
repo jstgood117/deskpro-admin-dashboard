@@ -1,9 +1,9 @@
-import React, { Component, forwardRef, LegacyRef } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import React, { forwardRef, LegacyRef, SFC, Fragment } from 'react';
+import styled from 'styled-components';
 import MaterialTable from 'material-table';
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
-import { DeskproAdminTheme } from '../Theme';
+import { ITableRow, ITableColumn } from '../../resources/interfaces';
 
 const tableIcons = {
 	FirstPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <FirstPage {...props} ref={ref} />),
@@ -59,48 +59,29 @@ const TableStyled = styled.div`
 	}
 `
 
+//, render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div>
+
 export interface IProps {
-	columns: any;
-	tableData: any;
-}
-interface IState {
-	tableData: any;
+	data: ITableRow[],
+	columns: ITableColumn[],
 }
 
-class Table extends Component<IProps, IState> {
-	constructor(props: IProps) {
-		super(props);
-
-		this.state = { 
-			tableData: this.props.tableData,
-		};
-	}
-
-	componentDidUpdate(prevProps: IProps) {
-		if (this.props.tableData.length !== prevProps.tableData.length) {
-			this.setState({ tableData: this.props.tableData });
-		}
-	}
-
-	render() {
-		return (
-			<ThemeProvider theme={DeskproAdminTheme}>
-				<TableStyled>
-					{this.state.tableData && <MaterialTable
-						data={this.state.tableData}
-						columns={this.props.columns}
-						options={{
-							pageSize: 5,
-							search: false,
-							showTitle: false,
-							selection: true,
-						}}
-						icons={tableIcons}
-					/>}
-				</TableStyled>
-			</ThemeProvider>
-		);
-	}
-}
+const Table: SFC<IProps> = ({data, columns}) => (
+	<Fragment>
+		<TableStyled>
+			<MaterialTable
+				data={data}
+				columns={columns}
+				options={{
+					pageSize: 5,
+					search: false,
+					showTitle: false,
+					selection: true,
+				}}
+				icons={tableIcons}
+			/>
+		</TableStyled>
+	</Fragment>
+)
 
 export default Table;

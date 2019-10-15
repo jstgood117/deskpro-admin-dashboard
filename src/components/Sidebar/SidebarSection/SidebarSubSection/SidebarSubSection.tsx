@@ -1,8 +1,9 @@
 import React, { SFC, Fragment, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
-import { ISidebarItem } from '../../../../../resources/interfaces';
+import { ISidebarItem } from '../../../../resources/interfaces';
 import SidebarItem from '../SidebarItem';
 
 interface IStyleProps {}
@@ -27,33 +28,40 @@ const SidebarSubSectionStyled = styled.li<IStyleProps>`
 			fill: #4A4E4F;
 		}
 	}
+
+	& div {
+		margin-right: 15px;
+		overflow: hidden;
+	}
 `
 
 const SidebarSubSectionList = styled.ul`
 	margin: 0;
 	padding-inline-start: 0px;
 
-	& li a {
-		padding-left: 16px;
+	& li {
+		padding-left: 60px;
 	}
 `
 
 export interface IProps {
 	key: number;
-	navItemName: string;
+	path: string;
+	itemName: string;
 	navItems?: ISidebarItem[];
 }
 
 const SidebarSubSection: SFC<IProps> = (props) => {
 	const [openState, setOpenState] = useState(false);
+	const { path, itemName, navItems } = props;
 
 	return (
 		<Fragment>
 			<SidebarSubSectionStyled onClick={() => setOpenState(!openState)}>
-				{props.navItemName}
+				<div><FormattedMessage id={itemName} /></div>
 				{openState ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
 			</SidebarSubSectionStyled>
-			{props.navItems && openState && <SidebarSubSectionList>{props.navItems.map((navItem, index) => <SidebarItem key={index} {...navItem}></SidebarItem>)}
+			{navItems && openState && <SidebarSubSectionList>{navItems.map((navItem, index) => <SidebarItem key={index} path={path} {...navItem}></SidebarItem>)}
 			</SidebarSubSectionList>}
 		</Fragment>
 	);

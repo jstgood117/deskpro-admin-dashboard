@@ -20,7 +20,7 @@ describe("Icon", () => {
 
   beforeEach(() => {
     props = {
-      name: 'Setup'
+      name: 'sidebarSetup'
     };
     mountedIcon = undefined;
   });
@@ -32,7 +32,7 @@ describe("Icon", () => {
 
   describe("when name is defined", () => {
     beforeEach(() => {
-      props.name = 'Help';
+      props.name = 'sidebarHelp';
     });
 
     it("renders the correct icon", () => {

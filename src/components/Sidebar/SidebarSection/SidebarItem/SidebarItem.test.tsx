@@ -2,11 +2,16 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
+import { IntlProvider } from "react-intl";
 
 import SidebarItem, { IProps } from './SidebarItem';
-import { DeskproAdminTheme } from '../../../../Theme';
+import { DeskproAdminTheme } from '../../../Theme';
 
 configure({adapter: new Adapter()});
+
+const testTranslations = {
+  test: "Test",
+}
 
 describe("SidebarItem", () => {
   let props: IProps;
@@ -14,7 +19,19 @@ describe("SidebarItem", () => {
 
   const wrapper = (bShallow: boolean) => {
     if (!mountedSidebarItem) {
-      mountedSidebarItem = bShallow ? shallow(<ThemeProvider theme={DeskproAdminTheme}><SidebarItem {...props} /></ThemeProvider>) : mount(<ThemeProvider theme={DeskproAdminTheme}><SidebarItem {...props} /></ThemeProvider>);
+      mountedSidebarItem = bShallow ? shallow(
+        <IntlProvider locale='en' messages={testTranslations}>
+          <ThemeProvider theme={DeskproAdminTheme}>
+            <SidebarItem {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+      ) : mount(
+        <IntlProvider locale='en' messages={testTranslations}>
+          <ThemeProvider theme={DeskproAdminTheme}>
+            <SidebarItem {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+        );
     }
     return mountedSidebarItem;
   }
@@ -22,7 +39,8 @@ describe("SidebarItem", () => {
   beforeEach(() => {
     props = {
       key: 0,
-      navItemName: undefined,
+      path: undefined,
+      itemName: 'test',
       url: undefined,
     };
     mountedSidebarItem = undefined;
@@ -33,20 +51,13 @@ describe("SidebarItem", () => {
     expect(elts.length).toBeGreaterThan(0);
   });
 
-  describe("when props are undefined", () => {
-    it("doesn't render anything else", () => {
-      expect(wrapper(false).find('li').children().length).toBe(0);
-    });
-  });
-
-  describe("when navItemName and url are defined", () => {
+  describe("when itemName and url are defined", () => {
     beforeEach(() => {
-      props.navItemName = 'item 1';
       props.url = '/page1';
     });
 
     it("renders the label", () => {
-      expect(wrapper(false).text()).toContain('item 1');
+      expect(wrapper(false).text()).toContain('Test');
     });
 
     it("renders the link", () => {

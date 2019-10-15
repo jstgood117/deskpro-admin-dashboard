@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { checkA11y } from '@storybook/addon-a11y';
+import { IntlProvider } from 'react-intl';
 
 import SidebarSection from './SidebarSection';
 
@@ -8,43 +9,48 @@ const testData = {
 	'sectionName': 'Setup',
 	'navItems': [
 		{
-			'navItemName': 'Item1',
+			'itemName': 'Item1',
 			'url': '/item1',
 		},			
 		{
-			'navItemName': 'Item2',
+			'itemName': 'Item2',
 			'url': '/item2',
 		},			
 		{
-			'navItemName': 'SubMenu',
+			'itemName': 'SubMenu',
 			'navItems': [
 				{
-					'navItemName': 'SubItem1',
+					'itemName': 'SubItem1',
 					'url': '/subitem1',
 				},			
 				{
-					'navItemName': 'SubItem2',
+					'itemName': 'SubItem2',
 					'url': '/subitem2',
 				},			
 				{
-					'navItemName': 'SubItem3',
+					'itemName': 'SubItem3',
 					'url': '/subitem3',
 				},			
 				{
-					'navItemName': 'SubItem4',
+					'itemName': 'SubItem4',
 					'url': '/subitem4',
 				},			
 			]
 		},			
 		{
-			'navItemName': 'Item3',
+			'itemName': 'Item3',
 			'url': '/item3',
 		},			
 	]
+}
+const testTranslations = {
+  test: "Test",
 }
 
 storiesOf('SidebarSection',module)
 	.addDecorator(checkA11y)
 	.add('with dummy data', () => (
-		<SidebarSection key={0} {...testData}></SidebarSection>
+		<IntlProvider locale='en' messages={testTranslations}>
+			<SidebarSection key={0} path='/' {...testData}></SidebarSection>
+		</IntlProvider>
 	));

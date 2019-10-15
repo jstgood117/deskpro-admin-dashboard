@@ -2,11 +2,16 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
+import { IntlProvider } from "react-intl";
 
 import SidebarSubSection, { IProps } from './SidebarSubSection';
-import { DeskproAdminTheme } from '../../../../Theme';
+import { DeskproAdminTheme } from '../../../Theme';
 
 configure({adapter: new Adapter()});
+
+const testTranslations = {
+  test: "Test"
+}
 
 describe("SidebarSubSection", () => {
   let props: IProps;
@@ -14,7 +19,19 @@ describe("SidebarSubSection", () => {
 
   const wrapper = (bShallow: boolean) => {
     if (!mountedSidebarSubSection) {
-      mountedSidebarSubSection = bShallow ? shallow(<ThemeProvider theme={DeskproAdminTheme}><SidebarSubSection {...props} /></ThemeProvider>) : mount(<ThemeProvider theme={DeskproAdminTheme}><SidebarSubSection {...props} /></ThemeProvider>);
+      mountedSidebarSubSection = bShallow ? shallow(
+        <IntlProvider locale='en' messages={testTranslations}>
+          <ThemeProvider theme={DeskproAdminTheme}>
+            <SidebarSubSection {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+      ) : mount(
+        <IntlProvider locale='en' messages={testTranslations}>
+          <ThemeProvider theme={DeskproAdminTheme}>
+            <SidebarSubSection {...props} />
+          </ThemeProvider>
+        </IntlProvider>
+      );
 //      mountedSidebarSubSection = bShallow ? shallow(<SidebarSubSection {...props} />) : mount(<SidebarSubSection {...props} />);
     }
     return mountedSidebarSubSection;
@@ -23,7 +40,8 @@ describe("SidebarSubSection", () => {
   beforeEach(() => {
     props = {
       key: 0,
-      navItemName: undefined,
+      path: undefined,
+      itemName: 'test',
       navItems: undefined,
     };
     mountedSidebarSubSection = undefined;
@@ -38,24 +56,24 @@ describe("SidebarSubSection", () => {
 //    expect(wrapper(true).find('KeyboardArrowDownIcon').length).toBe(1);
   });
 
-  describe("when navItemName is defined", () => {
+  describe("when itemName is defined", () => {
     beforeEach(() => {
-      props.navItemName = 'item 1';
+      props.itemName = 'test';
     });
 
     it("renders the label", () => {
-      expect(wrapper(false).text()).toContain('item 1');
+      expect(wrapper(false).text()).toContain('Test');
     });
   });
 
   describe("when navItems are defined", () => {
     beforeEach(() => {
       props.navItems = [
-        { navItemName: '1' },
-        { navItemName: '2' },
-        { navItemName: '3' },
-        { navItemName: '4' },
-        { navItemName: '5' },
+        { itemName: 'test' },
+        { itemName: 'test' },
+        { itemName: 'test' },
+        { itemName: 'test' },
+        { itemName: 'test' },
       ]
     });
 

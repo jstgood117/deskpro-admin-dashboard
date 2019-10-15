@@ -1,19 +1,36 @@
-import React from 'react';
+import React, { SFC } from 'react';
 
-import Main from '../Main';
-import Button from '../Button';
-import Header from '../Header';
+import { IUser, ISidebarSection, ITranslation } from '../../resources/interfaces';
 
-const Page: React.SFC = () => (
-  <Main>
-    <Header>
-      <h1>Generic Page</h1>
-      <p>This is the {window.location.pathname} page</p>
-    </Header>
-    <p><Button styleType='primary'>Primary</Button></p>
-    <p><Button styleType='secondary'>Secondary</Button></p>
-    <p><Button styleType='tertiary'>Tertiary</Button></p>
-  </Main>
-);
+import { testPageData } from '../../resources/constants';
+
+import Sidebar from '../Sidebar';
+import Grid from '../Grid';
+import PageType from './PageType';
+
+export interface IProps {
+  location: {
+    pathname: string,
+  },
+  user: IUser,
+  sidebar: ISidebarSection[],
+  translations: ITranslation,
+}
+
+const Page: SFC<IProps> = ({location, sidebar}) => {
+/*  const { loading, error, data } = useQuery(QUERY_PAGE, { variables: { path: '/agent' }});
+  if (data) console.log(data.page) */
+  // test data for now
+  const loading = false;
+  const error = false;
+  const data = testPageData;
+
+  return (
+    <Grid>
+      <Sidebar path={location.pathname} data={sidebar} />
+      <PageType {...data} />
+    </Grid>
+  );
+}
 
 export default Page;

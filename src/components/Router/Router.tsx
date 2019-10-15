@@ -1,20 +1,19 @@
-import React from "react";
+import React, { SFC } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 
-import Grid from '../Grid';
-import Sidebar from '../Sidebar';
-import Agents from '../Agents';
+import { IUser, ISidebarSection, ITranslation } from '../../resources/interfaces';
 import Page from '../Page';
 
-const Router = () => (
+interface IProps {
+  user: IUser,
+  sidebar: ISidebarSection[],
+  translations: ITranslation,
+}
+const Router: SFC<IProps> = (props) => (
 	<HashRouter>
-  	<Grid>
-		  <Sidebar />
-      <Switch>
-        <Route exact path='/agent' component={Agents} />
-        <Route component={Page} />
-      </Switch>
-    </Grid>
+    <Switch>
+      <Route render={(p) => <Page {...p} {...props} />} />
+    </Switch>
 	</HashRouter>
 );
 
