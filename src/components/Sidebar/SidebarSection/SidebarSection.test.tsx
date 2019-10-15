@@ -11,8 +11,8 @@ import { DeskproAdminTheme } from '../../Theme';
 configure({adapter: new Adapter()});
 
 const testTranslations = {
-  test: "Test",
-  sidebarChannels: "Channels",
+  "test": "Test",
+  "admin.sidebar.channels": "Channels",
 }
 
 describe("SidebarSection", () => {

@@ -22,12 +22,16 @@ export interface ISidebarItem {
 export interface ITranslation {}
 
 export interface ITableColumn {
-/*	title: string,
-	field?: string,
-	sorting?: boolean, // default false  */
+	title: string,
+	field?: keyof ITableRow,
+	props?: object,
+	sort?: boolean, // default false 
+  render?: (data: ITableRow, type: ('row' | 'group')) => any,
 }
 
-export interface ITableRow {}
+export interface ITableRow {
+	[key: string]: any,
+}
 
 export interface ITableData {
 	columns: ITableColumn[],

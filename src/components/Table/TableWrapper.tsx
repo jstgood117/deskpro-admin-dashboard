@@ -4,10 +4,15 @@ import { gql } from 'apollo-boost';
 
 import { testTableColumns } from '../../resources/constants';
 import Table from './Table';
+import { ITableColumn } from '../../resources/interfaces';
 
 export interface IProps {
 	dataQuery: string,
 	metadataQuery: string,
+}
+
+const formattedNameAvatar = (props: any) => {
+	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
 }
 
 const TableWrapper: SFC<IProps> = ({dataQuery, metadataQuery}) => {
@@ -18,7 +23,16 @@ const TableWrapper: SFC<IProps> = ({dataQuery, metadataQuery}) => {
 	// test data for now
 	const loadingCols = false;
 	const errorCols = false;
-	const dataCols = testTableColumns;
+	const dataCols: ITableColumn[] = testTableColumns;
+
+	dataCols.map((column) => {
+		switch (column.field) {
+			case 'formattedNameAvatar':
+				// PSRA check props are valid
+				column.render = formattedNameAvatar(column.props);
+		}
+		return column;
+	});
 
 	return (
 		<Fragment>
