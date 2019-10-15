@@ -59,8 +59,6 @@ const TableStyled = styled.div`
 	}
 `
 
-//, render: (rowData: any) => <div id={rowData.id}><img src={rowData.avatar} alt="ava" />{rowData.name}</div>
-
 export interface IProps {
 	data: ITableRow[],
 	columns: ITableColumn[],

@@ -5,6 +5,7 @@ import { configure, mount, shallow } from 'enzyme';
 import Table, { IProps } from './Table';
 import { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
+import { ITableColumn } from '../../resources/interfaces';
 
 configure({adapter: new Adapter()});
 
@@ -15,7 +16,7 @@ const testData = [
   {"id": 81299,"name": "Tonia Sykes","age": 38,"phone": "+44 (0)208 328 3671","color": "blue"},
   {"id": 14225,"name": "Leach Durham","age": 23,"phone": "+44 (0)208 280 9572","color": "green"}
 ];
-const testCols = [
+const testCols: ITableColumn[] = [
   { title: 'Name', field: 'name' },
   { title: 'Email', field: 'email' },
   { title: 'Phone', field: 'phone' },
