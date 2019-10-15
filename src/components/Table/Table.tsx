@@ -69,9 +69,9 @@ export interface IProps {
 }
 
 const Table: SFC<IProps> = ({dataQuery, metadataQuery}) => {
+	const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
 	if (dataQuery && metadataQuery) {
 //		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
-		const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
 //		if (dataCols) console.log(dataCols)
 
 		// test data for now
