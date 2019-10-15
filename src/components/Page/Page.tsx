@@ -7,6 +7,7 @@ import { testPageData } from '../../resources/constants';
 import Sidebar from '../Sidebar';
 import Grid from '../Grid';
 import PageType from './PageType';
+import ErrorBoundary from '../Error/ErrorBoundary';
 
 export interface IProps {
   location: {
@@ -26,10 +27,12 @@ const Page: SFC<IProps> = ({location, sidebar}) => {
   const data = testPageData;
 
   return (
-    <Grid>
-      <Sidebar path={location.pathname} data={sidebar} />
-      <PageType {...data} />
-    </Grid>
+    <ErrorBoundary>
+      <Grid>
+        <Sidebar path={location.pathname} data={sidebar} />
+        <PageType {...data} />
+      </Grid>
+    </ErrorBoundary>
   );
 }
 
