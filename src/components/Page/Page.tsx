@@ -21,8 +21,8 @@ const Page: SFC<IProps> = ({location, sidebar}) => {
 /*  const { loading, error, data } = useQuery(QUERY_PAGE, { variables: { path: '/agent' }});
   if (data) console.log(data.page) */
   // test data for now
-  const loading = false;
-  const error = false;
+//  const loading = false;
+//  const error = false;
   const data = testPageData;
 
   return (

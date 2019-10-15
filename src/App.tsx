@@ -1,11 +1,12 @@
 import React, { SFC } from 'react';
 import ApolloClient from 'apollo-boost';
-import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-hooks';
+// import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import {IntlProvider} from 'react-intl';
 
 import { testInitialData } from './resources/constants';
 import Router from './components/Router';
-import { QUERY_INITIAL } from './resources/graphql';
+// import { QUERY_INITIAL } from './resources/graphql';
 
 const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
 console.log("API URL: " + apiUrl);
