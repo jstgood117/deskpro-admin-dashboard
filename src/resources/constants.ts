@@ -81,6 +81,15 @@ export const testSidebarData = [
 			},			
 		]
 	},
+	{
+		'sectionName': 'admin.sidebar.agents',
+		'navItems': [
+			{
+				'itemName': 'admin.sidebar.agents.agent',
+				'url': '/agent',
+			},			
+		]
+	},
 ]
 
 export const testInitialData = {

@@ -7,14 +7,17 @@ import Icon from './Icon';
 storiesOf('Icon',module)
 	.addDecorator(checkA11y)
 	.add('Setup', () => (
-		<Icon name='Setup' />
+		<Icon name='admin.sidebar.setup' />
 	))
 	.add('Channels', () => (
-		<Icon name='Channels' />
+		<Icon name='admin.sidebar.channels' />
 	))
 	.add('Agents', () => (
-		<Icon name='Agents' />
+		<Icon name="admin.sidebar.agents" />
+	))
+	.add('Dropdown Vector', () => (
+		<Icon name='dropdownVector' />
 	))
 	.add('Help', () => (
-		<Icon name='Help' />
+		<Icon name='sidebarHelp' />
 	));
