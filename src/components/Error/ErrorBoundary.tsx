@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Error from './Error';
+import { appDebug } from '../../logging';
 
 interface IProps {}
 interface IState {
@@ -9,8 +10,7 @@ interface IState {
 
 export const logError = (error: any) => {
   // TODO log the error to external service
-  console.log('Heres the caught error')
-  console.log(error);  
+  appDebug(`Admin app error: ${error}`);  
 }
 
 class ErrorBoundary extends Component<IProps,IState> {

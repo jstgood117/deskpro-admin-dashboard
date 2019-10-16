@@ -8,6 +8,7 @@ import Table from './Table';
 import Loading from '../Loading';
 import Error from '../Error';
 import { client } from '../../App';
+import { logError } from '../Error/ErrorBoundary';
 
 /* const formattedNameAvatar = (props: any) => {
 	const checkArr = Object.keys(props);
@@ -28,18 +29,13 @@ const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => 
 			//	const fetchID = ++fetchIdRef.current;
 		if (!loading) {
 			setLoading(true);
-			console.log('>>>LOADING!!!')
-			try {
-				client.query({query: gql`${dataQuery}`}).then(result => {
-					console.log('>>>LOADED')
-					console.log(result.data)
-					setData(result.data.agents_getAgents); // TODO this needs to be generic!
-					setPageCount(100); // TODO this need to be returned in results
-					setLoading(false);
-				});
-			} catch (err) {
-				console.log(`ERR: ${err}`)
-			}
+			console.log('loading data...')
+
+			client.query({ query: gql`${dataQuery}`, errorPolicy: 'all' }).then(result => {
+				setData(result.data.agents_getAgents); // TODO this needs to be generic!
+				setPageCount(100); // TODO this need to be returned in results
+				setLoading(false);
+			}).catch(err => logError(err))
 		}		
 			
 /*			if (dataRows) {
@@ -50,9 +46,11 @@ const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => 
 		//		setPageCount(NEEDS TO BE RETURNED FROM QUERY);
 				setLoading(false);
 			} */
-		}, [dataQuery]);
+			
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dataQuery]);
 		
-//		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
+//		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`, { errorPolicy: 'all' }););
 //		if (dataCols) console.log(dataCols)
 
 	// test data for now
