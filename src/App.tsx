@@ -3,6 +3,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 // import { ApolloProvider, useQuery } from '@apollo/react-hooks';
 import {IntlProvider} from 'react-intl';
+import { appDebug } from './logging';
 
 import { testInitialData } from './resources/constants';
 import Router from './components/Router';
@@ -12,7 +13,7 @@ import { logError } from './components/Error/ErrorBoundary';
 // import { QUERY_INITIAL } from './resources/graphql';
 
 const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
-console.log("API URL: " + apiUrl);
+appDebug("API URL: " + apiUrl);
 
 const client = new ApolloClient({
 	uri: apiUrl,
