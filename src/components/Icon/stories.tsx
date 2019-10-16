@@ -19,5 +19,5 @@ storiesOf('Icon',module)
 		<Icon name='dropdownVector' />
 	))
 	.add('Help', () => (
-		<Icon name='sidebarHelp' />
+		<Icon name='admin.sidebar.help.helpCentre' />
 	));

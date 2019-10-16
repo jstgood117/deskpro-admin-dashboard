@@ -7,6 +7,10 @@ export const testTranslations = {
   'admin.sidebar.setup.dashboard': 'Dashboard',
   'admin.sidebar.setup.wizard': 'Setup wizard',
   'admin.sidebar.setup.brands': 'Brands',
+  'admin.sidebar.setup.languagesAndLocales': 'Languages & Locales',
+  'admin.sidebar.setup.businessHours': 'Business Hours',
+	'admin.sidebar.setup.advancedSettings': 'Advanced Settings',
+	
   'admin.sidebar.channels': 'Channels',
   'admin.sidebar.channels.email': 'Email',
   'admin.sidebar.channels.forms': 'Forms',
@@ -14,8 +18,23 @@ export const testTranslations = {
   'admin.sidebar.channels.messenger.setup': 'Setup',
   'admin.sidebar.channels.messenger.departments': 'Departments',
   'admin.sidebar.channels.messenger.queues': 'Queues',
+	'admin.sidebar.channels.social': 'Social',
+	'admin.sidebar.channels.voice': 'Voice',
+
   'admin.sidebar.agents': 'Agents',
 	'admin.sidebar.agents.agent': 'Agent',
+	'admin.sidebar.agents.teams': 'Teams',
+	'admin.sidebar.agents.permissionGroups': 'Permission Groups',
+	'admin.sidebar.agents.logs': 'Agent Logs',
+	'admin.sidebar.agents.authSSO': 'Auth & SSO',
+	'admin.sidebar.agents.settings': 'Settings',
+	
+	'admin.sidebar.help.helpCentre': 'Help Centre',
+	'admin.sidebar.help.helpCentreSetup': 'Help Centre Setup',
+	'admin.sidebar.help.knowledgeBase': 'Knowledge Base',
+	'admin.sidebar.help.news': 'News',
+	'admin.sidebar.help.downloads': 'Downloads',
+	'admin.sidebar.help.community': 'Community',
 	
 	'admin.page.error': 'Something has gone wrong',
 	'admin.page.loading': 'Loading',
@@ -40,6 +59,18 @@ export const testSidebarData = [
 				'itemName': 'admin.sidebar.setup.brands',
 				'url': '/brands',
 			},			
+			{
+				'itemName': 'admin.sidebar.setup.languagesAndLocales',
+				'url': '/languagesAndLocales',
+			},
+			{
+				'itemName': 'admin.sidebar.setup.businessHours',
+				'url': '/businessHours',
+			},
+			{
+				'itemName': 'admin.sidebar.setup.advancedSettings',
+				'url': '/advancedSettings',
+			},
 		]
 	},
 	{
@@ -55,21 +86,30 @@ export const testSidebarData = [
 			},			
 			{
 				'itemName': 'admin.sidebar.channels.messenger',
-				'navItems': [
-					{
-						'itemName': 'admin.sidebar.channels.messenger.setup',
-						'url': '/messenger-setup',
-					},			
-					{
-						'itemName': 'admin.sidebar.channels.messenger.departments',
-						'url': '/messenger-departments',
-					},			
-					{
-						'itemName': 'admin.sidebar.channels.messenger.queues',
-						'url': '/messenger-queues',
-					},			
-				],
-			},			
+				'url': '/messenger',
+				// 'navItems': [
+				// 	{
+				// 		'itemName': 'admin.sidebar.channels.messenger.setup',
+				// 		'url': '/messenger-setup',
+				// 	},			
+				// 	{
+				// 		'itemName': 'admin.sidebar.channels.messenger.departments',
+				// 		'url': '/messenger-departments',
+				// 	},			
+				// 	{
+				// 		'itemName': 'admin.sidebar.channels.messenger.queues',
+				// 		'url': '/messenger-queues',
+				// 	},			
+				// ],
+			},
+			{
+				'itemName': 'admin.sidebar.channels.social',
+				'url': '/social',
+			},
+			{
+				'itemName': 'admin.sidebar.channels.voice',
+				'url': '/voice',
+			},
 		]
 	},
 	{
@@ -78,16 +118,52 @@ export const testSidebarData = [
 			{
 				'itemName': 'admin.sidebar.agents.agent',
 				'url': '/agent',
-			},			
+			},
+			{
+				'itemName': 'admin.sidebar.agents.teams',
+				'url': '/teams',
+			},
+			{
+				'itemName': 'admin.sidebar.agents.permissionGroups',
+				'url': '/permissionGroups',
+			},
+			{
+				'itemName': 'admin.sidebar.agents.logs',
+				'url': '/logs',
+			},
+			{
+				'itemName': 'admin.sidebar.agents.authSSO',
+				'url': '/authSSO',
+			},
+			{
+				'itemName': 'admin.sidebar.agents.settings',
+				'url': '/settings',
+			},
 		]
 	},
 	{
-		'sectionName': 'admin.sidebar.agents',
+		'sectionName': 'admin.sidebar.help.helpCentre',
 		'navItems': [
 			{
-				'itemName': 'admin.sidebar.agents.agent',
-				'url': '/agent',
-			},			
+				'itemName': 'admin.sidebar.help.helpCentreSetup',
+				'url': '/helpCentreSetup',
+			},
+			{
+				'itemName': 'admin.sidebar.help.knowledgeBase',
+				'url': '/knowledgeBase',
+			},
+			{
+				'itemName': 'admin.sidebar.help.news',
+				'url': '/news',
+			},
+			{
+				'itemName': 'admin.sidebar.help.downloads',
+				'url': '/downloads',
+			},
+			{
+				'itemName': 'admin.sidebar.help.community',
+				'url': '/community',
+			},
 		]
 	},
 ]
