@@ -1,4 +1,4 @@
-import React, { SFC, Fragment } from 'react';
+import React, { SFC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 
