@@ -95,6 +95,7 @@ export const testInitialData = {
 }
 
 export const testTableColumns: Array<Column> = [
+	{ id: 'selection' },
 /*	{ title: 'Name',
 		field: 'formattedNameAvatar',
 		props: {
