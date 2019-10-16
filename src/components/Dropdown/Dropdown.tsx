@@ -1,6 +1,7 @@
 import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
-import { DropdownVectorSVG } from './SVG';
+
+import Icon from '../Icon';
 
 const DropdownLabel = styled.div`
   padding-right: 3px;
@@ -69,7 +70,7 @@ const Dropdown: SFC<IProps> = props => {
       <DropdownStyled>
         <DropdownBtn>
           <DropdownLabel>{props.label}</DropdownLabel>
-          <DropdownVectorSVG />
+          <Icon name="dropdownVector" />
         </DropdownBtn>
         <DropdownContent>
           {props.items.map(item => {

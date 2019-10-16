@@ -1,6 +1,6 @@
 import React, { SFC, Fragment } from "react";
 
-import { IconSetup, IconChannels, IconAgents, IconHelp } from "./SVG";
+import { IconSetup, IconChannels, IconAgents, IconHelp, IconDropdownVector } from "./SVG";
 
 export interface IProps {
   name: string;
@@ -14,8 +14,10 @@ const Icon: SFC<IProps> = (props) => {
       return <IconChannels />;
     case "admin.sidebar.agents":
       return <IconAgents />;
-    case "sidebarHelp":
+    case "admin.sidebar.help.helpCentre":
       return <IconHelp />;
+    case "dropdownVector":
+      return <IconDropdownVector />;
     default:
       return <Fragment />;
   }
