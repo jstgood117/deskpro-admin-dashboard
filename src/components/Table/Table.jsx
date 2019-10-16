@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, usePagination } from 'react-table';
+
+import Pagination from './Pagination';
 
 const TableStyled = styled.div`
 	& table {
+		width: 100%;
+		border-collapse: collapse;
+
 		& thead {
 			& tr {
 				border-top: 1px solid ${props => props.theme.greyLight};
@@ -13,6 +18,7 @@ const TableStyled = styled.div`
 					padding: 0;
 					line-height: 26px;
 					color: ${props => props.theme.greyDark};
+					text-align: left;
 				}
 			}
 		}
@@ -47,7 +53,7 @@ const TableStyled = styled.div`
 	}
 } */
 
-const Table = ({data,columns,options}) => {
+const Table = ({data,columns,fetchData,loading,pageCount:controlledPageCount,options}) => {
 //	const memoizedDataCols: Array<Column> = useMemo(() => columns, [columns]);
 //	const memoizedDataRows: Array<any> = useMemo(() => data, [data]);
 
@@ -55,15 +61,33 @@ const Table = ({data,columns,options}) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
-    prepareRow,
+		prepareRow,
+		page,
+		canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+		setPageSize,
+		state: { pageIndex, pageSize }	
   } = useTable(
 		{
     	columns,
-    	data,
+			data,
+			initialState: { pageIndex: 0 },
+			manualPagination: true,
+			pageCount: controlledPageCount,
 		},
 		useSortBy,
+		usePagination,
 	)
+
+	useEffect(() => {
+    console.log(`>>> page: ${pageIndex}`);
+    fetchData({ pageIndex, pageSize });
+  }, [fetchData, pageIndex, pageSize]);
 
 	// TODO: replace up/down characters with SVGs from Figma
 
@@ -77,14 +101,14 @@ const Table = ({data,columns,options}) => {
 								<th {...column.getHeaderProps(column.getSortByToggleProps())}>
 									{column.render('Header')}
 									<span>{column.isSorted ? column.isSortedDesc ? ' v' : ' ^' : ''}
-                  </span>
+									</span>
 								</th>
 							))}
 						</tr>
 					))}
 				</thead>
 				<tbody {...getTableBodyProps()}>
-					{rows.map(
+					{page.map(
 						(row, i) => {
 							prepareRow(row);
 							return (
@@ -96,8 +120,17 @@ const Table = ({data,columns,options}) => {
 							);
 						}
 					)}
+					<tr>
+						{loading ? ( <td>Loading...</td> ) : (
+							<td>
+								Showing {page.length} of ~{controlledPageCount * pageSize}{" "}
+								results
+							</td>
+						)}
+					</tr>
 				</tbody>
 			</table>
+			{!loading && <Pagination pageIndex={pageIndex} pageCount={pageCount} pageSize={pageSize} pageOptions={pageOptions} canPreviousPage={canPreviousPage} canNextPage={canNextPage} gotoPage={gotoPage} previousPage={previousPage} nextPage={nextPage} setPageSize={setPageSize} />}
 		</TableStyled>
 	);
 }

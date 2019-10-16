@@ -19,7 +19,7 @@ export interface IProps {
 }
 
 const Page: SFC<IProps> = ({location, sidebar}) => {
-/*  const { loading, error, data } = useQuery(QUERY_PAGE, { variables: { path: '/agent' }});
+/*  const { loading, error, data } = useQuery(QUERY_PAGE, { errorPolicy: 'all', variables: { path: '/agent' }});
   if (data) console.log(data.page) */
   // test data for now
 //  const loading = false;
