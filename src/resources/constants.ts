@@ -1,4 +1,5 @@
-import { IPageData, ITableColumn } from "./interfaces";
+import { IPageData } from "./interfaces";
+import { Column } from "react-table";
 
 // export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
@@ -178,22 +179,18 @@ export const testInitialData = {
   }
 }
 
-export const testTableColumns: ITableColumn[] = [
-	{ title: 'Name',
+export const testTableColumns: Array<Column> = [
+/*	{ title: 'Name',
 		field: 'formattedNameAvatar',
 		props: {
 			name: 'name',
 			avatar: 'url',
 		},
-		sort: true,
-	},
-  { title: 'Name', field: 'name', sort: true },
-  { title: 'Email', field: 'primary_email', sort: false },
+		sorting: true,
+	}, */
+  { Header: 'Name', accessor: 'name' },
+  { Header: 'Email', accessor: 'primary_email' },
 ];
-
-export const testTableData = {
-  columns: testTableColumns,
-}
 
 export const testPageData: IPageData = {
   path: "/agents",
@@ -203,8 +200,13 @@ export const testPageData: IPageData = {
     description: "admin.agents.page_description",
     tables: [
       {
-        "dataQuery": "query { agents_getAgents { id, name, primary_email }}",
-        "metadataQuery": "query { agents_getAgentsTableOptions ... } }" // returns testTableMeta into Tables component
+        dataQuery: "query { agents_getAgents { id, name, primary_email }}",
+				metadataQuery: "query { agents_getAgentsTableOptions ... }}",
+				options: {
+					pageSize: 1,
+					search: true,
+					selection: true,
+				}
       }
     ]
   }
