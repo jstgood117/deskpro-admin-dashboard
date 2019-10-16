@@ -1,16 +1,8 @@
-import React, { forwardRef, LegacyRef, SFC, Fragment } from 'react';
+import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
 import MaterialTable from 'material-table';
-import { ChevronLeft, ChevronRight, FirstPage, LastPage } from '@material-ui/icons';
 
 import { ITableRow, ITableColumn } from '../../resources/interfaces';
-
-const tableIcons = {
-	FirstPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <FirstPage {...props} ref={ref} />),
-	LastPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <LastPage {...props} ref={ref} />),
-	NextPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <ChevronRight {...props} ref={ref} />),
-	PreviousPage: forwardRef((props, ref: LegacyRef<SVGSVGElement>) => <ChevronLeft {...props} ref={ref} />),
-};
 
 const TableStyled = styled.div`
 	& .MuiToolbar-regular {
@@ -62,24 +54,25 @@ const TableStyled = styled.div`
 export interface IProps {
 	data: ITableRow[],
 	columns: ITableColumn[],
+	options?: {
+		[key: string]: any,
+	}
 }
 
-const Table: SFC<IProps> = ({data, columns}) => (
-	<Fragment>
-		<TableStyled>
-			<MaterialTable
-				data={data}
-				columns={columns}
-				options={{
-					pageSize: 5,
-					search: false,
-					showTitle: false,
-					selection: true,
-				}}
-				icons={tableIcons}
-			/>
-		</TableStyled>
-	</Fragment>
-)
+const Table: SFC<IProps> = ({data,columns,options}) => {
+	const fullOptions = Object.assign({}, options, { showTitle: false });
+
+	return (
+		<Fragment>
+			<TableStyled>
+				<MaterialTable
+					data={data}
+					columns={columns}
+					options={fullOptions}
+				/>
+			</TableStyled>
+		</Fragment>
+	);
+}
 
 export default Table;

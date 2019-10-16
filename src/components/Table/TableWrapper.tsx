@@ -13,8 +13,9 @@ const formattedNameAvatar = (props: any) => {
 	}
 	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
 }
+const sortNameAvatar = (a: any, b: any) => a.name - b.name;
 
-const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery}) => {
+const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => {
 //		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`);
 	const { loading: loadingRows, error: errorRows, data: dataRows } = useQuery(gql`${dataQuery}`);
 //		if (dataCols) console.log(dataCols)
@@ -28,22 +29,18 @@ const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery}) => {
 		switch (column.field) {
 			case 'formattedNameAvatar':
 				column.render = formattedNameAvatar(column.props);
+				column.customSort = sortNameAvatar;
 		}
 		return column;
 	});
-
+	
 	return (
 		<Fragment>
 			{(loadingCols || loadingRows) && <p>Loading...</p>}
 			{(errorCols || errorRows) && <p>Error, couldn't load data</p>}
-			{dataCols && dataRows && <Table data={dataRows.agents_getAgents} columns={dataCols} />}
+			{dataCols && dataRows && <Table data={dataRows.agents_getAgents} columns={dataCols} options={options} />}
 		</Fragment>
 	);
 }
-
-// Default settings for the table
-TableWrapper.defaultProps = {
-	pageSize: 20,
-} 
 
 export default TableWrapper;
