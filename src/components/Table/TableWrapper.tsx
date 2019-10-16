@@ -12,6 +12,10 @@ export interface IProps {
 }
 
 const formattedNameAvatar = (props: any) => {
+	const checkArr = Object.keys(props);
+	if (!checkArr.includes('avatar') || !checkArr.includes('name')) {
+		throw new Error(`formattedNameAvatar did not receive required props: ${JSON.stringify(props)}`);
+	}
 	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
 }
 
@@ -28,7 +32,6 @@ const TableWrapper: SFC<IProps> = ({dataQuery, metadataQuery}) => {
 	dataCols.map((column) => {
 		switch (column.field) {
 			case 'formattedNameAvatar':
-				// PSRA check props are valid
 				column.render = formattedNameAvatar(column.props);
 		}
 		return column;
