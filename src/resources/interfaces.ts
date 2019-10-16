@@ -25,8 +25,10 @@ export interface ITableColumn {
 	title: string,
 	field?: keyof ITableRow,
 	props?: object,
-	sort?: boolean, // default false 
+	sorting?: boolean,
+	searchable?: boolean,
   render?: (data: ITableRow, type: ('row' | 'group')) => any,
+  customSort?: (a:any,b:any) => any,
 }
 
 export interface ITableRow {
@@ -54,5 +56,7 @@ export interface IPageProps {
 export interface ITableSetup {
 	dataQuery: string,
 	metadataQuery: string,
-	pageSize?: number,
+	options: {
+		[key: string]: any,
+	}
 }

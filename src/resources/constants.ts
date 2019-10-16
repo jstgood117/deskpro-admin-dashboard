@@ -100,10 +100,10 @@ export const testTableColumns: ITableColumn[] = [
 			name: 'name',
 			avatar: 'url',
 		},
-		sort: true,
+		sorting: true,
 	},
-  { title: 'Name', field: 'name', sort: true },
-  { title: 'Email', field: 'primary_email', sort: false },
+  { title: 'Name', field: 'name', sorting: true, searchable: true },
+  { title: 'Email', field: 'primary_email', sorting: false },
 ];
 
 export const testTableData = {
@@ -118,9 +118,13 @@ export const testPageData: IPageData = {
     description: "admin.agents.page_description",
     tables: [
       {
-        "dataQuery": "query { agents_getAgents { id, name, primary_email }}",
-				"metadataQuery": "query { agents_getAgentsTableOptions ... } }",
-				"pageSize": 3,
+        dataQuery: "query { agents_getAgents { id, name, primary_email }}",
+				metadataQuery: "query { agents_getAgentsTableOptions ... }}",
+				options: {
+					pageSize: 1,
+					search: true,
+					selection: true,
+				}
       }
     ]
   }
