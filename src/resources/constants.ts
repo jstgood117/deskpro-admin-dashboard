@@ -1,4 +1,5 @@
-import { IPageData, ITableColumn } from "./interfaces";
+import { IPageData } from "./interfaces";
+import { Column } from "react-table";
 
 // export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
@@ -93,22 +94,18 @@ export const testInitialData = {
   }
 }
 
-export const testTableColumns: ITableColumn[] = [
-	{ title: 'Name',
+export const testTableColumns: Array<Column> = [
+/*	{ title: 'Name',
 		field: 'formattedNameAvatar',
 		props: {
 			name: 'name',
 			avatar: 'url',
 		},
 		sorting: true,
-	},
-  { title: 'Name', field: 'name', sorting: true, searchable: true },
-  { title: 'Email', field: 'primary_email', sorting: false },
+	}, */
+  { Header: 'Name', accessor: 'name' },
+  { Header: 'Email', accessor: 'primary_email' },
 ];
-
-export const testTableData = {
-  columns: testTableColumns,
-}
 
 export const testPageData: IPageData = {
   path: "/agents",

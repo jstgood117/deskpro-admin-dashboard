@@ -21,7 +21,7 @@ export interface ISidebarItem {
 
 export interface ITranslation {}
 
-export interface ITableColumn {
+/* export interface ITableColumn {
 	title: string,
 	field?: keyof ITableRow,
 	props?: object,
@@ -33,12 +33,7 @@ export interface ITableColumn {
 
 export interface ITableRow {
 	[key: string]: any,
-}
-
-export interface ITableData {
-	columns: ITableColumn[],
-	search?: boolean, // default false
-}
+} */
 
 export interface IPageData {
 	path: string,
