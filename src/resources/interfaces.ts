@@ -21,22 +21,19 @@ export interface ISidebarItem {
 
 export interface ITranslation {}
 
-export interface ITableColumn {
+/* export interface ITableColumn {
 	title: string,
 	field?: keyof ITableRow,
 	props?: object,
-	sort?: boolean, // default false 
+	sorting?: boolean,
+	searchable?: boolean,
   render?: (data: ITableRow, type: ('row' | 'group')) => any,
+  customSort?: (a:any,b:any) => any,
 }
 
 export interface ITableRow {
 	[key: string]: any,
-}
-
-export interface ITableData {
-	columns: ITableColumn[],
-	search?: boolean, // default false
-}
+} */
 
 export interface IPageData {
 	path: string,
@@ -48,10 +45,13 @@ export interface IPageProps {
 	title: string,
 	description?: string,
 	illustration?: string, // TBD whether this is a local link
-	tables?: ITableQuery[],
+	tables?: ITableSetup[],
 }
 
-export interface ITableQuery {
+export interface ITableSetup {
 	dataQuery: string,
 	metadataQuery: string,
+	options: {
+		[key: string]: any,
+	}
 }

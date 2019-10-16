@@ -1,7 +1,6 @@
 import React, { SFC, Fragment, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { KeyboardArrowDown, KeyboardArrowUp } from '@material-ui/icons';
 
 import { ISidebarItem } from '../../../../resources/interfaces';
 import SidebarItem from '../SidebarItem';
@@ -51,6 +50,8 @@ export interface IProps {
 	navItems?: ISidebarItem[];
 }
 
+// TODO: replace up/down characters with SVGs from Figma
+
 const SidebarSubSection: SFC<IProps> = (props) => {
 	const [openState, setOpenState] = useState(false);
 	const { path, itemName, navItems } = props;
@@ -59,7 +60,7 @@ const SidebarSubSection: SFC<IProps> = (props) => {
 		<Fragment>
 			<SidebarSubSectionStyled onClick={() => setOpenState(!openState)}>
 				<div><FormattedMessage id={itemName} /></div>
-				{openState ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+				{openState ? '^' : 'v'}
 			</SidebarSubSectionStyled>
 			{navItems && openState && <SidebarSubSectionList>{navItems.map((navItem, index) => <SidebarItem key={index} path={path} {...navItem}></SidebarItem>)}
 			</SidebarSubSectionList>}

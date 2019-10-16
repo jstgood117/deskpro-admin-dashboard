@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { ITableQuery } from '../../resources/interfaces';
+import { ITableSetup } from '../../resources/interfaces';
 
 import Main from '../Main';
 import Header from '../Header';
@@ -11,7 +11,7 @@ export interface IProps {
   title: string,
   description?: string,
   illustration?: string,
-  tables?: ITableQuery[],
+  tables?: ITableSetup[],
 }
 
 const StandardTablePage: SFC<IProps> = ({title, description, tables}) => {
