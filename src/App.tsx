@@ -15,7 +15,7 @@ import { logError } from './components/Error/ErrorBoundary';
 const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
 appDebug("API URL: " + apiUrl);
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
 	uri: apiUrl,
 });
 

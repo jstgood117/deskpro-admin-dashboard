@@ -8,7 +8,7 @@ interface IState {
 }
 
 export const logError = (error: any) => {
-  // PSRA log the error to external service
+  // TODO log the error to external service
   console.log('Heres the caught error')
   console.log(error);  
 }
