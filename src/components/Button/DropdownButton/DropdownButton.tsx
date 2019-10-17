@@ -1,22 +1,36 @@
-import React, { SFC, Fragment } from 'react';
+import React, { SFC, Fragment, useState } from 'react';
 import styled from 'styled-components';
 
-import Icon from '../Icon';
+import Icon from '../../Icon';
+
+export interface StyleProps {
+  openState: boolean;
+}
 
 const DropdownLabel = styled.div`
-  padding-right: 3px;
+  padding-right: 12px;
 `;
-const DropdownStyled = styled.div`
+const DropdownStyled = styled.div<StyleProps>`
+  padding: 4px 10px;
+  background: #FFFFFF;
+  border: 0.8px solid #A9B0B0;
+  box-sizing: border-box;
+  border-radius: 3px;
   cursor: pointer;
   float: left;
   overflow: hidden;
   display: flex;
   align-item: center;
-  :hover {
-    > div:nth-child(2) {
-      display: flex;
-      flex-direction: column;
-    }
+  outline: none;
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 150%;
+  color: #a9b0b0;
+  > div:nth-child(2) {
+    display: ${props => (props.openState ? 'flex' : 'none')}
+    flex-direction: column;
   }
 `;
 const DropdownBtn = styled.div`
@@ -54,25 +68,46 @@ const DropdownContentLink = styled.div`
     background-color: #e8ebee;
   }
 `;
+const StyledIcon = styled.div`
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+`;
+
 interface IItemProps {
   link: string;
 }
 
 export interface IProps {
+  iconName?: string;
   label: string;
   items: IItemProps[];
   onClick?: (e: any) => void;
 }
 
-const Dropdown: SFC<IProps> = props => {
+const DropdownButton: SFC<IProps> = props => {
+  const [openState, clickButton] = useState(false);
   return (
     <Fragment>
-      <DropdownStyled>
-        <DropdownBtn>
+      <DropdownStyled openState={openState}>
+        <DropdownBtn
+          onClick={() => {
+            clickButton(!openState);
+          }}
+        >
+          {props.iconName ? (
+            <StyledIcon>
+              <Icon name={props.iconName} />
+            </StyledIcon>
+          ) : null}
           <DropdownLabel>{props.label}</DropdownLabel>
           <Icon name="downVector" />
         </DropdownBtn>
-        <DropdownContent>
+        <DropdownContent
+          onClick={() => {
+            clickButton(!openState);
+          }}
+        >
           {props.items.map(item => {
             return (
               <DropdownContentLink onClick={props.onClick}>
@@ -86,4 +121,4 @@ const Dropdown: SFC<IProps> = props => {
   );
 };
 
-export default Dropdown;
+export default DropdownButton;
