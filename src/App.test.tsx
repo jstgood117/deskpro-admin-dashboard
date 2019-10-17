@@ -1,15 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { IntlProvider } from 'react-intl';
+import { MockedProvider } from '@apollo/react-testing';
 
 import App from './App';
-import { testTranslations } from './resources/constants';
+import { testInitialData } from './resources/constants';
+import { QUERY_INITIAL } from './resources/graphql';
+
+const mocks = [
+  {
+    request: {
+      query: QUERY_INITIAL,
+      variables: {
+        locale: "en",
+      },
+    },
+    result: {
+      data: testInitialData,
+    }
+  },
+];
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <IntlProvider locale='en' messages={testTranslations}>
+    <MockedProvider mocks={mocks} addTypename={false}>
       <App />
-    </IntlProvider>, div);
+    </MockedProvider>
+    , div);
   ReactDOM.unmountComponentAtNode(div);
 });

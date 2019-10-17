@@ -40,8 +40,8 @@ export const testTranslations = {
 	'admin.page.error': 'Something has gone wrong',
 	'admin.page.loading': 'Loading',
 	
-  'admin.agents.page_title': 'Agents',
-  'admin.agents.page_description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  'admin_agents.agents.title': 'Agents',
+  'admin_agents.agents.description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 }
 
 export const testSidebarData = [
@@ -197,8 +197,8 @@ export const testPageData: IPageData = {
   path: "/agents",
   pageType: "standardTable",
   pageProps: {
-    title: "admin.agents.page_title",
-    description: "admin.agents.page_description",
+    title: "admin_agents.agents.title",
+    description: "admin_agents.agents.description",
     tables: [
       {
         dataQuery: "query { agents_getAgents { id, name, primary_email }}",
