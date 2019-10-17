@@ -33,7 +33,7 @@ const Icon: SFC<IProps> = props => {
       return <IconChannels />;
     case 'admin.sidebar.agents':
       return <IconAgents />;
-    case "sidebarHelp":
+    case "admin.sidebar.help.helpCentre":
       return <IconHelp />;
     case 'viewMode.table':
       return <IconTableView />;
