@@ -1,13 +1,8 @@
-import React, { SFC } from 'react';
+import React, { SFC, Fragment } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
-
-const StyledBody = styled.nav`
-  overflow-y: scroll;
-  height: 100%;
-`;
 
 const Body: SFC = props => {
   return (
@@ -21,7 +16,7 @@ const Body: SFC = props => {
           width: 'auto'
         }}
       >
-        <StyledBody>{props.children}</StyledBody>
+        <div>{props.children}</div>
       </Scrollbars>
     </ThemeProvider>
   );

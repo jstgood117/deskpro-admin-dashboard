@@ -6,14 +6,12 @@ import { ISidebarSection } from '../../resources/interfaces';
 import { DeskproAdminTheme } from '../Theme';
 import SidebarSection from './SidebarSection';
 
-const SidebarStyled = styled.nav`
+const SidebarStyled = styled.div`
   background-color: #e8ebee;
   color: #000;
   width: 100%;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
-  overflow-y: scroll;
-  height: 100%;
 `;
 
 export interface IProps {
@@ -30,6 +28,19 @@ const Sidebar: SFC<IProps> = props => {
           position: 'absolute',
           height: '100%'
         }}
+        renderTrackVertical={({ style, ...props }) => (
+          <div
+            style={{
+              background: '#ccc',
+              position: 'absolute',
+              width: 6,
+              right: 0,
+              bottom: 2,
+              top: 2,
+              borderRadius: 3
+            }}
+          />
+        )}
       >
         <SidebarStyled>
           {props.data &&
