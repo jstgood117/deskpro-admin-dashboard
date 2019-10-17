@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 
 import { ISidebarSection, ISidebarItem } from '../../resources/interfaces';
-import { testSidebarData } from '../../resources/constants';
+// import { testSidebarData } from '../../resources/constants';
 
 import Sidebar from '../Sidebar';
 import PageType from './PageType';
