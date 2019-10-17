@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../src/components/Theme';
 
-const req = require.context('../src/components', true, /.stories.tsx$/);
+const req = require.context('../src/components', true, /.stories\..sx$/);
 
 function loadStories() {
   req.keys().forEach(req);

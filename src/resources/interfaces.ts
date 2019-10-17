@@ -37,9 +37,15 @@ export interface ITableRow {
 } */
 
 export interface IPageData {
-	path: string,
-	pageType: string,
-	pageProps: IPageProps,
+  __typename: string,
+    title: string,
+    description: string,
+    headerLinks: [
+			{
+      	title: string,
+	      path: string,
+			}
+		]
 }
 
 export interface IPageProps {
@@ -50,9 +56,11 @@ export interface IPageProps {
 }
 
 export interface ITableSetup {
+	__typename: string,
+	title: string,
 	dataQuery: string,
-	metadataQuery: string,
+/*	metadataQuery: string,
 	options: {
 		[key: string]: any,
-	}
+	} */
 }

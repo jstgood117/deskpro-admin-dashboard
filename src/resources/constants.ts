@@ -1,8 +1,6 @@
 import { IPageData } from "./interfaces";
 import { Column } from "react-table";
 
-export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
-
 export const testTranslations = {
   'admin.sidebar.setup': 'Setup',
   'admin.sidebar.setup.dashboard': 'Dashboard',
@@ -197,7 +195,15 @@ export const testTableColumns: Array<Column> = [
   { Header: 'Email', accessor: 'primary_email' },
 ];
 
-export const testPageData: IPageData = {
+export const testTableData = [
+  {"id": 75950,"name": "Louella Wallace","age": 24,"phone": "+44 (0)203 437 7302","avatar": "https://randomuser.me/api/portraits/men/49.jpg"},
+  {"id": 80616,"name": "Hanson Perry","age": 36,"phone": "+44 (0)203 279 3708","color": "brown"},
+  {"id": 77621,"name": "Brandi Long","age": 20,"phone": "+44 (0)203 319 4880","color": "gray"},
+  {"id": 81299,"name": "Tonia Sykes","age": 38,"phone": "+44 (0)208 328 3671","color": "blue"},
+  {"id": 14225,"name": "Leach Durham","age": 23,"phone": "+44 (0)208 280 9572","color": "green"}
+];
+
+/*export const testPageData: IPageData = {
   path: "/agents",
   pageType: "standardTable",
   pageProps: {
@@ -215,4 +221,43 @@ export const testPageData: IPageData = {
       }
     ]
   }
+}*/
+
+export const testView = {
+	__typename: "Table",
+	title: "Test table",
+	dataQuery: "query { agents_getAgents { id, name, primary_email }}",
+}
+
+export const testPageData: IPageData = {
+  __typename: "StandardDataPageData",
+    title: "admin_agents.agents.title",
+    description: "admin_agents.agents.description",
+    headerLinks: [
+			{
+      	title: "admin_agents.page.link.login_log",
+	      path: "./login-log",
+			}
+		]
+/*    newLink
+    views {
+      ... on InMemoryPageDataView {
+        __typename
+        title
+        dataQuery
+        tableDef {
+          columns {
+            title
+            field
+            data {
+              propName
+              path
+              value
+            }
+            defaultShow
+          }
+        }
+      }
+    }
+  } */
 }

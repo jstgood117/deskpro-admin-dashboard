@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 
 import { ISidebarSection, ISidebarItem } from '../../resources/interfaces';
-import { testSidebarData } from '../../resources/constants';
+// import { testSidebarData } from '../../resources/constants';
 
 import Sidebar from '../Sidebar';
 import PageType from './PageType';
@@ -28,8 +28,7 @@ const Page: SFC<IProps> = ({location, sidebar}) => {
     }, {});
   }
 
-  const currSidebar: ISidebarItem = nestedSearch(testSidebarData,location.pathname);
-  console.log('SIDEBAR');
+  const currSidebar: ISidebarItem = nestedSearch(sidebar,location.pathname);
   console.log(currSidebar)
 
   // TODO when backend data is there
