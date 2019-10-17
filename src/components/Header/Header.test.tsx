@@ -1,49 +1,45 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
+import { IntlProvider } from 'react-intl';
 
 import Header, { IProps } from './Header';
+import { testTranslations } from '../../resources/constants';
 
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
-describe("Header", () => {
+describe('Header', () => {
   let props: IProps;
   let mountedHeader: any;
 
   const wrapper = (bShallow: boolean) => {
     if (!mountedHeader) {
-      mountedHeader = bShallow ? shallow(<Header {...props} />) : mount(<Header {...props} />);
+      mountedHeader = bShallow
+        ? shallow(
+            <IntlProvider locale="en" messages={testTranslations}>
+              <Header {...props} />
+            </IntlProvider>
+          )
+        : mount(
+            <IntlProvider locale="en" messages={testTranslations}>
+              <Header {...props} />
+            </IntlProvider>
+          );
     }
     return mountedHeader;
-  }
+  };
 
   beforeEach(() => {
-    props = {};
+    props = {
+      title: 'admin.agents.page_title',
+      description: 'admin.agents.page_description',
+      illustration: null
+    };
     mountedHeader = undefined;
   });
 
-  it("always renders a <div>", () => {
+  it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-
-  describe("when children is undefined", () => {
-    beforeEach(() => {
-      props.children = undefined;
-    });
-
-    it("doesn't render anything else", () => {
-      expect(wrapper(false).find('div').children().length).toBe(0);
-    });
-  });
-
-  describe("when children is defined", () => {
-    beforeEach(() => {
-      props.children = <div>Header text</div>;
-    });
-
-    it("renders them within the div tag", () => {
-      expect(wrapper(false).find('div').children().length).toBe(1);
-    });
-  });
-})
+});
