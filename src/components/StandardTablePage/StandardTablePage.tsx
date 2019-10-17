@@ -14,6 +14,7 @@ export interface IProps {
 }
 
 const StandardTablePage: SFC<IProps> = ({title, description, tables}) => {
+  console.log(`TITLE: ${title}`);
   return (
     <Main>
       <Header title={title} description={description} />

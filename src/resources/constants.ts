@@ -1,7 +1,7 @@
 import { IPageData } from "./interfaces";
 import { Column } from "react-table";
 
-// export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
+export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
 
 export const testTranslations = {
   'admin.sidebar.setup': 'Setup',
@@ -48,6 +48,7 @@ export const testTranslations = {
 export const testSidebarData = [
 	{
 		'sectionName': 'admin.sidebar.setup',
+		'icon': 'cog',
 		'navItems': [
 			{
 				'itemName': 'admin.sidebar.setup.dashboard',
@@ -89,20 +90,20 @@ export const testSidebarData = [
 			{
 				'itemName': 'admin.sidebar.channels.messenger',
 				'url': '/messenger',
-				// 'navItems': [
-				// 	{
-				// 		'itemName': 'admin.sidebar.channels.messenger.setup',
-				// 		'url': '/messenger-setup',
-				// 	},			
-				// 	{
-				// 		'itemName': 'admin.sidebar.channels.messenger.departments',
-				// 		'url': '/messenger-departments',
-				// 	},			
-				// 	{
-				// 		'itemName': 'admin.sidebar.channels.messenger.queues',
-				// 		'url': '/messenger-queues',
-				// 	},			
-				// ],
+				 'navItems': [
+					{
+						'itemName': 'admin.sidebar.channels.messenger.setup',
+						'url': '/messenger-setup',
+					},			
+					{
+						'itemName': 'admin.sidebar.channels.messenger.departments',
+						'url': '/messenger-departments',
+					},			
+					{
+						'itemName': 'admin.sidebar.channels.messenger.queues',
+						'url': '/messenger-queues',
+					},			
+				],
 			},
 			{
 				'itemName': 'admin.sidebar.channels.social',
@@ -120,6 +121,8 @@ export const testSidebarData = [
 			{
 				'itemName': 'admin.sidebar.agents.agent',
 				'url': '/agent',
+//				'metadataQuery': "query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }, newLink, views {... on InMemoryPageDataView {__typename, title, dataQuery, tableDef { columns { title, field, data { propName, path, value }, defaultShow }}}}}}"
+				'metadataQuery': "query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }}}"
 			},
 			{
 				'itemName': 'admin.sidebar.agents.teams',

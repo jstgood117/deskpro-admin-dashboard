@@ -1,8 +1,7 @@
 import React, { SFC } from 'react';
 
-import { ISidebarSection } from '../../resources/interfaces';
-
-import { testPageData } from '../../resources/constants';
+import { ISidebarSection, ISidebarItem } from '../../resources/interfaces';
+import { testSidebarData } from '../../resources/constants';
 
 import Sidebar from '../Sidebar';
 import Grid from '../Grid';
@@ -17,18 +16,34 @@ export interface IProps {
 }
 
 const Page: SFC<IProps> = ({location, sidebar}) => {
-/*  const { loading, error, data } = useQuery(QUERY_PAGE, { errorPolicy: 'all', variables: { path: '/agent' }});
-  if (data) console.log(data.page) */
-  // test data for now
-//  const loading = false;
-//  const error = false;
-  const data = testPageData;
+  sidebar = testSidebarData;  // TODO temporary until backend ready
+
+  const nestedSearch = (arr: Array<any>, match: string) => {
+    let matchedObj = {
+      itemName: ''
+    };
+
+    arr.filter(obj => {
+      if (obj.navItems) {
+        matchedObj = Object.assign(matchedObj, nestedSearch(obj.navItems, match));
+      }
+      if (obj.url && obj.metadataQuery) {
+        matchedObj = Object.assign(matchedObj, obj);
+        return obj.url === match;
+      }
+      return false;
+    });
+    return matchedObj;
+  }
+
+  const currSidebar: ISidebarItem = nestedSearch(sidebar,location.pathname);
+  console.log(currSidebar)
 
   return (
     <ErrorBoundary>
       <Grid>
         <Sidebar path={location.pathname} data={sidebar} />
-        <PageType {...data} />
+        {Object.keys(currSidebar).length > 0 && <PageType query={currSidebar.metadataQuery} />}
       </Grid>
     </ErrorBoundary>
   );

@@ -23,7 +23,6 @@ const App: SFC = () => {
 
 	// Need to convert incoming translations from array of objects to single object
 	if (data) translations = arrayToObject(data.adminInterface_getTranslations);
-	console.log(translations)
 	 
 /*	// test data for now
 	const loading = false;
