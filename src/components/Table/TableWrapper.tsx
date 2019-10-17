@@ -1,5 +1,6 @@
 import React, { SFC, Fragment, useCallback, useState } from 'react';
-import { gql } from 'apollo-boost';
+import { withApollo } from 'react-apollo';
+import { gql, ApolloClient } from 'apollo-boost';
 
 import { testTableColumns } from '../../resources/constants';
 import { ITableSetup } from '../../resources/interfaces';
@@ -7,19 +8,12 @@ import { ITableSetup } from '../../resources/interfaces';
 import Table from './Table';
 import Loading from '../Loading';
 import Error from '../Error';
-import { client } from '../../App';
 import { logError } from '../Error/ErrorBoundary';
 
-/* const formattedNameAvatar = (props: any) => {
-	const checkArr = Object.keys(props);
-	if (!checkArr.includes('avatar') || !checkArr.includes('name')) {
-		throw new Error(`formattedNameAvatar did not receive required props: ${JSON.stringify(props)}`);
-	}
-	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
+interface IProps {
+	client: ApolloClient<any>;
 }
-const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
-
-const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => {
+const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery}) => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [pageCount, setPageCount] = useState(0);
@@ -57,15 +51,7 @@ const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => 
 	const loadingCols = false;
 	const errorCols = false;
 	const dataCols = testTableColumns;
-
-/*	dataCols.map((column) => {
-		switch (column.field) {
-			case 'formattedNameAvatar':
-				column.render = formattedNameAvatar(column.props);
-				column.customSort = sortNameAvatar;
-		}
-		return column;
-	}); */
+	const options = {};
 
 	return (
 		<Fragment>
@@ -82,4 +68,4 @@ const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => 
 	);
 }
 
-export default TableWrapper;
+export default withApollo<ITableSetup & IProps>(TableWrapper);

@@ -7,17 +7,17 @@ import { DeskproAdminTheme } from '../Theme';
 const Body: SFC = props => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-
-    <Scrollbars
-      style={{
-        width: 'calc(100% - 223px)',
-        height: '100%',
-        left: '223px',
-        position: 'absolute'
-      }}
-    >
-      <div style={{ height: '1600px' }}>{props.children}</div>
-    </Scrollbars>
+      <Scrollbars
+        style={{
+          height: '100%',
+          left: '223px',
+          position: 'absolute',
+          right: '0',
+          width: 'auto'
+        }}
+      >
+        <div>{props.children}</div>
+      </Scrollbars>
     </ThemeProvider>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useTable, useSortBy, usePagination } from 'react-table';
+import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 
 import Pagination from './Pagination';
 
@@ -53,9 +53,46 @@ const TableStyled = styled.div`
 	}
 } */
 
+/* const formattedNameAvatar = (props: any) => {
+	const checkArr = Object.keys(props);
+	if (!checkArr.includes('avatar') || !checkArr.includes('name')) {
+		throw new Error(`formattedNameAvatar did not receive required props: ${JSON.stringify(props)}`);
+	}
+	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
+}
+const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
+
+
+const transformColumnData = (columns) => {
+	columns.map((column) => {
+		switch (column.id) {
+			case 'selection':
+				column.Header = ({ getToggleAllRowsSelectedProps }) => (
+					<div>
+						<input type="checkbox" {...getToggleAllRowsSelectedProps()} />
+					</div>
+				);
+				column.Cell = ({ row }) => (
+					<div>
+						<input type="checkbox" {...row.getToggleRowSelectedProps()} />
+					</div>
+				);
+				break;
+	/*			case 'formattedNameAvatar':
+				column.render = formattedNameAvatar(column.props);
+				column.customSort = sortNameAvatar; */
+				default:
+		}
+		return column;
+	});
+
+	return columns;
+}
+
 const Table = ({data,columns,fetchData,loading,pageCount:controlledPageCount,options}) => {
 //	const memoizedDataCols: Array<Column> = useMemo(() => columns, [columns]);
 //	const memoizedDataRows: Array<any> = useMemo(() => data, [data]);
+	transformColumnData([...columns]);
 
 	const {
     getTableProps,
@@ -82,6 +119,7 @@ const Table = ({data,columns,fetchData,loading,pageCount:controlledPageCount,opt
 		},
 		useSortBy,
 		usePagination,
+		useRowSelect,
 	)
 
 	useEffect(() => {

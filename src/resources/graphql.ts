@@ -2,22 +2,36 @@ import { gql } from 'apollo-boost';
 
 // Queries
 
-export const QUERY_INITIAL = gql`{
-  initial {
-    user {
-      locale
-    }
-    sidebar {
+// TODO locale needs to be a parameter, not hard-coded
 
+export const QUERY_INITIAL = gql`
+  query  {
+    adminInterface_getTranslations(locale: "en") {
+      id
+      message
     }
-    translations {
-
+    adminInterface_getAdminInterfaceData {
+      user {
+        locale
+      }
+      sidebar {
+        sectionName
+        icon
+        navItems {
+          itemName
+          url
+          navItems {
+            itemName
+            url
+          }
+        }
+      }
     }
   }
-}`
+`
 
 export const QUERY_PAGE = gql`
-  query getPage($path: $tring!) {
+  query getPage($path: string!) {
     page(path: $path) {
       path
       pageType

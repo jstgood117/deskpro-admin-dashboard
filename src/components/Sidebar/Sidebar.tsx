@@ -12,6 +12,7 @@ const SidebarStyled = styled.nav`
   width: 100%;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
+  position: absolute;
 `;
 
 export interface IProps {
@@ -19,7 +20,7 @@ export interface IProps {
   data: ISidebarSection[];
 }
 
-const Sidebar: SFC<IProps> = props => {
+const Sidebar: SFC<IProps> = ({ path, data }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
@@ -28,11 +29,24 @@ const Sidebar: SFC<IProps> = props => {
           position: 'absolute',
           height: '100%'
         }}
+        renderTrackVertical={({ style, ...props }) => (
+          <div
+            style={{
+              background: '#ccc',
+              position: 'absolute',
+              width: 6,
+              right: 0,
+              bottom: 2,
+              top: 2,
+              borderRadius: 3
+            }}
+          />
+        )}
       >
         <SidebarStyled>
-          {props.data &&
-            props.data.map((navSection, index) => (
-              <SidebarSection key={index} path={props.path} {...navSection} />
+          {data &&
+            data.map((navSection, index) => (
+              <SidebarSection key={index} path={path} {...navSection} />
             ))}
         </SidebarStyled>
       </Scrollbars>
