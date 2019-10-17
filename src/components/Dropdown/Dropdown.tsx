@@ -69,7 +69,7 @@ const Dropdown: SFC<IProps> = props => {
       <DropdownStyled>
         <DropdownBtn>
           <DropdownLabel>{props.label}</DropdownLabel>
-          <Icon name="dropdownVector" />
+          <Icon name="downVector" />
         </DropdownBtn>
         <DropdownContent>
           {props.items.map(item => {
