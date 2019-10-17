@@ -1,10 +1,14 @@
-import React, { SFC } from 'react';
+import React, { SFC, ReactNode } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 
-const Body: SFC = props => {
+export interface IProps {
+	children?: ReactNode,
+}
+
+const Body: SFC<IProps> = props => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
