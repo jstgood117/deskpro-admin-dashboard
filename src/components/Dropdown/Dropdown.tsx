@@ -7,7 +7,6 @@ const DropdownLabel = styled.div`
   padding-right: 3px;
 `;
 const DropdownStyled = styled.div`
-  height: 100%;
   cursor: pointer;
   float: left;
   overflow: hidden;
