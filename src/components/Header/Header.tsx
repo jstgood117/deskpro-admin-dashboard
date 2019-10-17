@@ -1,170 +1,217 @@
-import React, { ReactNode, SFC, useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import React, { SFC, ReactElement, useState } from 'react';
+import styled, { ThemeProvider, css } from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 
 import { DeskproAdminTheme } from '../Theme';
-import Button from '../Button/index';
+import Icon from '../Icon';
+import { renderToStaticMarkup } from 'react-dom/server';
 
-const HeaderStyled = styled.div<IHeaderProps>`
-	background-color: ${props => props.theme.pageHeader};
-	padding: ${props => props.theme.pagePadding};
-	margin-top: ${props => `-${props.theme.pagePadding}`};
-	margin-left: ${props => `-${props.theme.pagePadding}`};
-	margin-right: ${props => `-${props.theme.pagePadding}`};
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background-image: url(assets/${props => props.background});
-	background-repeat: no-repeat;
-	background-position: 50%;
-	background-size: contain;
-
-	& h2 {
-		color: ${props => props.theme.activeColour};
-		font-size: 40px;
-		margin-top: 0;
-		margin-bottom: 20px;
-	}
-	& p {
-		color: ${props => props.theme.greyDark};
-		font-size: 14px;
-		max-width: 30vw;
-	}
-	& .btn-help {
-		background-color: ${props => props.theme.brandPrimary};
-		width: 48px;
-		height: 48px;
-	}
+const HeaderStyled = styled.div<IHeader>`
+  background-color: ${props => props.theme.pageHeader};
+  padding: ${props => props.theme.pagePadding};
+  margin-top: ${props => `-${props.theme.pagePadding}`};
+  margin-left: ${props => `-${props.theme.pagePadding}`};
+  margin-right: ${props => `-${props.theme.pagePadding}`};
+  position: relative;
+  display: flex;
+  background-image: url("data:image/svg+xml,${props => encodeURIComponent(renderToStaticMarkup(props.illustration))}");
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: contain;
+  & h1 {
+    color: ${props => props.theme.activeColour};
+    font-size: 40px;
+    margin-top: 0;
+  }
+  & p {
+    color: ${props => props.theme.greyDark};
+    font-size: 14px;
+    width: 35%;
+  }
+  & button {
+    outline: none;
+    cursor: pointer;
+    border: none;
+  }
 `;
 
-const HeaderRightSectionStyled = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-end;
-	height: 150px;
+const ViewModeContainer = styled.div`
+  height: 34px;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  display: flex;
+  width: max-content;
 `;
 
-const HelpButtonStyled = styled.button`
-	width: 48px;
-	height: 48px;
-	border-radius: 50%;
-	background-color: ${props => props.theme.brandPrimary};
-	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
-	color: ${props => props.theme.secondaryColour};
-	font-size: 20px;
-	outline: none;
+const ViewModeButton = styled.button<{ active: boolean }>`
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  path {
+    fill: ${props => (props.active ? '#1c3e55' : '#A9B0B0')};
+  }
+  ${props =>
+    props.active &&
+    css`
+      background-color: ${props => props.theme.hoverColour};
+    `}
 `;
 
-const FlexBoxStyled = styled.div`
-	display: flex;
+export const NewButton = styled.button`
+  background: ${props => props.theme.activeColour};
+  border-radius: 4px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  color: #fff;
+  margin-left: 20px;
+  & span {
+    margin-left: 10px;
+  }
 `;
 
-const ViewButtonGroupBoxStyled = styled.div`
-	border-radius: 4px;
-	background-color: ${props => props.theme.secondaryColour};
-	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-	display: flex;
+export const HelpButton = styled.button`
+  background: ${props => props.theme.brandPrimary};
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  right: ${props => props.theme.pagePadding};
+  top: ${props => props.theme.pagePadding};
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
-const ViewButtonStyled = styled.button<IViewButtonProps>`
-	background-color: ${props => props.selected ? props.theme.hoverColour : props.theme.secondaryColour};
-	opacity: ${props => props.selected ? 1 : 0.3};
-	border-radius: 4px;
-	width: 44px;
-	height: 34px;
-	border: 0;
-	outline: none;
-	padding: 0;
+export const ActionContainer = styled.div`
+  display: flex;
+  position: absolute;
+  right: ${props => props.theme.pagePadding};
+  bottom: ${props => props.theme.pagePadding};
 `;
 
-const NewButtonWrapperStyled = styled.div`
-	margin-left: 20px;
-
-	& button {
-		height: 100%;
-	}
+const Link = styled.a`
+  color: ${props => props.theme.brandPrimary};
+  text-decoration: underline;
+  cursor: pointer;
+  margin-right: 20px;
+  svg {
+    margin-right: 10px;
+  }
 `;
 
-const HeaderLinkButtonStyled = styled.a`
-	color: ${props => props.theme.brandPrimary};
-	font-size: 15px;
-	text-decoration: underline;
-	margin-right: 30px;
-
-	& img {
-		margin-right: 5px;
-	}
-`;
-
-interface IViewButtonProps {
-	selected?: boolean,
+export interface IHeader {
+  illustration?: ReactElement;
 }
 
-interface IHeaderProps {
-	background?: string,
+export interface ILink {
+  icon?: string;
+  label: string;
+  href: string;
 }
 
 export interface IProps {
-	children?: ReactNode,
-	title?: string,
-	description?: string,
-	illustration?: string,
-	showHelpButton?: boolean,
-	showViewModeSwitcher?: boolean,
-	showLinks?: boolean,
-	defaultViewMode?: string,
-	showNewButton?: boolean,
-	onChangeView?: (e:any) => void,
-	onNewClick?: (e:any) => void
+  title: string;
+  description: string;
+  illustration?: ReactElement;
+  links?: ILink[];
+  showHelpButton?: boolean;
+  showViewModeSwitcher?: boolean;
+  defaulViewMode?: 'table' | 'list' | 'map';
+  showNewButton?: boolean;
+  onChangeView?: (viewMode: string) => void;
+  onNewClick?: () => void;
 }
 
-const Header: SFC<IProps> = (props) => {
-	const { onChangeView } = props;
-	const [state, setState] = useState(props.defaultViewMode);
+const Header: SFC<IProps> = ({
+  title,
+  description,
+  illustration,
+  links = [],
+  showHelpButton,
+  showViewModeSwitcher,
+  defaulViewMode = 'table',
+  showNewButton,
+  onChangeView,
+  onNewClick
+}) => {
+  const [state, setState] = useState(defaulViewMode);
+  
+  function changeView(viewMode: 'table' | 'list' | 'map') {
+    setState(viewMode);
+    onChangeView(viewMode);
+  }
 
-	function changeView(viewMode: string) {
-		setState(viewMode);
-		onChangeView(viewMode);
-	};
-	
-	return (
-		<ThemeProvider theme={DeskproAdminTheme}>
-			<HeaderStyled background={props.illustration}>
-				<div>
-					<h2>{props.title}</h2>
-					<p>{props.description}</p>
-					{props.showLinks && <div>
-						<HeaderLinkButtonStyled>
-							<img src="assets/ic-login-log.svg" /> Login Log
-						</HeaderLinkButtonStyled>
-						<HeaderLinkButtonStyled>
-							<img src="assets/ic-settings.svg" /> Settings
-						</HeaderLinkButtonStyled>
-					</div>}
-				</div>
-				<HeaderRightSectionStyled>
-					{props.showHelpButton && <HelpButtonStyled>?</HelpButtonStyled>}
-					{props.showViewModeSwitcher && <FlexBoxStyled>
-						<ViewButtonGroupBoxStyled>
-							<ViewButtonStyled selected={state === 'table'} onClick={() => changeView('table')}>
-								<img src="assets/ic-table.svg" />
-							</ViewButtonStyled>
-							<ViewButtonStyled selected={state === 'list'} onClick={() => changeView('list')}>
-								<img src="assets/ic-list.svg" />
-							</ViewButtonStyled>
-							<ViewButtonStyled selected={state === 'grid'} onClick={() => changeView('grid')}>
-								<img src="assets/ic-grid.svg" />
-							</ViewButtonStyled>
-						</ViewButtonGroupBoxStyled>
-						{props.showNewButton && 
-							<NewButtonWrapperStyled>
-								<Button styleType="primary">+ New</Button>
-						</NewButtonWrapperStyled>}
-					</FlexBoxStyled>}
-				</HeaderRightSectionStyled>
-			</HeaderStyled>
-		</ThemeProvider>
-	)
+  return (
+    <ThemeProvider theme={DeskproAdminTheme}>
+      <HeaderStyled illustration={illustration}>
+        <div>
+          <h1>
+            <FormattedMessage id={title} />
+          </h1>
+          {description && (
+            <p>
+              <FormattedMessage id={description} />
+            </p>
+          )}
+          {links.length && (
+            <div>
+              {links.map((link, key) => (
+                <Link href={link.href} key={key}>
+                  {link.icon && <Icon name={link.icon} />}
+                  <span>{link.label}</span>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {showHelpButton && (
+          <HelpButton>
+            <Icon name="question" />
+          </HelpButton>
+        )}
+
+        <ActionContainer>
+          {showViewModeSwitcher && onChangeView && (
+            <ViewModeContainer>
+              <ViewModeButton
+                onClick={() => changeView('table')}
+                active={state === 'table'}
+              >
+                <Icon name="viewMode.table" />
+              </ViewModeButton>
+              <ViewModeButton
+                onClick={() => changeView('list')}
+                active={state === 'list'}
+              >
+                <Icon name="viewMode.list" />
+              </ViewModeButton>
+              <ViewModeButton
+                onClick={() => changeView('map')}
+                active={state === 'map'}
+              >
+                <Icon name="viewMode.map" />
+              </ViewModeButton>
+            </ViewModeContainer>
+          )}
+
+          {showNewButton && onNewClick && (
+            <NewButton onClick={onNewClick}>
+              <Icon name="plus" />
+              <span>
+                <FormattedMessage id="admin.page.new" />
+              </span>
+            </NewButton>
+          )}
+        </ActionContainer>
+      </HeaderStyled>
+    </ThemeProvider>
+  )
 };
 
 export default Header;

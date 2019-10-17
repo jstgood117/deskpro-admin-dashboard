@@ -17,10 +17,10 @@ export interface IProps {
 const StandardTablePage: SFC<IProps> = ({title, description, tables}) => {
   return (
     <Main>
-      <Header>
+      {/* <Header>
         <h1><FormattedMessage id={title} /></h1>
         {description && <p><FormattedMessage id={description} /></p>}
-      </Header>
+      </Header> */}
       {tables && tables.map((table, index) => <Table key={index} {...table} />)}
     </Main>
   );

@@ -1,29 +1,36 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { IntlProvider } from 'react-intl';
 import { action } from '@storybook/addon-actions';
+
 import Header from './Header';
+import { testTranslations } from '../../resources/constants';
+import Icon from '../Icon';
 
-const test = {
-	title: 'Agents',
-	description: 'Test Description test test test test test tse ttest tes tte st tes testeste stste e',
-	illustration: 'illustration.svg',
-	defaultViewMode: 'table'
-};
-
-storiesOf('Header',module)
-	.add('Standard', () =>(
-		<Header
-			title={test.title}
-			description={test.description}
-			illustration={test.illustration}
-			showHelpButton={true}
-			showViewModeSwitcher={true}
-			showLinks={true}
-			defaultViewMode={test.defaultViewMode}
-			onChangeView={action('changeView')}
-			showNewButton={true}
-			onNewClick={action('newClick')}
-		>
-		</Header>
-	)
-);
+storiesOf('Header', module).add('with text', () => (
+  <IntlProvider locale="en" messages={testTranslations}>
+    <Header
+      illustration={<Icon name='illustration' />}
+      title="admin.agents.page_title"
+      description="admin.agents.page_description"
+      defaulViewMode="table"
+      showViewModeSwitcher={true}
+      showNewButton={true}
+      showHelpButton={true}
+      links={[
+        {
+          label: 'Login Log',
+          icon: 'loginLog',
+          href: '/login'
+        },
+        {
+          label: 'Settings',
+          icon: 'settings',
+          href: '/settings'
+        }
+      ]}
+      onChangeView={action('clicked onChangeView')}
+      onNewClick={action('clicked onNewClick')}
+    ></Header>
+  </IntlProvider>
+));
