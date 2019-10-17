@@ -12,6 +12,7 @@ const SidebarStyled = styled.nav`
   width: 100%;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
+  position: absolute;
 `;
 
 export interface IProps {
