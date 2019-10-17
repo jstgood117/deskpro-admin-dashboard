@@ -39,9 +39,10 @@ export const testTranslations = {
 	
 	'admin.page.error': 'Something has gone wrong',
 	'admin.page.loading': 'Loading',
-	
-  'admin.agents.page_title': 'Agents',
-  'admin.agents.page_description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+	'admin.page.new': 'New',
+		
+	'admin.agents.page_title': 'Agents',
+	'admin.agents.page_description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 }
 
 export const testSidebarData = [
@@ -180,6 +181,7 @@ export const testInitialData = {
 }
 
 export const testTableColumns: Array<Column> = [
+	{ id: 'selection' },
 /*	{ title: 'Name',
 		field: 'formattedNameAvatar',
 		props: {

@@ -58,15 +58,6 @@ const TableWrapper: SFC<ITableSetup> = ({dataQuery, metadataQuery, options}) => 
 	const errorCols = false;
 	const dataCols = testTableColumns;
 
-/*	dataCols.map((column) => {
-		switch (column.field) {
-			case 'formattedNameAvatar':
-				column.render = formattedNameAvatar(column.props);
-				column.customSort = sortNameAvatar;
-		}
-		return column;
-	}); */
-
 	return (
 		<Fragment>
 			{loadingCols && <Loading />}

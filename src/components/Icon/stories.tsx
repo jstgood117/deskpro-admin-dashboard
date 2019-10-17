@@ -34,5 +34,5 @@ storiesOf('Icon',module)
 		<Icon name='view' />
 	))
 	.add('Help', () => (
-		<Icon name='admin.sidebar.help.helpCentre' />
+		<Icon name='sidebarHelp' />
 	));

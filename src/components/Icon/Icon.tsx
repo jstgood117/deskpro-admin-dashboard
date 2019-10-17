@@ -11,6 +11,14 @@ import {
   IconSort,
   IconGroup,
   IconView,
+  IconTableView,
+  IconListView,
+  IconMapView,
+  IconPlus,
+  IconQuestion,
+  IconLoginLog,
+  IconSettings,
+  Illustration
 } from './SVG';
 
 export interface IProps {
@@ -25,9 +33,25 @@ const Icon: SFC<IProps> = props => {
       return <IconChannels />;
     case 'admin.sidebar.agents':
       return <IconAgents />;
-    case 'admin.sidebar.help.helpCentre':
+    case "sidebarHelp":
       return <IconHelp />;
-    case 'downVector':
+    case 'viewMode.table':
+      return <IconTableView />;
+    case 'viewMode.list':
+      return <IconListView />;
+    case 'viewMode.map':
+      return <IconMapView />;
+    case 'plus':
+      return <IconPlus />;
+    case 'question':
+      return <IconQuestion />;
+    case 'loginLog':
+      return <IconLoginLog />;
+    case 'settings':
+      return <IconSettings />;
+    case 'illustration':
+      return <Illustration />;
+	case 'downVector':
       return <IcondownVector />;
     case 'search':
       return <IconSearch />;
