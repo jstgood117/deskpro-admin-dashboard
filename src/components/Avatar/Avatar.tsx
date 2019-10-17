@@ -37,6 +37,7 @@ const Text = styled.div<ITextProps>`
   text-align: center;
   font-size: 12px;
   font-weight: bold;
+  border: solid 2px transparent;
   &:hover {
     width: 22px;
     height: 22px;
