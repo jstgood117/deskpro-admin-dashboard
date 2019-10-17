@@ -32,7 +32,7 @@ describe("Icon", () => {
 
   describe("when name is defined", () => {
     beforeEach(() => {
-      props.name = 'admin.sidebar.help.helpCentre';
+      props.name = 'sidebarHelp';
     });
 
     it("renders the correct icon", () => {
