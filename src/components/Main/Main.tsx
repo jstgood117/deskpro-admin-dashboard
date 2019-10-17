@@ -4,9 +4,9 @@ import styled, { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
 
 const MainStyled = styled.main`
-	padding: 34px;
 	font-size: 14px;
 	font-family: ${props => props.theme.mainFont};
+	height: 100vh;
 `;
 
 export interface IProps {
