@@ -1,8 +1,10 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
+import { IntlProvider } from 'react-intl';
 
 import Header, { IProps } from './Header';
+import { testTranslations } from '../../resources/constants';
 
 configure({ adapter: new Adapter() });
 
@@ -13,17 +15,24 @@ describe('Header', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedHeader) {
       mountedHeader = bShallow
-        ? shallow(<Header {...props} />)
-        : mount(<Header {...props} />);
+        ? shallow(
+            <IntlProvider locale="en" messages={testTranslations}>
+              <Header {...props} />
+            </IntlProvider>
+          )
+        : mount(
+            <IntlProvider locale="en" messages={testTranslations}>
+              <Header {...props} />
+            </IntlProvider>
+          );
     }
     return mountedHeader;
   };
 
   beforeEach(() => {
     props = {
-      title: 'some.phrase.id',
-      description:
-        'The Agents section allows you to configure settings related to all agents in the system, whether or not they are using the helpdesk software at the moment.',
+      title: 'admin.agents.page_title',
+      description: 'admin.agents.page_description',
       illustration: null
     };
     mountedHeader = undefined;
@@ -32,25 +41,5 @@ describe('Header', () => {
   it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
-  });
-
-  describe('when children is undefined', () => {
-    it("doesn't render anything else", () => {
-      expect(
-        wrapper(false)
-          .find('div')
-          .children().length
-      ).toBe(0);
-    });
-  });
-
-  describe('when children is defined', () => {
-    it('renders them within the div tag', () => {
-      expect(
-        wrapper(false)
-          .find('div')
-          .children().length
-      ).toBe(1);
-    });
   });
 });
