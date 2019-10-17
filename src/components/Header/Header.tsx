@@ -9,9 +9,6 @@ import { renderToStaticMarkup } from 'react-dom/server';
 const HeaderStyled = styled.div<IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: ${props => props.theme.pagePadding};
-  margin-top: ${props => `-${props.theme.pagePadding}`};
-  margin-left: ${props => `-${props.theme.pagePadding}`};
-  margin-right: ${props => `-${props.theme.pagePadding}`};
   position: relative;
   display: flex;
   background-image: url("data:image/svg+xml,${props => encodeURIComponent(renderToStaticMarkup(props.illustration))}");
