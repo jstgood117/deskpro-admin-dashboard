@@ -9,10 +9,10 @@ export interface IProps {
 }
 
 const DropdownItems = [
-  { link: 'Link1' },
-  { link: 'Link2' },
-  { link: 'Link3' },
-  { link: 'Link4' }
+  { id: 0, link: 'Link1' },
+  { id: 1, link: 'Link2' },
+  { id: 2, link: 'Link3' },
+  { id: 3, link: 'Link4' }
 ];
 
 storiesOf('Dropdown', module).add('Default', () => (

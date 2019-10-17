@@ -55,6 +55,7 @@ const DropdownContentLink = styled.div`
   }
 `;
 interface IItemProps {
+  id: number;
   link: string;
 }
 
@@ -75,7 +76,7 @@ const Dropdown: SFC<IProps> = props => {
         <DropdownContent>
           {props.items.map(item => {
             return (
-              <DropdownContentLink onClick={props.onClick}>
+              <DropdownContentLink  key={item.id} onClick={props.onClick}>
                 {item.link}
               </DropdownContentLink>
             );

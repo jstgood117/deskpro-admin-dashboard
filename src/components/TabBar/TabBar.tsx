@@ -14,9 +14,9 @@ const TabBarStyled = styled.div`
 `;
 
 const DropdownItems = [
-  { link: 'Property4' },
-  { link: 'Property5' },
-  { link: 'Property6' }
+  { id: 0, link: 'Property4' },
+  { id: 1, link: 'Property5' },
+  { id: 2, link: 'Property6' }
 ];
 
 interface ITabsProps {

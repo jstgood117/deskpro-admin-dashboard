@@ -26,7 +26,7 @@ describe('Body', () => {
 
   it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
-    expect(elts.length).toBeGreaterThan(6);
+    expect(elts.length).toBeGreaterThan(0);
   });
 
   describe('when children is undefined', () => {
