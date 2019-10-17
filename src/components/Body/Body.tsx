@@ -1,6 +1,6 @@
 import React, { SFC, Fragment } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 

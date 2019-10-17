@@ -6,7 +6,7 @@ import { ISidebarSection } from '../../resources/interfaces';
 import { DeskproAdminTheme } from '../Theme';
 import SidebarSection from './SidebarSection';
 
-const SidebarStyled = styled.div`
+const SidebarStyled = styled.nav`
   background-color: #e8ebee;
   color: #000;
   width: 100%;
@@ -19,7 +19,7 @@ export interface IProps {
   data: ISidebarSection[];
 }
 
-const Sidebar: SFC<IProps> = ({path,data}) => {
+const Sidebar: SFC<IProps> = ({ path, data }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
