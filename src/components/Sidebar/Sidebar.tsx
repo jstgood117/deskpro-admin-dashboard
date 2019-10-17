@@ -19,7 +19,7 @@ export interface IProps {
   data: ISidebarSection[];
 }
 
-const Sidebar: SFC<IProps> = ({path,data}) => {
+const Sidebar: SFC<IProps> = ({ path, data }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
@@ -28,6 +28,19 @@ const Sidebar: SFC<IProps> = ({path,data}) => {
           position: 'absolute',
           height: '100%'
         }}
+        renderTrackVertical={({ style, ...props }) => (
+          <div
+            style={{
+              background: '#ccc',
+              position: 'absolute',
+              width: 6,
+              right: 0,
+              bottom: 2,
+              top: 2,
+              borderRadius: 3
+            }}
+          />
+        )}
       >
         <SidebarStyled>
           {data &&

@@ -5,7 +5,12 @@ import {
   IconChannels,
   IconAgents,
   IconHelp,
-  IconDropdownVector,
+  IcondownVector,
+  IconSearch,
+  IconFilter,
+  IconSort,
+  IconGroup,
+  IconView,
   IconTableView,
   IconListView,
   IconMapView,
@@ -28,10 +33,8 @@ const Icon: SFC<IProps> = props => {
       return <IconChannels />;
     case 'admin.sidebar.agents':
       return <IconAgents />;
-    case "sidebarHelp":
+    case "admin.sidebar.help.helpCentre":
       return <IconHelp />;
-    case "dropdownVector":
-      return <IconDropdownVector />;
     case 'viewMode.table':
       return <IconTableView />;
     case 'viewMode.list':
@@ -48,6 +51,18 @@ const Icon: SFC<IProps> = props => {
       return <IconSettings />;
     case 'illustration':
       return <Illustration />;
+	case 'downVector':
+      return <IcondownVector />;
+    case 'search':
+      return <IconSearch />;
+    case 'filter':
+      return <IconFilter />;
+    case 'sort':
+      return <IconSort />;
+    case 'group':
+      return <IconGroup />;
+    case 'view':
+      return <IconView />;
     default:
       return <Fragment />;
   }

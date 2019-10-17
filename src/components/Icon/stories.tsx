@@ -15,9 +15,24 @@ storiesOf('Icon',module)
 	.add('Agents', () => (
 		<Icon name="admin.sidebar.agents" />
 	))
-	.add('Dropdown Vector', () => (
-		<Icon name='dropdownVector' />
+	.add('Down Vector', () => (
+		<Icon name='downVector' />
+	))
+	.add('Search Icon', () => (
+		<Icon name='search' />
+	))
+	.add('Filter Icon', () => (
+		<Icon name='filter' />
+	))
+	.add('Sort Icon', () => (
+		<Icon name='sort' />
+	))
+	.add('Group Icon', () => (
+		<Icon name='group' />
+	))
+	.add('View Icon', () => (
+		<Icon name='view' />
 	))
 	.add('Help', () => (
-		<Icon name='sidebarHelp' />
+		<Icon name='admin.sidebar.help.helpCentre' />
 	));
