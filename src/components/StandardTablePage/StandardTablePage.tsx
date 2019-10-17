@@ -1,5 +1,4 @@
 import React, { SFC } from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import { ITableSetup } from '../../resources/interfaces';
 
@@ -17,10 +16,7 @@ export interface IProps {
 const StandardTablePage: SFC<IProps> = ({title, description, tables}) => {
   return (
     <Main>
-      <Header>
-        <h1><FormattedMessage id={title} /></h1>
-        {description && <p><FormattedMessage id={description} /></p>}
-      </Header>
+      <Header title={title} description={description} />
       {tables && tables.map((table, index) => <Table key={index} {...table} />)}
     </Main>
   );
