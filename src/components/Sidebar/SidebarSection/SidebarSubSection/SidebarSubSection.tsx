@@ -60,7 +60,6 @@ const SidebarSubSection: SFC<IProps> = (props) => {
 		<Fragment>
 			<SidebarSubSectionStyled onClick={() => setOpenState(!openState)}>
 				<div><FormattedMessage id={itemName} /></div>
-				{openState ? '^' : 'v'}
 			</SidebarSubSectionStyled>
 			{navItems && openState && <SidebarSubSectionList>{navItems.map((navItem, index) => <SidebarItem key={index} path={path} {...navItem}></SidebarItem>)}
 			</SidebarSubSectionList>}
