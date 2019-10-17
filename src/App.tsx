@@ -1,40 +1,45 @@
-import React, { SFC } from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
-// import { ApolloProvider, useQuery } from '@apollo/react-hooks';
+import React, { SFC, Fragment } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import {IntlProvider} from 'react-intl';
-import { appDebug } from './logging';
 
-import { testInitialData } from './resources/constants';
+// import { testInitialData } from './resources/constants';
 import Router from './components/Router';
-import Loading from './components/Loading';
-import Error from './components/Error';
+//import Loading from './components/Loading';
+//import Error from './components/Error';
 import { logError } from './components/Error/ErrorBoundary';
-// import { QUERY_INITIAL } from './resources/graphql';
+import { QUERY_INITIAL } from './resources/graphql';
 
-const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
-appDebug("API URL: " + apiUrl);
-
-export const client = new ApolloClient({
-	uri: apiUrl,
-});
+const arrayToObject = (array: Array<any>) =>
+	array.reduce((obj, item) => {
+		obj[item.id] = item.message;
+		return obj
+}, {})
 
 const App: SFC = () => {
-/*	const { loading, error, data } = useQuery(QUERY_INITIAL, { errorPolicy: 'all' });
-	if (data) console.log(data.initial) */
-	// test data for now
+	const locale = navigator.language;
+	console.log(`locale: ${locale}`)
+	const { loading, error, data } = useQuery(QUERY_INITIAL, { errorPolicy: 'all', variables: { locale: locale }});
+	let translations;
+
+	// Need to convert incoming translations from array of objects to single object
+	if (data) translations = arrayToObject(data.adminInterface_getTranslations);
+	console.log(translations)
+	 
+/*	// test data for now
 	const loading = false;
 	const error = false;
-	const data = testInitialData;
+	const data = testInitialData; */
 
+	// TODO create a default IntlProvider so that loading/error components can be used
+	
   return (
-		<ApolloProvider client={client}>
-			{loading && <Loading />}
-			{error && <Error apolloError={error} />}
-			{data && <IntlProvider locale={data.initial.user.locale} messages={data.initial.translations} onError={(err) => {logError(err)}} >
-				<Router {...data.initial} />
+		<Fragment>
+			{loading && <div>Loading...</div>}
+			{error && <div>apolloError={error}</div>}
+			{data && <IntlProvider locale={data.adminInterface_getAdminInterfaceData.user.locale} messages={translations} onError={(err) => {logError(err)}} >
+				<Router {...data.adminInterface_getAdminInterfaceData} />
 			</IntlProvider>}
-		</ApolloProvider>
+		</Fragment>
 	);
 }
 
