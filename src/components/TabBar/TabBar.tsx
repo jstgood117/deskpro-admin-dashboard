@@ -35,6 +35,7 @@ const TabBar: SFC<IProps> = props => {
         {props.tabItems.map((tab, index: number) => {
           return (
             <Tab
+              key={index}
               label={tab.label}
               index={index}
               value={tabIndex}
