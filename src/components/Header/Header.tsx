@@ -19,11 +19,14 @@ const HeaderStyled = styled.div<IHeader>`
     color: ${props => props.theme.activeColour};
     font-size: 40px;
     margin-top: 0;
+    font-family: Rubik;
   }
   & p {
     color: ${props => props.theme.greyDark};
     font-size: 14px;
     width: 35%;
+    font-family: Lato;
+    line-height: 150%;
   }
   & button {
     outline: none;
@@ -68,8 +71,10 @@ export const NewButton = styled.button`
   padding: 0 10px;
   color: #fff;
   margin-left: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   & span {
     margin-left: 10px;
+    font-size: 16px;
   }
 `;
 
@@ -81,7 +86,7 @@ export const HelpButton = styled.button`
   position: absolute;
   right: ${props => props.theme.pagePadding};
   top: ${props => props.theme.pagePadding};
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
 `;
 
 export const ActionContainer = styled.div`
@@ -96,6 +101,7 @@ const Link = styled.a`
   text-decoration: underline;
   cursor: pointer;
   margin-right: 20px;
+  font-size: 15px;
   svg {
     margin-right: 10px;
   }
