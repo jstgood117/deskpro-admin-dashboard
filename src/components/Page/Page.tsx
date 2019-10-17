@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import { IUser, ISidebarSection, ITranslation } from '../../resources/interfaces';
+import { ISidebarSection } from '../../resources/interfaces';
 
 import { testPageData } from '../../resources/constants';
 
@@ -13,9 +13,7 @@ export interface IProps {
   location: {
     pathname: string,
   },
-  user: IUser,
   sidebar: ISidebarSection[],
-  translations: ITranslation,
 }
 
 const Page: SFC<IProps> = ({location, sidebar}) => {

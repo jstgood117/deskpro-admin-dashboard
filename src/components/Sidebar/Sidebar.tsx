@@ -19,7 +19,7 @@ export interface IProps {
   data: ISidebarSection[];
 }
 
-const Sidebar: SFC<IProps> = props => {
+const Sidebar: SFC<IProps> = ({path,data}) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
@@ -43,9 +43,9 @@ const Sidebar: SFC<IProps> = props => {
         )}
       >
         <SidebarStyled>
-          {props.data &&
-            props.data.map((navSection, index) => (
-              <SidebarSection key={index} path={props.path} {...navSection} />
+          {data &&
+            data.map((navSection, index) => (
+              <SidebarSection key={index} path={path} {...navSection} />
             ))}
         </SidebarStyled>
       </Scrollbars>

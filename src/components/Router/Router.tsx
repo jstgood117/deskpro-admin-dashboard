@@ -12,7 +12,7 @@ interface IProps {
 const Router: SFC<IProps> = (props) => (
 	<HashRouter>
     <Switch>
-      <Route render={(p) => <Page {...p} {...props} />} />
+      <Route render={(p) => <Page {...p} sidebar={props.sidebar} />} />
     </Switch>
 	</HashRouter>
 );

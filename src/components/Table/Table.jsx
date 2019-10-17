@@ -53,6 +53,16 @@ const TableStyled = styled.div`
 	}
 } */
 
+/* const formattedNameAvatar = (props: any) => {
+	const checkArr = Object.keys(props);
+	if (!checkArr.includes('avatar') || !checkArr.includes('name')) {
+		throw new Error(`formattedNameAvatar did not receive required props: ${JSON.stringify(props)}`);
+	}
+	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
+}
+const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
+
+
 const transformColumnData = (columns) => {
 	columns.map((column) => {
 		switch (column.id) {
