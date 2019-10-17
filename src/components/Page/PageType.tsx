@@ -29,7 +29,7 @@ const PageType: SFC<IProps> = ({query}) => {
 
     switch (data.page.__typename) {
       case "StandardDataPageData":
-        return <StandardTablePage {...data.page} />        
+        return <StandardTablePage {...data.page} />
       default:
     }
   }

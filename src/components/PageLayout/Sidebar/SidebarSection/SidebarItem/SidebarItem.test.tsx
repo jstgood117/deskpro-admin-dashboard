@@ -5,7 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import { IntlProvider } from "react-intl";
 
 import SidebarItem, { IProps } from './SidebarItem';
-import { DeskproAdminTheme } from '../../../Theme';
+import { DeskproAdminTheme } from '../../../../Theme';
+import { MemoryRouter } from 'react-router';
 
 configure({adapter: new Adapter()});
 
@@ -22,13 +23,17 @@ describe("SidebarItem", () => {
       mountedSidebarItem = bShallow ? shallow(
         <IntlProvider locale='en' messages={testTranslations}>
           <ThemeProvider theme={DeskproAdminTheme}>
-            <SidebarItem {...props} />
+            <MemoryRouter>
+              <SidebarItem {...props} />
+            </MemoryRouter>
           </ThemeProvider>
         </IntlProvider>
       ) : mount(
         <IntlProvider locale='en' messages={testTranslations}>
           <ThemeProvider theme={DeskproAdminTheme}>
-            <SidebarItem {...props} />
+            <MemoryRouter>
+              <SidebarItem {...props} />
+            </MemoryRouter>
           </ThemeProvider>
         </IntlProvider>
         );
@@ -40,22 +45,12 @@ describe("SidebarItem", () => {
     props = {
       key: 0,
       path: undefined,
-      itemName: 'test',
-      url: undefined,
+      itemName: 'test'
     };
     mountedSidebarItem = undefined;
   });
 
-  it("always renders a <li>", () => {
-    const elts = wrapper(false).find('li');
-    expect(elts.length).toBeGreaterThan(0);
-  });
-
-  describe("when itemName and url are defined", () => {
-    beforeEach(() => {
-      props.url = '/page1';
-    });
-
+  describe("when itemName and path are defined", () => {
     it("renders the label", () => {
       expect(wrapper(false).text()).toContain('Test');
     });

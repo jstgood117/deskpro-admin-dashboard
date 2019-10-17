@@ -1,4 +1,4 @@
-import React, { SFC, Fragment } from 'react';
+import React, { SFC } from 'react';
 
 import {
   IconSetup,
@@ -64,7 +64,7 @@ const Icon: SFC<IProps> = props => {
     case 'view':
       return <IconView />;
     default:
-      return <Fragment />;
+      return <IconSetup />;
   }
 };
 

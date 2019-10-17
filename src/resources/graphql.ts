@@ -19,10 +19,10 @@ export const QUERY_INITIAL = gql`
         icon
         navItems {
           itemName
-          url
+          path
           navItems {
             itemName
-            url
+            path
           }
         }
       }

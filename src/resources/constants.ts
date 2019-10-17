@@ -9,7 +9,7 @@ export const testTranslations = {
   'admin.sidebar.setup.languagesAndLocales': 'Languages & Locales',
   'admin.sidebar.setup.businessHours': 'Business Hours',
 	'admin.sidebar.setup.advancedSettings': 'Advanced Settings',
-	
+
   'admin.sidebar.channels': 'Channels',
   'admin.sidebar.channels.email': 'Email',
   'admin.sidebar.channels.forms': 'Forms',
@@ -27,20 +27,20 @@ export const testTranslations = {
 	'admin.sidebar.agents.logs': 'Agent Logs',
 	'admin.sidebar.agents.authSSO': 'Auth & SSO',
 	'admin.sidebar.agents.settings': 'Settings',
-	
+
 	'admin.sidebar.help.helpCentre': 'Help Centre',
 	'admin.sidebar.help.helpCentreSetup': 'Help Centre Setup',
 	'admin.sidebar.help.knowledgeBase': 'Knowledge Base',
 	'admin.sidebar.help.news': 'News',
 	'admin.sidebar.help.downloads': 'Downloads',
 	'admin.sidebar.help.community': 'Community',
-	
+
 	'admin.page.error': 'Something has gone wrong',
 	'admin.page.loading': 'Loading',
 	'admin.page.new': 'New',
-	
-  'admin.agents.title': 'Agents',
-  'admin.agents.description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+
+  'admin_agents.agents.title': 'Agents',
+  'admin_agents.agents.description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 }
 
 export const testSidebarData = [
@@ -50,27 +50,27 @@ export const testSidebarData = [
 		'navItems': [
 			{
 				'itemName': 'admin.sidebar.setup.dashboard',
-				'url': '/dashboard',
-			},			
+				'path': '/dashboard',
+			},
 			{
 				'itemName': 'admin.sidebar.setup.wizard',
-				'url': '/setup-wizard',
-			},			
+				'path': '/setup-wizard',
+			},
 			{
 				'itemName': 'admin.sidebar.setup.brands',
-				'url': '/brands',
-			},			
+				'path': '/brands',
+			},
 			{
 				'itemName': 'admin.sidebar.setup.languagesAndLocales',
-				'url': '/languagesAndLocales',
+				'path': '/languagesAndLocales',
 			},
 			{
 				'itemName': 'admin.sidebar.setup.businessHours',
-				'url': '/businessHours',
+				'path': '/businessHours',
 			},
 			{
 				'itemName': 'admin.sidebar.setup.advancedSettings',
-				'url': '/advancedSettings',
+				'path': '/advancedSettings',
 			},
 		]
 	},
@@ -79,37 +79,37 @@ export const testSidebarData = [
 		'navItems': [
 			{
 				'itemName': 'admin.sidebar.channels.email',
-				'url': '/email',
-			},			
+				'path': '/email',
+			},
 			{
 				'itemName': 'admin.sidebar.channels.forms',
-				'url': '/forms',
-			},			
+				'path': '/forms',
+			},
 			{
 				'itemName': 'admin.sidebar.channels.messenger',
-				'url': '/messenger',
+				'path': '/messenger',
 				 'navItems': [
-					{
-						'itemName': 'admin.sidebar.channels.messenger.setup',
-						'url': '/messenger-setup',
-					},			
-					{
-						'itemName': 'admin.sidebar.channels.messenger.departments',
-						'url': '/messenger-departments',
-					},			
-					{
-						'itemName': 'admin.sidebar.channels.messenger.queues',
-						'url': '/messenger-queues',
-					},			
-				],
+				 	{
+				 		'itemName': 'admin.sidebar.channels.messenger.setup',
+				 		'path': '/messenger-setup',
+				 	},
+				 	{
+				 		'itemName': 'admin.sidebar.channels.messenger.departments',
+				 		'path': '/messenger-departments',
+				 	},
+				 	{
+				 		'itemName': 'admin.sidebar.channels.messenger.queues',
+				 		'path': '/messenger-queues',
+				 	},
+				 ],
 			},
 			{
 				'itemName': 'admin.sidebar.channels.social',
-				'url': '/social',
+				'path': '/social',
 			},
 			{
 				'itemName': 'admin.sidebar.channels.voice',
-				'url': '/voice',
+				'path': '/voice',
 			},
 		]
 	},
@@ -118,29 +118,28 @@ export const testSidebarData = [
 		'navItems': [
 			{
 				'itemName': 'admin.sidebar.agents.agent',
-				'url': '/agent',
-//				'metadataQuery': "query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }, newLink, views {... on InMemoryPageDataView {__typename, title, dataQuery, tableDef { columns { title, field, data { propName, path, value }, defaultShow }}}}}}"
+				'path': '/agent',
 				'metadataQuery': "query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }}}"
 			},
 			{
 				'itemName': 'admin.sidebar.agents.teams',
-				'url': '/teams',
+				'path': '/teams',
 			},
 			{
 				'itemName': 'admin.sidebar.agents.permissionGroups',
-				'url': '/permissionGroups',
+				'path': '/permissionGroups',
 			},
 			{
 				'itemName': 'admin.sidebar.agents.logs',
-				'url': '/logs',
+				'path': '/logs',
 			},
 			{
 				'itemName': 'admin.sidebar.agents.authSSO',
-				'url': '/authSSO',
+				'path': '/authSSO',
 			},
 			{
 				'itemName': 'admin.sidebar.agents.settings',
-				'url': '/settings',
+				'path': '/settings',
 			},
 		]
 	},
@@ -149,23 +148,23 @@ export const testSidebarData = [
 		'navItems': [
 			{
 				'itemName': 'admin.sidebar.help.helpCentreSetup',
-				'url': '/helpCentreSetup',
+				'path': '/helpCentreSetup',
 			},
 			{
 				'itemName': 'admin.sidebar.help.knowledgeBase',
-				'url': '/knowledgeBase',
+				'path': '/knowledgeBase',
 			},
 			{
 				'itemName': 'admin.sidebar.help.news',
-				'url': '/news',
+				'path': '/news',
 			},
 			{
 				'itemName': 'admin.sidebar.help.downloads',
-				'url': '/downloads',
+				'path': '/downloads',
 			},
 			{
 				'itemName': 'admin.sidebar.help.community',
-				'url': '/community',
+				'path': '/community',
 			},
 		]
 	},
