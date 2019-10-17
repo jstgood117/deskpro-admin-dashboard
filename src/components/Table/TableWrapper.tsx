@@ -13,7 +13,7 @@ import { logError } from '../Error/ErrorBoundary';
 interface IProps {
 	client: ApolloClient<any>;
 }
-const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery, metadataQuery, options}) => {
+const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery}) => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [pageCount, setPageCount] = useState(0);
@@ -51,6 +51,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery, metadataQuer
 	const loadingCols = false;
 	const errorCols = false;
 	const dataCols = testTableColumns;
+	const options = {};
 
 	return (
 		<Fragment>

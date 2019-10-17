@@ -1,8 +1,6 @@
 import { IPageData } from "./interfaces";
 import { Column } from "react-table";
 
-export const dataSource = 'https://site40813.deskprodemo.com/admin-api/graphql';
-
 export const testTranslations = {
   'admin.sidebar.setup': 'Setup',
   'admin.sidebar.setup.dashboard': 'Dashboard',
@@ -197,7 +195,7 @@ export const testTableColumns: Array<Column> = [
   { Header: 'Email', accessor: 'primary_email' },
 ];
 
-export const testPageData: IPageData = {
+/*export const testPageData: IPageData = {
   path: "/agents",
   pageType: "standardTable",
   pageProps: {
@@ -215,4 +213,43 @@ export const testPageData: IPageData = {
       }
     ]
   }
+}*/
+
+export const testView = {
+	__typename: "Table",
+	title: "Test table",
+	dataQuery: "query { agents_getAgents { id, name, primary_email }}",
+}
+
+export const testPageData: IPageData = {
+  __typename: "StandardDataPageData",
+    title: "admin_agents.agents.title",
+    description: "admin_agents.agents.description",
+    headerLinks: [
+			{
+      	title: "admin_agents.page.link.login_log",
+	      path: "./login-log",
+			}
+		]
+/*    newLink
+    views {
+      ... on InMemoryPageDataView {
+        __typename
+        title
+        dataQuery
+        tableDef {
+          columns {
+            title
+            field
+            data {
+              propName
+              path
+              value
+            }
+            defaultShow
+          }
+        }
+      }
+    }
+  } */
 }
