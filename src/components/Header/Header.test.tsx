@@ -31,8 +31,8 @@ describe('Header', () => {
 
   beforeEach(() => {
     props = {
-      title: 'admin.agents.page_title',
-      description: 'admin.agents.page_description',
+      title: 'admin_agents.agents.title',
+      description: 'admin_agents.agents.description',
       illustration: null
     };
     mountedHeader = undefined;
