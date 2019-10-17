@@ -41,8 +41,8 @@ export const testTranslations = {
 	'admin.page.loading': 'Loading',
 	'admin.page.new': 'New',
 	
-  'admin_agents.agents.title': 'Agents',
-  'admin_agents.agents.description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  'admin.agents.title': 'Agents',
+  'admin.agents.description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
 }
 
 export const testSidebarData = [

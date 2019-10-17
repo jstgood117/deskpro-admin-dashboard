@@ -11,8 +11,8 @@ storiesOf('Header', module).add('with text', () => (
   <IntlProvider locale="en" messages={testTranslations}>
     <Header
       illustration={<Icon name='illustration' />}
-      title="admin.agents.page_title"
-      description="admin.agents.page_description"
+      title="admin.agents.title"
+      description="admin.agents.description"
       defaulViewMode="table"
       showViewModeSwitcher={true}
       showNewButton={true}

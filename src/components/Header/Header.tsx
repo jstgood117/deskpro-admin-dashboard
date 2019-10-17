@@ -62,7 +62,7 @@ const ViewModeButton = styled.button<{ active: boolean }>`
 `;
 
 export const NewButton = styled.button`
-  background: ${props => props.theme.activeColour};
+  background-color: ${props => props.theme.activeColour};
   border-radius: 4px;
   height: 34px;
   display: flex;
@@ -75,6 +75,9 @@ export const NewButton = styled.button`
   & span {
     margin-left: 10px;
     font-size: 16px;
+  }
+  &:hover {
+    background-color: ${props => props.theme.brandPrimary};
   }
 `;
 
