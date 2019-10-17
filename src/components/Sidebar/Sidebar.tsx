@@ -7,9 +7,9 @@ import { DeskproAdminTheme } from '../Theme';
 import SidebarSection from './SidebarSection';
 
 const SidebarStyled = styled.nav`
-  background-color: #E8EBEE;
+  background-color: #e8ebee;
   color: #000;
-  width: 200px;
+  width: 100%;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
 `;
@@ -26,16 +26,13 @@ const Sidebar: SFC<IProps> = props => {
         style={{
           width: 215,
           position: 'absolute',
-          height: 'calc(100% - 46px)',
-          top: 46
+          height: '100%'
         }}
       >
         <SidebarStyled>
           {props.data &&
             props.data.map((navSection, index) => (
-              <SidebarSection key={index} path={props.path} {...navSection}>
-                }
-              </SidebarSection>
+              <SidebarSection key={index} path={props.path} {...navSection} />
             ))}
         </SidebarStyled>
       </Scrollbars>
