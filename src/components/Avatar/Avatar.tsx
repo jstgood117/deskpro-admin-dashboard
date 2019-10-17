@@ -62,7 +62,7 @@ const Avatar: SFC<IProps> = ({
 }) => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <AvatarContainer selected={selected}>
-      {type === 'image' && <img src={content} />}
+      {type === 'image' && <img src={content} alt="avatar" />}
 
       {type === 'svg' && <Icon name={content} />}
 
