@@ -33,7 +33,7 @@ const DropdownContent = styled.div`
   display: none;
   position: absolute;
   background: #ffffff;
-  min-width: 160px;
+  min-width: 110px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   font-family: Rubik;
@@ -41,6 +41,7 @@ const DropdownContent = styled.div`
   font-weight: normal;
   font-size: 15px;
   line-height: 150%;
+  top: 40px;
 `;
 const DropdownContentLink = styled.div`
   float: none;
@@ -54,6 +55,7 @@ const DropdownContentLink = styled.div`
   }
 `;
 interface IItemProps {
+  id: number;
   link: string;
 }
 
@@ -74,7 +76,7 @@ const Dropdown: SFC<IProps> = props => {
         <DropdownContent>
           {props.items.map(item => {
             return (
-              <DropdownContentLink onClick={props.onClick}>
+              <DropdownContentLink  key={item.id} onClick={props.onClick}>
                 {item.link}
               </DropdownContentLink>
             );
