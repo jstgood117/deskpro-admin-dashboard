@@ -44,7 +44,7 @@ describe('TableActions', () => {
       expect(
         wrapper(false)
           .find('div')
-          .at(1)
+          .at(2)
           .children().length
       ).toBe(1);
     });
@@ -58,7 +58,7 @@ describe('TableActions', () => {
       expect(
         wrapper(false)
           .find('div')
-          .at(1)
+          .at(2)
           .children().length
       ).toBe(2);
     });
@@ -72,7 +72,7 @@ describe('TableActions', () => {
       expect(
         wrapper(false)
           .find('div')
-          .at(4)
+          .at(5)
           .children().length
       ).toBe(3);
     });
@@ -86,7 +86,7 @@ describe('TableActions', () => {
       expect(
         wrapper(false)
           .find('div')
-          .at(3)
+          .at(4)
           .children().length
       ).toBe(2);
     });
