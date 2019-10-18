@@ -27,6 +27,8 @@
     "rollbar": "^2.13.0",
     "styled-components": "^4.4.0",
     "typescript": "^3.6.4",
+    "use-force-update": "^1.0.7",
+    "use-react-router": "^1.0.7",
     "warning": "^4.0.3"
   },
   "devDependencies": {

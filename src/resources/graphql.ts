@@ -20,9 +20,13 @@ export const QUERY_INITIAL = gql`
         navItems {
           itemName
           path
+          pageType
+          metadataQuery
           navItems {
             itemName
             path
+            pageType
+            metadataQuery
           }
         }
       }
@@ -41,6 +45,39 @@ export const QUERY_PAGE = gql`
         tables {
           dataQuery
           metadataQuery
+        }
+      }
+    }
+  }
+`
+
+export const QUERY_AGENTS_PAGE = gql`
+  query {
+    agents_getAgentsPage {
+      __typename
+      title
+      description
+      headerLinks {
+        title
+        path
+      }
+      newLink
+      views {
+        ... on InMemoryPageDataView {
+          title
+          dataQuery
+          tableDef {
+            columns {
+              title
+              field
+              data {
+                propName
+                path
+                value
+              }
+              defaultShow
+            }
+          }
         }
       }
     }

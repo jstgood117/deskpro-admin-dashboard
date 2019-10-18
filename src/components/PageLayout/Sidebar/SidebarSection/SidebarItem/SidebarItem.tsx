@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
+import useReactRouter from 'use-react-router';
 
-interface IStyleProps {
-  active?: boolean
-}
-
-const SidebarItemStyled = styled(NavLink)<IStyleProps>`
+const SidebarItemStyled = styled(NavLink)`
 	padding: 10px 10px 10px 44px;
-	color: ${props => props.active ? props.theme.brandPrimary : props.theme.staticColour};
+	color: ${props => props.exact ? props.theme.brandPrimary : props.theme.staticColour};
 	text-decoration: none;
 	margin: 0;
 	overflow: hidden;
@@ -27,26 +24,13 @@ export interface IProps {
 	itemName: string;
 }
 
-class SidebarItem extends Component<IProps> {
-	constructor(props: IProps) {
-		super(props);
-
-		this.state = { redirect: false };
-	}
-
-	handleOnClick = () => {
-		this.setState({ redirect: true });
-	}
-
-	render() {
-		const { path, itemName } = this.props;
-
-		return (
-			<SidebarItemStyled to={path || ""}>
-				<FormattedMessage id={itemName} />
-			</SidebarItemStyled>
-		);
-	}
+const SidebarItem: SFC<IProps> = ({path, itemName}) => {
+	const { location } = useReactRouter();
+	return (
+		<SidebarItemStyled to={path || ""} exact={location.pathname === path}>
+			<FormattedMessage id={itemName} />
+		</SidebarItemStyled>
+	);
 }
 
 export default SidebarItem;

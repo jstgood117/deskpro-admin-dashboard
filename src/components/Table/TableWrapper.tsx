@@ -11,9 +11,11 @@ import Error from '../Error';
 import { logError } from '../Error/ErrorBoundary';
 
 interface IProps {
-	client: ApolloClient<any>;
+	client: ApolloClient<any>,
+	dataQuery: string,
 }
-const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery}) => {
+
+const TableWrapper: SFC<ITableSetup & IProps> = ({client, dataQuery}) => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [pageCount, setPageCount] = useState(0);
