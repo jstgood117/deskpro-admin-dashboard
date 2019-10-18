@@ -15,7 +15,8 @@ export interface ISidebarSection {
 
 export interface ISidebarItem {
 	itemName: string,
-	url?: string,
+	path?: string,
+	pageType?: string,
 	metadataQuery?: string,
 	navItems?: ISidebarItem[], // having this array turns this SidebarItem into a SidebarSubSection
 }

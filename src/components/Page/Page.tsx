@@ -4,9 +4,9 @@ import { ISidebarSection, ISidebarItem } from '../../resources/interfaces';
 // import { testSidebarData } from '../../resources/constants';
 
 import Sidebar from '../Sidebar';
-import PageType from './PageType';
 import ErrorBoundary from '../Error/ErrorBoundary';
 import PageContainer from '../PageContainer';
+import PageType from './PageType';
 
 export interface IProps {
   location: {
@@ -38,7 +38,7 @@ const Page: SFC<IProps> = ({location, sidebar}) => {
     <ErrorBoundary>
       <PageContainer>
         <Sidebar path={location.pathname} data={sidebar} />
-        <PageType query="query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }, newLink, views { ... on InMemoryPageDataView { title, dataQuery, tableDef { columns { title, field, data { propName, path, value }, defaultShow }}}}}}" />
+        <PageType sidebar={currSidebar} />
       </PageContainer>
     </ErrorBoundary>
   );
