@@ -5,8 +5,9 @@ import { DeskproAdminTheme } from '../../Theme';
 
 import { ISidebarSection } from '../../../resources/interfaces';
 import SidebarSection from './SidebarSection';
+import { dpstyle } from '../../Styled';
 
-const SidebarContainer = styled.nav`
+const SidebarContainer = styled(dpstyle.div)`
   position: static;
   top: 0;
   right: 0;
@@ -16,8 +17,6 @@ const SidebarContainer = styled.nav`
   background-color: #e8ebee;
   color: #000;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  box-sizing: border-box;
   overflow: hidden;
 `;
 

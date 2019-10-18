@@ -2,6 +2,8 @@ export const DeskproAdminTheme = {
   mainFont: 'Lato, sans-serif',
   headerFont: 'Rubik, sans-serif',
 
+  btnBorderRadius: '4px',
+
   staticColour: '#4c4f50',
   textHover: '#E8EBEE',
   brandPrimary: '#3a8dde',
@@ -17,7 +19,6 @@ export const DeskproAdminTheme = {
   warningColour: '#FD667F',
   successColour: '#5BB6B1',
   pageHeader: '#E1EEFB',
-
   pagePadding: '34px',
 }
 

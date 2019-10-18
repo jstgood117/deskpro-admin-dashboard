@@ -7,6 +7,7 @@ import Icon from '../../../Icon';
 import SidebarItem from './SidebarItem';
 import { ReactComponent as CaretDown } from './caret-down.svg';
 import { useLocation, matchPath } from 'react-router-dom';
+import { TextLabel, Container, BoxFill, Box } from '../../../Styled';
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -62,10 +63,11 @@ const ListItem = styled.li`
   margin: 0;
   padding: 0;
   list-style: none;
+  display: block;
 `;
 
 const SubgroupTitleContainer = styled.div`
-  padding: 10px 10px 10px 39px;
+  padding: 10px 16px 10px 39px;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -76,22 +78,6 @@ const SubgroupTitleContainer = styled.div`
   &:hover {
 		background-color: #d4dbdf;
 	}
-`;
-
-const SubgroupTitleText = styled.div`
-  display: block;
-  flex: 1 0;
-`;
-
-const SubgroupTitleCaret = styled(CaretDown)`
-  flex: 0 1 1;
-  padding-right: 6px;
-
-  &.collapsed {
-    transform: rotate(180deg);
-    padding-right: 0;
-    padding-left: 6px;
-  }
 `;
 
 export interface IProps {
@@ -115,17 +101,20 @@ const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   }, [isOpen, setOpen, navItem.navItems, loc]);
 
   const className = isOpen ? '' : 'collapsed';
+  const caretStyle = isOpen ? {transform: "rotate(180deg)"} : {};
 
   return (
-    <div>
+    <Fragment>
       <SubgroupTitleContainer onClick={() => setOpen(!isOpen)}>
-        <SubgroupTitleText><FormattedMessage id={navItem.itemName} /></SubgroupTitleText>
-        <SubgroupTitleCaret className={className} />
+        <Container>
+          <BoxFill><TextLabel bold={1}><FormattedMessage id={navItem.itemName} /></TextLabel></BoxFill>
+          <Box><CaretDown style={caretStyle} /></Box>
+        </Container>
       </SubgroupTitleContainer>
       <List className={className}>
         {navItem.navItems.map((n, idx) => <SidebarItem key={idx} path={n.path!!} itemName={n.itemName} depth={1} />)}
       </List>
-    </div>
+    </Fragment>
   );
 };
 

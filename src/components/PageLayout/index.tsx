@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
+import { dpstyle } from '../Styled';
 
 export const AppContainer = (props: any) => (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -8,7 +9,7 @@ export const AppContainer = (props: any) => (
     </ThemeProvider>
 );
 
-export const PageContainer = styled.div`
+export const PageContainer = styled(dpstyle.div)`
     position: absolute;
     top: 0;
     right: 0;

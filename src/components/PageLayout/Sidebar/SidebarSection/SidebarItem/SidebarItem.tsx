@@ -2,6 +2,7 @@ import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
+import { TextLabel } from '../../../../Styled';
 
 interface IStyleProps {
   active?: boolean;
@@ -15,16 +16,18 @@ const SidebarItemStyled = styled(NavLink)<IStyleProps>`
 	overflow: hidden;
 	display: block;
 
-	&.active {
-		color: ${props => props.theme.brandPrimary};
-		font-weight: bold;
-	}
-
 	&:hover {
 		background-color: #d4dbdf;
 		cursor: pointer;
 	}
 `
+
+const ItemName = styled(TextLabel)`
+	${SidebarItemStyled}.active & {
+		color: ${props => props.theme.brandPrimary};
+		font-weight: bold;
+	}
+`;
 
 export interface IProps {
 	path: string;
@@ -40,7 +43,7 @@ const SidebarItem: SFC<IProps> = ({path, itemName, depth}) => {
 
 	return (
 		<SidebarItemStyled to={path || "/"} exact={true} activeClassName="active" style={style}>
-			<FormattedMessage id={itemName} />
+			<ItemName><FormattedMessage id={itemName} /></ItemName>
 		</SidebarItemStyled>
 	);
 };
