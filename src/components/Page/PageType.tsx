@@ -1,39 +1,24 @@
 import React, { SFC } from 'react';
-import { useQuery } from 'react-apollo';
-import gql from 'graphql-tag';
 
+import { QUERY_AGENTS_PAGE } from '../../resources/graphql';
 import StandardTablePage from '../StandardTablePage';
-import Loading from '../Loading';
-import Error from '../Error';
 
 export interface IProps {
-  query: string,
+  path?: string,
 }
 
-const PageType: SFC<IProps> = ({query}) => {
-  const { loading, error, data } = useQuery(gql`${query}`, { errorPolicy: 'all' });
-  // test data for now
-//  const loading = false;
-//  const error = false;
-//  const data = testPageData;
+// Everything is now defined by the path field
+// So what is the point of pageType and metadataQuery fields in the sidebar query payload?
 
-  if (loading) {
-    return <Loading />
-  }
-  if (error) {
-    return <Error apolloError={error} />
-  }
-  if (data && data.page) {
-    console.log('Page data loaded:');
-    console.log(data.page)
+const PageType: SFC<IProps> = ({path}) => {
+  switch (path) {
+    case "/agents":
+      return <StandardTablePage query={QUERY_AGENTS_PAGE} queryName='agents_getAgentsPage' />;
+    
+    default:
+      return <div><textarea value={path} style={{width: "50%", height: "500px", fontFamily: "Monospace"}} readOnly /></div>
+	}
+};
 
-    switch (data.page.__typename) {
-      case "StandardDataPageData":
-        return <StandardTablePage {...data.page} />
-      default:
-    }
-  }
-  return null
-}
 
 export default PageType;

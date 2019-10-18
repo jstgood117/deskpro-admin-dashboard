@@ -1,10 +1,14 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+
 import { DeskproAdminTheme } from '../Theme';
+import ErrorBoundary from '../Error/ErrorBoundary';
 
 export const AppContainer = (props: any) => (
     <ThemeProvider theme={DeskproAdminTheme}>
-        <PageContainer>{props.children}</PageContainer>
+        <ErrorBoundary>
+            <PageContainer>{props.children}</PageContainer>
+        </ErrorBoundary>
     </ThemeProvider>
 );
 
