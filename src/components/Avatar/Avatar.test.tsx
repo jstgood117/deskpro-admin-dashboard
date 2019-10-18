@@ -8,15 +8,15 @@ configure({ adapter: new Adapter() });
 
 describe('Avatar', () => {
   let props: IProps;
-  let mountedIcon: any;
+  let mountedAvatar: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedIcon) {
-      mountedIcon = bShallow
+    if (!mountedAvatar) {
+      mountedAvatar = bShallow
         ? shallow(<Avatar {...props} />)
         : mount(<Avatar {...props} />);
     }
-    return mountedIcon;
+    return mountedAvatar;
   };
 
   beforeEach(() => {

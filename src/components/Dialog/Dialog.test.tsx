@@ -3,39 +3,37 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 
-import Header, { IProps } from './Header';
+import Dialog, { IProps } from './Dialog';
 import { testTranslations } from '../../resources/constants';
 
 configure({ adapter: new Adapter() });
 
-describe('Header', () => {
+describe('Dialog', () => {
   let props: IProps;
-  let mountedHeader: any;
+  let mountedDialog: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedHeader) {
-      mountedHeader = bShallow
+    if (!mountedDialog) {
+      mountedDialog = bShallow
         ? shallow(
             <IntlProvider locale="en" messages={testTranslations}>
-              <Header {...props} />
+              <Dialog {...props} />
             </IntlProvider>
           )
         : mount(
             <IntlProvider locale="en" messages={testTranslations}>
-              <Header {...props} />
+              <Dialog appElement={document.createElement('div')} {...props} />
             </IntlProvider>
           );
     }
-    return mountedHeader;
+    return mountedDialog;
   };
 
   beforeEach(() => {
     props = {
-      title: 'admin_agents.agents.title',
-      description: 'admin_agents.agents.description',
-      illustration: null
+      isOpen: true,
+      children: undefined
     };
-    mountedHeader = undefined;
   });
 
   it('always renders a <div>', () => {
