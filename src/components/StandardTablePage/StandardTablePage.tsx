@@ -1,8 +1,7 @@
-import React, { SFC } from 'react';
+import React, { SFC, Fragment } from 'react';
 
 import { ITableSetup } from '../../resources/interfaces';
 
-import Body from '../Body';
 import Header from '../Header';
 import Table from '../Table/TableWrapper';
 import { testView } from '../../resources/constants';
@@ -21,10 +20,10 @@ const StandardTablePage: SFC<IProps> = ({title, description, headerLinks, views}
   // {views && views.map((table, index) => <Table key={index} {...table} />)}
 
   return (
-    <Body>
+    <Fragment>
       <Header title={title} description={description} links={headerLinks} />
       {[testView].map((table, index) => <Table key={index} {...table} />)}
-    </Body>
+    </Fragment>
   );
 }
 

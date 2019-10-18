@@ -4,9 +4,10 @@ import { configure, mount, shallow } from 'enzyme';
 import { IntlProvider } from "react-intl";
 
 import SidebarSection, { IProps } from './SidebarSection';
-import Icon from '../../Icon';
+import Icon from '../../../Icon';
 import { ThemeProvider } from 'styled-components';
-import { DeskproAdminTheme } from '../../Theme';
+import { DeskproAdminTheme } from '../../../Theme';
+import { MemoryRouter } from 'react-router';
 
 configure({adapter: new Adapter()});
 
@@ -24,13 +25,17 @@ describe("SidebarSection", () => {
       mountedSidebarSection = bShallow ? shallow(
         <IntlProvider locale='en' messages={testTranslations}>
           <ThemeProvider theme={DeskproAdminTheme}>
-            <SidebarSection {...props} />
+            <MemoryRouter>
+              <SidebarSection {...props} />
+            </MemoryRouter>
           </ThemeProvider>
         </IntlProvider>
       ) : mount(
         <IntlProvider locale='en' messages={testTranslations}>
           <ThemeProvider theme={DeskproAdminTheme}>
-            <SidebarSection {...props} />
+            <MemoryRouter>
+              <SidebarSection {...props} />
+            </MemoryRouter>
           </ThemeProvider>
         </IntlProvider>
       );
@@ -41,7 +46,6 @@ describe("SidebarSection", () => {
   beforeEach(() => {
     props = {
       key: 0,
-      path: undefined,
       sectionName: 'test',
       navItems: undefined,
     };
@@ -66,10 +70,10 @@ describe("SidebarSection", () => {
       ]
       expect(wrapper(false).find('SidebarItem').length).toBe(props.navItems.length);
     });
-  });  
+  });
 
-  describe("when navItems are defined with navItems inside", () => {    
-    it("renders the correct number of <SidebarSubSection>", () => {
+  describe("when navItems are defined with navItems inside", () => {
+    it("renders the correct number of <SidebarItem>", () => {
       props.navItems = [
         { itemName: 'test',
           navItems: [
@@ -83,7 +87,7 @@ describe("SidebarSection", () => {
         { itemName: 'test',
           navItems: [] },
       ]
-      expect(wrapper(false).find('SidebarSubSection').length).toBe(props.navItems.length);
+      expect(wrapper(false).find('SidebarItem').length).toBe(7);
     });
-  });  
+  });
 })

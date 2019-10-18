@@ -1,33 +1,40 @@
 import React, { SFC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { DeskproAdminTheme } from '../../Theme';
 
-import { ISidebarSection } from '../../resources/interfaces';
-import { DeskproAdminTheme } from '../Theme';
+import { ISidebarSection } from '../../../resources/interfaces';
 import SidebarSection from './SidebarSection';
 
-const SidebarStyled = styled.nav`
+const SidebarContainer = styled.nav`
+  position: static;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
   background-color: #e8ebee;
   color: #000;
-  width: 100%;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
-  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 export interface IProps {
-  path: string;
   data: ISidebarSection[];
 }
 
-const Sidebar: SFC<IProps> = ({ path, data }) => {
+const Sidebar: SFC<IProps> = ({ data }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
         style={{
-          width: 215,
           position: 'absolute',
-          height: '100%'
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0
         }}
         renderTrackVertical={({ style, ...props }) => (
           <div
@@ -36,19 +43,19 @@ const Sidebar: SFC<IProps> = ({ path, data }) => {
               position: 'absolute',
               width: 6,
               right: 0,
-              bottom: 2,
-              top: 2,
+              bottom: 0,
+              top: 0,
               borderRadius: 3
             }}
           />
         )}
       >
-        <SidebarStyled>
+        <SidebarContainer>
           {data &&
             data.map((navSection, index) => (
-              <SidebarSection key={index} path={path} {...navSection} />
+              <SidebarSection key={index} {...navSection} />
             ))}
-        </SidebarStyled>
+        </SidebarContainer>
       </Scrollbars>
     </ThemeProvider>
   );
