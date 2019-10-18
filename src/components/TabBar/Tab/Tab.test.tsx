@@ -1,8 +1,10 @@
 import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
+import { IntlProvider } from 'react-intl';
 
 import Tab, { IProps } from './Tab';
+import { testTranslations } from '../../../resources/constants';
 
 configure({ adapter: new Adapter() });
 
@@ -13,8 +15,15 @@ describe('Tab', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedTab) {
       mountedTab = bShallow
-        ? shallow(<Tab {...props} />)
-        : mount(<Tab {...props} />);
+        ? shallow(
+        <IntlProvider locale='en' messages={testTranslations}>
+          <Tab {...props} />
+        </IntlProvider>
+      ) : mount(
+        <IntlProvider locale='en' messages={testTranslations}>
+          <Tab {...props} />
+        </IntlProvider>
+      );
     }
     return mountedTab;
   };
@@ -33,23 +42,8 @@ describe('Tab', () => {
     expect(elts.length).toBeGreaterThan(0);
   });
 
-  describe('when label is undefined', () => {
-    beforeEach(() => {
-      props.label = undefined;
-    });
-
-    it("doesn't render anything else", () => {
-      expect(
-        wrapper(false)
-          .find('div')
-          .children().length
-      ).toBe(0);
-    });
-  });
-
   describe('label is defined', () => {
     beforeEach(() => {
-      props.label = 'Property';
       props.value = 1;
       props.index = 1;
     });

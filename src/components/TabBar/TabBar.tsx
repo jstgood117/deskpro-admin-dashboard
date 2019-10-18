@@ -1,10 +1,8 @@
 import React, { SFC, useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
-import Tab from './Tab/Tab';
-import { DeskproAdminTheme } from '../Theme';
+import Tab from './Tab';
 import Dropdown from '../Dropdown';
-import { action } from '@storybook/addon-actions';
 
 const TabBarStyled = styled.div`
   display: flex;
@@ -25,35 +23,36 @@ interface ITabsProps {
 
 export interface IProps {
   tabItems: ITabsProps[];
+  handleClick?: (index: number) => void;
 }
 
-const TabBar: SFC<IProps> = props => {
+const TabBar: SFC<IProps> = ({tabItems, handleClick}) => {
   const [tabIndex, setTabState] = useState(0);
+
   return (
-    <ThemeProvider theme={DeskproAdminTheme}>
-      <TabBarStyled onClick={action('clicked')}>
-        {props.tabItems.map((tab, index: number) => {
-          return (
-            <Tab
-              key={index}
-              label={tab.label}
-              index={index}
-              value={tabIndex}
-              onClick={() => {
-                setTabState(index);
-              }}
-            />
-          );
-        })}
-        <Dropdown
-          label="Menu"
-          items={DropdownItems}
-          onClick={() => {
-            setTabState(4);
-          }}
-        />
-      </TabBarStyled>
-    </ThemeProvider>
+    <TabBarStyled>
+      {tabItems.map((tab, index: number) => {
+        return (
+          <Tab
+            key={index}
+            label={tab.label}
+            index={index}
+            value={tabIndex}
+            onClick={(e) => {
+              setTabState(index);
+              handleClick(index);
+            }}
+          />
+        );
+      })}
+      <Dropdown
+        label="Menu"
+        items={DropdownItems}
+        onClick={() => {
+          setTabState(4);
+        }}
+      />
+    </TabBarStyled>
   );
 };
 

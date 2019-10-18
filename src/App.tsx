@@ -23,7 +23,6 @@ const arrayToObject = (array: Array<any>) =>
 const collectNavItems = (is: any): ISidebarItem[] => {
 	const navItems = is.map((i: any) => i.navItems || []);
 	const x = flatMap(navItems, (i: any) => (i.navItems || []).concat(i));
-	console.log(x);
 	return x;
 };
 
