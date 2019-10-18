@@ -58,7 +58,7 @@ export const transformColumnData = (columns, intl) => {
   let newCols = columns.map( column => {
     let newCol = {
 			id: column.title,
-			// Backend payload column title phrases are missing admin_common - should this be hard-coded like this?
+			// Backend payload phrases are missing admin_common - should this be hard-coded like this?
 			Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
 			accessor: column.data[0].path, // TODO what is intended if array length > 1?
     }

@@ -1,5 +1,6 @@
 import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 
 export interface IStyleProps {
   active: boolean;
@@ -32,7 +33,7 @@ export interface IProps {
 const Tab: SFC<IProps> = props => (
   <Fragment>
     <TabStyled active={props.index === props.value} onClick={props.onClick}>
-      {props.label}
+      <FormattedMessage id={props.label} />
     </TabStyled>
   </Fragment>
 );

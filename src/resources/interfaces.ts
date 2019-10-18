@@ -16,7 +16,24 @@ export interface IPageData {
 	headerLinks: [{
 			title: string,
 			path: string,
-	}]
+	}],
+	newLink?: string,
+	views?: Array<IViewData>,
+}
+
+export interface IViewData {
+	title: string,
+	dataQuery: string,
+	tableDef: {
+		columns: Array<ITableColumn>,
+	},
+}
+
+export interface ITableColumn {
+	title: string,
+	field?: string,
+	data?: Array<any>,
+	defaultShow?: boolean,
 }
 
 export interface ISidebarSection {
@@ -31,12 +48,6 @@ export interface ISidebarItem {
 	navItems?: ISidebarItem[], // having this array turns this SidebarItem into a SidebarSubSection
 }
 
-export interface ITableColumn {
-	title: string,
-	field?: string,
-	data?: Array<any>,
-	defaultShow?: boolean,
-}
 
 export interface ITableSetup {
 	columns: Array<ITableColumn>
