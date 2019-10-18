@@ -9,6 +9,7 @@ import Error from '../Error';
 import Header from '../Header';
 import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
+import SearchBox from '../SearchBox';
 
 export interface IProps {
   query: DocumentNode,
@@ -17,6 +18,7 @@ export interface IProps {
 
 const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   const [tabIndex, setTabState] = useState(0);
+  const [searchText, setSearchState] = useState('');
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all' });
   // test data for now
 //  const loading = false;
@@ -37,6 +39,7 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
     return (
       <Fragment>
         <Header title={title} description={description} links={headerLinks} />
+        {views && <SearchBox placeholder="Search for agents" handleSearch={(e) => { setSearchState(e.target.value) }} />}
         {views && views.length > 1 &&
           <TabBar
 			      // Backend payload phrases are missing admin_common - should this be hard-coded like this?
@@ -44,7 +47,7 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
             handleClick={ index => { setTabState(index) }} 
           />
         }
-        {views && views[tabIndex] && <Table {...views[tabIndex]} />}
+        {views && views[tabIndex] && <Table {...views[tabIndex]} search={searchText} />}
       </Fragment>
     );    
   }
