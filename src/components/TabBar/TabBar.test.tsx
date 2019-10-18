@@ -41,7 +41,7 @@ describe('TabBar', () => {
       props.tabItems = [];
     });
 
-    it("doesn't render anything else", () => {
+    it("doesn't render Tab component", () => {
       expect(wrapper(false).find('Tab').length).toBe(0);
     });
   });
@@ -51,7 +51,7 @@ describe('TabBar', () => {
       props.tabItems = TabItems;
     });
 
-    it('renders  the div tag', () => {
+    it('renders the div tags and Dropdown Tag', () => {
       expect(wrapper(false).find('div').length).toBe(11);
       expect(wrapper(false).find('Dropdown').length).toBe(1);
     });

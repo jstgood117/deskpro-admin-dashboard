@@ -29,20 +29,6 @@ describe('Body', () => {
     expect(elts.length).toBeGreaterThan(0);
   });
 
-  describe('when children is undefined', () => {
-    beforeEach(() => {
-      props.children = undefined;
-    });
-
-    it("doesn't render anything else", () => {
-      expect(
-        wrapper(false)
-          .find('div')
-          .children().length
-      ).toBe(6);
-    });
-  });
-
   describe('when children is defined', () => {
     beforeEach(() => {
       props.children = <div>body</div>;

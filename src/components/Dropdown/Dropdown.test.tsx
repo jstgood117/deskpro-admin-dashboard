@@ -55,12 +55,12 @@ describe('Dropdown', () => {
       props.items = [];
     });
 
-    it('renders them within the div tag', () => {
+    it('doesnt render anything else', () => {
       expect(
         wrapper(false)
-          .find('div')
+          .find('DropdownContent')
           .children().length
-      ).toBe(4);
+      ).toBe(0);
     });
   });
 });

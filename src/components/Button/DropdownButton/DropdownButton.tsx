@@ -108,9 +108,9 @@ const DropdownButton: SFC<IProps> = props => {
             clickButton(!openState);
           }}
         >
-          {props.items.map(item => {
+          {props.items.map((item, index: number) => {
             return (
-              <DropdownContentLink onClick={props.onClick}>
+              <DropdownContentLink key={index} onClick={props.onClick}>
                 {item.link}
               </DropdownContentLink>
             );
