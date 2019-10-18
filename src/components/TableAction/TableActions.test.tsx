@@ -63,18 +63,32 @@ describe('TableActions', () => {
       ).toBe(2);
     });
   });
+  describe('when filterMenu is undefined', () => {
+    beforeEach(() => {
+      props.filterMenu = false;
+    });
 
-  // describe('when children is defined', () => {
-  //   beforeEach(() => {
-  //     props.children = <div>Grid text</div>;
-  //   });
+    it('Renders only 3 div tags', () => {
+      expect(
+        wrapper(false)
+          .find('div')
+          .at(4)
+          .children().length
+      ).toBe(3);
+    });
+  });
+  describe('when filterMenu is defined', () => {
+    beforeEach(() => {
+      props.filterMenu = true;
+    });
 
-  //   it('renders them within the div tag', () => {
-  //     expect(
-  //       wrapper(false)
-  //         .find('div')
-  //         .children().length
-  //     ).toBe(1);
-  //   });
-  // });
+    it('Renders only two div tags', () => {
+      expect(
+        wrapper(false)
+          .find('div')
+          .at(3)
+          .children().length
+      ).toBe(2);
+    });
+  });
 });
