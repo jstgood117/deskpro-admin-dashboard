@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Table from './Table';
+import Table from './TableAsync';
 import { testTableColumns, testTableData } from '../../resources/constants'
 
 storiesOf('Table',module)

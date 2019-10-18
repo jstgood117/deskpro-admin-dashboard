@@ -2,7 +2,7 @@ import React from 'react';
 import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 
-import Table, { IProps } from './Table';
+import Table from './TableMemory';
 import { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
 import { ITableColumn } from '../../resources/interfaces';
@@ -26,7 +26,7 @@ const testCols: ITableColumn[] = [
 ];
 
 describe("Table", () => {
-  let props: IProps;
+  let props: any;
   let mountedTable: any;
   let shallowTable: any;
 

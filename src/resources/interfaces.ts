@@ -1,11 +1,22 @@
+export interface IUser {
+	locale: string,
+}
+
 export interface IInitialData {
 	user: IUser,
 	sidebar: ISidebarSection[],
-	translations: ITranslation,
+	translations: any,
 }
 
-export interface IUser {
-	locale: string,
+export interface IPageData {
+  __typename: string,
+	title: string,
+	description?: string,
+	illustration?: string, // TBD whether this is a local link
+	headerLinks: [{
+			title: string,
+			path: string,
+	}]
 }
 
 export interface ISidebarSection {
@@ -20,47 +31,13 @@ export interface ISidebarItem {
 	navItems?: ISidebarItem[], // having this array turns this SidebarItem into a SidebarSubSection
 }
 
-export interface ITranslation {}
-
-/* export interface ITableColumn {
+export interface ITableColumn {
 	title: string,
-	field?: keyof ITableRow,
-	props?: object,
-	sorting?: boolean,
-	searchable?: boolean,
-  render?: (data: ITableRow, type: ('row' | 'group')) => any,
-  customSort?: (a:any,b:any) => any,
-}
-
-export interface ITableRow {
-	[key: string]: any,
-} */
-
-export interface IPageData {
-  __typename: string,
-    title: string,
-    description: string,
-    headerLinks: [
-			{
-      	title: string,
-	      path: string,
-			}
-		]
-}
-
-export interface IPageProps {
-	title: string,
-	description?: string,
-	illustration?: string, // TBD whether this is a local link
-	tables?: ITableSetup[],
+	field?: string,
+	data?: Array<any>,
+	defaultShow?: boolean,
 }
 
 export interface ITableSetup {
-	__typename: string,
-	title: string,
-	dataQuery: string,
-/*	metadataQuery: string,
-	options: {
-		[key: string]: any,
-	} */
+	columns: Array<ITableColumn>
 }
