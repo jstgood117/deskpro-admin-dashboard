@@ -24,6 +24,7 @@ const PageType: SFC<IProps> = ({query}) => {
     return <Error apolloError={error} />
   }
   if (data && data.page) {
+    console.log('Page data loaded:');
     console.log(data.page)
 
     switch (data.page.__typename) {

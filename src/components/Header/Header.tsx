@@ -116,8 +116,8 @@ export interface IHeader {
 
 export interface ILink {
   icon?: string;
-  label: string;
-  href: string;
+  title: string;
+  path: string;
 }
 
 export interface IProps {
@@ -167,9 +167,9 @@ const Header: SFC<IProps> = ({
           {links.length && (
             <div>
               {links.map((link, key) => (
-                <Link href={link.href} key={key}>
+                <Link href={link.path} key={key}>
                   {link.icon && <Icon name={link.icon} />}
-                  <span>{link.label}</span>
+                  <span><FormattedMessage id={link.title} /></span>
                 </Link>
               ))}
             </div>
