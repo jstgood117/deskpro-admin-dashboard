@@ -33,40 +33,60 @@ export interface IProps {
 
 const TableActions: SFC<IProps> = props => {
   return (
-    <StyledTableAction>
-      <FlexStyled style={{ flex: 5 }}>
-        {props.showSearch && (
-          <FlexStyled style={{ paddingLeft: 10 }}>
-            <SearchBox
-              placeholder="Search Box"
-              handleSearch={props.onSearchChange}
-            />
+    <div>
+      {(props.showSearch ||
+        props.filterMenu ||
+        props.sortMenu ||
+        props.groupMenu ||
+        props.viewMenu) && (
+        <StyledTableAction>
+          <FlexStyled style={{ flex: 5 }}>
+            {props.showSearch && (
+              <FlexStyled style={{ paddingLeft: 10 }}>
+                <SearchBox
+                  placeholder="Search Box"
+                  handleSearch={props.onSearchChange}
+                />
+              </FlexStyled>
+            )}
+            {props.filterMenu && (
+              <FlexStyled style={{ paddingLeft: 10 }}>
+                <FilterButton>Filter</FilterButton>
+              </FlexStyled>
+            )}
           </FlexStyled>
-        )}
-        {props.filterMenu && (
-          <FlexStyled style={{ paddingLeft: 10 }}>
-            <FilterButton>Filter</FilterButton>
+          <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
+            {props.viewMenu && (
+              <FlexStyled style={{ paddingRight: 10 }}>
+                <DropdownButton
+                  label="View"
+                  iconName="view"
+                  items={ViewItems}
+                />
+              </FlexStyled>
+            )}
+            {props.groupMenu && (
+              <FlexStyled style={{ paddingRight: 10 }}>
+                <DropdownButton
+                  label="Group"
+                  iconName="group"
+                  items={GroupItems}
+                />
+              </FlexStyled>
+            )}
+            {props.sortMenu && (
+              <FlexStyled style={{ paddingRight: 10 }}>
+                <DropdownButton
+                  label="Sort"
+                  iconName="sort"
+                  items={SortItems}
+                />
+              </FlexStyled>
+            )}
           </FlexStyled>
-        )}
-      </FlexStyled>
-      <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
-        {props.viewMenu && (
-          <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="View" iconName="view" items={ViewItems} />
-          </FlexStyled>
-        )}
-        {props.groupMenu && (
-          <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="Group" iconName="group" items={GroupItems} />
-          </FlexStyled>
-        )}
-        {props.sortMenu && (
-          <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="Sort" iconName="sort" items={SortItems} />
-          </FlexStyled>
-        )}
-      </FlexStyled>
-    </StyledTableAction>
+        </StyledTableAction>
+      )}
+    </div>
   );
 };
 

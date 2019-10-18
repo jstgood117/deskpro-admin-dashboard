@@ -5,13 +5,15 @@ import { FormattedMessage } from 'react-intl';
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
 import { renderToStaticMarkup } from 'react-dom/server';
+import TableActions from '../TableAction';
 
 const HeaderStyled = styled.div<IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: ${props => props.theme.pagePadding};
   position: relative;
   display: flex;
-  background-image: url("data:image/svg+xml,${props => encodeURIComponent(renderToStaticMarkup(props.illustration))}");
+  background-image: url("data:image/svg+xml,${props =>
+    encodeURIComponent(renderToStaticMarkup(props.illustration))}");
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: contain;
@@ -109,6 +111,12 @@ const Link = styled.a`
     margin-right: 10px;
   }
 `;
+const TableActionStyled = styled.div`
+  position: absolute;
+  left: 33px;
+  right: 27px;
+  bottom: -27px;
+`;
 
 export interface IHeader {
   illustration?: ReactElement;
@@ -129,6 +137,7 @@ export interface IProps {
   showViewModeSwitcher?: boolean;
   defaulViewMode?: 'table' | 'list' | 'map';
   showNewButton?: boolean;
+  tableActions?: boolean;
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
 }
@@ -143,10 +152,11 @@ const Header: SFC<IProps> = ({
   defaulViewMode = 'table',
   showNewButton,
   onChangeView,
-  onNewClick
+  onNewClick,
+  tableActions
 }) => {
   const [state, setState] = useState(defaulViewMode);
-  
+
   function changeView(viewMode: 'table' | 'list' | 'map') {
     setState(viewMode);
     onChangeView(viewMode);
@@ -169,7 +179,9 @@ const Header: SFC<IProps> = ({
               {links.map((link, key) => (
                 <Link href={link.path} key={key}>
                   {link.icon && <Icon name={link.icon} />}
-                  <span><FormattedMessage id={link.title} /></span>
+                  <span>
+                    <FormattedMessage id={link.title} />
+                  </span>
                 </Link>
               ))}
             </div>
@@ -215,9 +227,21 @@ const Header: SFC<IProps> = ({
             </NewButton>
           )}
         </ActionContainer>
+        {tableActions && (
+          <TableActionStyled>
+            <TableActions
+              showSearch={true}
+              onSearchChange={() => {}}
+              filterMenu={true}
+              sortMenu={true}
+              groupMenu={true}
+              viewMenu={true}
+            />
+          </TableActionStyled>
+        )}
       </HeaderStyled>
     </ThemeProvider>
-  )
+  );
 };
 
 export default Header;

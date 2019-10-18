@@ -7,7 +7,7 @@ import Icon from '../../Icon';
 const ButtonStyled = styled.button`
   border-radius: 3px;
   padding: 4px 10px;
-  border: 0.8px solid #a9b0b0;
+  border: 0.8px solid #a9b0b0 !important;
   outline: none;
   box-sizing: border-box;
   background: #ffffff;

@@ -44,7 +44,7 @@ const DropdownContent = styled.div`
   flex-direction: column;
   position: absolute;
   background: #ffffff;
-  min-width: 160px;
+  min-width: 110px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   font-family: Rubik;
