@@ -35,13 +35,14 @@ const SearchWrapper = styled.div`
 `;
 export interface IProps {
   placeholder: string;
+  handleSearch?: (e: any) => void;
 }
 
 const SearchBox: SFC<IProps> = props => {
   return (
     <SearchWrapper>
       <Icon name="search" />
-      <InputStyled placeholder={props.placeholder}></InputStyled>
+      <InputStyled placeholder={props.placeholder} onChange={props.handleSearch}></InputStyled>
     </SearchWrapper>
   );
 };

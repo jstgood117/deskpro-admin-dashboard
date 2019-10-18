@@ -12,8 +12,8 @@ const DropdownLabel = styled.div`
 `;
 const DropdownStyled = styled.div<StyleProps>`
   padding: 4px 10px;
-  background: #FFFFFF;
-  border: 0.8px solid #A9B0B0;
+  background: #ffffff;
+  border: 0.8px solid #a9b0b0;
   box-sizing: border-box;
   border-radius: 3px;
   cursor: pointer;
@@ -28,10 +28,6 @@ const DropdownStyled = styled.div<StyleProps>`
   font-size: 15px;
   line-height: 150%;
   color: #a9b0b0;
-  > div:nth-child(2) {
-    display: ${props => (props.openState ? 'flex' : 'none')}
-    flex-direction: column;
-  }
 `;
 const DropdownBtn = styled.div`
   font-family: Rubik;
@@ -44,7 +40,8 @@ const DropdownBtn = styled.div`
   display: flex;
 `;
 const DropdownContent = styled.div`
-  display: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   background: #ffffff;
   min-width: 160px;
@@ -57,6 +54,14 @@ const DropdownContent = styled.div`
   line-height: 150%;
   top: 40px;
 `;
+const DropdownContentPanel = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  zindex: 0;
+`;
 const DropdownContentLink = styled.div`
   float: none;
   color: black;
@@ -67,6 +72,7 @@ const DropdownContentLink = styled.div`
   :hover {
     background-color: #e8ebee;
   }
+  z-index: 1;
 `;
 const StyledIcon = styled.div`
   display: flex;
@@ -103,19 +109,22 @@ const DropdownButton: SFC<IProps> = props => {
           <DropdownLabel>{props.label}</DropdownLabel>
           <Icon name="downVector" />
         </DropdownBtn>
-        <DropdownContent
-          onClick={() => {
-            clickButton(!openState);
-          }}
-        >
-          {props.items.map((item, index: number) => {
-            return (
-              <DropdownContentLink key={index} onClick={props.onClick}>
-                {item.link}
-              </DropdownContentLink>
-            );
-          })}
-        </DropdownContent>
+        {openState && (
+          <DropdownContent
+            onClick={() => {
+              clickButton(!openState);
+            }}
+          >
+            {props.items.map((item, index: number) => {
+              return (
+                <DropdownContentLink key={index} onClick={props.onClick}>
+                  {item.link}
+                </DropdownContentLink>
+              );
+            })}
+            <DropdownContentPanel />
+          </DropdownContent>
+        )}
       </DropdownStyled>
     </Fragment>
   );
