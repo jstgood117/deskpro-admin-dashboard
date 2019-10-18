@@ -1,10 +1,12 @@
-import React, { SFC, Fragment } from 'react';
+import React, { SFC, Fragment, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 import { ISidebarItem } from '../../../../resources/interfaces';
 import Icon from '../../../Icon';
 import SidebarItem from './SidebarItem';
+import { ReactComponent as CaretDown } from './caret-down.svg';
+import { useLocation, matchPath } from 'react-router-dom';
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -46,6 +48,14 @@ const SectionHeader: SFC<{ sectionName: string }> = ({ sectionName }) => (
 const List = styled.ul`
   margin: 10px 0 15px 0;
   padding: 0;
+
+  &.collapsed {
+    display: none;
+  }
+
+  ul {
+    margin: 0;
+  }
 `;
 
 const ListItem = styled.li`
@@ -54,10 +64,34 @@ const ListItem = styled.li`
   list-style: none;
 `;
 
-const SubListItem = styled.li`
-  margin: 0 0 0 15px;
-  padding: 0;
-  list-style: none;
+const SubgroupTitleContainer = styled.div`
+  padding: 10px 10px 10px 39px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  color: ${props => props.theme.staticColour};
+  font-weight: bold;
+
+  &:hover {
+		background-color: #d4dbdf;
+	}
+`;
+
+const SubgroupTitleText = styled.div`
+  display: block;
+  flex: 1 0;
+`;
+
+const SubgroupTitleCaret = styled(CaretDown)`
+  flex: 0 1 1;
+  padding-right: 6px;
+
+  &.collapsed {
+    transform: rotate(180deg);
+    padding-right: 0;
+    padding-left: 6px;
+  }
 `;
 
 export interface IProps {
@@ -65,6 +99,35 @@ export interface IProps {
   sectionName: string;
   navItems?: ISidebarItem[];
 }
+
+const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
+  const [isOpen, setOpen] = useState(false);
+
+  const loc = useLocation();
+
+  useEffect(() => {
+    const matchingNav = navItem.navItems.find(n => {
+      return matchPath(loc.pathname, { path: n.path, exact: true })
+    });
+    if (matchingNav && !isOpen) {
+      setOpen(true);
+    }
+  }, [isOpen, setOpen, navItem.navItems, loc]);
+
+  const className = isOpen ? '' : 'collapsed';
+
+  return (
+    <div>
+      <SubgroupTitleContainer onClick={() => setOpen(!isOpen)}>
+        <SubgroupTitleText><FormattedMessage id={navItem.itemName} /></SubgroupTitleText>
+        <SubgroupTitleCaret className={className} />
+      </SubgroupTitleContainer>
+      <List className={className}>
+        {navItem.navItems.map((n, idx) => <SidebarItem key={idx} path={n.path!!} itemName={n.itemName} depth={1} />)}
+      </List>
+    </div>
+  );
+};
 
 const SidebarSection: SFC<IProps> = props => {
   const { sectionName, navItems } = props;
@@ -76,12 +139,11 @@ const SidebarSection: SFC<IProps> = props => {
         <List>
             {navItems.map((navItem, index) => {
               return (
-                <Fragment key={`${index}.group`}>
-                  <ListItem>
-                    <SidebarItem key={`${index}.group.item`} {...navItem}></SidebarItem>
-                  </ListItem>
-                  { navItem.navItems && navItem.navItems.map((subNavItem, subIndex) => <SubListItem key={`${index}.group.li.${subIndex}`}><SidebarItem key={`${index}.group.item.${subIndex}`} {...subNavItem}></SidebarItem></SubListItem>)}
-                </Fragment>
+                <ListItem key={`${index}.group`}>
+                  {!navItem.navItems || !navItem.navItems.length
+                  ? <SidebarItem path={navItem.path!!} itemName={navItem.itemName} depth={0} />
+                  : <TopLevelNavGroup navItem={navItem} />}
+                </ListItem>
               );
             })}
         </List>
