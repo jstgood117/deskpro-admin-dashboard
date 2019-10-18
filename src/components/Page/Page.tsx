@@ -38,7 +38,7 @@ const Page: SFC<IProps> = ({location, sidebar}) => {
     <ErrorBoundary>
       <PageContainer>
         <Sidebar path={location.pathname} data={sidebar} />
-        <PageType query="query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }}}" />
+        <PageType query="query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }, newLink, views { ... on InMemoryPageDataView { title, dataQuery, tableDef { columns { title, field, data { propName, path, value }, defaultShow }}}}}}" />
       </PageContainer>
     </ErrorBoundary>
   );

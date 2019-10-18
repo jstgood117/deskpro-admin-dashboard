@@ -19,14 +19,14 @@ storiesOf('Header', module).add('with text', () => (
       showHelpButton={true}
       links={[
         {
-          label: 'Login Log',
+          title: 'login.log',
           icon: 'loginLog',
-          href: '/login'
+          path: '/login'
         },
         {
-          label: 'Settings',
+          title: 'Settings',
           icon: 'settings',
-          href: '/settings'
+          path: '/settings'
         }
       ]}
       onChangeView={action('clicked onChangeView')}
