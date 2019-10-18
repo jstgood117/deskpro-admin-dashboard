@@ -87,7 +87,7 @@ describe("SidebarSection", () => {
         { itemName: 'test',
           navItems: [] },
       ]
-      expect(wrapper(false).find('SidebarItem').length).toBe(7);
+      expect(wrapper(false).find('SidebarItem').length).toBe(6);
     });
   });
 })
