@@ -29,9 +29,9 @@ describe('TabBar', () => {
   };
 
   const TabItems = [
-    { label: 'Property1' },
-    { label: 'Property2' },
-    { label: 'Property3' }
+    { label: 'admin.tabbar.bar1' },
+    { label: 'admin.tabbar.bar2' },
+    { label: 'admin.tabbar.bar3' }
   ];
   beforeEach(() => {
     props = {

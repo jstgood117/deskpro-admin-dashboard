@@ -35,34 +35,36 @@ const TableActions: SFC<IProps> = props => {
   return (
     <StyledTableAction>
       <FlexStyled style={{ flex: 5 }}>
-        <FlexStyled style={{ paddingLeft: 10 }}>
-          <SearchBox
-            placeholder="Search Box"
-            handleSearch={props.onSearchChange}
-          />
-        </FlexStyled>
-        {props.filterMenu ? (
+        {props.showSearch && (
+          <FlexStyled style={{ paddingLeft: 10 }}>
+            <SearchBox
+              placeholder="Search Box"
+              handleSearch={props.onSearchChange}
+            />
+          </FlexStyled>
+        )}
+        {props.filterMenu && (
           <FlexStyled style={{ paddingLeft: 10 }}>
             <FilterButton>Filter</FilterButton>
           </FlexStyled>
-        ) : null}
+        )}
       </FlexStyled>
       <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
-        {props.viewMenu ? (
+        {props.viewMenu && (
           <FlexStyled style={{ paddingRight: 10 }}>
             <DropdownButton label="View" iconName="view" items={ViewItems} />
           </FlexStyled>
-        ) : null}
-        {props.groupMenu ? (
+        )}
+        {props.groupMenu && (
           <FlexStyled style={{ paddingRight: 10 }}>
             <DropdownButton label="Group" iconName="group" items={GroupItems} />
           </FlexStyled>
-        ) : null}
-        {props.sortMenu ? (
+        )}
+        {props.sortMenu && (
           <FlexStyled style={{ paddingRight: 10 }}>
             <DropdownButton label="Sort" iconName="sort" items={SortItems} />
           </FlexStyled>
-        ) : null}
+        )}
       </FlexStyled>
     </StyledTableAction>
   );

@@ -28,6 +28,11 @@ export const testTranslations = {
 	'admin.sidebar.agents.authSSO': 'Auth & SSO',
 	'admin.sidebar.agents.settings': 'Settings',
 
+	'admin.tabbar.bar': 'Property',
+	'admin.tabbar.bar1': 'Property1',
+	'admin.tabbar.bar2': 'Property2',
+	'admin.tabbar.bar3': 'Property3',
+
 	'admin.sidebar.help.helpCentre': 'Help Centre',
 	'admin.sidebar.help.helpCentreSetup': 'Help Centre Setup',
 	'admin.sidebar.help.knowledgeBase': 'Knowledge Base',

@@ -1,7 +1,3 @@
-# SearchBox
-
-This component makes a simple grid to hold the Sidebar and main pages
-
 # SearchBox Component Contract
 
 * it has Props of:

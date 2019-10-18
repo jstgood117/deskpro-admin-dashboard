@@ -30,7 +30,7 @@ describe('Tab', () => {
 
   beforeEach(() => {
     props = {
-      label: 'Property',
+      label: 'admin.tabbar.bar',
       index: 0,
       value: 0
     };
