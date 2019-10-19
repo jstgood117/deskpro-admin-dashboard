@@ -1,6 +1,5 @@
 import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
 
 export interface IStyleProps {
   active: boolean;
