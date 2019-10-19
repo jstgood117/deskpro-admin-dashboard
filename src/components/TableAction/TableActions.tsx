@@ -3,6 +3,7 @@ import SearchBox from '../SearchBox';
 import FilterButton from '../Button/FilterButton';
 import DropdownButton from '../Button/DropdownButton/DropdownButton';
 import styled from 'styled-components';
+import { action } from '@storybook/addon-actions';
 
 export interface IProps {}
 
@@ -62,6 +63,7 @@ const TableActions: SFC<IProps> = props => {
                   label="View"
                   iconName="view"
                   items={ViewItems}
+                  onChangeOption={action('clicked onChangeOption')}
                 />
               </FlexStyled>
             )}
@@ -71,6 +73,7 @@ const TableActions: SFC<IProps> = props => {
                   label="Group"
                   iconName="group"
                   items={GroupItems}
+                  onChangeOption={action('clicked onChangeOption')}
                 />
               </FlexStyled>
             )}
@@ -80,6 +83,7 @@ const TableActions: SFC<IProps> = props => {
                   label="Sort"
                   iconName="sort"
                   items={SortItems}
+                  onChangeOption={action('clicked onChangeOption')}
                 />
               </FlexStyled>
             )}

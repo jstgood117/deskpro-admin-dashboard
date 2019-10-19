@@ -88,11 +88,14 @@ export interface IProps {
   iconName?: string;
   label: string;
   items: IItemProps[];
-  onClick?: (e: any) => void;
+  onChangeOption?: (e: any) => void;
 }
 
 const DropdownButton: SFC<IProps> = props => {
   const [openState, clickButton] = useState(false);
+  const changeOption = (option: string) => {
+    props.onChangeOption(option);
+  };
   return (
     <Fragment>
       <DropdownStyled openState={openState}>
@@ -117,7 +120,12 @@ const DropdownButton: SFC<IProps> = props => {
           >
             {props.items.map((item, index: number) => {
               return (
-                <DropdownContentLink key={index} onClick={props.onClick}>
+                <DropdownContentLink
+                  key={index}
+                  onClick={() => {
+                    changeOption(item.link);
+                  }}
+                >
                   {item.link}
                 </DropdownContentLink>
               );
