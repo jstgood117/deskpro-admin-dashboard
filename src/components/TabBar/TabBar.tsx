@@ -24,7 +24,7 @@ interface ITabsProps {
 
 export interface IProps {
   tabItems: ITabsProps[];
-  handleClick?: (label: string) => void;
+  handleClick?: (index: number) => void;
 }
 
 const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
@@ -32,7 +32,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
 
   function changeTab(index: number, label: string) {
     setTabState(index);
-    handleClick(label);
+    handleClick(index);
   }
 
   return (
