@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Tab from './Tab';
 import Dropdown from '../Dropdown';
+import { action } from '@storybook/addon-actions';
 
 const TabBarStyled = styled.div`
   display: flex;
@@ -23,11 +24,16 @@ interface ITabsProps {
 
 export interface IProps {
   tabItems: ITabsProps[];
-  handleClick?: (index: number) => void;
+  handleClick?: (label: string) => void;
 }
 
-const TabBar: SFC<IProps> = ({tabItems, handleClick}) => {
+const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
   const [tabIndex, setTabState] = useState(0);
+
+  function changeTab(index: number, label: string) {
+    setTabState(index);
+    handleClick(label);
+  }
 
   return (
     <TabBarStyled>
@@ -38,9 +44,8 @@ const TabBar: SFC<IProps> = ({tabItems, handleClick}) => {
             label={tab.label}
             index={index}
             value={tabIndex}
-            onClick={(e) => {
-              setTabState(index);
-              handleClick(index);
+            onClick={e => {
+              changeTab(index, tab.label);
             }}
           />
         );
@@ -48,9 +53,7 @@ const TabBar: SFC<IProps> = ({tabItems, handleClick}) => {
       <Dropdown
         label="Menu"
         items={DropdownItems}
-        onClick={() => {
-          setTabState(4);
-        }}
+        onChangeOption={action('clicked Tab Option')}
       />
     </TabBarStyled>
   );

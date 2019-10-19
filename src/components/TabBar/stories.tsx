@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import TabBar from './TabBar';
 import { DeskproAdminTheme } from '../Theme';
+import { action } from '@storybook/addon-actions';
 
 const TabItems = [
   { label: 'Property1' },
@@ -11,9 +12,8 @@ const TabItems = [
   { label: 'Property3' }
 ];
 
-storiesOf('TabBar', module)
-  .add('Tab Bar', () => (
-    <ThemeProvider theme={DeskproAdminTheme}>
-      <TabBar tabItems={TabItems} />
-    </ThemeProvider>
-  ));
+storiesOf('TabBar', module).add('Tab Bar', () => (
+  <ThemeProvider theme={DeskproAdminTheme}>
+    <TabBar tabItems={TabItems} handleClick={action('clicked Tab Option')} />
+  </ThemeProvider>
+));

@@ -57,11 +57,11 @@ describe('DropdownButton', () => {
       expect(wrapper(false).find('svg').length).toBe(2);
     });
   });
-  describe('when onClick is defined', () => {
-    it('when button clicked', () => {
-      const button = wrapper(false).find('div');
-      button.at(1).simulate('click');
-      expect(wrapper(false).find('div').length).toBe(10);
-    });
-  });
+  // describe('when onClick is defined', () => {
+  //   it('when button clicked', () => {
+  //     const button = wrapper(false).find('div');
+  //     button.at(1).simulate('click');
+  //     expect(wrapper(false).find('div').length).toBe(10);
+  //   });
+  // });
 });

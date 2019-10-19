@@ -33,7 +33,7 @@ export interface IProps {
 const Tab: SFC<IProps> = props => (
   <Fragment>
     <TabStyled active={props.index === props.value} onClick={props.onClick}>
-      <FormattedMessage id={props.label} />
+      {props.label}
     </TabStyled>
   </Fragment>
 );

@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Dropdown from './Dropdown';
+import { action } from '@storybook/addon-actions';
 
 export interface IProps {
   label: string;
@@ -16,5 +17,9 @@ const DropdownItems = [
 ];
 
 storiesOf('Dropdown', module).add('Default', () => (
-  <Dropdown label="Dropdown" items={DropdownItems} />
+  <Dropdown
+    label="Dropdown"
+    items={DropdownItems}
+    onChangeOption={action('clicked onChangeOption')}
+  />
 ));
