@@ -1,8 +1,7 @@
-import React, { Children, Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Flex as BaseFlex, Box as BaseBox } from 'reflexbox/styled-components';
 import invariant from 'invariant';
-import { string } from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
 export const Flex = styled(BaseFlex)`
