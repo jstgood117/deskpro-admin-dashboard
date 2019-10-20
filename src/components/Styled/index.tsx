@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Children, Fragment } from 'react';
 import styled from 'styled-components';
 import { Flex as BaseFlex, Box as BaseBox } from 'reflexbox/styled-components';
+import invariant from 'invariant';
+import { string } from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 export const Flex = styled(BaseFlex)`
     margin: 0;
@@ -13,12 +16,29 @@ export const Flex = styled(BaseFlex)`
     box-sizing: content-box;
 `;
 
-export const Container = styled(Flex)`
-    flex-wrap: nowrap;
-    align-items: stretch;
+/**
+ * Box layout -- arranges boxes on a single row
+ * and fills the container width.
+ *
+ * Example: A header area with controls to the right:
+ *
+ * ```
+ * <BoxLayout>
+ *   <BoxFill>Foo bar baz</BoxFill>
+ *   <Box><CloseIcon /></Box>
+ * </BoxLayout>
+ * ```
+ */
+export const BoxLayout = styled(Flex).attrs(_props => ({
+    flexWrap: "nowrap",
+    alignItems: "stretch"
+}))`
     width: 100%;
 `;
 
+/**
+ * An element of a layout that wraps one or more components.
+ */
 export const Box = styled(BaseBox)`
     margin: 0;
     padding: 0;
@@ -33,22 +53,60 @@ export const Box = styled(BaseBox)`
     }
 `;
 
-export const BoxFill = styled(Box)`
-    flex-grow: 1;
-    width: 100%;
-`;
+/**
+ * An element of the layout that fills the space.
+ */
+export const BoxFill = styled(Box).attrs(_props => ({
+    flexGrow: 1,
+    width: [1]
+}))``;
 
-export const TextLabel = styled((props) => <span {...props} />)<{ bold?: boolean, small?: boolean, color?: string }>`
+export const TextString = ({ messageId, ...rest }: any & { messageId?: string }) => {
+    invariant(
+        !(messageId && rest.children && rest.children.length),
+        "Cannot specify both messageId and children -- one or the other only"
+    );
+
+    if (messageId) {
+        return <span><FormattedMessage id={messageId} /></span>;
+    } else {
+        return <span {...rest} />;
+    }
+};
+
+/**
+ * Standard text
+ */
+export const TextLabel = styled((props) => <TextString {...props} />)<{ messageId?: string, bold?: boolean, small?: boolean, color?: string }>`
     margin: 0;
     padding: 0;
     line-height: 1;
     display: inline-block;
-    color: ${props => props.color ? props.color : props.theme.staticColour};
+    color: ${props => props.color ? props.color : 'inherit'};
     font-family: ${props => props.theme.mainFont};
     font-size: ${props => props.small ? '12px' : '14px'};
     font-weight: ${props => props.bold ? 'bold' : 'normal'};
 `;
 
+/**
+ * Standard text with link styling
+ */
+export const TextLinkLabel = styled((props) => <TextString {...props} />)<{ messageId?: string, bold?: boolean, small?: boolean, color?: string, underline?: boolean }>`
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    display: inline-block;
+    color: ${props => props.color ? props.color : props.theme.brandPrimary};
+    text-decoration: ${props => props.underline ? 'underline' : 'none'};
+    cursor: pointer;
+    font-family: ${props => props.theme.mainFont};
+    font-size: ${props => props.small ? '12px' : '14px'};
+    font-weight: ${props => props.bold ? 'bold' : 'normal'};
+`;
+
+/**
+ * Standard base styles
+ */
 export const dpstyle = {
     div: styled.div`
         margin: 0;
@@ -82,6 +140,29 @@ export const dpstyle = {
         border: 0;
         font-size: 100%;
         vertical-align: baseline;
+        display: block;
+        line-height: 1;
+        color: ${props => props.theme.staticColor};
+        font-family: ${props => props.theme.mainFont};
+        box-sizing: content-box;
+    `,
+
+    input: styled.input`
+        border-radius: 3px;
+        padding: 4px 10px;
+        font-size: 100%;
+        line-height: 1;
+        font-family: ${props => props.theme.mainFont};
+        font-weight: nomral;
+        box-sizing: content-box;
+        cursor: pointer;
+    `,
+
+    p: styled.p`
+        margin: 10px 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
         display: block;
         line-height: 1;
         color: ${props => props.theme.staticColor};
@@ -182,4 +263,34 @@ export const dpstyle = {
         font-family: ${props => props.theme.headerFont};
         font-size: 15pt;
     `
+};
+
+const HeadingText1 = dpstyle.h1;
+const HeadingText2 = dpstyle.h2;
+const HeadingText3 = dpstyle.h3;
+const HeadingText4 = dpstyle.h4;
+const HeadingText5 = dpstyle.h5;
+const HeadingText6 = dpstyle.h6;
+
+export const HeadingText = ({ size, messageId, ...rest}: any & { messageId?: string, size: number | string }) => {
+    const s = parseInt(size+'');
+    invariant(s && s >= 1 && s <= 6, 'size must be a number between 1 and 6');
+
+    invariant(
+        !(messageId && rest.children && rest.children.length),
+        "Cannot specify both messageId and children -- one or the other only"
+    );
+
+    if (messageId) {
+        rest.children = [<span><FormattedMessage id={messageId} /></span>];
+    }
+
+    switch (s) {
+        case 1: return <HeadingText1 {...rest} />;
+        case 2: return <HeadingText2 {...rest} />;
+        case 3: return <HeadingText3 {...rest} />;
+        case 4: return <HeadingText4 {...rest} />;
+        case 5: return <HeadingText5 {...rest} />;
+        case 6: return <HeadingText6 {...rest} />;
+    }
 };

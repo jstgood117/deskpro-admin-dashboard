@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../../Theme';
 import Icon from '../../Icon';
 import { action } from '@storybook/addon-actions';
+import { dpstyle } from '../../Styled';
 
 const ButtonStyled = styled.button`
   border-radius: 3px;
@@ -22,7 +23,7 @@ const ButtonStyled = styled.button`
   align-items: center;
   cursor: pointer;
 `;
-const StyledIcon = styled.div`
+const StyledIcon = styled(dpstyle.div)`
   display: flex;
   align-items: center;
   padding-right: 10px;

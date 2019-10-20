@@ -7,7 +7,7 @@ import Icon from '../../../Icon';
 import SidebarItem from './SidebarItem';
 import { ReactComponent as CaretDown } from './caret-down.svg';
 import { useLocation, matchPath } from 'react-router-dom';
-import { TextLabel, Container, BoxFill, Box } from '../../../Styled';
+import { TextLabel, BoxLayout, BoxFill, Box } from '../../../Styled';
 
 const SectionHeaderWrapper = styled.div`
   display: flex;
@@ -101,15 +101,15 @@ const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   }, [isOpen, setOpen, navItem.navItems, loc]);
 
   const className = isOpen ? '' : 'collapsed';
-  const caretStyle = isOpen ? {transform: "rotate(180deg)"} : {};
+  const caretStyle = isOpen ? {} : {transform: "rotate(180deg)"};
 
   return (
     <Fragment>
       <SubgroupTitleContainer onClick={() => setOpen(!isOpen)}>
-        <Container>
+        <BoxLayout>
           <BoxFill><TextLabel bold={1}><FormattedMessage id={navItem.itemName} /></TextLabel></BoxFill>
           <Box><CaretDown style={caretStyle} /></Box>
-        </Container>
+        </BoxLayout>
       </SubgroupTitleContainer>
       <List className={className}>
         {navItem.navItems.map((n, idx) => <SidebarItem key={idx} path={n.path!!} itemName={n.itemName} depth={1} />)}

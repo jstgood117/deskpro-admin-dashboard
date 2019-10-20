@@ -2,11 +2,12 @@ import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
 
 import Icon from '../Icon';
+import { dpstyle, TextLabel } from '../Styled';
 
-const DropdownLabel = styled.div`
+const DropdownLabel = styled(dpstyle.div)`
   padding-right: 3px;
 `;
-const DropdownStyled = styled.div`
+const DropdownStyled = styled(dpstyle.div)`
   cursor: pointer;
   float: left;
   overflow: hidden;
@@ -19,7 +20,7 @@ const DropdownStyled = styled.div`
     }
   }
 `;
-const DropdownBtn = styled.div`
+const DropdownBtn = styled(dpstyle.div)`
   font-family: Rubik;
   font-style: normal;
   font-weight: 500;
@@ -29,7 +30,7 @@ const DropdownBtn = styled.div`
   color: #a9b0b0;
   display: flex;
 `;
-const DropdownContent = styled.div`
+const DropdownContent = styled(dpstyle.div)`
   display: none;
   position: absolute;
   background: #ffffff;
@@ -43,7 +44,7 @@ const DropdownContent = styled.div`
   line-height: 150%;
   top: 30px;
 `;
-const DropdownContentLink = styled.div`
+const DropdownContentLink = styled(dpstyle.div)`
   float: none;
   color: black;
   padding: 12px 16px;
@@ -73,7 +74,7 @@ const Dropdown: SFC<IProps> = props => {
     <Fragment>
       <DropdownStyled>
         <DropdownBtn>
-          <DropdownLabel>{props.label}</DropdownLabel>
+          <DropdownLabel><TextLabel>{props.label}</TextLabel></DropdownLabel>
           <Icon name="downVector" />
         </DropdownBtn>
         <DropdownContent>

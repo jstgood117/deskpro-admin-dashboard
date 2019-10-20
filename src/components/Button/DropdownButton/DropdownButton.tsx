@@ -2,19 +2,20 @@ import React, { SFC, Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 import Icon from '../../Icon';
+import { dpstyle, TextLabel } from '../../Styled';
 
 export interface StyleProps {
   openState: boolean;
 }
 
-const DropdownLabel = styled.div`
+const DropdownLabel = styled(TextLabel)`
   padding-right: 12px;
+  color: #a9b0b0;
 `;
-const DropdownStyled = styled.div<StyleProps>`
+const DropdownStyled = styled(dpstyle.div)<StyleProps>`
   padding: 4px 10px;
   background: #ffffff;
-  border: 0.8px solid #a9b0b0;
-  box-sizing: border-box;
+  border: 1px solid #a9b0b0;
   border-radius: 3px;
   cursor: pointer;
   float: left;
@@ -29,7 +30,7 @@ const DropdownStyled = styled.div<StyleProps>`
   line-height: 150%;
   color: #a9b0b0;
 `;
-const DropdownBtn = styled.div`
+const DropdownBtn = styled(dpstyle.div)`
   font-family: Rubik;
   font-style: normal;
   font-weight: 500;
@@ -39,7 +40,7 @@ const DropdownBtn = styled.div`
   color: #a9b0b0;
   display: flex;
 `;
-const DropdownContent = styled.div`
+const DropdownContent = styled(dpstyle.div)`
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -54,7 +55,7 @@ const DropdownContent = styled.div`
   line-height: 150%;
   top: 40px;
 `;
-const DropdownContentPanel = styled.div`
+const DropdownContentPanel = styled(dpstyle.div)`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -62,7 +63,7 @@ const DropdownContentPanel = styled.div`
   left: 0;
   zindex: 0;
 `;
-const DropdownContentLink = styled.div`
+const DropdownContentLink = styled(dpstyle.div)`
   float: none;
   color: black;
   padding: 12px 16px;
@@ -74,7 +75,7 @@ const DropdownContentLink = styled.div`
   }
   z-index: 1;
 `;
-const StyledIcon = styled.div`
+const StyledIcon = styled(dpstyle.div)`
   display: flex;
   align-items: center;
   padding-right: 10px;

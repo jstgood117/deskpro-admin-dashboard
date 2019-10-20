@@ -4,6 +4,7 @@ import FilterButton from '../Button/FilterButton';
 import DropdownButton from '../Button/DropdownButton/DropdownButton';
 import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
+import { dpstyle, TextLabel } from '../Styled';
 
 export interface IProps {}
 
@@ -11,7 +12,7 @@ const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
 const ViewItems = [{ link: 'View1' }, { link: 'View2' }];
 
-const StyledTableAction = styled.div`
+const StyledTableAction = styled(dpstyle.div)`
   display: flex;
   align-items: center;
   background: #ffffff;
@@ -52,7 +53,7 @@ const TableActions: SFC<IProps> = props => {
             )}
             {props.filterMenu && (
               <FlexStyled style={{ paddingLeft: 10 }}>
-                <FilterButton>Filter</FilterButton>
+                <FilterButton><TextLabel>Filter</TextLabel></FilterButton>
               </FlexStyled>
             )}
           </FlexStyled>

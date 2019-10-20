@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import Tab from './Tab';
 import Dropdown from '../Dropdown';
 import { action } from '@storybook/addon-actions';
+import { dpstyle } from '../Styled';
 
-const TabBarStyled = styled.div`
+const TabBarStyled = styled(dpstyle.div)`
   display: flex;
   width: 100%;
   height: 32px;
