@@ -2,6 +2,7 @@ import { IPageData } from "./interfaces";
 import { Column } from "react-table";
 
 export const testTranslations = {
+  'test': 'Test',
   'admin.sidebar.setup': 'Setup',
   'admin.sidebar.setup.dashboard': 'Dashboard',
   'admin.sidebar.setup.wizard': 'Setup wizard',

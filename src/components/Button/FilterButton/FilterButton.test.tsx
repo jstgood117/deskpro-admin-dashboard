@@ -1,10 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../../test/enzyme';
 
 import FilterButton, { IProps } from './FilterButton';
-
-configure({adapter: new Adapter()});
 
 describe("Grid", () => {
   let props: IProps;

@@ -1,13 +1,8 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../test/enzyme';
 
 import Table from './TableMemory';
-import { ThemeProvider } from 'styled-components';
-import { DeskproAdminTheme } from '../Theme';
 import { ITableColumn } from '../../resources/interfaces';
-
-configure({adapter: new Adapter()});
 
 const testData = [
   {"id": 75950,"name": "Louella Wallace","age": 24,"phone": "+44 (0)203 437 7302","avatar": "https://randomuser.me/api/portraits/men/49.jpg"},
@@ -33,16 +28,12 @@ describe("Table", () => {
   const wrapper = (bShallow: boolean) => {
     if (!bShallow && !mountedTable) {
       mountedTable = mount(
-        <ThemeProvider theme={DeskproAdminTheme}>
           <Table {...props} />
-        </ThemeProvider>
       );
     }
     if (bShallow && !shallowTable) {
       shallowTable = shallow(
-        <ThemeProvider theme={DeskproAdminTheme}>
           <Table {...props} />
-        </ThemeProvider>
       );
     }
     return bShallow ? shallowTable : mountedTable;
@@ -66,17 +57,4 @@ describe("Table", () => {
 //      expect(wrapper(false).find('div').children().length).toBe(0);
     });
   });
-
-  describe("when tableData & columns are defined", () => {
-    beforeEach(() => {
-      // set up data?
-    });
-
-    it("renders all the rows into <MaterialTable>", () => {
-      // MaterialTable component becomes WithStyles (internal to material-table)
-      expect(wrapper(true).find('WithStyles(Component)').length).toBe(0);
-      // Don't test a sub-component
-//      expect(wrapper(false).find('person').length).toBe(props.tableData.length);
-    });
-  }); 
 })

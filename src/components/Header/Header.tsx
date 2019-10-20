@@ -6,8 +6,9 @@ import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
 import { renderToStaticMarkup } from 'react-dom/server';
 import TableActions from '../TableAction';
+import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 
-const HeaderStyled = styled.div<IHeader>`
+const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: ${props => props.theme.pagePadding};
   position: relative;
@@ -17,19 +18,6 @@ const HeaderStyled = styled.div<IHeader>`
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: contain;
-  & h1 {
-    color: ${props => props.theme.activeColour};
-    font-size: 40px;
-    margin-top: 0;
-    font-family: Rubik;
-  }
-  & p {
-    color: ${props => props.theme.greyDark};
-    font-size: 14px;
-    width: 35%;
-    font-family: Lato;
-    line-height: 150%;
-  }
   & button {
     outline: none;
     cursor: pointer;
@@ -37,7 +25,14 @@ const HeaderStyled = styled.div<IHeader>`
   }
 `;
 
-const ViewModeContainer = styled.div`
+const HeaderDescription = styled(dpstyle.p)`
+  color: ${props => props.theme.greyDark};
+  font-size: 14px;
+  width: 35%;
+  line-height: 150%;
+`;
+
+const ViewModeContainer = styled(dpstyle.div)`
   height: 34px;
   background-color: #fff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -94,24 +89,21 @@ export const HelpButton = styled.button`
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
 `;
 
-export const ActionContainer = styled.div`
+export const ActionContainer = styled(dpstyle.div)`
   display: flex;
   position: absolute;
   right: ${props => props.theme.pagePadding};
   bottom: ${props => props.theme.pagePadding};
 `;
 
-const Link = styled.a`
-  color: ${props => props.theme.brandPrimary};
-  text-decoration: underline;
-  cursor: pointer;
+const Link = styled(dpstyle.a)`
   margin-right: 20px;
   font-size: 15px;
   svg {
     margin-right: 10px;
   }
 `;
-const TableActionStyled = styled.div`
+const TableActionStyled = styled(dpstyle.div)`
   position: absolute;
   left: 33px;
   right: 27px;
@@ -166,22 +158,18 @@ const Header: SFC<IProps> = ({
     <ThemeProvider theme={DeskproAdminTheme}>
       <HeaderStyled illustration={illustration}>
         <div>
-          <h1>
-            <FormattedMessage id={title} />
-          </h1>
+          <HeadingText size={1} messageId={title} />
           {description && (
-            <p>
+            <HeaderDescription>
               <FormattedMessage id={description} />
-            </p>
+            </HeaderDescription>
           )}
           {links.length && (
             <div>
               {links.map((link, key) => (
                 <Link href={link.path} key={key}>
                   {link.icon && <Icon name={link.icon} />}
-                  <span>
-                    <FormattedMessage id={link.title} />
-                  </span>
+                  <TextLinkLabel messageId={link.title} />
                 </Link>
               ))}
             </div>

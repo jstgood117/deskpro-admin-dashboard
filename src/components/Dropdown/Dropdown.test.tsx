@@ -1,10 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../test/enzyme';
 
 import Dropdown, { IProps } from './Dropdown';
-
-configure({ adapter: new Adapter() });
 
 describe('Dropdown', () => {
   let mountedDropdown: any;
@@ -47,7 +44,7 @@ describe('Dropdown', () => {
         wrapper(false)
           .find('div')
           .children().length
-      ).toBe(8);
+      ).toBe(9);
     });
   });
   describe('when items is empty', () => {

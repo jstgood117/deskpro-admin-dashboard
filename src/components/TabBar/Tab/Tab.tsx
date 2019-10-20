@@ -1,17 +1,16 @@
 import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
+import { dpstyle } from '../../Styled';
 
 export interface IStyleProps {
   active: boolean;
 }
 
-const TabStyled = styled.div<IStyleProps>`
+const TabStyled = styled(dpstyle.div)<IStyleProps>`
   border-bottom: solid 1.5px ${props => (props.active ? '#1C3E55' : '#eff0f0')};
+  font-family: ${props => props.theme.headerFont};
   width: fit-content;
   height: 100%;
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: 500;
   font-size: 16px;
   line-height: 150%;
   display: flex;

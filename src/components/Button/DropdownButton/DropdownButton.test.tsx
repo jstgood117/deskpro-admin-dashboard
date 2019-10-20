@@ -1,10 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../../test/enzyme';
 
 import DropdownButton, { IProps } from './DropdownButton';
-
-configure({ adapter: new Adapter() });
 
 describe('DropdownButton', () => {
   let props: IProps;
@@ -53,7 +50,6 @@ describe('DropdownButton', () => {
     });
 
     it('renders div tags and svg tag', () => {
-      expect(wrapper(false).find('div').length).toBe(4);
       expect(wrapper(false).find('svg').length).toBe(2);
     });
   });

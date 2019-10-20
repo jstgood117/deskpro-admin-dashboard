@@ -25,6 +25,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.2.0",
     "react-table": "^7.0.0-beta.12",
+    "reflexbox": "^4.0.6",
     "rollbar": "^2.13.0",
     "styled-components": "^4.4.0",
     "typescript": "^3.6.4",
@@ -35,10 +36,12 @@
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@storybook/addon-a11y": "^5.2.3",
-    "@storybook/addon-actions": "^5.2.3",
+    "@storybook/addon-actions": "^5.2.4",
     "@storybook/addon-info": "^5.2.3",
     "@storybook/addon-knobs": "^5.2.3",
-    "@storybook/react": "^5.2.3",
+    "@storybook/addon-links": "^5.2.4",
+    "@storybook/addons": "^5.2.4",
+    "@storybook/react": "^5.2.4",
     "@types/debug": "^4.1.5",
     "@types/enzyme": "^3.10.3",
     "@types/enzyme-adapter-react-16": "^1.0.5",
@@ -49,6 +52,7 @@
     "@types/react-dom": "^16.9.1",
     "@types/react-modal": "^3.8.3",
     "@types/react-router-dom": "^5.1.0",
+    "@types/reflexbox": "^4.0.0",
     "@types/styled-components": "^4.1.19",
     "@types/warning": "^3.0.0",
     "awesome-typescript-loader": "^5.2.1",
@@ -65,8 +69,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook"
+    "storybook": "start-storybook -p 9009 -s public",
+    "storybook:build": "build-storybook",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"

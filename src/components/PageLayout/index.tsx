@@ -1,18 +1,15 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-
 import { DeskproAdminTheme } from '../Theme';
-import ErrorBoundary from '../Error/ErrorBoundary';
+import { dpstyle } from '../Styled';
 
 export const AppContainer = (props: any) => (
     <ThemeProvider theme={DeskproAdminTheme}>
-        <ErrorBoundary>
-            <PageContainer>{props.children}</PageContainer>
-        </ErrorBoundary>
+        <PageContainer>{props.children}</PageContainer>
     </ThemeProvider>
 );
 
-export const PageContainer = styled.div`
+export const PageContainer = styled(dpstyle.div)`
     position: absolute;
     top: 0;
     right: 0;

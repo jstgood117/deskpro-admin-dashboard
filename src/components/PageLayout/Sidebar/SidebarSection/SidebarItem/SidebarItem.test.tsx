@@ -1,18 +1,8 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { ThemeProvider } from 'styled-components';
-import { IntlProvider } from "react-intl";
+import { mount, shallow } from '../../../../../test/enzyme';
 
 import SidebarItem, { IProps } from './SidebarItem';
-import { DeskproAdminTheme } from '../../../../Theme';
 import { MemoryRouter } from 'react-router';
-
-configure({adapter: new Adapter()});
-
-const testTranslations = {
-  test: "Test",
-}
 
 describe("SidebarItem", () => {
   let props: IProps;
@@ -21,21 +11,13 @@ describe("SidebarItem", () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedSidebarItem) {
       mountedSidebarItem = bShallow ? shallow(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <ThemeProvider theme={DeskproAdminTheme}>
-            <MemoryRouter>
-              <SidebarItem {...props} />
-            </MemoryRouter>
-          </ThemeProvider>
-        </IntlProvider>
+          <MemoryRouter>
+            <SidebarItem {...props} />
+          </MemoryRouter>
       ) : mount(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <ThemeProvider theme={DeskproAdminTheme}>
-            <MemoryRouter>
-              <SidebarItem {...props} />
-            </MemoryRouter>
-          </ThemeProvider>
-        </IntlProvider>
+          <MemoryRouter>
+            <SidebarItem {...props} />
+          </MemoryRouter>
         );
     }
     return mountedSidebarItem;
@@ -43,7 +25,6 @@ describe("SidebarItem", () => {
 
   beforeEach(() => {
     props = {
-      key: 0,
       path: undefined,
       itemName: 'test'
     };

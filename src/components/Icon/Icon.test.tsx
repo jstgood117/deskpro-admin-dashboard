@@ -1,11 +1,8 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../test/enzyme';
 
 import Icon, { IProps } from './Icon';
 import { IconHelp } from './SVG';
-
-configure({adapter: new Adapter()});
 
 describe("Icon", () => {
   let props: IProps;

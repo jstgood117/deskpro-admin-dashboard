@@ -1,19 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { IntlProvider } from 'react-intl';
+import { mount, shallow } from '../../test/enzyme';
 
 import Error, { IProps, IStyleProps } from './Error';
-import { testTranslations } from '../../resources/constants';
-
-configure({adapter: new Adapter()});
-
-const testError = {
-  graphQLErrors: [
-    { message: 'error happened'},
-    { message: 'second error happened'},
-  ]
-}
 
 describe("Error", () => {
   let props: IProps & IStyleProps;
@@ -22,13 +10,9 @@ describe("Error", () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedError) {
       mountedError = bShallow ? shallow(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <Error {...props} />
-        </IntlProvider>
+        <Error {...props} />
       ) : mount(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <Error {...props} />
-        </IntlProvider>
+        <Error {...props} />
       );
     }
     return mountedError;

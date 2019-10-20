@@ -1,7 +1,6 @@
 import React, { SFC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import {IntlProvider} from 'react-intl';
-import { flatMap } from 'lodash';
 
 // import { testInitialData } from './resources/constants';
 //import Loading from './components/Loading';
@@ -11,7 +10,7 @@ import { QUERY_INITIAL } from './resources/graphql';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { SidebarContainer, AppContainer, BodyContainer } from './components/PageLayout';
 import Sidebar from './components/PageLayout/Sidebar';
-import { ISidebarItem } from './resources/interfaces';
+import { ISidebarItem, ISidebarSection } from './resources/interfaces';
 import PageType from './components/Page/PageType';
 
 const arrayToObject = (array: Array<any>) =>
@@ -20,10 +19,23 @@ const arrayToObject = (array: Array<any>) =>
 		return obj
 }, {})
 
-const collectNavItems = (is: any): ISidebarItem[] => {
-	const navItems = is.map((i: any) => i.navItems || []);
-	const x = flatMap(navItems, (i: any) => (i.navItems || []).concat(i));
-	return x;
+const collectNavItems = (sects: ISidebarSection[]): ISidebarItem[] => {
+	const all: ISidebarItem[] = [];
+
+	sects.forEach(section => {
+		if (section.navItems) {
+			section.navItems.forEach(i => {
+				all.push(i);
+				if (i.navItems) {
+					i.navItems.forEach(ii => {
+						all.push(ii);
+					});
+				}
+			});
+		}
+	});
+
+	return all;
 };
 
 const App: SFC = () => {

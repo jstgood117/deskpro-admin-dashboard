@@ -1,16 +1,12 @@
 import React, { SFC } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
+import { dpstyle } from '../Styled';
 
-const InputStyled = styled.input`
+const InputStyled = styled(dpstyle.input)`
   border-radius: 4px;
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
   font-size: 15px;
   line-height: 150%;
-  display: flex;
-  align-items: center;
   border: none;
   outline: none;
   height: 16px;
@@ -19,15 +15,10 @@ const InputStyled = styled.input`
   padding-left: 10px;
   color: #4C4F50;
   ::placeholder {
-    font-family: Rubik;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 150%;
     color: #8b9293;
   }
 `;
-const SearchWrapper = styled.div`
+const SearchWrapper = styled(dpstyle.div)`
   display: flex;
   background: #f7f7f7;
   max-width: 250px;

@@ -2,11 +2,15 @@ import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
-import useReactRouter from 'use-react-router';
+import { TextLabel } from '../../../../Styled';
 
-const SidebarItemStyled = styled(NavLink)`
-	padding: 10px 10px 10px 44px;
-	color: ${props => props.exact ? props.theme.brandPrimary : props.theme.staticColour};
+interface IStyleProps {
+  active?: boolean;
+}
+
+const SidebarItemStyled = styled(NavLink)<IStyleProps>`
+	padding: 10px 10px 10px 39px;
+	color: ${props => props.theme.staticColour};
 	text-decoration: none;
 	margin: 0;
 	overflow: hidden;
@@ -18,19 +22,30 @@ const SidebarItemStyled = styled(NavLink)`
 	}
 `
 
+const ItemName = styled(TextLabel)`
+	${SidebarItemStyled}.active & {
+		color: ${props => props.theme.brandPrimary};
+		font-weight: bold;
+	}
+`;
+
 export interface IProps {
-	key: any;
-	path?: string;
+	path: string;
 	itemName: string;
+	depth?: number;
 }
 
-const SidebarItem: SFC<IProps> = ({path, itemName}) => {
-	const { location } = useReactRouter();
+const SidebarItem: SFC<IProps> = ({path, itemName, depth}) => {
+	const style: React.CSSProperties = {};
+	if (depth) {
+		style.paddingLeft = (39 + ((depth||0)*15)) + 'px';
+	}
+
 	return (
-		<SidebarItemStyled to={path || ""} exact={location.pathname === path}>
-			<FormattedMessage id={itemName} />
+		<SidebarItemStyled to={path || "/"} exact={true} activeClassName="active" style={style}>
+			<ItemName><FormattedMessage id={itemName} /></ItemName>
 		</SidebarItemStyled>
 	);
-}
+};
 
 export default SidebarItem;
