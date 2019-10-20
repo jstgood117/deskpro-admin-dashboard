@@ -15,6 +15,27 @@ storiesOf('Icon',module)
 	.add('Agents', () => (
 		<Icon name="admin.sidebar.agents" />
 	))
+	.add('View Mode Table', () => (
+		<Icon name='viewMode.table' />
+	))
+	.add('View Mode List', () => (
+		<Icon name='viewMode.list' />
+	))
+	.add('View Mode Map', () => (
+		<Icon name='viewMode.map' />
+	))
+	.add('Plus', () => (
+		<Icon name='plus' />
+	))
+	.add('Question', () => (
+		<Icon name='question' />
+	))
+	.add('LoginLog', () => (
+		<Icon name='loginLog' />
+	))
+	.add('Settings', () => (
+		<Icon name='settings' />
+	))
 	.add('Down Vector', () => (
 		<Icon name='downVector' />
 	))

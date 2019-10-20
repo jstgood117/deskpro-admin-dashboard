@@ -38,17 +38,6 @@ const collectNavItems = (sects: ISidebarSection[]): ISidebarItem[] => {
 	return all;
 };
 
-const Debug = ({ p }: { p: any }) => {
-	if (p.path === "/agents") {
-		const metadataQuery = "query { page: agents_getAgentsPage { __typename, title, description, headerLinks { title, path }}}";
-		return (<PageType query={metadataQuery} />);
-	} else {
-		return (<div>
-			<textarea value={JSON.stringify(p)} style={{width: "50%", height: "500px", fontFamily: "Monospace"}} readOnly />
-		</div>);
-	}
-};
-
 const App: SFC = () => {
 	const locale = navigator.language;
 	console.log(`locale: ${locale}`)
@@ -78,8 +67,8 @@ const App: SFC = () => {
 				</SidebarContainer>
 				<BodyContainer>
 					<Switch>
-						{collectNavItems(data.adminInterface_getAdminInterfaceData.sidebar).map((i, idx) =>
-							i.path && <Route key={idx} exact path={i.path} render={() => <Debug p={i} />} />
+						{collectNavItems(data.adminInterface_getAdminInterfaceData.sidebar).map((sbObj, idx) =>
+							sbObj.path && <Route key={idx} exact path={sbObj.path} render={() => <PageType {...sbObj} />} />
 						)}
 					</Switch>
 				</BodyContainer>

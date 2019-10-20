@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 
-import Pagination from './Pagination';
 
-const TableStyled = styled.div`
+export const TableStyled = styled.div`
 	& table {
 		width: 100%;
 		border-collapse: collapse;
@@ -45,13 +43,7 @@ const TableStyled = styled.div`
 	}
 `
 
-/* export interface IProps {
-	data: Array<any>,
-	columns: Array<Column>,
-	options?: {
-		[key: string]: any,
-	}
-} */
+// TODO how does this come through in the agents_getAgentsPage query?
 
 /* const formattedNameAvatar = (props: any) => {
 	const checkArr = Object.keys(props);
@@ -62,17 +54,22 @@ const TableStyled = styled.div`
 }
 const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
 
-
-const transformColumnData = (columns) => {
-	columns.map((column) => {
-		switch (column.id) {
+export const transformColumnData = (columns, intl) => {
+  let newCols = columns.map( column => {
+    let newCol = {
+			id: column.title,
+			// Backend payload phrases are missing admin_common - should this be hard-coded like this?
+			Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
+			accessor: column.data[0].path, // TODO what is intended if array length > 1?
+    }
+		switch (column.title) {
 			case 'selection':
-				column.Header = ({ getToggleAllRowsSelectedProps }) => (
+				newCol.Header = ({ getToggleAllRowsSelectedProps }) => (
 					<div>
 						<input type="checkbox" {...getToggleAllRowsSelectedProps()} />
 					</div>
 				);
-				column.Cell = ({ row }) => (
+				newCol.Cell = ({ row }) => (
 					<div>
 						<input type="checkbox" {...row.getToggleRowSelectedProps()} />
 					</div>
@@ -82,95 +79,10 @@ const transformColumnData = (columns) => {
 				column.render = formattedNameAvatar(column.props);
 				column.customSort = sortNameAvatar; */
 				default:
-		}
-		return column;
+    }
+		return newCol;
 	});
 
-	return columns;
+	return newCols;
 }
 
-const Table = ({data,columns,fetchData,loading,pageCount:controlledPageCount,options}) => {
-//	const memoizedDataCols: Array<Column> = useMemo(() => columns, [columns]);
-//	const memoizedDataRows: Array<any> = useMemo(() => data, [data]);
-	transformColumnData([...columns]);
-
-	const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-		prepareRow,
-		page,
-		canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-		setPageSize,
-		state: { pageIndex, pageSize }	
-  } = useTable(
-		{
-    	columns,
-			data,
-			initialState: { pageIndex: 0 },
-			manualPagination: true,
-			pageCount: controlledPageCount,
-		},
-		useSortBy,
-		usePagination,
-		useRowSelect,
-	)
-
-	useEffect(() => {
-    console.log(`>>> page: ${pageIndex}`);
-    fetchData({ pageIndex, pageSize });
-  }, [fetchData, pageIndex, pageSize]);
-
-	// TODO: replace up/down characters with SVGs from Figma
-
-	return (
-		<TableStyled>
-			<table {...getTableProps()}>
-				<thead>
-					{headerGroups.map(headerGroup => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map(column => (
-								<th {...column.getHeaderProps(column.getSortByToggleProps())}>
-									{column.render('Header')}
-									<span>{column.isSorted ? column.isSortedDesc ? ' v' : ' ^' : ''}
-									</span>
-								</th>
-							))}
-						</tr>
-					))}
-				</thead>
-				<tbody {...getTableBodyProps()}>
-					{page.map(
-						(row, i) => {
-							prepareRow(row);
-							return (
-								<tr {...row.getRowProps()}>
-									{row.cells.map(cell => {
-										return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-									})}
-								</tr>
-							);
-						}
-					)}
-					<tr>
-						{loading ? ( <td>Loading...</td> ) : (
-							<td>
-								Showing {page.length} of ~{controlledPageCount * pageSize}{" "}
-								results
-							</td>
-						)}
-					</tr>
-				</tbody>
-			</table>
-			{!loading && <Pagination pageIndex={pageIndex} pageCount={pageCount} pageSize={pageSize} pageOptions={pageOptions} canPreviousPage={canPreviousPage} canNextPage={canNextPage} gotoPage={gotoPage} previousPage={previousPage} nextPage={nextPage} setPageSize={setPageSize} />}
-		</TableStyled>
-	);
-}
-
-export default Table;

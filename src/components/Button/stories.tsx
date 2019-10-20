@@ -11,20 +11,9 @@ const DropdownItems = [
   { link: 'Link3' },
   { link: 'Link4' }
 ];
-const SortItems = [
-  { link: 'Sort1' },
-  { link: 'Sort2' },
-  { link: 'Sort3' }
-];
-const GroupItems = [
-  { link: 'Group1' },
-  { link: 'Group2' },
-  { link: 'Group3' }
-];
-const ViewItems = [
-  { link: 'View1' },
-  { link: 'View2' }
-];
+const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
+const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
+const ViewItems = [{ link: 'View1' }, { link: 'View2' }];
 
 storiesOf('Button', module)
   .add('primary', () => (
@@ -43,16 +32,35 @@ storiesOf('Button', module)
     </Button>
   ))
   .add('Dropdown', () => (
-    <DropdownButton label="Dropdown" items={DropdownItems} />
+    <DropdownButton
+      label="Dropdown"
+      items={DropdownItems}
+      onChangeOption={action('clicked onChangeOption')}
+    />
   ))
   .add('Sort', () => (
-    <DropdownButton label="Sort" items={SortItems} iconName="sort" />
+    <DropdownButton
+      label="Sort"
+      items={SortItems}
+      iconName="sort"
+      onChangeOption={action('clicked onChangeOption')}
+    />
   ))
   .add('Group', () => (
-    <DropdownButton label="Group" items={GroupItems} iconName="group" />
+    <DropdownButton
+      label="Group"
+      items={GroupItems}
+      iconName="group"
+      onChangeOption={action('clicked onChangeOption')}
+    />
   ))
   .add('View', () => (
-    <DropdownButton label="View" items={ViewItems} iconName="view" />
+    <DropdownButton
+      label="View"
+      items={ViewItems}
+      iconName="view"
+      onChangeOption={action('clicked onChangeOption')}
+    />
   ))
   .add('Filter', () => (
     <FilterButton onClick={action('clicked')}>Filter</FilterButton>

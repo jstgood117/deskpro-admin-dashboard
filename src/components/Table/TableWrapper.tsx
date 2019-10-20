@@ -1,65 +1,66 @@
-import React, { SFC, Fragment, useCallback, useState } from 'react';
+import React, { SFC, useCallback, useState, Fragment } from 'react';
 import { withApollo } from 'react-apollo';
 import { gql, ApolloClient } from 'apollo-boost';
+import { injectIntl } from 'react-intl';
 
-import { testTableColumns } from '../../resources/constants';
+// import { testTableColumns } from '../../resources/constants';
 import { ITableSetup } from '../../resources/interfaces';
 
-import Table from './Table';
-import Loading from '../Loading';
-import Error from '../Error';
+import { transformColumnData } from './Table';
+import TableMemory from './TableMemory';
+import TableAsync from './TableAsync';
 import { logError } from '../Error/ErrorBoundary';
 
 interface IProps {
-	client: ApolloClient<any>;
+	intl: any,
+	client: ApolloClient<any>,
+	dataQuery: string,
+	tableDef: ITableSetup,
 }
-const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery}) => {
+
+// TODO how does memory vs async choice come through in the agents_getAgentsPage query?
+const bChooseMemoryTable = true;
+
+const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef}) => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [pageCount, setPageCount] = useState(0);
 //	const fetchIdRef = useRef(0);
 
+	// TODO remove this when backend data is fixed
+	const dataQuery2 = "query { results: agents_getAgents(filter: { is_deleted: false }) { id, name, first_name, last_name, primary_email, emails, can_admin, can_agent }}"
+
+	const getData = () => {
+		client.query({ query: gql`${dataQuery2}`, errorPolicy: 'all' }).then(result => {
+			setData(result.data.results);
+			setPageCount(result.data.results.length / 20); // TODO non-hardcoded page size
+			setLoading(false);
+		}).catch(err => logError(err))
+	}
+
 	const fetchData = useCallback(({ pageSize, pageIndex }) => {
-			//	const fetchID = ++fetchIdRef.current;
 		if (!loading) {
 			setLoading(true);
-			console.log('loading data...')
-
-			client.query({ query: gql`${dataQuery}`, errorPolicy: 'all' }).then(result => {
-				setData(result.data.agents_getAgents); // TODO this needs to be generic!
-				setPageCount(100); // TODO this need to be returned in results
-				setLoading(false);
-			}).catch(err => logError(err))
+			console.log('Table callback, loading data...')
+			getData();
 		}		
-			
-/*			if (dataRows) {
-		//		if (fetchID === fetchIdRef.current) {
-				const startRow = pageSize * pageIndex;
-				const endRow = startRow + pageSize;
-				setData(dataRows.slice(startRow, endRow));
-		//		setPageCount(NEEDS TO BE RETURNED FROM QUERY);
-				setLoading(false);
-			} */
-			
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// disable warning, otherwise component is constantly refreshed
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dataQuery]);
 		
-//		const { loading: loadingCols, error: errorCols, data: dataCols } = useQuery(gql`${metadataQuery}`, { errorPolicy: 'all' }););
-//		if (dataCols) console.log(dataCols)
-
-	// test data for now
-	const loadingCols = false;
-	const errorCols = false;
-	const dataCols = testTableColumns;
 	const options = {};
+
+	if (bChooseMemoryTable) getData();
 
 	return (
 		<Fragment>
-			{loadingCols && <Loading />}
-			{errorCols && <Error />}
-			{dataCols && <Table
+			{bChooseMemoryTable && <TableMemory
 				data={data}
-				columns={dataCols}
+				columns={transformColumnData([...tableDef.columns], intl)}
+				options={options} />}
+			{!bChooseMemoryTable && <TableAsync
+				data={data}
+				columns={tableDef.columns}
 				fetchData={fetchData}
 				loading={loading}
 				pageCount={pageCount}
@@ -68,4 +69,4 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({client,dataQuery}) => {
 	);
 }
 
-export default withApollo<ITableSetup & IProps>(TableWrapper);
+export default injectIntl(withApollo<ITableSetup & IProps>(TableWrapper));

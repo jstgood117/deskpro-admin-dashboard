@@ -3,11 +3,12 @@ import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../../Theme';
 import Icon from '../../Icon';
+import { action } from '@storybook/addon-actions';
 
 const ButtonStyled = styled.button`
   border-radius: 3px;
   padding: 4px 10px;
-  border: 0.8px solid #a9b0b0;
+  border: 0.8px solid #a9b0b0 !important;
   outline: none;
   box-sizing: border-box;
   background: #ffffff;
@@ -34,7 +35,7 @@ export interface IProps {
 
 const FilterButton: SFC<IProps> = props => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <ButtonStyled onClick={props.onClick}>
+    <ButtonStyled onClick={action('clicked Filter Button')}>
       <StyledIcon>
         <Icon name="filter" />
       </StyledIcon>

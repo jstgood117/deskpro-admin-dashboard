@@ -41,7 +41,7 @@ const DropdownContent = styled.div`
   font-weight: normal;
   font-size: 15px;
   line-height: 150%;
-  top: 40px;
+  top: 30px;
 `;
 const DropdownContentLink = styled.div`
   float: none;
@@ -62,10 +62,13 @@ interface IItemProps {
 export interface IProps {
   label: string;
   items: IItemProps[];
-  onClick?: (e: any) => void;
+  onChangeOption?: (option: string) => void;
 }
 
 const Dropdown: SFC<IProps> = props => {
+  function changeOption(option: string) {
+    props.onChangeOption(option);
+  }
   return (
     <Fragment>
       <DropdownStyled>
@@ -76,7 +79,12 @@ const Dropdown: SFC<IProps> = props => {
         <DropdownContent>
           {props.items.map(item => {
             return (
-              <DropdownContentLink  key={item.id} onClick={props.onClick}>
+              <DropdownContentLink
+                key={item.id}
+                onClick={() => {
+                  changeOption(item.link);
+                }}
+              >
                 {item.link}
               </DropdownContentLink>
             );
