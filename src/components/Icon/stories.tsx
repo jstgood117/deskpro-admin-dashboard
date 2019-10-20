@@ -56,4 +56,7 @@ storiesOf('Icon',module)
 	))
 	.add('Help', () => (
 		<Icon name='admin.sidebar.help.helpCentre' />
+	))
+	.add('Indeterminate CheckBox', () => (
+		<Icon name='checkbox.indeterminate' />
 	));

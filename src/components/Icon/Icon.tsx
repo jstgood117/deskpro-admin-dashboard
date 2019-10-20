@@ -18,7 +18,8 @@ import {
   IconQuestion,
   IconLoginLog,
   IconSettings,
-  Illustration
+  Illustration,
+  IconIndeterminateCheckBox
 } from './SVG';
 
 export interface IProps {
@@ -63,6 +64,8 @@ const Icon: SFC<IProps> = props => {
       return <IconGroup />;
     case 'view':
       return <IconView />;
+    case 'checkbox.indeterminate':
+      return <IconIndeterminateCheckBox />;
     default:
       return <IconSetup />;
   }
