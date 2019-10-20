@@ -1,10 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../test/enzyme';
 
 import Avatar, { IProps } from './Avatar';
-
-configure({ adapter: new Adapter() });
 
 describe('Avatar', () => {
   let props: IProps;

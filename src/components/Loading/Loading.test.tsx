@@ -1,12 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { IntlProvider } from 'react-intl';
+import { mount, shallow } from '../../test/enzyme';
 
 import Loading, { IProps, IStyleProps } from './Loading';
-import { testTranslations } from '../../resources/constants';
-
-configure({adapter: new Adapter()});
 
 describe("Loading", () => {
   let props: IProps & IStyleProps;
@@ -15,13 +10,9 @@ describe("Loading", () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedLoading) {
       mountedLoading = bShallow ? shallow(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <Loading {...props} />
-        </IntlProvider>
+        <Loading {...props} />
       ) : mount(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <Loading {...props} />
-        </IntlProvider>
+        <Loading {...props} />
       );
     }
     return mountedLoading;

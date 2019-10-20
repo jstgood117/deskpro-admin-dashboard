@@ -1,10 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
+import { mount, shallow } from '../../test/enzyme';
 
 import TableActions, { IProps } from './TableActions';
-
-configure({ adapter: new Adapter() });
 
 describe('TableActions', () => {
   let props: IProps;

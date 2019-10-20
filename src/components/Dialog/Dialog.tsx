@@ -20,7 +20,7 @@ const ModalAdapter: SFC<IProps> = ({
   ...props
 }) => {
   if (!props.appElement) {
-    Modal.setAppElement('#root');
+    Modal.setAppElement('body');
   }
 
   const contentClassName = `${className}__content`;

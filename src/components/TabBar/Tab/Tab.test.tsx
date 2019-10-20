@@ -1,12 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { IntlProvider } from 'react-intl';
+import { mount, shallow } from '../../../test/enzyme';
 
 import Tab, { IProps } from './Tab';
-import { testTranslations } from '../../../resources/constants';
-
-configure({ adapter: new Adapter() });
 
 describe('Tab', () => {
   let props: IProps;
@@ -16,13 +11,9 @@ describe('Tab', () => {
     if (!mountedTab) {
       mountedTab = bShallow
         ? shallow(
-        <IntlProvider locale='en' messages={testTranslations}>
           <Tab {...props} />
-        </IntlProvider>
       ) : mount(
-        <IntlProvider locale='en' messages={testTranslations}>
           <Tab {...props} />
-        </IntlProvider>
       );
     }
     return mountedTab;

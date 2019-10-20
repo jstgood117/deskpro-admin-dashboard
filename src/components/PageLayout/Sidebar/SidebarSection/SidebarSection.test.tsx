@@ -1,15 +1,9 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { IntlProvider } from "react-intl";
+import { mount, shallow } from '../../../../test/enzyme';
 
 import SidebarSection, { IProps } from './SidebarSection';
 import Icon from '../../../Icon';
-import { ThemeProvider } from 'styled-components';
-import { DeskproAdminTheme } from '../../../Theme';
 import { MemoryRouter } from 'react-router';
-
-configure({adapter: new Adapter()});
 
 const testTranslations = {
   "test": "Test",
@@ -23,21 +17,13 @@ describe("SidebarSection", () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedSidebarSection) {
       mountedSidebarSection = bShallow ? shallow(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <ThemeProvider theme={DeskproAdminTheme}>
-            <MemoryRouter>
-              <SidebarSection {...props} />
-            </MemoryRouter>
-          </ThemeProvider>
-        </IntlProvider>
+          <MemoryRouter>
+            <SidebarSection {...props} />
+          </MemoryRouter>
       ) : mount(
-        <IntlProvider locale='en' messages={testTranslations}>
-          <ThemeProvider theme={DeskproAdminTheme}>
-            <MemoryRouter>
-              <SidebarSection {...props} />
-            </MemoryRouter>
-          </ThemeProvider>
-        </IntlProvider>
+          <MemoryRouter>
+            <SidebarSection {...props} />
+          </MemoryRouter>
       );
     }
     return mountedSidebarSection;

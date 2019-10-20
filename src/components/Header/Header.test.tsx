@@ -1,12 +1,7 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { IntlProvider } from 'react-intl';
+import { mount, shallow } from '../../test/enzyme';
 
 import Header, { IProps } from './Header';
-import { testTranslations } from '../../resources/constants';
-
-configure({ adapter: new Adapter() });
 
 describe('Header', () => {
   let props: IProps;
@@ -16,14 +11,10 @@ describe('Header', () => {
     if (!mountedHeader) {
       mountedHeader = bShallow
         ? shallow(
-            <IntlProvider locale="en" messages={testTranslations}>
-              <Header {...props} />
-            </IntlProvider>
+            <Header {...props} />
           )
         : mount(
-            <IntlProvider locale="en" messages={testTranslations}>
-              <Header {...props} />
-            </IntlProvider>
+            <Header {...props} />
           );
     }
     return mountedHeader;

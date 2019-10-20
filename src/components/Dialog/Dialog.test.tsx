@@ -1,12 +1,6 @@
 import React from 'react';
-import Adapter from 'enzyme-adapter-react-16';
-import { configure, mount, shallow } from 'enzyme';
-import { IntlProvider } from 'react-intl';
-
+import { mount, shallow } from '../../test/enzyme';
 import Dialog, { IProps } from './Dialog';
-import { testTranslations } from '../../resources/constants';
-
-configure({ adapter: new Adapter() });
 
 describe('Dialog', () => {
   let props: IProps;
@@ -16,14 +10,10 @@ describe('Dialog', () => {
     if (!mountedDialog) {
       mountedDialog = bShallow
         ? shallow(
-            <IntlProvider locale="en" messages={testTranslations}>
               <Dialog {...props} />
-            </IntlProvider>
           )
         : mount(
-            <IntlProvider locale="en" messages={testTranslations}>
-              <Dialog appElement={document.createElement('div')} {...props} />
-            </IntlProvider>
+              <Dialog {...props} />
           );
     }
     return mountedDialog;

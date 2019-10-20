@@ -282,7 +282,7 @@ export const HeadingText = ({ size, messageId, ...rest}: any & { messageId?: str
     );
 
     if (messageId) {
-        rest.children = [<span><FormattedMessage id={messageId} /></span>];
+        rest.children = <span><FormattedMessage id={messageId} /></span>;
     }
 
     switch (s) {
