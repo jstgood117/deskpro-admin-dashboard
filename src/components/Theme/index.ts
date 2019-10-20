@@ -19,6 +19,85 @@ export const DeskproAdminTheme = {
   pageHeader: '#E1EEFB',
 
   pagePadding: '34px',
-}
+
+  h1: {
+    fontFamily: 'Rubik, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    fontSize: '28px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  h2: {
+    fontFamily: 'Rubik, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '18px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  h3: {
+    fontFamily: 'Rubik, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '16px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  h4: {
+    fontFamily: 'Rubik, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    fontSize: '16px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  h5: {
+    fontFamily: 'Rubik, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '15px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  h6: {
+    fontFamily: 'Rubik, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 500,
+    fontSize: '15px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  p1: {
+    fontFamily: 'Lato, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  p2: {
+    fontFamily: 'Lato, sans-serif',
+    fontSize: '14px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  s1: {
+    fontFamily: 'Lato, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '12px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  },
+  s2: {
+    fontFamily: 'Lato, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '12px',
+    lineHeight: '150%',
+    color: '#4C4F50'
+  }
+};
 
 export default {};

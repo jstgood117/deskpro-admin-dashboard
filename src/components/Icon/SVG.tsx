@@ -320,5 +320,25 @@ export const Illustration: SFC = () => (
   </svg>
 );
 
+export const IconIndeterminateCheckBox: SFC = () => (
+  <svg
+    width="8"
+    height="2"
+    viewBox="0 0 8 2"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <line
+      x1="0.75"
+      y1="1.25"
+      x2="7.25"
+      y2="1.25"
+      stroke="white"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 export default {};
