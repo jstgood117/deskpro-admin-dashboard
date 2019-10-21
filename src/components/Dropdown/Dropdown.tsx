@@ -19,6 +19,7 @@ const DropdownStyled = styled(dpstyle.div)`
       flex-direction: column;
     }
   }
+  min-height: 32px;
 `;
 const DropdownBtn = styled(dpstyle.div)`
   font-family: Rubik;
