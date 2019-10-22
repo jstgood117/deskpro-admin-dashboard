@@ -3,6 +3,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 
 import Checkbox, { IProps } from './Checkbox';
+import { ThemeProvider } from 'styled-components';
+import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
@@ -13,8 +15,16 @@ describe('Checkbox', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedCheckbox) {
       mountedCheckbox = bShallow
-        ? shallow(<Checkbox {...props} />)
-        : mount(<Checkbox {...props} />);
+        ? shallow(
+            <ThemeProvider theme={DeskproAdminTheme}>
+              <Checkbox {...props} />
+            </ThemeProvider>
+          )
+        : mount(
+            <ThemeProvider theme={DeskproAdminTheme}>
+              <Checkbox {...props} />
+            </ThemeProvider>
+          );
     }
     return mountedCheckbox;
   };

@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import Button from './Button';
 import FilterButton from './FilterButton/FilterButton';
 import DropdownButton from './DropdownButton/DropdownButton';
+import IconButton from './IconButton';
 
 const DropdownItems = [
   { link: 'Link1' },
@@ -32,36 +33,49 @@ storiesOf('Button', module)
     </Button>
   ))
   .add('Dropdown', () => (
-    <DropdownButton
-      label="Dropdown"
-      items={DropdownItems}
-      onChangeOption={action('clicked onChangeOption')}
-    />
+    <DropdownButton label="Dropdown" items={DropdownItems} />
   ))
   .add('Sort', () => (
-    <DropdownButton
-      label="Sort"
-      items={SortItems}
-      iconName="sort"
-      onChangeOption={action('clicked onChangeOption')}
-    />
+    <DropdownButton label="Sort" items={SortItems} iconName="sort" />
   ))
   .add('Group', () => (
-    <DropdownButton
-      label="Group"
-      items={GroupItems}
-      iconName="group"
-      onChangeOption={action('clicked onChangeOption')}
-    />
+    <DropdownButton label="Group" items={GroupItems} iconName="group" />
   ))
   .add('View', () => (
-    <DropdownButton
-      label="View"
-      items={ViewItems}
-      iconName="view"
-      onChangeOption={action('clicked onChangeOption')}
-    />
+    <DropdownButton label="View" items={ViewItems} iconName="view" />
   ))
   .add('Filter', () => (
     <FilterButton onClick={action('clicked')}>Filter</FilterButton>
+  ))
+  .add('button/small/icon/primary', () => (
+    <IconButton
+      icon="plus"
+      size="small"
+      styleType="primary"
+      onClick={action('clicked')}
+    />
+  ))
+  .add('button/small/icon/secondary', () => (
+    <IconButton
+      icon="plus"
+      size="small"
+      styleType="secondary"
+      onClick={action('clicked')}
+    />
+  ))
+  .add('button/medium/icon/primary', () => (
+    <IconButton
+      icon="plus"
+      size="medium"
+      styleType="primary"
+      onClick={action('clicked')}
+    />
+  ))
+  .add('button/medium/icon/secondary', () => (
+    <IconButton
+      icon="plus"
+      size="medium"
+      styleType="secondary"
+      onClick={action('clicked')}
+    />
   ));

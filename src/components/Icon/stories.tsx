@@ -59,4 +59,7 @@ storiesOf('Icon',module)
 	))
 	.add('Indeterminate CheckBox', () => (
 		<Icon name='checkbox.indeterminate' />
+	))
+	.add('Close Icon', () => (
+		<Icon name='close' />
 	));
