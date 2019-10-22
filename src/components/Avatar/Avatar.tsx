@@ -6,12 +6,14 @@ import Icon from '../Icon';
 
 interface ImageProps {
   selected?: boolean;
+  width?: number;
+  height?: number;
 }
 const AvatarContainer = styled.div<ImageProps>`
   img,
   svg {
-    width: 25px;
-    height: 25px;
+    width: ${props => (props.width ? `${props.width}px` : '25px')};
+    height: ${props => (props.width ? `${props.height}px` : '25px')};
     border-radius: 50%;
     object-fit: cover;
     box-shadow: 0px 3px 4px ${props => props.theme.pageHeader};
@@ -28,6 +30,7 @@ interface ITextProps {
   color: string;
 }
 const Text = styled.div<ITextProps>`
+  font-family: Lato, sans-serif;
   width: 22px;
   height: 22px;
   line-height: 22px;
@@ -51,6 +54,8 @@ export interface IProps {
   content: string;
   textColor?: string;
   textBackgroundColor?: string;
+  width?: number;
+  height?: number;
 }
 
 const Avatar: SFC<IProps> = ({
@@ -58,10 +63,12 @@ const Avatar: SFC<IProps> = ({
   type,
   content,
   textColor,
-  textBackgroundColor
+  textBackgroundColor,
+  width,
+  height
 }) => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <AvatarContainer selected={selected}>
+    <AvatarContainer selected={selected} width={width} height={height}>
       {type === 'image' && <img src={content} alt="avatar" />}
 
       {type === 'svg' && <Icon name={content} />}

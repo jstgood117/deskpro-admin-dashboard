@@ -52,7 +52,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
         );
       })}
       <Dropdown
-        label="Menu"
+        label="More"
         items={DropdownItems}
         onChangeOption={action('clicked Tab Option')}
       />
