@@ -53,7 +53,9 @@ const PinkButton = styled.button<IStyleProps>`
   font-size: 12px;
   line-height: 150%;
   cursor: pointer;
-  outline: none;
+	outline: none;
+	min-width: 105px;
+	padding: 0px 10px;
   height: ${props =>
     props.styles && props.styles.height ? props.styles.height : 'inherit'};
   color: ${props =>
@@ -73,6 +75,8 @@ const OutlineGrayButton = styled.button<IStyleProps>`
   line-height: 150%;
 	outline: none;
 	cursor: pointer;
+	min-width: 105px;
+	padding: 0px 10px;
   height: ${props =>
     props.styles && props.styles.height ? props.styles.height : 'inherit'};
 		&:hover {

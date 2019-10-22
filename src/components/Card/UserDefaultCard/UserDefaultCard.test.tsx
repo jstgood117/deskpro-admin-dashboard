@@ -34,7 +34,8 @@ describe('Card', () => {
   beforeEach(() => {
     props = {
       checkbox: true,
-      userDetails: userDetails
+      userDetails: userDetails,
+      styleType: 'default1'
     };
   });
 

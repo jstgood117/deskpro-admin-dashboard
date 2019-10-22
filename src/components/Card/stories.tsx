@@ -14,9 +14,7 @@ const userDetails = {
     { text: 'C', color: '#F8AF3C', textBackgroundColor: '#FFF8E1' }
   ],
   avatar:
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
-  avatarWidth: 70,
-  avatarHeight: 70
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
 };
 
 storiesOf('Card', module)
@@ -25,6 +23,17 @@ storiesOf('Card', module)
       <Card />
     </div>
   ))
-  .add('default card with checkbox - dummy data', () => (
-    <UserDefaultCard checkbox={true} userDetails={userDetails} />
+  .add('default1 card without dummy data', () => (
+    <UserDefaultCard
+      checkbox={false}
+      styleType="default1"
+      userDetails={userDetails}
+    />
+  ))
+  .add('default2 card with dummy data', () => (
+    <UserDefaultCard
+      checkbox={true}
+      styleType="default2"
+      userDetails={userDetails}
+    />
   ));

@@ -19,12 +19,15 @@ export interface userType {
   userMail?: string;
   userTexts?: userTextDetail[];
   avatar?: string;
-  avatarWidth?: number;
-  avatarHeight?: number;
 }
 export interface IProps {
   checkbox: boolean;
   userDetails?: userType;
+  styleType: 'default1' | 'default2';
+}
+
+interface StyleProps {
+  styleType: 'default1' | 'default2';
 }
 
 const CardDefaultStyled = styled.div`
@@ -43,8 +46,8 @@ const Ellipse = styled.div`
 `;
 const CheckboxWrapper = styled.div`
   position: absolute;
-  left: 15px;
-  top: 15px;
+  left: 12px;
+  top: 12px;
 `;
 
 const ContentWrapper = styled.div`
@@ -60,11 +63,17 @@ const AvatarWrapper = styled.div`
   padding: 15px;
 `;
 
-const StyledProperty = styled.div`
+const TextAvatarStyled = styled.div`
   padding-left: 5px;
   padding-right: 5px;
 `;
-const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails }) => {
+const StyledPermissionBtn = styled.div<StyleProps>`
+  padding-right: ${props => (props.styleType === 'default1' ? '5px' : '25px')};
+`;
+const StyledAdminBtn = styled.div<StyleProps>`
+  padding-left: ${props => (props.styleType === 'default1' ? '5px' : '25px')};
+`;
+const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails, styleType }) => {
   const [checked, setChecked] = useState(false);
   return (
     <CardDefaultStyled>
@@ -85,31 +94,47 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails }) => {
           <ContentWrapper>
             <AvatarWrapper>
               <Avatar
-                width={userDetails.avatarWidth}
-                height={userDetails.avatarHeight}
+                width={styleType === 'default1' ? 70 : 60}
+                height={styleType === 'default1' ? 70 : 60}
                 type="image"
                 content={userDetails.avatar}
               />
             </AvatarWrapper>
-            <H2 style={{ paddingBottom: 10 }}>{userDetails.userName}</H2>
-            <P3 style={{ paddingBottom: 3 }}>{userDetails.userNumber}</P3>
-            <P3 style={{ paddingBottom: 10 }}>{userDetails.userMail}</P3>
-            <div style={{ display: 'flex', paddingBottom: 10 }}>
+            <H2 style={{ paddingBottom: styleType === 'default1' ? 10 : 8 }}>
+              {userDetails.userName}
+            </H2>
+            <P3 style={{ paddingBottom: styleType === 'default1' ? 3 : 0 }}>
+              {userDetails.userNumber}
+            </P3>
+            <P3 style={{ paddingBottom: styleType === 'default1' ? 10 : 9 }}>
+              {userDetails.userMail}
+            </P3>
+            <div
+              style={{
+                display: 'flex',
+                paddingBottom: styleType === 'default1' ? 10 : 13
+              }}
+            >
               {userDetails.userTexts &&
                 userDetails.userTexts.length > 0 &&
                 userDetails.userTexts.map((textDetails, Index: number) => (
-                  <StyledProperty key={Index}>
+                  <TextAvatarStyled key={Index}>
                     <Avatar
                       type="text"
                       content={textDetails.text}
                       textColor={textDetails.color}
                       textBackgroundColor={textDetails.textBackgroundColor}
                     />
-                  </StyledProperty>
+                  </TextAvatarStyled>
                 ))}
             </div>
-            <div style={{ display: 'flex', paddingBottom: 15 }}>
-              <StyledProperty>
+            <div
+              style={{
+                display: 'flex',
+                paddingBottom: styleType === 'default1' ? 16 : 15
+              }}
+            >
+              <StyledPermissionBtn styleType={styleType}>
                 <Button
                   styleType="outlineGray"
                   styles={{ height: '22px' }}
@@ -117,8 +142,8 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails }) => {
                 >
                   All Permissions
                 </Button>
-              </StyledProperty>
-              <StyledProperty>
+              </StyledPermissionBtn>
+              <StyledAdminBtn styleType={styleType}>
                 <Button
                   styleType="pink"
                   styles={{ height: '22px' }}
@@ -126,7 +151,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails }) => {
                 >
                   Administrator
                 </Button>
-              </StyledProperty>
+              </StyledAdminBtn>
             </div>
           </ContentWrapper>
         )}
