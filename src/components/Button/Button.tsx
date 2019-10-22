@@ -5,9 +5,9 @@ import { DeskproAdminTheme } from '../Theme';
 
 export interface IStyleProps {
   styleType: 'primary' | 'secondary' | 'pink' | 'outlineGray' | 'tertiary';
-   styles?: CSSProperties;
-   size?: 'small' | 'medium';
-   className?: string;
+  styles?: CSSProperties;
+  size?: 'small' | 'medium';
+  className?: string;
 }
 
 const ButtonStyled = styled.button<IStyleProps>`
@@ -34,7 +34,11 @@ const ButtonStyled = styled.button<IStyleProps>`
   outline: none;
 
   height: ${props =>
-    props.styles && props.styles.height ? props.styles.height : props.size === 'medium' ? 34 : 28};
+    props.styles && props.styles.height
+      ? props.styles.height
+      : props.size === 'medium'
+      ? 34
+      : 28};
 
   &:hover {
     background-color: ${props =>
@@ -54,7 +58,8 @@ const PinkButton = styled.button<IStyleProps>`
   line-height: 150%;
   cursor: pointer;
 	outline: none;
-	min-width: 105px;
+	width: ${props =>
+    props.styles && props.styles.width ? props.styles.width : 'inherit'};
 	padding: 0px 10px;
   height: ${props =>
     props.styles && props.styles.height ? props.styles.height : 'inherit'};
@@ -75,8 +80,9 @@ const OutlineGrayButton = styled.button<IStyleProps>`
   line-height: 150%;
 	outline: none;
 	cursor: pointer;
-	min-width: 105px;
 	padding: 0px 10px;
+  width: ${props =>
+    props.styles && props.styles.width ? props.styles.width : 'inherit'};
   height: ${props =>
     props.styles && props.styles.height ? props.styles.height : 'inherit'};
 		&:hover {

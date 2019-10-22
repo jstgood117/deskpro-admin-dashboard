@@ -22,7 +22,7 @@ export interface userType {
 }
 export interface IProps {
   checkbox: boolean;
-  userDetails?: userType;
+  cardDetails?: userType;
   styleType: 'default1' | 'default2';
 }
 
@@ -30,7 +30,7 @@ interface StyleProps {
   styleType: 'default1' | 'default2';
 }
 
-const CardDefaultStyled = styled.div`
+const CardStyled = styled.div`
   width: 298px;
   display: flex;
 `;
@@ -73,10 +73,10 @@ const StyledPermissionBtn = styled.div<StyleProps>`
 const StyledAdminBtn = styled.div<StyleProps>`
   padding-left: ${props => (props.styleType === 'default1' ? '5px' : '25px')};
 `;
-const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails, styleType }) => {
+const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
   const [checked, setChecked] = useState(false);
   return (
-    <CardDefaultStyled>
+    <CardStyled>
       <Card>
         <Ellipse />
         {checkbox && (
@@ -90,34 +90,34 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails, styleType }) => {
             />
           </CheckboxWrapper>
         )}
-        {userDetails && (
+        {cardDetails && (
           <ContentWrapper>
             <AvatarWrapper>
               <Avatar
                 width={styleType === 'default1' ? 70 : 60}
                 height={styleType === 'default1' ? 70 : 60}
                 type="image"
-                content={userDetails.avatar}
+                content={cardDetails.avatar}
               />
             </AvatarWrapper>
             <H2 style={{ paddingBottom: styleType === 'default1' ? 10 : 8 }}>
-              {userDetails.userName}
+              {cardDetails.userName}
             </H2>
             <P3 style={{ paddingBottom: styleType === 'default1' ? 3 : 0 }}>
-              {userDetails.userNumber}
+              {cardDetails.userNumber}
             </P3>
-            <P3 style={{ paddingBottom: styleType === 'default1' ? 10 : 9 }}>
-              {userDetails.userMail}
+            <P3 style={{ paddingBottom: styleType === 'default1' ? 12 : 9 }}>
+              {cardDetails.userMail}
             </P3>
             <div
               style={{
                 display: 'flex',
-                paddingBottom: styleType === 'default1' ? 10 : 13
+                paddingBottom: styleType === 'default1' ? 12 : 15
               }}
             >
-              {userDetails.userTexts &&
-                userDetails.userTexts.length > 0 &&
-                userDetails.userTexts.map((textDetails, Index: number) => (
+              {cardDetails.userTexts &&
+                cardDetails.userTexts.length > 0 &&
+                cardDetails.userTexts.map((textDetails, Index: number) => (
                   <TextAvatarStyled key={Index}>
                     <Avatar
                       type="text"
@@ -137,7 +137,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails, styleType }) => {
               <StyledPermissionBtn styleType={styleType}>
                 <Button
                   styleType="outlineGray"
-                  styles={{ height: '22px' }}
+                  styles={{ height: '22px', width: '105px' }}
                   onClick={action('All permission button clicked')}
                 >
                   All Permissions
@@ -146,7 +146,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails, styleType }) => {
               <StyledAdminBtn styleType={styleType}>
                 <Button
                   styleType="pink"
-                  styles={{ height: '22px' }}
+                  styles={{ height: '22px', width: '105px' }}
                   onClick={action('Administrator button clicked')}
                 >
                   Administrator
@@ -156,7 +156,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, userDetails, styleType }) => {
           </ContentWrapper>
         )}
       </Card>
-    </CardDefaultStyled>
+    </CardStyled>
   );
 };
 export default UserDefaultCard;
