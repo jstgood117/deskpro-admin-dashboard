@@ -82,7 +82,7 @@ const OutlineGrayButton = styled.button<IStyleProps>`
 export interface IProps {
   children?: ReactNode;
   onClick?: (e: any) => void;
-  styles?: IButtonStyles;
+  styles?: CSSProperties;
 }
 
 const Button: SFC<IProps & IStyleProps> = props => (
