@@ -19,7 +19,8 @@ import {
   IconLoginLog,
   IconSettings,
   Illustration,
-  IconIndeterminateCheckBox
+  IconIndeterminateCheckBox,
+  IconClose
 } from './SVG';
 
 export interface IProps {
@@ -66,6 +67,8 @@ const Icon: SFC<IProps> = props => {
       return <IconView />;
     case 'checkbox.indeterminate':
       return <IconIndeterminateCheckBox />;
+    case 'close':
+      return <IconClose />;
     default:
       return <IconSetup />;
   }

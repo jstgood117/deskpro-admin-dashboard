@@ -3,42 +3,38 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
-import SearchBox, { IProps } from './SearchBox';
+import Input, { IProps } from './Input';
 import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
-describe('SearchBox', () => {
+describe('Input', () => {
   let props: IProps;
-  let mountedSearchBox: any;
+  let mountedInput: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedSearchBox) {
-      mountedSearchBox = bShallow
+    if (!mountedInput) {
+      mountedInput = bShallow
         ? shallow(
             <ThemeProvider theme={DeskproAdminTheme}>
-              <SearchBox {...props} />
+              <Input {...props} />
             </ThemeProvider>
           )
         : mount(
             <ThemeProvider theme={DeskproAdminTheme}>
-              <SearchBox {...props} />
+              <Input {...props} />
             </ThemeProvider>
           );
     }
-    return mountedSearchBox;
+    return mountedInput;
   };
 
   beforeEach(() => {
-    props = {
-      placeholder: 'Searchbox'
-    };
-    mountedSearchBox = undefined;
+    mountedInput = undefined;
   });
 
-  it('always renders a <div>, <svg>, <input>', () => {
+  it('always renders a <div>, <input>', () => {
     expect(wrapper(false).find('div').length).toBe(1);
     expect(wrapper(false).find('input').length).toBe(1);
-    expect(wrapper(false).find('svg').length).toBe(1);
   });
 });

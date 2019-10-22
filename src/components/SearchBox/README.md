@@ -1,7 +1,13 @@
 # SearchBox Component Contract
 
 * it has Props of:
-	placeholder: string - Search box label
-* it has no State
-* it always renders a <div> element, <input> element, <svg> element.
+	containerStyle?: container style
+  containerClassName?: container class name
+	onClear?: clear button click event
+  ...props: input HTML attributes
 
+- it has State of:
+	hasValue: true if input has value
+	hasFocus: true if input is focusing
+
+* it always renders a <div> element, <input> element, <svg> element.
