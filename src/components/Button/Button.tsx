@@ -1,20 +1,23 @@
 import React, { ReactNode, SFC } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider, CSSProperties } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 
 export interface IStyleProps {
   styleType: 'primary' | 'secondary' | 'pink' | 'outlineGray' | 'tertiary';
-  styles?: IButtonStyles;
-}
-
-interface IButtonStyles {
-  height?: string;
-  color?: string;
+   styles?: CSSProperties;
+   size?: 'small' | 'medium';
+   className?: string;
 }
 
 const ButtonStyled = styled.button<IStyleProps>`
   border-radius: 4px;
+  cursor: pointer;
+  font-family: Rubik, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 150%;
   background-color: ${props =>
     props.styleType === 'primary'
       ? props.theme.activeColour
@@ -23,14 +26,15 @@ const ButtonStyled = styled.button<IStyleProps>`
     props.styleType === 'primary'
       ? props.theme.secondaryColour
       : props.theme.activeColour};
-  padding: 4px 10px;
+  padding: 0px 10px;
   border: ${props =>
     props.styleType === 'secondary'
       ? '1.1px solid rgba(28, 62, 85, 0.8)'
       : 'none'};
   outline: none;
+
   height: ${props =>
-    props.styles && props.styles.height ? props.styles.height : 'inherit'};
+    props.styles && props.styles.height ? props.styles.height : props.size === 'medium' ? 34 : 28};
 
   &:hover {
     background-color: ${props =>

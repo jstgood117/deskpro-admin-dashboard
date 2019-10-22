@@ -39,7 +39,7 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
     return (
       <Fragment>
         <Header title={title} description={description} links={headerLinks} />
-        {views && <SearchBox placeholder="Search for agents" handleSearch={(e) => { setSearchState(e.target.value) }} />}
+        {views && <SearchBox placeholder="Search for agents" onChange={(e) => { setSearchState(e.target.value) }} />}
         {views && views.length > 1 &&
           <TabBar
 			      // Backend payload phrases are missing admin_common - should this be hard-coded like this?

@@ -57,7 +57,7 @@ describe('TableActions', () => {
           .find('div')
           .at(2)
           .children().length
-      ).toBe(2);
+      ).toBe(1);
     });
   });
   describe('when filterMenu is undefined', () => {
@@ -71,7 +71,7 @@ describe('TableActions', () => {
           .find('div')
           .at(5)
           .children().length
-      ).toBe(3);
+      ).toBe(1);
     });
   });
   describe('when filterMenu is defined', () => {
@@ -85,7 +85,7 @@ describe('TableActions', () => {
           .find('div')
           .at(4)
           .children().length
-      ).toBe(2);
+      ).toBe(1);
     });
   });
 });
