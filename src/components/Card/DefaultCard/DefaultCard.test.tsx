@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, shallow } from '../../../test/enzyme';
 
-import UserDefaultCard, { IProps } from './UserDefaultCard';
+import DefaultCard, { IProps } from './DefaultCard';
 
-const userDetails = {
+const cardDetails = {
   userName: 'Jone Doe',
   userNumber: '07200654321',
   userMail: 'jon.doe321@example.com',
@@ -25,8 +25,8 @@ describe('Card', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedUserDefaultCard) {
       mountedUserDefaultCard = bShallow
-        ? shallow(<UserDefaultCard {...props} />)
-        : mount(<UserDefaultCard {...props} />);
+        ? shallow(<DefaultCard {...props} />)
+        : mount(<DefaultCard {...props} />);
     }
     return mountedUserDefaultCard;
   };
@@ -34,7 +34,8 @@ describe('Card', () => {
   beforeEach(() => {
     props = {
       checkbox: true,
-      userDetails: userDetails
+      cardDetails: cardDetails,
+      styleType: 'default1'
     };
   });
 
