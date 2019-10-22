@@ -83,6 +83,14 @@ export const DeskproAdminTheme = {
     lineHeight: '150%',
     color: '#4C4F50'
   },
+  p3: {
+    fontFamily: 'Lato, sans-serif',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    lineHeight: '150%',
+    color: '#8B9293'
+  },
   s1: {
     fontFamily: 'Lato, sans-serif',
     fontStyle: 'normal',
