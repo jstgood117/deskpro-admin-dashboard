@@ -8,6 +8,7 @@ import DialogTitle from './DialogTitle';
 import DialogContent from './DialogContent';
 import DialogContentText from './DialogContentText';
 import DialogActions from './DialogActions';
+import { FlowLayout, ControlBox } from '../Styled';
 
 storiesOf('Dialog', module)
   .add('auto open without backdrop', () => (
@@ -21,13 +22,27 @@ storiesOf('Dialog', module)
       </DialogContent>
 
       <DialogActions>
-        <Button styleType="primary" onClick={action('primary')} styles={{height: '30px'}}>
-          Yes, Delete Agents
-        </Button>
+        <FlowLayout>
+          <ControlBox>
+            <Button
+              styleType="primary"
+              onClick={action('primary')}
+              styles={{ height: '30px' }}
+            >
+              Yes, Delete Agents
+            </Button>
+          </ControlBox>
 
-        <Button styleType="secondary" onClick={action('optional')} styles={{height: '30px'}}>
-          Cancel, Keep Agents
-        </Button>
+          <ControlBox marginLeft={10}>
+            <Button
+              styleType="secondary"
+              onClick={action('optional')}
+              styles={{ height: '30px' }}
+            >
+              Cancel, Keep Agents
+            </Button>
+          </ControlBox>
+        </FlowLayout>
       </DialogActions>
     </Dialog>
   ))
@@ -42,13 +57,27 @@ storiesOf('Dialog', module)
       </DialogContent>
 
       <DialogActions>
-        <Button styleType="primary" onClick={action('primary')} styles={{height: '30px'}}>
-          Yes, Delete Agents
-        </Button>
+        <FlowLayout>
+          <ControlBox>
+            <Button
+              styleType="primary"
+              onClick={action('primary')}
+              styles={{ height: '30px' }}
+            >
+              Yes, Delete Agents
+            </Button>
+          </ControlBox>
 
-        <Button styleType="secondary" onClick={action('optional')} styles={{height: '30px'}}>
-          Cancel, Keep Agents
-        </Button>
+          <ControlBox marginLeft={10}>
+            <Button
+              styleType="secondary"
+              onClick={action('optional')}
+              styles={{ height: '30px' }}
+            >
+              Cancel, Keep Agents
+            </Button>
+          </ControlBox>
+        </FlowLayout>
       </DialogActions>
     </Dialog>
   ));

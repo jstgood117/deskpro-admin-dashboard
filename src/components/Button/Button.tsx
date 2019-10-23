@@ -2,6 +2,7 @@ import React, { ReactNode, SFC } from 'react';
 import styled, { ThemeProvider, CSSProperties } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
+import { dpstyle } from '../Styled';
 
 export interface IStyleProps {
   styleType: 'primary' | 'secondary' | 'tertiary';
@@ -10,14 +11,7 @@ export interface IStyleProps {
   className?: string;
 }
 
-const ButtonStyled = styled.button<IStyleProps>`
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: Rubik, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 150%;
+const ButtonStyled = styled(dpstyle.button)<IStyleProps>`
   background-color: ${props =>
     props.styleType === 'primary'
       ? props.theme.activeColour
@@ -26,15 +20,17 @@ const ButtonStyled = styled.button<IStyleProps>`
     props.styleType === 'primary'
       ? props.theme.secondaryColour
       : props.theme.activeColour};
-  padding: 0px 10px;
   border: ${props =>
     props.styleType === 'secondary'
       ? '1.1px solid rgba(28, 62, 85, 0.8)'
       : 'none'};
   outline: none;
-
-  height: ${props => (props.size === 'medium' ? 34 : 28)};
-
+  height: ${props =>
+    props.styles && props.styles.height
+      ? props.styles.height
+      : props.size === 'medium'
+      ? 34
+      : 28}px;
   &:hover {
     background-color: ${props =>
       props.styleType === 'primary'
