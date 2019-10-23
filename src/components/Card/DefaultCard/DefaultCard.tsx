@@ -94,8 +94,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
           <ContentWrapper>
             <AvatarWrapper>
               <Avatar
-                width={styleType === 'default1' ? 70 : 60}
-                height={styleType === 'default1' ? 70 : 60}
+                size={styleType === 'default1' ? 70 : 60}
                 type="image"
                 content={cardDetails.avatar}
               />

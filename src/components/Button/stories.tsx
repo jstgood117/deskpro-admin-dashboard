@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Button from './Button';
 import FilterButton from './FilterButton/FilterButton';
-import DropdownButton from './DropdownButton/DropdownButton';
+import DropdownButton, { IProps } from './DropdownButton/DropdownButton';
 import IconButton from './IconButton';
 
 const DropdownItems = [
@@ -15,6 +15,20 @@ const DropdownItems = [
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
 const ViewItems = [{ link: 'View1' }, { link: 'View2' }];
+
+const DropButtonComponent: React.FC<IProps> = props => {
+  const [value, setValue] = useState('');
+
+  return (
+    <DropdownButton
+      {...props}
+      value={value}
+      label={value ? value.link as any : props.label}
+      onSelect={val => setValue(val)}
+      onClear={() => setValue('')}
+    />
+  );
+};
 
 storiesOf('Button', module)
   .add('primary', () => (
@@ -47,6 +61,18 @@ storiesOf('Button', module)
   ))
   .add('Sort', () => (
     <DropdownButton label="Sort" items={SortItems} iconName="sort" />
+  ))
+  .add('button/medium/dropdown/text/secondary', () => (
+    <DropButtonComponent label="Item" items={SortItems} />
+  ))
+  .add('button/medium/dropdown/icon-text', () => (
+    <DropButtonComponent
+      label="Item"
+      items={SortItems}
+      iconName="sort"
+      showClearButton={true}
+      onClear={action('onClear')}
+    />
   ))
   .add('Group', () => (
     <DropdownButton label="Group" items={GroupItems} iconName="group" />

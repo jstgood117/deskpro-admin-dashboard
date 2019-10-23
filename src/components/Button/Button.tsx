@@ -89,6 +89,10 @@ const OutlineGrayButton = styled.button<IStyleProps>`
 			background-color: ${props => props.theme.hoverColour};
 `;
 
+const ButtonWrapper = styled.div`
+  display: inline;
+`;
+
 export interface IProps {
   children?: ReactNode;
   onClick?: (e: any) => void;
@@ -97,7 +101,7 @@ export interface IProps {
 
 const Button: SFC<IProps & IStyleProps> = props => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <div>
+    <ButtonWrapper>
       {(props.styleType === 'primary' || props.styleType === 'secondary') && (
         <ButtonStyled
           onClick={props.onClick}
@@ -125,7 +129,7 @@ const Button: SFC<IProps & IStyleProps> = props => (
           {props.children}
         </OutlineGrayButton>
       )}
-    </div>
+    </ButtonWrapper>
   </ThemeProvider>
 );
 

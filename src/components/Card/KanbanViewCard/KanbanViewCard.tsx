@@ -111,10 +111,7 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
             {(styleType === 'view1' || styleType === 'view2') && (
               <AvatarWrapper styleType={styleType}>
                 <Avatar
-                  width={
-                    styleType === 'view1' ? 65 : styleType === 'view2' ? 44 : 30
-                  }
-                  height={
+                  size={
                     styleType === 'view1' ? 65 : styleType === 'view2' ? 44 : 30
                   }
                   type="image"
@@ -127,8 +124,7 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                 {styleType === 'view3' && (
                   <AvatarWrapper styleType={styleType}>
                     <Avatar
-                      width={30}
-                      height={30}
+                      size={30}
                       type="image"
                       content={cardDetails.avatar}
                     />

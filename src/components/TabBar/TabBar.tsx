@@ -2,8 +2,6 @@ import React, { SFC, useState } from 'react';
 import styled from 'styled-components';
 
 import Tab from './Tab';
-import Dropdown from '../Dropdown';
-import { action } from '@storybook/addon-actions';
 import { dpstyle } from '../Styled';
 
 const TabBarStyled = styled(dpstyle.div)`
@@ -13,11 +11,6 @@ const TabBarStyled = styled(dpstyle.div)`
   border-bottom: 1.5px solid #eff0f0;
 `;
 
-const DropdownItems = [
-  { id: 0, link: 'Property4' },
-  { id: 1, link: 'Property5' },
-  { id: 2, link: 'Property6' }
-];
 
 interface ITabsProps {
   label: string;
@@ -51,11 +44,6 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
           />
         );
       })}
-      <Dropdown
-        label="More"
-        items={DropdownItems}
-        onChangeOption={action('clicked Tab Option')}
-      />
     </TabBarStyled>
   );
 };
