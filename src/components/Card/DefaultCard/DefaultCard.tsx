@@ -82,10 +82,8 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
         {checkbox && (
           <CheckboxWrapper>
             <Checkbox
+              size={11}
               checked={checked}
-              value="checked"
-              indeterminate={true}
-              showArrow={false}
               onChange={event => setChecked(event.target.checked)}
             />
           </CheckboxWrapper>
