@@ -1,7 +1,12 @@
 import React from 'react';
-import { mount, shallow } from '../../../test/enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { configure, mount, shallow } from 'enzyme';
 
 import DropdownButton, { IProps } from './DropdownButton';
+import { ThemeProvider } from 'styled-components';
+import { DeskproAdminTheme } from '../../Theme';
+
+configure({ adapter: new Adapter() });
 
 describe('DropdownButton', () => {
   let props: IProps;
@@ -10,8 +15,16 @@ describe('DropdownButton', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedDropdownButton) {
       mountedDropdownButton = bShallow
-        ? shallow(<DropdownButton {...props} />)
-        : mount(<DropdownButton {...props} />);
+        ? shallow(
+            <ThemeProvider theme={DeskproAdminTheme}>
+              <DropdownButton {...props} />
+            </ThemeProvider>
+          )
+        : mount(
+            <ThemeProvider theme={DeskproAdminTheme}>
+              <DropdownButton {...props} />
+            </ThemeProvider>
+          );
     }
     return mountedDropdownButton;
   };
@@ -50,14 +63,15 @@ describe('DropdownButton', () => {
     });
 
     it('renders div tags and svg tag', () => {
+      expect(wrapper(false).find('div').length).toBe(5);
       expect(wrapper(false).find('svg').length).toBe(2);
     });
   });
-  // describe('when onClick is defined', () => {
-  //   it('when button clicked', () => {
-  //     const button = wrapper(false).find('div');
-  //     button.at(1).simulate('click');
-  //     expect(wrapper(false).find('div').length).toBe(10);
-  //   });
-  // });
+  describe('when onClick is defined', () => {
+    it('when button clicked', () => {
+      const button = wrapper(false).find('div');
+      button.at(1).simulate('click');
+      expect(wrapper(false).find('div').length).toBe(5);
+    });
+  });
 });

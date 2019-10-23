@@ -1,69 +1,98 @@
-import React, { SFC, Fragment, useState } from 'react';
-import styled from 'styled-components';
+import React, { SFC, useState, CSSProperties } from 'react';
+import styled, { css } from 'styled-components';
+import isNil from 'lodash/isNil';
 
 import Icon from '../../Icon';
-import { dpstyle, TextLabel } from '../../Styled';
 
-export interface StyleProps {
-  openState: boolean;
-}
-
-const DropdownLabel = styled(TextLabel)`
-  padding-right: 12px;
-  color: #a9b0b0;
-`;
-const DropdownStyled = styled(dpstyle.div)<StyleProps>`
-  padding: 4px 10px;
-  background: #ffffff;
-  border: 1px solid #a9b0b0;
-  border-radius: 3px;
+const ClearButton = styled.button`
   cursor: pointer;
-  float: left;
-  overflow: hidden;
-  display: flex;
-  align-item: center;
   outline: none;
-  font-family: Rubik;
+  width: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: 1px solid #1c3e55;
+  margin-left: -1px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  path {
+    fill: ${props => props.theme.activeColour};
+  }
+`;
+const DropdownWrapper = styled.div`
+  display: inline-flex;
+  &:hover > * {
+    color: ${props => props.theme.activeColour};
+    background: ${props => props.theme.hoverColour};
+    border: 0.8px solid ${props => props.theme.activeColour};
+    path {
+      fill: ${props => props.theme.activeColour};
+    }
+  }
+  &.selected > * {
+    color: ${props => props.theme.activeColour};
+    border: 0.8px solid ${props => props.theme.activeColour};
+    path {
+      fill: ${props => props.theme.activeColour};
+    }
+  }
+`;
+const DropdownStyled = styled.div<{ hasClearButton: boolean }>`
+  background: ${props => props.theme.secondaryColour};
+  border: 0.8px solid ${props => props.theme.static2Colour};
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-family: Rubik, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 150%;
-  color: #a9b0b0;
+  color: ${props => props.theme.static2Colour};
+  height: 34px;
+  display: inline-block;
+  min-width: 169px;
+  padding: 0 10px;
+  ${props =>
+    props.hasClearButton &&
+    css`
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    `};
 `;
-const DropdownBtn = styled(dpstyle.div)`
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 150%;
-  align-items: center;
-  color: #a9b0b0;
+const DropdownBtn = styled.div`
+  position: relative;
+  height: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
-const DropdownContent = styled(dpstyle.div)`
+const DropdownContent = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
   background: #ffffff;
-  min-width: 110px;
+  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  font-family: Rubik;
+  font-family: Rubik, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 150%;
   top: 40px;
 `;
-const DropdownContentPanel = styled(dpstyle.div)`
+const DropdownContentPanel = styled.div`
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
-  zindex: 0;
+  z-index: 0;
 `;
-const DropdownContentLink = styled(dpstyle.div)`
+const DropdownContentLink = styled.div`
   float: none;
   color: black;
   padding: 12px 16px;
@@ -75,10 +104,15 @@ const DropdownContentLink = styled(dpstyle.div)`
   }
   z-index: 1;
 `;
-const StyledIcon = styled(dpstyle.div)`
+const StyledIcon = styled.div`
   display: flex;
   align-items: center;
   padding-right: 10px;
+`;
+const LeftIcon = styled.div`
+  margin-left: 5px;
+  line-height: 1;
+  margin-right: 5px;
 `;
 
 interface IItemProps {
@@ -87,45 +121,64 @@ interface IItemProps {
 
 export interface IProps {
   iconName?: string;
+  containerClassName?: string;
+  containerStyle?: CSSProperties;
   label: string;
   items: IItemProps[];
-  onChangeOption?: (e: any) => void;
+  value?: any;
+  showClearButton?: boolean;
+  onClear?: () => void;
+  onSelect?: (value: any) => void;
 }
 
-const DropdownButton: SFC<IProps> = props => {
+const DropdownButton: SFC<IProps> = ({
+  iconName,
+  containerClassName,
+  containerStyle,
+  label,
+  items,
+  value,
+  showClearButton,
+  onClear,
+  onSelect
+}) => {
   const [openState, clickButton] = useState(false);
-  const changeOption = (option: string) => {
-    props.onChangeOption(option);
-  };
+
+  const selected = !isNil(value) && value !== '';
   return (
-    <Fragment>
-      <DropdownStyled openState={openState}>
+    <DropdownWrapper
+      style={containerStyle}
+      className={`${containerClassName || ''} ${selected ? 'selected' : ''}`}
+    >
+      <DropdownStyled hasClearButton={showClearButton && selected}>
         <DropdownBtn
           onClick={() => {
             clickButton(!openState);
           }}
         >
-          {props.iconName ? (
-            <StyledIcon>
-              <Icon name={props.iconName} />
-            </StyledIcon>
-          ) : null}
-          <DropdownLabel>{props.label}</DropdownLabel>
+          <StyledIcon>
+            {iconName && (
+              <LeftIcon>
+                <Icon name={iconName} />
+              </LeftIcon>
+            )}
+            {label}
+          </StyledIcon>
+
           <Icon name="downVector" />
         </DropdownBtn>
+
         {openState && (
           <DropdownContent
             onClick={() => {
               clickButton(!openState);
             }}
           >
-            {props.items.map((item, index: number) => {
+            {items.map((item, index: number) => {
               return (
                 <DropdownContentLink
                   key={index}
-                  onClick={() => {
-                    changeOption(item.link);
-                  }}
+                  onClick={() => onSelect && onSelect(item)}
                 >
                   {item.link}
                 </DropdownContentLink>
@@ -135,7 +188,17 @@ const DropdownButton: SFC<IProps> = props => {
           </DropdownContent>
         )}
       </DropdownStyled>
-    </Fragment>
+      {showClearButton && selected && (
+        <ClearButton
+          onClick={event => {
+            event.stopPropagation();
+            onClear && onClear();
+          }}
+        >
+          <Icon name="close" />
+        </ClearButton>
+      )}
+    </DropdownWrapper>
   );
 };
 
