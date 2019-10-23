@@ -15,6 +15,11 @@ export const Flex = styled(BaseFlex)`
     box-sizing: content-box;
 `;
 
+export const FlowLayout = styled(Flex)`
+    flex-wrap: wrap;
+    align-items: center;
+`;
+
 /**
  * Box layout -- arranges boxes on a single row
  * and fills the container width.
@@ -50,6 +55,22 @@ export const Box = styled(BaseBox)`
     img, svg {
         vertical-align: middle;
     }
+`;
+
+export interface IControlBoxProps {
+    margin?: number;
+    marginTop?: number;
+    marginRight?: number;
+    marginBottom?: number;
+    marginLeft?: number;
+}
+
+export const ControlBox = styled(Box)<IControlBoxProps>`
+    margin: ${props => props.margin || 5}px;
+    margin-top: ${props => props.marginTop || 5}px;
+    margin-right: ${props => props.marginRight || 5}px;
+    margin-bottom: ${props => props.marginBottom || 5}px;
+    margin-left: ${props => props.marginLeft || 5}px;
 `;
 
 /**
@@ -184,7 +205,6 @@ export const dpstyle = {
         color: ${props => props.theme.brandPrimary};
         text-decoration: underline;
         cursor: pointer;
-
         &:hover {
             color: ${props => props.theme.activeColour};
         }
@@ -194,7 +214,6 @@ export const dpstyle = {
         color: ${props => props.theme.staticColour};
         text-decoration: none;
         cursor: pointer;
-
         &:hover {
             color: ${props => props.theme.staticColour};
         }

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import isNil from 'lodash/isNil';
 
 import Icon from '../../Icon';
+import { H6 } from '../../Typography';
 
 const ClearButton = styled.button`
   cursor: pointer;
@@ -19,27 +20,30 @@ const ClearButton = styled.button`
     fill: ${props => props.theme.activeColour};
   }
 `;
-const DropdownWrapper = styled.div`
+const DropdownWrapper = styled.div<{ opened: boolean }>`
   display: inline-flex;
   &:hover > * {
     color: ${props => props.theme.activeColour};
     background: ${props => props.theme.hoverColour};
-    border: 0.8px solid ${props => props.theme.activeColour};
+    border: ${props => (props.opened ? 0 : 0.8)}px solid
+      ${props => props.theme.activeColour};
     path {
       fill: ${props => props.theme.activeColour};
     }
   }
   &.selected > * {
     color: ${props => props.theme.activeColour};
-    border: 0.8px solid ${props => props.theme.activeColour};
+    border: ${props => (props.opened ? 0 : 0.8)}px solid
+      ${props => props.theme.activeColour};
     path {
       fill: ${props => props.theme.activeColour};
     }
   }
 `;
-const DropdownStyled = styled.div<{ hasClearButton: boolean }>`
+const DropdownStyled = styled.div<{ hasClearButton: boolean; opened: boolean }>`
   background: ${props => props.theme.secondaryColour};
-  border: 0.8px solid ${props => props.theme.static2Colour};
+  border: ${props => (props.opened ? 0 : 0.8)}px solid
+    ${props => props.theme.static2Colour};
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
@@ -53,7 +57,6 @@ const DropdownStyled = styled.div<{ hasClearButton: boolean }>`
   color: ${props => props.theme.static2Colour};
   height: 34px;
   display: inline-block;
-  min-width: 169px;
   padding: 0 10px;
   ${props =>
     props.hasClearButton &&
@@ -94,14 +97,15 @@ const DropdownContentPanel = styled.div`
   left: 0;
   z-index: 0;
 `;
-const DropdownContentLink = styled.div`
+const DropdownContentLink = styled(H6)`
   float: none;
-  color: black;
   padding: 7px 15px;
   height: 31px;
   text-decoration: none;
   display: block;
   text-align: left;
+  display: flex;
+  align-items: center;
   :hover {
     background-color: #e8ebee;
   }
@@ -150,10 +154,14 @@ const DropdownButton: SFC<IProps> = ({
   const selected = !isNil(value) && value !== '';
   return (
     <DropdownWrapper
+      opened={openState}
       style={containerStyle}
       className={`${containerClassName || ''} ${selected ? 'selected' : ''}`}
     >
-      <DropdownStyled hasClearButton={showClearButton && selected}>
+      <DropdownStyled
+        opened={openState}
+        hasClearButton={showClearButton && selected}
+      >
         <DropdownBtn
           onClick={() => {
             clickButton(!openState);
