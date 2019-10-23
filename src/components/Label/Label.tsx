@@ -4,7 +4,7 @@ import styled, { CSSProperties } from 'styled-components';
 import { dpstyle, TextLabel } from '../Styled';
 
 export interface IStyleProps {
-  styleType: 'OutlineGray' | 'Pink' | 'Tertiary';
+  styleType: 'lined' | 'filled';
   styles?: CSSProperties;
 }
 
@@ -22,11 +22,17 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   height: ${props =>
     props.styles && props.styles.height ? props.styles.height : 'inherit'};
   border: ${props =>
-    props.styleType === 'OutlineGray' ? '1.5px solid #a9b0b0' : 'none'};
+    props.styleType === 'lined' && props.styles && props.styles.borderColor
+      ? `1.5px solid ${props.styles.borderColor}`
+      : 'none'};
   background: ${props =>
-    props.styleType === 'Pink' ? '#f9e6e1' : '#ffffff'};
+    props.styleType === 'filled' && props.styles && props.styles.backgroundColor
+      ? props.styles.backgroundColor
+      : '#ffffff'};
   color: ${props =>
-    props.styleType === 'Pink' ? '#ec6c4e' : '#A9B0B0'};
+    props.styles && props.styles && props.styles.color
+      ? props.styles.color
+      : '#000'};
   color: ;
 `;
 

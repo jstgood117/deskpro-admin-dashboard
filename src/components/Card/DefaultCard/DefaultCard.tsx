@@ -136,15 +136,25 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
               <StyledPermission styleType={styleType}>
                 <Label
                   label="All Permissions"
-                  styleType="OutlineGray"
-                  styles={{ height: '22px', width: '105px' }}
+                  styleType="lined"
+                  styles={{
+                    height: '22px',
+                    width: '105px',
+                    borderColor: '#a9b0b0',
+                    color: '#A9B0B0'
+                  }}
                 />
               </StyledPermission>
               <StyledAdmin styleType={styleType}>
                 <Label
                   label="Administrator"
-                  styleType="Pink"
-                  styles={{ height: '24px', width: '94px' }}
+                  styleType="filled"
+                  styles={{
+                    height: '22px',
+                    width: '105px',
+                    backgroundColor: '#f9e6e1',
+                    color: '#ec6c4e'
+                  }}
                 />
               </StyledAdmin>
             </div>
