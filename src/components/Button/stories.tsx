@@ -41,16 +41,6 @@ storiesOf('Button', module)
       Secondary Button
     </Button>
   ))
-  .add('pink', () => (
-    <Button styleType="pink" onClick={action('clicked')}>
-      Pink Button
-    </Button>
-  ))
-  .add('outlineGray', () => (
-    <Button styleType="outlineGray" onClick={action('clicked')}>
-      Gray Button
-    </Button>
-  ))
   .add('tertiary', () => (
     <Button styleType="tertiary" onClick={action('clicked')}>
       Tertiary Button

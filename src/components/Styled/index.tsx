@@ -79,7 +79,7 @@ export const TextString = ({ messageId, ...rest }: any & { messageId?: string })
 export const TextLabel = styled((props) => <TextString {...props} />)<{ messageId?: string, bold?: boolean, small?: boolean, color?: string }>`
     margin: 0;
     padding: 0;
-    line-height: 1;
+    line-height: 150%;
     display: inline-block;
     color: ${props => props.color ? props.color : 'inherit'};
     font-family: ${props => props.theme.mainFont};
