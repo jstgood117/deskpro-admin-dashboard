@@ -50,9 +50,8 @@ describe('TabBar', () => {
       props.tabItems = TabItems;
     });
 
-    it('renders the div tags and Dropdown Tag', () => {
-      expect(wrapper(false).find('div').length).toBe(11);
-      expect(wrapper(false).find('Dropdown').length).toBe(1);
+    it('renders the div tags', () => {
+      expect(wrapper(false).find('div').length).toBe(4);
     });
   });
 });

@@ -43,7 +43,7 @@ const DropdownStyled = styled.div<{ hasClearButton: boolean }>`
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
-  overflow: hidden;
+  position: relative;
   outline: none;
   font-family: Rubik, sans-serif;
   font-style: normal;
@@ -82,7 +82,9 @@ const DropdownContent = styled.div`
   font-weight: normal;
   font-size: 15px;
   line-height: 150%;
-  top: 40px;
+  top: 0px;
+  left: 0px;
+  width: 100%;
 `;
 const DropdownContentPanel = styled.div`
   position: fixed;
@@ -95,7 +97,8 @@ const DropdownContentPanel = styled.div`
 const DropdownContentLink = styled.div`
   float: none;
   color: black;
-  padding: 12px 16px;
+  padding: 7px 15px;
+  height: 31px;
   text-decoration: none;
   display: block;
   text-align: left;
