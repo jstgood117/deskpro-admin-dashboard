@@ -122,7 +122,7 @@ export type IProps = {
   size: ButtonSizeType;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
-const FilterButton: SFC<IProps> = ({ icon, styleType, size, ...props }) => {
+const IconButton: SFC<IProps> = ({ icon, styleType, size, ...props }) => {
   const styles = getStyle(styleType, size, DeskproAdminTheme);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -133,4 +133,4 @@ const FilterButton: SFC<IProps> = ({ icon, styleType, size, ...props }) => {
   );
 };
 
-export default FilterButton;
+export default IconButton;

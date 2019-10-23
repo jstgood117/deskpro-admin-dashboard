@@ -1,24 +1,22 @@
-import React, { SFC } from 'react';
+import React, { SFC, CSSProperties } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
+  display: none;
 `;
 
-const StyledCheckbox = styled.div<{ checked: boolean; indeterminate: boolean }>`
-  display: inline-block;
-  position: relative;
-  width: 16px;
-  height: 16px;
+interface ICheckboxProps {
+  size: number;
+  checked: boolean;
+  indeterminate: boolean;
+}
+const StyledCheckbox = styled.span<ICheckboxProps>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
   background: ${props => (props.checked ? props.theme.activeColour : '#fff')};
   border-radius: 3px;
   transition: all 150ms;
@@ -37,7 +35,6 @@ const StyledCheckbox = styled.div<{ checked: boolean; indeterminate: boolean }>`
 `;
 
 const ArrowButton = styled.span<{ checked: boolean }>`
-  display: inline-block;
   position: absolute;
   left: 36px;
   path {
@@ -46,21 +43,23 @@ const ArrowButton = styled.span<{ checked: boolean }>`
   }
 `;
 
-const CheckboxContainer = styled.label`
-  height: 16px;
+const CheckboxContainer = styled.label<{ size: number }>`
+  height: ${props => props.size}px;
   display: inline-block;
+  position: relative;
   &::before {
     content: '';
-    display: inline-block;
     vertical-align: middle;
     height: 100%;
   }
 `;
 
 export interface IProps {
+  size?: number;
   checked: boolean;
   value?: any;
   containerClassName?: string;
+  containerStyle?: CSSProperties;
   disabled?: boolean;
   inputProps?: object;
   indeterminate?: boolean;
@@ -70,9 +69,11 @@ export interface IProps {
 }
 
 const Checkbox: SFC<IProps> = ({
+  size = 16,
   checked,
   value,
   containerClassName,
+  containerStyle,
   disabled,
   indeterminate,
   inputProps,
@@ -80,7 +81,11 @@ const Checkbox: SFC<IProps> = ({
   onChange,
   onArrowClick
 }) => (
-  <CheckboxContainer className={containerClassName}>
+  <CheckboxContainer
+    size={size}
+    style={containerStyle}
+    className={containerClassName}
+  >
     <HiddenCheckbox
       checked={checked}
       value={value}
@@ -88,7 +93,7 @@ const Checkbox: SFC<IProps> = ({
       onChange={onChange}
       {...inputProps}
     />
-    <StyledCheckbox indeterminate={indeterminate} checked={checked}>
+    <StyledCheckbox size={size} indeterminate={indeterminate} checked={checked}>
       {indeterminate && checked && <Icon name="checkbox.indeterminate" />}
     </StyledCheckbox>
 
