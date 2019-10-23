@@ -4,7 +4,7 @@ import styled, { ThemeProvider, CSSProperties } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
 
 export interface IStyleProps {
-  styleType: 'primary' | 'secondary' | 'pink' | 'outlineGray' | 'tertiary';
+  styleType: 'primary' | 'secondary' | 'tertiary';
   styles?: CSSProperties;
   size?: 'small' | 'medium';
   className?: string;
@@ -33,12 +33,7 @@ const ButtonStyled = styled.button<IStyleProps>`
       : 'none'};
   outline: none;
 
-  height: ${props =>
-    props.styles && props.styles.height
-      ? props.styles.height
-      : props.size === 'medium'
-      ? 34
-      : 28};
+  height: ${props => (props.size === 'medium' ? 34 : 28)};
 
   &:hover {
     background-color: ${props =>
@@ -46,47 +41,6 @@ const ButtonStyled = styled.button<IStyleProps>`
         ? props.theme.brandPrimary
         : props.theme.hoverColour};
   }
-`;
-
-const PinkButton = styled.button<IStyleProps>`
-  background: #f9e6e1;
-  border-radius: 4px;
-  border: none;
-  color: #ec6c4e;
-  font-family: Lato;
-  font-size: 12px;
-  line-height: 150%;
-  cursor: pointer;
-	outline: none;
-	width: ${props =>
-    props.styles && props.styles.width ? props.styles.width : 'inherit'};
-	padding: 0px 10px;
-  height: ${props =>
-    props.styles && props.styles.height ? props.styles.height : 'inherit'};
-  color: ${props =>
-    props.styles && props.styles.color ? props.styles.color : '#EC6C4E'};
-		&:hover {
-			background-color: ${props => props.theme.hoverColour};
-`;
-
-const OutlineGrayButton = styled.button<IStyleProps>`
-  border: 1.5px solid #a9b0b0;
-  background: #ffffff;
-  border-radius: 4px;
-  color: ${props =>
-    props.styles && props.styles.color ? props.styles.color : '#A9B0B0'};
-  font-family: Lato;
-  font-size: 12px;
-  line-height: 150%;
-	outline: none;
-	cursor: pointer;
-	padding: 0px 10px;
-  width: ${props =>
-    props.styles && props.styles.width ? props.styles.width : 'inherit'};
-  height: ${props =>
-    props.styles && props.styles.height ? props.styles.height : 'inherit'};
-		&:hover {
-			background-color: ${props => props.theme.hoverColour};
 `;
 
 const ButtonWrapper = styled.div`
@@ -102,33 +56,13 @@ export interface IProps {
 const Button: SFC<IProps & IStyleProps> = props => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <ButtonWrapper>
-      {(props.styleType === 'primary' || props.styleType === 'secondary') && (
-        <ButtonStyled
-          onClick={props.onClick}
-          styleType={props.styleType}
-          styles={props.styles}
-        >
-          {props.children}
-        </ButtonStyled>
-      )}
-      {props.styleType === 'pink' && (
-        <PinkButton
-          onClick={props.onClick}
-          styleType={props.styleType}
-          styles={props.styles}
-        >
-          {props.children}
-        </PinkButton>
-      )}
-      {props.styleType === 'outlineGray' && (
-        <OutlineGrayButton
-          onClick={props.onClick}
-          styleType={props.styleType}
-          styles={props.styles}
-        >
-          {props.children}
-        </OutlineGrayButton>
-      )}
+      <ButtonStyled
+        onClick={props.onClick}
+        styleType={props.styleType}
+        styles={props.styles}
+      >
+        {props.children}
+      </ButtonStyled>
     </ButtonWrapper>
   </ThemeProvider>
 );

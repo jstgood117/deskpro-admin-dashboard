@@ -1,12 +1,11 @@
 import React, { SFC, useState } from 'react';
 import styled from 'styled-components';
-import { action } from '@storybook/addon-actions';
 
 import Card from '../Card';
 import Avatar from '../../Avatar';
 import Checkbox from '../../Checkbox';
 import { H2, P3 } from '../../Typography';
-import Button from '../../Button';
+import Label from '../../Label';
 
 interface userTextDetail {
   text?: string;
@@ -68,10 +67,10 @@ const TextAvatarStyled = styled.div`
   padding-left: 5px;
   padding-right: 5px;
 `;
-const StyledPermissionBtn = styled.div<StyleProps>`
+const StyledPermission = styled.div<StyleProps>`
   padding-right: ${props => (props.styleType === 'default1' ? '5px' : '25px')};
 `;
-const StyledAdminBtn = styled.div<StyleProps>`
+const StyledAdmin = styled.div<StyleProps>`
   padding-left: ${props => (props.styleType === 'default1' ? '5px' : '25px')};
 `;
 const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
@@ -134,24 +133,20 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                 paddingBottom: styleType === 'default1' ? 16 : 15
               }}
             >
-              <StyledPermissionBtn styleType={styleType}>
-                <Button
-                  styleType="outlineGray"
+              <StyledPermission styleType={styleType}>
+                <Label
+                  label="All Permissions"
+                  styleType="OutlineGray"
                   styles={{ height: '22px', width: '105px' }}
-                  onClick={action('All permission button clicked')}
-                >
-                  All Permissions
-                </Button>
-              </StyledPermissionBtn>
-              <StyledAdminBtn styleType={styleType}>
-                <Button
-                  styleType="pink"
-                  styles={{ height: '22px', width: '105px' }}
-                  onClick={action('Administrator button clicked')}
-                >
-                  Administrator
-                </Button>
-              </StyledAdminBtn>
+                />
+              </StyledPermission>
+              <StyledAdmin styleType={styleType}>
+                <Label
+                  label="Administrator"
+                  styleType="Pink"
+                  styles={{ height: '24px', width: '94px' }}
+                />
+              </StyledAdmin>
             </div>
           </ContentWrapper>
         )}

@@ -1,11 +1,11 @@
 import React, { SFC, useState } from 'react';
 import styled from 'styled-components';
+
 import Card from '../Card';
 import Avatar from '../../Avatar';
 import Checkbox from '../../Checkbox';
 import { H2, P3 } from '../../Typography';
-import Button from '../../Button';
-import { action } from '@storybook/addon-actions';
+import Label from '../../Label';
 
 interface userTextDetail {
   text?: string;
@@ -75,8 +75,11 @@ const AvatarWrapper = styled.div<StyleProps>`
 const TextAvatarStyled = styled.div`
   padding-right: 3px;
 `;
-const StyledBtn = styled.div`
-  padding-right: 10px;
+const StyledPermission = styled.div`
+  padding-right: 5px;
+`;
+const StyledAdmin = styled.div`
+  padding-left: 5px;
 `;
 
 const StyledNameSection = styled.div<StyleProps>`
@@ -162,24 +165,20 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   display: 'flex'
                 }}
               >
-                <StyledBtn>
-                  <Button
-                    styleType="outlineGray"
+                <StyledPermission>
+                  <Label
+                    label="All Permissions"
+                    styleType="OutlineGray"
                     styles={{ height: '22px', width: '105px' }}
-                    onClick={action('All permission button clicked')}
-                  >
-                    All Permissions
-                  </Button>
-                </StyledBtn>
-                <StyledBtn>
-                  <Button
-                    styleType="pink"
-                    styles={{ height: '22px', width: '94px' }}
-                    onClick={action('Administrator button clicked')}
-                  >
-                    Administrator
-                  </Button>
-                </StyledBtn>
+                  />
+                </StyledPermission>
+                <StyledAdmin>
+                  <Label
+                    label="Administrator"
+                    styleType="Pink"
+                    styles={{ height: '24px', width: '94px' }}
+                  />
+                </StyledAdmin>
               </div>
             </ContentWrapper>
           </div>
