@@ -9,6 +9,8 @@ interface ImageProps {
   selected?: boolean;
 }
 const AvatarContainer = styled.div<ImageProps>`
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
   img,
   svg {
     width: ${props => props.size}px;

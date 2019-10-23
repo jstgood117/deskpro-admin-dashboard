@@ -42,20 +42,20 @@ const Ellipse = styled.div`
   border-radius: 50%;
   position: absolute;
   right: 15px;
-  top: 15px;
+  top: 14px;
 `;
 const CheckboxWrapper = styled.div`
   position: absolute;
   left: 12px;
-  top: 12px;
+  top: 14px;
 `;
 
 const ContentWrapper = styled.div<StyleProps>`
   display: flex;
   flex-flow: column;
   align-items: left;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 14px;
+  padding-bottom: 14px;
   width: 100%;
   padding-left: ${props => (props.styleType === 'view3' ? '42px' : '0px')};
 `;
