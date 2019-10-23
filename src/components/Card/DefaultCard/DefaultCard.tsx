@@ -130,6 +130,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
             <div
               style={{
                 display: 'flex',
+                alignItems: 'center',
                 paddingBottom: styleType === 'default1' ? 16 : 15
               }}
             >

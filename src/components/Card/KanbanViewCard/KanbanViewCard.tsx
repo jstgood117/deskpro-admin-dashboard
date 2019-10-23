@@ -162,7 +162,8 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
               </div>
               <div
                 style={{
-                  display: 'flex'
+                  display: 'flex',
+                  alignItems: 'center'
                 }}
               >
                 <StyledPermission>
