@@ -9,6 +9,7 @@ script:
 - npm run test
 - npm run build
 - npm run storybook:build
+- npm run snapshot
 - ".travis/prep-site.sh"
 deploy:
 - provider: pages
