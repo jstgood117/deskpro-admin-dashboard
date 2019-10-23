@@ -280,6 +280,18 @@ export const dpstyle = {
         color: ${props => props.theme.staticColour};
         font-family: ${props => props.theme.headerFont};
         font-size: 15pt;
+    `,
+
+    button: styled.button`
+        border-radius: 4px;
+        cursor: pointer;
+        outline: none;
+        font-family: Rubik, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 150%;
+        padding: 0px 10px;
     `
 };
 
