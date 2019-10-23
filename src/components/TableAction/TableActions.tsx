@@ -1,8 +1,9 @@
 import React, { SFC } from 'react';
+import styled from 'styled-components';
+
 import SearchBox from '../SearchBox';
 import FilterButton from '../Button/FilterButton';
 import DropdownButton from '../Button/DropdownButton/DropdownButton';
-import styled from 'styled-components';
 
 export interface IProps {}
 

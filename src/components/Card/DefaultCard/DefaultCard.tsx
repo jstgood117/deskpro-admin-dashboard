@@ -1,11 +1,12 @@
 import React, { SFC, useState } from 'react';
 import styled from 'styled-components';
+import { action } from '@storybook/addon-actions';
+
 import Card from '../Card';
 import Avatar from '../../Avatar';
 import Checkbox from '../../Checkbox';
 import { H2, P3 } from '../../Typography';
 import Button from '../../Button';
-import { action } from '@storybook/addon-actions';
 
 interface userTextDetail {
   text?: string;
