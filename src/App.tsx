@@ -8,8 +8,8 @@ import {IntlProvider} from 'react-intl';
 import { logError } from './components/Error/ErrorBoundary';
 import { QUERY_INITIAL } from './resources/graphql';
 import { HashRouter, Switch, Route } from 'react-router-dom';
-import { SidebarContainer, AppContainer, BodyContainer } from './components/PageLayout';
-import Sidebar from './components/PageLayout/Sidebar';
+import { SidebarContainer, AppContainer, BodyContainer } from './pages/AdminInterface';
+import Sidebar from './components/Sidebar';
 import { ISidebarItem, ISidebarSection } from './resources/interfaces';
 import PageType from './components/Page/PageType';
 
