@@ -4,7 +4,8 @@ import { storiesOf } from '@storybook/react';
 import JsonSchemaForm, {
   ISchemaType,
   ObjectFieldTemplate,
-  SearchComponent
+  SearchComponent,
+  ICustomProps
 } from './JsonSchemaForm';
 import { JSONSchema6Definition } from 'json-schema';
 
@@ -19,7 +20,6 @@ const schema: ISchemaType = {
   } as { [k: string]: JSONSchema6Definition }
 };
 
-
 const uiSchema = {
   'ui:ObjectFieldTemplate': ObjectFieldTemplate,
   Input: {
@@ -30,7 +30,9 @@ const uiSchema = {
     'ui:placeholder': 'Number'
   },
   Search: {
-    'ui:widget': SearchComponent
+    'ui:widget': (props: ICustomProps) => {
+      return <SearchComponent {...props} />;
+    }
   }
 };
 
