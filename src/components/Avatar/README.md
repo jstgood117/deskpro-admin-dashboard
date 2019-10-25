@@ -6,6 +6,8 @@
   content: string - image url, icon name or text content
   textColor?: string - text color
   textBackgroundColor? - text background color
+  style?: CSSProperties - container style
+  className?: string - container class name
 
 * it has no State
 * it renders a <img> element, <svg> element or <div> element

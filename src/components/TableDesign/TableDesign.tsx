@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-`
+`;
 
 /** TableHead */
 const TableHead = styled.thead`
@@ -30,38 +30,47 @@ const TableRow = styled.tr<{ isSelected?: boolean }>`
 `;
 
 /** TableCell */
+type CellAlign = 'inherit' | 'left' | 'center' | 'right' | 'justify';
 const TablHeadCellTextStyled = styled.th(props => props.theme.p2);
 const TablBodyCellTextStyled = styled.td(props => props.theme.p1);
-const TablHeadCell = styled(TablHeadCellTextStyled)`
-  padding: 0;
+const TablHeadCell = styled(TablHeadCellTextStyled)<{ textAlign: CellAlign }>`
+  padding: 0 16px;
   line-height: 26px;
   color: ${props => props.theme.greyDark};
-  text-align: left;
+  text-align: ${props => props.textAlign};;
 `;
-const TablBodyCell = styled(TablBodyCellTextStyled)`
+const TablBodyCell = styled(TablBodyCellTextStyled)<{ textAlign: CellAlign }>`
   padding: 0;
-  text-align: left;
+  text-align: ${props => props.textAlign};
   line-height: 44px;
   color: ${props => props.theme.staticColour};
+  padding: 0 16px;
   & img {
     vertical-align: middle;
-    margin-right: 15px;
   }
 `;
-
 const TableCell: React.SFC<{
   container?: 'head' | 'body';
+  textAlign?: CellAlign;
   className?: string;
   style?: CSSProperties;
   onCellClick?: (
     event: React.MouseEvent<HTMLTableCellElement, MouseEvent>
   ) => void;
-}> = ({ container = 'body', className, style, onCellClick, ...props }) => {
+}> = ({
+  container = 'body',
+  textAlign = 'inherit',
+  className,
+  style,
+  onCellClick,
+  ...props
+}) => {
   const Component = container === 'head' ? TablHeadCell : TablBodyCell;
 
   const emptyStyle = isEmpty(props.children) ? { minWidth: 34 } : {};
   return (
     <Component
+      textAlign={textAlign}
       className={className}
       style={{ ...emptyStyle, ...style }}
       onClick={onCellClick}
