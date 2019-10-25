@@ -20,7 +20,11 @@ import {
   IconSettings,
   Illustration,
   IconIndeterminateCheckBox,
-  IconClose
+  IconClose,
+  IconAdmin,
+  IconReport,
+  IconUserCheck,
+  IconClock
 } from './SVG';
 
 export interface IProps {
@@ -69,6 +73,14 @@ const Icon: SFC<IProps> = props => {
       return <IconIndeterminateCheckBox />;
     case 'close':
       return <IconClose />;
+    case 'admin':
+      return <IconAdmin />;
+    case 'report':
+      return <IconReport />;
+    case 'user.check':
+      return <IconUserCheck />;
+    case 'clock':
+      return <IconClock />;
     default:
       return <IconSetup />;
   }

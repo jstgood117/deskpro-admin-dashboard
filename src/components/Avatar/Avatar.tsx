@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, CSSProperties } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
@@ -55,6 +55,8 @@ export interface IProps {
   content: string;
   textColor?: string;
   textBackgroundColor?: string;
+  style?: CSSProperties;
+  className?: string;
 }
 
 const Avatar: SFC<IProps> = ({
@@ -64,10 +66,17 @@ const Avatar: SFC<IProps> = ({
   type,
   content,
   textColor,
-  textBackgroundColor
+  textBackgroundColor,
+  style,
+  className
 }) => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <AvatarContainer size={size} selected={selected}>
+    <AvatarContainer
+      style={style}
+      className={className}
+      size={size}
+      selected={selected}
+    >
       {type === 'image' && <img src={content} alt="avatar" />}
 
       {type === 'svg' && <Icon name={content} />}
