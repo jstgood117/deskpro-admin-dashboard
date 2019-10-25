@@ -10,20 +10,24 @@ import Header from '../Header';
 import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
 import SearchBox from '../SearchBox';
+import Icon from '../Icon';
+import TableActions from '../TableAction';
+import styled from 'styled-components';
+import { dpstyle } from '../../style/styled';
 
 export interface IProps {
   query: DocumentNode,
   queryName: string,
 }
 
+const BodyMargin = styled(dpstyle.div)`
+  margin: 34px;
+`;
+
 const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   const [tabIndex, setTabState] = useState(0);
   const [searchText, setSearchState] = useState('');
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all' });
-  // test data for now
-//  const loading = false;
-//  const error = false;
-//  const data = testPageData;
 
   if (loading) {
     return <Loading />
@@ -38,18 +42,30 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
     const {title, description, headerLinks, views} = data[queryName];
     return (
       <Fragment>
-        <Header title={title} description={description} links={headerLinks} />
-        {views && <SearchBox placeholder="Search for agents" onChange={(e) => { setSearchState(e.target.value) }} />}
-        {views && views.length > 1 &&
-          <TabBar
-			      // Backend payload phrases are missing admin_common - should this be hard-coded like this?
-            tabItems={views.map((view: IViewData) => { return { label: `admin_common.${view.title}` }} )}
-            handleClick={ index => { setTabState(index) }} 
-          />
-        }
-        {views && views[tabIndex] && <Table {...views[tabIndex]} search={searchText} />}
+        <Header
+          title={title}
+          description={description}
+          links={headerLinks}
+          illustration={<Icon name="illustration" />}
+          defaulViewMode="table"
+          showViewModeSwitcher={true}
+          showNewButton={true}
+          showHelpButton={true}
+          onNewClick={() => null}
+          tableActions={true}
+        />
+        <BodyMargin>
+          {views && views.length > 1 &&
+            <TabBar
+              // Backend payload phrases are missing admin_common - should this be hard-coded like this?
+              tabItems={views.map((view: IViewData) => { return { messageId: `admin_common.${view.title}` }} )}
+              handleClick={ index => { setTabState(index) }}
+            />
+          }
+          {views && views[tabIndex] && <Table {...views[tabIndex]} search={searchText} />}
+        </BodyMargin>
       </Fragment>
-    );    
+    );
   }
   return null;
 }

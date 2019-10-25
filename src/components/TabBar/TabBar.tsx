@@ -13,7 +13,8 @@ const TabBarStyled = styled(dpstyle.div)`
 
 
 interface ITabsProps {
-  label: string;
+  label?: string;
+  messageId?: string;
 }
 
 export interface IProps {
@@ -36,6 +37,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
           <Tab
             key={index}
             label={tab.label}
+            messageId={tab.messageId}
             index={index}
             value={tabIndex}
             onClick={e => {

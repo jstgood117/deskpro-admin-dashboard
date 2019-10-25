@@ -35,7 +35,7 @@ storiesOf('Header', module)
       ></Header>
     </IntlProvider>
   ))
-  .add('with tabe actions', () => (
+  .add('with table actions', () => (
     <IntlProvider locale="en" messages={testTranslations}>
       <Header
         illustration={<Icon name="illustration" />}

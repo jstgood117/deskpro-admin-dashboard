@@ -4,9 +4,10 @@ import { IntlProvider } from 'react-intl';
 import { flatMap } from 'lodash';
 
 import { logError } from './components/Error/ErrorBoundary';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { SidebarContainer, AppContainer, BodyContainer } from './pages/AdminInterface';
+import { PlaceholderPageContainer, PlaceholderAppNavContainer, PlaceholderHeaderContainer, PlaceholderBodyContainer, PlaceholderAppNavIcons, PlaceholderHeaderIcons } from './pages/AdminInterface/placeholder';
 import Sidebar from './components/Sidebar';
 import { ISidebarSection } from './resources/interfaces';
 import PageType from './components/Page/PageType';
@@ -52,7 +53,6 @@ const App: SFC = () => {
 	if (error) {
 		return <p>Error: {error}</p>;
 	}
-
 	return (
 		<HashRouter>
 			<IntlProvider
@@ -64,23 +64,36 @@ const App: SFC = () => {
 				}, {})}
 				onError={(err) => { logError(err) }}
 			>
-				<AppContainer>
-					<SidebarContainer>
-						<Sidebar data={data.sidebar} />
-					</SidebarContainer>
-					<BodyContainer>
-						<Switch>
-							{
-								flatMap(
-									(data.sidebar as ISidebarSection[]).map(section => section.navItems),
-									sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
-								)
-									.filter(s => s.path)
-									.map(s => <Route key={s.path} exact path={s.path} render={() => <PageType {...s} />} />)
-							}
-						</Switch>
-					</BodyContainer>
-				</AppContainer>
+				<PlaceholderPageContainer>
+					<PlaceholderAppNavContainer>
+						<PlaceholderAppNavIcons />
+						<b />
+					</PlaceholderAppNavContainer>
+					<PlaceholderHeaderContainer>
+						<PlaceholderHeaderIcons />
+					</PlaceholderHeaderContainer>
+					<PlaceholderBodyContainer>
+						<AppContainer>
+							<SidebarContainer>
+								<Sidebar data={data.sidebar} />
+							</SidebarContainer>
+							<BodyContainer>
+								<Switch>
+									<Route exact path="/" render={() => <Redirect to="/agents" />} />
+									{
+										flatMap(
+											(data.sidebar as ISidebarSection[]).map(section => section.navItems),
+											sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
+										)
+											.filter(s => s.path)
+											.map(s => <Route key={s.path} exact path={s.path} render={() => <PageType {...s} />} />)
+									}
+								</Switch>
+							</BodyContainer>
+						</AppContainer>
+					</PlaceholderBodyContainer>
+				</PlaceholderPageContainer>
+
 			</IntlProvider>
 		</HashRouter>
 	);
