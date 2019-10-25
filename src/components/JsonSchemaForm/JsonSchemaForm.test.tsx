@@ -16,7 +16,6 @@ const schema: ISchemaType = {
   properties: {
     Input: { type: 'string', title: 'Input' },
     Number: { type: 'number', title: 'Number' },
-    Search: { type: 'string', title: 'Search' }
   } as { [k: string]: JSONSchema6Definition }
 };
 
@@ -49,10 +48,11 @@ describe('JsonSchemaForm', () => {
       schema: schema,
       uiSchema: uiSchema
     };
+    mountedJsonSchemaForm = undefined;
   });
 
   it('always renders a <div>', () => {
-    const elts = wrapper(false).find('div');
+    const elts = wrapper(true).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
 });
