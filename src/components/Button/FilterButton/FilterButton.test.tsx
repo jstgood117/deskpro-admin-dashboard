@@ -30,7 +30,7 @@ describe("Grid", () => {
       expect(wrapper(false).find('div').children().length).toBe(1);
     });
     it("render svg", () => {
-      expect(wrapper(false).find('svg').children().length).toBe(1);
+      expect(wrapper(false).find('svg').children().length).toBe(0);
     });
     it("render svg", () => {
       expect(wrapper(false).find('button').children().length).toBe(1);
