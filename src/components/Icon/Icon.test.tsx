@@ -2,7 +2,6 @@ import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import Icon, { IProps } from './Icon';
-import { IconHelp } from './SVG';
 
 describe("Icon", () => {
   let props: IProps;
@@ -25,15 +24,5 @@ describe("Icon", () => {
   it("always renders a <svg>", () => {
     const elts = wrapper(false).find('svg');
     expect(elts.length).toBeGreaterThan(0);
-  });
-
-  describe("when name is defined", () => {
-    beforeEach(() => {
-      props.name = 'admin.sidebar.help.helpCentre';
-    });
-
-    it("renders the correct icon", () => {
-      expect(wrapper(false).find(IconHelp).children().length).toBe(1);
-    });
   });
 })

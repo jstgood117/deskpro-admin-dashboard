@@ -41,7 +41,7 @@ describe('IconButton', () => {
         wrapper(false)
           .find('svg')
           .children().length
-      ).toBe(1);
+      ).toBe(0);
     });
   });
 });
