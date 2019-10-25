@@ -324,3 +324,66 @@ export const HeadingText = ({ size, messageId, ...rest}: any & { messageId?: str
         case 6: return <HeadingText6 {...rest} />;
     }
 };
+
+export const JsonFormStyle = styled(dpstyle.div)`
+  input {
+    border-radius: 4px;
+    &:focus {
+      background-color: ${props => props.theme.secondaryColour};
+      box-shadow: 0px 0px 8px ${props => props.theme.hoverColour};
+      border: 1px solid ${props => props.theme.lightBlue};
+    }
+    /* If has value */
+    &[value]:not([value='']) {
+      background-color: ${props => props.theme.secondaryColour};
+      border: 1px solid ${props => props.theme.greyLight};
+    }
+    &:hover {
+      background: ${props => props.theme.hoverColour};
+      ::placeholder {
+        color: ${props => props.theme.activeColour};
+      }
+    }
+    background: ${props => props.theme.greyLightest};
+    padding: 0 15px;
+    box-sizing: border-box;
+    height: 35px;
+    font-family: Rubik, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 150%;
+    border: none;
+    outline: none;
+    color: ${props => props.theme.staticColour};
+    width: 100%;
+    ::placeholder {
+      font-family: Rubik, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      line-height: 150%;
+      color: ${props => props.theme.greyDark};
+    }
+  }
+`;
+export const SearchWrapper = styled(dpstyle.div)`
+  input {
+    &:focus {
+      box-shadow: 0px 0px 0px transparent;
+      border: none;
+    }
+    /* If has value */
+    &[value]:not([value='']) {
+      background-color: transparent;
+      border: none;
+    }
+    &:hover {
+      background: ${props => props.theme.hoverColour};
+      ::placeholder {
+        color: ${props => props.theme.activeColour};
+      }
+    }
+    padding: 0;
+  }
+`;
