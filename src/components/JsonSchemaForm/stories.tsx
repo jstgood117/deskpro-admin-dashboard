@@ -4,8 +4,7 @@ import { storiesOf } from '@storybook/react';
 import JsonSchemaForm, {
   ISchemaType,
   ObjectFieldTemplate,
-  SearchComponent,
-  ICustomProps
+  widgets
 } from './JsonSchemaForm';
 import { JSONSchema6Definition } from 'json-schema';
 
@@ -16,7 +15,10 @@ const schema: ISchemaType = {
   properties: {
     Input: { type: 'string', title: 'Input' },
     Number: { type: 'number', title: 'Number' },
-    Search: { type: 'string', title: 'Search' }
+    Search: { type: 'string', title: 'Search' },
+    date: { type: 'string', title: 'Date' },
+    checkBox: { type: 'boolean', title: 'CheckBox' },
+    submit: { type: 'string', title: 'submit' },
   } as { [k: string]: JSONSchema6Definition }
 };
 
@@ -30,14 +32,27 @@ const uiSchema = {
     'ui:placeholder': 'Number'
   },
   Search: {
-    'ui:widget': (props: ICustomProps) => {
-      return <SearchComponent {...props} />;
+    'ui:widget': widgets.searchWidget
+  },
+  date: {
+    'ui:field': 'rdp',
+    rdp: {
+      dayPickerProps: {
+        todayButton: 'Today'
+      }
     }
+  },
+  checkBox: {
+    'ui:widget': widgets.checkboxWidget
+  },
+  submit: {
+    'ui:widget': widgets.buttonWidget
   }
 };
 
 const formData = {
-  Input: 'Initial Value'
+  Input: 'Initial Value',
+  submit: 'Submit'
 };
 
 storiesOf('Json Schema Form', module).add('with dummy data', () => (

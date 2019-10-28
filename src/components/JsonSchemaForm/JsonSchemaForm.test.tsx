@@ -3,7 +3,6 @@ import { mount, shallow } from '../../test/enzyme';
 
 import JsonSchemaForm, {
   IProps,
-  ICustomProps,
   ObjectFieldTemplate,
   ISchemaType
 } from './JsonSchemaForm';
@@ -15,7 +14,7 @@ const schema: ISchemaType = {
   type: 'object' as 'object',
   properties: {
     Input: { type: 'string', title: 'Input' },
-    Number: { type: 'number', title: 'Number' },
+    Number: { type: 'number', title: 'Number' }
   } as { [k: string]: JSONSchema6Definition }
 };
 
@@ -52,7 +51,7 @@ describe('JsonSchemaForm', () => {
   });
 
   it('always renders a <div>', () => {
-    const elts = wrapper(true).find('div');
+    const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
 });

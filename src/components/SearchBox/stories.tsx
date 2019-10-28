@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import SearchBox from './SearchBox';
-import { actions } from '@storybook/addon-actions';
 
 const SearchComponent: React.SFC = () => {
   const [value, setValue] = useState('');
@@ -10,7 +9,7 @@ const SearchComponent: React.SFC = () => {
     <SearchBox
       value={value}
       placeholder="Search"
-      onClear={() => actions('onClear')}
+      onClear={() => setValue('')}
       onChange={event => setValue(event.target.value)}
     />
   );

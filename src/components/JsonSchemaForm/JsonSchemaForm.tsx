@@ -1,13 +1,19 @@
-import React, { SFC, useState, useEffect } from 'react';
+import React, { SFC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { JSONSchema6Definition } from 'json-schema';
 import Form, { ObjectFieldTemplateProps } from 'react-jsonschema-form';
+import { TypeaheadField } from 'react-jsonschema-form-extras/lib/TypeaheadField';
+import ReactDatePicker from 'react-jsonschema-form-extras/lib/ReactDatePicker';
+import 'react-day-picker/lib/style.css';
 
 import { DeskproAdminTheme } from '../Theme';
-import { dpstyle, JsonFormStyle, SearchWrapper } from '../Styled';
-import Button from '../Button';
+import { dpstyle, JsonFormStyle } from '../Styled';
 import { P1, H2 } from '../Typography';
-import SearchBox from '../SearchBox';
+import {
+  SearchComponent,
+  ButtonComponent,
+  CheckboxWidget
+} from './JsonSchemaFormWidgets';
 
 export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
   return (
@@ -45,32 +51,10 @@ export interface IProps {
   widgets?: Object;
 }
 
-export interface ICustomProps {
-  value: string | number | string[];
-  required: boolean;
-  onChange: (arg0: string) => void;
-}
-
-export const SearchComponent: React.SFC<ICustomProps> = ({ onChange }) => {
-  const [value, setValue] = useState('');
-  useEffect(() => {
-    onChange(value);
-  }, [value, onChange]);
-  return (
-    <SearchWrapper>
-      <SearchBox
-        value={value}
-        placeholder="Search"
-        onClear={e => {
-          e.preventDefault();
-          setValue('');
-        }}
-        onChange={event => {
-          setValue(event.target.value);
-        }}
-      />
-    </SearchWrapper>
-  );
+export const widgets = {
+  searchWidget: SearchComponent,
+  buttonWidget: ButtonComponent,
+  checkboxWidget: CheckboxWidget
 };
 
 const StyledForm = styled(dpstyle.div)`
@@ -97,13 +81,12 @@ const JsonSchemaForm: SFC<IProps> = ({ schema, uiSchema, formData }) => {
         <Form
           schema={schema}
           uiSchema={uiSchema}
+          widgets={widgets}
           formData={formData}
           onSubmit={onSubmit}
-        >
-          <div style={{ padding: 10 }}>
-            <Button styleType="primary">Submit</Button>
-          </div>
-        </Form>
+          fields={{ typeahead: TypeaheadField, rdp: ReactDatePicker }}
+          children={<br />}
+        />
       </StyledForm>
     </ThemeProvider>
   );

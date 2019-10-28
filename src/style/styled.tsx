@@ -397,23 +397,3 @@ export const JsonFormStyle = styled(dpstyle.div)`
     }
   }
 `;
-export const SearchWrapper = styled(dpstyle.div)`
-  input {
-    &:focus {
-      box-shadow: 0px 0px 0px transparent;
-      border: none;
-    }
-    /* If has value */
-    &[value]:not([value='']) {
-      background-color: transparent;
-      border: none;
-    }
-    &:hover {
-      background: ${props => props.theme.hoverColour};
-      ::placeholder {
-        color: ${props => props.theme.activeColour};
-      }
-    }
-    padding: 0;
-  }
-`;
