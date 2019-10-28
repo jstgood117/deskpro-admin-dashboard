@@ -3,38 +3,44 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
-import Input, { IProps } from './Input';
+import Tooltip, { IProps } from './Tooltip';
 import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
-describe('Input', () => {
+describe('Tooltip', () => {
   let props: IProps;
-  let mountedInput: any;
+  let mountedCheckbox: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedInput) {
-      mountedInput = bShallow
+    if (!mountedCheckbox) {
+      mountedCheckbox = bShallow
         ? shallow(
             <ThemeProvider theme={DeskproAdminTheme}>
-              <Input {...props} />
+              <Tooltip {...props}>
+                <span>Tooltip</span>
+              </Tooltip>
             </ThemeProvider>
           )
         : mount(
             <ThemeProvider theme={DeskproAdminTheme}>
-              <Input {...props} />
+              <Tooltip {...props}>
+                <span>Tooltip</span>
+              </Tooltip>
             </ThemeProvider>
           );
     }
-    return mountedInput;
+    return mountedCheckbox;
   };
 
   beforeEach(() => {
-    mountedInput = undefined;
+    props = {
+      content: '',
+    } as IProps;
   });
 
-  it('always renders a <div>, <input>', () => {
-    expect(wrapper(false).find('div').length).toBe(2);
-    expect(wrapper(false).find('input').length).toBe(1);
+  it('always renders a <span>', () => {
+    const elts = wrapper(false).find('span');
+    expect(elts.length).toBeGreaterThan(0);
   });
 });

@@ -30,6 +30,10 @@ import { ReactComponent as IconTrash } from '../../assets/svg/ic-trash.svg';
 import { ReactComponent as IconChat } from '../../assets/svg/ic-chat.svg';
 import { ReactComponent as IconUserSetting } from '../../assets/svg/ic-user-setting.svg';
 import { ReactComponent as IconUserAlias } from '../../assets/svg/ic-user-alias.svg';
+import { ReactComponent as IconCheck } from '../../assets/svg/ic-check.svg';
+import { ReactComponent as IconCollapse } from '../../assets/svg/ic-collapse.svg';
+import { ReactComponent as IconAttachment } from '../../assets/svg/ic-attachment.svg';
+import { ReactComponent as IconError } from '../../assets/svg/ic-error.svg';
 
 export interface IProps {
   name: string;
@@ -97,6 +101,14 @@ const Icon: SFC<IProps> = props => {
       return <IconUserSetting />;
     case 'user.alias':
       return <IconUserAlias />;
+    case 'check':
+      return <IconCheck />;
+    case 'collapse':
+      return <IconCollapse />;
+    case 'attachment':
+      return <IconAttachment />;
+    case 'error':
+      return <IconError />;
     default:
       return <IconSetup />;
   }

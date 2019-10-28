@@ -5,8 +5,10 @@ import React, {
   useEffect,
   CSSProperties
 } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { dpstyle } from '../Styled';
+import { P1 } from '../Typography';
+import Icon from '../Icon';
 
 const InputStyled = styled(dpstyle.input)`
   background-color: transparent;
@@ -31,10 +33,17 @@ const InputStyled = styled(dpstyle.input)`
   }
 `;
 
-const InputWrapper = styled(dpstyle.div)`
+const InputWrapper = styled(dpstyle.div)<{ error: boolean }>`
   background: ${props => props.theme.greyLightest};
   border-radius: 4px;
   padding: 0 15px;
+  position: relative;
+  ${props =>
+    props.error &&
+    css`
+      border: 1px solid ${props => props.theme.warningColour};
+      padding-right: 35px;
+    `}
   &.focus {
     background-color: ${props => props.theme.secondaryColour};
     box-shadow: 0px 0px 8px ${props => props.theme.hoverColour};
@@ -53,14 +62,35 @@ const InputWrapper = styled(dpstyle.div)`
   }
 `;
 
+const ErrorWrapper = styled.div`
+  background: #fff;
+  box-shadow: 5px 5px 8px ${props => props.theme.greyLight};
+  border-radius: 3px;
+  padding: 5px 10px;
+`;
+
+const ErrorText = styled(P1)`
+  color: ${props => props.theme.warningColour};
+`;
+
+const IconErrorWrapper = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`;
+
 export type IProps = {
   containerStyle?: CSSProperties;
   containerClassName?: string;
+  hasError?: boolean;
+  errorMessage?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Input: SFC<IProps> = ({
   containerStyle,
   containerClassName = '',
+  hasError,
+  errorMessage,
   ...props
 }) => {
   const [hasValue, setHasValue] = useState(false);
@@ -74,19 +104,35 @@ const Input: SFC<IProps> = ({
     hasFocus ? 'focus' : ''
   }`;
   return (
-    <InputWrapper style={containerStyle} className={className}>
-      <InputStyled
-        onFocus={event => {
-          setHasFocus(true);
-          props.onFocus && props.onFocus(event);
-        }}
-        onBlur={event => {
-          setHasFocus(false);
-          props.onFocus && props.onBlur(event);
-        }}
-        {...props}
-      ></InputStyled>
-    </InputWrapper>
+    <div>
+      <InputWrapper
+        error={hasError}
+        style={containerStyle}
+        className={className}
+      >
+        <InputStyled
+          onFocus={event => {
+            setHasFocus(true);
+            props.onFocus && props.onFocus(event);
+          }}
+          onBlur={event => {
+            setHasFocus(false);
+            props.onFocus && props.onBlur(event);
+          }}
+          {...props}
+        ></InputStyled>
+        {hasError && (
+          <IconErrorWrapper>
+            <Icon name="error" />
+          </IconErrorWrapper>
+        )}
+      </InputWrapper>
+      {hasError && errorMessage && (
+        <ErrorWrapper>
+          <ErrorText>{errorMessage}</ErrorText>
+        </ErrorWrapper>
+      )}
+    </div>
   );
 };
 

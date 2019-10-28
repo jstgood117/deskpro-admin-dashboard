@@ -1,14 +1,15 @@
 import React, { SFC, CSSProperties } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface IBadgeProps {
   backgroundColor: string;
   color: string;
+  showBoxShadow: boolean;
 }
 const BadgeContainer = styled.div<IBadgeProps>`
   border-radius: 4px;
   height: 22px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   background-color: ${props => props.backgroundColor};
   color: ${props => props.color};
@@ -18,6 +19,15 @@ const BadgeContainer = styled.div<IBadgeProps>`
   font-size: 12px;
   line-height: 150%;
   padding: 0 10px;
+  ${props =>
+    props.showBoxShadow &&
+    css`
+      border: 2px solid transparent;
+      &:hover {
+        box-shadow: 0px 3px 5px rgba(159, 204, 243, 0.25);
+        border-color: ${props => props.theme.lightBlue};
+      }
+    `}
 `;
 
 export interface IProps {
@@ -25,6 +35,7 @@ export interface IProps {
   backgroundColor: string;
   style?: CSSProperties;
   className?: string;
+  showBoxShadow?: boolean;
 }
 
 const Badge: SFC<IProps> = ({
@@ -32,6 +43,7 @@ const Badge: SFC<IProps> = ({
   backgroundColor,
   style,
   className,
+  showBoxShadow,
   ...props
 }) => (
   <BadgeContainer
@@ -39,6 +51,7 @@ const Badge: SFC<IProps> = ({
     className={className}
     color={color}
     backgroundColor={backgroundColor}
+    showBoxShadow={showBoxShadow}
   >
     {props.children}
   </BadgeContainer>

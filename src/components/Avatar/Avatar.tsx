@@ -7,6 +7,7 @@ import Icon from '../Icon';
 interface ImageProps {
   size: number;
   selected?: boolean;
+  showBoxShadow?: boolean;
 }
 const AvatarContainer = styled.div<ImageProps>`
   img,
@@ -15,7 +16,11 @@ const AvatarContainer = styled.div<ImageProps>`
     height: ${props => props.size}px;
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0px 3px 4px ${props => props.theme.pageHeader};
+    ${props =>
+      props.showBoxShadow &&
+      css`
+        box-shadow: 0px 3px 4px ${props => props.theme.pageHeader};
+      `}
     ${props =>
       props.selected &&
       css`
@@ -57,6 +62,7 @@ export interface IProps {
   textBackgroundColor?: string;
   style?: CSSProperties;
   className?: string;
+  showBoxShadow?: boolean;
 }
 
 const Avatar: SFC<IProps> = ({
@@ -68,7 +74,8 @@ const Avatar: SFC<IProps> = ({
   textColor,
   textBackgroundColor,
   style,
-  className
+  className,
+  showBoxShadow = true
 }) => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <AvatarContainer
@@ -76,6 +83,7 @@ const Avatar: SFC<IProps> = ({
       className={className}
       size={size}
       selected={selected}
+      showBoxShadow={showBoxShadow}
     >
       {type === 'image' && <img src={content} alt="avatar" />}
 

@@ -3,38 +3,41 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
-import Input, { IProps } from './Input';
+import Toggle, { IProps } from './Toggle';
 import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
-describe('Input', () => {
+describe('Toggle', () => {
   let props: IProps;
-  let mountedInput: any;
+  let mountedCheckbox: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedInput) {
-      mountedInput = bShallow
+    if (!mountedCheckbox) {
+      mountedCheckbox = bShallow
         ? shallow(
             <ThemeProvider theme={DeskproAdminTheme}>
-              <Input {...props} />
+              <Toggle {...props} />
             </ThemeProvider>
           )
         : mount(
             <ThemeProvider theme={DeskproAdminTheme}>
-              <Input {...props} />
+              <Toggle {...props} />
             </ThemeProvider>
           );
     }
-    return mountedInput;
+    return mountedCheckbox;
   };
 
   beforeEach(() => {
-    mountedInput = undefined;
+    props = {
+      checked: false,
+      onChange: () => null
+    };
   });
 
-  it('always renders a <div>, <input>', () => {
-    expect(wrapper(false).find('div').length).toBe(2);
-    expect(wrapper(false).find('input').length).toBe(1);
+  it('always renders a <label>', () => {
+    const elts = wrapper(false).find('label');
+    expect(elts.length).toBeGreaterThan(0);
   });
 });
