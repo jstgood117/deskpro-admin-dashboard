@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { checkA11y } from '@storybook/addon-a11y';
+import { withA11y } from '@storybook/addon-a11y';
 
 import Icon from './Icon';
 
 storiesOf('Icon', module)
-  .addDecorator(checkA11y)
+  .addDecorator(withA11y)
   .add('admin.sidebar.setup', () => <Icon name="admin.sidebar.setup" />)
   .add('admin.sidebar.channels', () => <Icon name="admin.sidebar.channels" />)
   .add('admin.sidebar.agents', () => <Icon name="admin.sidebar.agents" />)
@@ -13,7 +13,7 @@ storiesOf('Icon', module)
   .add('viewMode.list', () => <Icon name="viewMode.list" />)
   .add('viewMode.map', () => <Icon name="viewMode.map" />)
   .add('plus', () => <Icon name="plus" />)
-  .add('plus', () => <Icon name="question" />)
+  .add('question', () => <Icon name="question" />)
   .add('loginLog', () => <Icon name="loginLog" />)
   .add('settings', () => <Icon name="settings" />)
   .add('downVector', () => <Icon name="downVector" />)

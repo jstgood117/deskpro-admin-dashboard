@@ -55,29 +55,22 @@ const StyledIcon = styled.span`
   display: flex;
   align-items: center;
 `;
-
-const StyledMenuItem = styled(MenuItem)`
+const StyledMenuItem = styled(props => <MenuItem {...props} />)`
   cursor: pointer;
   padding: 6.2px 30px 7.09px 15px;
   user-select: none;
   position: relative;
   display: flex;
   align-items: center;
-  &:hover {
-    background: ${props => props.theme.textHover};
-  }
 `;
 
-const StyledSubMenuItem = styled(SubMenuItem)`
+const StyledSubMenuItem = styled(props => <SubMenuItem {...props} />)`
   cursor: pointer;
   padding: 6.2px 30px 7.09px 15px;
   user-select: none;
   position: relative;
   display: flex;
   align-items: center;
-  &:hover {
-    background: ${props => props.theme.textHover};
-  }
 `;
 const HR = styled.div`
   border: 1px solid #eff0f0;
@@ -107,9 +100,10 @@ export interface IListProps {
 const LI = (props: IListProps) => {
   return (
     <StyledMenuItem
-      onItemChosen={e => {
+      onItemChosen={(e: any) => {
         props.onClick && props.onClick(props.children);
       }}
+      highlightedStyle={{background: '#E8EBEE'}}
     >
       <TextLabel
         style={{
@@ -131,9 +125,9 @@ const MenuSub: SFC<IProps> = ({ onSelect, items }) => {
         {items.length > 0 &&
           items.map((item, index: number) => {
             return (
-              <div>
+              <div key={index}>
                 {item.name && !item.subItems && (
-                  <LI key={index} onClick={onSelect}>
+                  <LI onClick={onSelect}>
                     <span
                       style={{
                         display: 'flex',
@@ -148,10 +142,10 @@ const MenuSub: SFC<IProps> = ({ onSelect, items }) => {
                 )}
                 {item.name && item.subItems && (
                   <StyledSubMenuItem
-                    key={index}
-                    onItemChosen={e => {
+                    onItemChosen={() => {
                       onSelect && onSelect(item.name);
                     }}
+                    highlightedStyle={{background: '#E8EBEE'}}
                     menu={<MenuSub items={item.subItems} onSelect={onSelect} />}
                   >
                     <span
