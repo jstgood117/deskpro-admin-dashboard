@@ -356,7 +356,7 @@ export const HeadingText = ({
 };
 
 export const JsonFormStyle = styled(dpstyle.div)`
-  input {
+  input[type='text'], input[type='number'] {
     border-radius: 4px;
     &:focus {
       background-color: ${props => props.theme.secondaryColour};

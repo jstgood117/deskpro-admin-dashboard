@@ -74,7 +74,7 @@ const SearchBoxWrapper = styled.div`
   }
 `;
 
-const ButtonClear = styled.button`
+const ButtonClear = styled.div`
   outline: none;
   border: none;
   background-color: transparent;
@@ -85,7 +85,7 @@ const ButtonClear = styled.button`
 export type IProps = {
   containerStyle?: CSSProperties;
   containerClassName?: string;
-  onClear?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const SearchBox: SFC<IProps> = ({

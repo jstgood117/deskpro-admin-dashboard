@@ -79,6 +79,13 @@ const StyledForm = styled(dpstyle.div)`
   .control-label {
     display: none;
   }
+  .panel-danger {
+    border: solid 1px ${props => props.theme.greyDark};
+    padding: 4px 10px;
+    color: #fff;
+    background: ${props => props.theme.warningColour};
+    font-family: ${props => props.theme.mainFont};
+  }
 `;
 const JsonSchemaForm: SFC<IProps> = ({ schema, uiSchema, formData }) => {
   const onSubmit = ({ formData }: any) => {
