@@ -37,7 +37,8 @@ const TablHeadCell = styled(TablHeadCellTextStyled)<{ textAlign: CellAlign }>`
   padding: 0 16px;
   line-height: 26px;
   color: ${props => props.theme.greyDark};
-  text-align: ${props => props.textAlign};;
+  text-align: ${props => props.textAlign};
+  position: relative;
 `;
 const TablBodyCell = styled(TablBodyCellTextStyled)<{ textAlign: CellAlign }>`
   padding: 0;
@@ -45,6 +46,7 @@ const TablBodyCell = styled(TablBodyCellTextStyled)<{ textAlign: CellAlign }>`
   line-height: 44px;
   color: ${props => props.theme.staticColour};
   padding: 0 16px;
+  position: relative;
   & img {
     vertical-align: middle;
   }

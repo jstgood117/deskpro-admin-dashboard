@@ -217,6 +217,7 @@ export const testTableData = [
     team: 'Accounting',
     permission_group: 'Support Team',
     id: 12345,
+    active: true,
     teams: [
       {
         text: 'Accounting',
@@ -260,6 +261,7 @@ export const testTableData = [
     team: 'Business',
     permission_group: 'All Non-Destructive Permissions',
     id: 34513,
+    active: true,
     teams: [
       {
         text: 'Business',
@@ -345,6 +347,7 @@ export const testTableData = [
           'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80'
       }
     ],
+    active: true,
     permission_groups: ['All Permissions', 'All Non-Destructive Permissions'],
     departments: ['Support', 'Sales'],
     admin: true,
