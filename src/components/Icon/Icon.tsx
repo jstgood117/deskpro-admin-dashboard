@@ -24,6 +24,12 @@ import { ReactComponent as IconAdmin } from '../../assets/svg/ic-admin.svg';
 import { ReactComponent as IconReport } from '../../assets/svg/ic-report.svg';
 import { ReactComponent as IconUserCheck } from '../../assets/svg/ic-user-check.svg';
 import { ReactComponent as IconClock } from '../../assets/svg/ic-clock.svg';
+import { ReactComponent as IconMenu } from '../../assets/svg/ic-menu.svg';
+import { ReactComponent as IconRightVector } from '../../assets/svg/ic-right-vector.svg';
+import { ReactComponent as IconTrash } from '../../assets/svg/ic-trash.svg';
+import { ReactComponent as IconChat } from '../../assets/svg/ic-chat.svg';
+import { ReactComponent as IconUserSetting } from '../../assets/svg/ic-user-setting.svg';
+import { ReactComponent as IconUserAlias } from '../../assets/svg/ic-user-alias.svg';
 
 export interface IProps {
   name: string;
@@ -57,6 +63,8 @@ const Icon: SFC<IProps> = props => {
       return <Illustration />;
 	  case 'downVector':
       return <IconDownVector />;
+	  case 'rightVector':
+      return <IconRightVector />;
     case 'search':
       return <IconSearch />;
     case 'filter':
@@ -79,6 +87,16 @@ const Icon: SFC<IProps> = props => {
       return <IconUserCheck />;
     case 'clock':
       return <IconClock />;
+    case 'menu':
+      return <IconMenu />;
+    case 'trash':
+      return <IconTrash />;
+    case 'chat':
+      return <IconChat />;
+    case 'user.setting':
+      return <IconUserSetting />;
+    case 'user.alias':
+      return <IconUserAlias />;
     default:
       return <IconSetup />;
   }

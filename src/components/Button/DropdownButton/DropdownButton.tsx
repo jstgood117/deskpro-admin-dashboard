@@ -4,6 +4,7 @@ import isNil from 'lodash/isNil';
 
 import Icon from '../../Icon';
 import { H6 } from '../../Typography';
+import { MenuLabel } from '../../Styled';
 
 const ClearButton = styled.button`
   cursor: pointer;
@@ -49,11 +50,6 @@ const DropdownStyled = styled.div<{ hasClearButton: boolean; opened: boolean }>`
   cursor: pointer;
   position: relative;
   outline: none;
-  font-family: Rubik, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 150%;
   color: ${props => props.theme.static2Colour};
   height: 34px;
   display: inline-block;
@@ -80,11 +76,6 @@ const DropdownContent = styled.div`
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  font-family: Rubik, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 150%;
   top: 0px;
   left: 0px;
   width: 100%;
@@ -173,7 +164,7 @@ const DropdownButton: SFC<IProps> = ({
                 <Icon name={iconName} />
               </LeftIcon>
             )}
-            {label}
+            <MenuLabel>{label}</MenuLabel>
           </StyledIcon>
 
           <Icon name="downVector" />
@@ -191,7 +182,7 @@ const DropdownButton: SFC<IProps> = ({
                   key={index}
                   onClick={() => onSelect && onSelect(item)}
                 >
-                  {item.link}
+                  <MenuLabel>{item.link}</MenuLabel>
                 </DropdownContentLink>
               );
             })}
