@@ -6,6 +6,7 @@ import { MenuList, MenuItem, MenuButton, SubMenuItem } from 'react-menu-list';
 import Icon from '../Icon';
 import { MenuLabel, TextLabel } from '../Styled';
 import { DeskproAdminTheme } from '../Theme';
+import { IMenuItemProps } from '../../resources/interfaces';
 
 const MenuWrapper = styled.div`
   display: inline-flex;
@@ -78,24 +79,18 @@ const HR = styled.div`
   margin-bottom: 6px;
 `;
 
-export interface IItemProps {
-  name?: string;
-  subItems?: IItemProps[];
-  icon?: string;
-}
-
 export interface IProps {
   iconName?: string;
   containerStyle?: CSSProperties;
   label?: string;
-  items?: IItemProps[];
+  items?: IMenuItemProps[];
   value?: any;
   onSelect?: (value: any) => void;
 }
 export interface IListProps {
   children: ReactNode;
   onClick?: (value: any) => void;
-  item?: IItemProps;
+  item?: IMenuItemProps;
 }
 
 const LI = (props: IListProps) => {

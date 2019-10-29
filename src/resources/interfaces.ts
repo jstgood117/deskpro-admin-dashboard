@@ -52,3 +52,9 @@ export interface ISidebarItem {
 export interface ITableSetup {
 	columns: Array<ITableColumn>
 }
+
+export interface IMenuItemProps {
+  name?: string;
+  subItems?: IMenuItemProps[];
+  icon?: string;
+}
