@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Menu, { IProps, IItemProps } from './Menu';
+import Menu, { IProps } from './Menu';
+import { IMenuItemProps } from '../../resources/interfaces';
 
 describe('Menu', () => {
   let props: IProps;
@@ -21,7 +22,7 @@ describe('Menu', () => {
     }
     return mountedMenu;
   };
-  const DropdownItems: IItemProps[] = [
+  const DropdownItems: IMenuItemProps[] = [
     { name: 'Delete Agents', icon: 'trash' },
     {},
     {

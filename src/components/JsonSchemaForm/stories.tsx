@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import JsonSchemaForm, {
   ISchemaType,
   ObjectFieldTemplate,
-  widgets
+  widgets,
+  ISchemaPropertyType
 } from './JsonSchemaForm';
-import { JSONSchema6Definition } from 'json-schema';
 
 const schema: ISchemaType = {
   title: 'Form Title',
@@ -19,7 +19,7 @@ const schema: ISchemaType = {
     date: { type: 'string', title: 'Date' },
     checkBox: { type: 'boolean', title: 'CheckBox' },
     submit: { type: 'string', title: 'submit' },
-  } as { [k: string]: JSONSchema6Definition }
+  } as ISchemaPropertyType
 };
 
 const uiSchema = {

@@ -15,19 +15,9 @@ import {
   CheckboxWidget
 } from './JsonSchemaFormWidgets';
 
-export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
-  return (
-    <JsonFormStyle key={props.title}>
-      <H2 style={{ padding: 10 }}>{props.title}</H2>
-      <P1 style={{ padding: 10 }}>{props.description}</P1>
-      {props.properties.map((element, index) => (
-        <div key={index} style={{ padding: 10 }}>
-          {element.content}
-        </div>
-      ))}
-    </JsonFormStyle>
-  );
-};
+export interface ISchemaPropertyType {
+  [key: string]: JSONSchema6Definition;
+}
 
 export interface ISchemaType {
   title: string;
@@ -41,7 +31,7 @@ export interface ISchemaType {
     | 'array'
     | 'null'
     | 'any';
-  properties: { [k: string]: JSONSchema6Definition };
+  properties: ISchemaPropertyType;
 }
 
 export interface IProps {
@@ -55,6 +45,20 @@ export const widgets = {
   searchWidget: SearchComponent,
   buttonWidget: ButtonComponent,
   checkboxWidget: CheckboxWidget
+};
+
+export const ObjectFieldTemplate = (props: ObjectFieldTemplateProps) => {
+  return (
+    <JsonFormStyle key={props.title}>
+      <H2 style={{ padding: 10 }}>{props.title}</H2>
+      <P1 style={{ padding: 10 }}>{props.description}</P1>
+      {props.properties.map((element, index) => (
+        <div key={index} style={{ padding: 10 }}>
+          {element.content}
+        </div>
+      ))}
+    </JsonFormStyle>
+  );
 };
 
 const StyledForm = styled(dpstyle.div)`
