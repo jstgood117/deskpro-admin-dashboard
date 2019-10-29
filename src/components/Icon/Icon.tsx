@@ -34,6 +34,9 @@ import { ReactComponent as IconCheck } from '../../assets/svg/ic-check.svg';
 import { ReactComponent as IconCollapse } from '../../assets/svg/ic-collapse.svg';
 import { ReactComponent as IconAttachment } from '../../assets/svg/ic-attachment.svg';
 import { ReactComponent as IconError } from '../../assets/svg/ic-error.svg';
+import { ReactComponent as IconCaretRight } from '../../assets/svg/ic-caret-right.svg';
+import { ReactComponent as IconCaretLeft } from '../../assets/svg/ic-caret-left.svg';
+import { ReactComponent as IconCheck2 } from '../../assets/svg/ic-check-2.svg';
 
 export interface IProps {
   name: string;
@@ -47,7 +50,7 @@ const Icon: SFC<IProps> = props => {
       return <IconChannel />;
     case 'admin.sidebar.agents':
       return <IconAgent />;
-    case "admin.sidebar.help.helpCentre":
+    case 'admin.sidebar.help.helpCentre':
       return <IconHelp />;
     case 'viewMode.table':
       return <IconTableView />;
@@ -65,9 +68,9 @@ const Icon: SFC<IProps> = props => {
       return <IconSetting />;
     case 'illustration':
       return <Illustration />;
-	  case 'downVector':
+    case 'downVector':
       return <IconDownVector />;
-	  case 'rightVector':
+    case 'rightVector':
       return <IconRightVector />;
     case 'search':
       return <IconSearch />;
@@ -109,6 +112,13 @@ const Icon: SFC<IProps> = props => {
       return <IconAttachment />;
     case 'error':
       return <IconError />;
+    case 'caret-right':
+      return <IconCaretRight />;
+    case 'caret-left':
+      return <IconCaretLeft />;
+    case 'check-2':
+      return <IconCheck2 />;
+
     default:
       return <IconSetup />;
   }
