@@ -34,6 +34,16 @@ import { ReactComponent as IconCheck } from '../../assets/svg/ic-check.svg';
 import { ReactComponent as IconCollapse } from '../../assets/svg/ic-collapse.svg';
 import { ReactComponent as IconAttachment } from '../../assets/svg/ic-attachment.svg';
 import { ReactComponent as IconError } from '../../assets/svg/ic-error.svg';
+import { ReactComponent as IconNavChat } from '../../assets/svg/ic-nav-chat.svg';
+import { ReactComponent as IconNavMessage } from '../../assets/svg/ic-nav-message.svg';
+import { ReactComponent as IconNavUsers } from '../../assets/svg/ic-nav-users.svg';
+import { ReactComponent as IconNavThumb } from '../../assets/svg/ic-nav-thumb.svg';
+import { ReactComponent as IconNavNotification } from '../../assets/svg/ic-nav-notification.svg';
+import { ReactComponent as IconNavSetting } from '../../assets/svg/ic-nav-setting.svg';
+import { ReactComponent as IconNavDollar } from '../../assets/svg/ic-nav-dollar.svg';
+import { ReactComponent as IconNavHelpCentre } from '../../assets/svg/ic-nav-helpCentre.svg';
+import { ReactComponent as IconNavData } from '../../assets/svg/ic-nav-data.svg';
+import { ReactComponent as IconNavPie } from '../../assets/svg/ic-nav-pie.svg';
 
 export interface IProps {
   name: string;
@@ -109,6 +119,26 @@ const Icon: SFC<IProps> = props => {
       return <IconAttachment />;
     case 'error':
       return <IconError />;
+    case 'nav.chat':
+      return <IconNavChat />;
+    case 'nav.message':
+      return <IconNavMessage />;
+    case 'nav.users':
+      return <IconNavUsers />;
+    case 'nav.thumb':
+      return <IconNavThumb />;
+    case 'nav.notification':
+      return <IconNavNotification />;
+    case 'nav.setting':
+      return <IconNavSetting />;
+    case 'nav.dollar':
+      return <IconNavDollar />;
+    case 'nav.helpCentre':
+      return <IconNavHelpCentre />;
+    case 'nav.data':
+      return <IconNavData />;
+    case 'nav.pie':
+      return <IconNavPie />;
     default:
       return <IconSetup />;
   }
