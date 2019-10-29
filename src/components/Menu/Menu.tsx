@@ -95,15 +95,16 @@ export interface IProps {
 export interface IListProps {
   children: ReactNode;
   onClick?: (value: any) => void;
+  item?: IItemProps;
 }
 
 const LI = (props: IListProps) => {
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
-        props.onClick && props.onClick(props.children);
+        props.onClick && props.onClick(props.item.name);
       }}
-      highlightedStyle={{background: '#E8EBEE'}}
+      highlightedStyle={{ background: '#E8EBEE' }}
     >
       <TextLabel
         style={{
@@ -127,7 +128,7 @@ const MenuSub: SFC<IProps> = ({ onSelect, items }) => {
             return (
               <div key={index}>
                 {item.name && !item.subItems && (
-                  <LI onClick={onSelect}>
+                  <LI onClick={onSelect} item={item}>
                     <span
                       style={{
                         display: 'flex',
@@ -145,7 +146,7 @@ const MenuSub: SFC<IProps> = ({ onSelect, items }) => {
                     onItemChosen={() => {
                       onSelect && onSelect(item.name);
                     }}
-                    highlightedStyle={{background: '#E8EBEE'}}
+                    highlightedStyle={{ background: '#E8EBEE' }}
                     menu={<MenuSub items={item.subItems} onSelect={onSelect} />}
                   >
                     <span

@@ -99,7 +99,15 @@ const DropdownItems2: IItemProps[] = [
 const MenuComponent: React.FC<IProps> = props => {
   const [value, setValue] = useState('');
 
-  return <Menu {...props} value={value} onSelect={val => setValue(val)} />;
+  return (
+    <Menu
+      items={props.items}
+      iconName={props.iconName}
+      value={value}
+      label={value ? value : props.label}
+      onSelect={val => setValue(val)}
+    />
+  );
 };
 
 storiesOf('Menu', module)
