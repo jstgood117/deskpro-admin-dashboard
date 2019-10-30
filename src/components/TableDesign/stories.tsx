@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
+import orderBy from 'lodash/orderBy';
 
 import {
   Table,
@@ -16,6 +17,7 @@ import { Flex } from '../Styled';
 import { S1, P1, S2 } from '../Typography';
 import Icon from '../Icon';
 import Badge from '../Badge';
+import { ISortItem } from '../../resources/interfaces';
 
 const getRandomColor = (): string => {
   var letters = '0123456789ABCDEF';
@@ -25,6 +27,7 @@ const getRandomColor = (): string => {
   }
   return color;
 };
+const colors = testTableData.map(() => getRandomColor());
 
 interface IMoreTextProps {
   max: number;
@@ -344,7 +347,9 @@ const TableDesignTimeComponent: React.SFC<{
               <P1>{item.timezone}</P1>
             </TableCell>
             <TableCell>{item.language}</TableCell>
-            <TableCell><P1>{item.date_created}</P1></TableCell>
+            <TableCell>
+              <P1>{item.date_created}</P1>
+            </TableCell>
             <TableCell>
               <P1>
                 {timeView === 'absolute' ? item.last_logged_in : '15 min'}
@@ -357,6 +362,118 @@ const TableDesignTimeComponent: React.SFC<{
             >
               <S2 style={{ opacity: 0.3 }}>{item.id}</S2>
             </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+const TableSortingComponent: React.SFC = () => {
+  const [selected, setSelected] = useState([]);
+  const [sort, setSort] = useState<ISortItem>(null);
+  const [data, setData] = useState(testTableData);
+  const SortItems = [
+    {
+      label: '',
+      field: 'id',
+      sort: null,
+    },
+    {
+      label: 'Name',
+      field: 'name',
+      sort: 'asc' as const
+    },
+    {
+      label: 'Email',
+      field: 'email',
+      sort: 'asc' as const
+    },
+    {
+      label: 'Phone',
+      field: 'phone',
+      sort: 'asc' as const
+    },
+    {
+      label: 'Access',
+      field: 'access',
+      sort: 'asc' as const
+    },
+    {
+      label: 'Team',
+      field: 'team',
+      sort: 'asc' as const
+    },
+    {
+      label: 'Permission Groups',
+      field: 'permission_group',
+      sort: 'asc' as const
+    }
+  ];
+
+  const onSelect = (id: number) => {
+    const list = selected.includes(id)
+      ? selected.filter(item => item !== id)
+      : [...selected, id];
+    setSelected(list);
+  };
+  const onSelectSort = (item: ISortItem) => {
+    setSort(item);
+    const dataSorted = orderBy(testTableData, [item.field], [item.sort]);
+    setData(dataSorted);
+  }
+
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          {SortItems.map(item => (
+            <TableCell
+              key={item.field}
+              container="head"
+              sortProps={{
+                sortItem: item,
+                sortSelected: sort,
+                onSelectSort
+              }}
+            />
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((item, index) => (
+          <TableRow key={item.id} isSelected={selected.includes(item.id)}>
+            <TableCell>
+              <Checkbox
+                size={11}
+                containerStyle={{ marginLeft: 10 }}
+                checked={selected.includes(item.id)}
+                onChange={() => onSelect(item.id)}
+              />
+            </TableCell>
+            <TableCell>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Avatar
+                  style={{ marginRight: 15 }}
+                  type="image"
+                  content={item.avatar}
+                />
+                {item.name}
+              </div>
+            </TableCell>
+            <TableCell>{item.email}</TableCell>
+            <TableCell>{item.phone}</TableCell>
+            <TableCell>{item.access}</TableCell>
+            <TableCell>
+              <Avatar
+                textSize={18}
+                type="text"
+                textBackgroundColor={colors[index]}
+                textColor="#fff"
+                content={item.team}
+              />
+            </TableCell>
+            <TableCell>{item.permission_group}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -385,4 +502,7 @@ storiesOf('Table Design', module)
   ))
   .add('Optional fields: relative time', () => (
     <TableDesignTimeComponent timeView="relative" />
+  ))
+  .add('Sorting', () => (
+    <TableSortingComponent />
   ));

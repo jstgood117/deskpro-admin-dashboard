@@ -53,6 +53,12 @@ export interface ITableSetup {
 	columns: Array<ITableColumn>
 }
 
+export interface ISortItem 	{
+	label: string;
+	field: string;
+	sort: 'asc' | 'desc';
+} 
+
 export interface IMenuItemProps {
   name?: string;
   subItems?: IMenuItemProps[];
