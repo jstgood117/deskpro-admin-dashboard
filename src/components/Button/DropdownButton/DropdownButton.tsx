@@ -23,19 +23,17 @@ const ClearButton = styled.button`
 `;
 const DropdownWrapper = styled.div<{ opened: boolean }>`
   display: inline-flex;
+  border: 0.8px ${props => props.theme.static2Colour}solid;
   &:hover > * {
     color: ${props => props.theme.activeColour};
     background: ${props => props.theme.hoverColour};
-    border: ${props => (props.opened ? 0 : 0.8)}px solid
-      ${props => props.theme.activeColour};
-    path {
-      fill: ${props => props.theme.activeColour};
-    }
+    border-color: ${props => props.theme.activeColour};
   }
   &.selected > * {
     color: ${props => props.theme.activeColour};
-    border: ${props => (props.opened ? 0 : 0.8)}px solid
-      ${props => props.theme.activeColour};
+    border-color: ${props => props.theme.activeColour};
+  }
+  &:hover, &.selected > div > div > svg {
     path {
       fill: ${props => props.theme.activeColour};
     }
@@ -43,8 +41,10 @@ const DropdownWrapper = styled.div<{ opened: boolean }>`
 `;
 const DropdownStyled = styled.div<{ hasClearButton: boolean; opened: boolean }>`
   background: ${props => props.theme.secondaryColour};
-  border: ${props => (props.opened ? 0 : 0.8)}px solid
-    ${props => props.theme.static2Colour};
+  border: 0.8px
+    ${props =>
+      props.opened ? props.theme.activeColour : props.theme.static2Colour}
+    solid;
   box-sizing: border-box;
   border-radius: 4px;
   cursor: pointer;
@@ -76,8 +76,8 @@ const DropdownContent = styled.div`
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  top: 0px;
-  left: 0px;
+  top: -1px;
+  left: -1px;
   width: 100%;
 `;
 const DropdownContentPanel = styled.div`
@@ -121,10 +121,12 @@ export interface IProps {
   iconName?: string;
   containerClassName?: string;
   containerStyle?: CSSProperties;
+  dropdownContentStyle?: CSSProperties;
   label: string;
-  items: IItemProps[];
+  items: IItemProps[] | any;
   value?: any;
   showClearButton?: boolean;
+  renderItem?: (item: any, index: number) => React.ReactElement;
   onClear?: () => void;
   onSelect?: (value: any) => void;
 }
@@ -133,10 +135,12 @@ const DropdownButton: SFC<IProps> = ({
   iconName,
   containerClassName,
   containerStyle,
+  dropdownContentStyle,
   label,
   items,
   value,
   showClearButton,
+  renderItem,
   onClear,
   onSelect
 }) => {
@@ -172,12 +176,15 @@ const DropdownButton: SFC<IProps> = ({
 
         {openState && (
           <DropdownContent
+            style={dropdownContentStyle}
             onClick={() => {
               clickButton(!openState);
             }}
           >
-            {items.map((item, index: number) => {
-              return (
+            {items.map((item: any, index: number) => {
+              return renderItem ? (
+                renderItem(item, index)
+              ) : (
                 <DropdownContentLink
                   key={index}
                   onClick={() => onSelect && onSelect(item)}
