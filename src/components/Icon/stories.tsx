@@ -23,7 +23,9 @@ storiesOf('Icon', module)
   .add('sort', () => <Icon name="sort" />)
   .add('group', () => <Icon name="group" />)
   .add('view', () => <Icon name="view" />)
-  .add('admin.sidebar.help.helpCentre', () => <Icon name="admin.sidebar.help.helpCentre" />)
+  .add('admin.sidebar.help.helpCentre', () => (
+    <Icon name="admin.sidebar.help.helpCentre" />
+  ))
   .add('checkbox.indeterminate', () => <Icon name="checkbox.indeterminate" />)
   .add('close', () => <Icon name="close" />)
   .add('admin', () => <Icon name="admin" />)
@@ -44,5 +46,4 @@ storiesOf('Icon', module)
   .add('nav.dollar', () => <Icon name="nav.dollar" />)
   .add('nav.helpCentre', () => <Icon name="nav.helpCentre" />)
   .add('nav.data', () => <Icon name="nav.data" />)
-  .add('nav.pie', () => <Icon name="nav.pie" />)
-;
+  .add('nav.pie', () => <Icon name="nav.pie" />);
