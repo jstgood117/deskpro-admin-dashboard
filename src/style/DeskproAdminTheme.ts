@@ -23,6 +23,7 @@ const DeskproAdminTheme = {
   successColour: '#5BB6B1',
   pageHeader: '#E1EEFB',
   white: '#ffffff',
+  black: '#000',
   pagePadding: '34px',
 
   h1: {

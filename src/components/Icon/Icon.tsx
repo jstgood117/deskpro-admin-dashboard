@@ -47,6 +47,7 @@ import { ReactComponent as IconNavDollar } from '../../assets/svg/ic-nav-dollar.
 import { ReactComponent as IconNavHelpCentre } from '../../assets/svg/ic-nav-helpCentre.svg';
 import { ReactComponent as IconNavData } from '../../assets/svg/ic-nav-data.svg';
 import { ReactComponent as IconNavPie } from '../../assets/svg/ic-nav-pie.svg';
+import { ReactComponent as IconDial } from '../../assets/svg/ic-dial.svg';
 
 export interface IProps {
   name: string;
@@ -148,6 +149,8 @@ const Icon: SFC<IProps> = props => {
       return <IconNavData />;
     case 'nav.pie':
       return <IconNavPie />;
+    case 'dial':
+      return <IconDial />;
     default:
       return <IconSetup />;
   }

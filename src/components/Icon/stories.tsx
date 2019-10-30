@@ -46,4 +46,5 @@ storiesOf('Icon', module)
   .add('nav.dollar', () => <Icon name="nav.dollar" />)
   .add('nav.helpCentre', () => <Icon name="nav.helpCentre" />)
   .add('nav.data', () => <Icon name="nav.data" />)
-  .add('nav.pie', () => <Icon name="nav.pie" />);
+  .add('nav.pie', () => <Icon name="nav.pie" />)
+  .add('dial', () => <Icon name="dial" />);

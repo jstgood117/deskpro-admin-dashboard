@@ -1,7 +1,9 @@
-import React, { SFC, Fragment } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import React, { SFC } from 'react';
+import styled, { CSSProperties, ThemeProvider } from 'styled-components';
 
+import { DeskproAdminTheme } from '../Theme';
 import { dpstyle, TextLabel } from '../Styled';
+import Icon from '../Icon';
 
 export interface IStyleProps {
   styleType: 'lined' | 'filled';
@@ -11,14 +13,16 @@ export interface IStyleProps {
 export interface IProps {
   label: string;
   styles?: CSSProperties;
+  icon?: string;
 }
 
 const LabelStyle = styled(dpstyle.div)<IStyleProps>`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   border-radius: 4px;
   width: ${props =>
     props.styles && props.styles.width ? props.styles.width : 'fit-content'};
+  min-height: 24px;
   height: ${props =>
     props.styles && props.styles.height ? props.styles.height : 'inherit'};
   border: ${props =>
@@ -28,22 +32,46 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   background: ${props =>
     props.styleType === 'filled' && props.styles && props.styles.backgroundColor
       ? props.styles.backgroundColor
-      : '#ffffff'};
+      : props.theme.white};
   color: ${props =>
     props.styles && props.styles && props.styles.color
       ? props.styles.color
-      : '#000'};
-  color: ;
+      : props.theme.black};
+  path {
+    fill: ${props => props.theme.activeColour};
+  }
 `;
 
-const Label: SFC<IProps & IStyleProps> = ({ label, styleType, styles }) => (
-  <Fragment>
+const Label: SFC<IProps & IStyleProps> = ({
+  label,
+  styleType,
+  icon,
+  styles
+}) => (
+  <ThemeProvider theme={DeskproAdminTheme}>
     <LabelStyle styleType={styleType} styles={styles}>
-      <TextLabel small={1} style={{ padding: '0px 10px' }}>
+      {icon && (
+        <span
+          style={{
+            display: 'flex',
+            padding: '6px 0px 6px 10px'
+          }}
+        >
+          <Icon name={icon} />
+        </span>
+      )}
+      <TextLabel
+        small={1}
+        style={{
+          padding: '0px 10px',
+          fontWeight: '600',
+          minWidth: icon ? 0 : 50
+        }}
+      >
         {label}
       </TextLabel>
     </LabelStyle>
-  </Fragment>
+  </ThemeProvider>
 );
 
 export default Label;
