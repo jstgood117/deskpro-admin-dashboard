@@ -7,6 +7,7 @@ import Icon from '../Icon';
 
 export interface IStyleProps {
   styleType: 'lined' | 'filled';
+  iconColor?: string;
   styles?: CSSProperties;
 }
 
@@ -14,6 +15,7 @@ export interface IProps {
   label: string;
   styles?: CSSProperties;
   icon?: string;
+  iconColor?: string;
 }
 
 const LabelStyle = styled(dpstyle.div)<IStyleProps>`
@@ -38,7 +40,8 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
       ? props.styles.color
       : props.theme.black};
   path {
-    fill: ${props => props.theme.activeColour};
+    fill: ${props =>
+      props.iconColor ? props.iconColor : props.theme.activeColour};
   }
 `;
 
@@ -46,10 +49,11 @@ const Label: SFC<IProps & IStyleProps> = ({
   label,
   styleType,
   icon,
-  styles
+  styles,
+  iconColor
 }) => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <LabelStyle styleType={styleType} styles={styles}>
+    <LabelStyle styleType={styleType} styles={styles} iconColor={iconColor}>
       {icon && (
         <span
           style={{

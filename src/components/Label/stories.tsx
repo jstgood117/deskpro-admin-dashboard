@@ -38,16 +38,28 @@ storiesOf('Label', module)
       }}
     />
   ))
-  .add('Icon-Text', () => (
+  .add('Icon-Text-Outline', () => (
     <Label
       label="6"
       styleType="lined"
       styles={{
         color: '#8B9293',
         backgroundColor: '#F7F7F7',
-        borderColor: '#a9b0b0',
-
+        borderColor: '#a9b0b0'
       }}
-      icon='dial'
+      icon="dial"
+    />
+  ))
+  .add('Icon-Text-Filled', () => (
+    <Label
+      label="6"
+      styleType="filled"
+      styles={{
+        color: '#9384BD',
+        backgroundColor: '#EBE4F2',
+        borderColor: '#a9b0b0'
+      }}
+      icon="clock"
+      iconColor="#9384BD"
     />
   ));
