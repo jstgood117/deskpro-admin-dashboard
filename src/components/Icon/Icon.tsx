@@ -128,7 +128,7 @@ const Icon: SFC<IProps> = props => {
       return <IconCaretLeft />;
     case 'check-2':
       return <IconCheck2 />;
-	case 'nav.chat':
+    case 'nav.chat':
       return <IconNavChat />;
     case 'nav.message':
       return <IconNavMessage />;
