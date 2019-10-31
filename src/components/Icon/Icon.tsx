@@ -50,6 +50,7 @@ import { ReactComponent as IconNavPie } from '../../assets/svg/ic-nav-pie.svg';
 import { ReactComponent as IconDial } from '../../assets/svg/ic-dial.svg';
 import { ReactComponent as IconArrowDropUp } from '../../assets/svg/ic-arrow-drop-up.svg';
 import { ReactComponent as IconArrowDropDown } from '../../assets/svg/ic-arrow-drop-down.svg';
+import { ReactComponent as IconDragDrop } from '../../assets/svg/ic-drag-drop.svg';
 
 export interface IProps {
   name: string;
@@ -157,6 +158,8 @@ const Icon: SFC<IProps> = props => {
       return <IconArrowDropUp />;
     case 'arrow-drop-down':
       return <IconArrowDropDown />;
+    case 'drag-and-drop':
+      return <IconDragDrop />;
     default:
       return <IconSetup />;
   }
