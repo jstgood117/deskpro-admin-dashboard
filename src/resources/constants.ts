@@ -1003,6 +1003,26 @@ export const DropdownItemsWithIcon: IMenuItemProps[] = [
   }
 ];
 
+export const OrderableMenuItems: IMenuItemProps[] = [
+  { key: 0, name: 'Name' },
+  {
+    key: 1, name: 'Email',
+    subItems: [
+      { name: 'Text' },
+      { name: 'Avatar with text' },
+      { name: 'Avatar' },
+      { name: 'Label' }
+    ]
+  },
+  { key: 2, name: 'Phone number' },
+  { key: 3, name: 'Access' },
+  { key: 4, name: 'Team' },
+  { key: 5, name: 'Permissioin group' },
+  { key: 6, name: 'Assigned tickets' },
+  { key: 7, name: 'Language' },
+  { key: 8, name: 'Timezone' }
+];
+
 export const testNavData = [
   {
     NavItem: 'nav.message'
