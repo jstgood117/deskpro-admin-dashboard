@@ -14,7 +14,7 @@ if ("production" !== process.env.NODE_ENV) {
     debug.enable('*,-sockjs-client:*');
 }
 
-const apiUrl = window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
+const apiUrl = (window as any).DP_GRAPHQL_ENDPOINT || window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
 
 const AppWrap = () => {
 	if (apiUrl) {
@@ -24,7 +24,7 @@ const AppWrap = () => {
 			cache: new InMemoryCache(),
 			link,
 		});
-		
+
 		return (
 			<ApolloProvider client={client}>
 				<App />
