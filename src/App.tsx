@@ -7,38 +7,37 @@ import { logError } from './components/Error/ErrorBoundary';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { SidebarContainer, AppContainer, BodyContainer } from './pages/AdminInterface';
-import { PlaceholderPageContainer, PlaceholderAppNavContainer, PlaceholderHeaderContainer, PlaceholderBodyContainer, PlaceholderAppNavIcons, PlaceholderHeaderIcons } from './pages/AdminInterface/placeholder';
 import Sidebar from './components/Sidebar';
 import { ISidebarSection } from './resources/interfaces';
 import PageType from './components/Page/PageType';
 
 export const QUERY_INITIAL = gql`
-query  {
-	translations: adminInterface_getTranslations(locale: "en") {
-		id
-		message
-	}
+	query  {
+		translations: adminInterface_getTranslations(locale: "en") {
+			id
+			message
+		}
 
-	user: adminInterface_getAdminUser {
-		locale
-	}
+		user: adminInterface_getAdminUser {
+			locale
+		}
 
-	sidebar: adminInterface_getAdminSidebar {
-		sectionName
-		icon
-		navItems {
-			itemName
-			path
-			pageType
-			metadataQuery
+		sidebar: adminInterface_getAdminSidebar {
+			sectionName
+			icon
 			navItems {
 				itemName
 				path
 				pageType
 				metadataQuery
+				navItems {
+					itemName
+					path
+					pageType
+					metadataQuery
+				}
 			}
 		}
-	}
 }
 `;
 
@@ -51,7 +50,8 @@ const App: SFC = () => {
 		return <p>Loading</p>;
 	}
 	if (error) {
-		return <p>Error: {error}</p>;
+		console.log(error);
+		return <p>Error</p>;
 	}
 	return (
 		<HashRouter>
@@ -64,36 +64,24 @@ const App: SFC = () => {
 				}, {})}
 				onError={(err) => { logError(err) }}
 			>
-				<PlaceholderPageContainer>
-					<PlaceholderAppNavContainer>
-						<PlaceholderAppNavIcons />
-						<b />
-					</PlaceholderAppNavContainer>
-					<PlaceholderHeaderContainer>
-						<PlaceholderHeaderIcons />
-					</PlaceholderHeaderContainer>
-					<PlaceholderBodyContainer>
-						<AppContainer>
-							<SidebarContainer>
-								<Sidebar data={data.sidebar} />
-							</SidebarContainer>
-							<BodyContainer>
-								<Switch>
-									<Route exact path="/" render={() => <Redirect to="/agents" />} />
-									{
-										flatMap(
-											(data.sidebar as ISidebarSection[]).map(section => section.navItems),
-											sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
-										)
-											.filter(s => s.path)
-											.map(s => <Route key={s.path} exact path={s.path} render={() => <PageType {...s} />} />)
-									}
-								</Switch>
-							</BodyContainer>
-						</AppContainer>
-					</PlaceholderBodyContainer>
-				</PlaceholderPageContainer>
-
+				<AppContainer>
+					<SidebarContainer>
+						<Sidebar data={data.sidebar} />
+					</SidebarContainer>
+					<BodyContainer>
+						<Switch>
+							<Route exact path="/" render={() => <Redirect to="/agents" />} />
+							{
+								flatMap(
+									(data.sidebar as ISidebarSection[]).map(section => section.navItems),
+									sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
+								)
+									.filter(s => s.path)
+									.map(s => <Route key={s.path} exact path={s.path} render={() => <PageType {...s} />} />)
+							}
+						</Switch>
+					</BodyContainer>
+				</AppContainer>
 			</IntlProvider>
 		</HashRouter>
 	);

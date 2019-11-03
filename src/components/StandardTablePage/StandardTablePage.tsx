@@ -9,9 +9,7 @@ import Error from '../Error';
 import Header from '../Header';
 import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
-import SearchBox from '../SearchBox';
 import Icon from '../Icon';
-import TableActions from '../TableAction';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 
@@ -26,7 +24,7 @@ const BodyMargin = styled(dpstyle.div)`
 
 const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   const [tabIndex, setTabState] = useState(0);
-  const [searchText, setSearchState] = useState('');
+  const [searchText] = useState('');
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all' });
 
   if (loading) {
