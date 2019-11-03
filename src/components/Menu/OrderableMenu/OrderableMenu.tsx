@@ -66,20 +66,15 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
-          // clickedGear ? (
-          //   <MenuSub
-          //     onSelect={onSelect}
-          //     menuItems={item.subItems}
-          //     selectedValue={selectedValue}
-          //   />
-          // ) : (
-          //   <div />
-          // )
-          <MenuSub
+          clickedGear ? (
+            <MenuSub
               onSelect={onSelect}
               menuItems={item.subItems}
               selectedValue={selectedValue}
             />
+          ) : (
+            <div />
+          )
         }
         positionOptions={{
           position: submenuPosition ? submenuPosition : 'right',
