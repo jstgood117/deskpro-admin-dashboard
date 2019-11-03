@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Menu, { IProps } from './Menu';
+import Menu from './Menu';
 import { DropdownItemsWithIcon } from '../../resources/constants';
+import { IMenuProps } from '../../resources/interfaces';
 
 describe('Menu', () => {
-  let props: IProps;
+  let props: IMenuProps;
   let mountedMenu: any;
 
-  const MenuComponent: React.FC<IProps> = props => {
-    const [value, setValue] = useState('');
+  const MenuComponent: React.FC<IMenuProps> = props => {
+    const [value, setValue] = useState();
 
     return <Menu {...props} value={value} onSelect={val => setValue(val)} />;
   };
@@ -27,7 +28,7 @@ describe('Menu', () => {
     props = {
       label: 'Action',
       iconName: 'menu',
-      items: DropdownItemsWithIcon
+      menuItems: DropdownItemsWithIcon
     };
     mountedMenu = undefined;
   });

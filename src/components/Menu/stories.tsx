@@ -27,7 +27,7 @@ const MenuComponent: React.FC<IMenuProps> = props => {
 const OrderableMenuComponent: React.FC<IMenuProps> = props => {
   const [value, setValue] = useState();
   const [SortList, SetList] = useState(OrderableMenuItems);
-  const checkedState: { [key: string]: any } = {};
+  const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
   return (
     <OrderableMenu
