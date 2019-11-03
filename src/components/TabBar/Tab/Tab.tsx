@@ -20,7 +20,8 @@ const TabStyled = styled(dpstyle.div)<IStyleProps>`
 `;
 
 export interface IProps {
-  label: string;
+  label?: string;
+  messageId?: string;
   index: number;
   value: number;
   onClick?: (e: any) => void;
@@ -29,7 +30,7 @@ export interface IProps {
 const Tab: SFC<IProps> = props => (
   <Fragment>
     <TabStyled active={props.index === props.value} onClick={props.onClick}>
-      <TextLabel>{props.label}</TextLabel>
+      {props.label ? <TextLabel>{props.label}</TextLabel> : <TextLabel messageId={props.messageId} />}
     </TabStyled>
   </Fragment>
 );
