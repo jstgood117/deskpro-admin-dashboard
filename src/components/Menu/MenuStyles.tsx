@@ -71,6 +71,7 @@ export const StyledMenuItem = styled(props => <MenuItem {...props} />)`
   position: relative;
   display: flex;
   align-items: center;
+  color: ${props => (props.selected ? props.theme.activeColour : null)};
 `;
 
 export const HR = styled.div`

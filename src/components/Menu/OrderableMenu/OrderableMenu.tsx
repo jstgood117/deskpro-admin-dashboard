@@ -21,7 +21,7 @@ import {
 import Toggle from '../../Toggle';
 import { SingleSubMenuItem } from '../Menu';
 
-const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems }) => {
+const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => {
   return (
     <MenuListWrapper>
       <MenuList>
@@ -29,7 +29,11 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems }) => {
           return (
             <div key={index}>
               {item.name && (
-                <SingleSubMenuItem onSelect={onSelect} item={item}>
+                <SingleSubMenuItem
+                  onSelect={onSelect}
+                  item={item}
+                  selected={selectedValue && selectedValue.key === item.key}
+                >
                   <IconWrapper>
                     {item.icon && <Icon name={item.icon} />}
                   </IconWrapper>
@@ -46,22 +50,36 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems }) => {
 const MultiMenuComponent: SFC<IMenuProps> = ({
   item,
   onSelect,
-  submenuPosition
+  submenuPosition,
+  selectedValue
 }) => {
   const [clickedGear, clickGear] = useState(false);
   return (
-    <div onMouseLeave={()=>{clickGear(false)}}>
+    <div
+      onMouseLeave={() => {
+        clickGear(false);
+      }}
+    >
       <StyledSubMenuItem
         onItemChosen={() => {
-          onSelect && onSelect(item.name);
+          onSelect && onSelect(item);
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
-          clickedGear ? (
-            <MenuSub onSelect={onSelect} menuItems={item.subItems} />
-          ) : (
-            <div />
-          )
+          // clickedGear ? (
+          //   <MenuSub
+          //     onSelect={onSelect}
+          //     menuItems={item.subItems}
+          //     selectedValue={selectedValue}
+          //   />
+          // ) : (
+          //   <div />
+          // )
+          <MenuSub
+              onSelect={onSelect}
+              menuItems={item.subItems}
+              selectedValue={selectedValue}
+            />
         }
         positionOptions={{
           position: submenuPosition ? submenuPosition : 'right',
@@ -94,7 +112,8 @@ const Menu: SFC<IMenuProps> = ({
   submenuPosition,
   initialList,
   setChecked,
-  checked
+  checked,
+  selectedValue
 }) => {
   const itemList = menuItems.map((item, index: number) => {
     return (
@@ -120,6 +139,7 @@ const Menu: SFC<IMenuProps> = ({
               item={item}
               submenuPosition={submenuPosition}
               onSelect={onSelect}
+              selectedValue={selectedValue}
             />
           )}
         </div>
@@ -204,6 +224,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
               initialList={initialList}
               setChecked={setChecked}
               checked={checked}
+              selectedValue={value}
             />
           }
         >

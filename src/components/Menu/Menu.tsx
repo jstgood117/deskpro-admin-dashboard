@@ -21,9 +21,10 @@ export const SingleSubMenuItem: SFC<IMenuProps> = props => {
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
-        props.onSelect && props.onSelect(props.item.name);
+        props.onSelect && props.onSelect(props.item);
       }}
       highlightedStyle={{ background: '#E8EBEE' }}
+      selected={props.selected}
     >
       <TextLabel
         style={{
@@ -31,9 +32,21 @@ export const SingleSubMenuItem: SFC<IMenuProps> = props => {
           alignItems: 'center',
           paddingRight: 15
         }}
+        bold={props.selected}
       >
         {props.children}
       </TextLabel>
+
+      {props.selected && (
+        <span
+          style={{
+            position: 'absolute',
+            right: 10
+          }}
+        >
+          <Icon name="check-2" />
+        </span>
+      )}
     </StyledMenuItem>
   );
 };

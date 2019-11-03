@@ -67,13 +67,15 @@ export interface IMenuProps {
   label?: string;
   menuItems?: IMenuItemProps[];
   initialList?: IMenuItemProps[];
-  value?: string;
+  value?: IMenuItemProps;
 	submenuPosition?: string;
-  onSelect?: (value: string) => void;
+  onSelect?: (value: IMenuItemProps) => void;
 	order?: (value: IMenuItemProps[]) => void;
 	setChecked?: (value: any) => void;
 	checked?: {[key: string]: any};
 	item?: IMenuItemProps;
+	selectedValue?: IMenuItemProps;
+	selected? : boolean;
 }
 	
 export interface IMenuItemProps {
