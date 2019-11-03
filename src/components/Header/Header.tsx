@@ -11,6 +11,7 @@ import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: ${props => props.theme.pagePadding};
+  padding-bottom: 68px;
   position: relative;
   display: flex;
   background-image: url("data:image/svg+xml,${props =>
@@ -210,7 +211,7 @@ const Header: SFC<IProps> = ({
             <NewButton onClick={onNewClick}>
               <Icon name="plus" />
               <span>
-                <FormattedMessage id="admin.page.new" />
+                <FormattedMessage id="admin_common.btn.new" />
               </span>
             </NewButton>
           )}
