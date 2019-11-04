@@ -5,15 +5,8 @@ import Button from './Button';
 import DropdownButton, { IProps } from './DropdownButton/DropdownButton';
 import IconButton from './IconButton';
 
-const DropdownItems = [
-  { link: 'Link1' },
-  { link: 'Link2' },
-  { link: 'Link3' },
-  { link: 'Link4' }
-];
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
-const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
-const ViewItems = [{ link: 'View1' }, { link: 'View2' }];
+const FilterItems = [{ link: 'Filter1' }, { link: 'Filter2' }, { link: 'Filter3' }];
 
 const DropButtonComponent: React.FC<IProps> = props => {
   const [value, setValue] = useState('');
@@ -64,53 +57,73 @@ storiesOf('Button', module)
     </Button>
   ))
   .add('button/small/icon-text/primary', () => (
-    <Button styleType="primary" onClick={action('clicked')} size="small" icon='filter'>
+    <Button
+      styleType="primary"
+      onClick={action('clicked')}
+      size="small"
+      icon="filter"
+    >
       Primary Button
     </Button>
   ))
   .add('button/small/icon-text/secondary', () => (
-    <Button styleType="secondary" onClick={action('clicked')} size="small" icon='filter'>
+    <Button
+      styleType="secondary"
+      onClick={action('clicked')}
+      size="small"
+      icon="filter"
+    >
       Secondary Button
     </Button>
   ))
   .add('button/small/icon-text/tertiary', () => (
-    <Button styleType="tertiary" onClick={action('clicked')} size="small" icon='filter'>
+    <Button
+      styleType="tertiary"
+      onClick={action('clicked')}
+      size="small"
+      icon="filter"
+    >
       Tertiary Button
     </Button>
   ))
   .add('button/medium/icon-text/primary', () => (
-    <Button styleType="primary" onClick={action('clicked')} size="medium" icon='plus'>
+    <Button
+      styleType="primary"
+      onClick={action('clicked')}
+      size="medium"
+      icon="plus"
+    >
       Primary Button
     </Button>
   ))
   .add('button/medium/icon-text/secondary', () => (
-    <Button styleType="secondary" onClick={action('clicked')} size="medium" icon='filter'>
+    <Button
+      styleType="secondary"
+      onClick={action('clicked')}
+      size="medium"
+      icon="filter"
+    >
       Secondary Button
     </Button>
   ))
-  .add('Dropdown', () => (
-    <DropdownButton label="Dropdown" items={DropdownItems} />
+
+  .add('button/small/icon-text/dropdown', () => (
+    <DropButtonComponent
+      label="Item"
+      items={FilterItems}
+      size="small"
+      iconName="filter"
+    />
   ))
-  .add('Sort', () => (
-    <DropdownButton label="Sort" items={SortItems} iconName="sort" />
-  ))
-  .add('button/medium/dropdown/text/secondary', () => (
-    <DropButtonComponent label="Item" items={SortItems} />
-  ))
-  .add('button/medium/dropdown/icon-text', () => (
+  .add('button/medium/icon-text/secondary/dropdown', () => (
     <DropButtonComponent
       label="Item"
       items={SortItems}
       iconName="sort"
       showClearButton={true}
       onClear={action('onClear')}
+      size="medium"
     />
-  ))
-  .add('Group', () => (
-    <DropdownButton label="Group" items={GroupItems} iconName="group" />
-  ))
-  .add('View', () => (
-    <DropdownButton label="View" items={ViewItems} iconName="view" />
   ))
   .add('button/small/icon/secondary', () => (
     <IconButton

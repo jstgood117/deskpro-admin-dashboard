@@ -32,6 +32,9 @@ const DropdownWrapper = styled.div<{ opened: boolean }>`
   &.selected > * {
     color: ${props => props.theme.activeColour};
     border-color: ${props => props.theme.activeColour};
+    path {
+      fill: ${props => props.theme.activeColour};
+    }
   }
   &:hover, &.selected > div > div > svg {
     path {
@@ -39,7 +42,7 @@ const DropdownWrapper = styled.div<{ opened: boolean }>`
     }
   }
 `;
-const DropdownStyled = styled.div<{ hasClearButton: boolean; opened: boolean }>`
+const DropdownStyled = styled.div<{ hasClearButton: boolean; opened: boolean; size: string }>`
   background: ${props => props.theme.secondaryColour};
   border: 0.8px
     ${props =>
@@ -51,7 +54,7 @@ const DropdownStyled = styled.div<{ hasClearButton: boolean; opened: boolean }>`
   position: relative;
   outline: none;
   color: ${props => props.theme.static2Colour};
-  height: 34px;
+  height: ${props => props.size === 'medium' ? 34 : 28}px;
   display: inline-block;
   padding: 0 10px;
   ${props =>
@@ -106,11 +109,9 @@ const StyledIcon = styled.div`
   display: flex;
   align-items: center;
   padding-right: 10px;
-`;
-const LeftIcon = styled.div`
-  margin-left: 5px;
-  line-height: 1;
-  margin-right: 5px;
+  svg {
+    padding-right: 8px;
+  }
 `;
 
 interface IItemProps {
@@ -125,6 +126,7 @@ export interface IProps {
   label: string;
   items: IItemProps[] | any;
   value?: any;
+  size?: string;
   showClearButton?: boolean;
   renderItem?: (item: any, index: number) => React.ReactElement;
   onClear?: () => void;
@@ -142,7 +144,8 @@ const DropdownButton: SFC<IProps> = ({
   showClearButton,
   renderItem,
   onClear,
-  onSelect
+  onSelect,
+  size
 }) => {
   const [openState, clickButton] = useState(false);
 
@@ -156,6 +159,7 @@ const DropdownButton: SFC<IProps> = ({
       <DropdownStyled
         opened={openState}
         hasClearButton={showClearButton && selected}
+        size={size}
       >
         <DropdownBtn
           onClick={() => {
@@ -164,9 +168,7 @@ const DropdownButton: SFC<IProps> = ({
         >
           <StyledIcon>
             {iconName && (
-              <LeftIcon>
                 <Icon name={iconName} />
-              </LeftIcon>
             )}
             <MenuLabel>{label}</MenuLabel>
           </StyledIcon>

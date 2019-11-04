@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, useState } from 'react';
 import styled from 'styled-components';
 
 import SearchBox from '../SearchBox';
@@ -34,6 +34,9 @@ export interface IProps {
 }
 
 const TableActions: SFC<IProps> = props => {
+  const [Group, setGroupValue] = useState('');
+  const [Sort, setSortValue] = useState('');
+  const [View, setViewValue] = useState('');
   return (
     <StyledTableAction>
       <FlexStyled style={{ flex: 5 }}>
@@ -56,17 +59,38 @@ const TableActions: SFC<IProps> = props => {
       <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
         {props.viewMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="View" iconName="view" items={ViewItems} />
+            <DropdownButton
+              label={View ? (View.link as any) : 'View'}
+              iconName="view"
+              size="medium"
+              items={ViewItems}
+              onSelect={val => setViewValue(val)}
+              value={View}
+            />
           </FlexStyled>
         ) : null}
         {props.groupMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="Group" iconName="group" items={GroupItems} />
+            <DropdownButton
+              iconName="group"
+              size="medium"
+              items={GroupItems}
+              label={Group ? (Group.link as any) : 'Group'}
+              onSelect={val => setGroupValue(val)}
+              value={Group}
+            />
           </FlexStyled>
         ) : null}
         {props.sortMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="Sort" iconName="sort" items={SortItems} />
+            <DropdownButton
+              label={Sort ? (Sort.link as any) : 'Sort'}
+              iconName="sort"
+              size="medium"
+              items={SortItems}
+              onSelect={val => setSortValue(val)}
+              value={Sort}
+            />
           </FlexStyled>
         ) : null}
       </FlexStyled>
