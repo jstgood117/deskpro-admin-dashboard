@@ -1,105 +1,30 @@
-import React, { SFC, CSSProperties, ReactNode } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import React, { SFC } from 'react';
+import { ThemeProvider } from 'styled-components';
 import isNil from 'lodash/isNil';
-import { MenuList, MenuItem, MenuButton, SubMenuItem } from 'react-menu-list';
+import { MenuList, MenuButton } from 'react-menu-list';
 
 import Icon from '../Icon';
 import { MenuLabel, TextLabel } from '../Styled';
 import { DeskproAdminTheme } from '../Theme';
-import { IMenuItemProps } from '../../resources/interfaces';
+import { IMenuProps } from '../../resources/interfaces';
+import {
+  MenuWrapper,
+  StyledMenuItem,
+  IconWrapper,
+  MenuListWrapper,
+  StyledSubMenuItem,
+  HR,
+  StyledIcon
+} from './MenuStyles';
 
-const MenuWrapper = styled.div`
-  display: inline-flex;
-  .menu-btn {
-    color: ${props => props.theme.greyDark};
-    padding: 0px 13px 0px 14px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    background: ${props => props.theme.white};
-    border: 1px solid ${props => props.theme.greyLight};
-    outline: none;
-    box-sizing: border-box;
-    border-radius: ${props => props.theme.btnBorderRadius};
-    cursor: pointer
-    &:hover {
-      border: 1px solid ${props => props.theme.activeColour};
-      color: ${props => props.theme.activeColour};
-      background: ${props => props.theme.hoverColour};
-      .ic-down,
-      .ic-menu {
-        path {
-          fill: ${props => props.theme.activeColour};
-        }
-      }
-    }
-  }
-  .selected {
-    border: 1px solid ${props => props.theme.activeColour};
-    color: ${props => props.theme.activeColour};
-    .ic-down,
-    .ic-menu {
-      path {
-        fill: ${props => props.theme.activeColour};
-      }
-    }
-  }
-`;
-
-const MenuListWrapper = styled.div`
-  background: ${props => props.theme.white};
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  border-radius: ${props => props.theme.btnBorderRadius};
-  min-width: 231px;
-`;
-const StyledIcon = styled.span`
-  display: flex;
-  align-items: center;
-`;
-const StyledMenuItem = styled(props => <MenuItem {...props} />)`
-  cursor: pointer;
-  padding: 6.2px 30px 7.09px 15px;
-  user-select: none;
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-
-const StyledSubMenuItem = styled(props => <SubMenuItem {...props} />)`
-  cursor: pointer;
-  padding: 6.2px 30px 7.09px 15px;
-  user-select: none;
-  position: relative;
-  display: flex;
-  align-items: center;
-`;
-const HR = styled.div`
-  border: 1px solid #eff0f0;
-  margin-top: 6px;
-  margin-bottom: 6px;
-`;
-
-export interface IProps {
-  iconName?: string;
-  containerStyle?: CSSProperties;
-  label?: string;
-  items?: IMenuItemProps[];
-  value?: any;
-  onSelect?: (value: any) => void;
-}
-export interface IListProps {
-  children: ReactNode;
-  onClick?: (value: any) => void;
-  item?: IMenuItemProps;
-}
-
-const LI = (props: IListProps) => {
+export const SingleSubMenuItem: SFC<IMenuProps> = props => {
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
-        props.onClick && props.onClick(props.item.name);
+        props.onSelect && props.onSelect(props.item);
       }}
       highlightedStyle={{ background: '#E8EBEE' }}
+      selected={props.selected}
     >
       <TextLabel
         style={{
@@ -107,66 +32,78 @@ const LI = (props: IListProps) => {
           alignItems: 'center',
           paddingRight: 15
         }}
+        bold={props.selected}
       >
         {props.children}
       </TextLabel>
+
+      {props.selected && (
+        <span
+          style={{
+            position: 'absolute',
+            right: 10
+          }}
+        >
+          <Icon name="check-2" />
+        </span>
+      )}
     </StyledMenuItem>
   );
 };
+export const MultiSubMenuItem: SFC<IMenuProps> = ({
+  item,
+  onSelect,
+  submenuPosition
+}) => {
+  return (
+    <StyledSubMenuItem
+      highlightedStyle={{ background: '#E8EBEE' }}
+      menu={<MenuSub menuItems={item.subItems} onSelect={onSelect} />}
+      positionOptions={{
+        position: submenuPosition ? submenuPosition : 'right',
+        vAlign: 'top',
+        hAligh: 'left'
+      }}
+    >
+      <IconWrapper>{item.icon && <Icon name={item.icon} />}</IconWrapper>
+      <TextLabel style={{ paddingRight: 15 }}>{item.name}</TextLabel>
+      <span
+        style={{
+          position: 'absolute',
+          right: 15,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        <Icon name="rightVector" />
+      </span>
+    </StyledSubMenuItem>
+  );
+};
 
-const MenuSub: SFC<IProps> = ({ onSelect, items }) => {
+const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, submenuPosition }) => {
   return (
     <MenuListWrapper>
       <MenuList>
-        {items.length > 0 &&
-          items.map((item, index: number) => {
+        {menuItems.length > 0 &&
+          menuItems.map((item, index: number) => {
             return (
               <div key={index}>
                 {item.name && !item.subItems && (
-                  <LI onClick={onSelect} item={item}>
-                    <span
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        paddingRight: 13
-                      }}
-                    >
+                  <SingleSubMenuItem onSelect={onSelect} item={item}>
+                    <IconWrapper>
                       {item.icon && <Icon name={item.icon} />}
-                    </span>
+                    </IconWrapper>
                     {item.name}
-                  </LI>
+                  </SingleSubMenuItem>
                 )}
                 {item.name && item.subItems && (
-                  <StyledSubMenuItem
-                    onItemChosen={() => {
-                      onSelect && onSelect(item.name);
-                    }}
-                    highlightedStyle={{ background: '#E8EBEE' }}
-                    menu={<MenuSub items={item.subItems} onSelect={onSelect} />}
-                  >
-                    <span
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        paddingRight: 13
-                      }}
-                    >
-                      {item.icon && <Icon name={item.icon} />}
-                    </span>
-                    <TextLabel style={{ paddingRight: 15 }}>
-                      {item.name}
-                    </TextLabel>
-                    <span
-                      style={{
-                        position: 'absolute',
-                        right: 15,
-                        display: 'flex',
-                        alignItems: 'center'
-                      }}
-                    >
-                      <Icon name="rightVector" />
-                    </span>
-                  </StyledSubMenuItem>
+                  <MultiSubMenuItem
+                    item={item}
+                    onSelect={onSelect}
+                    menuItems={item.subItems}
+                    submenuPosition={submenuPosition}
+                  />
                 )}
                 {!item.name && <HR />}
               </div>
@@ -176,14 +113,20 @@ const MenuSub: SFC<IProps> = ({ onSelect, items }) => {
     </MenuListWrapper>
   );
 };
-const Menu: SFC<IProps> = ({ iconName, label, value, onSelect, items }) => {
+const Menu: SFC<IMenuProps> = ({
+  iconName,
+  label,
+  value,
+  onSelect,
+  menuItems
+}) => {
   const selected = !isNil(value) && value !== '';
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <MenuWrapper>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
-          menu={<MenuSub items={items} onSelect={onSelect} />}
+          menu={<MenuSub menuItems={menuItems} onSelect={onSelect} />}
         >
           {iconName && (
             <StyledIcon className="ic-menu">

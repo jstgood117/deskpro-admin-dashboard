@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export interface IUser {
 	locale: string,
 }
@@ -59,7 +61,25 @@ export interface ISortItem 	{
 	sort: 'asc' | 'desc';
 } 
 
+export interface IMenuProps {
+  iconName?: string;
+  containerStyle?: CSSProperties;
+  label?: string;
+  menuItems?: IMenuItemProps[];
+  initialList?: IMenuItemProps[];
+  value?: IMenuItemProps;
+	submenuPosition?: string;
+  onSelect?: (value: IMenuItemProps) => void;
+	order?: (value: IMenuItemProps[]) => void;
+	setChecked?: (value: any) => void;
+	checked?: {[key: string]: any};
+	item?: IMenuItemProps;
+	selectedValue?: IMenuItemProps;
+	selected? : boolean;
+}
+	
 export interface IMenuItemProps {
+  key?: number;
   name?: string;
   subItems?: IMenuItemProps[];
   icon?: string;
