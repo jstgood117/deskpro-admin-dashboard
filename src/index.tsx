@@ -5,6 +5,10 @@ import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 
 import { debug, appDebug } from './logging';
+
+import generateConfig from './config';
+import { ConfigType } from './config/config';
+
 import App from './App';
 import DevApiPrompt from './DevApiPrompt';
 import { InMemoryCache } from 'apollo-boost';
@@ -13,7 +17,8 @@ if ('production' !== process.env.NODE_ENV) {
     debug.enable('*,-sockjs-client:*');
 }
 
-const apiUrl = (window as any).DP_GRAPHQL_ENDPOINT || window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
+const config: ConfigType = generateConfig();
+const { apiUrl } = config;
 
 const AppWrap = () => {
   if (apiUrl) {
