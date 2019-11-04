@@ -2,19 +2,19 @@ import React, { SFC } from 'react';
 import styled from 'styled-components';
 
 const PaginationStyled = styled.div`
-`
+`;
 
 interface IProps {
-  pageIndex: any,
-  pageCount: any,
-  pageSize: any,
-  pageOptions: any,
-  canPreviousPage: any,
-  canNextPage: any,
-  gotoPage: any,
-  previousPage: any,
-  nextPage: any,
-  setPageSize: any,
+  pageIndex: any;
+  pageCount: any;
+  pageSize: any;
+  pageOptions: any;
+  canPreviousPage: any;
+  canNextPage: any;
+  gotoPage: any;
+  previousPage: any;
+  nextPage: any;
+  setPageSize: any;
 }
 
 const Pagination: SFC<IProps> = ({pageIndex, pageCount, pageSize, pageOptions, canPreviousPage, canNextPage, gotoPage, previousPage, nextPage, setPageSize}) => (

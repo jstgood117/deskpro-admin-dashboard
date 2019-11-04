@@ -144,7 +144,7 @@ const trackEvent = (id: string, extra?: object) => {
             LogRocket.captureMessage(id, { extra: { ...logContext.app, ...extra} });
         }
     }
-}
+};
 
 /**
  * Set app context variables
@@ -161,9 +161,9 @@ const setAppContext = (context: object) => {
             payload: {
                 context: logContext.app
             }
-        })
+        });
     }
-}
+};
 
 /**
  * Set user context
@@ -184,7 +184,7 @@ const setUserContext = (context: object) => {
             payload: {
                 person: logContext.user
             }
-        })
+        });
     }
 };
 

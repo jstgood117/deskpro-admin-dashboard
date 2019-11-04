@@ -16,7 +16,7 @@ describe('Loading', () => {
       );
     }
     return mountedLoading;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -29,4 +29,4 @@ describe('Loading', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-})
+});

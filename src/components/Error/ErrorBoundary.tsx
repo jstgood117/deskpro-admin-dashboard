@@ -5,13 +5,13 @@ import { appDebug } from '../../logging';
 
 interface IProps {}
 interface IState {
-  hasError: boolean,
+  hasError: boolean;
 }
 
 export const logError = (error: any) => {
   // TODO log the error to external service
   appDebug(`Admin app error: ${error}`);
-}
+};
 
 class ErrorBoundary extends Component<IProps,IState> {
   constructor(props: IProps) {
@@ -30,7 +30,7 @@ class ErrorBoundary extends Component<IProps,IState> {
 
   render() {
     if (this.state.hasError) {
-      return <Error />
+      return <Error />;
     }
     return this.props.children;
   }

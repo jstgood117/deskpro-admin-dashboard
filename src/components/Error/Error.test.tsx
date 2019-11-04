@@ -16,7 +16,7 @@ describe('Error', () => {
       );
     }
     return mountedError;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -29,4 +29,4 @@ describe('Error', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-})
+});

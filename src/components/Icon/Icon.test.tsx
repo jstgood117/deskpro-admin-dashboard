@@ -12,7 +12,7 @@ describe('Icon', () => {
       mountedIcon = bShallow ? shallow(<Icon {...props} />) : mount(<Icon {...props} />);
     }
     return mountedIcon;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -25,4 +25,4 @@ describe('Icon', () => {
     const elts = wrapper(false).find('svg');
     expect(elts.length).toBeGreaterThan(0);
   });
-})
+});

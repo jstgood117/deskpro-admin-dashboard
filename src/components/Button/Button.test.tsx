@@ -12,7 +12,7 @@ describe('Button', () => {
       mountedButton = bShallow ? shallow(<Button {...props} />) : mount(<Button {...props} />);
     }
     return mountedButton;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -59,4 +59,4 @@ describe('Button', () => {
       expect(passedParam).toBe(999);
     });
   });
-})
+});

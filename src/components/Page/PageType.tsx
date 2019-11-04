@@ -4,7 +4,7 @@ import { QUERY_AGENTS_PAGE } from '../../resources/graphql';
 import StandardTablePage from '../StandardTablePage';
 
 export interface IProps {
-  path?: string,
+  path?: string;
 }
 
 // Everything is now defined by the path field
@@ -16,7 +16,7 @@ const PageType: SFC<IProps> = ({path}) => {
       return <StandardTablePage query={QUERY_AGENTS_PAGE} queryName='agents_getAgentsPage' />;
 
     default:
-      return <div><textarea value={path} style={{width: '50%', height: '500px', fontFamily: 'Monospace'}} readOnly={true} /></div>
+      return <div><textarea value={path} style={{width: '50%', height: '500px', fontFamily: 'Monospace'}} readOnly={true} /></div>;
 	}
 };
 

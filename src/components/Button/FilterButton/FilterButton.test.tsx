@@ -12,7 +12,7 @@ describe('Grid', () => {
       mountedFilterButton = bShallow ? shallow(<FilterButton {...props} />) : mount(<FilterButton {...props} />);
     }
     return mountedFilterButton;
-  }
+  };
 
   beforeEach(() => {
     props = {};
@@ -36,4 +36,4 @@ describe('Grid', () => {
       expect(wrapper(false).find('button').children().length).toBe(1);
     });
   });
-})
+});

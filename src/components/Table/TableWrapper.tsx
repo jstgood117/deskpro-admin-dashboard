@@ -12,10 +12,10 @@ import TableAsync from './TableAsync';
 import { logError } from '../Error/ErrorBoundary';
 
 interface IProps {
-	intl: any,
-	client: ApolloClient<any>,
-	dataQuery: string,
-	tableDef: ITableSetup,
+	intl: any;
+	client: ApolloClient<any>;
+	dataQuery: string;
+	tableDef: ITableSetup;
 }
 
 // TODO how does memory vs async choice come through in the agents_getAgentsPage query?
@@ -28,15 +28,15 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 // 	const fetchIdRef = useRef(0);
 
 	// TODO remove this when backend data is fixed
-	const dataQuery2 = 'query { results: agents_getAgents(filter: { is_deleted: false }) { id, name, first_name, last_name, primary_email, emails, can_admin, can_agent }}'
+	const dataQuery2 = 'query { results: agents_getAgents(filter: { is_deleted: false }) { id, name, first_name, last_name, primary_email, emails, can_admin, can_agent }}';
 
 	const getData = () => {
 		client.query({ query: gql`${dataQuery2}`, errorPolicy: 'all' }).then(result => {
 			setData(result.data.results);
 			setPageCount(result.data.results.length / 20); // TODO non-hardcoded page size
 			setLoading(false);
-		}).catch(err => logError(err))
-	}
+		}).catch(err => logError(err));
+	};
 
 	const fetchData = useCallback(({ pageSize, pageIndex }) => {
 		if (!loading) {
@@ -53,21 +53,25 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 
 	return (
 		<Fragment>
-			{bChooseMemoryTable && <TableMemory
-				data={data}
-				columns={transformColumnData([...tableDef.columns], intl)}
-				options={options}
-			/>}
-			{!bChooseMemoryTable && <TableAsync
-				data={data}
-				columns={tableDef.columns}
-				fetchData={fetchData}
-				loading={loading}
-				pageCount={pageCount}
-				options={options}
-			/>}
+			{bChooseMemoryTable && (
+				<TableMemory
+					data={data}
+					columns={transformColumnData([...tableDef.columns], intl)}
+					options={options}
+				/>
+			)}
+			{!bChooseMemoryTable && (
+				<TableAsync
+					data={data}
+					columns={tableDef.columns}
+					fetchData={fetchData}
+					loading={loading}
+					pageCount={pageCount}
+					options={options}
+				/>
+			)}
 		</Fragment>
 	);
-}
+};
 
 export default injectIntl(withApollo<ITableSetup & IProps>(TableWrapper));

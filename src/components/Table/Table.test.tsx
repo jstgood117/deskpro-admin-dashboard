@@ -37,7 +37,7 @@ describe('Table', () => {
       );
     }
     return bShallow ? shallowTable : mountedTable;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -57,4 +57,4 @@ describe('Table', () => {
 //      expect(wrapper(false).find('div').children().length).toBe(0);
     });
   });
-})
+});

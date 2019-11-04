@@ -57,12 +57,12 @@ const Relationship: SFC<IProps> = ({
   return (
     <Tooltip
       styleType='lightBox'
-      content={
+      content={(
         <List>
           <S1>{title}</S1>
           {items.map((item, index) => renderItem(item, index))}
         </List>
-      }
+      )}
     >
       <span>
         {text ? (

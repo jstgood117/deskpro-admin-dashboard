@@ -10,7 +10,7 @@ const testError = {
     { message: 'graphQLError happened'},
     { message: 'second graphQLError happened'},
   ]
-}
+};
 
 storiesOf('Error',module)
 	.add('dummy graphQL errors', () => (

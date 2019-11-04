@@ -64,7 +64,7 @@ const Components: React.FC = () => {
 
 const Group: React.FC = () => {
   return <RuleBuilder />;
-}
+};
 
 storiesOf('Rule Builder', module)
   .add('components', () => <Components />)

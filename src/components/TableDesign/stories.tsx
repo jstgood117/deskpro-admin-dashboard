@@ -421,7 +421,7 @@ const TableSortingComponent: React.SFC = () => {
     setSort(item);
     const dataSorted = orderBy(testTableData, [item.field], [item.sort]);
     setData(dataSorted);
-  }
+  };
 
   return (
     <Table>

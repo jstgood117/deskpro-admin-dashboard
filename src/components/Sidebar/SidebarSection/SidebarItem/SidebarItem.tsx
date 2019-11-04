@@ -20,7 +20,7 @@ const SidebarItemStyled = styled(NavLink)<IStyleProps>`
 		background-color: #d4dbdf;
 		cursor: pointer;
 	}
-`
+`;
 
 const ItemName = styled(TextLabel)`
 	${SidebarItemStyled}.active & {

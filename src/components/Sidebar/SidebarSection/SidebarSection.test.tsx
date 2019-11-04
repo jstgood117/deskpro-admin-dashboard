@@ -8,7 +8,7 @@ import { MemoryRouter } from 'react-router';
 const testTranslations = {
   'test': 'Test',
   'admin.sidebar.channels': 'Channels',
-}
+};
 
 describe('SidebarSection', () => {
   let props: IProps;
@@ -27,7 +27,7 @@ describe('SidebarSection', () => {
       );
     }
     return mountedSidebarSection;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -53,7 +53,7 @@ describe('SidebarSection', () => {
         { itemName: 'test' },
         { itemName: 'test' },
         { itemName: 'test' },
-      ]
+      ];
       expect(wrapper(false).find('SidebarItem').length).toBe(props.navItems.length);
     });
   });
@@ -72,8 +72,8 @@ describe('SidebarSection', () => {
         },
         { itemName: 'test',
           navItems: [] },
-      ]
+      ];
       expect(wrapper(false).find('SidebarItem').length).toBe(6);
     });
   });
-})
+});

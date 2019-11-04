@@ -21,7 +21,7 @@ describe('SidebarItem', () => {
         );
     }
     return mountedSidebarItem;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -40,4 +40,4 @@ describe('SidebarItem', () => {
 //      expect(wrapper(false).text()).toContain('item 1');
     });
   });
-})
+});

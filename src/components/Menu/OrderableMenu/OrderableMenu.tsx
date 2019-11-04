@@ -62,7 +62,7 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          if(onSelect) { onSelect(item) };
+          if(onSelect) { onSelect(item); }
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
@@ -210,7 +210,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
       <MenuWrapper>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
-          menu={
+          menu={(
             <Menu
               onSelect={onSelect}
               order={order}
@@ -221,7 +221,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
               checked={checked}
               selectedValue={value}
             />
-          }
+          )}
         >
           {iconName && (
             <StyledIcon className='ic-menu'>

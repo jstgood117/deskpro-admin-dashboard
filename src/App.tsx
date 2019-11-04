@@ -51,16 +51,31 @@ const App: SFC = () => {
 	if (error) {
 		return <p>Error</p>;
 	}
+
+	const renderMessage = (data.translations as any[]).reduce((obj, item) => {
+		// turns [{id, msg}] array into {id: msg} map
+		obj[item.id] = item.message;
+		return obj;
+	}, {});
+
+	const onError = (err:string) => { logError(err); };
+
+	const onRouteRender = () => <Redirect to='/agents' />;
+
+	const renderSidebar = flatMap(
+		(data.sidebar as ISidebarSection[]).map(section => section.navItems),
+		sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
+	)
+		.filter(s => s.path)
+		/* tslint:disable:jsx-no-lambda */
+		.map(s => <Route key={s.path} exact={true} path={s.path} render={() => <PageType {...s} />} />);
+
 	return (
 		<HashRouter>
 			<IntlProvider
 				locale={data.user.locale}
-				messages={(data.translations as any[]).reduce((obj, item) => {
-					// turns [{id, msg}] array into {id: msg} map
-					obj[item.id] = item.message;
-					return obj
-				}, {})}
-				onError={err => { logError(err) }}
+				messages={renderMessage}
+				onError={onError}
 			>
 				<AppContainer>
 					<SidebarContainer>
@@ -68,21 +83,14 @@ const App: SFC = () => {
 					</SidebarContainer>
 					<BodyContainer>
 						<Switch>
-							<Route exact={true} path='/' render={() => <Redirect to='/agents' />} />
-							{
-								flatMap(
-									(data.sidebar as ISidebarSection[]).map(section => section.navItems),
-									sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
-								)
-									.filter(s => s.path)
-									.map(s => <Route key={s.path} exact={true} path={s.path} render={() => <PageType {...s} />} />)
-							}
+							<Route exact={true} path='/' render={onRouteRender} />
+							{renderSidebar}
 						</Switch>
 					</BodyContainer>
 				</AppContainer>
 			</IntlProvider>
 		</HashRouter>
 	);
-}
+};
 
 export default App;
