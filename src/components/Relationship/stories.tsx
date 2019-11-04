@@ -6,10 +6,10 @@ import { P1 } from '../Typography';
 
 storiesOf('Relationship', module).add('relationship', () => (
   <Relationship
-    backgroundColor="#F7F7F7"
-    color="#8B9293"
-    icon="admin"
-    title="Numbers"
+    backgroundColor='#F7F7F7'
+    color='#8B9293'
+    icon='admin'
+    title='Numbers'
     renderItem={item => <P1 key={item}>{item}</P1>}
     items={[
       '+18883375776',
@@ -23,11 +23,11 @@ storiesOf('Relationship', module).add('relationship', () => (
   />
 )).add('relationship with text', () => (
   <Relationship
-    backgroundColor="#F7F7F7"
-    color="#8B9293"
-    icon="admin"
-    title="Numbers"
-    text="Relationship"
+    backgroundColor='#F7F7F7'
+    color='#8B9293'
+    icon='admin'
+    title='Numbers'
+    text='Relationship'
     renderItem={item => <P1 key={item}>{item}</P1>}
     items={[
       '+18883375776',

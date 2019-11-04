@@ -26,7 +26,7 @@ export const Locale: React.SFC<IProps> = ({ code }) => {
   }
 
   return (
-    <Tooltip content={config.name} styleType="lightBox">
+    <Tooltip content={config.name} styleType='lightBox'>
       <ImageStyled src={config.flag} />
     </Tooltip>
   );

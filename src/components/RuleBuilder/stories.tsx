@@ -27,27 +27,27 @@ const Components: React.FC = () => {
 
       {/* Action */}
       <Flex>
-        <ActionButton iconName="group" />
-        <ActionButton iconName="plus" />
-        <ActionButton iconName="undo" />
-        <ActionButton toolip="Move up one level" iconName="move-left" />
-        <ActionButton iconName="trash" />
+        <ActionButton iconName='group' />
+        <ActionButton iconName='plus' />
+        <ActionButton iconName='undo' />
+        <ActionButton toolip='Move up one level' iconName='move-left' />
+        <ActionButton iconName='trash' />
       </Flex>
 
       {/* DropdownIcon */}
-      <DropdownIcon iconName="trash" onClick={() => actions('Dropdown')} />
+      <DropdownIcon iconName='trash' onClick={() => actions('Dropdown')} />
 
       {/* DropdownText */}
-      <DropdownText text="all" onClick={() => actions('Dropdown')} />
+      <DropdownText text='all' onClick={() => actions('Dropdown')} />
 
       {/* Select */}
-      <Select placeholder="Select property"></Select>
+      <Select placeholder='Select property'/>
 
       <br />
       {/* Header */}
       <HeaderContainer>
         <Text>Show objects that meet</Text>
-        <DropdownText text="all" onClick={() => actions('Dropdown')} />
+        <DropdownText text='all' onClick={() => actions('Dropdown')} />
         <Text> of the following:</Text>
       </HeaderContainer>
 

@@ -25,9 +25,9 @@ class DevApiPrompt extends React.Component<any, any> {
 			<form onSubmit={this.handleSubmit}>
 				<label>
 				API URL:
-				<input type="text" value={this.state.value} onChange={this.handleChange} />
+				<input type='text' value={this.state.value} onChange={this.handleChange} />
 				</label>
-				<input type="submit" value="Set" />
+				<input type='submit' value='Set' />
 			</form>
 		);
 	}

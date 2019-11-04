@@ -9,9 +9,9 @@ import { MemoryRouter } from 'react-router-dom';
 storiesOf('Page',module)
 	.add('Demo Sidebar', () => (
 		<IntlProvider locale='en' messages={testTranslations}>
-			<div style={{"width": "215px", "height": "75vh", "position": "relative"}}>
+			<div style={{'width': '215px', 'height': '75vh', 'position': 'relative'}}>
 				<MemoryRouter>
-					<Sidebar data={testSidebarData}></Sidebar>
+					<Sidebar data={testSidebarData}/>
 				</MemoryRouter>
 			</div>
 		</IntlProvider>

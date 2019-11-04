@@ -9,7 +9,7 @@ const ToggleComponent: React.FC = () => {
   return (
     <Toggle
       checked={checked}
-      value="checked"
+      value='checked'
       onChange={event => setChecked(event.target.checked)}
     />
   );

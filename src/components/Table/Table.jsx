@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 export const TableStyled = styled.div`
 	& table {
 		width: 100%;
@@ -85,4 +84,3 @@ export const transformColumnData = (columns, intl) => {
 
 	return newCols;
 }
-

@@ -101,7 +101,7 @@ const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   }, [isOpen, setOpen, navItem.navItems, loc]);
 
   const className = isOpen ? '' : 'collapsed';
-  const caretStyle = isOpen ? {} : {transform: "rotate(180deg)"};
+  const caretStyle = isOpen ? {} : {transform: 'rotate(180deg)'};
 
   return (
     <Fragment>

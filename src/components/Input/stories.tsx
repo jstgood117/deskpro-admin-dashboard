@@ -11,7 +11,7 @@ const InputComponent: React.SFC<{
   return (
     <Input
       value={value}
-      placeholder="Placeholder"
+      placeholder='Placeholder'
       errorMessage={errorMessage}
       hasError={hasError}
       onChange={event => setValue(event.target.value)}
@@ -24,6 +24,6 @@ storiesOf('Input', module)
   .add('input error', () => (
     <InputComponent
       hasError={true}
-      errorMessage="Please enter an email in the format of example@mail only"
+      errorMessage='Please enter an email in the format of example@mail only'
     />
   ));

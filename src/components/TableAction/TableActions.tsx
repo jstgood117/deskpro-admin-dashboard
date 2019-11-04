@@ -38,7 +38,7 @@ const TableActions: SFC<IProps> = props => {
       <FlexStyled style={{ flex: 5 }}>
         <FlexStyled style={{ paddingLeft: 10 }}>
           <SearchBox
-            placeholder="Search Box"
+            placeholder='Search Box'
             onChange={props.onSearchChange}
           />
         </FlexStyled>
@@ -51,17 +51,17 @@ const TableActions: SFC<IProps> = props => {
       <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
         {props.viewMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="View" iconName="view" items={ViewItems} />
+            <DropdownButton label='View' iconName='view' items={ViewItems} />
           </FlexStyled>
         ) : null}
         {props.groupMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="Group" iconName="group" items={GroupItems} />
+            <DropdownButton label='Group' iconName='group' items={GroupItems} />
           </FlexStyled>
         ) : null}
         {props.sortMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton label="Sort" iconName="sort" items={SortItems} />
+            <DropdownButton label='Sort' iconName='sort' items={SortItems} />
           </FlexStyled>
         ) : null}
       </FlexStyled>

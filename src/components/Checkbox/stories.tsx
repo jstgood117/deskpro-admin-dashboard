@@ -12,7 +12,7 @@ const CheckboxComponent: React.FC<{
   return (
     <Checkbox
       checked={checked}
-      value="checked"
+      value='checked'
       indeterminate={indeterminate}
       showArrow={showArrow}
       onChange={event => setChecked(event.target.checked)}

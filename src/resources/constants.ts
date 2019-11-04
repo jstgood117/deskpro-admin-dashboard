@@ -188,7 +188,7 @@ export const testInitialData = {
   }
 };
 
-export const testTableColumns: Array<Column> = [
+export const testTableColumns: Column[] = [
   { id: 'selection', width: 20 },
   /*	{ title: 'Name',
 		field: 'formattedNameAvatar',
@@ -619,7 +619,7 @@ export const testTableData = [
   {
     avatar:
       'https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=944&q=80',
-    name: "Melvin O'Conner",
+    name: 'Melvin O\'Conner',
     email: 'melvin.oconner@example.com',
     phone: '07443123456',
     access: 'Administrator',

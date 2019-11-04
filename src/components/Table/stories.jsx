@@ -7,9 +7,9 @@ import { testTableColumns, testTableData } from '../../resources/constants'
 storiesOf('Table',module)
 	.add('with dummy data', () => (
     <Table
-				data={testTableData}
+		data={testTableData}
         columns={testTableColumns}
-        fetchData={() => {}}
+        fetchData={() => false}
         pageCount={100}
     />
-	));
+));

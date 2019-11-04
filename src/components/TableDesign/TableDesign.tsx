@@ -27,7 +27,7 @@ const TableRow = styled.tr<{ isSelected?: boolean }>`
   ${props =>
     props.isSelected &&
     css`
-      background: ${props => props.theme.hoverColour};
+      background: ${_props => _props.theme.hoverColour};
     `}
 `;
 
@@ -49,7 +49,7 @@ const TableHeadCell = styled(TableHeadCellTextStyled)<ITableHeadCellProps>`
     props.hover &&
     css`
       cursor: pointer;
-      border: solid 1px ${props => props.theme.greyLight};
+      border: solid 1px ${_props => _props.theme.greyLight};
       border-left-color: transparent;
       border-right-color: transparent;
       &:hover {
@@ -151,9 +151,9 @@ const TableCell: React.SFC<TableCellProps> = ({
     if (!onSelectSort || !item.sort) {
       return;
     }
-    const sortItem =
+    const _sortItem =
       sortSelected && sortSelected.field === item.field ? sortSelected : item;
-    const sort = sortItem.sort === 'asc' ? 'desc' : 'asc';
+    const sort = _sortItem.sort === 'asc' ? 'desc' : 'asc';
 
     onSelectSort({
       ...item,
@@ -186,8 +186,8 @@ const TableCell: React.SFC<TableCellProps> = ({
       className={className}
       style={{ ...emptyStyle, ...style }}
       onClick={event => {
-        onCellClick && onCellClick(event);
-        hasSort && selectSort(sortItem);
+        if(onCellClick) { onCellClick(event);}
+        if(hasSort) { selectSort(sortItem); }
       }}
       hover={hasSort}
     >

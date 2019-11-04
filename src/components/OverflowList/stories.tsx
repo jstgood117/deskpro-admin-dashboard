@@ -21,7 +21,7 @@ storiesOf('Overflow List', module)
         textColor: '#f9e6e1',
         textBackgroundColor: '#ec6c4e'
       }))}
-      styleType="avatar"
+      styleType='avatar'
     />
   ))
   .add('teams - label', () => (
@@ -32,7 +32,7 @@ storiesOf('Overflow List', module)
         textColor: '#f9e6e1',
         textBackgroundColor: '#ec6c4e'
       }))}
-      styleType="label"
+      styleType='label'
     />
   ))
   .add('teams - name-avatar', () => (
@@ -43,6 +43,6 @@ storiesOf('Overflow List', module)
         textColor: '#f9e6e1',
         textBackgroundColor: '#ec6c4e'
       }))}
-      styleType="name-avatar"
+      styleType='name-avatar'
     />
   ));

@@ -3,7 +3,7 @@ import { mount, shallow } from '../../test/enzyme';
 
 import Button, { IProps, IStyleProps } from './Button';
 
-describe("Button", () => {
+describe('Button', () => {
   let props: IProps & IStyleProps;
   let mountedButton: any;
 
@@ -21,32 +21,32 @@ describe("Button", () => {
     mountedButton = undefined;
   });
 
-  it("always renders a <button>", () => {
+  it('always renders a <button>', () => {
     const elts = wrapper(false).find('button');
     expect(elts.length).toBeGreaterThan(0);
   });
 
-  describe("when children is undefined", () => {
+  describe('when children is undefined', () => {
     beforeEach(() => {
       props.children = undefined;
     });
 
-    it("doesn't render anything else", () => {
+    it('doesn\'t render anything else', () => {
       expect(wrapper(false).find('button').children().length).toBe(0);
     });
   });
 
-  describe("when children is defined", () => {
+  describe('when children is defined', () => {
     beforeEach(() => {
       props.children = <div>button text</div>;
     });
 
-    it("renders them within the button tag", () => {
+    it('renders them within the button tag', () => {
       expect(wrapper(false).find('button').children().length).toBe(1);
     });
   });
 
-  describe("when onClick is defined", () => {
+  describe('when onClick is defined', () => {
     it('when button clicked, will call the handler', () => {
       let passedParam = 0;
       const handleParam = () => {

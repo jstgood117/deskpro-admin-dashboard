@@ -19,7 +19,7 @@ const AvatarContainer = styled.div<ImageProps>`
     ${props =>
       props.showBoxShadow &&
       css`
-        box-shadow: 0px 3px 4px ${props => props.theme.pageHeader};
+        box-shadow: 0px 3px 4px ${_props => _props.theme.pageHeader};
       `}
     ${props =>
       props.selected &&
@@ -85,7 +85,7 @@ const Avatar: SFC<IProps> = ({
       selected={selected}
       showBoxShadow={showBoxShadow}
     >
-      {type === 'image' && <img src={content} alt="avatar" />}
+      {type === 'image' && <img src={content} alt='avatar' />}
 
       {type === 'svg' && <Icon name={content} />}
 

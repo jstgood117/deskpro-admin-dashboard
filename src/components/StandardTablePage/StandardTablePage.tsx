@@ -34,8 +34,6 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
     return <Error apolloError={error} />
   }
   if (data && data[queryName]) {
-    console.log('Standard table page data loaded:');
-    console.log(data[queryName])
 
     const {title, description, headerLinks, views} = data[queryName];
     return (
@@ -44,8 +42,8 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
           title={title}
           description={description}
           links={headerLinks}
-          illustration={<Icon name="illustration" />}
-          defaulViewMode="table"
+          illustration={<Icon name='illustration' />}
+          defaulViewMode='table'
           showViewModeSwitcher={true}
           showNewButton={true}
           showHelpButton={true}
@@ -57,7 +55,7 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
             <TabBar
               // Backend payload phrases are missing admin_common - should this be hard-coded like this?
               tabItems={views.map((view: IViewData) => { return { messageId: `admin_common.${view.title}` }} )}
-              handleClick={ index => { setTabState(index) }}
+              handleClick={index => { setTabState(index) }}
             />
           }
           {views && views[tabIndex] && <Table {...views[tabIndex]} search={searchText} />}

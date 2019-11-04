@@ -44,20 +44,20 @@ const RuleBuilder: React.SFC = () => {
     <Container>
       <HeaderContainer>
         <Text>Show objects that meet</Text>
-        <DropdownText text="all" onClick={() => console.log('Clicked')} />
+        <DropdownText text='all' onClick={() => false} />
         <Text> of the following:</Text>
       </HeaderContainer>
 
       <BodyContainer>
-        <PropertyBuilder></PropertyBuilder>
+        <PropertyBuilder/>
         <GroupRuleBuilder>
           <BodyContainer>
             <BodyContainer>
-              <PropertyBuilder></PropertyBuilder>
-              <PropertyBuilder></PropertyBuilder>
+              <PropertyBuilder/>
+              <PropertyBuilder/>
               <GroupRuleBuilder>
                 <BodyContainer>
-                  <PropertyBuilder></PropertyBuilder>
+                  <PropertyBuilder/>
                 </BodyContainer>
               </GroupRuleBuilder>
             </BodyContainer>

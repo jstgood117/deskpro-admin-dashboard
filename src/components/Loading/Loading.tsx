@@ -12,7 +12,7 @@ const LoadingStyled = styled.div<IStyleProps>`
 
 export interface IProps {}
 
-const Loading: SFC<IProps & IStyleProps> = (props) => (
+const Loading: SFC<IProps & IStyleProps> =props => (
   <ThemeProvider theme={DeskproAdminTheme}>
 		<LoadingStyled><FormattedMessage id='admin.page.loading' /></LoadingStyled>
 	</ThemeProvider>

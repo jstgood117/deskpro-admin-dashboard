@@ -6,13 +6,13 @@ import { DropdownItemsWithIcon } from '../../resources/constants';
 import { IMenuProps } from '../../resources/interfaces';
 
 describe('Menu', () => {
-  let props: IMenuProps;
+  let props: IMenuProps = {};
   let mountedMenu: any;
 
-  const MenuComponent: React.FC<IMenuProps> = props => {
+  const MenuComponent: React.FC<IMenuProps> = _props => {
     const [value, setValue] = useState();
 
-    return <Menu {...props} value={value} onSelect={val => setValue(val)} />;
+    return <Menu {..._props} value={value} onSelect={val => setValue(val)} />;
   };
 
   const wrapper = (bShallow: boolean) => {

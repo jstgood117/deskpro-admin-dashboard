@@ -34,8 +34,8 @@ describe('Pagination', () => {
       totalRecords: 1000,
       rowsPerPage: 10,
       currentPage: 1,
-      onChangePage: () => {},
-      onChangeRowsPerPage: () => {}
+      onChangePage: () => false,
+      onChangeRowsPerPage: () => false
     };
     mountedPagination = undefined;
   });

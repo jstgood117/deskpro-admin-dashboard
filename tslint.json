@@ -1,0 +1,11 @@
+{
+  "extends": ["@optics/codestyle", "tslint-react"],
+  "rules": {
+    "interface-name": false
+    
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}

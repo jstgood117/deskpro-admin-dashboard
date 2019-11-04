@@ -179,13 +179,13 @@ const Pagination: React.FC<IProps> = ({
     const total = Math.floor((totalRecords + rowsPerPage - 1) / rowsPerPage);
 
     // Pages
-    const pages: IPageItem[] = [];
+    const _pages: IPageItem[] = [];
     let page = 1;
     while (page <= total) {
       const start = (page - 1) * rowsPerPage + 1;
       const end = Math.min(start + rowsPerPage - 1, totalRecords);
       const label = `${formatNumber(start)}-${formatNumber(end)}`;
-      pages.push({
+      _pages.push({
         start,
         end,
         page,
@@ -208,7 +208,7 @@ const Pagination: React.FC<IProps> = ({
         onClick={() => setShowRowsPerPage(!showRowsPerPage)}
       >
         <P1>{rowsPerPage}</P1>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
 
         {showRowsPerPage && (
           <ListContainer>
@@ -222,7 +222,7 @@ const Pagination: React.FC<IProps> = ({
                 }}
               >
                 {formatNumber(item)}
-                {rowsPerPage === item && <Icon name="check-2" />}
+                {rowsPerPage === item && <Icon name='check-2' />}
               </ListItem>
             ))}
             <DropdownContentPanel />
@@ -238,7 +238,7 @@ const Pagination: React.FC<IProps> = ({
         onClick={() => setShowPages(!showPages)}
       >
         <H6>{pages[currentPage - 1] && pages[currentPage - 1].label}</H6>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
 
         {showPages && (
           <ListContainer>
@@ -257,7 +257,7 @@ const Pagination: React.FC<IProps> = ({
                 }}
               >
                 {item.label}
-                {currentPage === item.page && <Icon name="check-2" />}
+                {currentPage === item.page && <Icon name='check-2' />}
               </ListItem>
             ))}
             <DropdownContentPanel />
@@ -268,11 +268,11 @@ const Pagination: React.FC<IProps> = ({
       <Total>of {formatNumber(totalRecords)}</Total>
 
       <Button disabled={currentPage === 1} onClick={onPrevClick}>
-        <Icon name="caret-left" />
+        <Icon name='caret-left' />
       </Button>
 
       <Button disabled={currentPage === totalPages} onClick={onNextClick}>
-        <Icon name="caret-right" />
+        <Icon name='caret-right' />
       </Button>
     </Container>
   );

@@ -53,7 +53,7 @@ describe('DropdownButton', () => {
       props.items = [];
     });
 
-    it("doesn't render DropdownContentLink", () => {
+    it('doesn\'t render DropdownContentLink', () => {
       expect(wrapper(false).find('DropdownContentLink').length).toBe(0);
     });
   });

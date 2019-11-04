@@ -26,4 +26,4 @@ describe('Currency', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-}); 
+});

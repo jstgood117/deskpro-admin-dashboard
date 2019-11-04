@@ -53,7 +53,7 @@ const SortHeaderComponent: React.SFC = () => {
           {SortItems.map(item => (
             <TableCell
               key={item.field}
-              container="head"
+              container='head'
               sortProps={{
                 sortItem: item,
                 sortSelected: sort,

@@ -10,7 +10,7 @@ import DevApiPrompt from './DevApiPrompt';
 import * as serviceWorker from './serviceWorker';
 import { InMemoryCache } from 'apollo-boost';
 
-if ("production" !== process.env.NODE_ENV) {
+if ('production' !== process.env.NODE_ENV) {
     debug.enable('*,-sockjs-client:*');
 }
 
@@ -18,7 +18,7 @@ const apiUrl = (window as any).DP_GRAPHQL_ENDPOINT || window.sessionStorage.getI
 
 const AppWrap = () => {
 	if (apiUrl) {
-		appDebug("API URL: " + apiUrl);
+		appDebug('API URL: ' + apiUrl);
 		const link = createHttpLink({ uri: apiUrl });
 		const client = new ApolloClient({
 			cache: new InMemoryCache(),

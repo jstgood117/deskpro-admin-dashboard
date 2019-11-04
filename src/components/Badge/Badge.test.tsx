@@ -27,4 +27,4 @@ describe('Badge', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-}); 
+});

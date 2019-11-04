@@ -62,7 +62,7 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          onSelect && onSelect(item);
+          if(onSelect) { onSelect(item) };
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
@@ -82,7 +82,7 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
         }}
       >
         <IconWrapper>
-          <Icon name="drag-and-drop" />
+          <Icon name='drag-and-drop' />
         </IconWrapper>
         <IconWrapper>{item.icon && <Icon name={item.icon} />}</IconWrapper>
         <TextLabel style={{ paddingRight: 43 }}>{item.name}</TextLabel>
@@ -91,8 +91,8 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
             clickGear(true);
           }}
         >
-          <span className="ic-settings">
-            <Icon name="settings" />
+          <span className='ic-settings'>
+            <Icon name='settings' />
           </span>
         </SettingIcon>
       </StyledSubMenuItem>
@@ -121,7 +121,7 @@ const Menu: SFC<IMenuProps> = ({
           {item.name && !item.subItems && (
             <SingleSubMenuItem onSelect={onSelect} item={item}>
               <IconWrapper>
-                <Icon name="drag-and-drop" />
+                <Icon name='drag-and-drop' />
               </IconWrapper>
               <IconWrapper>
                 {item.icon && <Icon name={item.icon} />}
@@ -142,7 +142,7 @@ const Menu: SFC<IMenuProps> = ({
           <span style={{ position: 'absolute', right: 15, display: 'flex' }}>
             <Toggle
               checked={checked[item.key]}
-              value="checked"
+              value='checked'
               onChange={event =>
                 setChecked({ ...checked, [item.key]: event.target.checked })
               }
@@ -163,7 +163,7 @@ const Menu: SFC<IMenuProps> = ({
                 OrderedList.push(menuItems[index]);
                 return true;
               });
-              order && order(OrderedList);
+              if(order) { order(OrderedList); }
             }}
             children={itemList}
           />
@@ -172,11 +172,11 @@ const Menu: SFC<IMenuProps> = ({
         <ResetWrapper
           onClick={e => {
             e.preventDefault();
-            order && order(initialList);
+            if(order) { order(initialList); }
           }}
         >
           <IconWrapper>
-            <Icon name="refresh" />
+            <Icon name='refresh' />
           </IconWrapper>
           <TextLabel
             style={{
@@ -224,15 +224,15 @@ const OrderableMenu: SFC<IMenuProps> = ({
           }
         >
           {iconName && (
-            <StyledIcon className="ic-menu">
+            <StyledIcon className='ic-menu'>
               <Icon name={iconName} />
             </StyledIcon>
           )}
           <MenuLabel style={{ paddingRight: 8, paddingLeft: 11 }}>
             {label}
           </MenuLabel>
-          <StyledIcon className="ic-down">
-            <Icon name="downVector" />
+          <StyledIcon className='ic-down'>
+            <Icon name='downVector' />
           </StyledIcon>
         </MenuButton>
       </MenuWrapper>

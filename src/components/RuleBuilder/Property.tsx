@@ -25,19 +25,19 @@ const Content = styled.div`
 
 const PropertyBuilder: React.SFC = () => {
   return (
-    <Container className="rule-item">
+    <Container className='rule-item'>
       <BodyContainer>
-        <GroupMoveButtons label="Where" />
+        <GroupMoveButtons label='Where' />
         <Content>
-          <Select position="left" placeholder="Select property"></Select>
-          <Select position="center"></Select>
-          <Select position="right"></Select>
+          <Select position='left' placeholder='Select property'/>
+          <Select position='center'/>
+          <Select position='right'/>
         </Content>
       </BodyContainer>
       <Flex>
-        <ActionButton iconName="group" />
-        <ActionButton iconName="trash" />
-        <ActionButton iconName="plus" />
+        <ActionButton iconName='group' />
+        <ActionButton iconName='trash' />
+        <ActionButton iconName='plus' />
       </Flex>
     </Container>
   );

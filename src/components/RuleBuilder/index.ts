@@ -1,3 +1,3 @@
 import Filter from './RuleBuilder';
 
-export default Filter; 
+export default Filter;

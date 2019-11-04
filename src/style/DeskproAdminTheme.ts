@@ -27,7 +27,7 @@ const DeskproAdminTheme = {
   pagePadding: '34px',
 
   h1: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 500,
     fontSize: '28px',
@@ -35,7 +35,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   h2: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '18px',
@@ -43,7 +43,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   h3: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '16px',
@@ -51,7 +51,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   h4: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 500,
     fontSize: '16px',
@@ -59,7 +59,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   h5: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '15px',
@@ -67,7 +67,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   h6: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 500,
     fontSize: '15px',
@@ -75,7 +75,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   p1: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '14px',
@@ -83,13 +83,13 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   p2: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontSize: '14px',
     lineHeight: '150%',
     color: '#4C4F50'
   },
   p3: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '14px',
@@ -97,7 +97,7 @@ const DeskproAdminTheme = {
     color: '#8B9293'
   },
   s1: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '12px',
@@ -105,7 +105,7 @@ const DeskproAdminTheme = {
     color: '#4C4F50'
   },
   s2: {
-    fontFamily: fontFamily,
+    fontFamily,
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: '12px',

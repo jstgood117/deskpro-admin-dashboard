@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 
 export interface IUser {
 	locale: string,
@@ -20,21 +20,21 @@ export interface IPageData {
 			path: string,
 	}],
 	newLink?: string,
-	views?: Array<IViewData>,
+	views?: IViewData[],
 }
 
 export interface IViewData {
 	title: string,
 	dataQuery: string,
 	tableDef: {
-		columns: Array<ITableColumn>,
+		columns: ITableColumn[],
 	},
 }
 
 export interface ITableColumn {
 	title: string,
 	field?: string,
-	data?: Array<any>,
+	data?: any[],
 	defaultShow?: boolean,
 }
 
@@ -52,14 +52,14 @@ export interface ISidebarItem {
 
 
 export interface ITableSetup {
-	columns: Array<ITableColumn>
+	columns: ITableColumn[]
 }
 
 export interface ISortItem 	{
 	label: string;
 	field: string;
 	sort: 'asc' | 'desc';
-} 
+}
 
 export interface IMenuProps {
   iconName?: string;
@@ -77,7 +77,7 @@ export interface IMenuProps {
 	selectedValue?: IMenuItemProps;
 	selected? : boolean;
 }
-	
+
 export interface IMenuItemProps {
   key?: number;
   name?: string;

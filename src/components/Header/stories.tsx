@@ -9,12 +9,12 @@ import Icon from '../Icon';
 
 storiesOf('Header', module)
   .add('with text', () => (
-    <IntlProvider locale="en" messages={testTranslations}>
+    <IntlProvider locale='en' messages={testTranslations}>
       <Header
-        illustration={<Icon name="illustration" />}
-        title="admin_agents.agents.title"
-        description="admin_agents.agents.description"
-        defaulViewMode="table"
+        illustration={<Icon name='illustration' />}
+        title='admin_agents.agents.title'
+        description='admin_agents.agents.description'
+        defaulViewMode='table'
         showViewModeSwitcher={true}
         showNewButton={true}
         showHelpButton={true}
@@ -32,16 +32,16 @@ storiesOf('Header', module)
         ]}
         onChangeView={action('clicked onChangeView')}
         onNewClick={action('clicked onNewClick')}
-      ></Header>
+      />
     </IntlProvider>
   ))
   .add('with table actions', () => (
-    <IntlProvider locale="en" messages={testTranslations}>
+    <IntlProvider locale='en' messages={testTranslations}>
       <Header
-        illustration={<Icon name="illustration" />}
-        title="admin_agents.agents.title"
-        description="admin_agents.agents.description"
-        defaulViewMode="table"
+        illustration={<Icon name='illustration' />}
+        title='admin_agents.agents.title'
+        description='admin_agents.agents.description'
+        defaulViewMode='table'
         showViewModeSwitcher={true}
         showNewButton={true}
         showHelpButton={true}
@@ -60,6 +60,6 @@ storiesOf('Header', module)
         ]}
         onChangeView={action('clicked onChangeView')}
         onNewClick={action('clicked onNewClick')}
-      ></Header>
+      />
     </IntlProvider>
   ));

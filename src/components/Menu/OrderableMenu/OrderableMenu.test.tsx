@@ -9,14 +9,14 @@ describe('OrderableMenu', () => {
   let props: IMenuProps;
   let mountedOrderableMenu: any;
 
-  const OrderableMenuComponent: React.FC<IMenuProps> = props => {
+  const OrderableMenuComponent: React.FC<IMenuProps> = _props => {
     const [SortList, SetList] = useState(OrderableMenuItems);
     const [value, setValue] = useState();
     const checkedState: { [key: string]: boolean } = {};
     const [checked, setChecked] = useState(checkedState);
     return (
       <OrderableMenu
-        {...props}
+        {..._props}
         order={val => SetList(val)}
         menuItems={SortList}
         value={value}

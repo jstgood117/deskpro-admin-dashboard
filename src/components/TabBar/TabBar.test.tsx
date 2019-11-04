@@ -40,7 +40,7 @@ describe('TabBar', () => {
       props.tabItems = [];
     });
 
-    it("doesn't render Tab component", () => {
+    it('doesn\'t render Tab component', () => {
       expect(wrapper(false).find('Tab').length).toBe(0);
     });
   });

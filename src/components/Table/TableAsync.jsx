@@ -34,7 +34,6 @@ const Table = ({data,columns,fetchData,loading,pageCount:controlledPageCount,opt
 	)
 
 	useEffect(() => {
-    console.log(`page change: ${pageIndex}`);
     fetchData({ pageIndex, pageSize });
   }, [fetchData, pageIndex, pageSize]);
 

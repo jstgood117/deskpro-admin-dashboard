@@ -12,7 +12,7 @@ import { FlowLayout, ControlBox } from '../Styled';
 
 storiesOf('Dialog', module)
   .add('auto open without backdrop', () => (
-    <Dialog isOpen={true} onRequestClose={() => {}}>
+    <Dialog isOpen={true}>
       <DialogTitle>Delete Agent?</DialogTitle>
 
       <DialogContent>
@@ -25,7 +25,7 @@ storiesOf('Dialog', module)
         <FlowLayout>
           <ControlBox>
             <Button
-              styleType="primary"
+              styleType='primary'
               onClick={action('primary')}
               styles={{ height: '30px' }}
             >
@@ -35,7 +35,7 @@ storiesOf('Dialog', module)
 
           <ControlBox marginLeft={10}>
             <Button
-              styleType="secondary"
+              styleType='secondary'
               onClick={action('optional')}
               styles={{ height: '30px' }}
             >
@@ -47,7 +47,7 @@ storiesOf('Dialog', module)
     </Dialog>
   ))
   .add('auto open with backdrop', () => (
-    <Dialog isOpen={true} showBackdrop={true} onRequestClose={() => {}}>
+    <Dialog isOpen={true} showBackdrop={true}>
       <DialogTitle>Delete Agent?</DialogTitle>
 
       <DialogContent>
@@ -60,7 +60,7 @@ storiesOf('Dialog', module)
         <FlowLayout>
           <ControlBox>
             <Button
-              styleType="primary"
+              styleType='primary'
               onClick={action('primary')}
               styles={{ height: '30px' }}
             >
@@ -70,7 +70,7 @@ storiesOf('Dialog', module)
 
           <ControlBox marginLeft={10}>
             <Button
-              styleType="secondary"
+              styleType='secondary'
               onClick={action('optional')}
               styles={{ height: '30px' }}
             >

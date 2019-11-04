@@ -323,7 +323,7 @@ export const HeadingText = ({
   messageId,
   ...rest
 }: any & { messageId?: string; size: number | string }) => {
-  const s = parseInt(size + '');
+  const s = parseInt((size + ''), 10);
   invariant(s && s >= 1 && s <= 6, 'size must be a number between 1 and 6');
 
   invariant(

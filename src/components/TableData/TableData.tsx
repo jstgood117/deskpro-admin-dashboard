@@ -121,7 +121,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
       return <P1>{props.date_time}</P1>;
 
     case 'yes_no':
-      return props.checked ? <Icon name="check" /> : null;
+      return props.checked ? <Icon name='check' /> : null;
 
     case 'link':
       return (
@@ -141,7 +141,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
 
     case 'attachment':
       return (
-        <Attachment id={props.id} onChangeFile={() => {}} text={props.text} />
+        <Attachment id={props.id} onChangeFile={() => false} text={props.text} />
       );
 
     case 'locale':
@@ -149,9 +149,9 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
 
     case 'team':
       return (
-        <Tooltip content={props.name} styleType="lightBox">
+        <Tooltip content={props.name} styleType='lightBox'>
           <span style={{ display: 'inline-block' }}>
-            <Avatar content={props.avatar} type="image" />
+            <Avatar content={props.avatar} type='image' />
           </span>
         </Tooltip>
       );

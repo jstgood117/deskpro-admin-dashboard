@@ -43,14 +43,12 @@ export const QUERY_INITIAL = gql`
 
 const App: SFC = () => {
 	const locale = navigator.language;
-	console.log(`locale: ${locale}`)
-	const { loading, error, data } = useQuery(QUERY_INITIAL, { errorPolicy: 'all', variables: { locale: locale } });
+	const { loading, error, data } = useQuery(QUERY_INITIAL, { errorPolicy: 'all', variables: { locale } });
 
 	if (loading) {
 		return <p>Loading</p>;
 	}
 	if (error) {
-		console.log(error);
 		return <p>Error</p>;
 	}
 	return (
@@ -62,7 +60,7 @@ const App: SFC = () => {
 					obj[item.id] = item.message;
 					return obj
 				}, {})}
-				onError={(err) => { logError(err) }}
+				onError={err => { logError(err) }}
 			>
 				<AppContainer>
 					<SidebarContainer>
@@ -70,14 +68,14 @@ const App: SFC = () => {
 					</SidebarContainer>
 					<BodyContainer>
 						<Switch>
-							<Route exact path="/" render={() => <Redirect to="/agents" />} />
+							<Route exact={true} path='/' render={() => <Redirect to='/agents' />} />
 							{
 								flatMap(
 									(data.sidebar as ISidebarSection[]).map(section => section.navItems),
 									sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
 								)
 									.filter(s => s.path)
-									.map(s => <Route key={s.path} exact path={s.path} render={() => <PageType {...s} />} />)
+									.map(s => <Route key={s.path} exact={true} path={s.path} render={() => <PageType {...s} />} />)
 							}
 						</Switch>
 					</BodyContainer>

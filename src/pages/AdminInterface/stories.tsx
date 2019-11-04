@@ -9,7 +9,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 storiesOf('AdminInterface/Page',module)
 	.add('Full Page Demo', () => (
-        <div style={{"width": "90%", "height": "75vh", "position": "relative", "border": "2px solid #000"}}>
+        <div style={{'width': '90%', 'height': '75vh', 'position': 'relative', 'border': '2px solid #000'}}>
             <IntlProvider locale='en' messages={testTranslations}>
                 <PageContainer>
                     <SidebarContainer>
@@ -18,7 +18,7 @@ storiesOf('AdminInterface/Page',module)
                         </MemoryRouter>
                     </SidebarContainer>
                     <BodyContainer>
-                        <div style={{"height": "1500px", "margin": "25px"}}>
+                        <div style={{'height': '1500px', 'margin': '25px'}}>
                             Demo demo demo
                         </div>
                     </BodyContainer>

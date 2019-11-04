@@ -25,16 +25,16 @@ const Body = styled.div`
 
 const GroupRuleBuilder: React.SFC = ({ ...props }) => {
   return (
-    <Container className="rule-item">
-      <GroupMoveButtons label="Where" />
+    <Container className='rule-item'>
+      <GroupMoveButtons label='Where' />
       <Body>
         <Flex>
-          <DropdownText text="all" onClick={() => console.log('select')} />
+          <DropdownText text='all'/>
           <Text> off the following:</Text>
         </Flex>
         <Flex>
-          <ActionButton toolip="Move up one level" iconName="move-left" />
-          <ActionButton iconName="trash" />
+          <ActionButton toolip='Move up one level' iconName='move-left' />
+          <ActionButton iconName='trash' />
         </Flex>
       </Body>
       {props.children}

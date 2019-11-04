@@ -52,7 +52,7 @@ let LogRocket: any;
 
 if ((window as any).DP_USE_CRASH_LOGGING || window.localStorage.getItem('window.DP_USE_CRASH_LOGGING')) {
     Rollbar = new rollbar({
-        accessToken: "1040735a62d047d98ad6f82116207963",
+        accessToken: '1040735a62d047d98ad6f82116207963',
         captureUncaught: true,
         captureUnhandledRejections: true,
         environment: logContext.app.environment,
@@ -79,7 +79,7 @@ if ((window as any).DP_USE_SESS_RECORDING || window.localStorage.getItem('window
     if (Rollbar) {
         LogRocket.getSessionURL((sessionURL: any) => {
             Rollbar.configure({
-                transform: function (obj: any) {
+                transform (obj: any) {
                     obj.sessionURL = sessionURL;
                 }
             });
@@ -94,16 +94,9 @@ if ((window as any).DP_USE_SESS_RECORDING || window.localStorage.getItem('window
  * @param Error  error
  * @param object extra
  */
-const captureError = (msg: String, error: Error, extra?: object) => {
-    console.error(msg, error);
-    if (extra) {
-        console.info(extra);
-    }
+const captureError = (msg: string, error: Error, extra?: object) => {
 
     if (Rollbar) {
-        if (extra) {
-            console.info(extra);
-        }
         Rollbar.error(msg, error);
     }
     if (LogRocket) {
@@ -124,12 +117,7 @@ const captureError = (msg: String, error: Error, extra?: object) => {
  * @param Error  error
  * @param object extra
  */
-const captureWarning = (msg: String, extra?: object) => {
-    if (extra) {
-        console.error(msg, extra);
-    } else {
-        console.error(msg);
-    }
+const captureWarning = (msg: string, extra?: object) => {
 
     if (Rollbar) {
         Rollbar.warning(msg, extra);
@@ -147,8 +135,8 @@ const trackDebug = debug('app:track');
  * @param string id
  * @param object extra
  */
-const trackEvent = (id: String, extra?: object) => {
-    trackDebug("event: %s %j", id, extra);
+const trackEvent = (id: string, extra?: object) => {
+    trackDebug('event: %s %j', id, extra);
     if (LogRocket) {
         LogRocket.track(id);
 

@@ -42,7 +42,7 @@ const SidebarItem: SFC<IProps> = ({path, itemName, depth}) => {
 	}
 
 	return (
-		<SidebarItemStyled to={path || "/"} exact={true} activeClassName="active" style={style}>
+		<SidebarItemStyled to={path || '/'} exact={true} activeClassName='active' style={style}>
 			<ItemName><FormattedMessage id={itemName} /></ItemName>
 		</SidebarItemStyled>
 	);

@@ -25,10 +25,10 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [pageCount, setPageCount] = useState(0);
-//	const fetchIdRef = useRef(0);
+// 	const fetchIdRef = useRef(0);
 
 	// TODO remove this when backend data is fixed
-	const dataQuery2 = "query { results: agents_getAgents(filter: { is_deleted: false }) { id, name, first_name, last_name, primary_email, emails, can_admin, can_agent }}"
+	const dataQuery2 = 'query { results: agents_getAgents(filter: { is_deleted: false }) { id, name, first_name, last_name, primary_email, emails, can_admin, can_agent }}'
 
 	const getData = () => {
 		client.query({ query: gql`${dataQuery2}`, errorPolicy: 'all' }).then(result => {
@@ -41,13 +41,12 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 	const fetchData = useCallback(({ pageSize, pageIndex }) => {
 		if (!loading) {
 			setLoading(true);
-			console.log('Table callback, loading data...')
 			getData();
-		}		
+		}
 		// disable warning, otherwise component is constantly refreshed
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dataQuery]);
-		
+
 	const options = {};
 
 	if (bChooseMemoryTable) getData();
@@ -57,14 +56,16 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 			{bChooseMemoryTable && <TableMemory
 				data={data}
 				columns={transformColumnData([...tableDef.columns], intl)}
-				options={options} />}
+				options={options}
+			/>}
 			{!bChooseMemoryTable && <TableAsync
 				data={data}
 				columns={tableDef.columns}
 				fetchData={fetchData}
 				loading={loading}
 				pageCount={pageCount}
-				options={options} />}
+				options={options}
+			/>}
 		</Fragment>
 	);
 }

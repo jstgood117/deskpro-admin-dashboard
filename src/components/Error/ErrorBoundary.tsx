@@ -10,7 +10,7 @@ interface IState {
 
 export const logError = (error: any) => {
   // TODO log the error to external service
-  appDebug(`Admin app error: ${error}`);  
+  appDebug(`Admin app error: ${error}`);
 }
 
 class ErrorBoundary extends Component<IProps,IState> {
@@ -32,7 +32,7 @@ class ErrorBoundary extends Component<IProps,IState> {
     if (this.state.hasError) {
       return <Error />
     }
-    return this.props.children; 
+    return this.props.children;
   }
 }
 

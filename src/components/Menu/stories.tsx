@@ -48,16 +48,16 @@ const OrderableMenuComponent: React.FC<IMenuProps> = props => {
 storiesOf('Menu', module)
   .add('Menu with dummy data and icon', () => (
     <MenuComponent
-      label="Action"
+      label='Action'
       menuItems={DropdownItemsWithIcon}
-      iconName="menu"
+      iconName='menu'
     />
   ))
   .add('Menu with dummy data and without icon', () => (
     <MenuComponent
-      label="Action"
+      label='Action'
       menuItems={DropdownItemsWithoutIcon}
-      iconName="menu"
+      iconName='menu'
     />
   ))
   .add('OrderableMenu with dummy data and icon', () => (
@@ -73,9 +73,9 @@ storiesOf('Menu', module)
     >
       <div style={{ position: 'absolute', right: 10 }}>
         <OrderableMenuComponent
-          label="View"
-          iconName="view"
-          submenuPosition="left"
+          label='View'
+          iconName='view'
+          submenuPosition='left'
         />
       </div>
     </div>

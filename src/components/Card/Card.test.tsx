@@ -4,7 +4,7 @@ import { mount, shallow } from '../../test/enzyme';
 import Card, { IProps } from './Card';
 
 describe('Card', () => {
-  let props: IProps;
+  const props: IProps = {};
   let mountedCard: any;
 
   const wrapper = (bShallow: boolean) => {

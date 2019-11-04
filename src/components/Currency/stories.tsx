@@ -6,7 +6,7 @@ import Currency from './Currency';
 import { testTranslations } from '../../resources/constants';
 
 const Container: React.SFC = props => (
-  <IntlProvider locale="en" messages={testTranslations}>
+  <IntlProvider locale='en' messages={testTranslations}>
     {props.children}
   </IntlProvider>
 );
@@ -19,6 +19,6 @@ storiesOf('Currency', module)
   ))
   .add('currency with label', () => (
     <Container>
-      <Currency currency="GBP" value={1000} />
+      <Currency currency='GBP' value={1000} />
     </Container>
   ));
