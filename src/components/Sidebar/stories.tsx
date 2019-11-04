@@ -7,12 +7,12 @@ import Sidebar from './Sidebar';
 import { MemoryRouter } from 'react-router-dom';
 
 storiesOf('Page',module)
-	.add('Demo Sidebar', () => (
-		<IntlProvider locale='en' messages={testTranslations}>
-			<div style={{'width': '215px', 'height': '75vh', 'position': 'relative'}}>
-				<MemoryRouter>
-					<Sidebar data={testSidebarData}/>
-				</MemoryRouter>
-			</div>
-		</IntlProvider>
-	));
+  .add('Demo Sidebar', () => (
+    <IntlProvider locale='en' messages={testTranslations}>
+      <div style={{'width': '215px', 'height': '75vh', 'position': 'relative'}}>
+        <MemoryRouter>
+          <Sidebar data={testSidebarData}/>
+        </MemoryRouter>
+      </div>
+    </IntlProvider>
+  ));

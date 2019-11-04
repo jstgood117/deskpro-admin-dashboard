@@ -14,8 +14,8 @@ export interface IProps {}
 
 const Loading: SFC<IProps & IStyleProps> =props => (
   <ThemeProvider theme={DeskproAdminTheme}>
-		<LoadingStyled><FormattedMessage id='admin.page.loading' /></LoadingStyled>
-	</ThemeProvider>
+    <LoadingStyled><FormattedMessage id='admin.page.loading' /></LoadingStyled>
+  </ThemeProvider>
 );
 
 export default Loading;

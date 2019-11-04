@@ -6,8 +6,8 @@ import Loading from './Loading';
 import { testTranslations } from '../../resources/constants';
 
 storiesOf('Loading',module)
-	.add('simple', () => (
-		<IntlProvider locale='en' messages={testTranslations}>
-			<Loading />
-		</IntlProvider>
-	));
+  .add('simple', () => (
+    <IntlProvider locale='en' messages={testTranslations}>
+      <Loading />
+    </IntlProvider>
+  ));

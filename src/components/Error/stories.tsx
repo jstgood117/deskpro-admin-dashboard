@@ -13,8 +13,8 @@ const testError = {
 };
 
 storiesOf('Error',module)
-	.add('dummy graphQL errors', () => (
-		<IntlProvider locale='en' messages={testTranslations}>
-			<Error apolloError={testError} />
-		</IntlProvider>
-	));
+  .add('dummy graphQL errors', () => (
+    <IntlProvider locale='en' messages={testTranslations}>
+      <Error apolloError={testError} />
+    </IntlProvider>
+  ));

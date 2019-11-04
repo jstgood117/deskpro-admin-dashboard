@@ -30,22 +30,22 @@ const ItemName = styled(TextLabel)`
 `;
 
 export interface IProps {
-	path: string;
-	itemName: string;
-	depth?: number;
+  path: string;
+  itemName: string;
+  depth?: number;
 }
 
 const SidebarItem: SFC<IProps> = ({path, itemName, depth}) => {
-	const style: React.CSSProperties = {};
-	if (depth) {
-		style.paddingLeft = (39 + ((depth||0)*15)) + 'px';
-	}
+  const style: React.CSSProperties = {};
+  if (depth) {
+    style.paddingLeft = (39 + ((depth||0)*15)) + 'px';
+  }
 
-	return (
-		<SidebarItemStyled to={path || '/'} exact={true} activeClassName='active' style={style}>
-			<ItemName><FormattedMessage id={itemName} /></ItemName>
-		</SidebarItemStyled>
-	);
+  return (
+    <SidebarItemStyled to={path || '/'} exact={true} activeClassName='active' style={style}>
+      <ItemName><FormattedMessage id={itemName} /></ItemName>
+    </SidebarItemStyled>
+  );
 };
 
 export default SidebarItem;

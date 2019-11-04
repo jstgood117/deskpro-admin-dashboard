@@ -16,22 +16,22 @@ if ('production' !== process.env.NODE_ENV) {
 const apiUrl = (window as any).DP_GRAPHQL_ENDPOINT || window.sessionStorage.getItem('DESKPRO_ADMIN_API_URL');
 
 const AppWrap = () => {
-	if (apiUrl) {
-		appDebug('API URL: ' + apiUrl);
-		const link = createHttpLink({ uri: apiUrl });
-		const client = new ApolloClient({
-			cache: new InMemoryCache(),
-			link,
-		});
+  if (apiUrl) {
+    appDebug('API URL: ' + apiUrl);
+    const link = createHttpLink({ uri: apiUrl });
+    const client = new ApolloClient({
+      cache: new InMemoryCache(),
+      link,
+    });
 
-		return (
-			<ApolloProvider client={client}>
-				<App />
-			</ApolloProvider>
-		);
-	} else {
-		return <DevApiPrompt />;
-	}
+    return (
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    );
+  } else {
+    return <DevApiPrompt />;
+  }
 };
 
 ReactDOM.render(<AppWrap />, document.getElementById('root'));

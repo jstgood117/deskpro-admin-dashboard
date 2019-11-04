@@ -8,7 +8,7 @@ import Sidebar from '../../components/Sidebar';
 import { MemoryRouter } from 'react-router-dom';
 
 storiesOf('AdminInterface/Page',module)
-	.add('Full Page Demo', () => (
+  .add('Full Page Demo', () => (
         <div style={{'width': '90%', 'height': '75vh', 'position': 'relative', 'border': '2px solid #000'}}>
             <IntlProvider locale='en' messages={testTranslations}>
                 <PageContainer>
@@ -25,4 +25,4 @@ storiesOf('AdminInterface/Page',module)
                 </PageContainer>
             </IntlProvider>
         </div>
-	));
+  ));

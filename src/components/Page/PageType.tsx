@@ -17,7 +17,7 @@ const PageType: SFC<IProps> = ({path}) => {
 
     default:
       return <div><textarea value={path} style={{width: '50%', height: '500px', fontFamily: 'Monospace'}} readOnly={true} /></div>;
-	}
+  }
 };
 
 
