@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import Button from './Button';
-import FilterButton from './FilterButton/FilterButton';
 import DropdownButton, { IProps } from './DropdownButton/DropdownButton';
 import IconButton from './IconButton';
 
@@ -113,10 +112,6 @@ storiesOf('Button', module)
   .add('View', () => (
     <DropdownButton label="View" items={ViewItems} iconName="view" />
   ))
-  .add('Filter', () => (
-    <FilterButton onClick={action('clicked')}>Filter</FilterButton>
-  ))
-
   .add('button/small/icon/secondary', () => (
     <IconButton
       icon="plus"

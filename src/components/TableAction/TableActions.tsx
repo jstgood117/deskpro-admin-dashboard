@@ -2,8 +2,9 @@ import React, { SFC } from 'react';
 import styled from 'styled-components';
 
 import SearchBox from '../SearchBox';
-import FilterButton from '../Button/FilterButton';
 import DropdownButton from '../Button/DropdownButton/DropdownButton';
+import Button from '../Button';
+import { action } from '@storybook/addon-actions';
 
 export interface IProps {}
 
@@ -37,14 +38,18 @@ const TableActions: SFC<IProps> = props => {
     <StyledTableAction>
       <FlexStyled style={{ flex: 5 }}>
         <FlexStyled style={{ paddingLeft: 10 }}>
-          <SearchBox
-            placeholder="Search Box"
-            onChange={props.onSearchChange}
-          />
+          <SearchBox placeholder="Search Box" onChange={props.onSearchChange} />
         </FlexStyled>
         {props.filterMenu ? (
           <FlexStyled style={{ paddingLeft: 10 }}>
-            <FilterButton>Filter</FilterButton>
+            <Button
+              styleType="secondary"
+              onClick={action('clicked')}
+              size="medium"
+              icon="filter"
+            >
+              Filter
+            </Button>
           </FlexStyled>
         ) : null}
       </FlexStyled>
