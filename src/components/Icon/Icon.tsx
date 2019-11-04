@@ -52,6 +52,10 @@ import { ReactComponent as IconArrowDropUp } from '../../assets/svg/ic-arrow-dro
 import { ReactComponent as IconArrowDropDown } from '../../assets/svg/ic-arrow-drop-down.svg';
 import { ReactComponent as IconDragDrop } from '../../assets/svg/ic-drag-drop.svg';
 import { ReactComponent as IconRefresh } from '../../assets/svg/ic-refresh.svg';
+import { ReactComponent as IconMoveUp } from '../../assets/svg/ic-move-up.svg';
+import { ReactComponent as IconMoveDown } from '../../assets/svg/ic-move-down.svg';
+import { ReactComponent as IconMoveLeft } from '../../assets/svg/ic-move-left.svg';
+import { ReactComponent as IconUndo } from '../../assets/svg/ic-undo.svg';
 
 export interface IProps {
   name: string;
@@ -163,6 +167,14 @@ const Icon: SFC<IProps> = props => {
       return <IconDragDrop />;
     case 'refresh':
       return <IconRefresh />;
+    case 'move-up':
+      return <IconMoveUp />;
+    case 'move-down':
+      return <IconMoveDown />;
+    case 'move-left':
+      return <IconMoveLeft />;
+    case 'undo':
+      return <IconUndo />;
     default:
       return <IconSetup />;
   }
