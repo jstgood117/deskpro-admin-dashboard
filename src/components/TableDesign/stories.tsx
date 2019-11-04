@@ -10,7 +10,7 @@ import {
   TableCell,
   TableBody
 } from './TableDesign';
-import { testTableData } from '../../resources/constants';
+import { testTableData } from '../../resources/constants/constants';
 import Checkbox from '../Checkbox';
 import Avatar from '../Avatar';
 import { Flex } from '../Styled';

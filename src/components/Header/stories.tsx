@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { action } from '@storybook/addon-actions';
 
 import Header from './Header';
-import { testTranslations } from '../../resources/constants';
+import { testTranslations } from '../../resources/constants/constants';
 import Icon from '../Icon';
 
 storiesOf('Header', module)

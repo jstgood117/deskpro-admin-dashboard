@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { IntlProvider } from 'react-intl';
 
 import Currency from './Currency';
-import { testTranslations } from '../../resources/constants';
+import { testTranslations } from '../../resources/constants/constants';
 
 const Container: React.SFC = props => (
   <IntlProvider locale='en' messages={testTranslations}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import OverflowList from './OverflowList';
-import { testTableData } from '../../resources/constants';
+import { testTableData } from '../../resources/constants/constants';
 import TeamOverflow from './TeamOverflow';
 
 storiesOf('Overflow List', module)

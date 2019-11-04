@@ -9,7 +9,7 @@ import { debug, appDebug } from './logging';
 import generateConfig from './config';
 import { ConfigType } from './config/config';
 
-import App from './App';
+import App from './pages/App/App';
 import DevApiPrompt from './DevApiPrompt';
 import { InMemoryCache } from 'apollo-boost';
 

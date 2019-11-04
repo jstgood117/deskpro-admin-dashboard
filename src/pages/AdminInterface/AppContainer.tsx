@@ -7,7 +7,7 @@ import './fonts.css';
 import '../../style/text-antialiased.css';
 
 export const AppContainer = (props: any) => (
-    <ThemeProvider theme={DeskproAdminTheme}>
-        <PageContainer>{props.children}</PageContainer>
-    </ThemeProvider>
+  <ThemeProvider theme={DeskproAdminTheme}>
+    <PageContainer>{props.children}</PageContainer>
+  </ThemeProvider>
 );

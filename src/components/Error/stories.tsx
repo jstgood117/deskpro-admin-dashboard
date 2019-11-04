@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { IntlProvider } from 'react-intl';
 
 import Error from './Error';
-import { testTranslations } from '../../resources/constants';
+import { testTranslations } from '../../resources/constants/constants';
 
 const testError = {
   graphQLErrors: [

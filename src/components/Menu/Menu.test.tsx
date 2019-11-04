@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import Menu from './Menu';
-import { DropdownItemsWithIcon } from '../../resources/constants';
+import { testsDropdownItemsWithIcon } from '../../resources/constants/constants';
 import { IMenuProps } from '../../resources/interfaces';
 
 describe('Menu', () => {
@@ -28,7 +28,7 @@ describe('Menu', () => {
     props = {
       label: 'Action',
       iconName: 'menu',
-      menuItems: DropdownItemsWithIcon
+      menuItems: testDropdownItemsWithIcon
     };
     mountedMenu = undefined;
   });

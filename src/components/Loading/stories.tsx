@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { IntlProvider } from 'react-intl';
 
 import Loading from './Loading';
-import { testTranslations } from '../../resources/constants';
+import { testTranslations } from '../../resources/constants/constants';
 
 storiesOf('Loading',module)
   .add('simple', () => (

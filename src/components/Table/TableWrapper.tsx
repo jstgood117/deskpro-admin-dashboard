@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl';
 import { ITableSetup } from '../../resources/interfaces';
 
 import { transformColumnData } from './Table';
-import TableMemory from './TableMemory';
+import TableSync from './TableSync';
 import TableAsync from './TableAsync';
 import { logError } from '../Error/ErrorBoundary';
 
@@ -19,7 +19,7 @@ interface IProps {
 }
 
 // TODO how does memory vs async choice come through in the agents_getAgentsPage query?
-const bChooseMemoryTable = true;
+const bChooseSyncTable = true;
 
 const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef}) => {
   const [data, setData] = useState([]);
@@ -49,18 +49,18 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 
   const options = {};
 
-  if (bChooseMemoryTable) getData();
+  if (bChooseSyncTable) getData();
 
   return (
     <Fragment>
-      {bChooseMemoryTable && (
-        <TableMemory
+      {bChooseSyncTable && (
+        <TableSync
           data={data}
           columns={transformColumnData([...tableDef.columns], intl)}
           options={options}
         />
       )}
-      {!bChooseMemoryTable && (
+      {!bChooseSyncTable && (
         <TableAsync
           data={data}
           columns={tableDef.columns}

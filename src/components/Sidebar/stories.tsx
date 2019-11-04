@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { IntlProvider } from 'react-intl';
 
-import { testSidebarData, testTranslations } from '../../resources/constants';
+import { testSidebarData, testTranslations } from '../../resources/constants/constants';
 import Sidebar from './Sidebar';
 import { MemoryRouter } from 'react-router-dom';
 

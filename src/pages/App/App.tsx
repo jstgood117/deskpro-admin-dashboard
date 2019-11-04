@@ -3,13 +3,13 @@ import { useQuery } from '@apollo/react-hooks';
 import { IntlProvider } from 'react-intl';
 import { flatMap } from 'lodash';
 
-import { logError } from './components/Error/ErrorBoundary';
+import { logError } from '../../components/Error/ErrorBoundary';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { SidebarContainer, AppContainer, BodyContainer } from './pages/AdminInterface';
-import Sidebar from './components/Sidebar';
-import { ISidebarSection } from './resources/interfaces';
-import PageType from './components/Page/PageType';
+import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
+import Sidebar from '../../components/Sidebar';
+import { ISidebarSection } from '../../resources/interfaces';
+import PageType from '../../components/Page/PageType';
 
 export const QUERY_INITIAL = gql`
 	query  {

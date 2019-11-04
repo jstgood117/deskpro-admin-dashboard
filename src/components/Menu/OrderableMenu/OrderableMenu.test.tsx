@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../../test/enzyme';
 
 import OrderableMenu from './OrderableMenu';
-import { OrderableMenuItems } from '../../../resources/constants';
+import { testOrderableMenuItems } from '../../../resources/constants/constants';
 import { IMenuProps } from '../../../resources/interfaces';
 
 describe('OrderableMenu', () => {
@@ -10,7 +10,7 @@ describe('OrderableMenu', () => {
   let mountedOrderableMenu: any;
 
   const OrderableMenuComponent: React.FC<IMenuProps> = _props => {
-    const [SortList, SetList] = useState(OrderableMenuItems);
+    const [SortList, SetList] = useState(testOrderableMenuItems);
     const [value, setValue] = useState();
     const checkedState: { [key: string]: boolean } = {};
     const [checked, setChecked] = useState(checkedState);
@@ -40,7 +40,7 @@ describe('OrderableMenu', () => {
     props = {
       label: 'Action',
       iconName: 'menu',
-      initialList: OrderableMenuItems,
+      initialList: testOrderableMenuItems,
       submenuPosition: 'left'
     };
     mountedOrderableMenu = undefined;

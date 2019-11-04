@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 
 import TableData from './TableData';
 import { IntlProvider } from 'react-intl';
-import { testTranslations, testTableData } from '../../resources/constants';
+import { testTranslations, testTableData } from '../../resources/constants/constants';
 import { DeskproAdminTheme } from '../Theme';
 
 const getRandomColor = (): string => {
