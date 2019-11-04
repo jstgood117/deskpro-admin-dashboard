@@ -64,6 +64,31 @@ storiesOf('Button', module)
       Secondary Button
     </Button>
   ))
+  .add('button/small/icon-text/primary', () => (
+    <Button styleType="primary" onClick={action('clicked')} size="small" icon='filter'>
+      Primary Button
+    </Button>
+  ))
+  .add('button/small/icon-text/secondary', () => (
+    <Button styleType="secondary" onClick={action('clicked')} size="small" icon='filter'>
+      Secondary Button
+    </Button>
+  ))
+  .add('button/small/icon-text/tertiary', () => (
+    <Button styleType="tertiary" onClick={action('clicked')} size="small" icon='filter'>
+      Tertiary Button
+    </Button>
+  ))
+  .add('button/medium/icon-text/primary', () => (
+    <Button styleType="primary" onClick={action('clicked')} size="medium" icon='plus'>
+      Primary Button
+    </Button>
+  ))
+  .add('button/medium/icon-text/secondary', () => (
+    <Button styleType="secondary" onClick={action('clicked')} size="medium" icon='filter'>
+      Secondary Button
+    </Button>
+  ))
   .add('Dropdown', () => (
     <DropdownButton label="Dropdown" items={DropdownItems} />
   ))
