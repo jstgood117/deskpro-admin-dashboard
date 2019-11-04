@@ -23,7 +23,7 @@ const DropButtonComponent: React.FC<IProps> = props => {
     <DropdownButton
       {...props}
       value={value}
-      label={value ? value.link as any : props.label}
+      label={value ? (value.link as any) : props.label}
       onSelect={val => setValue(val)}
       onClear={() => setValue('')}
     />
@@ -31,19 +31,37 @@ const DropButtonComponent: React.FC<IProps> = props => {
 };
 
 storiesOf('Button', module)
-  .add('primary', () => (
-    <Button styleType="primary" onClick={action('clicked')}>
+  .add('button/small/icon/primary', () => (
+    <IconButton
+      icon="plus"
+      size="small"
+      styleType="primary"
+      onClick={action('clicked')}
+    />
+  ))
+  .add('button/small/text/primary', () => (
+    <Button styleType="primary" onClick={action('clicked')} size="small">
       Primary Button
     </Button>
   ))
-  .add('secondary', () => (
-    <Button styleType="secondary" onClick={action('clicked')}>
+  .add('button/small/text/secondary', () => (
+    <Button styleType="secondary" onClick={action('clicked')} size="small">
       Secondary Button
     </Button>
   ))
-  .add('tertiary', () => (
-    <Button styleType="tertiary" onClick={action('clicked')}>
+  .add('button/small/text/tertiary', () => (
+    <Button styleType="tertiary" onClick={action('clicked')} size="small">
       Tertiary Button
+    </Button>
+  ))
+  .add('button/medium/text/primary', () => (
+    <Button styleType="primary" onClick={action('clicked')} size="medium">
+      Primary Button
+    </Button>
+  ))
+  .add('button/medium/text/secondary', () => (
+    <Button styleType="secondary" onClick={action('clicked')} size="medium">
+      Secondary Button
     </Button>
   ))
   .add('Dropdown', () => (
@@ -73,14 +91,7 @@ storiesOf('Button', module)
   .add('Filter', () => (
     <FilterButton onClick={action('clicked')}>Filter</FilterButton>
   ))
-  .add('button/small/icon/primary', () => (
-    <IconButton
-      icon="plus"
-      size="small"
-      styleType="primary"
-      onClick={action('clicked')}
-    />
-  ))
+
   .add('button/small/icon/secondary', () => (
     <IconButton
       icon="plus"

@@ -3,6 +3,7 @@ import styled, { ThemeProvider, css } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
+import { dpstyle } from '../Styled';
 
 interface ImageProps {
   size: number;
@@ -34,7 +35,8 @@ interface ITextProps {
   color: string;
   size: number;
 }
-const Text = styled.div<ITextProps>`
+const Text = styled(dpstyle.div)<ITextProps>`
+  cursor: default;
   width: ${props => props.size}px;
   height: ${props => props.size}px;
   line-height: ${props => props.size}px;

@@ -11,6 +11,7 @@ const DeskproAdminTheme = {
   textHover: '#E8EBEE',
   brandPrimary: '#3a8dde',
   activeColour: '#1C3E55',
+  primaryHoverColour: '#3A8DDE',
   hoverColour: '#D2D8DD',
   secondaryColour: '#fff',
   greyDark: '#8B9293',
@@ -22,7 +23,7 @@ const DeskproAdminTheme = {
   warningColour: '#FD667F',
   successColour: '#5BB6B1',
   pageHeader: '#E1EEFB',
-  white: '#ffffff',
+  white: '#FFFFFF',
   black: '#000',
   pagePadding: '34px',
 
