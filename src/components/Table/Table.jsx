@@ -54,7 +54,7 @@ export const TableStyled = styled.div`
 const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
 
 export const transformColumnData = (columns, intl) => {
-  let newCols = columns.map( column => {
+	let newCols = columns.map( column => {
     let newCol = {
 			id: column.title,
 			// Backend payload phrases are missing admin_common - should this be hard-coded like this?

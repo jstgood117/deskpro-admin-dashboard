@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import Menu from './Menu';
-import { testsDropdownItemsWithIcon } from '../../resources/constants/constants';
+import { testDropdownItemsWithIcon } from '../../resources/constants/constants';
 import { IMenuProps } from '../../resources/interfaces';
 
 describe('Menu', () => {
