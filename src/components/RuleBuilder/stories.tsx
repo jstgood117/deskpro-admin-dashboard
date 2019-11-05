@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { actions } from '@storybook/addon-actions';
 
@@ -6,15 +6,15 @@ import {
   MoveButtons,
   ActionButton,
   DropdownIcon,
-  HeaderContainer,
-  Text,
   DropdownText,
   Select
 } from './Components';
-import GroupRuleBuilder from './Group';
+import GroupHeader from './GroupHeader';
 import PropertyBuilder from './Property';
 import { Flex } from '../Styled';
 import RuleBuilder from './RuleBuilder';
+import { IRuleBuilderSchema, IRuleValue } from './interfaces';
+import { initGroup } from './utils';
 
 const Components: React.FC = () => {
   return (
@@ -35,35 +35,48 @@ const Components: React.FC = () => {
       </Flex>
 
       {/* DropdownIcon */}
-      <DropdownIcon iconName='trash' onClick={() => actions('Dropdown')} />
+      <DropdownIcon iconName='trash' />
 
       {/* DropdownText */}
-      <DropdownText text='all' onClick={() => actions('Dropdown')} />
+      <DropdownText text='all' />
 
       {/* Select */}
       <Select placeholder='Select property'/>
 
       <br />
-      {/* Header */}
-      <HeaderContainer>
-        <Text>Show objects that meet</Text>
-        <DropdownText text='all' onClick={() => actions('Dropdown')} />
-        <Text> of the following:</Text>
-      </HeaderContainer>
 
       <br />
-      {/* GroupRuleBuilder */}
-      <GroupRuleBuilder />
+      {/* GroupHeader */}
+      <GroupHeader index={0} />
+      <GroupHeader index={1} />
 
       <br />
       {/* PropertyBuilder */}
-      <PropertyBuilder />
+      <PropertyBuilder index={1} />
     </>
   );
 };
 
 const Group: React.FC = () => {
-  return <RuleBuilder />;
+  const [value, setValue] = useState<IRuleValue>(initGroup());
+  const ruleSchema: IRuleBuilderSchema = {
+    groupTitle: 'admin_tickets.some_group_title',
+    properties: [
+      {
+        propertyId: 'person.name',
+        title: 'admin_people.name',
+        oparators: ['=', '!='],
+        type: 'text'
+      }
+    ]
+  };
+  const onChangeValue = (newValue: IRuleValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <RuleBuilder value={value} onChange={onChangeValue} schema={ruleSchema} />
+  );
 };
 
 storiesOf('Rule Builder', module)
