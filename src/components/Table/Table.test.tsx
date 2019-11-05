@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Table from './TableMemory';
+import Table from './TableSync';
 import { ITableColumn } from '../../resources/interfaces';
 
 const testData = [
@@ -11,7 +11,7 @@ const testData = [
   {'id': 81299,'name': 'Tonia Sykes','age': 38,'phone': '+44 (0)208 328 3671','color': 'blue'},
   {'id': 14225,'name': 'Leach Durham','age': 23,'phone': '+44 (0)208 280 9572','color': 'green'}
 ];
-const testCols: ITableColumn[] = [
+const testCols: ITableColumn<object>[] = [
   { title: 'Name', field: 'name' },
   { title: 'Email', field: 'email' },
   { title: 'Phone', field: 'phone' },

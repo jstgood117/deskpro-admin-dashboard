@@ -27,11 +27,11 @@ export interface IViewData {
   title: string;
   dataQuery: string;
   tableDef: {
-    columns: ITableColumn[],
+    columns: ITableColumn<object>[],
   };
 }
 
-export interface ITableColumn {
+export interface ITableColumn<T> {
   title: string;
   field?: string;
   data?: any[];
@@ -52,7 +52,7 @@ export interface ISidebarItem {
 
 
 export interface ITableSetup {
-  columns: ITableColumn[];
+  columns: ITableColumn<object>[];
 }
 
 export interface ISortItem 	{

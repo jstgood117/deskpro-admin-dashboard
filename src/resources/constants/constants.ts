@@ -8,16 +8,7 @@ import { testNavData } from './mock/testNavData';
 import { testTableData } from './mock/testTableData';
 import { testPageData } from './mock/testPageData';
 import { testView } from './mock/testView';
-
-const testInitialData = {
-  initial: {
-    user: {
-      locale: 'en'
-    },
-    sidebar: testSidebarData,
-    translations: testTranslations
-  }
-};
+import { testInitialData } from './mock/testInitialData';
 
 export {
   testInitialData,
