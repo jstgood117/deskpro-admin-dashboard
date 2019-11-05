@@ -8,7 +8,7 @@ const SearchComponent: React.SFC = () => {
   return (
     <SearchBox
       value={value}
-      placeholder="Search"
+      placeholder='Search'
       onClear={() => setValue('')}
       onChange={event => setValue(event.target.value)}
     />

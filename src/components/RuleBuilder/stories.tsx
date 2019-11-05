@@ -27,21 +27,21 @@ const Components: React.FC = () => {
 
       {/* Action */}
       <Flex>
-        <ActionButton iconName="group" />
-        <ActionButton iconName="plus" />
-        <ActionButton iconName="undo" />
-        <ActionButton toolip="Move up one level" iconName="move-left" />
-        <ActionButton iconName="trash" />
+        <ActionButton iconName='group' />
+        <ActionButton iconName='plus' />
+        <ActionButton iconName='undo' />
+        <ActionButton toolip='Move up one level' iconName='move-left' />
+        <ActionButton iconName='trash' />
       </Flex>
 
       {/* DropdownIcon */}
-      <DropdownIcon iconName="trash" />
+      <DropdownIcon iconName='trash' />
 
       {/* DropdownText */}
-      <DropdownText text="all" />
+      <DropdownText text='all' />
 
       {/* Select */}
-      <Select placeholder="Select property"></Select>
+      <Select placeholder='Select property'/>
 
       <br />
 
@@ -71,8 +71,6 @@ const Group: React.FC = () => {
     ]
   };
   const onChangeValue = (newValue: IRuleValue) => {
-    console.log(newValue);
-    
     setValue(newValue);
   };
 

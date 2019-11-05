@@ -44,8 +44,8 @@ describe('JsonSchemaForm', () => {
 
   beforeEach(() => {
     props = {
-      schema: schema,
-      uiSchema: uiSchema
+      schema,
+      uiSchema
     };
     mountedJsonSchemaForm = undefined;
   });

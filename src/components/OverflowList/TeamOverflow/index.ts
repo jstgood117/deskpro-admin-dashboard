@@ -1,3 +1,3 @@
 import TeamOverflow from './TeamOverflow';
 
-export default TeamOverflow; 
+export default TeamOverflow;

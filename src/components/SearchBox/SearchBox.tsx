@@ -109,25 +109,25 @@ const SearchBox: SFC<IProps> = ({
   }`;
   return (
     <SearchBoxWrapper style={containerStyle} className={className}>
-      <span className="ic-search">
-        <Icon name="search" />
+      <span className='ic-search'>
+        <Icon name='search' />
       </span>
 
       <SearchBoxStyled
         onFocus={event => {
           setHasFocus(true);
-          props.onFocus && props.onFocus(event);
+          if(props.onFocus) { props.onFocus(event); }
         }}
         onBlur={event => {
           setHasFocus(false);
-          props.onFocus && props.onBlur(event);
+          if(props.onFocus) { props.onBlur(event); }
         }}
         {...props}
       />
 
       {(hasValue || hasFocus) && (
         <ButtonClear onClick={onClear}>
-          <Icon name="close" />
+          <Icon name='close' />
         </ButtonClear>
       )}
     </SearchBoxWrapper>

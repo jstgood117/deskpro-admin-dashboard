@@ -69,35 +69,35 @@ storiesOf('Card', module)
   .add('default1 card without dummy data', () => (
     <DefaultCard
       checkbox={false}
-      styleType="default1"
+      styleType='default1'
       cardDetails={userDetails1}
     />
   ))
   .add('default2 card with dummy data', () => (
     <DefaultCard
       checkbox={true}
-      styleType="default2"
+      styleType='default2'
       cardDetails={userDetails1}
     />
   ))
   .add('kanban-view 1 with dummy data', () => (
     <KanbanViewCard
       checkbox={false}
-      styleType="view1"
+      styleType='view1'
       cardDetails={kanbanDetails1}
     />
   ))
   .add('kanban-view 2 with dummy data', () => (
     <KanbanViewCard
       checkbox={false}
-      styleType="view2"
+      styleType='view2'
       cardDetails={kanbanDetails2}
     />
   ))
   .add('kanban-view 3 with dummy data', () => (
     <KanbanViewCard
       checkbox={true}
-      styleType="view3"
+      styleType='view3'
       cardDetails={kanbanDetails3}
     />
   ));

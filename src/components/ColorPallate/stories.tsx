@@ -33,20 +33,20 @@ const ColorPallete: React.SFC<{ backgroundColor: string }> = ({
 
 storiesOf('Colour Palette', module).add('colour palette', () => (
   <React.Fragment>
-    <ColorPallete backgroundColor="staticColour" />
-    <ColorPallete backgroundColor="textHover" />
-    <ColorPallete backgroundColor="brandPrimary" />
-    <ColorPallete backgroundColor="activeColour" />
-    <ColorPallete backgroundColor="hoverColour" />
-    <ColorPallete backgroundColor="secondaryColour" />
-    <ColorPallete backgroundColor="greyDark" />
-    <ColorPallete backgroundColor="static2Colour" />
-    <ColorPallete backgroundColor="greyLight" />
-    <ColorPallete backgroundColor="greyLighter" />
-    <ColorPallete backgroundColor="greyLightest" />
-    <ColorPallete backgroundColor="lightBlue" />
-    <ColorPallete backgroundColor="warningColour" />
-    <ColorPallete backgroundColor="successColour" />
-    <ColorPallete backgroundColor="pageHeader" />
+    <ColorPallete backgroundColor='staticColour' />
+    <ColorPallete backgroundColor='textHover' />
+    <ColorPallete backgroundColor='brandPrimary' />
+    <ColorPallete backgroundColor='activeColour' />
+    <ColorPallete backgroundColor='hoverColour' />
+    <ColorPallete backgroundColor='secondaryColour' />
+    <ColorPallete backgroundColor='greyDark' />
+    <ColorPallete backgroundColor='static2Colour' />
+    <ColorPallete backgroundColor='greyLight' />
+    <ColorPallete backgroundColor='greyLighter' />
+    <ColorPallete backgroundColor='greyLightest' />
+    <ColorPallete backgroundColor='lightBlue' />
+    <ColorPallete backgroundColor='warningColour' />
+    <ColorPallete backgroundColor='successColour' />
+    <ColorPallete backgroundColor='pageHeader' />
   </React.Fragment>
 ));

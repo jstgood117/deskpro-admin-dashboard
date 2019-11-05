@@ -25,83 +25,83 @@ const DropButtonComponent: React.FC<IProps> = props => {
 storiesOf('Button', module)
   .add('button/small/icon/primary', () => (
     <IconButton
-      icon="plus"
-      size="small"
-      styleType="primary"
+      icon='plus'
+      size='small'
+      styleType='primary'
       onClick={action('clicked')}
     />
   ))
   .add('button/small/text/primary', () => (
-    <Button styleType="primary" onClick={action('clicked')} size="small">
+    <Button styleType='primary' onClick={action('clicked')} size='small'>
       Primary Button
     </Button>
   ))
   .add('button/small/text/secondary', () => (
-    <Button styleType="secondary" onClick={action('clicked')} size="small">
+    <Button styleType='secondary' onClick={action('clicked')} size='small'>
       Secondary Button
     </Button>
   ))
   .add('button/small/text/tertiary', () => (
-    <Button styleType="tertiary" onClick={action('clicked')} size="small">
+    <Button styleType='tertiary' onClick={action('clicked')} size='small'>
       Tertiary Button
     </Button>
   ))
   .add('button/medium/text/primary', () => (
-    <Button styleType="primary" onClick={action('clicked')} size="medium">
+    <Button styleType='primary' onClick={action('clicked')} size='medium'>
       Primary Button
     </Button>
   ))
   .add('button/medium/text/secondary', () => (
-    <Button styleType="secondary" onClick={action('clicked')} size="medium">
+    <Button styleType='secondary' onClick={action('clicked')} size='medium'>
       Secondary Button
     </Button>
   ))
   .add('button/small/icon-text/primary', () => (
     <Button
-      styleType="primary"
+      styleType='primary'
       onClick={action('clicked')}
-      size="small"
-      icon="filter"
+      size='small'
+      icon='filter'
     >
       Primary Button
     </Button>
   ))
   .add('button/small/icon-text/secondary', () => (
     <Button
-      styleType="secondary"
+      styleType='secondary'
       onClick={action('clicked')}
-      size="small"
-      icon="filter"
+      size='small'
+      icon='filter'
     >
       Secondary Button
     </Button>
   ))
   .add('button/small/icon-text/tertiary', () => (
     <Button
-      styleType="tertiary"
+      styleType='tertiary'
       onClick={action('clicked')}
-      size="small"
-      icon="filter"
+      size='small'
+      icon='filter'
     >
       Tertiary Button
     </Button>
   ))
   .add('button/medium/icon-text/primary', () => (
     <Button
-      styleType="primary"
+      styleType='primary'
       onClick={action('clicked')}
-      size="medium"
-      icon="plus"
+      size='medium'
+      icon='plus'
     >
       Primary Button
     </Button>
   ))
   .add('button/medium/icon-text/secondary', () => (
     <Button
-      styleType="secondary"
+      styleType='secondary'
       onClick={action('clicked')}
-      size="medium"
-      icon="filter"
+      size='medium'
+      icon='filter'
     >
       Secondary Button
     </Button>
@@ -109,43 +109,43 @@ storiesOf('Button', module)
 
   .add('button/small/icon-text/dropdown', () => (
     <DropButtonComponent
-      label="Item"
+      label='Item'
       items={FilterItems}
-      size="small"
-      iconName="filter"
+      size='small'
+      iconName='filter'
     />
   ))
   .add('button/medium/icon-text/secondary/dropdown', () => (
     <DropButtonComponent
-      label="Item"
+      label='Item'
       items={SortItems}
-      iconName="sort"
+      iconName='sort'
       showClearButton={true}
       onClear={action('onClear')}
-      size="medium"
+      size='medium'
     />
   ))
   .add('button/small/icon/secondary', () => (
     <IconButton
-      icon="plus"
-      size="small"
-      styleType="secondary"
+      icon='plus'
+      size='small'
+      styleType='secondary'
       onClick={action('clicked')}
     />
   ))
   .add('button/medium/icon/primary', () => (
     <IconButton
-      icon="plus"
-      size="medium"
-      styleType="primary"
+      icon='plus'
+      size='medium'
+      styleType='primary'
       onClick={action('clicked')}
     />
   ))
   .add('button/medium/icon/secondary', () => (
     <IconButton
-      icon="plus"
-      size="medium"
-      styleType="secondary"
+      icon='plus'
+      size='medium'
+      styleType='secondary'
       onClick={action('clicked')}
     />
   ));

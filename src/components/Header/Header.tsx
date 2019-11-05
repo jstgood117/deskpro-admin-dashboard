@@ -55,7 +55,7 @@ const ViewModeButton = styled.button<{ active: boolean }>`
   ${props =>
     props.active &&
     css`
-      background-color: ${props => props.theme.hoverColour};
+      background-color: ${_props => props.theme.hoverColour};
     `}
 `;
 
@@ -179,7 +179,7 @@ const Header: SFC<IProps> = ({
 
         {showHelpButton && (
           <HelpButton>
-            <Icon name="question" />
+            <Icon name='question' />
           </HelpButton>
         )}
 
@@ -190,28 +190,28 @@ const Header: SFC<IProps> = ({
                 onClick={() => changeView('table')}
                 active={state === 'table'}
               >
-                <Icon name="viewMode.table" />
+                <Icon name='viewMode.table' />
               </ViewModeButton>
               <ViewModeButton
                 onClick={() => changeView('list')}
                 active={state === 'list'}
               >
-                <Icon name="viewMode.list" />
+                <Icon name='viewMode.list' />
               </ViewModeButton>
               <ViewModeButton
                 onClick={() => changeView('map')}
                 active={state === 'map'}
               >
-                <Icon name="viewMode.map" />
+                <Icon name='viewMode.map' />
               </ViewModeButton>
             </ViewModeContainer>
           )}
 
           {showNewButton && onNewClick && (
             <NewButton onClick={onNewClick}>
-              <Icon name="plus" />
+              <Icon name='plus' />
               <span>
-                <FormattedMessage id="admin_common.btn.new" />
+                <FormattedMessage id='admin_common.btn.new' />
               </span>
             </NewButton>
           )}
@@ -220,7 +220,6 @@ const Header: SFC<IProps> = ({
           <TableActionStyled>
             <TableActions
               showSearch={true}
-              onSearchChange={() => {}}
               filterMenu={true}
               sortMenu={true}
               groupMenu={true}

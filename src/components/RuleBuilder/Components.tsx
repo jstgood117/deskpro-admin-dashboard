@@ -6,7 +6,6 @@ import Icon from '../Icon';
 import { P1 } from '../Typography';
 import Tooltip from '../Tooltip';
 
-/**** BaseButton ****/
 type ButtonEventClickType = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 type DivEventClickType = React.MouseEvent<HTMLDivElement, MouseEvent>;
 const BaseButton = styled(dpstyle.div)<{ disabled?: boolean }>`
@@ -38,9 +37,9 @@ const BaseButton = styled(dpstyle.div)<{ disabled?: boolean }>`
   ${props =>
     props.disabled &&
     css`
-      background: ${props => props.theme.greyLighter};
+      background: ${_props => _props.theme.greyLighter};
       path {
-        fill: ${props => props.theme.greyLight};
+        fill: ${_props => _props.theme.greyLight};
       }
       pointer-events: none;
     `}
@@ -70,14 +69,14 @@ const MoveButtons: React.SFC<IMoveButtonProps> = ({
   return (
     <MoveButtonGroup>
       <MoveButtonStyled disabled={disabledMoveUp} onClick={onMoveUp}>
-        <Icon name="move-up" />
+        <Icon name='move-up' />
       </MoveButtonStyled>
       <MoveButtonStyled
         disabled={disabledMoveDown}
         style={{ marginTop: 4 }}
         onClick={onMoveDown}
       >
-        <Icon name="move-down" />
+        <Icon name='move-down' />
       </MoveButtonStyled>
     </MoveButtonGroup>
   );
@@ -112,8 +111,8 @@ const ActionButton: React.SFC<IActionButtonProps> = ({
 }) => {
   return (
     <Tooltip
-      placement="bottom"
-      styleType="dark"
+      placement='bottom'
+      styleType='dark'
       enabled={!!toolip && !disabled}
       content={toolip}
     >
@@ -170,10 +169,10 @@ const DropdownIconContainer = styled(props => <BaseButton {...props} />)<{active
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
       }
-      background: ${props => props.theme.hoverColour};
-      border-color: ${props => props.theme.activeColour};
+      background: ${_props => _props.theme.hoverColour};
+      border-color: ${_props => _props.theme.activeColour};
       path {
-        fill: ${props => props.theme.activeColour};
+        fill: ${_props => _props.theme.activeColour};
       }
     `}
 `;
@@ -225,7 +224,7 @@ const DropdownIcon: React.SFC<IDropdownIconProps> = ({
         <Icon name={iconName} />
       </DropdownIconStyled>
       <ArrowButton>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </ArrowButton>
       {active && (
         <DropdownContent>
@@ -270,7 +269,7 @@ const DropdownText: React.SFC<IDropdownTextProps> = ({
     >
       <DropdownTextStyled>{text}</DropdownTextStyled>
       <ArrowButton hideBorder={true}>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </ArrowButton>
       {active && (
         <DropdownContent>
@@ -351,12 +350,12 @@ const Select: React.SFC<ISelectProps> = ({
       className={position}
       onClick={(e: DivEventClickType) => {
         setActive(!active);
-        onClick && onClick(e);
+        if(onClick) { onClick(e); }
       }}
     >
       <SelectTextStyled active={!!value}>{placeholder}</SelectTextStyled>
       <SelectArrowButton hideBorder={true}>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </SelectArrowButton>
     </SelectContainer>
   );

@@ -6,8 +6,8 @@ import Label from './Label';
 storiesOf('Label', module)
   .add('Filled', () => (
     <Label
-      label="Sales"
-      styleType="filled"
+      label='Sales'
+      styleType='filled'
       styles={{
         backgroundColor: '#EEFFDD',
         color: '#54B162',
@@ -17,8 +17,8 @@ storiesOf('Label', module)
   ))
   .add('Administrator', () => (
     <Label
-      label="Administrator"
-      styleType="filled"
+      label='Administrator'
+      styleType='filled'
       styles={{
         height: '24px',
         width: '94px',
@@ -29,8 +29,8 @@ storiesOf('Label', module)
   ))
   .add('AllPermissions', () => (
     <Label
-      label="All Permissions"
-      styleType="lined"
+      label='All Permissions'
+      styleType='lined'
       styles={{
         height: '22px',
         width: '105px',
@@ -41,26 +41,26 @@ storiesOf('Label', module)
   ))
   .add('Icon-Text-Outline', () => (
     <Label
-      label="6"
-      styleType="lined"
+      label='6'
+      styleType='lined'
       styles={{
         color: '#8B9293',
         backgroundColor: '#F7F7F7',
         borderColor: '#a9b0b0'
       }}
-      icon="dial"
+      icon='dial'
     />
   ))
   .add('Icon-Text-Filled', () => (
     <Label
-      label="6"
-      styleType="filled"
+      label='6'
+      styleType='filled'
       styles={{
         color: '#9384BD',
         backgroundColor: '#EBE4F2',
         borderColor: '#a9b0b0'
       }}
-      icon="clock"
-      iconColor="#9384BD"
+      icon='clock'
+      iconColor='#9384BD'
     />
   ));

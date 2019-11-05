@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 export const TableStyled = styled.div`
 	& table {
 		width: 100%;
@@ -55,7 +54,7 @@ export const TableStyled = styled.div`
 const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
 
 export const transformColumnData = (columns, intl) => {
-  let newCols = columns.map( column => {
+	let newCols = columns.map( column => {
     let newCol = {
 			id: column.title,
 			// Backend payload phrases are missing admin_common - should this be hard-coded like this?
@@ -85,4 +84,3 @@ export const transformColumnData = (columns, intl) => {
 
 	return newCols;
 }
-

@@ -7,22 +7,22 @@ import Checkbox from '../../Checkbox';
 import { H2, P3 } from '../../Typography';
 import Label from '../../Label';
 
-interface userTextDetail {
+interface UserTextDetail {
   text?: string;
   color?: string;
   textBackgroundColor?: string;
 }
 
-export interface userType {
+export interface UserType {
   userName?: string;
   userNumber?: string;
   userMail?: string;
-  userTexts?: userTextDetail[];
+  userTexts?: UserTextDetail[];
   avatar?: string;
 }
 export interface IProps {
   checkbox: boolean;
-  cardDetails?: userType;
+  cardDetails?: UserType;
   styleType: 'view1' | 'view2' | 'view3';
 }
 
@@ -115,7 +115,7 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   size={
                     styleType === 'view1' ? 65 : styleType === 'view2' ? 44 : 30
                   }
-                  type="image"
+                  type='image'
                   content={cardDetails.avatar}
                 />
               </AvatarWrapper>
@@ -126,7 +126,7 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   <AvatarWrapper styleType={styleType}>
                     <Avatar
                       size={30}
-                      type="image"
+                      type='image'
                       content={cardDetails.avatar}
                     />
                   </AvatarWrapper>
@@ -150,7 +150,7 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   cardDetails.userTexts.map((textDetails, Index: number) => (
                     <TextAvatarStyled key={Index}>
                       <Avatar
-                        type="text"
+                        type='text'
                         content={textDetails.text}
                         textColor={textDetails.color}
                         textBackgroundColor={textDetails.textBackgroundColor}
@@ -166,8 +166,8 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
               >
                 <StyledPermission>
                   <Label
-                    label="All Permissions"
-                    styleType="lined"
+                    label='All Permissions'
+                    styleType='lined'
                     styles={{
                       height: '24px',
                       width: '105px',
@@ -179,8 +179,8 @@ const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                 </StyledPermission>
                 <StyledAdmin>
                   <Label
-                    label="Administrator"
-                    styleType="filled"
+                    label='Administrator'
+                    styleType='filled'
                     styles={{
                       height: '24px',
                       width: '94px',

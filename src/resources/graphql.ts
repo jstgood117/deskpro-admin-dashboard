@@ -19,7 +19,7 @@ export const QUERY_PAGE = gql`
       }
     }
   }
-`
+`;
 
 export const QUERY_AGENTS_PAGE = gql`
   query {
@@ -52,7 +52,7 @@ export const QUERY_AGENTS_PAGE = gql`
       }
     }
   }
-`
+`;
 
 // Mutations
 

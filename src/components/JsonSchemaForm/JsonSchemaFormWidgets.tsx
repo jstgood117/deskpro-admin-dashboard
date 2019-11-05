@@ -12,7 +12,7 @@ const CheckboxComponent: React.FC<{
   return (
     <Checkbox
       checked={checked}
-      value="checked"
+      value='checked'
       indeterminate={indeterminate}
       showArrow={showArrow}
       onChange={(event: any) => setChecked(event.target.checked)}
@@ -34,7 +34,7 @@ export const SearchComponent: React.SFC<ICustomProps> = ({ onChange }) => {
   return (
     <SearchBox
       value={value}
-      placeholder="Search"
+      placeholder='Search'
       onClear={e => {
         e.preventDefault();
         setValue('');
@@ -47,7 +47,7 @@ export const SearchComponent: React.SFC<ICustomProps> = ({ onChange }) => {
 };
 
 export const ButtonComponent: React.SFC<ICustomProps> = props => {
-  return <Button styleType="primary">{props.value}</Button>;
+  return <Button styleType='primary'>{props.value}</Button>;
 };
 
 export const CheckboxWidget: React.SFC<ICustomProps> = props => {

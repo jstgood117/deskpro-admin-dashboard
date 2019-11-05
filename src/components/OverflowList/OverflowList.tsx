@@ -52,7 +52,7 @@ const OverflowList: React.SFC<IProps> = ({
     viewMode === 'text' ? (
       <S1 style={textStyle}>+{Math.abs(max - items.length)}</S1>
     ) : (
-      <Badge style={{ height: 18 }} color="#fff" backgroundColor="#A9B0B0">
+      <Badge style={{ height: 18 }} color='#fff' backgroundColor='#A9B0B0'>
         +{Math.abs(max - items.length)}
       </Badge>
     );
@@ -68,7 +68,7 @@ const OverflowList: React.SFC<IProps> = ({
       >
         {items.length > max ? (
           expand ? (
-            <Icon name="collapse" />
+            <Icon name='collapse' />
           ) : (
             OverflowText
           )

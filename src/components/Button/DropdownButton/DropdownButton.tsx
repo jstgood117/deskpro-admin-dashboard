@@ -173,7 +173,7 @@ const DropdownButton: SFC<IProps> = ({
             <MenuLabel>{label}</MenuLabel>
           </StyledIcon>
 
-          <Icon name="downVector" />
+          <Icon name='downVector' />
         </DropdownBtn>
 
         {openState && (
@@ -203,10 +203,10 @@ const DropdownButton: SFC<IProps> = ({
         <ClearButton
           onClick={event => {
             event.stopPropagation();
-            onClear && onClear();
+            if(onClear) { onClear(); }
           }}
         >
-          <Icon name="close" />
+          <Icon name='close' />
         </ClearButton>
       )}
     </DropdownWrapper>

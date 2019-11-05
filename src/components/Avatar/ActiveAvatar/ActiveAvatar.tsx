@@ -49,7 +49,7 @@ const ActiveAvatar: React.SFC<IProps> = ({
   containerStyle,
   containerClassName
 }) => (
-  <Tooltip content={name} styleType="lightBox">
+  <Tooltip content={name} styleType='lightBox'>
     <Container style={containerStyle} className={containerClassName}>
       <Avatar
         type={avatar ? 'image' : 'text'}

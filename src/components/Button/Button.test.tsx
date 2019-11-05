@@ -1,25 +1,22 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Button, { IProps } from './Button';
+import Button, { IProps, IStyleProps } from './Button';
 
 describe('Button', () => {
-  let props: IProps;
+  let props: IProps & IStyleProps;
   let mountedButton: any;
 
   const wrapper = (bShallow: boolean) => {
     if (!mountedButton) {
-      mountedButton = bShallow
-        ? shallow(<Button {...props} />)
-        : mount(<Button {...props} />);
+      mountedButton = bShallow ? shallow(<Button {...props} />) : mount(<Button {...props} />);
     }
     return mountedButton;
   };
 
   beforeEach(() => {
     props = {
-      styleType: 'primary',
-      size: 'small'
+      styleType: 'primary'
     };
     mountedButton = undefined;
   });
@@ -34,12 +31,8 @@ describe('Button', () => {
       props.children = undefined;
     });
 
-    it("doesn't render anything else", () => {
-      expect(
-        wrapper(false)
-          .find('button')
-          .children().length
-      ).toBe(0);
+    it('doesn\'t render anything else', () => {
+      expect(wrapper(false).find('button').children().length).toBe(0);
     });
   });
 
@@ -49,11 +42,7 @@ describe('Button', () => {
     });
 
     it('renders them within the button tag', () => {
-      expect(
-        wrapper(false)
-          .find('button')
-          .children().length
-      ).toBe(1);
+      expect(wrapper(false).find('button').children().length).toBe(1);
     });
   });
 

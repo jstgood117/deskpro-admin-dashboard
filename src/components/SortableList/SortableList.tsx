@@ -11,7 +11,7 @@ const SortableList = ({ onChange, children, restore }: IProps) => {
   return (
     <div>
       <Sortable
-        onChange={(order: Array<string>) => {
+        onChange={(order: string[]) => {
           onChange(order);
         }}
       >

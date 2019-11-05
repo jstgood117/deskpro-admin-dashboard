@@ -4,7 +4,7 @@ import { mount, shallow } from '../../test/enzyme';
 import Attachment, { IProps } from './Attachment';
 
 describe('Label', () => {
-  let props: IProps;
+  const props: IProps = { id: 'id1'};
   let mountedLabel: any;
 
   const wrapper = (bShallow: boolean) => {

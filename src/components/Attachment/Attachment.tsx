@@ -29,9 +29,9 @@ export interface IProps {
 const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {
   return (
     <div>
-      <InputFile id={id} onChange={onChangeFile}></InputFile>
+      <InputFile id={id} onChange={onChangeFile}/>
       <Label htmlFor={id}>
-        <Icon name="attachment" />
+        <Icon name='attachment' />
         {text}
       </Label>
     </div>

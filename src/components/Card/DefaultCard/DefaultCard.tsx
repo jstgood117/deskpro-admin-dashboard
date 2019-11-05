@@ -7,22 +7,22 @@ import Checkbox from '../../Checkbox';
 import { H2, P3 } from '../../Typography';
 import Label from '../../Label';
 
-interface userTextDetail {
+interface UserTextDetail {
   text?: string;
   color?: string;
   textBackgroundColor?: string;
 }
 
-export interface userType {
+export interface UserType {
   userName?: string;
   userNumber?: string;
   userMail?: string;
-  userTexts?: userTextDetail[];
+  userTexts?: UserTextDetail[];
   avatar?: string;
 }
 export interface IProps {
   checkbox: boolean;
-  cardDetails?: userType;
+  cardDetails?: UserType;
   styleType: 'default1' | 'default2';
 }
 
@@ -93,7 +93,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
             <AvatarWrapper>
               <Avatar
                 size={styleType === 'default1' ? 70 : 60}
-                type="image"
+                type='image'
                 content={cardDetails.avatar}
               />
             </AvatarWrapper>
@@ -117,7 +117,7 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                 cardDetails.userTexts.map((textDetails, Index: number) => (
                   <TextAvatarStyled key={Index}>
                     <Avatar
-                      type="text"
+                      type='text'
                       content={textDetails.text}
                       textColor={textDetails.color}
                       textBackgroundColor={textDetails.textBackgroundColor}
@@ -134,8 +134,8 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
             >
               <StyledPermission styleType={styleType}>
                 <Label
-                  label="All Permissions"
-                  styleType="lined"
+                  label='All Permissions'
+                  styleType='lined'
                   styles={{
                     height: '22px',
                     width: '105px',
@@ -147,8 +147,8 @@ const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
               </StyledPermission>
               <StyledAdmin styleType={styleType}>
                 <Label
-                  label="Administrator"
-                  styleType="filled"
+                  label='Administrator'
+                  styleType='filled'
                   styles={{
                     height: '22px',
                     width: '105px',
