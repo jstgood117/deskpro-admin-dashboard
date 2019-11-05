@@ -6,7 +6,6 @@ import Icon from '../Icon';
 import { P1 } from '../Typography';
 import Tooltip from '../Tooltip';
 
-type ButtonEventClickType = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 type DivEventClickType = React.MouseEvent<HTMLDivElement, MouseEvent>;
 const BaseButton = styled(dpstyle.div)<{ disabled?: boolean }>`
   background: ${props => props.theme.secondaryColour};

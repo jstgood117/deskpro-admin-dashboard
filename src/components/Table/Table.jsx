@@ -65,12 +65,12 @@ export const transformColumnData = (columns, intl) => {
 			case 'selection':
 				newCol.Header = ({ getToggleAllRowsSelectedProps }) => (
 					<div>
-						<input type="checkbox" {...getToggleAllRowsSelectedProps()} />
+						<input type='checkbox' {...getToggleAllRowsSelectedProps()} />
 					</div>
 				);
 				newCol.Cell = ({ row }) => (
 					<div>
-						<input type="checkbox" {...row.getToggleRowSelectedProps()} />
+						<input type='checkbox' {...row.getToggleRowSelectedProps()} />
 					</div>
 				);
 				break;

@@ -1,3 +1,5 @@
+import { ITableColor } from "../../interfaces";
+
 export const testTableData = [
   {
     avatar:
@@ -641,6 +643,7 @@ export const testTableData = [
     tickets: 79
   }
 ];
+
 export const tableColors: ITableColor[] = [
   { background: '#E1EEFB', textColor: '#3A8DDE' },
   { background: '#F9E6E1', textColor: '#EC6C4E' },

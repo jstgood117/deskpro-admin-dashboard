@@ -10,7 +10,6 @@ import {
   TableCell,
   TableBody
 } from './TableDesign';
-import { testTableData, tableColors } from '../../resources/constants';
 import Checkbox from '../Checkbox';
 import Avatar from '../Avatar';
 import { Flex } from '../Styled';
@@ -18,6 +17,10 @@ import { S1, P1, S2 } from '../Typography';
 import Icon from '../Icon';
 import Badge from '../Badge';
 import { ISortItem, ITableColor } from '../../resources/interfaces';
+import {
+  tableColors,
+  testTableData
+} from '../../resources/constants/mock/testTableData';
 
 let textColor = '';
 let backgroundCache = '';
@@ -65,7 +68,7 @@ const Team: React.SFC<{
     case 'avatar':
       return (
         <Avatar
-          type='text'
+          type="text"
           content={team.text}
           style={{ marginRight: 8 }}
           textBackgroundColor={getRandomColor().background}
@@ -126,19 +129,19 @@ const TableDesignComponent: React.SFC = () => {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell container='head' />
-          <TableCell container='head'>Name</TableCell>
-          <TableCell container='head'>Email</TableCell>
-          <TableCell container='head'>Phone</TableCell>
-          <TableCell container='head'>Access</TableCell>
-          <TableCell style={{ width: 100 }} container='head'>
+          <TableCell container="head" />
+          <TableCell container="head">Name</TableCell>
+          <TableCell container="head">Email</TableCell>
+          <TableCell container="head">Phone</TableCell>
+          <TableCell container="head">Access</TableCell>
+          <TableCell style={{ width: 100 }} container="head">
             Team
           </TableCell>
-          <TableCell container='head'>Permission Group</TableCell>
+          <TableCell container="head">Permission Group</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {testTableData.map((item, index) => (
+        {testTableData.map(item => (
           <TableRow key={item.id} isSelected={selected.includes(item.id)}>
             <TableCell>
               <Checkbox
@@ -152,7 +155,7 @@ const TableDesignComponent: React.SFC = () => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Avatar
                   style={{ marginRight: 15 }}
-                  type='image'
+                  type="image"
                   content={item.avatar}
                 />
                 {item.name}
@@ -194,18 +197,18 @@ const TableDesignTeamAvatarComponent: React.SFC<{
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell container='head' />
-          <TableCell container='head'>Name</TableCell>
-          <TableCell container='head'>Email</TableCell>
-          <TableCell container='head'>Teams</TableCell>
-          <TableCell container='head'>Permission groups</TableCell>
-          <TableCell container='head'>Departments</TableCell>
-          <TableCell container='head'>Admin</TableCell>
-          <TableCell container='head'>Reports</TableCell>
+          <TableCell container="head" />
+          <TableCell container="head">Name</TableCell>
+          <TableCell container="head">Email</TableCell>
+          <TableCell container="head">Teams</TableCell>
+          <TableCell container="head">Permission groups</TableCell>
+          <TableCell container="head">Departments</TableCell>
+          <TableCell container="head">Admin</TableCell>
+          <TableCell container="head">Reports</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {testTableData.map((item, index) => (
+        {testTableData.map(item => (
           <TableRow key={item.id} isSelected={selected.includes(item.id)}>
             <TableCell>
               <Checkbox
@@ -219,7 +222,7 @@ const TableDesignTeamAvatarComponent: React.SFC<{
               <Flex style={{ alignItems: 'center' }}>
                 <Avatar
                   style={{ marginRight: 15 }}
-                  type='image'
+                  type="image"
                   content={item.avatar}
                 />
                 <P1>{item.name}</P1>
@@ -244,7 +247,7 @@ const TableDesignTeamAvatarComponent: React.SFC<{
             </TableCell>
             <TableCell>
               <P1>
-                {item.permission_groups.map((_item, idx) =>
+                {item.permission_groups.map((_item: string, idx: number) =>
                   idx < 2 ? _item + ' ' : ''
                 )}
                 <MoreText length={item.permission_groups.length} max={2} />
@@ -253,12 +256,12 @@ const TableDesignTeamAvatarComponent: React.SFC<{
             <TableCell>
               <Flex style={{ alignItems: 'center' }}>
                 {item.departments.map(
-                  (department, idx) =>
+                  (department: string, idx: number) =>
                     idx < 3 && (
                       <Avatar
                         key={idx + ''}
                         style={{ marginRight: 8 }}
-                        type='text'
+                        type="text"
                         content={department}
                         textBackgroundColor={getRandomColor().background}
                         textColor={textColor}
@@ -268,11 +271,11 @@ const TableDesignTeamAvatarComponent: React.SFC<{
                 <MoreText length={item.departments.length} max={3} />
               </Flex>
             </TableCell>
-            <TableCell textAlign='center'>
-              {item.admin && <Icon name='admin' />}
+            <TableCell textAlign="center">
+              {item.admin && <Icon name="admin" />}
             </TableCell>
-            <TableCell textAlign='center'>
-              {item.reports && <Icon name='report' />}
+            <TableCell textAlign="center">
+              {item.reports && <Icon name="report" />}
             </TableCell>
           </TableRow>
         ))}
@@ -297,25 +300,25 @@ const TableDesignTimeComponent: React.SFC<{
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell container='head' />
-          <TableCell container='head'>Name</TableCell>
-          <TableCell container='head'>Phone number</TableCell>
-          <TableCell container='head'>Links</TableCell>
-          <TableCell container='head'>Alias</TableCell>
-          <TableCell container='head'>Timezone</TableCell>
-          <TableCell container='head'>Language</TableCell>
-          <TableCell container='head'>Date created</TableCell>
-          <TableCell container='head'>Last logged in</TableCell>
-          <TableCell container='head' textAlign='right'>
+          <TableCell container="head" />
+          <TableCell container="head">Name</TableCell>
+          <TableCell container="head">Phone number</TableCell>
+          <TableCell container="head">Links</TableCell>
+          <TableCell container="head">Alias</TableCell>
+          <TableCell container="head">Timezone</TableCell>
+          <TableCell container="head">Language</TableCell>
+          <TableCell container="head">Date created</TableCell>
+          <TableCell container="head">Last logged in</TableCell>
+          <TableCell container="head" textAlign="right">
             Tickets
           </TableCell>
-          <TableCell container='head' textAlign='right'>
+          <TableCell container="head" textAlign="right">
             ID
           </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {testTableData.map((item, index) => (
+        {testTableData.map(item => (
           <TableRow key={item.id} isSelected={selected.includes(item.id)}>
             <TableCell>
               <Checkbox
@@ -329,7 +332,7 @@ const TableDesignTimeComponent: React.SFC<{
               <Flex style={{ alignItems: 'center' }}>
                 <Avatar
                   style={{ marginRight: 15 }}
-                  type='image'
+                  type="image"
                   content={item.avatar}
                 />
                 <P1>{item.name}</P1>
@@ -338,16 +341,16 @@ const TableDesignTimeComponent: React.SFC<{
             <TableCell>{item.phone}</TableCell>
             <TableCell>
               <Flex>
-                <Badge backgroundColor='#F7F7F7' color='#8B9293'>
-                  <Icon name='user.check' />
+                <Badge backgroundColor="#F7F7F7" color="#8B9293">
+                  <Icon name="user.check" />
                   <span style={{ marginLeft: 5 }}>{item.links.user}</span>
                 </Badge>
                 <Badge
                   style={{ marginLeft: 8 }}
-                  backgroundColor='#EBE4F2'
-                  color='#9384BD'
+                  backgroundColor="#EBE4F2"
+                  color="#9384BD"
                 >
-                  <Icon name='clock' />
+                  <Icon name="clock" />
                   <span style={{ marginLeft: 5 }}>{item.links.clock}</span>
                 </Badge>
               </Flex>
@@ -367,10 +370,10 @@ const TableDesignTimeComponent: React.SFC<{
                 {timeView === 'absolute' ? item.last_logged_in : '15 min'}
               </P1>
             </TableCell>
-            <TableCell textAlign='right'>{item.tickets}</TableCell>
+            <TableCell textAlign="right">{item.tickets}</TableCell>
             <TableCell
               style={{ verticalAlign: 'bottom', paddingBottom: 5 }}
-              textAlign='right'
+              textAlign="right"
             >
               <S2 style={{ opacity: 0.3 }}>{item.id}</S2>
             </TableCell>
@@ -442,7 +445,7 @@ const TableSortingComponent: React.SFC = () => {
           {SortItems.map(item => (
             <TableCell
               key={item.field}
-              container='head'
+              container="head"
               sortProps={{
                 sortItem: item,
                 sortSelected: sort,
@@ -467,7 +470,7 @@ const TableSortingComponent: React.SFC = () => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Avatar
                   style={{ marginRight: 15 }}
-                  type='image'
+                  type="image"
                   content={item.avatar}
                 />
                 {item.name}
@@ -498,21 +501,21 @@ storiesOf('Table Design', module)
     return <TableDesignComponent />;
   })
   .add('Default fields: teams as avatars', () => (
-    <TableDesignTeamAvatarComponent teamView='avatar' />
+    <TableDesignTeamAvatarComponent teamView="avatar" />
   ))
   .add('Default fields: teams with names displayed', () => (
-    <TableDesignTeamAvatarComponent teamView='avatar-text' />
+    <TableDesignTeamAvatarComponent teamView="avatar-text" />
   ))
   .add('Default fields: teams as labels', () => (
-    <TableDesignTeamAvatarComponent teamView='label' />
+    <TableDesignTeamAvatarComponent teamView="label" />
   ))
   .add('Default fields: teams as labels with avatar', () => (
-    <TableDesignTeamAvatarComponent teamView='avatar-label' />
+    <TableDesignTeamAvatarComponent teamView="avatar-label" />
   ))
   .add('Optional fields: absolute time', () => (
-    <TableDesignTimeComponent timeView='absolute' />
+    <TableDesignTimeComponent timeView="absolute" />
   ))
   .add('Optional fields: relative time', () => (
-    <TableDesignTimeComponent timeView='relative' />
+    <TableDesignTimeComponent timeView="relative" />
   ))
   .add('Sorting', () => <TableSortingComponent />);
