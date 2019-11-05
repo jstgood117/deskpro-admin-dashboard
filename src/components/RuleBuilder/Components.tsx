@@ -1,7 +1,7 @@
 import React, { useState, CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
 
-import { dpstyle, FlowLayout } from '../Styled';
+import { dpstyle } from '../Styled';
 import Icon from '../Icon';
 import { P1 } from '../Typography';
 import Tooltip from '../Tooltip';
@@ -9,7 +9,7 @@ import Tooltip from '../Tooltip';
 /**** BaseButton ****/
 type ButtonEventClickType = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 type DivEventClickType = React.MouseEvent<HTMLDivElement, MouseEvent>;
-const BaseButton = styled(dpstyle.div)`
+const BaseButton = styled(dpstyle.div)<{ disabled?: boolean }>`
   background: ${props => props.theme.secondaryColour};
   border: 1px solid ${props => props.theme.greyLight};
   border-radius: 4px;
@@ -35,6 +35,15 @@ const BaseButton = styled(dpstyle.div)`
       fill: ${props => props.theme.activeColour};
     }
   }
+  ${props =>
+    props.disabled &&
+    css`
+      background: ${props => props.theme.greyLighter};
+      path {
+        fill: ${props => props.theme.greyLight};
+      }
+      pointer-events: none;
+    `}
 `;
 
 /**** MoveButton ****/
@@ -42,21 +51,34 @@ const MoveButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const MoveButtonStyled = styled(BaseButton)`
+const MoveButtonStyled = styled(props => <BaseButton {...props} />)<{
+  disabled?: boolean;
+}>`
   width: 26px;
   height: 16px;
 `;
 interface IMoveButtonProps {
-  onMoveUp?: (e: DivEventClickType) => void;
-  onMoveDown?: (e: DivEventClickType) => void;
+  disabledMoveUp?: boolean;
+  disabledMoveDown?: boolean;
+  onMoveUp?: () => void;
+  onMoveDown?: () => void;
 }
-const MoveButtons: React.SFC<IMoveButtonProps> = ({ onMoveUp, onMoveDown }) => {
+const MoveButtons: React.SFC<IMoveButtonProps> = ({
+  disabledMoveUp,
+  disabledMoveDown,
+  onMoveUp,
+  onMoveDown
+}) => {
   return (
     <MoveButtonGroup>
-      <MoveButtonStyled onClick={onMoveUp}>
+      <MoveButtonStyled disabled={disabledMoveUp} onClick={onMoveUp}>
         <Icon name="move-up" />
       </MoveButtonStyled>
-      <MoveButtonStyled style={{ marginTop: 4 }} onClick={onMoveDown}>
+      <MoveButtonStyled
+        disabled={disabledMoveDown}
+        style={{ marginTop: 4 }}
+        onClick={onMoveDown}
+      >
         <Icon name="move-down" />
       </MoveButtonStyled>
     </MoveButtonGroup>
@@ -64,42 +86,48 @@ const MoveButtons: React.SFC<IMoveButtonProps> = ({ onMoveUp, onMoveDown }) => {
 };
 
 /**** ActionButton ****/
-const ActionButtonStyled = styled(BaseButton)`
+const ActionButtonStyled = styled(BaseButton)<{ disabled?: boolean }>`
   width: 36px;
   height: 22px;
   margin-left: 8px;
+  ${props =>
+    props.disabled &&
+    css`
+      background: ${props.theme.greyLightest};
+      pointer-events: none;
+      path {
+        fill: ${props.theme.greyLight};
+      }
+    `};
 `;
 interface IActionButtonProps {
   iconName: string;
   toolip?: string;
+  disabled?: boolean;
   onClick?: (e: DivEventClickType) => void;
 }
 const ActionButton: React.SFC<IActionButtonProps> = ({
   iconName,
   toolip = '',
+  disabled,
   onClick
 }) => {
   return (
     <Tooltip
       placement="bottom"
       styleType="dark"
-      enabled={!!toolip}
+      enabled={!!toolip && !disabled}
       content={toolip}
     >
-      <ActionButtonStyled onClick={onClick}>
+      <ActionButtonStyled
+        disabled={disabled}
+        onClick={e => !disabled && onClick && onClick(e)}
+      >
         <Icon name={iconName} />
       </ActionButtonStyled>
     </Tooltip>
   );
 };
-
-/**** HeaderContainer ****/
-const HeaderContainer = styled(FlowLayout)`
-  height: 34px;
-  background: ${props => props.theme.greyLighter};
-  border: 1px solid ${props => props.theme.greyLighter};
-  padding: 0 10px;
-`;
 
 /**** Text ****/
 const Text = styled(P1)``;
@@ -124,10 +152,15 @@ const ArrowButton = styled.div<{ hideBorder?: boolean }>`
       border: none;
     `}
 `;
-const DropdownIconContainer = styled(BaseButton)<{ active: boolean }>`
+const DropdownIconContainer = styled(props => <BaseButton {...props} />)<{
+  active: boolean;
+  disabled: boolean;
+}>`
   width: 55px;
   height: 22px;
+  margin-left: 8px;
   justify-content: flex-start;
+  position: relative;
   &:hover {
     ${ArrowButton} {
       border-color: ${props => props.theme.activeColour};
@@ -149,20 +182,48 @@ const DropdownIconContainer = styled(BaseButton)<{ active: boolean }>`
       }
     `}
 `;
+const DropdownContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: #fff;
+  min-width: 160px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  z-index: 1;
+  top: 24px;
+  right: 0;
+  left: 0;
+  max-width: 100%;
+`;
+const DropdownContentPanel = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+`;
 interface IDropdownIconProps {
   iconName: string;
-  toolip?: string;
-  onClick?: (e: DivEventClickType) => void;
+  items?: any[];
+  disabled?: boolean;
+  renderItem?: (item: any, index: number) => void;
 }
-const DropdownIcon: React.SFC<IDropdownIconProps> = ({ iconName, onClick }) => {
+const DropdownIcon: React.SFC<IDropdownIconProps> = ({
+  iconName,
+  items,
+  disabled,
+  renderItem
+}) => {
   const [active, setActive] = useState(false);
 
   return (
     <DropdownIconContainer
       active={active}
+      disabled={disabled}
       onClick={(e: DivEventClickType) => {
         setActive(!active);
-        onClick(e);
       }}
     >
       <DropdownIconStyled>
@@ -171,6 +232,14 @@ const DropdownIcon: React.SFC<IDropdownIconProps> = ({ iconName, onClick }) => {
       <ArrowButton>
         <Icon name="downVector" />
       </ArrowButton>
+      {active && (
+        <DropdownContent>
+          {(items || []).map((item: any, index: number) =>
+            renderItem(item, index)
+          )}
+          <DropdownContentPanel />
+        </DropdownContent>
+      )}
     </DropdownIconContainer>
   );
 };
@@ -180,15 +249,21 @@ const DropdowTextContainer = styled(BaseButton)<{ active: boolean }>`
   color: ${props => props.theme.staticColour};
   padding: 0 10px;
   margin: 0 10px;
+  position: relative;
 `;
 const DropdownTextStyled = styled(Text)`
   margin-right: 5px;
 `;
 export interface IDropdownTextProps {
   text?: string;
-  onClick?: (e: DivEventClickType) => void;
+  items?: any[];
+  renderItem?: (item: any, index: number) => void;
 }
-const DropdownText: React.SFC<IDropdownTextProps> = ({ text, onClick }) => {
+const DropdownText: React.SFC<IDropdownTextProps> = ({
+  text,
+  items,
+  renderItem
+}) => {
   const [active, setActive] = useState(false);
 
   return (
@@ -196,13 +271,20 @@ const DropdownText: React.SFC<IDropdownTextProps> = ({ text, onClick }) => {
       active={active}
       onClick={(e: DivEventClickType) => {
         setActive(!active);
-        onClick && onClick(e);
       }}
     >
       <DropdownTextStyled>{text}</DropdownTextStyled>
       <ArrowButton hideBorder={true}>
         <Icon name="downVector" />
       </ArrowButton>
+      {active && (
+        <DropdownContent>
+          {(items || []).map((item: any, index: number) =>
+            renderItem(item, index)
+          )}
+          <DropdownContentPanel />
+        </DropdownContent>
+      )}
     </DropdowTextContainer>
   );
 };
@@ -316,7 +398,6 @@ const GroupMoveButtons: React.SFC<IGroupMoveButtonsProps> = ({
 export {
   MoveButtons,
   ActionButton,
-  HeaderContainer,
   Text,
   DropdownIcon,
   DropdownText,
