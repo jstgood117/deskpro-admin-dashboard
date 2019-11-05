@@ -69,7 +69,9 @@ const Label: SFC<IProps & IStyleProps> = ({
         style={{
           padding: '0px 10px',
           fontWeight: '600',
-          minWidth: icon ? 0 : 50
+          minWidth: icon ? 0 : 50,
+          width: '100%',
+          textAlign: styles.textAlign
         }}
       >
         {label}
