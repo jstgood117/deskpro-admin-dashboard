@@ -37,11 +37,17 @@ const TableActions: SFC<IProps> = props => {
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
   const [View, setViewValue] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   return (
     <StyledTableAction>
       <FlexStyled style={{ flex: 5 }}>
         <FlexStyled style={{ paddingLeft: 10 }}>
-          <SearchBox placeholder="Search Box" onChange={props.onSearchChange} />
+          <SearchBox
+            placeholder="Search Box"
+            value={searchValue}
+            onChange={event => setSearchValue(event.target.value)}
+            onClear={() => setSearchValue('')}
+          />
         </FlexStyled>
         {props.filterMenu ? (
           <FlexStyled style={{ paddingLeft: 10 }}>

@@ -34,8 +34,9 @@ const SearchBoxStyled = styled.input`
 
 const SearchBoxWrapper = styled.div`
   background: ${props => props.theme.greyLightest};
+  position: relative;
   border-radius: 4px;
-  padding: 0 15px;
+  padding: 0 34px 0 15px;
   display: flex;
   align-items: center;
   .ic-search {
@@ -80,6 +81,8 @@ const ButtonClear = styled.div`
   background-color: transparent;
   cursor: pointer;
   padding-right: 0;
+  position: absolute;
+  right: 11.75px;
 `;
 
 export type IProps = {
