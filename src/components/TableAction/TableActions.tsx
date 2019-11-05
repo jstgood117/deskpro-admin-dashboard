@@ -40,10 +40,10 @@ const TableActions: SFC<IProps> = props => {
   const [searchValue, setSearchValue] = useState('');
   return (
     <StyledTableAction>
-      <FlexStyled style={{ flex: 5 }}>
+      <FlexStyled style={{ flex: 5, alignItems: 'center' }}>
         <FlexStyled style={{ paddingLeft: 10 }}>
           <SearchBox
-            placeholder="Search Box"
+            placeholder='Search Box'
             value={searchValue}
             onChange={event => setSearchValue(event.target.value)}
             onClear={() => setSearchValue('')}
@@ -52,10 +52,10 @@ const TableActions: SFC<IProps> = props => {
         {props.filterMenu ? (
           <FlexStyled style={{ paddingLeft: 10 }}>
             <Button
-              styleType="secondary"
+              styleType='secondary'
               onClick={action('clicked')}
-              size="medium"
-              icon="filter"
+              size='medium'
+              icon='filter'
             >
               Filter
             </Button>
@@ -67,8 +67,8 @@ const TableActions: SFC<IProps> = props => {
           <FlexStyled style={{ paddingRight: 10 }}>
             <DropdownButton
               label={View ? (View.link as any) : 'View'}
-              iconName="view"
-              size="medium"
+              iconName='view'
+              size='medium'
               items={ViewItems}
               onSelect={val => setViewValue(val)}
               value={View}
@@ -78,8 +78,8 @@ const TableActions: SFC<IProps> = props => {
         {props.groupMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
             <DropdownButton
-              iconName="group"
-              size="medium"
+              iconName='group'
+              size='medium'
               items={GroupItems}
               label={Group ? (Group.link as any) : 'Group'}
               onSelect={val => setGroupValue(val)}
@@ -91,8 +91,8 @@ const TableActions: SFC<IProps> = props => {
           <FlexStyled style={{ paddingRight: 10 }}>
             <DropdownButton
               label={Sort ? (Sort.link as any) : 'Sort'}
-              iconName="sort"
-              size="medium"
+              iconName='sort'
+              size='medium'
               items={SortItems}
               onSelect={val => setSortValue(val)}
               value={Sort}

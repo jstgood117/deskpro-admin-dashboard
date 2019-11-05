@@ -203,7 +203,7 @@ const DropdownButton: SFC<IProps> = ({
         <ClearButton
           onClick={event => {
             event.stopPropagation();
-            if(onClear) { onClear(); }
+            if (onClear) { onClear(); }
           }}
         >
           <Icon name='close' />

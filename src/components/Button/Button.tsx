@@ -128,6 +128,9 @@ const getStyle = (
       }
     }
   };
+  if (!size) {
+    size = 'small';
+  }
   return styles[size][styleType];
 };
 
@@ -160,12 +163,12 @@ export type IProps = {
   children?: ReactNode;
   onClick?: (e: any) => void;
   styleType: ButtonStyleType;
-  size: ButtonSizeType;
+  size?: ButtonSizeType;
   icon?: string;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 const Button: SFC<IProps> = ({ styleType, size, icon, ...props }) => {
-  const styles = getStyle(styleType, size='small', DeskproAdminTheme);
+  const styles = getStyle(styleType, size, DeskproAdminTheme);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <ButtonStyled onClick={props.onClick} styles={styles} {...props}>

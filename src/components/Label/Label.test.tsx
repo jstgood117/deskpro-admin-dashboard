@@ -5,7 +5,7 @@ import Label, { IProps, IStyleProps } from './Label';
 
 describe('Label', () => {
   const props: IProps = {label: 'test'};
-  const styleProps: IStyleProps = {styleType:'lined'};
+  const styleProps: IStyleProps = {styleType: 'lined'};
   let mountedLabel: any;
 
   const wrapper = (bShallow: boolean) => {
