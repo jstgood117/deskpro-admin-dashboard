@@ -32,7 +32,7 @@ storiesOf('Button', module)
     />
   ))
   .add('button/small/text/primary', () => (
-    <Button styleType='primary' onClick={action('clicked')} size='small'>
+    <Button styleType='primary' onClick={action('clicked')}>
       Primary Button
     </Button>
   ))

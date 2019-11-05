@@ -165,7 +165,7 @@ export type IProps = {
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 const Button: SFC<IProps> = ({ styleType, size, icon, ...props }) => {
-  const styles = getStyle(styleType, size, DeskproAdminTheme);
+  const styles = getStyle(styleType, size='small', DeskproAdminTheme);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <ButtonStyled onClick={props.onClick} styles={styles} {...props}>
