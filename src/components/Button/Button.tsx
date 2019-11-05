@@ -1,66 +1,182 @@
 import React, { ReactNode, SFC } from 'react';
-import styled, { ThemeProvider, CSSProperties } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 import { dpstyle } from '../Styled';
+import Icon from '../Icon';
 
-export interface IStyleProps {
-  styleType: 'primary' | 'secondary' | 'tertiary';
-  styles?: CSSProperties;
-  size?: 'small' | 'medium';
-  className?: string;
+type ButtonStyleType = 'primary' | 'secondary' | 'tertiary';
+type ButtonSizeType = 'small' | 'medium';
+
+interface IButtonStyle {
+  static: {
+    backgroundColor: string;
+    color: string;
+    svgColor: string;
+    size: number;
+    border?: string;
+  };
+  hover: {
+    backgroundColor: string;
+    svgColor: string;
+    color: string;
+    size: number;
+    border?: string;
+  };
 }
 
-const ButtonStyled = styled(dpstyle.button)<IStyleProps>`
-  background-color: ${props =>
-    props.styleType === 'primary'
-      ? props.theme.activeColour
-      : props.theme.secondaryColour};
-  color: ${props =>
-    props.styleType === 'primary'
-      ? props.theme.secondaryColour
-      : props.theme.activeColour};
-  border: ${props =>
-    props.styleType === 'secondary'
-      ? '1.1px solid rgba(28, 62, 85, 0.8)'
-      : 'none'};
+const getStyle = (
+  styleType: ButtonStyleType,
+  size: ButtonSizeType,
+  theme: any
+): IButtonStyle => {
+  const styles = {
+    small: {
+      primary: {
+        static: {
+          backgroundColor: theme.activeColour,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 28
+        },
+        hover: {
+          backgroundColor: theme.primaryHoverColour,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 28
+        }
+      },
+      secondary: {
+        static: {
+          backgroundColor: theme.textHover,
+          color: theme.activeColour,
+          svgColor: theme.activeColour,
+          size: 28,
+          border: '1px solid #1C3E55'
+        },
+        hover: {
+          backgroundColor: theme.hoverColour,
+          color: theme.activeColour,
+          svgColor: theme.activeColour,
+          size: 28,
+          border: '1px solid #1C3E55'
+        }
+      },
+      tertiary: {
+        static: {
+          backgroundColor: theme.white,
+          color: theme.greyDark,
+          svgColor: theme.greyDark,
+          size: 28,
+          border: '1px solid #D3D6D7'
+        },
+        hover: {
+          backgroundColor: theme.hoverColour,
+          color: theme.activeColour,
+          svgColor: theme.activeColour,
+          size: 28,
+          border: '1px solid #1C3E55'
+        }
+      }
+    },
+    medium: {
+      primary: {
+        static: {
+          backgroundColor: theme.activeColour,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 34
+        },
+        hover: {
+          backgroundColor: theme.primaryHoverColour,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 34
+        }
+      },
+      secondary: {
+        static: {
+          backgroundColor: theme.white,
+          color: theme.greyDark,
+          svgColor: theme.greyDark,
+          size: 34,
+          border: '1px solid #D3D6D7'
+        },
+        hover: {
+          backgroundColor: theme.hoverColour,
+          color: theme.activeColour,
+          svgColor: theme.activeColour,
+          size: 34,
+          border: '1px solid #1C3E55'
+        }
+      },
+      tertiary: {
+        static: {
+          backgroundColor: theme.white,
+          color: theme.greyDark,
+          svgColor: theme.greyDark,
+          size: 34,
+          border: '1px solid #D3D6D7'
+        },
+        hover: {
+          backgroundColor: theme.hoverColour,
+          color: theme.activeColour,
+          svgColor: theme.activeColour,
+          size: 34,
+          border: '1px solid #1C3E55'
+        }
+      }
+    }
+  };
+  if (!size) {
+    size = 'small';
+  }
+  return styles[size][styleType];
+};
+
+const ButtonStyled = styled(dpstyle.button)<{ styles: IButtonStyle }>`
+  background-color: ${props => props.styles.static.backgroundColor};
+  color: ${props => props.styles.static.color};
+  border: ${props => props.styles.static.border};
   outline: none;
-  height: ${props =>
-    props.styles && props.styles.height
-      ? props.styles.height
-      : props.size === 'medium'
-      ? 34
-      : 28}px;
+  height: ${props => props.styles.static.size}px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  path {
+    fill: ${props => props.styles.static.svgColor};
+  }
+  svg {
+    padding-right: 8px;
+  }
   &:hover {
-    background-color: ${props =>
-      props.styleType === 'primary'
-        ? props.theme.brandPrimary
-        : props.theme.hoverColour};
+    background-color: ${props => props.styles.hover.backgroundColor};
+    color: ${props => props.styles.hover.color};
+    border: ${props => props.styles.hover.border};
+    path {
+      fill: ${props => props.styles.hover.svgColor};
+    }
   }
 `;
 
-const ButtonWrapper = styled.div`
-  display: inline;
-`;
-
-export interface IProps {
+export type IProps = {
   children?: ReactNode;
   onClick?: (e: any) => void;
-  styles?: CSSProperties;
-}
+  styleType: ButtonStyleType;
+  size?: ButtonSizeType;
+  icon?: string;
+} & React.HTMLAttributes<HTMLButtonElement>;
 
-const Button: SFC<IProps & IStyleProps> = props => (
-  <ThemeProvider theme={DeskproAdminTheme}>
-    <ButtonWrapper>
-      <ButtonStyled
-        onClick={props.onClick}
-        styleType={props.styleType}
-        styles={props.styles}
-      >
+const Button: SFC<IProps> = ({ styleType, size, icon, ...props }) => {
+  const styles = getStyle(styleType, size, DeskproAdminTheme);
+  return (
+    <ThemeProvider theme={DeskproAdminTheme}>
+      <ButtonStyled onClick={props.onClick} styles={styles} {...props}>
+        {icon && <Icon name={icon} />}
         {props.children}
       </ButtonStyled>
-    </ButtonWrapper>
-  </ThemeProvider>
-);
+    </ThemeProvider>
+  );
+};
 
 export default Button;

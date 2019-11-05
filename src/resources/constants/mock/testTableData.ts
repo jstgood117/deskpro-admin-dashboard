@@ -1,3 +1,5 @@
+import { ITableColor } from '../../interfaces';
+
 export const testTableData = [
   {
     avatar:
@@ -411,7 +413,7 @@ export const testTableData = [
   {
     avatar:
       'https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=944&q=80',
-    name: 'Melvin O\'Conner',
+    name: "Melvin O'Conner",
     email: 'melvin.oconner@example.com',
     phone: '07443123456',
     access: 'Administrator',
@@ -640,4 +642,12 @@ export const testTableData = [
     last_logged_in: 'Oct 2, 2019 @ 09:51',
     tickets: 79
   }
+];
+
+export const tableColors: ITableColor[] = [
+  { background: '#E1EEFB', textColor: '#3A8DDE' },
+  { background: '#F9E6E1', textColor: '#EC6C4E' },
+  { background: '#FFF8E1', textColor: '#F8AF3C' },
+  { background: '#EBE4F2', textColor: '#9384BD' },
+  { background: '#F7F7F7', textColor: '#8B9293' }
 ];

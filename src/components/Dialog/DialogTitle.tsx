@@ -10,7 +10,7 @@ const DialogTitleStyled = styled.div`
   font-size: 18px;
   line-height: 150%;
   color: ${props => props.theme.activeColour};
-  padding: 10px 20px 0 25px;
+  padding: 0 25px;
   > div {
     align-items: center;
     display: flex;

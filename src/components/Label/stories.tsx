@@ -10,7 +10,8 @@ storiesOf('Label', module)
       styleType='filled'
       styles={{
         backgroundColor: '#EEFFDD',
-        color: '#54B162'
+        color: '#54B162',
+        textAlign: 'left'
       }}
     />
   ))

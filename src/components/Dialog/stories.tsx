@@ -27,7 +27,7 @@ storiesOf('Dialog', module)
             <Button
               styleType='primary'
               onClick={action('primary')}
-              styles={{ height: '30px' }}
+              size='medium'
             >
               Yes, Delete Agents
             </Button>
@@ -37,7 +37,7 @@ storiesOf('Dialog', module)
             <Button
               styleType='secondary'
               onClick={action('optional')}
-              styles={{ height: '30px' }}
+              size='medium'
             >
               Cancel, Keep Agents
             </Button>
@@ -62,7 +62,7 @@ storiesOf('Dialog', module)
             <Button
               styleType='primary'
               onClick={action('primary')}
-              styles={{ height: '30px' }}
+              size='medium'
             >
               Yes, Delete Agents
             </Button>
@@ -72,7 +72,7 @@ storiesOf('Dialog', module)
             <Button
               styleType='secondary'
               onClick={action('optional')}
-              styles={{ height: '30px' }}
+              size='medium'
             >
               Cancel, Keep Agents
             </Button>

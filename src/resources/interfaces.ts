@@ -84,3 +84,8 @@ export interface IMenuItemProps {
   subItems?: IMenuItemProps[];
   icon?: string;
 }
+
+export interface ITableColor {
+	background: string;
+	textColor: string;
+}
