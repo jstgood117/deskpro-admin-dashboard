@@ -94,7 +94,7 @@ const Checkbox: SFC<IProps> = ({
       {...inputProps}
     />
     <StyledCheckbox size={size} indeterminate={indeterminate} checked={checked}>
-      {indeterminate && checked && <Icon name="checkbox.indeterminate" />}
+      {indeterminate && checked && <Icon name='checkbox.indeterminate' />}
     </StyledCheckbox>
 
     {showArrow && (
@@ -107,7 +107,7 @@ const Checkbox: SFC<IProps> = ({
           }
         }}
       >
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </ArrowButton>
     )}
   </CheckboxContainer>

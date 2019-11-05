@@ -36,9 +36,9 @@ export interface ISchemaType {
 
 export interface IProps {
   schema: ISchemaType;
-  uiSchema: Object;
-  formData?: Object;
-  widgets?: Object;
+  uiSchema: object;
+  formData?: object;
+  widgets?: object;
 }
 
 export const widgets = {
@@ -76,9 +76,7 @@ const StyledForm = styled(dpstyle.div)`
   }
 `;
 const JsonSchemaForm: SFC<IProps> = ({ schema, uiSchema, formData }) => {
-  const onSubmit = ({ formData }: any) => {
-    return console.log('form data are', formData);
-  };
+  const onSubmit = ({ _formData }: any) => false;
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledForm>

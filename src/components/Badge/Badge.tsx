@@ -25,7 +25,7 @@ const BadgeContainer = styled.div<IBadgeProps>`
       border: 2px solid transparent;
       &:hover {
         box-shadow: 0px 3px 5px rgba(159, 204, 243, 0.25);
-        border-color: ${props => props.theme.lightBlue};
+        border-color: ${_props => _props.theme.lightBlue};
       }
     `}
 `;

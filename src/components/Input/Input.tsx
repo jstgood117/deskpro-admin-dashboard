@@ -41,7 +41,7 @@ const InputWrapper = styled(dpstyle.div)<{ error: boolean }>`
   ${props =>
     props.error &&
     css`
-      border: 1px solid ${props => props.theme.warningColour};
+      border: 1px solid ${_props => _props.theme.warningColour};
       padding-right: 35px;
     `}
   &.focus {
@@ -113,17 +113,17 @@ const Input: SFC<IProps> = ({
         <InputStyled
           onFocus={event => {
             setHasFocus(true);
-            props.onFocus && props.onFocus(event);
+            if(props.onFocus) { props.onFocus(event); }
           }}
           onBlur={event => {
             setHasFocus(false);
-            props.onFocus && props.onBlur(event);
+            if(props.onFocus) { props.onBlur(event); }
           }}
           {...props}
-        ></InputStyled>
+        />
         {hasError && (
           <IconErrorWrapper>
-            <Icon name="error" />
+            <Icon name='error' />
           </IconErrorWrapper>
         )}
       </InputWrapper>

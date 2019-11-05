@@ -52,8 +52,8 @@ describe('Tab', () => {
       };
       props.onClick = handleParam;
 
-      const Tab = wrapper(false).find('div');
-      Tab.simulate('click');
+      const _Tab = wrapper(false).find('div');
+      _Tab.simulate('click');
       expect(passedParam).toBe(999);
     });
   });

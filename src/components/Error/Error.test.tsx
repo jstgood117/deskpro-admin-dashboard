@@ -3,7 +3,7 @@ import { mount, shallow } from '../../test/enzyme';
 
 import Error, { IProps, IStyleProps } from './Error';
 
-describe("Error", () => {
+describe('Error', () => {
   let props: IProps & IStyleProps;
   let mountedError: any;
 
@@ -16,7 +16,7 @@ describe("Error", () => {
       );
     }
     return mountedError;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -25,8 +25,8 @@ describe("Error", () => {
     mountedError = undefined;
   });
 
-  it("always renders a <div>", () => {
+  it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-})
+});

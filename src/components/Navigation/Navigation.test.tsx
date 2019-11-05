@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import Navigation, { IProps } from './Navigation';
-import { testNavData } from '../../resources/constants';
+import { testNavData } from '../../resources/constants/constants';
 
 describe('Navigation', () => {
   let props: IProps;

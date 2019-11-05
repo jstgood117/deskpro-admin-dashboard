@@ -4,8 +4,8 @@ import { mount, shallow } from '../../test/enzyme';
 import Label, { IProps, IStyleProps } from './Label';
 
 describe('Label', () => {
-  let props: IProps;
-  let styleProps: IStyleProps;
+  const props: IProps = {label: 'test'};
+  const styleProps: IStyleProps = {styleType:'lined'};
   let mountedLabel: any;
 
   const wrapper = (bShallow: boolean) => {

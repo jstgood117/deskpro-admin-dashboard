@@ -38,7 +38,7 @@ const FilterButton: SFC<IProps> = props => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <ButtonStyled onClick={action('clicked Filter Button')}>
       <StyledIcon>
-        <Icon name="filter" />
+        <Icon name='filter' />
       </StyledIcon>
       {props.children}
     </ButtonStyled>

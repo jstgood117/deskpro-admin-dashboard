@@ -1,0 +1,16 @@
+{
+  "extends": ["@optics/codestyle", "tslint-react"],
+  "rules": {
+    "jsx-no-multiline-js": false,
+    "interface-name": false,
+    "semicolon": true,
+    "no-var-requires": false,
+    "jsx-no-lambda": false,
+    "no-bitwise": false,
+    "indent": [true, "spaces", 2]
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}

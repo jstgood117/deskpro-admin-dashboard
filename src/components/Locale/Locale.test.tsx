@@ -26,4 +26,4 @@ describe('Locale', () => {
     const elts = wrapper(false).find('img');
     expect(elts.length).toBeGreaterThan(0);
   });
-}); 
+});

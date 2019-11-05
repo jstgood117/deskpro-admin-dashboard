@@ -3,10 +3,10 @@ import { storiesOf } from '@storybook/react';
 
 import Menu from './Menu';
 import {
-  DropdownItemsWithoutIcon,
-  DropdownItemsWithIcon,
-  OrderableMenuItems
-} from '../../resources/constants';
+  testDropdownItemsWithIcon,
+  testDropdownItemsWithoutIcon,
+  testOrderableMenuItems
+} from '../../resources/constants/constants';
 import { IMenuProps } from '../../resources/interfaces';
 import OrderableMenu from './OrderableMenu';
 
@@ -26,7 +26,7 @@ const MenuComponent: React.FC<IMenuProps> = props => {
 
 const OrderableMenuComponent: React.FC<IMenuProps> = props => {
   const [value, setValue] = useState();
-  const [SortList, SetList] = useState(OrderableMenuItems);
+  const [SortList, SetList] = useState(testOrderableMenuItems);
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
   return (
@@ -36,7 +36,7 @@ const OrderableMenuComponent: React.FC<IMenuProps> = props => {
       label={value ? value['name'] : props.label}
       onSelect={val => setValue(val)}
       order={val => SetList(val)}
-      initialList={OrderableMenuItems}
+      initialList={testOrderableMenuItems}
       menuItems={SortList}
       submenuPosition={props.submenuPosition}
       setChecked={setChecked}
@@ -48,16 +48,16 @@ const OrderableMenuComponent: React.FC<IMenuProps> = props => {
 storiesOf('Menu', module)
   .add('Menu with dummy data and icon', () => (
     <MenuComponent
-      label="Action"
-      menuItems={DropdownItemsWithIcon}
-      iconName="menu"
+      label='Action'
+      menuItems={testDropdownItemsWithIcon}
+      iconName='menu'
     />
   ))
   .add('Menu with dummy data and without icon', () => (
     <MenuComponent
-      label="Action"
-      menuItems={DropdownItemsWithoutIcon}
-      iconName="menu"
+      label='Action'
+      menuItems={testDropdownItemsWithoutIcon}
+      iconName='menu'
     />
   ))
   .add('OrderableMenu with dummy data and icon', () => (
@@ -73,9 +73,9 @@ storiesOf('Menu', module)
     >
       <div style={{ position: 'absolute', right: 10 }}>
         <OrderableMenuComponent
-          label="View"
-          iconName="view"
-          submenuPosition="left"
+          label='View'
+          iconName='view'
+          submenuPosition='left'
         />
       </div>
     </div>

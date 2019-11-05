@@ -3,18 +3,18 @@ import { storiesOf } from '@storybook/react';
 import { IntlProvider } from 'react-intl';
 
 import Error from './Error';
-import { testTranslations } from '../../resources/constants';
+import { testTranslations } from '../../resources/constants/constants';
 
 const testError = {
   graphQLErrors: [
     { message: 'graphQLError happened'},
     { message: 'second graphQLError happened'},
   ]
-}
+};
 
 storiesOf('Error',module)
-	.add('dummy graphQL errors', () => (
-		<IntlProvider locale='en' messages={testTranslations}>
-			<Error apolloError={testError} />
-		</IntlProvider>
-	));
+  .add('dummy graphQL errors', () => (
+    <IntlProvider locale='en' messages={testTranslations}>
+      <Error apolloError={testError} />
+    </IntlProvider>
+  ));

@@ -93,7 +93,7 @@ const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
 
   useEffect(() => {
     const matchingNav = navItem.navItems.find(n => {
-      return matchPath(loc.pathname, { path: n.path, exact: true })
+      return matchPath(loc.pathname, { path: n.path, exact: true });
     });
     if (matchingNav && !isOpen) {
       setOpen(true);
@@ -101,7 +101,7 @@ const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   }, [isOpen, setOpen, navItem.navItems, loc]);
 
   const className = isOpen ? '' : 'collapsed';
-  const caretStyle = isOpen ? {} : {transform: "rotate(180deg)"};
+  const caretStyle = isOpen ? {} : {transform: 'rotate(180deg)'};
 
   return (
     <Fragment>

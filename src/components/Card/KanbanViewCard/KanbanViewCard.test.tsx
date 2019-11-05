@@ -34,7 +34,7 @@ describe('Card', () => {
   beforeEach(() => {
     props = {
       checkbox: true,
-      cardDetails: cardDetails,
+      cardDetails,
       styleType: 'view1'
     };
   });

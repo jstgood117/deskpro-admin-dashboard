@@ -3,7 +3,7 @@ import { mount, shallow } from '../../test/enzyme';
 
 import Loading, { IProps, IStyleProps } from './Loading';
 
-describe("Loading", () => {
+describe('Loading', () => {
   let props: IProps & IStyleProps;
   let mountedLoading: any;
 
@@ -16,7 +16,7 @@ describe("Loading", () => {
       );
     }
     return mountedLoading;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -25,8 +25,8 @@ describe("Loading", () => {
     mountedLoading = undefined;
   });
 
-  it("always renders a <div>", () => {
+  it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-})
+});

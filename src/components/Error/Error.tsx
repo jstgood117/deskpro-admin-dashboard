@@ -11,20 +11,22 @@ const ErrorStyled = styled.div<IStyleProps>`
 `;
 
 export interface IProps {
-	apolloError?: any;
+  apolloError?: any;
 }
 
 const Error: SFC<IProps & IStyleProps> = ({apolloError}) => (
   <ThemeProvider theme={DeskproAdminTheme}>
-		<ErrorStyled>
-			<h2><FormattedMessage id='admin.page.error' /></h2>
-			{apolloError && apolloError.graphQLErrors && <ul>
-				{apolloError.graphQLErrors.map(({ message }: any, i: number) => (
-        	<li key={i}>{message}</li>
-				))}
-			</ul>}
-		</ErrorStyled>
-	</ThemeProvider>
+    <ErrorStyled>
+      <h2><FormattedMessage id='admin.page.error' /></h2>
+      {apolloError && apolloError.graphQLErrors && (
+        <ul>
+          {apolloError.graphQLErrors.map(({ message }: any, i: number) => (
+            <li key={i}>{message}</li>
+          ))}
+        </ul>
+      )}
+    </ErrorStyled>
+  </ThemeProvider>
 );
 
 export default Error;

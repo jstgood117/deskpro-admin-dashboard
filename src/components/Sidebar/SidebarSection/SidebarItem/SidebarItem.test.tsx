@@ -4,7 +4,7 @@ import { mount, shallow } from '../../../../test/enzyme';
 import SidebarItem, { IProps } from './SidebarItem';
 import { MemoryRouter } from 'react-router';
 
-describe("SidebarItem", () => {
+describe('SidebarItem', () => {
   let props: IProps;
   let mountedSidebarItem: any;
 
@@ -21,7 +21,7 @@ describe("SidebarItem", () => {
         );
     }
     return mountedSidebarItem;
-  }
+  };
 
   beforeEach(() => {
     props = {
@@ -31,13 +31,13 @@ describe("SidebarItem", () => {
     mountedSidebarItem = undefined;
   });
 
-  describe("when itemName and path are defined", () => {
-    it("renders the label", () => {
+  describe('when itemName and path are defined', () => {
+    it('renders the label', () => {
       expect(wrapper(false).text()).toContain('Test');
     });
 
-    it("renders the link", () => {
+    it('renders the link', () => {
 //      expect(wrapper(false).text()).toContain('item 1');
     });
   });
-})
+});

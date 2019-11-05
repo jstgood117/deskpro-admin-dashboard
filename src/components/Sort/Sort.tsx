@@ -49,10 +49,10 @@ const SortIcon: SFC<ISortIconProps> = ({ sortType, style, className }) => {
   return (
     <IconContainer style={style} className={className}>
       <IconItem selected={sortType === 'asc'}>
-        <Icon name="arrow-drop-up" />
+        <Icon name='arrow-drop-up' />
       </IconItem>
       <IconItem selected={sortType === 'desc'}>
-        <Icon name="arrow-drop-down" />
+        <Icon name='arrow-drop-down' />
       </IconItem>
     </IconContainer>
   );
@@ -77,8 +77,8 @@ const Sort: SFC<IProps> = ({ items, sortSelected = null, onSelectSort }) => {
 
   return (
     <DropdownButton
-      label="Sort"
-      iconName="sort"
+      label='Sort'
+      iconName='sort'
       items={items}
       dropdownContentStyle={{
         marginTop: 34,

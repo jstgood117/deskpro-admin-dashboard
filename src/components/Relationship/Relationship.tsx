@@ -56,13 +56,13 @@ const Relationship: SFC<IProps> = ({
 }) => {
   return (
     <Tooltip
-      styleType="lightBox"
-      content={
+      styleType='lightBox'
+      content={(
         <List>
           <S1>{title}</S1>
           {items.map((item, index) => renderItem(item, index))}
         </List>
-      }
+      )}
     >
       <span>
         {text ? (
@@ -71,7 +71,7 @@ const Relationship: SFC<IProps> = ({
               <Icon name={icon} />
             </CircleStyled>
             <P1 style={{ marginRight: 8 }}>{text}</P1>
-            <Badge color="#FFF" backgroundColor="#A9B0B0">
+            <Badge color='#FFF' backgroundColor='#A9B0B0'>
               {items.length}
             </Badge>
           </FlowLayoutStyled>
