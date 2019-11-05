@@ -1,4 +1,4 @@
-import { IPageData, IMenuItemProps } from './interfaces';
+import { IPageData, IMenuItemProps, ITableColor } from './interfaces';
 import { Column } from 'react-table';
 
 export const testTranslations = {
@@ -1055,4 +1055,12 @@ export const testNavData = [
   {
     NavItem: 'nav.helpCentre'
   }
+];
+
+export const tableColors: ITableColor[] = [
+  { background: '#E1EEFB', textColor: '#3A8DDE' },
+  { background: '#F9E6E1', textColor: '#EC6C4E' },
+  { background: '#FFF8E1', textColor: '#F8AF3C' },
+  { background: '#EBE4F2', textColor: '#9384BD' },
+  { background: '#F7F7F7', textColor: '#8B9293' }
 ];

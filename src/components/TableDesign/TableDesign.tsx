@@ -12,7 +12,7 @@ const Table = styled.table`
 
 /** TableHead */
 const TableHead = styled.thead`
-  background: transparent;
+  background: ${props => props.theme.white};
 `;
 
 /** TableBody */

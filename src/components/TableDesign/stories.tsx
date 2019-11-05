@@ -10,25 +10,27 @@ import {
   TableCell,
   TableBody
 } from './TableDesign';
-import { testTableData } from '../../resources/constants';
+import { testTableData, tableColors } from '../../resources/constants';
 import Checkbox from '../Checkbox';
 import Avatar from '../Avatar';
 import { Flex } from '../Styled';
 import { S1, P1, S2 } from '../Typography';
 import Icon from '../Icon';
 import Badge from '../Badge';
-import { ISortItem } from '../../resources/interfaces';
+import { ISortItem, ITableColor } from '../../resources/interfaces';
 
-const getRandomColor = (): string => {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+let textColor = '';
+let backgroundCache = '';
+const getRandomItem = (): ITableColor => {
+  return tableColors[Math.floor(Math.random() * tableColors.length)];
 };
-const colors = testTableData.map(() => getRandomColor());
-
+const getRandomColor = (): ITableColor => {
+  let randomItem = getRandomItem();
+  if (randomItem.background === backgroundCache) randomItem = getRandomItem();
+  backgroundCache = randomItem.background;
+  textColor = randomItem.textColor;
+  return randomItem;
+};
 interface IMoreTextProps {
   max: number;
   length: number;
@@ -57,15 +59,17 @@ const BadeImage = styled.img`
 const Team: React.SFC<{
   teamView: 'avatar' | 'avatar-text' | 'label' | 'avatar-label';
   team: any;
-}> = ({ teamView, team }) => {
+  index: number;
+}> = ({ teamView, team, index }) => {
   switch (teamView) {
     case 'avatar':
       return (
         <Avatar
           type="text"
           content={team.text}
-          textBackgroundColor={getRandomColor()}
-          textColor="#fff"
+          style={{ marginRight: 8 }}
+          textBackgroundColor={getRandomColor().background}
+          textColor={textColor}
         />
       );
     case 'avatar-text':
@@ -75,8 +79,8 @@ const Team: React.SFC<{
             style={{ marginRight: 8 }}
             type={team.image ? 'image' : 'text'}
             content={team.image || team.text}
-            textBackgroundColor={getRandomColor()}
-            textColor="#fff"
+            textBackgroundColor={getRandomColor().background}
+            textColor={textColor}
           />
           <P1>{team.text}</P1>
         </Flex>
@@ -85,8 +89,8 @@ const Team: React.SFC<{
       return (
         <Badge
           style={{ marginRight: 5, marginBottom: 5 }}
-          color="#fff"
-          backgroundColor={getRandomColor()}
+          backgroundColor={getRandomColor().background}
+          color={textColor}
         >
           {team.text}
         </Badge>
@@ -94,7 +98,10 @@ const Team: React.SFC<{
     case 'avatar-label':
       return (
         <Flex style={{ margin: 5, alignItems: 'center' }}>
-          <Badge color="#fff" backgroundColor={getRandomColor()}>
+          <Badge
+            backgroundColor={getRandomColor().background}
+            color={textColor}
+          >
             {team.image && <BadeImage src={team.image} />}
             {team.text}
           </Badge>
@@ -158,8 +165,8 @@ const TableDesignComponent: React.SFC = () => {
               <Avatar
                 textSize={18}
                 type="text"
-                textBackgroundColor={getRandomColor()}
-                textColor="#fff"
+                textBackgroundColor={getRandomColor().background}
+                textColor={textColor}
                 content={item.team}
               />
             </TableCell>
@@ -220,11 +227,16 @@ const TableDesignTeamAvatarComponent: React.SFC<{
             </TableCell>
             <TableCell>{item.email}</TableCell>
             <TableCell>
-              <Flex style={{ alignItems: 'center', flexWrap: 'wrap' }}>
+              <Flex style={{ alignItems: 'center' }}>
                 {item.teams.map(
                   (team, idx) =>
                     idx < 3 && (
-                      <Team key={team.text} team={team} teamView={teamView} />
+                      <Team
+                        key={team.text}
+                        team={team}
+                        teamView={teamView}
+                        index={idx}
+                      />
                     )
                 )}
                 <MoreText length={item.teams.length} max={3} />
@@ -248,8 +260,8 @@ const TableDesignTeamAvatarComponent: React.SFC<{
                         style={{ marginRight: 8 }}
                         type="text"
                         content={department}
-                        textBackgroundColor={getRandomColor()}
-                        textColor="#fff"
+                        textBackgroundColor={getRandomColor().background}
+                        textColor={textColor}
                       />
                     )
                 )}
@@ -377,7 +389,7 @@ const TableSortingComponent: React.SFC = () => {
     {
       label: '',
       field: 'id',
-      sort: null,
+      sort: null
     },
     {
       label: 'Name',
@@ -421,7 +433,7 @@ const TableSortingComponent: React.SFC = () => {
     setSort(item);
     const dataSorted = orderBy(testTableData, [item.field], [item.sort]);
     setData(dataSorted);
-  }
+  };
 
   return (
     <Table>
@@ -468,8 +480,8 @@ const TableSortingComponent: React.SFC = () => {
               <Avatar
                 textSize={18}
                 type="text"
-                textBackgroundColor={colors[index]}
-                textColor="#fff"
+                textBackgroundColor={getRandomColor().background}
+                textColor={textColor}
                 content={item.team}
               />
             </TableCell>
@@ -503,6 +515,4 @@ storiesOf('Table Design', module)
   .add('Optional fields: relative time', () => (
     <TableDesignTimeComponent timeView="relative" />
   ))
-  .add('Sorting', () => (
-    <TableSortingComponent />
-  ));
+  .add('Sorting', () => <TableSortingComponent />);
