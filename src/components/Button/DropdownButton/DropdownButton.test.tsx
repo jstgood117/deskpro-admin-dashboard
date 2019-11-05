@@ -63,7 +63,7 @@ describe('DropdownButton', () => {
     });
 
     it('renders div tags and svg tag', () => {
-      expect(wrapper(false).find('div').length).toBe(5);
+      expect(wrapper(false).find('div').length).toBe(4);
       expect(wrapper(false).find('svg').length).toBe(2);
     });
   });
@@ -71,7 +71,7 @@ describe('DropdownButton', () => {
     it('when button clicked', () => {
       const button = wrapper(false).find('div');
       button.at(1).simulate('click');
-      expect(wrapper(false).find('div').length).toBe(5);
+      expect(wrapper(false).find('div').length).toBe(4);
     });
   });
 });

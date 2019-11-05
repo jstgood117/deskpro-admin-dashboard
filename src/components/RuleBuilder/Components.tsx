@@ -51,9 +51,7 @@ const MoveButtonGroup = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const MoveButtonStyled = styled(props => <BaseButton {...props} />)<{
-  disabled?: boolean;
-}>`
+const MoveButtonStyled = styled(props => <BaseButton {...props} />)<{disabled?: boolean;}>`
   width: 26px;
   height: 16px;
 `;
@@ -152,10 +150,7 @@ const ArrowButton = styled.div<{ hideBorder?: boolean }>`
       border: none;
     `}
 `;
-const DropdownIconContainer = styled(props => <BaseButton {...props} />)<{
-  active: boolean;
-  disabled: boolean;
-}>`
+const DropdownIconContainer = styled(props => <BaseButton {...props} />)<{active: boolean; disabled: boolean;}>`
   width: 55px;
   height: 22px;
   margin-left: 8px;
