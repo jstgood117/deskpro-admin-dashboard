@@ -1,1 +1,1 @@
-export const equals = (a, b) => a === b;
+export const equals = (a:string, b:string): boolean => a === b;
