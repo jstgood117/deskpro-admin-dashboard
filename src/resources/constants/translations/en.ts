@@ -44,5 +44,11 @@ export const testTranslations = {
 
   'admin_agents.agents.title': 'Agents',
   'admin_agents.agents.description':
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+
+  'admin_common.col.all_emails': 'All emails',
+  'admin_common.col.can_admin': 'Can Admin',
+  'admin_common.col.can_reports': 'Can Reports',
+  'admin_common.col.last_login': 'Last login',
+  'admin_common.col.groups': 'Groups'
 };

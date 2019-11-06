@@ -10,7 +10,8 @@ import generateConfig from './config';
 import { ConfigType } from './config/config';
 
 import App from './pages/App/App';
-import DevApiPrompt from './DevApiPrompt';
+import AppError from './components/AppError';
+
 import { InMemoryCache } from 'apollo-boost';
 
 if ('production' !== process.env.NODE_ENV) {
@@ -21,22 +22,23 @@ const config: ConfigType = generateConfig();
 const { apiUrl } = config;
 
 const AppWrap = () => {
-  if (apiUrl) {
-    appDebug('API URL: ' + apiUrl);
-    const link = createHttpLink({ uri: apiUrl });
-    const client = new ApolloClient({
-      cache: new InMemoryCache(),
-      link,
-    });
 
-    return (
-      <ApolloProvider client={client}>
-        <App />
-      </ApolloProvider>
-    );
-  } else {
-    return <DevApiPrompt />;
+  if (!apiUrl) {
+    return <AppError message={'API_URL missing'} />;
   }
+
+  appDebug('API URL: ' + apiUrl);
+  const link = createHttpLink({ uri: apiUrl });
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link,
+  });
+
+  return (
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
 };
 
 ReactDOM.render(<AppWrap />, document.getElementById('root'));

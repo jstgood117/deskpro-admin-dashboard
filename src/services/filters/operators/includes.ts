@@ -1,0 +1,1 @@
+export const includes = (a:string, b:string) => a.includes(b);

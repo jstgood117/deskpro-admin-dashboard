@@ -2,48 +2,33 @@ import React, { SFC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { IntlProvider } from 'react-intl';
 import { flatMap } from 'lodash';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { logError } from '../../components/Error/ErrorBoundary';
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { gql } from 'apollo-boost';
-import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
 import Sidebar from '../../components/Sidebar';
 import { ISidebarSection } from '../../resources/interfaces';
+import { testTranslations } from '../../resources/constants/translations/en';
 import PageType from '../../components/Page/PageType';
+import { QueryService } from '../../services/query';
 
-export const QUERY_INITIAL = gql`
-	query  {
-		translations: adminInterface_getTranslations(locale: "en") {
-			id
-			message
-		}
+import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
 
-		user: adminInterface_getAdminUser {
-			locale
-		}
-
-		sidebar: adminInterface_getAdminSidebar {
-			sectionName
-			icon
-			navItems {
-				itemName
-				path
-				pageType
-				metadataQuery
-				navItems {
-					itemName
-					path
-					pageType
-					metadataQuery
-				}
-			}
-		}
-}
-`;
+// Crudely add development translations
+const __mergeInDevI18Keys = (currentTranslations:object[], _testTranslations:object) => {
+  return [...Object.keys(testTranslations).map((_key: string) => {
+    const message = _testTranslations.hasOwnProperty(_key) ? _testTranslations[_key.toString()] : '';
+    return {id: _key, message, __typename: 'AdminTranslation'};
+  }), ...currentTranslations];
+};
 
 const App: SFC = () => {
+
   const locale = navigator.language;
-  const { loading, error, data } = useQuery(QUERY_INITIAL, { errorPolicy: 'all', variables: { locale } });
+
+  const queryService = QueryService();
+  const query = queryService.getQueryBasedOnRoute('/');
+
+  const { loading, error, data } = useQuery(query, { errorPolicy: 'all', variables: { locale } });
 
   if (loading) {
     return <p>Loading</p>;
@@ -52,7 +37,9 @@ const App: SFC = () => {
     return <p>Error</p>;
   }
 
-  const renderMessage = (data.translations as any[]).reduce((obj, item) => {
+  const translations = __mergeInDevI18Keys(data.translations, testTranslations);
+
+  const renderMessage = (translations as any[]).reduce((obj, item) => {
     // turns [{id, msg}] array into {id: msg} map
     obj[item.id] = item.message;
     return obj;
@@ -67,7 +54,6 @@ const App: SFC = () => {
     sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
   )
     .filter(s => s.path)
-    /* tslint:disable:jsx-no-lambda */
     .map(s => <Route key={s.path} exact={true} path={s.path} render={() => <PageType {...s} />} />);
 
   return (

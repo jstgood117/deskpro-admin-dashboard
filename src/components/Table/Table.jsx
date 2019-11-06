@@ -54,12 +54,12 @@ export const TableStyled = styled.div`
 const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
 
 export const transformColumnData = (columns, intl) => {
-	let newCols = columns.map( column => {
+	let newCols = columns.map( column => {	
     let newCol = {
 			id: column.title,
-			// Backend payload phrases are missing admin_common - should this be hard-coded like this?
 			Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
-			accessor: column.data[0].path, // TODO what is intended if array length > 1?
+			accessor: column.data[0].path,
+			type: column.field
     }
 		switch (column.title) {
 			case 'selection':
