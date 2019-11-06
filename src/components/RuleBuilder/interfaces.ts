@@ -1,4 +1,4 @@
-export type RuleOperatorType = '=' | '!=' | '';
+export type RuleOperatorType = '' | '=' | '!=' | 'in' | 'not_in';
 export type GroupType = 'all' | 'any';
 export type GroupOperatorType = 'and' | 'or';
 export type PropertyType = 'text' | 'select';
@@ -10,11 +10,16 @@ export interface IRuleBuilderSchema {
   properties: IPropertySchema[];
 }
 
+export interface IRuleOptions {
+  choices: object;
+}
+
 export interface IPropertySchema {
   propertyId: string;
   title: string;
-  oparators: RuleOperatorType[];
+  operators: RuleOperatorType[];
   type: PropertyType;
+  options?: IRuleOptions;
 }
 
 // For Value
@@ -34,5 +39,5 @@ export interface IRuleValue {
   id: string;
   type: ValueType;
   operator: GroupOperatorType;
-  rules: (IRuleItem | IRuleValue)[];
+  rules: Array<IRuleItem | IRuleValue>;
 }

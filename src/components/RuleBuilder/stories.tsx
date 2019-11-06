@@ -15,6 +15,7 @@ import { Flex } from '../Styled';
 import RuleBuilder from './RuleBuilder';
 import { IRuleBuilderSchema, IRuleValue } from './interfaces';
 import { initGroup } from './utils';
+import Button from '../Button';
 
 const Components: React.FC = () => {
   return (
@@ -27,21 +28,21 @@ const Components: React.FC = () => {
 
       {/* Action */}
       <Flex>
-        <ActionButton iconName='group' />
-        <ActionButton iconName='plus' />
-        <ActionButton iconName='undo' />
-        <ActionButton toolip='Move up one level' iconName='move-left' />
-        <ActionButton iconName='trash' />
+        <ActionButton iconName="group" />
+        <ActionButton iconName="plus" />
+        <ActionButton iconName="undo" />
+        <ActionButton toolip="Move up one level" iconName="move-left" />
+        <ActionButton iconName="trash" />
       </Flex>
 
       {/* DropdownIcon */}
-      <DropdownIcon iconName='trash' />
+      <DropdownIcon iconName="trash" />
 
       {/* DropdownText */}
-      <DropdownText text='all' />
+      <DropdownText text="all" />
 
       {/* Select */}
-      <Select placeholder='Select property'/>
+      <Select placeholder="Select property"></Select>
 
       <br />
 
@@ -65,17 +66,42 @@ const Group: React.FC = () => {
       {
         propertyId: 'person.name',
         title: 'admin_people.name',
-        oparators: ['=', '!='],
+        operators: ['=', '!=', 'in', 'not_in'],
         type: 'text'
+      },
+      {
+        propertyId: 'category.id',
+        title: 'admin_people.category',
+        operators: ['=', '!='],
+        type: 'select',
+        options: {
+          choices: {
+            '0': 'foo',
+            '1': 'bar',
+            '2': 'baz'
+          }
+        }
       }
     ]
   };
+
   const onChangeValue = (newValue: IRuleValue) => {
     setValue(newValue);
   };
 
+  const save = () => {
+    console.log(value);
+  }
+
   return (
-    <RuleBuilder value={value} onChange={onChangeValue} schema={ruleSchema} />
+    <Flex style={{ flexDirection: 'column' }}>
+      <RuleBuilder value={value} onChange={onChangeValue} schema={ruleSchema} />
+      <div style={{ marginTop: 20 }}>
+        <Button styleType="primary" onClick={save}>
+          Save
+        </Button>
+      </div>
+    </Flex>
   );
 };
 

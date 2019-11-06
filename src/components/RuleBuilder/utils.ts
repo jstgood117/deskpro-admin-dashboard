@@ -4,8 +4,8 @@ import get from 'lodash/get';
 
 export const generateId = (): string =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = (Math.random() * 16) | 0;
-    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    const r = (Math.random() * 16) | 0,
+      v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 
@@ -91,7 +91,7 @@ export const changeRuleValue = (
 };
 
 export const moveRule = (
-  rules: (IRuleValue | IRuleItem)[],
+  rules: Array<IRuleValue | IRuleItem>,
   oldIndex: number,
   newIndex: number
 ) => {
@@ -102,7 +102,7 @@ export const moveRule = (
     newIndex += rules.length;
   }
   if (newIndex >= rules.length) {
-    let k = newIndex - rules.length + 1;
+    var k = newIndex - rules.length + 1;
     while (k--) {
       rules.push(undefined);
     }
@@ -199,4 +199,17 @@ export const upLevelGroup = (
   );
 
   return changeRuleValue(rootValue, ruleNeedUpdate, 'rules', rules);
+};
+
+
+export const updateRule = (
+  rootValue: IRuleValue,
+  currentValue: IRuleValue,
+  value: IRuleItem,
+  index: number
+) => {
+  const rules = currentValue.rules || [];
+  rules[index] = value;
+
+  return changeRuleValue(rootValue, currentValue, 'rules', rules);
 };
