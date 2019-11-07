@@ -68,7 +68,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   };
 
   const filteredData = runFilters(data, filters);
-console.log(filteredData);
+
   return (
     <Fragment>
       {bChooseSyncTable && (

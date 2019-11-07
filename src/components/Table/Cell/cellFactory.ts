@@ -53,7 +53,6 @@ export const create = (cell:any) => {
 
     case 'TEXT':
     default:
-      console.log(cell.value);
       return cellRenderer({type:'string', props:{values:[cell.value]} });
   }
 };

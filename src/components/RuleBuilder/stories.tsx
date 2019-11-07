@@ -86,13 +86,11 @@ const Group: React.FC = () => {
   };
 
   const onChangeValue = (newValue: IRuleValue[]) => {
-    console.log(newValue);
-
     setValue(newValue);
   };
 
   const save = () => {
-    console.log(value);
+    return false;
   };
 
   return (

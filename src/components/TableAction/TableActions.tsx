@@ -51,7 +51,6 @@ const TableActions: SFC<IProps> = props => {
 
   const onSearchChange = (value:string) => {
     const { onFilterChange } = props;
-
     if(onFilterChange) { onFilterChange('*-CONTAINS', 'CONTAINS', value); }
   };
 

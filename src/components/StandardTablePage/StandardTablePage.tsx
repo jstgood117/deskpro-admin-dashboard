@@ -42,8 +42,6 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
 
   const onFilterChange = (id:string, operatorName: string, compareValue:string) => {
 
-    console.log(compareValue);
-
     setFilters(updateFilter(filters, id, operatorName, compareValue));
   };
 

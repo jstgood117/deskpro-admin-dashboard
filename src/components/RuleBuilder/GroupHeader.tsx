@@ -23,13 +23,13 @@ const Body = styled(FlowLayout)<{ index: number }>`
     props.index === 0
       ? css`
           height: 34px;
-          background: ${props => props.theme.greyLighter};
-          border: 1px solid ${props => props.theme.greyLighter};
+          background: ${_props => _props.theme.greyLighter};
+          border: 1px solid ${_props => _props.theme.greyLighter};
           padding: 0 10px;
           flex: 1;
         `
       : css`
-          background: ${props => props.theme.greyLighter};
+          background: ${_props => _props.theme.greyLighter};
           height: 48px;
           display: inline-flex;
           justify-content: space-between;
@@ -81,7 +81,7 @@ const GroupHeader: React.SFC<IProps> = ({
         <DropdownOption
           key={item.id}
           onClick={() => {
-            onChangeOperator && onChangeOperator(item.id);
+            if(onChangeOperator) { onChangeOperator(item.id); }
           }}
         >
           {item.label}
@@ -133,7 +133,7 @@ const GroupHeader: React.SFC<IProps> = ({
               <DropdownOption
                 key={item.id}
                 onClick={() => {
-                  onDeleteGroup && onDeleteGroup(currentValue, index, item.id);
+                  if(onDeleteGroup) { onDeleteGroup(currentValue, index, item.id); }
                 }}
               >
                 {item.label}

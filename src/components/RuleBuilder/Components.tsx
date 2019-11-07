@@ -38,9 +38,10 @@ const BaseButton = styled(dpstyle.div)<{ disabled?: boolean }>`
   ${props =>
     props.disabled &&
     css`
-      background: ${props => props.theme.greyLighter};
+      background: ${_props => _props.theme.greyLighter};
       path {
-        fill: ${props => props.theme.greyLight};
+
+        fill: ${_props => _props.theme.greyLight};
       }
       pointer-events: none;
     `}
@@ -183,10 +184,10 @@ const DropdownIconContainer = styled(props => <BaseButton {...props} />)<IDropdo
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
       }
-      background: ${props => props.theme.hoverColour};
-      border-color: ${props => props.theme.activeColour};
+      background: ${_props => _props.theme.hoverColour};
+      border-color: ${_props => _props.theme.activeColour};
       path {
-        fill: ${props => props.theme.activeColour};
+        fill: ${_props => _props.theme.activeColour};
       }
     `}
 `;
