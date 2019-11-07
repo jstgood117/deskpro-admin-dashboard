@@ -15,7 +15,7 @@ import {
   updateRule
 } from './utils';
 
-const Container = styled.div`
+const RuleItemContainer = styled.div`
   position: relative;
   .group-item,
   .group-container {
@@ -50,16 +50,9 @@ const GroupBody = styled.div`
   padding-left: 30px;
 `;
 
-export interface IRuleBuilderItemProps {
-  schema: IRuleBuilderSchema;
-  rule: IRuleValue;
-  index: number;
-  onChange?: (value: IRuleValue[]) => void;
-  addGroup?: (rule: IRuleItem, index: number) => void;
-  addRule?: (rule: IRuleItem, index: number) => void;
-}
+const RuleBuilderContainer = styled.div``;
 
-export interface IProps {
+export interface IRuleBuilderItemProps {
   schema: IRuleBuilderSchema;
   value: IRuleValue; // Raw value
   currentValue?: IRuleValue; // Current value to recursive
@@ -68,7 +61,7 @@ export interface IProps {
   onChange?: (value: IRuleValue) => void;
 }
 
-const RuleBuilder: React.FC<IProps> = ({
+const RuleBuilderItem: React.FC<IRuleBuilderItemProps> = ({
   schema,
   value,
   currentValue,
@@ -128,7 +121,7 @@ const RuleBuilder: React.FC<IProps> = ({
   );
 
   return (
-    <Container className={index > -1 ? 'group-container' : ''}>
+    <RuleItemContainer className={index > -1 ? 'group-container' : ''}>
       <GroupHeader
         index={index}
         currentValue={currentValue}
@@ -158,7 +151,7 @@ const RuleBuilder: React.FC<IProps> = ({
               ></PropertyBuilder>
             </div>
           ) : (
-            <RuleBuilder
+            <RuleBuilderItem
               level={ruleIndex}
               key={item.id}
               onChange={onChange}
@@ -170,8 +163,35 @@ const RuleBuilder: React.FC<IProps> = ({
           )
         )}
       </GroupBody>
-    </Container>
+    </RuleItemContainer>
   );
 };
 
+export interface IProps {
+  schema: IRuleBuilderSchema;
+  value: IRuleValue[];
+  onChange: (value: IRuleValue[]) => void;
+}
+
+const RuleBuilder: React.FC<IProps> = ({ schema, value, onChange }) => {
+  const onChangeValue = (ruleValue: IRuleValue) => {
+    const newValue = value.map(item =>
+      item.id === ruleValue.id ? ruleValue : item
+    );
+    onChange(newValue);
+  };
+
+  return (
+    <RuleBuilderContainer>
+      {value.map(item => (
+        <RuleBuilderItem
+          key={item.id}
+          schema={schema}
+          value={item}
+          onChange={onChangeValue}
+        />
+      ))}
+    </RuleBuilderContainer>
+  );
+};
 export default RuleBuilder;
