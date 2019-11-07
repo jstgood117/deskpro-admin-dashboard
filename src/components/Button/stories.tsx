@@ -164,14 +164,4 @@ storiesOf('Button', module)
     >
       <Icon name='plus' />
     </Button>
-  ))
-  .add('button/medium/icon/tertiary', () => (
-    <Button
-      styleType='tertiary'
-      onClick={action('clicked')}
-      size='medium'
-      iconOnly={true}
-    >
-      <Icon name='plus' />
-    </Button>
   ));

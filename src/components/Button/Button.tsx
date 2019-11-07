@@ -52,7 +52,7 @@ const getStyle = (
         static: {
           backgroundColor: theme.textHover,
           color: theme.activeColour,
-          svgColor: theme.static2Colour,
+          svgColor: theme.activeColour,
           size: 28,
           border: `1px solid ${theme.activeColour}`
         },
