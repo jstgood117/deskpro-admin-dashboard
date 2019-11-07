@@ -1,11 +1,11 @@
 import React, { ReactNode, SFC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { isNil } from 'lodash';
 
 import { DeskproAdminTheme } from '../Theme';
 import { dpstyle } from '../Styled';
 import { H6 } from '../Typography';
 import Icon from '../Icon';
-import { isNil } from 'lodash';
 
 type ButtonStyleType = 'primary' | 'secondary' | 'tertiary';
 type ButtonSizeType = 'small' | 'medium';
@@ -54,14 +54,14 @@ const getStyle = (
           color: theme.activeColour,
           svgColor: theme.static2Colour,
           size: 28,
-          border: '1px solid #1C3E55'
+          border: `1px solid ${theme.activeColour}`
         },
         hover: {
           backgroundColor: theme.hoverColour,
           color: theme.activeColour,
           svgColor: theme.activeColour,
           size: 28,
-          border: '1px solid #1C3E55'
+          border: `1px solid ${theme.activeColour}`
         }
       },
       tertiary: {
@@ -70,14 +70,14 @@ const getStyle = (
           color: theme.greyDark,
           svgColor: theme.static2Colour,
           size: 28,
-          border: '1px solid #D3D6D7'
+          border: `1px solid ${theme.greyLight}`
         },
         hover: {
           backgroundColor: theme.hoverColour,
           color: theme.activeColour,
           svgColor: theme.activeColour,
           size: 28,
-          border: '1px solid #1C3E55'
+          border: `1px solid ${theme.activeColour}`
         }
       }
     },
@@ -102,14 +102,14 @@ const getStyle = (
           color: theme.greyDark,
           svgColor: theme.static2Colour,
           size: 34,
-          border: '1px solid #D3D6D7'
+          border: `1px solid ${theme.greyLight}`
         },
         hover: {
           backgroundColor: theme.hoverColour,
           color: theme.activeColour,
           svgColor: theme.activeColour,
           size: 34,
-          border: '1px solid #1C3E55'
+          border: `1px solid ${theme.activeColour}`
         }
       },
       tertiary: {
@@ -118,14 +118,14 @@ const getStyle = (
           color: theme.greyDark,
           svgColor: theme.static2Colour,
           size: 34,
-          border: '1px solid #D3D6D7'
+          border: `1px solid ${theme.greyLight}`
         },
         hover: {
           backgroundColor: theme.hoverColour,
           color: theme.activeColour,
           svgColor: theme.activeColour,
           size: 34,
-          border: '1px solid #1C3E55'
+          border: `1px solid ${theme.activeColour}`
         }
       }
     }
@@ -136,13 +136,16 @@ const getStyle = (
   return styles[size][styleType];
 };
 
-const ClearButton = styled(dpstyle.button)<{ hasClearButton: boolean }>`
+interface IHasButtonType {
+  hasClearButton: boolean;
+}
+const ClearButton = styled(dpstyle.button)<IHasButtonType>`
   outline: none;
   width: 30px;
   align-items: center;
   justify-content: center;
   display: flex;
-  border: 1px solid #1c3e55;
+  border: 1px solid ${props => props.theme.activeColour};
   margin-left: -1px;
   border-top-left-radius: ${props => (props.hasClearButton ? 0 : 4)}px;
   border-bottom-left-radius: ${props => (props.hasClearButton ? 0 : 4)}px;
@@ -150,27 +153,33 @@ const ClearButton = styled(dpstyle.button)<{ hasClearButton: boolean }>`
     fill: ${props => props.theme.activeColour};
   }
 `;
-const ButtonStyled = styled(dpstyle.button)<{styles: IButtonStyle; hasClearButton: boolean; iconOnly: boolean;}>`
+
+interface IButtonStyleProp {
+  styles: IButtonStyle;
+  hasClearButton: boolean;
+  iconOnly: boolean;
+}
+const ButtonStyled = styled(dpstyle.button)<IButtonStyleProp>`
   background-color: ${props => props.styles.static.backgroundColor};
   color: ${props => props.styles.static.color};
   border: ${props => props.styles.static.border};
   height: ${props => props.styles.static.size}px;
-  width:${props => (props.iconOnly && props.styles.static.size)}px;
+  width: ${props => props.iconOnly && props.styles.static.size}px;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   border-top-right-radius: ${props => (props.hasClearButton ? 0 : 4)}px;
   border-bottom-right-radius: ${props => (props.hasClearButton ? 0 : 4)}px;
-  padding: ${props => (props.iconOnly && 0)};
+  padding: ${props => props.iconOnly && 0};
   path {
     fill: ${props => props.styles.static.svgColor};
   }
   svg:nth-child(1) {
-    padding-right: ${props => (!props.iconOnly && 8)}px;
+    padding-right: ${props => !props.iconOnly && 8}px;
     margin: auto;
   }
   svg:nth-child(2) {
-    padding-left: ${props => (!props.iconOnly && 8)}px;
+    padding-left: ${props => !props.iconOnly && 8}px;
   }
   &:hover {
     background-color: ${props => props.styles.hover.backgroundColor};
@@ -181,11 +190,12 @@ const ButtonStyled = styled(dpstyle.button)<{styles: IButtonStyle; hasClearButto
     }
   }
 `;
-const DropdownContent = styled.div`
+
+const DropdownContent = styled(dpstyle.div)`
   display: flex;
   flex-direction: column;
   position: absolute;
-  background: #ffffff;
+  background: ${props => props.theme.white};
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -193,7 +203,8 @@ const DropdownContent = styled.div`
   left: -1px;
   width: 100%;
 `;
-const DropdownContentPanel = styled.div`
+
+const DropdownContentPanel = styled(dpstyle.div)`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -201,22 +212,23 @@ const DropdownContentPanel = styled.div`
   left: 0;
   z-index: 0;
 `;
+
 const DropdownContentLink = styled(H6)`
   float: none;
   padding: 7px 15px;
   height: 31px;
   text-decoration: none;
-  display: block;
   text-align: left;
   display: flex;
   align-items: center;
   cursor: pointer;
   :hover {
-    background-color: #e8ebee;
+    background-color: ${props => props.theme.textHover};
   }
   z-index: 1;
 `;
-const ButtonWrapper = styled.div<{ hasClearButton: boolean }>`
+
+const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
   display: inline-flex;
   position: relative;
   .selected {
