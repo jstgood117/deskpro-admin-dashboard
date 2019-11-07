@@ -22,7 +22,6 @@ const HeaderStyled = styled(dpstyle.div)<IHeader>`
   & button {
     outline: none;
     cursor: pointer;
-    border: none;
   }
 `;
 
@@ -35,7 +34,6 @@ const HeaderDescription = styled(dpstyle.p)`
 
 const ViewModeContainer = styled(dpstyle.div)`
   height: 34px;
-  background-color: #fff;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   display: flex;
@@ -211,7 +209,7 @@ const Header: SFC<IProps> = ({
             <NewButton onClick={onNewClick}>
               <Icon name='plus' />
               <span>
-                <FormattedMessage id='admin_common.btn.new' />
+                <FormattedMessage id='admin.page.new' />
               </span>
             </NewButton>
           )}

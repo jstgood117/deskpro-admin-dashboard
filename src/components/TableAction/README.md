@@ -1,4 +1,4 @@
-# DropdownButton Component Contract
+# TableAction Component Contract
 
 - it has Props of:
   showSearch: boolean - Option to show or hide Search box;

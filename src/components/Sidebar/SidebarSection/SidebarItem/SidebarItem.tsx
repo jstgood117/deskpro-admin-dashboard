@@ -23,6 +23,7 @@ const SidebarItemStyled = styled(NavLink)<IStyleProps>`
 `;
 
 const ItemName = styled(TextLabel)`
+	line-height: 100%;
 	${SidebarItemStyled}.active & {
 		color: ${props => props.theme.brandPrimary};
 		font-weight: bold;

@@ -2,9 +2,9 @@ import React, { SFC, useState } from 'react';
 import styled from 'styled-components';
 
 import SearchBox from '../SearchBox';
-import DropdownButton from '../Button/DropdownButton/DropdownButton';
 import Button from '../Button';
 import { action } from '@storybook/addon-actions';
+import Icon from '../Icon';
 
 export interface IProps {}
 
@@ -38,6 +38,9 @@ const TableActions: SFC<IProps> = props => {
   const [Sort, setSortValue] = useState('');
   const [View, setViewValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [openedView, openView] = useState(false);
+  const [openedSort, clickButtonSort] = useState(false);
+  const [openedGroup, clickButtonGroup] = useState(false);
   return (
     <StyledTableAction>
       <FlexStyled style={{ flex: 5, alignItems: 'center' }}>
@@ -55,8 +58,8 @@ const TableActions: SFC<IProps> = props => {
               styleType='secondary'
               onClick={action('clicked')}
               size='medium'
-              icon='filter'
             >
+              <Icon name='filter' />
               Filter
             </Button>
           </FlexStyled>
@@ -65,38 +68,59 @@ const TableActions: SFC<IProps> = props => {
       <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
         {props.viewMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton
-              label={View ? (View.link as any) : 'View'}
-              iconName='view'
+            <Button
+              styleType='secondary'
+              onClick={() => {
+                openView(!openedView);
+              }}
               size='medium'
+              opened={openedView}
               items={ViewItems}
-              onSelect={val => setViewValue(val)}
-              value={View}
-            />
+              dropdownValue={View}
+              onSelect={(val: any) => setViewValue(val)}
+            >
+              <Icon name='view' />
+              {View ? View.link : 'View'}
+              <Icon name='downVector' />
+            </Button>
           </FlexStyled>
         ) : null}
         {props.groupMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton
-              iconName='group'
+            <Button
+              styleType='secondary'
+              onClick={() => {
+                clickButtonGroup(!openedGroup);
+              }}
               size='medium'
+              opened={openedGroup}
               items={GroupItems}
-              label={Group ? (Group.link as any) : 'Group'}
-              onSelect={val => setGroupValue(val)}
-              value={Group}
-            />
+              dropdownValue={Group}
+              onSelect={(val: any) => setGroupValue(val)}
+            >
+              <Icon name='group' />
+              {Group ? Group.link : 'Group'}
+              <Icon name='downVector' />
+            </Button>
           </FlexStyled>
         ) : null}
         {props.sortMenu ? (
           <FlexStyled style={{ paddingRight: 10 }}>
-            <DropdownButton
-              label={Sort ? (Sort.link as any) : 'Sort'}
-              iconName='sort'
+            <Button
+              styleType='secondary'
+              onClick={() => {
+                clickButtonSort(!openedSort);
+              }}
               size='medium'
+              opened={openedSort}
               items={SortItems}
-              onSelect={val => setSortValue(val)}
-              value={Sort}
-            />
+              dropdownValue={Sort}
+              onSelect={(val: any) => setSortValue(val)}
+            >
+              <Icon name='sort' />
+              {Sort ? Sort.link : 'Sort'}
+              <Icon name='downVector' />
+            </Button>
           </FlexStyled>
         ) : null}
       </FlexStyled>

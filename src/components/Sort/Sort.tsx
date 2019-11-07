@@ -1,12 +1,13 @@
-import React, { SFC, CSSProperties } from 'react';
+import React, { SFC, CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 
 import Icon from '../Icon';
 import { FlowLayout } from '../Styled';
-import DropdownButton from '../Button/DropdownButton';
 import { ISortItem } from '../../resources/interfaces';
+import Button from '../Button';
 
 const SortItem = styled(FlowLayout)`
+  cursor: pointer;
   justify-content: space-between;
   padding: 5px 15px;
   height: 31px;
@@ -64,6 +65,7 @@ export interface IProps {
   onSelectSort: (item: ISortItem) => void;
 }
 const Sort: SFC<IProps> = ({ items, sortSelected = null, onSelectSort }) => {
+  const [opened, open] = useState(false);
   const selectSort = (item: ISortItem) => {
     const sortItem =
       sortSelected && sortSelected.field === item.field ? sortSelected : item;
@@ -74,15 +76,13 @@ const Sort: SFC<IProps> = ({ items, sortSelected = null, onSelectSort }) => {
       sort
     });
   };
-
   return (
-    <DropdownButton
-      label='Sort'
-      iconName='sort'
+    <Button
+      styleType='tertiary'
       items={items}
-      dropdownContentStyle={{
-        marginTop: 34,
-        padding: '5px 0'
+      opened={opened}
+      onClick={() => {
+        open(!opened);
       }}
       renderItem={(item: ISortItem, index: number) => {
         const selected = sortSelected && sortSelected.field === item.field;
@@ -94,7 +94,11 @@ const Sort: SFC<IProps> = ({ items, sortSelected = null, onSelectSort }) => {
           </SortItem>
         );
       }}
-    />
+    >
+      <Icon name='sort' />
+      Sort
+      <Icon name='downVector' />
+    </Button>
   );
 };
 

@@ -36,6 +36,7 @@ const SearchBoxWrapper = styled.div`
   background: ${props => props.theme.greyLightest};
   position: relative;
   border-radius: 4px;
+  border: 1px solid ${props => props.theme.greyLight};
   padding: 0 34px 0 15px;
   display: flex;
   align-items: center;
