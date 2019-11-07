@@ -8,11 +8,12 @@ const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 
 interface IDropdownBtn {
   icon: string;
-  label: string;
+  label?: string;
   showClearButton?: boolean;
   items: IItemProps[];
   size?: 'small' | 'medium';
   styleType: 'primary' | 'secondary' | 'tertiary';
+  iconOnly?: boolean;
 }
 const DropdownButtonComponent: React.FC<IDropdownBtn> = props => {
   const [opened, clickButton] = useState(false);
@@ -31,9 +32,10 @@ const DropdownButtonComponent: React.FC<IDropdownBtn> = props => {
       dropdownValue={dropdownValue}
       onSelect={(val: any) => setDropdownValue(val)}
       onClear={() => setDropdownValue('')}
+      iconOnly={props.iconOnly}
     >
-      <Icon name={props.icon} />
-      {dropdownValue ? dropdownValue.link : props.label}
+      {!props.iconOnly && <Icon name={props.icon} />}
+      {!props.iconOnly && (dropdownValue ? dropdownValue.link : props.label)}
       <Icon name='downVector' />
     </Button>
   );
@@ -155,6 +157,7 @@ storiesOf('Button', module)
       <Icon name='plus' />
     </Button>
   ))
+
   .add('button/medium/icon/secondary', () => (
     <Button
       styleType='secondary'
@@ -164,4 +167,24 @@ storiesOf('Button', module)
     >
       <Icon name='plus' />
     </Button>
+  ))
+  .add('button/medium/icon/primary/dropdownOnly', () => (
+    <DropdownButtonComponent
+      icon='filter'
+      label='Item'
+      items={SortItems}
+      size='medium'
+      styleType='primary'
+      iconOnly={true}
+    />
+  ))
+  .add('button/medium/icon/secondary/dropdownOnly', () => (
+    <DropdownButtonComponent
+      icon='filter'
+      label='Item'
+      items={SortItems}
+      size='medium'
+      styleType='secondary'
+      iconOnly={true}
+    />
   ));
