@@ -59,7 +59,7 @@ const Components: React.FC = () => {
 };
 
 const Group: React.FC = () => {
-  const [value, setValue] = useState<IRuleValue>(initGroup());
+  const [value, setValue] = useState<IRuleValue[]>([initGroup()]);
   const ruleSchema: IRuleBuilderSchema = {
     groupTitle: 'admin_tickets.some_group_title',
     properties: [
@@ -85,13 +85,15 @@ const Group: React.FC = () => {
     ]
   };
 
-  const onChangeValue = (newValue: IRuleValue) => {
+  const onChangeValue = (newValue: IRuleValue[]) => {
+    console.log(newValue);
+
     setValue(newValue);
   };
 
   const save = () => {
     console.log(value);
-  }
+  };
 
   return (
     <Flex style={{ flexDirection: 'column' }}>
