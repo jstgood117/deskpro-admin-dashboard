@@ -133,10 +133,10 @@ const RuleBuilderItem: React.FC<IRuleBuilderItemProps> = ({
         onDeleteGroup={onDeleteGroup}
         onUpLevel={onUpLevel}
       />
-      <GroupBody className="group-items">
+      <GroupBody className='group-items'>
         {currentValue.rules.map((item, ruleIndex) =>
           item.type === 'rule' ? (
-            <div className="group-item" key={item.id}>
+            <div className='group-item' key={item.id}>
               <PropertyBuilder
                 schema={schema}
                 addGroup={addGroup}
@@ -148,7 +148,7 @@ const RuleBuilderItem: React.FC<IRuleBuilderItemProps> = ({
                 onMoveDown={onMoveDownProperty}
                 onDelete={onDeleteProperty}
                 updateRule={onUpdateRule}
-              ></PropertyBuilder>
+              />
             </div>
           ) : (
             <RuleBuilderItem

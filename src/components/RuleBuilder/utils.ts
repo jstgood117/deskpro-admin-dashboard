@@ -91,7 +91,7 @@ export const changeRuleValue = (
 };
 
 export const moveRule = (
-  rules: Array<IRuleValue | IRuleItem>,
+  rules: (IRuleValue | IRuleItem)[],
   oldIndex: number,
   newIndex: number
 ) => {
@@ -102,7 +102,7 @@ export const moveRule = (
     newIndex += rules.length;
   }
   if (newIndex >= rules.length) {
-    var k = newIndex - rules.length + 1;
+    let k = newIndex - rules.length + 1;
     while (k--) {
       rules.push(undefined);
     }

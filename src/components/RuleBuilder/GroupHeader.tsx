@@ -91,7 +91,7 @@ const GroupHeader: React.SFC<IProps> = ({
   );
 
   return !parentValue ? (
-    <HeaderContainer className="group-header">
+    <HeaderContainer className='group-header'>
       <Body index={0}>
         <Text>Show objects that meet</Text>
         {DropdownOperator}
@@ -101,7 +101,7 @@ const GroupHeader: React.SFC<IProps> = ({
     </HeaderContainer>
   ) : (
     <HeaderContainer
-      className="group-header"
+      className='group-header'
       id={'group_header_' + currentValue.id + ''}
     >
       <GroupMoveButtons
@@ -121,12 +121,12 @@ const GroupHeader: React.SFC<IProps> = ({
           {!isRoot && !isOnly && (
             <ActionButton
               onClick={() => onUpLevel(currentValue, index)}
-              toolip="Move up one level"
-              iconName="move-left"
+              toolip='Move up one level'
+              iconName='move-left'
             />
           )}
           <DropdownIcon
-            iconName="trash"
+            iconName='trash'
             disabled={isOnly}
             items={DeleteGroupOptions}
             renderItem={item => (

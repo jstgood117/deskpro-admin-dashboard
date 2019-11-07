@@ -1,12 +1,15 @@
 import React, { SFC, ReactElement, useState } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
+import { renderToStaticMarkup } from 'react-dom/server';
+
+import { FilterType } from '../../services/filters/types';
 
 import { DeskproAdminTheme } from '../Theme';
-import Icon from '../Icon';
-import { renderToStaticMarkup } from 'react-dom/server';
 import TableActions from '../TableAction';
+import Icon from '../Icon';
 import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
+
 
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
@@ -131,6 +134,8 @@ export interface IProps {
   tableActions?: boolean;
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
+  filters?:FilterType[];
+  onFilterChange?:(id:string, operatorName:string, value:string) => void;
 }
 
 const Header: SFC<IProps> = ({
@@ -144,7 +149,9 @@ const Header: SFC<IProps> = ({
   showNewButton,
   onChangeView,
   onNewClick,
-  tableActions
+  tableActions,
+  filters,
+  onFilterChange
 }) => {
   const [state, setState] = useState(defaulViewMode);
 
@@ -222,6 +229,8 @@ const Header: SFC<IProps> = ({
               sortMenu={true}
               groupMenu={true}
               viewMenu={true}
+              filters={filters}
+              onFilterChange={onFilterChange}
             />
           </TableActionStyled>
         )}

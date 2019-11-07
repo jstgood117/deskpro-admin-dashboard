@@ -1,8 +1,8 @@
-import { filterFactory, FilterType } from './FilterFactory';
+import { filterFactory } from './FilterFactory';
+import { FilterType } from './types';
 
 export const setupFilters = (columnName:string) => {
-  // Adds search
-  return addFilter([], columnName, 'contains', '');
+  return addFilter([], columnName, 'CONTAINS', '');
 };
 
 export const runFilter = (data:object[], filter: FilterType) => {
@@ -18,18 +18,37 @@ export const runFilter = (data:object[], filter: FilterType) => {
   });
 };
 
+export const runFilterOnAllColumns = (data:object[], filter: FilterType) => {
+
+  const { operator, value } = filter;
+
+  if(!data) {
+    return data;
+  }
+
+  // @TODO: (O)n^2
+  return data.filter((_row:any) => (
+    Object.keys(_row).some((_colKey:any) => (
+      typeof _row[_colKey] === 'string'
+      ? operator(_row[_colKey], value)
+      : false
+    ))
+  ));
+};
+
 export const runFilters = (data:object[], filters: FilterType[]) => {
 
   if(!filters) {
     return data;
   }
 
-  let filtereData = data;
-  filters.map((_filter: FilterType) => {
-    filtereData = runFilter(filtereData, _filter);
+  let filteredData = data;
+  filters.forEach((_filter: FilterType) => {
+    const { columnName } = _filter;
+    filteredData = (columnName !== '*' ? runFilter(filteredData, _filter) : runFilterOnAllColumns(filteredData, _filter));
   });
 
-  return filtereData;
+  return filteredData;
 };
 
 export const addFilter = (
@@ -47,6 +66,12 @@ export const addFilter = (
   ];
 };
 
-export const removeFilter = (id: string, filters: FilterType[]): FilterType[] => {
+export const removeFilter = (filters: FilterType[], id: string): FilterType[] => {
   return filters.filter(_filter => _filter.id !== id);
+};
+
+export const updateFilter = (filters: FilterType[], id: string, operatorName:string, compareValue:string): FilterType[] => {
+  const filtersRemoved = removeFilter(filters, id);
+  const filterAdded = addFilter(filtersRemoved, id.split('-')[0], operatorName, compareValue);
+  return filterAdded;
 };

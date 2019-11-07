@@ -97,7 +97,7 @@ const PropertyBuilder: React.SFC<IProps> = ({
   };
 
   return (
-    <Container className="rule-property">
+    <Container className='rule-property'>
       <BodyContainer>
         <GroupMoveButtons
           disabledMoveDown={isLast || isOnly}
@@ -108,7 +108,7 @@ const PropertyBuilder: React.SFC<IProps> = ({
         />
         <Content>
           <Select
-            position="left"
+            position='left'
             value={get(rule, 'rule.propertyId')}
             placeholder={get(rule, 'rule.propertyId') || 'Select property'}
             items={properties}
@@ -122,7 +122,7 @@ const PropertyBuilder: React.SFC<IProps> = ({
             )}
           />
           <Select
-            position="center"
+            position='center'
             items={operators}
             value={get(rule, 'rule.operator')}
             placeholder={get(rule, 'rule.operator')}
@@ -141,13 +141,13 @@ const PropertyBuilder: React.SFC<IProps> = ({
         </Content>
       </BodyContainer>
       <Flex>
-        <ActionButton onClick={() => addGroup(rule, index)} iconName="group" />
+        <ActionButton onClick={() => addGroup(rule, index)} iconName='group' />
         <ActionButton
           onClick={() => onDelete(rule, index)}
           disabled={isOnly}
-          iconName="trash"
+          iconName='trash'
         />
-        <ActionButton onClick={() => addRule(rule, index)} iconName="plus" />
+        <ActionButton onClick={() => addRule(rule, index)} iconName='plus' />
       </Flex>
     </Container>
   );

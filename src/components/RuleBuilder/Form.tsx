@@ -41,7 +41,7 @@ const CustomFieldTemplate = (props: any) => {
 const InputWidget = (props: any) => {
   return (
     <Input
-      type="text"
+      type='text'
       style={{ height: 24 }}
       containerStyle={{ height: 26 }}
       value={props.value || ''}
@@ -60,7 +60,7 @@ const SelectWidget = (props: any) => {
     <SelectContainer>
       <Select
         style={{ border: 0 }}
-        position="right"
+        position='right'
         items={options}
         value={valueOption.label || ''}
         placeholder={valueOption.label || ''}
@@ -128,7 +128,7 @@ const FormBuilder: React.FC<IProps> = ({ property, value, onChangeValue }) => {
           items: {
             type: 'string',
             enum: enumOptions,
-            enumNames: enumNames
+            enumNames
           },
           uniqueItems: true
         });

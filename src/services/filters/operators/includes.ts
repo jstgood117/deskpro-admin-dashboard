@@ -1,1 +1,1 @@
-export const includes = (a:string, b:string) => a.includes(b);
+export const includes = (a:string, b:string) => a.toLowerCase().includes(b.toLowerCase());

@@ -1,7 +1,7 @@
 import {
   runFilters
 } from '../FilterService';
-import { FilterType } from '../FilterFactory';
+import { FilterType } from '../types';
 
 const data = [{
   FirstName:'John',
@@ -18,12 +18,12 @@ describe('Run filters', () => {
     const mockOperator2 = jest.fn(() => true);
 
     const filters = [{
-      id:'FirstName-equals',
+      id:'FirstName-EQUAL',
       columnName:'FirstName',
       operator:mockOperator1,
       value:'John'
     }, {
-      id:'LastName-equals',
+      id:'LastName-EQUAL',
       columnName:'LastName',
       operator:mockOperator2,
       value:'Doe'

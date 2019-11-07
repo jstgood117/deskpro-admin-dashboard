@@ -70,14 +70,14 @@ const MoveButtons: React.SFC<IMoveButtonProps> = ({
   return (
     <MoveButtonGroup>
       <MoveButtonStyled disabled={disabledMoveUp} onClick={onMoveUp}>
-        <Icon name="move-up" />
+        <Icon name='move-up' />
       </MoveButtonStyled>
       <MoveButtonStyled
         disabled={disabledMoveDown}
         style={{ marginTop: 4 }}
         onClick={onMoveDown}
       >
-        <Icon name="move-down" />
+        <Icon name='move-down' />
       </MoveButtonStyled>
     </MoveButtonGroup>
   );
@@ -112,8 +112,8 @@ const ActionButton: React.SFC<IActionButtonProps> = ({
 }) => {
   return (
     <Tooltip
-      placement="bottom"
-      styleType="dark"
+      placement='bottom'
+      styleType='dark'
       enabled={!!toolip && !disabled}
       content={toolip}
     >
@@ -238,7 +238,7 @@ const DropdownIcon: React.SFC<IDropdownIconProps> = ({
         <Icon name={iconName} />
       </DropdownIconStyled>
       <ArrowButton>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </ArrowButton>
       {active && (
         <DropdownContent>
@@ -283,7 +283,7 @@ const DropdownText: React.SFC<IDropdownTextProps> = ({
     >
       <DropdownTextStyled>{text}</DropdownTextStyled>
       <ArrowButton hideBorder={true}>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </ArrowButton>
       {active && (
         <DropdownContent>
@@ -370,7 +370,7 @@ const Select: React.SFC<ISelectProps> = ({
     >
       <SelectTextStyled active={!!value}>{placeholder}</SelectTextStyled>
       <SelectArrowButton hideBorder={true}>
-        <Icon name="downVector" />
+        <Icon name='downVector' />
       </SelectArrowButton>
       {active && (
         <DropdownContent>

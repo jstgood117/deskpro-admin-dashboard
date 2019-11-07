@@ -3,6 +3,8 @@ import { withApollo } from 'react-apollo';
 import { gql, ApolloClient } from 'apollo-boost';
 import { injectIntl } from 'react-intl';
 
+import { runFilters } from '../../services/filters';
+import { FilterType } from '../../services/filters/types';
 import { ITableSetup } from '../../resources/interfaces';
 
 import { logError } from '../Error/ErrorBoundary';
@@ -20,12 +22,13 @@ interface IProps {
   client: ApolloClient<any>;
   dataQuery: string;
   tableDef: ITableSetup;
+  filters?: FilterType[];
 }
 
 // TODO how does memory vs async choice come through in the agents_getAgentsPage query?
 const bChooseSyncTable = true;
 
-const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef}) => {
+const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef, filters}) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [pageCount, setPageCount] = useState(0);
@@ -57,18 +60,20 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   if (bChooseSyncTable) getData();
 
   const handleSelectAllChange = (event:EventType) => {
-    //onSelectAllChange(event, setChecked);
+    // onSelectAllChange(event, setChecked);
   };
 
   const handleSelectChange = (event:EventType) => {
     onSelectChange(event, checked, setChecked);
   };
 
+  const filteredData = runFilters(data, filters);
+console.log(filteredData);
   return (
     <Fragment>
       {bChooseSyncTable && (
         <TableSync
-          data={data}
+          data={filteredData}
           columns={transformColumnData([...tableDef.columns], intl)}
           options={options}
           checked={checked}
@@ -78,7 +83,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
       )}
       {!bChooseSyncTable && (
         <TableAsync
-          data={data}
+          data={filteredData}
           columns={tableDef.columns}
           fetchData={fetchData}
           loading={loading}

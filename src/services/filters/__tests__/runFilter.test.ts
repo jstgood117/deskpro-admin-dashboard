@@ -1,7 +1,7 @@
 import {
   runFilter
 } from '../FilterService';
-import { FilterType } from '../FilterFactory';
+import { FilterType } from '../types';
 
 const includesOperator = jest.fn((a:string, b:string) => a.includes(b));
 
@@ -16,7 +16,7 @@ const data = [{
 describe('Run filter', () => {
   test('Runs filter and calls operator on the data', () => {
     const filter = {
-      id:'FirstName-equals',
+      id:'FirstName-EQUAL',
       columnName:'FirstName',
       operator:includesOperator,
       value:'John'

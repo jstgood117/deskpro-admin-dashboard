@@ -1,8 +1,10 @@
-import React, { SFC, Fragment, useState } from 'react';
+import React, { SFC, Fragment, useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import { DocumentNode } from 'graphql';
 
 import { IViewData } from '../../resources/interfaces';
+import { setupFilters, updateFilter } from '../../services/filters';
+import { FilterType } from '../../services/filters/types';
 
 import Loading from '../Loading';
 import Error from '../Error';
@@ -24,8 +26,12 @@ const BodyMargin = styled(dpstyle.div)`
 
 const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   const [tabIndex, setTabState] = useState(0);
-  const [searchText] = useState('');
+  const [filters, setFilters] = useState<FilterType[]>([]);
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all' });
+
+  useEffect(() => {
+    setFilters(setupFilters('*'));
+  }, []);
 
   if (loading) {
     return <Loading />;
@@ -33,8 +39,15 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   if (error) {
     return <Error apolloError={error} />;
   }
-  if (data && data[queryName]) {
 
+  const onFilterChange = (id:string, operatorName: string, compareValue:string) => {
+
+    console.log(compareValue);
+
+    setFilters(updateFilter(filters, id, operatorName, compareValue));
+  };
+
+  if (data && data[queryName]) {
     const {title, description, headerLinks, views} = data[queryName];
     return (
       <Fragment>
@@ -49,6 +62,8 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
           showHelpButton={true}
           onNewClick={() => null}
           tableActions={true}
+          filters={filters}
+          onFilterChange={onFilterChange}
         />
         <BodyMargin>
           {views && views.length > 1 && (
@@ -58,7 +73,7 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
               handleClick={index => { setTabState(index); }}
             />
           )}
-          {views && views[tabIndex] && <Table {...views[tabIndex]} search={searchText} />}
+          {views && views[tabIndex] && <Table {...views[tabIndex]} filters={filters} />}
         </BodyMargin>
       </Fragment>
     );

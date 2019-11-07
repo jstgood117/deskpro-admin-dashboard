@@ -46,15 +46,15 @@ export const create = (cell:any) => {
 
     case 'AGENT_GROUP_LIST':
       const values = [cell.value.map((_item:any) => _item.title)];
-      return cellRenderer({type:'string', props:{values:values} });
+      return cellRenderer({type:'string', props:{values} });
 
     case 'TEXT_COMMA_SEP':
       return cellRenderer({type:'string', props:{values:cell.value} });
 
     case 'TEXT':
     default:
-
-      return cellRenderer({type:'string', props:{name:[cell.value]} });
+      console.log(cell.value);
+      return cellRenderer({type:'string', props:{values:[cell.value]} });
   }
 };
 

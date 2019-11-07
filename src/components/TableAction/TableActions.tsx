@@ -1,10 +1,15 @@
-import React, { SFC, useState } from 'react';
+import React, { SFC, useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 import styled from 'styled-components';
+
+// import { testFilterMeta, operatorOptions, ValueType, OperatorTypes } from '../../resources/constants/mock/testFilterMeta';
+import { FilterType } from '../../services/filters/types';
 
 import SearchBox from '../SearchBox';
 import Button from '../Button';
-import { action } from '@storybook/addon-actions';
 import Icon from '../Icon';
+
+import { action } from '@storybook/addon-actions';
 
 export interface IProps {}
 
@@ -31,6 +36,8 @@ export interface IProps {
   groupMenu: boolean;
   viewMenu: boolean;
   onSearchChange?: (e: any) => void;
+  filters?:FilterType[];
+  onFilterChange?:(id:string, operatorName:string, value:string) => void;
 }
 
 const TableActions: SFC<IProps> = props => {
@@ -41,6 +48,30 @@ const TableActions: SFC<IProps> = props => {
   const [openedView, openView] = useState(false);
   const [openedSort, clickButtonSort] = useState(false);
   const [openedGroup, clickButtonGroup] = useState(false);
+
+  const onSearchChange = (value:string) => {
+    const { onFilterChange } = props;
+
+    if(onFilterChange) { onFilterChange('*-CONTAINS', 'CONTAINS', value); }
+  };
+
+  const debounceOnSearchChange = useCallback(debounce(onSearchChange, 300), []);
+
+  const handleSearchChange = (event:React.SyntheticEvent<HTMLInputElement>) => {
+
+    const { value } = event.currentTarget;
+    setSearchValue(value);
+
+    debounceOnSearchChange(value);
+  };
+
+  // console.log(props.onFilterChange); // Call this with id:string, operatorName:string, value:string
+  // console.log(testFilterMeta); // This drives what can be rendered out for each filter
+  // console.log(props.filters); // Current filters; Don't render any filters that start `id` with '*-'
+  // console.log(operatorOptions); // All the Operator Options, dropdown ready!
+  // console.log(OperatorTypes); // Types of Operators
+  // console.log(ValueType); // Value types
+
   return (
     <StyledTableAction>
       <FlexStyled style={{ flex: 5, alignItems: 'center' }}>
@@ -48,7 +79,7 @@ const TableActions: SFC<IProps> = props => {
           <SearchBox
             placeholder='Search Box'
             value={searchValue}
-            onChange={event => setSearchValue(event.target.value)}
+            onChange={handleSearchChange}
             onClear={() => setSearchValue('')}
           />
         </FlexStyled>
