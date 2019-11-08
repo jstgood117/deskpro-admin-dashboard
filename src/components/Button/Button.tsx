@@ -246,6 +246,7 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
 `;
 
 export interface IItemProps {
+  title?: string;
   link: string;
 }
 
@@ -262,6 +263,7 @@ export type IProps = {
   onSelect?: (value: IItemProps) => void;
   dropdownValue?: any;
   iconOnly?: boolean;
+  className?: string;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 const Button: SFC<IProps> = ({
@@ -276,13 +278,17 @@ const Button: SFC<IProps> = ({
   onSelect,
   children,
   dropdownValue,
-  iconOnly
+  iconOnly,
+  className
 }) => {
   const styles = getStyle(styleType, size, DeskproAdminTheme);
   const selected = !isNil(dropdownValue) && dropdownValue !== '';
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-      <ButtonWrapper hasClearButton={showClearButton && selected}>
+      <ButtonWrapper
+        hasClearButton={showClearButton && selected}
+        className={`${className}`}
+      >
         <ButtonStyled
           styles={styles}
           className={`${selected ? 'selected' : ''}`}
@@ -293,7 +299,7 @@ const Button: SFC<IProps> = ({
           {children}
         </ButtonStyled>
         {items && items.length > 0 && opened && (
-          <DropdownContent onClick={onClick}>
+          <DropdownContent onClick={onClick} className='dropdownContent'>
             {items.map((item: IItemProps, index: number) => {
               return renderItem ? (
                 renderItem(item, index)
@@ -302,7 +308,7 @@ const Button: SFC<IProps> = ({
                   key={index}
                   onClick={() => onSelect && onSelect(item)}
                 >
-                  {item.link}
+                  {item.title ? item.title : item.link}
                 </DropdownContentLink>
               );
             })}

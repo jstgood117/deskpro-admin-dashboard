@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+
 import Button, { IItemProps } from './Button';
 import Icon from '../Icon';
+import WithDropdownButton from './WithDropdownButton';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 
 interface IDropdownBtn {
-  icon: string;
+  icon?: string;
   label?: string;
   showClearButton?: boolean;
   items: IItemProps[];
@@ -180,11 +182,31 @@ storiesOf('Button', module)
   ))
   .add('button/medium/icon/secondary/dropdownOnly', () => (
     <DropdownButtonComponent
-      icon='filter'
       label='Item'
       items={SortItems}
       size='medium'
       styleType='secondary'
       iconOnly={true}
+    />
+  ))
+  .add('button/medium/primary/withDropdownButton', () => (
+    <div style={{ position: 'absolute', right: 10 }}>
+      <WithDropdownButton
+        icon='plus'
+        styleType='primary'
+        handleSelect={action('clicked')}
+        size='medium'
+      >
+        Add
+      </WithDropdownButton>
+    </div>
+  ))
+  .add('button/medium/secondary/withDropdownButton', () => (
+    <WithDropdownButton
+      icon='trash'
+      styleType='secondary'
+      handleSelect={action('clicked')}
+      contentPosistion='left'
+      size='small'
     />
   ));
