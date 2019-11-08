@@ -1,29 +1,49 @@
-import {SyntheticEvent} from 'react';
+import _ from 'lodash';
 
 type setCheckedType = React.Dispatch<React.SetStateAction<object>>;
 
-export const onSelectChange = (
-  event:SyntheticEvent<HTMLInputElement>,
+export const onCheckboxChange = (
+  value:string,
   checked:object,
   setChecked:setCheckedType
 ) => {
 
-  // tslint:disable-next-line
-  
-  const id = event.currentTarget.value;
   const keys = Object.keys(checked);
 
-  if(keys.includes(id)) {
+  if(keys.includes(value)) {
 
     const newIds = keys
-      .filter(_id => _id !== id)
+      .filter(_id => _id !== value)
       .reduce((_obj, _id) => Object.assign(_obj, {[_id]: true}), {});
     setChecked(newIds);
   } else {
 
     setChecked({
       ...checked,
-      [id]:true
+      [value]:true
     });
+  }
+};
+
+export const onSelectAllChange = (
+  isChecked: boolean,
+  setChecked: setCheckedType,
+  currentPage: number,
+  pageSize: number,
+  data: object[]
+) => {
+
+  if(!isChecked) {
+    setChecked({});
+  } else {
+
+    const startPos = Math.max(((currentPage*pageSize)), 0);
+    const endPos = Math.min(startPos+pageSize, data.length);
+
+    const showingRows = _.slice(data, startPos, endPos);
+    const ids = showingRows.map((_row:any) => ({
+      [_row.id]:true
+    }));
+    setChecked(Object.assign({}, ...ids));
   }
 };

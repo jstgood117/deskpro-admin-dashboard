@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, SFC, useCallback, useState, Fragment } from 'react';
+import React, { useEffect, SFC, useCallback, useState, Fragment } from 'react';
 import { withApollo } from 'react-apollo';
 import { gql, ApolloClient } from 'apollo-boost';
 import { injectIntl } from 'react-intl';
@@ -9,13 +9,9 @@ import { ITableSetup } from '../../resources/interfaces';
 
 import { logError } from '../Error/ErrorBoundary';
 
-import { onSelectChange } from './helpers/functions';
-
 import { transformColumnData } from './Table';
 import TableSync from './TableSync';
 import TableAsync from './TableAsync';
-
-type EventType = SyntheticEvent<HTMLInputElement>;
 
 interface IProps {
   intl: any;
@@ -30,44 +26,46 @@ const bChooseSyncTable = true;
 
 const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef, filters}) => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [pageCount, setPageCount] = useState(0);
-  const [checked, setChecked] = useState<object>({});
+  const [totalPageCount, setTotalPageCount] = useState(1);
+  const [pageSize] = useState<number>(10);
 
   const getData = async () => {
+    setLoading(true);
     try {
-      const result = await client.query({ query: gql`${dataQuery}`, errorPolicy: 'all' });
-      setData(result.data.results);
+      const response = await client.query({
+        query: gql`${dataQuery}`,
+        errorPolicy: 'all'
+      });
+      const { results } = response.data;
+      setData(results);
+      setFilteredData(results);
 
-      setPageCount(result.data.results.length / 20); // TODO non-hardcoded page size
+      setTotalPageCount(Math.ceil(results.length / pageSize));
       setLoading(false);
     } catch(err) {
       logError(err);
+      setLoading(false);
     }
   };
 
-  const fetchData = useCallback(({ pageSize, pageIndex }) => {
+  const fetchData = useCallback(() => {
     if (!loading) {
-      setLoading(true);
       getData();
     }
     // disable warning, otherwise component is constantly refreshed
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataQuery]);
 
-  const options = {};
+  useEffect(() => {
+    if (bChooseSyncTable) getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (bChooseSyncTable) getData();
-
-  const handleSelectAllChange = (event:EventType) => {
-    // onSelectAllChange(event, setChecked);
-  };
-
-  const handleSelectChange = (event:EventType) => {
-    onSelectChange(event, checked, setChecked);
-  };
-
-  const filteredData = runFilters(data, filters);
+  useEffect(() => {
+    setFilteredData(runFilters(data, filters));
+  }, [filters, data]);
 
   return (
     <Fragment>
@@ -75,10 +73,6 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
         <TableSync
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], intl)}
-          options={options}
-          checked={checked}
-          onSelectAllChange={handleSelectAllChange}
-          onSelectChange={handleSelectChange}
         />
       )}
       {!bChooseSyncTable && (
@@ -87,8 +81,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
           columns={tableDef.columns}
           fetchData={fetchData}
           loading={loading}
-          pageCount={pageCount}
-          options={options}
+          pageCount={totalPageCount}
         />
       )}
     </Fragment>

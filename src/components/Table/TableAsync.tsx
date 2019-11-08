@@ -1,4 +1,4 @@
-import React, { SFC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 
 import { TableStyled } from './Table';
@@ -10,16 +10,14 @@ type TableAsyncProps = {
   fetchData:any;
   loading:boolean;
   pageCount:number;
-  options:any;
 };
 
-const TableAsync: SFC<TableAsyncProps> = ({
+const TableAsync: FC<TableAsyncProps> = ({
   data,
   columns,
   fetchData,
   loading,
   pageCount:controlledPageCount,
-  options
 }) => {
   const {
     getTableProps,
@@ -52,8 +50,6 @@ const TableAsync: SFC<TableAsyncProps> = ({
   useEffect(() => {
     fetchData({ pageIndex, pageSize });
   }, [fetchData, pageIndex, pageSize]);
-
-  // TODO: replace up/down characters with SVGs from Figma
 
   return (
     <TableStyled>
@@ -90,7 +86,20 @@ const TableAsync: SFC<TableAsyncProps> = ({
         ? ( <div>Loading...</div> )
         : ( <div>Showing {page.length} of ~{controlledPageCount * pageSize}{' '}results</div> )
       }
-      {!loading && <Pagination pageIndex={pageIndex} pageCount={pageCount} pageSize={pageSize} pageOptions={pageOptions} canPreviousPage={canPreviousPage} canNextPage={canNextPage} gotoPage={gotoPage} previousPage={previousPage} nextPage={nextPage} setPageSize={setPageSize} />}
+      {!loading && (
+        <Pagination
+          pageIndex={pageIndex}
+          pageCount={pageCount}
+          pageSize={pageSize}
+          pageOptions={pageOptions}
+          canPreviousPage={canPreviousPage}
+          canNextPage={canNextPage}
+          gotoPage={gotoPage}
+          previousPage={previousPage}
+          nextPage={nextPage}
+          setPageSize={setPageSize}
+        />
+      )}
     </TableStyled>
   );
 };
