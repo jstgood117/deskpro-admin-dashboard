@@ -84,16 +84,12 @@ const TableAsync: SFC<TableAsyncProps> = ({
               );
             }
           )}
-          <tr>
-            {loading ? ( <td>Loading...</td> ) : (
-              <td>
-                Showing {page.length} of ~{controlledPageCount * pageSize}{' '}
-                results
-              </td>
-            )}
-          </tr>
         </tbody>
       </table>
+      {loading
+        ? ( <div>Loading...</div> )
+        : ( <div>Showing {page.length} of ~{controlledPageCount * pageSize}{' '}results</div> )
+      }
       {!loading && <Pagination pageIndex={pageIndex} pageCount={pageCount} pageSize={pageSize} pageOptions={pageOptions} canPreviousPage={canPreviousPage} canNextPage={canNextPage} gotoPage={gotoPage} previousPage={previousPage} nextPage={nextPage} setPageSize={setPageSize} />}
     </TableStyled>
   );

@@ -39,5 +39,5 @@ export interface IRuleValue {
   id: string;
   type: ValueType;
   operator: GroupOperatorType;
-  rules: Array<IRuleItem | IRuleValue>;
+  rules: (IRuleItem | IRuleValue)[];
 }

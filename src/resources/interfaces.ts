@@ -86,6 +86,6 @@ export interface IMenuItemProps {
 }
 
 export interface ITableColor {
-	background: string;
-	textColor: string;
+  background: string;
+  textColor: string;
 }

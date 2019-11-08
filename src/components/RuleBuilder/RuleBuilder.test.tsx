@@ -19,7 +19,7 @@ describe('RuleBuilder', () => {
 
   beforeEach(() => {
     props = {
-      onChange: () => {},
+      onChange: () => false,
       value: [initGroup()],
       schema: {
         groupTitle: 'admin_tickets.some_group_title',
