@@ -1,27 +1,5 @@
 import { gql } from 'apollo-boost';
-
-// Queries
-
-// TODO locale needs to be a parameter, not hard-coded
-
-export const QUERY_PAGE = gql`
-  query getPage($path: string!) {
-    page(path: $path) {
-      path
-      pageType
-      pageProps {
-        title
-        description
-        tables {
-          dataQuery
-          metadataQuery
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_AGENTS_PAGE = gql`
+export default gql`
   query {
     agents_getAgentsPage {
       __typename
@@ -53,7 +31,3 @@ export const QUERY_AGENTS_PAGE = gql`
     }
   }
 `;
-
-// Mutations
-
-// Subscriptions

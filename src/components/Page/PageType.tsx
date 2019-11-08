@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import { QUERY_AGENTS_PAGE } from '../../resources/graphql';
+import { QUERY_AGENTS_PAGE } from '../../schema/queries';
 import StandardTablePage from '../StandardTablePage';
 
 export interface IProps {

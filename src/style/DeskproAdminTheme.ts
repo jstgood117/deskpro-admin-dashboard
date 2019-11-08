@@ -26,6 +26,8 @@ const DeskproAdminTheme = {
   white: '#FFFFFF',
   black: '#000',
   pagePadding: '34px',
+  danger: '#E84954',
+  dangerLight: '#FBE1E3',
 
   h1: {
     fontFamily,

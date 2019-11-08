@@ -1,18 +1,28 @@
-import React, { SFC } from 'react';
+import React, { useState, SFC, SyntheticEvent, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 
 import { TableStyled } from './Table';
 import Pagination from './Pagination';
+import Checkbox from './Checkbox';
+import * as Cell from './Cell';
+
+type onCheckboxChangeType = (event:SyntheticEvent<HTMLInputElement>) => void;
 
 type TableAsyncProps = {
   data: any[];
   columns:any[];
+  checked:object;
   options:any;
+  onSelectAllChange:onCheckboxChangeType;
+  onSelectChange:onCheckboxChangeType;
 };
 
 const Table: SFC<TableAsyncProps> = ({
   data,
-  columns
+  columns,
+  onSelectChange,
+  onSelectAllChange,
+  checked
 }) => {
   const {
     getTableProps,
@@ -40,14 +50,26 @@ const Table: SFC<TableAsyncProps> = ({
     useRowSelect,
   ) as any;
 
-  // TODO: replace up/down characters with SVGs from Figma
+  const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsAllChecked(Object.keys(checked).length === data.length);
+  }, [checked, data]);
 
   return (
     <TableStyled>
+      <div>
+        <Checkbox
+          value={0}
+          checked={isAllChecked}
+          onChange={onSelectAllChange}
+        />
+      </div>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any, indexOuter:number) => (
             <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
+              <th>&nbsp;</th>
               {headerGroup.headers.map((column: any, indexInner: number) => (
                 <th key={indexInner} {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
@@ -63,22 +85,35 @@ const Table: SFC<TableAsyncProps> = ({
               prepareRow(row);
               return (
                 <tr key={indexOuter} {...row.getRowProps()}>
-                  {row.cells.map((cell: any, indexInner: number) => {
-                    return <td key={indexInner} {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-                  })}
+                  <td>
+                    <Checkbox
+                      value={row.getRowProps().key}
+                      checked={checked.hasOwnProperty(row.getRowProps().key.toString())  ? true : false}
+                      onChange={onSelectChange}
+                    />
+                  </td>
+                  {row.cells.map((cell: any, indexInner: number) => (
+                    <td key={indexInner} {...cell.getCellProps()}>{Cell.create(cell)}</td>
+                  ))}
                 </tr>
               );
             }
           )}
-          <tr>
-            <td>
-              Showing {page.length} of ~{pageCount * pageSize}{' '}
-              results
-            </td>
-          </tr>
         </tbody>
       </table>
-      <Pagination pageIndex={pageIndex} pageCount={pageCount} pageSize={pageSize} pageOptions={pageOptions} canPreviousPage={canPreviousPage} canNextPage={canNextPage} gotoPage={gotoPage} previousPage={previousPage} nextPage={nextPage} setPageSize={setPageSize} />
+      <div>Showing {page.length} of ~{pageCount * pageSize}{' '} results</div>
+      <Pagination
+        pageIndex={pageIndex}
+        pageCount={pageCount}
+        pageSize={pageSize}
+        pageOptions={pageOptions}
+        canPreviousPage={canPreviousPage}
+        canNextPage={canNextPage}
+        gotoPage={gotoPage}
+        previousPage={previousPage}
+        nextPage={nextPage}
+        setPageSize={setPageSize}
+      />
     </TableStyled>
   );
 };

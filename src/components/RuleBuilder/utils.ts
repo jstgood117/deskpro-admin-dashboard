@@ -4,8 +4,8 @@ import get from 'lodash/get';
 
 export const generateId = (): string =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = (Math.random() * 16) | 0,
-      v = c === 'x' ? r : (r & 0x3) | 0x8;
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
 
@@ -91,7 +91,7 @@ export const changeRuleValue = (
 };
 
 export const moveRule = (
-  rules: Array<IRuleValue | IRuleItem>,
+  rules: (IRuleValue | IRuleItem)[],
   oldIndex: number,
   newIndex: number
 ) => {
@@ -102,7 +102,7 @@ export const moveRule = (
     newIndex += rules.length;
   }
   if (newIndex >= rules.length) {
-    var k = newIndex - rules.length + 1;
+    let k = newIndex - rules.length + 1;
     while (k--) {
       rules.push(undefined);
     }

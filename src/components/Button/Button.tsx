@@ -7,7 +7,7 @@ import { dpstyle } from '../Styled';
 import { H6 } from '../Typography';
 import Icon from '../Icon';
 
-type ButtonStyleType = 'primary' | 'secondary' | 'tertiary';
+type ButtonStyleType = 'primary' | 'secondary' | 'tertiary' | 'danger';
 type ButtonSizeType = 'small' | 'medium';
 
 interface IButtonStyle {
@@ -79,6 +79,22 @@ const getStyle = (
           size: 28,
           border: `1px solid ${theme.activeColour}`
         }
+      },
+      danger: {
+        static: {
+          backgroundColor: theme.danger,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 28,
+          border: `1px solid ${theme.danger}`
+        },
+        hover: {
+          backgroundColor: theme.danger,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 28,
+          border: `1px solid ${theme.danger}`
+        }
       }
     },
     medium: {
@@ -126,6 +142,22 @@ const getStyle = (
           svgColor: theme.activeColour,
           size: 34,
           border: `1px solid ${theme.activeColour}`
+        }
+      },
+      danger: {
+        static: {
+          backgroundColor: theme.danger,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 34,
+          border: `1px solid ${theme.danger}`
+        },
+        hover: {
+          backgroundColor: theme.danger,
+          color: theme.white,
+          svgColor: theme.white,
+          size: 34,
+          border: `1px solid ${theme.danger}`
         }
       }
     }
