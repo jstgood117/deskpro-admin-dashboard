@@ -57,7 +57,6 @@ storiesOf('Menu', module)
     <MenuComponent
       label='Action'
       menuItems={testDropdownItemsWithoutIcon}
-      iconName='menu'
     />
   ))
   .add('OrderableMenu with dummy data and icon', () => (
