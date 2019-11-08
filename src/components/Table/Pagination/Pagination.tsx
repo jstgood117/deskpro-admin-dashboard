@@ -17,7 +17,18 @@ interface IProps {
   setPageSize: any;
 }
 
-const Pagination: SFC<IProps> = ({pageIndex, pageCount, pageSize, pageOptions, canPreviousPage, canNextPage, gotoPage, previousPage, nextPage, setPageSize}) => (
+const Pagination: SFC<IProps> = ({
+  pageIndex,
+  pageCount,
+  pageSize,
+  pageOptions,
+  canPreviousPage,
+  canNextPage,
+  gotoPage,
+  previousPage,
+  nextPage,
+  setPageSize
+}) => (
   <PaginationStyled>
     <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
       {'<<'}
