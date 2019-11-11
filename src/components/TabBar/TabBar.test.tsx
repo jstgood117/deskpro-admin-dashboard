@@ -25,7 +25,8 @@ describe('TabBar', () => {
   ];
   beforeEach(() => {
     props = {
-      tabItems: TabItems
+      tabItems: TabItems,
+      sharedTabsCount: 3,
     };
     mountedTabBar = undefined;
   });
@@ -42,16 +43,6 @@ describe('TabBar', () => {
 
     it('doesn\'t render Tab component', () => {
       expect(wrapper(false).find('Tab').length).toBe(0);
-    });
-  });
-
-  describe('when tabItems is defined', () => {
-    beforeEach(() => {
-      props.tabItems = TabItems;
-    });
-
-    it('renders the div tags', () => {
-      expect(wrapper(false).find('div').length).toBe(4);
     });
   });
 });

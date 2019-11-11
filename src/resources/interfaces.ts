@@ -89,3 +89,8 @@ export interface ITableColor {
   background: string;
   textColor: string;
 }
+
+export interface ITabsProps {
+  label?: string;
+  messageId?: string;
+}
