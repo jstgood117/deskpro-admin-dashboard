@@ -37,7 +37,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <TabBarStyled>
-        {tabItems.map((tab, index: number) => {
+        {tabItems.length > 0 && tabItems.map((tab, index: number) => {
           if (index < sharedTabsCount) {
             return (
               <Tab
@@ -52,6 +52,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
               />
             );
           }
+          return null;
         })}
         <AdditonalTab
           label='More'
