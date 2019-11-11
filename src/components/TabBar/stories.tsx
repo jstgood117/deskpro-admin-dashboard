@@ -19,6 +19,6 @@ const TabItems = [
 
 storiesOf('TabBar', module).add('Tab Bar', () => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <TabBar tabItems={TabItems} handleClick={action('clicked Tab Option')} sharedTabsCount={3} />
+    <TabBar tabItems={TabItems} handleClick={action('clicked Tab Option')} />
   </ThemeProvider>
 ));

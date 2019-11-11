@@ -1,4 +1,4 @@
-import React, { SFC, Fragment, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 import { dpstyle, TextString } from '../../Styled';
@@ -61,20 +61,19 @@ const StyledIcon = styled(dpstyle.div)`
 `;
 export interface IProps {
   selectedTabValue?: ITabsProps;
-  handle?: (val:ITabsProps)=>void;
+  handle?: (val: ITabsProps) => void;
   label?: string;
   tabItems: ITabsProps[];
 }
 
-const AdditonalTab: SFC<IProps> = props => {
+const AdditonalTab: FC<IProps> = ({ selectedTabValue, ...props }) => {
   const [opened, clickButton] = useState(false);
-  const selected =
-    !isNil(props.selectedTabValue) && props.selectedTabValue.label !== '';
+  const selected = !isNil(selectedTabValue) && selectedTabValue.label !== '';
   return (
     <Fragment>
       <TabStyled selected={selected}>
         <TextString>
-          {props.selectedTabValue ? props.selectedTabValue.label : props.label}
+          {selectedTabValue ? selectedTabValue.label : props.label}
         </TextString>
         <StyledIcon>
           <Button

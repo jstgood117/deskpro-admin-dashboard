@@ -11,19 +11,18 @@ const TabBarStyled = styled(dpstyle.div)`
   display: flex;
   width: 100%;
   height: 34px;
-  border-bottom: 1.5px solid #eff0f0;
+  border-bottom: 1.5px solid ${props => props.theme.greyLighter};
 `;
 
 export interface IProps {
   tabItems: ITabsProps[];
   handleClick?: (index: number) => void;
-  sharedTabsCount: number;
+  sharedTabsCount?: number;
 }
 
 const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
   const [tabIndex, setTabState] = useState(0);
   const [dropdownValue, setDropdownValue] = useState();
-
   const moreItems = tabItems.slice(sharedTabsCount);
   function changeTab(index: number) {
     setTabState(index);
@@ -37,7 +36,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <TabBarStyled>
-        {tabItems.length > 0 && tabItems.map((tab, index: number) => {
+        {tabItems.map((tab, index: number) => {
           if (index < sharedTabsCount) {
             return (
               <Tab
@@ -54,15 +53,17 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
           }
           return null;
         })}
-        <AdditonalTab
-          label='More'
-          tabItems={moreItems}
-          selectedTabValue={dropdownValue}
-          handle={handleMoreTab}
-        />
+        {moreItems.length > 0 && (
+          <AdditonalTab
+            label='More'
+            tabItems={moreItems}
+            selectedTabValue={dropdownValue}
+            handle={handleMoreTab}
+          />
+        )}
       </TabBarStyled>
     </ThemeProvider>
   );
 };
-
+TabBar.defaultProps = { sharedTabsCount: 3 };
 export default TabBar;
