@@ -6,16 +6,15 @@ import { TableStyled } from './Table';
 import Pagination from './Pagination';
 import Checkbox from './Checkbox';
 import * as Cell from './Cell';
+import Button from '../Button';
+import Icon from '../Icon';
 
 type TableAsyncProps = {
   data: any[];
-  columns:any[];
+  columns: any[];
 };
 
-const Table: FC<TableAsyncProps> = ({
-  data,
-  columns
-}) => {
+const Table: FC<TableAsyncProps> = ({ data, columns }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -35,11 +34,11 @@ const Table: FC<TableAsyncProps> = ({
     {
       columns,
       data,
-      initialState: { pageIndex: 0 },
+      initialState: { pageIndex: 0 }
     },
     useSortBy,
     usePagination,
-    useRowSelect,
+    useRowSelect
   ) as any;
 
   const [checked, setChecked] = useState<object>({});
@@ -49,12 +48,16 @@ const Table: FC<TableAsyncProps> = ({
     event: SyntheticEvent<HTMLInputElement>,
     _pageIndex: number
   ) => {
-    onSelectAllChange(event.currentTarget.checked, setChecked, _pageIndex, pageSize, data);
+    onSelectAllChange(
+      event.currentTarget.checked,
+      setChecked,
+      _pageIndex,
+      pageSize,
+      data
+    );
   };
 
-  const handleCheckboxChange = (
-    event: SyntheticEvent<HTMLInputElement>
-  ) => {
+  const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
     onCheckboxChange(event.currentTarget.value, checked, setChecked);
   };
 
@@ -68,52 +71,75 @@ const Table: FC<TableAsyncProps> = ({
 
   return (
     <TableStyled>
-      <div>
-        <Checkbox
-          value={0}
-          checked={isAllChecked}
-          onChange={(event: SyntheticEvent<HTMLInputElement> ) =>
-            handleSelectAllClick(event, pageIndex)
-          }
-        />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          paddingTop: 9,
+          paddingBottom: 10
+        }}
+      >
+        <div style={{ flex: 1 }}>
+          <Checkbox
+            value={0}
+            checked={isAllChecked}
+            onChange={(event: SyntheticEvent<HTMLInputElement>) =>
+              handleSelectAllClick(event, pageIndex)
+            }
+          />
+        </div>
+        <Button styleType='tertiary' size='small' iconOnly={true}>
+          <Icon name='export' />
+        </Button>
       </div>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup: any, indexOuter:number) => (
+          {headerGroups.map((headerGroup: any, indexOuter: number) => (
             <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
               <th>&nbsp;</th>
               {headerGroup.headers.map((column: any, indexInner: number) => (
-                <th key={indexInner} {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <th
+                  key={indexInner}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
                   {column.render('Header')}
-                  <span>{column.isSorted ? column.isSortedDesc ? ' v' : ' ^' : ''}</span>
+                  <span>
+                    {column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ''}
+                  </span>
                 </th>
               ))}
             </tr>
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map(
-            (row: any, indexOuter: number) => {
-              prepareRow(row);
-              return (
-                <tr key={indexOuter} {...row.getRowProps()}>
-                  <td>
-                    <Checkbox
-                      value={row.original.id}
-                      checked={checked.hasOwnProperty(row.original.id.toString())  ? true : false}
-                      onChange={handleCheckboxChange}
-                    />
+          {page.map((row: any, indexOuter: number) => {
+            prepareRow(row);
+            return (
+              <tr key={indexOuter} {...row.getRowProps()}>
+                <td>
+                  <Checkbox
+                    value={row.original.id}
+                    checked={
+                      checked.hasOwnProperty(row.original.id.toString())
+                        ? true
+                        : false
+                    }
+                    onChange={handleCheckboxChange}
+                  />
+                </td>
+                {row.cells.map((cell: any, indexInner: number) => (
+                  <td key={indexInner} {...cell.getCellProps()}>
+                    {Cell.create(cell)}
                   </td>
-                  {row.cells.map((cell: any, indexInner: number) => (
-                    <td key={indexInner} {...cell.getCellProps()}>{Cell.create(cell)}</td>
-                  ))}
-                </tr>
-              );
-            }
-          )}
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
-      <div>Showing {page.length} of ~{pageCount * pageSize}{' '} results</div>
+      <div>
+        Showing {page.length} of ~{pageCount * pageSize} results
+      </div>
       <Pagination
         pageIndex={pageIndex}
         pageCount={pageCount}

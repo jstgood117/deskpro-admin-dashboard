@@ -57,6 +57,7 @@ import { ReactComponent as IconMoveDown } from '../../assets/svg/ic-move-down.sv
 import { ReactComponent as IconMoveLeft } from '../../assets/svg/ic-move-left.svg';
 import { ReactComponent as IconUndo } from '../../assets/svg/ic-undo.svg';
 import { ReactComponent as IconCancelCall } from '../../assets/svg/ic-cancel-call.svg';
+import { ReactComponent as IconExport } from '../../assets/svg/ic-export.svg';
 
 export interface IProps {
   name: string;
@@ -178,6 +179,8 @@ const Icon: SFC<IProps> = props => {
       return <IconUndo />;
     case 'cancel-call':
       return <IconCancelCall />;
+    case 'export':
+      return <IconExport />;
     default:
       return <IconSetup />;
   }

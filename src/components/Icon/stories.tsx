@@ -56,6 +56,7 @@ storiesOf('Icon', module)
   .add('attachment', () => <Icon name='attachment' />)
   .add('collapse', () => <Icon name='collapse' />)
   .add('dial', () => <Icon name='dial' />)
+  .add('export', () => <Icon name='export' />)
   .add('move-down', () => <Icon name='move-down' />)
   .add('move-left', () => <Icon name='move-left' />)
   .add('move-up', () => <Icon name='move-up' />);
