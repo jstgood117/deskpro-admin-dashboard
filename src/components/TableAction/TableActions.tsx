@@ -9,7 +9,10 @@ import SearchBox from '../SearchBox';
 import Button from '../Button';
 import Icon from '../Icon';
 
-import { action } from '@storybook/addon-actions';
+import RuleBuilder from '../RuleBuilder/RuleBuilder';
+import { IRuleValue } from '../RuleBuilder/interfaces';
+import { initGroup, convertRuleSchema } from '../RuleBuilder/utils';
+import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 
 export interface IProps {}
 
@@ -24,9 +27,26 @@ const StyledTableAction = styled.div`
   box-shadow: 0px 3px 10px rgba(28, 62, 85, 0.1);
   border-radius: 4px;
   height: 54px;
+  position: relative;
 `;
 const FlexStyled = styled.div`
   display: flex;
+`;
+const FilterContainer = styled.div`
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+`;
+const FilterContent = styled.div<{ active: boolean }>`
+  opacity: ${props => (props.active ? 1 : 0)};
+  box-shadow: 0px 3px 10px rgba(28, 62, 85, 0.1);
+  padding: 10px;
+`;
+const ButtonContainer = styled.div`
+  margin-top: 20px;
 `;
 
 export interface IProps {
@@ -36,8 +56,8 @@ export interface IProps {
   groupMenu: boolean;
   viewMenu: boolean;
   onSearchChange?: (e: any) => void;
-  filters?:FilterType[];
-  onFilterChange?:(id:string, operatorName:string, value:string) => void;
+  filters?: FilterType[];
+  onFilterChange?: (id: string, operatorName: string, value: string) => void;
 }
 
 const TableActions: SFC<IProps> = props => {
@@ -45,23 +65,36 @@ const TableActions: SFC<IProps> = props => {
   const [Sort, setSortValue] = useState('');
   const [View, setViewValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
+  const [filterValue, setFilterValue] = useState<IRuleValue[]>([initGroup()]);
   const [openedView, openView] = useState(false);
   const [openedSort, clickButtonSort] = useState(false);
   const [openedGroup, clickButtonGroup] = useState(false);
+  const [openedFilter, clickOpenFilter] = useState(false);
 
-  const onSearchChange = (value:string) => {
+  const onSearchChange = (value: string) => {
     const { onFilterChange } = props;
-    if(onFilterChange) { onFilterChange('*-CONTAINS', 'CONTAINS', value); }
+    if (onFilterChange) {
+      onFilterChange('*-CONTAINS', 'CONTAINS', value);
+    }
   };
 
   const debounceOnSearchChange = useCallback(debounce(onSearchChange, 300), []);
 
-  const handleSearchChange = (event:React.SyntheticEvent<HTMLInputElement>) => {
-
+  const handleSearchChange = (
+    event: React.SyntheticEvent<HTMLInputElement>
+  ) => {
     const { value } = event.currentTarget;
     setSearchValue(value);
 
     debounceOnSearchChange(value);
+  };
+
+  const handleChangeFilter = (newValue: IRuleValue[]) => {
+    setFilterValue(newValue);
+  };
+
+  const handleSaveFilter = () => {
+    clickOpenFilter(false);
   };
 
   // console.log(props.onFilterChange); // Call this with id:string, operatorName:string, value:string
@@ -86,7 +119,9 @@ const TableActions: SFC<IProps> = props => {
           <FlexStyled style={{ paddingLeft: 10 }}>
             <Button
               styleType='secondary'
-              onClick={action('clicked')}
+              onClick={() => {
+                clickOpenFilter(!openedFilter);
+              }}
               size='medium'
             >
               <Icon name='filter' />
@@ -154,6 +189,24 @@ const TableActions: SFC<IProps> = props => {
           </FlexStyled>
         ) : null}
       </FlexStyled>
+
+      <FilterContainer>
+        <FilterContent active={openedFilter}>
+          <RuleBuilder
+            value={filterValue}
+            onChange={handleChangeFilter}
+            schema={convertRuleSchema(
+              'admin_tickets.some_group_title',
+              testFilterMeta
+            )}
+          />
+          <ButtonContainer>
+            <Button styleType='primary' onClick={() => handleSaveFilter()}>
+              Save
+            </Button>
+          </ButtonContainer>
+        </FilterContent>
+      </FilterContainer>
     </StyledTableAction>
   );
 };
