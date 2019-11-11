@@ -87,10 +87,10 @@ export const testFilterMeta: FilterMeta[] = [
     'dataPath': 'agent_team'
   },
   {
-    'title': 'Name',
+    'title': 'Last Name',
     'operators': ['CONTAINS', 'NOT_CONTAINS', 'EQUAL', 'NOT_EQUAL', 'STARTS_WITH', 'ENDS_WITH'],
     'type': 'TEXT',
-    'path': 'agent_team.*.name',
+    'path': 'agent_team.*.lastname',
     'dataPath': 'agent_team'
   },
   {

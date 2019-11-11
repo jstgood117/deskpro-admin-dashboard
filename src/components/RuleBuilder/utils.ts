@@ -1,6 +1,13 @@
-import { IRuleValue, IRuleItem } from './interfaces';
+import {
+  IRuleValue,
+  IRuleItem,
+  IRuleBuilderSchema,
+  IRuleOptions
+} from './interfaces';
 import setWith from 'lodash/setWith';
 import get from 'lodash/get';
+import merge from 'lodash/merge';
+import { FilterMeta } from '../../resources/constants/mock/testFilterMeta';
 
 export const generateId = (): string =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -201,7 +208,6 @@ export const upLevelGroup = (
   return changeRuleValue(rootValue, ruleNeedUpdate, 'rules', rules);
 };
 
-
 export const updateRule = (
   rootValue: IRuleValue,
   currentValue: IRuleValue,
@@ -212,4 +218,42 @@ export const updateRule = (
   rules[index] = value;
 
   return changeRuleValue(rootValue, currentValue, 'rules', rules);
+};
+
+// Conver rule schema from testFilterMeta
+export const convertRuleSchema = (
+  groupTitle: string,
+  input: FilterMeta[]
+): IRuleBuilderSchema => {
+  const schema: IRuleBuilderSchema = {
+    groupTitle,
+    properties: []
+  };
+
+  input.forEach(item => {
+    const mapTypes: any = {
+      BOOL: 'text',
+      TEXT: 'text',
+      CHOICE_FROM_DATA: 'select'
+    };
+    const type = mapTypes[item.type];
+    const options: IRuleOptions = {} as IRuleOptions;
+    if (type === 'select' && item.uniqueValues) {
+      const choices = item.uniqueValues.reduce((obj, i) => {
+        obj[i.id] = i.title;
+        return obj;
+      }, {});
+      merge(options, { choices });
+    }
+
+    schema.properties.push({
+      propertyId: item.title,
+      title: item.title,
+      operators: item.operators as any,
+      type,
+      options
+    });
+  });
+
+  return schema;
 };
