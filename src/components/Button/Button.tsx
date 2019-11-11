@@ -278,7 +278,7 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
 `;
 
 export interface IItemProps {
-  title?: string;
+  label?: string;
   link: string;
 }
 
@@ -319,7 +319,7 @@ const Button: SFC<IProps> = ({
     <ThemeProvider theme={DeskproAdminTheme}>
       <ButtonWrapper
         hasClearButton={showClearButton && selected}
-        className={`${className}`}
+        className={`${className?className:''}`}
       >
         <ButtonStyled
           styles={styles}
@@ -340,7 +340,7 @@ const Button: SFC<IProps> = ({
                   key={index}
                   onClick={() => onSelect && onSelect(item)}
                 >
-                  {item.title ? item.title : item.link}
+                  {item.label ? item.label : item.link}
                 </DropdownContentLink>
               );
             })}

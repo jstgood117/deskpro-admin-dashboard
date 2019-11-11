@@ -9,7 +9,12 @@ import { action } from '@storybook/addon-actions';
 const TabItems = [
   { label: 'Property1' },
   { label: 'Property2' },
-  { label: 'Property3' }
+  { label: 'Property3' },
+  { label: 'Property4' },
+  { label: 'Property5' },
+  { label: 'Property6' },
+  { label: 'Property7' },
+  { label: 'Property8' },
 ];
 
 storiesOf('TabBar', module).add('Tab Bar', () => (

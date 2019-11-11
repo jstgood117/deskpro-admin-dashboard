@@ -1,22 +1,30 @@
 import React, { SFC, Fragment } from 'react';
 import styled from 'styled-components';
 
-import { dpstyle, TextLabel } from '../../Styled';
+import { dpstyle, TextString } from '../../Styled';
 
 export interface IStyleProps {
   active: boolean;
 }
 
 const TabStyled = styled(dpstyle.div)<IStyleProps>`
-  border-bottom: solid 1.5px ${props => (props.active ? '#1C3E55' : '#eff0f0')};
+  border-bottom: solid 1.5px
+    ${props =>
+      props.active ? props.theme.activeColour : props.theme.greyLighter};
   width: fit-content;
   height: 100%;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: default;
   margin-right: 56px;
-  height: 32px;
-  color: ${props => (props.active ? '#1C3E55' : '#A9B0B0')};
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: ${props =>
+    props.active ? props.theme.activeColour : props.theme.static2Colour};
+  &:hover {
+    color: ${props => props.theme.activeColour};
+  }
 `;
 
 export interface IProps {
@@ -30,7 +38,11 @@ export interface IProps {
 const Tab: SFC<IProps> = props => (
   <Fragment>
     <TabStyled active={props.index === props.value} onClick={props.onClick}>
-      {props.label ? <TextLabel>{props.label}</TextLabel> : <TextLabel messageId={props.messageId} />}
+      {props.label ? (
+        <TextString>{props.label}</TextString>
+      ) : (
+        <TextString messageId={props.messageId} />
+      )}
     </TabStyled>
   </Fragment>
 );

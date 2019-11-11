@@ -1,53 +1,69 @@
 import React, { SFC, useState } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import Tab from './Tab';
 import { dpstyle } from '../Styled';
+import { DeskproAdminTheme } from '../Theme';
+import AdditonalTab from './MoreTab';
+import { ITabsProps } from '../../resources/interfaces';
 
 const TabBarStyled = styled(dpstyle.div)`
   display: flex;
   width: 100%;
-  height: 32px;
-  border-bottom: 1.5px solid #eff0f0;
+  height: 34px;
+  border-bottom: 1.5px solid ${props => props.theme.greyLighter};
 `;
-
-
-interface ITabsProps {
-  label?: string;
-  messageId?: string;
-}
 
 export interface IProps {
   tabItems: ITabsProps[];
   handleClick?: (index: number) => void;
+  sharedTabsCount?: number;
 }
 
-const TabBar: SFC<IProps> = ({ tabItems, handleClick }) => {
+const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
   const [tabIndex, setTabState] = useState(0);
-
-  function changeTab(index: number, label: string) {
+  const [dropdownValue, setDropdownValue] = useState();
+  const moreItems = tabItems.slice(sharedTabsCount);
+  function changeTab(index: number) {
     setTabState(index);
     handleClick(index);
+    handleMoreTab(null);
   }
-
+  function handleMoreTab(val: ITabsProps) {
+    setDropdownValue(val);
+    if (val) setTabState(sharedTabsCount);
+  }
   return (
-    <TabBarStyled>
-      {tabItems.map((tab, index: number) => {
-        return (
-          <Tab
-            key={index}
-            label={tab.label}
-            messageId={tab.messageId}
-            index={index}
-            value={tabIndex}
-            onClick={e => {
-              changeTab(index, tab.label);
-            }}
+    <ThemeProvider theme={DeskproAdminTheme}>
+      <TabBarStyled>
+        {tabItems.map((tab, index: number) => {
+          if (index < sharedTabsCount) {
+            return (
+              <Tab
+                key={index}
+                label={tab.label}
+                messageId={tab.messageId}
+                index={index}
+                value={tabIndex}
+                onClick={e => {
+                  changeTab(index);
+                }}
+              />
+            );
+          }
+          return null;
+        })}
+        {moreItems.length > 0 && (
+          <AdditonalTab
+            label='More'
+            tabItems={moreItems}
+            selectedTabValue={dropdownValue}
+            handle={handleMoreTab}
           />
-        );
-      })}
-    </TabBarStyled>
+        )}
+      </TabBarStyled>
+    </ThemeProvider>
   );
 };
-
+TabBar.defaultProps = { sharedTabsCount: 3 };
 export default TabBar;

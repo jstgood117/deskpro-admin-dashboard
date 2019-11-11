@@ -21,7 +21,9 @@ export const SingleSubMenuItem: SFC<IMenuProps> = props => {
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
-        if(props.onSelect) { props.onSelect(props.item); }
+        if (props.onSelect) {
+          props.onSelect(props.item);
+        }
       }}
       highlightedStyle={{ background: '#E8EBEE' }}
       selected={props.selected}
@@ -129,14 +131,12 @@ const Menu: SFC<IMenuProps> = ({
           menu={<MenuSub menuItems={menuItems} onSelect={onSelect} />}
         >
           {iconName && (
-            <StyledIcon className='ic-menu'>
+            <StyledIcon className='ic-menu' style={{ paddingRight: 8 }}>
               <Icon name={iconName} />
             </StyledIcon>
           )}
-          <MenuLabel style={{ paddingRight: 8, paddingLeft: 11 }}>
-            {label}
-          </MenuLabel>
-          <StyledIcon className='ic-down'>
+          <MenuLabel>{label}</MenuLabel>
+          <StyledIcon className='ic-down' style={{ paddingLeft: 8 }}>
             <Icon name='downVector' />
           </StyledIcon>
         </MenuButton>

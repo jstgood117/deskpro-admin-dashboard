@@ -20,6 +20,7 @@ const MenuComponent: React.FC<IMenuProps> = props => {
       value={value}
       label={value ? value['name'] : props.label}
       onSelect={val => setValue(val)}
+      selectedValue={value}
     />
   );
 };

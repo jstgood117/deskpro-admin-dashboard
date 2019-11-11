@@ -43,8 +43,8 @@ interface IStyleProp {
   size?: ButtonSizeType;
 }
 const SortItems = [
-  { title: 'Add Agent', link: 'Sort1' },
-  { title: 'Bulk Add Agent', link: 'Sort2' }
+  { label: 'Add Agent', link: 'Sort1' },
+  { label: 'Bulk Add Agent', link: 'Sort2' }
 ];
 
 const WithDropdownStyle = styled.div<IStyleWrapper & IStyleProp>`
