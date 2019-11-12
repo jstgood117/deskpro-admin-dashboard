@@ -10,7 +10,6 @@ import { P1, S2 } from '../Typography';
 import { TextLinkLabel } from '../Styled';
 import Locale from '../Locale';
 import Tooltip from '../Tooltip';
-import Badge from '../Badge';
 import Currency from '../Currency';
 import Color from '../Color';
 import ActiveAvatar from '../Avatar/ActiveAvatar';

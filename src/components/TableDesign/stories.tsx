@@ -15,7 +15,6 @@ import Avatar from '../Avatar';
 import { Flex } from '../Styled';
 import { S1, P1, S2 } from '../Typography';
 import Icon from '../Icon';
-import Badge from '../Badge';
 import { ISortItem, ITableColor } from '../../resources/interfaces';
 import {
   tableColors,
