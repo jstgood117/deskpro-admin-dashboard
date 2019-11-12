@@ -8,6 +8,8 @@ import Checkbox from './Checkbox';
 import * as Cell from './Cell';
 import Button from '../Button';
 import Icon from '../Icon';
+import styled from 'styled-components';
+import * as Pagination2 from '../Pagination/Pagination';
 
 type TableAsyncProps = {
   data: any[];
@@ -68,6 +70,28 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
   useEffect(() => {
     setChecked({});
   }, [pageIndex, data]);
+  const [opened, clickButton] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const handleChangeCurrentPage = (datas: Pagination2.IPageChange) => {
+    setCurrentPage(datas.currentPage);
+  };
+
+  const handleChangRowsPerPage = (datas: number) => {
+    setRowsPerPage(datas);
+    setCurrentPage(1);
+  };
+  const items = [{ link: 'action1' }, { link: 'action2' }, { link: 'action3' }];
+  const AllCheckStyle = styled.div`
+    flex: 1;
+    button {
+      display: contents;
+      svg {
+        padding-left: 10px;
+      }
+    }
+  `;
 
   return (
     <TableStyled>
@@ -79,7 +103,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           paddingBottom: 10
         }}
       >
-        <div style={{ flex: 1 }}>
+        <AllCheckStyle>
           <Checkbox
             value={0}
             checked={isAllChecked}
@@ -87,10 +111,32 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
               handleSelectAllClick(event, pageIndex)
             }
           />
+          <Button
+            items={items}
+            size='medium'
+            styleType='secondary'
+            iconOnly={true}
+            onClick={() => {
+              clickButton(!opened);
+            }}
+            opened={opened}
+            onSelect={(val: any) => setDropdownValue(val)}
+          >
+            <Icon name='downVector' />
+          </Button>
+        </AllCheckStyle>
+        <div style={{ paddingRight: 24 }}>
+          <Button styleType='tertiary' size='small' iconOnly={true}>
+            <Icon name='export' />
+          </Button>
         </div>
-        <Button styleType='tertiary' size='small' iconOnly={true}>
-          <Icon name='export' />
-        </Button>
+        <Pagination2.default
+          totalRecords={1734}
+          rowsPerPage={rowsPerPage}
+          currentPage={currentPage}
+          onChangePage={handleChangeCurrentPage}
+          onChangeRowsPerPage={handleChangRowsPerPage}
+        />
       </div>
       <table {...getTableProps()}>
         <thead>
@@ -137,9 +183,6 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           })}
         </tbody>
       </table>
-      <div>
-        Showing {page.length} of ~{pageCount * pageSize} results
-      </div>
       <Pagination
         pageIndex={pageIndex}
         pageCount={pageCount}
