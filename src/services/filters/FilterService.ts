@@ -5,6 +5,18 @@ export const setupFilters = (columnName:string) => {
   return addFilter([], columnName, 'CONTAINS', '');
 };
 
+export const getFilter =  (filters:FilterType[], id:string)  => {
+  return filters.find(filter => filter.id === id);
+};
+
+export const compareFilter =  (filterA:FilterType, filterB:FilterType)  => {
+  return (
+    filterA.id === filterB.id &&
+    filterA.operatorName === filterB.operatorName &&
+    filterA.value === filterB.value
+  );
+};
+
 export const runFilter = (data:object[], filter: FilterType) => {
 
   const { columnName, operator, value } = filter;
@@ -74,4 +86,19 @@ export const updateFilter = (filters: FilterType[], id: string, operatorName:str
   const filtersRemoved = removeFilter(filters, id);
   const filterAdded = addFilter(filtersRemoved, id.split('-')[0], operatorName, compareValue);
   return filterAdded;
+};
+
+export const diffUpdate = (currentFilters: FilterType[], newFilters: FilterType[]): FilterType[] => {
+  let updatedFilters:FilterType[] = [];
+
+  newFilters.forEach((newFilter:FilterType) => {
+    const currentFilter = getFilter(currentFilters, newFilter.id);
+    if(currentFilter && !compareFilter(currentFilter, newFilter)) {
+      updatedFilters = addFilter(updatedFilters, newFilter.columnName, newFilter.operatorName, newFilter.value);
+    } else {
+      updatedFilters = [...updatedFilters, currentFilter];
+    }
+  });
+
+  return updatedFilters;
 };

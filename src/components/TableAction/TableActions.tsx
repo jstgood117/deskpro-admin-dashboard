@@ -1,9 +1,10 @@
 import React, { SFC, useState, useCallback } from 'react';
-import { debounce } from 'lodash';
+import { debounce, chain } from 'lodash';
 import styled from 'styled-components';
 
 // import { testFilterMeta, operatorOptions, ValueType, OperatorTypes } from '../../resources/constants/mock/testFilterMeta';
 import { FilterType } from '../../services/filters/types';
+import { operators } from '../../services/filters/operators';
 
 import SearchBox from '../SearchBox';
 import Button from '../Button';
@@ -13,7 +14,7 @@ import RuleBuilder from '../RuleBuilder/RuleBuilder';
 import { IRuleValue } from '../RuleBuilder/interfaces';
 import { initGroup, convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-
+import { addFilter, removeFilter } from '../../services/filters';
 export interface IProps {}
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
@@ -57,7 +58,7 @@ export interface IProps {
   viewMenu: boolean;
   onSearchChange?: (e: any) => void;
   filters?: FilterType[];
-  onFilterChange?: (id: string, operatorName: string, value: string) => void;
+  onFilterChange?: (rules: FilterType[]) => void;
 }
 
 const TableActions: SFC<IProps> = props => {
@@ -74,7 +75,13 @@ const TableActions: SFC<IProps> = props => {
   const onSearchChange = (value: string) => {
     const { onFilterChange } = props;
     if (onFilterChange) {
-      onFilterChange('*-CONTAINS', 'CONTAINS', value);
+      onFilterChange([{
+        id:'*-CONTAINS',
+        columnName:'*',
+        operatorName:'CONTAINS',
+        operator:operators.CONTAINS,
+        value
+      }]);
     }
   };
 
@@ -90,6 +97,22 @@ const TableActions: SFC<IProps> = props => {
   };
 
   const handleChangeFilter = (newValue: IRuleValue[]) => {
+    const rules = chain(newValue)
+    .flatMap(builderItem => builderItem.rules)
+    .map((rule: any) => {
+      return {
+        id:`${rule.rule.propertyId}-${rule.rule.operator}`,
+        columnName:rule.rule.propertyId,
+        operatorName:rule.rule.operator,
+        operator:() => true,
+        value:rule.rule.value,
+      };
+    })
+    .value();
+
+    const { onFilterChange } = props;
+    if(onFilterChange) { onFilterChange(rules); }
+
     setFilterValue(newValue);
   };
 

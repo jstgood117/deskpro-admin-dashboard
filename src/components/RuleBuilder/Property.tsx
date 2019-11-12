@@ -77,6 +77,7 @@ const PropertyBuilder: React.SFC<IProps> = ({
   const selectProperty = (property: IPropertySchema) => {
     if (rule.rule.propertyId !== property.propertyId) {
       setPropertyState(property);
+
       rule.rule.propertyId = property.propertyId;
       if (!property.operators.includes(rule.rule.operator)) {
         rule.rule.operator = '';

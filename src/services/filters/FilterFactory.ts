@@ -14,6 +14,7 @@ export const filterFactory = (columnName: string, operatorName: string, value: a
     return {
       id,
       columnName,
+      operatorName,
       operator:() => true,
       value
     };
@@ -25,6 +26,7 @@ export const filterFactory = (columnName: string, operatorName: string, value: a
       return {
         id,
         columnName,
+        operatorName,
         operator:prop(operators, operatorName),
         value
       };
