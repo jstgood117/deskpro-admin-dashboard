@@ -1,5 +1,5 @@
-import React, { SFC } from 'react';
-import styled, { CSSProperties, ThemeProvider } from 'styled-components';
+import React, { SFC, ReactNode } from 'react';
+import styled, { CSSProperties, ThemeProvider, css } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
 import { dpstyle, TextLabel } from '../Styled';
@@ -8,14 +8,17 @@ import Icon from '../Icon';
 export interface IStyleProps {
   styleType: 'lined' | 'filled';
   iconColor?: string;
+  showBoxShadow?: boolean;
   styles?: CSSProperties;
 }
 
 export interface IProps {
-  label: string;
+  label: string | any;
   styles?: CSSProperties;
   icon?: string;
   iconColor?: string;
+  children?: ReactNode;
+  showBoxShadow?: boolean;
 }
 
 const LabelStyle = styled(dpstyle.div)<IStyleProps>`
@@ -24,9 +27,8 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   border-radius: 4px;
   width: ${props =>
     props.styles && props.styles.width ? props.styles.width : 'fit-content'};
-  min-height: 24px;
   height: ${props =>
-    props.styles && props.styles.height ? props.styles.height : 'inherit'};
+    props.styles && props.styles.height ? props.styles.height : '24px'};
   border: ${props =>
     props.styleType === 'lined' && props.styles && props.styles.borderColor
       ? `1.5px solid ${props.styles.borderColor}`
@@ -43,6 +45,15 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
     fill: ${props =>
       props.iconColor ? props.iconColor : props.theme.activeColour};
   }
+  ${props =>
+    props.showBoxShadow &&
+    css`
+      border: 2px solid transparent;
+      &:hover {
+        box-shadow: 0px 3px 5px rgba(159, 204, 243, 0.25);
+        border-color: ${_props => _props.theme.lightBlue};
+      }
+    `}
 `;
 
 const Label: SFC<IProps & IStyleProps> = ({
@@ -50,10 +61,16 @@ const Label: SFC<IProps & IStyleProps> = ({
   styleType,
   icon,
   styles,
-  iconColor
+  iconColor,
+  ...props
 }) => (
   <ThemeProvider theme={DeskproAdminTheme}>
-    <LabelStyle styleType={styleType} styles={styles} iconColor={iconColor}>
+    <LabelStyle
+      styleType={styleType}
+      styles={styles}
+      iconColor={iconColor}
+      showBoxShadow={props.showBoxShadow}
+    >
       {icon && (
         <span
           style={{
@@ -67,13 +84,15 @@ const Label: SFC<IProps & IStyleProps> = ({
       <TextLabel
         small={1}
         style={{
+          display: 'flex',
+          alignItems: 'center',
           padding: '0px 10px',
           fontWeight: '600',
-          minWidth: icon ? 0 : 50,
           width: '100%',
           textAlign: styles && styles.textAlign ? styles.textAlign : 'center'
         }}
       >
+        {props.children}
         {label}
       </TextLabel>
     </LabelStyle>

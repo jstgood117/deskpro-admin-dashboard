@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Badge from '../../Badge';
 import OverflowList from '../OverflowList';
 import Avatar from '../../Avatar';
 import NameAndAvatar from '../../Avatar/NameAndAvatar';
 import Tooltip from '../../Tooltip';
 import { S1 } from '../../Typography';
+import Label from '../../Label';
 
 const containerStyle = {
   marginRight: 8,
@@ -70,15 +70,19 @@ const TeamOverflow: React.SFC<IProps> = ({
 
       case 'label':
         component = (
-          <Badge
-            backgroundColor={item.textBackgroundColor}
-            color={item.textColor}
-            showBoxShadow={true}
-            style={containerStyle}
-          >
-            {item.avatar && <BadeImage src={item.avatar} />}
-            {item.name}
-          </Badge>
+          <div style={containerStyle}>
+            <Label
+              label={item.name}
+              styleType='filled'
+              styles={{
+                backgroundColor: item.textBackgroundColor,
+                color: item.textColor
+              }}
+              showBoxShadow={true}
+            >
+              {item.avatar && <BadeImage src={item.avatar} />}
+            </Label>
+          </div>
         );
         break;
 
@@ -90,7 +94,7 @@ const TeamOverflow: React.SFC<IProps> = ({
       <Tooltip
         key={item.id}
         styleType='lightBox'
-        content={(
+        content={
           <List>
             <S1>Team members</S1>
             {items.map((member: any) => (
@@ -101,7 +105,7 @@ const TeamOverflow: React.SFC<IProps> = ({
               />
             ))}
           </List>
-        )}
+        }
       >
         <span>{component}</span>
       </Tooltip>

@@ -21,6 +21,7 @@ import {
   tableColors,
   testTableData
 } from '../../resources/constants/mock/testTableData';
+import Label from '../Label';
 
 let textColor = '';
 let backgroundCache = '';
@@ -29,7 +30,9 @@ const getRandomItem = (): ITableColor => {
 };
 const getRandomColor = (): ITableColor => {
   let randomItem = getRandomItem();
-  if (randomItem.background === backgroundCache) { randomItem = getRandomItem(); }
+  if (randomItem.background === backgroundCache) {
+    randomItem = getRandomItem();
+  }
   backgroundCache = randomItem.background;
   textColor = randomItem.textColor;
   return randomItem;
@@ -90,24 +93,30 @@ const Team: React.SFC<{
       );
     case 'label':
       return (
-        <Badge
-          style={{ marginRight: 5, marginBottom: 5 }}
-          backgroundColor={getRandomColor().background}
-          color={textColor}
-        >
-          {team.text}
-        </Badge>
+        <div style={{ marginRight: 5 }}>
+          <Label
+            label={team.text}
+            styleType='filled'
+            styles={{
+              backgroundColor: getRandomColor().background,
+              color: textColor
+            }}
+          />
+        </div>
       );
     case 'avatar-label':
       return (
         <Flex style={{ margin: 5, alignItems: 'center' }}>
-          <Badge
-            backgroundColor={getRandomColor().background}
-            color={textColor}
+          <Label
+            label={team.text}
+            styleType='filled'
+            styles={{
+              backgroundColor: getRandomColor().background,
+              color: textColor
+            }}
           >
             {team.image && <BadeImage src={team.image} />}
-            {team.text}
-          </Badge>
+          </Label>
         </Flex>
       );
     default:
@@ -341,18 +350,34 @@ const TableDesignTimeComponent: React.SFC<{
             <TableCell>{item.phone}</TableCell>
             <TableCell>
               <Flex>
-                <Badge backgroundColor='#F7F7F7' color='#8B9293'>
-                  <Icon name='user.check' />
-                  <span style={{ marginLeft: 5 }}>{item.links.user}</span>
-                </Badge>
-                <Badge
-                  style={{ marginLeft: 8 }}
-                  backgroundColor='#EBE4F2'
-                  color='#9384BD'
+                <Label
+                  label={
+                    <span style={{ marginLeft: 5 }}>{item.links.user}</span>
+                  }
+                  styleType='filled'
+                  styles={{
+                    backgroundColor: '#F7F7F7',
+                    color: '#8B9293'
+                  }}
+                  iconColor='#8B9293'
                 >
-                  <Icon name='clock' />
-                  <span style={{ marginLeft: 5 }}>{item.links.clock}</span>
-                </Badge>
+                  <Icon name='user.check' />
+                </Label>
+                <div style={{ marginLeft: 5 }}>
+                  <Label
+                    label={
+                      <span style={{ marginLeft: 5 }}>{item.links.clock}</span>
+                    }
+                    styleType='filled'
+                    styles={{
+                      color: '#9384BD',
+                      backgroundColor: '#EBE4F2',
+                      borderColor: '#a9b0b0'
+                    }}
+                    icon='clock'
+                    iconColor='#9384BD'
+                  />
+                </div>
               </Flex>
             </TableCell>
             <TableCell>
