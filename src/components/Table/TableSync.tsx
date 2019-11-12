@@ -119,6 +119,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
             onClick={() => {
               clickButton(!opened);
             }}
+            dropdownValue={dropdownValue}
             opened={opened}
             onSelect={(val: any) => setDropdownValue(val)}
           >
