@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FlowLayout } from '../Styled';
 import { S1 } from '../Typography';
 import Icon from '../Icon';
-import Badge from '../Badge';
+import Label from '../Label';
 
 const OverflowStyled = styled.span`
   ${S1} {
@@ -49,12 +49,18 @@ const OverflowList: React.SFC<IProps> = ({
 
   const list = expand ? items : items.slice(0, max);
   const OverflowText =
-    viewMode === 'text' ? (
+    viewMode !== 'text' ? (
       <S1 style={textStyle}>+{Math.abs(max - items.length)}</S1>
     ) : (
-      <Badge style={{ height: 18 }} color='#fff' backgroundColor='#A9B0B0'>
-        +{Math.abs(max - items.length)}
-      </Badge>
+      <Label
+        label={`+${String(Math.abs(max - items.length))}`}
+        styleType='filled'
+        styles={{
+          backgroundColor: '#A9B0B0',
+          color: '#fff',
+          height: '18px',
+        }}
+      />
     );
 
   return (

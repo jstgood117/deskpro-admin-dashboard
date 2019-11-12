@@ -10,7 +10,6 @@ import { P1, S2 } from '../Typography';
 import { TextLinkLabel } from '../Styled';
 import Locale from '../Locale';
 import Tooltip from '../Tooltip';
-import Badge from '../Badge';
 import Currency from '../Currency';
 import Color from '../Color';
 import ActiveAvatar from '../Avatar/ActiveAvatar';
@@ -19,6 +18,7 @@ import TeamOverflow from '../OverflowList/TeamOverflow';
 import Attachment from '../Attachment';
 import Toogle from '../Toggle';
 import Input from '../Input';
+import Label from '../Label';
 
 interface IProps {
   type:
@@ -141,7 +141,11 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
 
     case 'attachment':
       return (
-        <Attachment id={props.id} onChangeFile={() => false} text={props.text} />
+        <Attachment
+          id={props.id}
+          onChangeFile={() => false}
+          text={props.text}
+        />
       );
 
     case 'locale':
@@ -180,9 +184,14 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
 
     case 'label':
       return (
-        <Badge color={props.color} backgroundColor={props.backgroundColor}>
-          {props.label}
-        </Badge>
+        <Label
+          label={props.label}
+          styleType='filled'
+          styles={{
+            backgroundColor: props.backgroundColor,
+            color: props.color
+          }}
+        />
       );
 
     case 'currency':
@@ -190,12 +199,14 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
 
     case 'code':
       return (
-        <Badge
-          color={props.color || '#1C3E55'}
-          backgroundColor={props.backgroundColor || '#E8EBEE'}
-        >
-          <FormattedMessage id={props.code} />
-        </Badge>
+        <Label
+          label={<FormattedMessage id={props.code} />}
+          styleType='filled'
+          styles={{
+            backgroundColor: props.backgroundColor || '#E8EBEE',
+            color: props.color || '#1C3E55'
+          }}
+        />
       );
 
     case 'color':

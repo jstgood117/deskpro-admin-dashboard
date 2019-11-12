@@ -1,11 +1,11 @@
 import React, { SFC, CSSProperties } from 'react';
 import styled from 'styled-components';
 
-import Badge from '../Badge';
 import Icon from '../Icon';
 import { P1, S1 } from '../Typography';
 import { FlowLayout } from '../Styled';
 import Tooltip from '../Tooltip';
+import Label from '../Label';
 
 const FlowLayoutStyled = styled(FlowLayout)`
   display: inline-flex;
@@ -50,8 +50,6 @@ const Relationship: SFC<IProps> = ({
   color,
   backgroundColor,
   title,
-  style,
-  className,
   renderItem
 }) => {
   return (
@@ -71,21 +69,29 @@ const Relationship: SFC<IProps> = ({
               <Icon name={icon} />
             </CircleStyled>
             <P1 style={{ marginRight: 8 }}>{text}</P1>
-            <Badge color='#FFF' backgroundColor='#A9B0B0'>
-              {items.length}
-            </Badge>
+            <Label
+              label={`${String(items.length)}`}
+              styleType='filled'
+              styles={{
+                backgroundColor: '#A9B0B0',
+                color: '#fff',
+                height: '22px'
+              }}
+            />
           </FlowLayoutStyled>
         ) : (
-          <Badge
-            style={style}
-            className={className}
-            color={color}
-            backgroundColor={backgroundColor}
+          <Label
+            label={<div style={{ marginLeft: 10 }}>{items.length}</div>}
+            styleType='filled'
+            iconColor={color}
+            styles={{
+              backgroundColor,
+              color
+            }}
             showBoxShadow={true}
           >
             <Icon name={icon} />
-            <div style={{ marginLeft: 10 }}>{items.length}</div>
-          </Badge>
+          </Label>
         )}
       </span>
     </Tooltip>
