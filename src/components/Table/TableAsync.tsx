@@ -1,15 +1,15 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 
 import { TableStyled } from './Table';
-import Pagination from './Pagination';
+import Pagination, { IPageChange } from '../Pagination/Pagination';
 
 type TableAsyncProps = {
   data: any[];
-  columns:any[],
-  fetchData:any;
-  loading:boolean;
-  pageCount:number;
+  columns: any[];
+  fetchData: any;
+  loading: boolean;
+  pageCount: number;
 };
 
 const TableAsync: FC<TableAsyncProps> = ({
@@ -17,7 +17,7 @@ const TableAsync: FC<TableAsyncProps> = ({
   columns,
   fetchData,
   loading,
-  pageCount:controlledPageCount,
+  pageCount: controlledPageCount
 }) => {
   const {
     getTableProps,
@@ -25,14 +25,6 @@ const TableAsync: FC<TableAsyncProps> = ({
     headerGroups,
     prepareRow,
     page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
     state: { pageIndex, pageSize }
   } = useTable(
     {
@@ -40,27 +32,40 @@ const TableAsync: FC<TableAsyncProps> = ({
       data,
       initialState: { pageIndex: 0 },
       manualPagination: true,
-      pageCount: controlledPageCount,
+      pageCount: controlledPageCount
     } as any,
     useSortBy,
     usePagination,
-    useRowSelect,
+    useRowSelect
   ) as any;
 
   useEffect(() => {
     fetchData({ pageIndex, pageSize });
   }, [fetchData, pageIndex, pageSize]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const handleChangeCurrentPage = (datas: IPageChange) => {
+    setCurrentPage(datas.currentPage);
+  };
 
+  const handleChangRowsPerPage = (datas: number) => {
+    setRowsPerPage(datas);
+    setCurrentPage(1);
+  };
   return (
     <TableStyled>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup:any, indexOuter: number) => (
+          {headerGroups.map((headerGroup: any, indexOuter: number) => (
             <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column:any, indexInner: number) => (
-                <th key={indexInner} {...column.getHeaderProps(column.getSortByToggleProps())}>
+              {headerGroup.headers.map((column: any, indexInner: number) => (
+                <th
+                  key={indexInner}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
                   {column.render('Header')}
-                  <span>{column.isSorted ? column.isSortedDesc ? ' v' : ' ^' : ''}
+                  <span>
+                    {column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ''}
                   </span>
                 </th>
               ))}
@@ -68,36 +73,36 @@ const TableAsync: FC<TableAsyncProps> = ({
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map(
-            (row:any, indexOuter:number) => {
-              prepareRow(row);
-              return (
-                <tr key={indexOuter} {...row.getRowProps()}>
-                  {row.cells.map((cell:any, indexInner:number) => {
-                    return <td key={indexInner} {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-                  })}
-                </tr>
-              );
-            }
-          )}
+          {page.map((row: any, indexOuter: number) => {
+            prepareRow(row);
+            return (
+              <tr key={indexOuter} {...row.getRowProps()}>
+                {row.cells.map((cell: any, indexInner: number) => {
+                  return (
+                    <td key={indexInner} {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
-      {loading
-        ? ( <div>Loading...</div> )
-        : ( <div>Showing {page.length} of ~{controlledPageCount * pageSize}{' '}results</div> )
-      }
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          Showing {page.length} of ~{controlledPageCount * pageSize} results
+        </div>
+      )}
       {!loading && (
         <Pagination
-          pageIndex={pageIndex}
-          pageCount={pageCount}
-          pageSize={pageSize}
-          pageOptions={pageOptions}
-          canPreviousPage={canPreviousPage}
-          canNextPage={canNextPage}
-          gotoPage={gotoPage}
-          previousPage={previousPage}
-          nextPage={nextPage}
-          setPageSize={setPageSize}
+          totalRecords={1734}
+          rowsPerPage={rowsPerPage}
+          currentPage={currentPage}
+          onChangePage={handleChangeCurrentPage}
+          onChangeRowsPerPage={handleChangRowsPerPage}
         />
       )}
     </TableStyled>

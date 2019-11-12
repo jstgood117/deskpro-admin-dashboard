@@ -3,13 +3,12 @@ import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 import { onCheckboxChange, onSelectAllChange } from './helpers/functions';
 
 import { TableStyled } from './Table';
-import Pagination from './Pagination';
 import Checkbox from './Checkbox';
 import * as Cell from './Cell';
 import Button from '../Button';
 import Icon from '../Icon';
 import styled from 'styled-components';
-import * as Pagination2 from '../Pagination/Pagination';
+import Pagination, { IPageChange } from '../Pagination/Pagination';
 
 type TableAsyncProps = {
   data: any[];
@@ -23,14 +22,6 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
     headerGroups,
     prepareRow,
     page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    setPageSize,
     state: { pageIndex, pageSize }
   } = useTable<any>(
     {
@@ -74,7 +65,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
   const [dropdownValue, setDropdownValue] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const handleChangeCurrentPage = (datas: Pagination2.IPageChange) => {
+  const handleChangeCurrentPage = (datas: IPageChange) => {
     setCurrentPage(datas.currentPage);
   };
 
@@ -131,7 +122,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
             <Icon name='export' />
           </Button>
         </div>
-        <Pagination2.default
+        <Pagination
           totalRecords={1734}
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
@@ -185,16 +176,11 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
         </tbody>
       </table>
       <Pagination
-        pageIndex={pageIndex}
-        pageCount={pageCount}
-        pageSize={pageSize}
-        pageOptions={pageOptions}
-        canPreviousPage={canPreviousPage}
-        canNextPage={canNextPage}
-        gotoPage={gotoPage}
-        previousPage={previousPage}
-        nextPage={nextPage}
-        setPageSize={setPageSize}
+        totalRecords={1734}
+        rowsPerPage={rowsPerPage}
+        currentPage={currentPage}
+        onChangePage={handleChangeCurrentPage}
+        onChangeRowsPerPage={handleChangRowsPerPage}
       />
     </TableStyled>
   );
