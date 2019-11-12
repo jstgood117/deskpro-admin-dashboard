@@ -1,6 +1,10 @@
 import { filterFactory } from './FilterFactory';
 import { FilterType } from './types';
 
+const generateFilterId = (columnName:string, operatorName:string, iterator: number = 1) => {
+  return `${columnName}-${operatorName}-${iterator}`;
+};
+
 export const setupFilters = (columnName:string) => {
   return addFilter([], columnName, 'CONTAINS', '');
 };
@@ -70,7 +74,15 @@ export const addFilter = (
   compareValue: any
 ): FilterType[] => {
 
-  const newFilter: FilterType = filterFactory(columnName, operatorName, compareValue);
+  const existingIds = filters.map(filter => filter.id);
+
+  let id = generateFilterId(columnName, operatorName);
+  let i = 1;
+  while(existingIds.includes(id)) {
+    id = generateFilterId(columnName, operatorName, ++i);
+  }
+
+  const newFilter: FilterType = filterFactory(id, columnName, operatorName, compareValue);
 
   return [
     ...filters,

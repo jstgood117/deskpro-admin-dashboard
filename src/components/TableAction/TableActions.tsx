@@ -14,7 +14,7 @@ import RuleBuilder from '../RuleBuilder/RuleBuilder';
 import { IRuleValue } from '../RuleBuilder/interfaces';
 import { initGroup, convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { addFilter, removeFilter } from '../../services/filters';
+// import { addFilter, removeFilter } from '../../services/filters';
 export interface IProps {}
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
@@ -76,7 +76,7 @@ const TableActions: SFC<IProps> = props => {
     const { onFilterChange } = props;
     if (onFilterChange) {
       onFilterChange([{
-        id:'*-CONTAINS',
+        id:'*-CONTAINS-1',
         columnName:'*',
         operatorName:'CONTAINS',
         operator:operators.CONTAINS,
