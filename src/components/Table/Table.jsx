@@ -21,6 +21,11 @@ export const TableStyled = styled.div`
 		}
 		& tbody {
 			& tr {
+
+				&.row--selected {
+					background-color: ${props => props.theme.greyLight};
+				}
+
 				border-bottom: 1px solid ${props => props.theme.greyLighter};
 
 				& td {

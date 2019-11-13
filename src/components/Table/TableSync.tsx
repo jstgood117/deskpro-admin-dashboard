@@ -22,6 +22,8 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
     headerGroups,
     prepareRow,
     page,
+    setPageSize,
+    gotoPage,
     state: { pageIndex, pageSize }
   } = useTable<any>(
     {
@@ -37,6 +39,11 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
   const [checked, setChecked] = useState<object>({});
   const [isAllChecked, setIsAllChecked] = useState(false);
   const [isAllIndeterminate, setIsAllIndeterminate] = useState(false);
+  const [opened, clickButton] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalRecords, setTotalRecords] = useState<number>(0);
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -55,6 +62,18 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
     onCheckboxChange(event.currentTarget.value, checked, setChecked);
   };
 
+  const handleChangeCurrentPage = (datas: IPageChange) => {
+    setCurrentPage(datas.currentPage);
+    gotoPage(datas.currentPage-1);
+  };
+
+  const handleChangRowsPerPage = (rows: number) => {
+    setPageSize(rows);
+    setRowsPerPage(rows);
+    setCurrentPage(1);
+    gotoPage(0);
+  };
+
   useEffect(() => {
     const checkedLength = Object.keys(checked).length;
     const indeterminate = (checkedLength !== 0 && checkedLength !== page.length) ? true : false;
@@ -66,15 +85,8 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   useEffect(() => {
     setChecked({});
+    setTotalRecords(data.length);
   }, [pageIndex, data]);
-
-  const [opened, clickButton] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const handleChangeCurrentPage = (datas: IPageChange) => {
-    setCurrentPage(datas.currentPage);
-  };
 
   useEffect(() => {
 
@@ -95,10 +107,6 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   }, [dropdownValue, checked]);
 
-  const handleChangRowsPerPage = (datas: number) => {
-    setRowsPerPage(datas);
-    setCurrentPage(1);
-  };
   const items = [{ link: 'Delete' }];
   const AllCheckStyle = styled.div`
     flex: 1;
@@ -150,7 +158,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           </Button>
         </div>
         <Pagination
-          totalRecords={1734}
+          totalRecords={totalRecords}
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}
           onChangePage={handleChangeCurrentPage}
@@ -180,7 +188,13 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           {page.map((row: any, indexOuter: number) => {
             prepareRow(row);
             return (
-              <tr key={indexOuter} {...row.getRowProps()}>
+              <tr
+                key={indexOuter}
+                {...row.getRowProps()}
+                className={checked.hasOwnProperty(row.original.id.toString())
+                  ? 'row--selected'
+                  : ''}
+              >
                 <td>
                   <Checkbox
                     value={row.original.id}
@@ -203,7 +217,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
         </tbody>
       </table>
       <Pagination
-        totalRecords={1734}
+        totalRecords={totalRecords}
         rowsPerPage={rowsPerPage}
         currentPage={currentPage}
         onChangePage={handleChangeCurrentPage}
