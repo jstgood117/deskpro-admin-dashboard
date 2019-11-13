@@ -44,6 +44,7 @@ const ArrowButton = styled.span<{ checked: boolean }>`
 `;
 
 const CheckboxContainer = styled.label<{ size: number }>`
+  width: ${props => props.size}px;
   height: ${props => props.size}px;
   display: inline-block;
   position: relative;
