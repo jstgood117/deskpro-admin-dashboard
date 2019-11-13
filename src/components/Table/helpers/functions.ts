@@ -16,12 +16,14 @@ export const onCheckboxChange = (
       .filter(_id => _id !== value)
       .reduce((_obj, _id) => Object.assign(_obj, {[_id]: true}), {});
     setChecked(newIds);
+
   } else {
 
     setChecked({
       ...checked,
       [value]:true
     });
+
   }
 };
 
@@ -46,4 +48,12 @@ export const onSelectAllChange = (
     }));
     setChecked(Object.assign({}, ...ids));
   }
+};
+
+export const onSelectEverything = (data: object[], setChecked: setCheckedType) => {
+
+  const ids = data.map((_row:any) => ({
+    [_row.id]:true
+  }));
+  setChecked(Object.assign({}, ...ids));
 };

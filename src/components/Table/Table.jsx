@@ -21,6 +21,11 @@ export const TableStyled = styled.div`
 		}
 		& tbody {
 			& tr {
+
+				&.row--selected {
+					background-color: ${props => props.theme.greyLight};
+				}
+
 				border-bottom: 1px solid ${props => props.theme.greyLighter};
 
 				& td {
@@ -74,9 +79,6 @@ export const transformColumnData = (columns, intl) => {
 					</div>
 				);
 				break;
-	/*			case 'formattedNameAvatar':
-				column.render = formattedNameAvatar(column.props);
-				column.customSort = sortNameAvatar; */
 				default:
     }
 		return newCol;
