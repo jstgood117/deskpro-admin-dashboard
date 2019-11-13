@@ -5,16 +5,25 @@ import { ThemeProvider } from 'styled-components';
 
 import TableData from './TableData';
 import { IntlProvider } from 'react-intl';
-import { testTranslations, testTableData } from '../../resources/constants/constants';
+import {
+  testTranslations,
+  testTableData
+} from '../../resources/constants/constants';
 import { DeskproAdminTheme } from '../Theme';
+import { getRandomItem } from '../../utils/getRandomColor';
+import { ITableColor } from '../../resources/interfaces';
 
-const getRandomColor = (): string => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+let backgroundCache = '';
+let txtColor = '';
+
+const getRandomColor = (): ITableColor => {
+  let randomItem = getRandomItem();
+  if (randomItem.background === backgroundCache) {
+    randomItem = getRandomItem();
   }
-  return color;
+  backgroundCache = randomItem.background;
+  txtColor = randomItem.textColor;
+  return randomItem;
 };
 
 const Container: React.SFC = props => (
@@ -183,45 +192,51 @@ storiesOf('Table Data', module)
       }}
     />
   ))
-  .add('Teams 1 (multiple_teams)', () => (
-    <TableData
-      type='multiple_teams'
-      props={{
-        styleType: 'avatar',
-        teams: testTableData.map(team => ({
-          ...team,
-          textColor: '#fff',
-          textBackgroundColor: getRandomColor()
-        }))
-      }}
-    />
-  ))
-  .add('Teams 2 (multiple_teams)', () => (
-    <TableData
-      type='multiple_teams'
-      props={{
-        styleType: 'name-avatar',
-        teams: testTableData.map(team => ({
-          ...team,
-          textColor: '#fff',
-          textBackgroundColor: getRandomColor()
-        }))
-      }}
-    />
-  ))
-  .add('Teams 3 (multiple_teams)', () => (
-    <TableData
-      type='multiple_teams'
-      props={{
-        styleType: 'label',
-        teams: testTableData.map(team => ({
-          ...team,
-          textColor: '#fff',
-          textBackgroundColor: getRandomColor()
-        }))
-      }}
-    />
-  ))
+  .add('Teams 1 (multiple_teams)', () => {
+    return (
+      <TableData
+        type='multiple_teams'
+        props={{
+          styleType: 'avatar',
+          teams: testTableData.map(team => ({
+            ...team,
+            textBackgroundColor: getRandomColor().background,
+            textColor: txtColor
+          }))
+        }}
+      />
+    );
+  })
+  .add('Teams 2 (multiple_teams)', () => {
+    return (
+      <TableData
+        type='multiple_teams'
+        props={{
+          styleType: 'name-avatar',
+          teams: testTableData.map(team => ({
+            ...team,
+            textBackgroundColor: getRandomColor().background,
+            textColor: txtColor
+          }))
+        }}
+      />
+    );
+  })
+  .add('Teams 3 (multiple_teams)', () => {
+    return (
+      <TableData
+        type='multiple_teams'
+        props={{
+          styleType: 'label',
+          teams: testTableData.map(team => ({
+            ...team,
+            textBackgroundColor: getRandomColor().background,
+            textColor: txtColor
+          }))
+        }}
+      />
+    );
+  })
   .add('Count (count)', () => <TableData type='count' props={{ count: 79 }} />)
   .add('Id (id)', () => (
     <div style={{ position: 'relative', width: 50, height: 44 }}>

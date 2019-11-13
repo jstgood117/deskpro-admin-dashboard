@@ -17,16 +17,14 @@ import { S1, P1, S2 } from '../Typography';
 import Icon from '../Icon';
 import { ISortItem, ITableColor } from '../../resources/interfaces';
 import {
-  tableColors,
   testTableData
 } from '../../resources/constants/mock/testTableData';
 import Label from '../Label';
+import { getRandomItem } from '../../utils/getRandomColor';
 
 let textColor = '';
 let backgroundCache = '';
-const getRandomItem = (): ITableColor => {
-  return tableColors[Math.floor(Math.random() * tableColors.length)];
-};
+
 const getRandomColor = (): ITableColor => {
   let randomItem = getRandomItem();
   if (randomItem.background === backgroundCache) {
