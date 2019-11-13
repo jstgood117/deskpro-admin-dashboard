@@ -6,6 +6,7 @@
     "semicolon": true,
     "no-var-requires": false,
     "jsx-no-lambda": false,
+    "jsx-wrap-multiline": false,
     "no-bitwise": false,
     "indent": [true, "spaces", 2]
   },
