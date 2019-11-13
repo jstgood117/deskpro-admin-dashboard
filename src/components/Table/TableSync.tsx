@@ -63,9 +63,11 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   }, [checked, page]);
 
+
   useEffect(() => {
     setChecked({});
   }, [pageIndex, data]);
+
   const [opened, clickButton] = useState(false);
   const [dropdownValue, setDropdownValue] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,11 +76,30 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
     setCurrentPage(datas.currentPage);
   };
 
+  useEffect(() => {
+
+    const deleteChecked = () => {
+      // console.log(checked);
+    };
+
+    if(dropdownValue) {
+      const { link } = dropdownValue;
+      switch(true) {
+        case link === 'Delete':
+          deleteChecked();
+          break;
+      }
+    }
+
+    setDropdownValue(undefined);
+
+  }, [dropdownValue, checked]);
+
   const handleChangRowsPerPage = (datas: number) => {
     setRowsPerPage(datas);
     setCurrentPage(1);
   };
-  const items = [{ link: 'action1' }, { link: 'action2' }, { link: 'action3' }];
+  const items = [{ link: 'Delete' }];
   const AllCheckStyle = styled.div`
     flex: 1;
     button {
