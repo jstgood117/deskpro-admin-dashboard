@@ -42,7 +42,7 @@ const FilterContainer = styled.div`
   background-color: #fff;
 `;
 const FilterContent = styled.div<{ active: boolean }>`
-  opacity: ${props => (props.active ? 1 : 0)};
+  display: ${props => (props.active ? 'block' : 'none')};
   box-shadow: 0px 3px 10px rgba(28, 62, 85, 0.1);
   padding: 10px;
 `;
