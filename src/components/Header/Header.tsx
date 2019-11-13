@@ -135,7 +135,7 @@ export interface IProps {
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
   filters?:FilterType[];
-  onFilterChange?:(id:string, operatorName:string, value:string) => void;
+  onFilterChange?:(rules:FilterType[]) => void;
 }
 
 const Header: SFC<IProps> = ({

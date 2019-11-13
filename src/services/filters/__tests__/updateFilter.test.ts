@@ -19,7 +19,7 @@ describe('updateFilter', () => {
 
     const newFilters = updateFilter(filters, id, operatorName, compareValue);
 
-    expect(newFilters[0].id).toEqual('FirstName-CONTAINS');
+    expect(newFilters[0].id).toEqual('FirstName-CONTAINS-1');
     expect(newFilters[0].columnName).toEqual('FirstName');
     expect(newFilters[0].value).toEqual('abc');
   });
