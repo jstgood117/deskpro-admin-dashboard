@@ -3,7 +3,7 @@ import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 import { onCheckboxChange, onSelectAllChange } from './helpers/functions';
 
 import { TableStyled } from './Table';
-import Checkbox from './Checkbox';
+import Checkbox from '../Checkbox';
 import * as Cell from './Cell';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -36,6 +36,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   const [checked, setChecked] = useState<object>({});
   const [isAllChecked, setIsAllChecked] = useState(false);
+  const [isAllIndeterminate, setIsAllIndeterminate] = useState(false);
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -55,7 +56,11 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
   };
 
   useEffect(() => {
-    setIsAllChecked(Object.keys(checked).length === page.length ? true : false);
+    const checkedLength = Object.keys(checked).length;
+    const indeterminate = (checkedLength !== 0 && checkedLength !== page.length) ? true : false;
+    setIsAllIndeterminate(indeterminate);
+    setIsAllChecked((indeterminate || checkedLength === page.length) ? true : false);
+
   }, [checked, page]);
 
   useEffect(() => {
@@ -97,6 +102,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
         <AllCheckStyle>
           <Checkbox
             value={0}
+            indeterminate={isAllIndeterminate}
             checked={isAllChecked}
             onChange={(event: SyntheticEvent<HTMLInputElement>) =>
               handleSelectAllClick(event, pageIndex)

@@ -3,7 +3,7 @@ import { useQuery } from 'react-apollo';
 import { DocumentNode } from 'graphql';
 
 import { IViewData } from '../../resources/interfaces';
-import { setupFilters, updateFilter } from '../../services/filters';
+import { setupFilters, diffUpdate } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 
 import Loading from '../Loading';
@@ -40,9 +40,10 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
     return <Error apolloError={error} />;
   }
 
-  const onFilterChange = (id:string, operatorName: string, compareValue:string) => {
+  const onFilterChange = (newFilters: FilterType[]) => {
 
-    setFilters(updateFilter(filters, id, operatorName, compareValue));
+    setFilters(diffUpdate(filters, newFilters));
+
   };
 
   if (data && data[queryName]) {

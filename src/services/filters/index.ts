@@ -3,7 +3,8 @@ import {
   runFilters,
   addFilter,
   removeFilter,
-  updateFilter
+  updateFilter,
+  diffUpdate
 } from './FilterService';
 
 export {
@@ -11,5 +12,6 @@ export {
   runFilters,
   addFilter,
   removeFilter,
-  updateFilter
+  updateFilter,
+  diffUpdate
 };
