@@ -196,8 +196,8 @@ const Pagination: React.FC<IProps> = ({
 
     // Update state
     setTotalPages(total);
-    setPages(pages);
-  }, [totalRecords, rowsPerPage, currentPage, pages]);
+    setPages(_pages);
+  }, [totalRecords, rowsPerPage, currentPage]);
 
   return (
     <Container style={containerStyle} className={containerClassName}>
