@@ -33,6 +33,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 
   const getData = async () => {
     setLoading(true);
+
     try {
       const response = await client.query({
         query: gql`${dataQuery}`,
@@ -51,6 +52,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   };
 
   const fetchData = useCallback(() => {
+
     if (!loading) {
       getData();
     }
@@ -61,7 +63,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   useEffect(() => {
     if (bChooseSyncTable) getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dataQuery]);
 
   useEffect(() => {
     setFilteredData(runFilters(data, filters));
