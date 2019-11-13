@@ -79,9 +79,6 @@ export const transformColumnData = (columns, intl) => {
 					</div>
 				);
 				break;
-	/*			case 'formattedNameAvatar':
-				column.render = formattedNameAvatar(column.props);
-				column.customSort = sortNameAvatar; */
 				default:
     }
 		return newCol;

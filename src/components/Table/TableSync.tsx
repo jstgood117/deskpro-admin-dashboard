@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
-import { onCheckboxChange, onSelectAllChange } from './helpers/functions';
+import { onCheckboxChange, onSelectAllChange, onSelectEverything } from './helpers/functions';
 
 import { TableStyled } from './Table';
 import Checkbox from '../Checkbox';
@@ -14,6 +14,25 @@ type TableAsyncProps = {
   data: any[];
   columns: any[];
 };
+
+const AllCheckStyle = styled.div`
+flex: 1;
+button {
+  display: contents;
+  svg {
+    padding-left: 10px;
+  }
+}
+.selected-text {
+  padding-left:17px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 150%;
+  color:${props => props.theme.activeColour};
+}
+`;
+
 
 const Table: FC<TableAsyncProps> = ({ data, columns }) => {
   const {
@@ -76,9 +95,9 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   useEffect(() => {
     const checkedLength = Object.keys(checked).length;
-    const indeterminate = (checkedLength !== 0 && checkedLength !== page.length) ? true : false;
+    const indeterminate = (checkedLength !== 0 && checkedLength < page.length) ? true : false;
     setIsAllIndeterminate(indeterminate);
-    setIsAllChecked((indeterminate || checkedLength === page.length) ? true : false);
+    setIsAllChecked((indeterminate || checkedLength >= page.length) ? true : false);
 
   }, [checked, page]);
 
@@ -90,33 +109,27 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   useEffect(() => {
 
-    const deleteChecked = () => {
-      // console.log(checked);
-    };
-
     if(dropdownValue) {
       const { link } = dropdownValue;
-      switch(true) {
-        case link === 'Delete':
-          deleteChecked();
+      switch(link) {
+        case 'All':
+          onSelectEverything(data, setChecked);
+          break;
+
+        case 'All on the page':
+          onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
+          break;
+        default:
           break;
       }
     }
 
     setDropdownValue(undefined);
 
-  }, [dropdownValue, checked]);
+  }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
-  const items = [{ link: 'Delete' }];
-  const AllCheckStyle = styled.div`
-    flex: 1;
-    button {
-      display: contents;
-      svg {
-        padding-left: 10px;
-      }
-    }
-  `;
+  const items = [{ link: 'All on the page'}, { link: 'All' }];
+
 
   return (
     <TableStyled>
@@ -151,6 +164,11 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           >
             <Icon name='downVector' />
           </Button>
+          {Object.keys(checked).length > 0 && (
+            <span className='selected-text'>
+              {Object.keys(checked).length} Selected
+            </span>
+          )}
         </AllCheckStyle>
         <div style={{ paddingRight: 24 }}>
           <Button styleType='tertiary' size='small' iconOnly={true}>
