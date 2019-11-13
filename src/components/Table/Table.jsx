@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { dpstyle } from '../Styled';
 
-export const TableStyled = styled.div`
+export const TableStyled = styled(dpstyle.div)`
 	& table {
 		width: 100%;
 		border-collapse: collapse;
