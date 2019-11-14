@@ -35,6 +35,7 @@ button {
 
 
 const Table: FC<TableAsyncProps> = ({ data, columns }) => {
+
   const {
     getTableProps,
     getTableBodyProps,

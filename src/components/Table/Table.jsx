@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { customSortMethod } from './helpers/sortingFunctions';
 import { dpstyle } from '../Styled';
 
 export const TableStyled = styled(dpstyle.div)`
@@ -48,16 +48,15 @@ export const TableStyled = styled(dpstyle.div)`
 	}
 `
 
-// TODO how does this come through in the agents_getAgentsPage query?
-
-/* const formattedNameAvatar = (props: any) => {
-	const checkArr = Object.keys(props);
-	if (!checkArr.includes('avatar') || !checkArr.includes('name')) {
-		throw new Error(`formattedNameAvatar did not receive required props: ${JSON.stringify(props)}`);
+const generateSortType = sortType => {
+	if(!sortType) {
+		return 'alphanumeric';
 	}
-	return (rowData: any) => <div><img src={rowData[props.avatar]} alt={rowData[props.name]} />{rowData[props.name]}</div>;
+
+	// Todo, switch function for different sort types
+	// ...for now, send back the custom sort type as a POC
+	return customSortMethod;
 }
-const sortNameAvatar = (a: any, b: any) => a.name - b.name; */
 
 export const transformColumnData = (columns, intl) => {
 	let newCols = columns.map( column => {	
@@ -65,22 +64,8 @@ export const transformColumnData = (columns, intl) => {
 			id: column.title,
 			Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
 			accessor: column.data[0].path,
-			type: column.field
-    }
-		switch (column.title) {
-			case 'selection':
-				newCol.Header = ({ getToggleAllRowsSelectedProps }) => (
-					<div>
-						<input type='checkbox' {...getToggleAllRowsSelectedProps()} />
-					</div>
-				);
-				newCol.Cell = ({ row }) => (
-					<div>
-						<input type='checkbox' {...row.getToggleRowSelectedProps()} />
-					</div>
-				);
-				break;
-				default:
+			type: column.field, 
+			sortType: generateSortType(column.sortType)
     }
 		return newCol;
 	});
