@@ -1,4 +1,4 @@
-import React, { SFC, Fragment, useState, useEffect } from 'react';
+import React, {Fragment, useState, useEffect, FC} from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -35,10 +35,10 @@ const SectionTitle = styled.div`
   align-items: center;
 `;
 
-const SectionHeader: SFC<{ sectionName: string }> = ({ sectionName }) => (
+const SectionHeader: FC<{ sectionName: string, icon: string }> = ({ sectionName, icon }) => (
   <SectionHeaderWrapper>
     <IconWrapper>
-      <Icon name={sectionName} />
+      <Icon name={icon} />
     </IconWrapper>
     <SectionTitle>
       <FormattedMessage id={sectionName} />
@@ -83,10 +83,11 @@ const SubgroupTitleContainer = styled.div`
 export interface IProps {
   key: number;
   sectionName: string;
+  icon: string;
   navItems?: ISidebarItem[];
 }
 
-const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
+const TopLevelNavGroup: FC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   const [isOpen, setOpen] = useState(false);
 
   const loc = useLocation();
@@ -118,12 +119,12 @@ const TopLevelNavGroup: SFC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   );
 };
 
-const SidebarSection: SFC<IProps> = props => {
-  const { sectionName, navItems } = props;
+const SidebarSection: FC<IProps> = props => {
+  const { sectionName, icon, navItems } = props;
 
   return (
     <Fragment>
-      <SectionHeader sectionName={sectionName} />
+      <SectionHeader sectionName={sectionName} icon={icon}/>
       {navItems && (
         <List>
             {navItems.map((navItem, index) => {

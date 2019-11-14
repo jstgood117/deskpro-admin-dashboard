@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, {FC} from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { DeskproAdminTheme } from '../Theme';
@@ -24,7 +24,7 @@ export interface IProps {
   data: ISidebarSection[];
 }
 
-const Sidebar: SFC<IProps> = ({ data }) => {
+const Sidebar: FC<IProps> = ({ data }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <Scrollbars
