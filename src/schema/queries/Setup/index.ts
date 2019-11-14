@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 export const QUERY_INITIAL = gql`
 	query  {
-		translations: setup_translations_all(locale: "en") {
+		translations: setupui_translations_all(locale: "en") {
 			id
 			message
 		}
@@ -11,7 +11,7 @@ export const QUERY_INITIAL = gql`
 			locale
 		}
 
-		sidebar: setup_interface_sidebar {
+		sidebar: setupui_interface_sidebar {
 			sectionName
 			icon
 			navItems {
