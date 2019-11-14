@@ -51,7 +51,7 @@ const StyledAutoComplete = styled.div`
   }
 `;
 
-const autoCompleteItemStyle = (
+export const AutoCompleteItemStyle = (
   isHighlighted: boolean,
   theme: any,
   selected: boolean
@@ -70,6 +70,20 @@ const autoCompleteItemStyle = (
   };
 };
 
+export const MenuStyle = () => {
+  return {
+    position: 'absolute',
+    left: 0,
+    top: 34,
+    zIndex: 1,
+    borderRadius: '4px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
+    background: 'rgba(255, 255, 255, 0.9)',
+    padding: '5px 0',
+    width: 'max-content'
+  };
+};
+
 const AutoComplete: SFC<IProps> = ({ menuItems, ...props }) => {
   const [value, setValue] = useState();
   const [containItems, setItems] = useState(menuItems);
@@ -84,7 +98,7 @@ const AutoComplete: SFC<IProps> = ({ menuItems, ...props }) => {
             const selected = item.label === value;
             return (
               <div
-                style={autoCompleteItemStyle(
+                style={AutoCompleteItemStyle(
                   isHighlighted,
                   DeskproAdminTheme,
                   selected
@@ -112,10 +126,15 @@ const AutoComplete: SFC<IProps> = ({ menuItems, ...props }) => {
             setValue(val);
           }}
           menuStyle={{
+            position: 'absolute',
+            left: 0,
+            top: 34,
+            zIndex: 1,
             borderRadius: '4px',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
             background: 'rgba(255, 255, 255, 0.9)',
-            padding: '5px 0'
+            padding: '5px 0',
+            width: 'max-content'
           }}
         />
         <span>

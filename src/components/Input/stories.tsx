@@ -4,8 +4,9 @@ import Input from './Input';
 
 const InputComponent: React.SFC<{
   hasError?: boolean;
+  showClear?: boolean;
   errorMessage?: string;
-}> = ({ hasError, errorMessage }) => {
+}> = ({ hasError, errorMessage, showClear }) => {
   const [value, setValue] = useState('');
 
   return (
@@ -14,6 +15,8 @@ const InputComponent: React.SFC<{
       placeholder='Placeholder'
       errorMessage={errorMessage}
       hasError={hasError}
+      onClear={() => setValue('')}
+      showClear={showClear}
       onChange={event => setValue(event.target.value)}
     />
   );
@@ -21,6 +24,7 @@ const InputComponent: React.SFC<{
 
 storiesOf('Input', module)
   .add('input', () => <InputComponent />)
+  .add('input with clear button', () => <InputComponent showClear={true}/>)
   .add('input error', () => (
     <InputComponent
       hasError={true}
