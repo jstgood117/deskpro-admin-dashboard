@@ -5,6 +5,7 @@ export default gql`
       __typename
       title
       description
+      illustration
       headerLinks {
         title
         path

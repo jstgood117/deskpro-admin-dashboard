@@ -40,6 +40,7 @@ export interface ITableColumn<T> {
 
 export interface ISidebarSection {
   sectionName: string;
+  icon: string;
   navItems?: ISidebarItem[];
 }
 
