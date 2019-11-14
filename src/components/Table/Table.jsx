@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { customSortMethod } from './helpers/sortingFunctions';
+import { customSortMethod } from '../../utils/sort';
 import { dpstyle } from '../Styled';
 
 export const TableStyled = styled(dpstyle.div)`
