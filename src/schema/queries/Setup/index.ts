@@ -2,16 +2,16 @@ import { gql } from 'apollo-boost';
 
 export const QUERY_INITIAL = gql`
 	query  {
-		translations: adminInterface_getTranslations(locale: "en") {
+		translations: setup_translations_all(locale: "en") {
 			id
 			message
 		}
 
-		user: adminInterface_getAdminUser {
+		user: auth_me {
 			locale
 		}
 
-		sidebar: adminInterface_getAdminSidebar {
+		sidebar: setup_interface_sidebar {
 			sectionName
 			icon
 			navItems {

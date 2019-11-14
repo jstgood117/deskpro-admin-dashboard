@@ -1,7 +1,7 @@
 export const testSidebarData = [
   {
     sectionName: 'admin.sidebar.setup',
-    icon: 'cog',
+    icon: 'setup',
     navItems: [
       {
         itemName: 'admin.sidebar.setup.dashboard',
@@ -31,6 +31,7 @@ export const testSidebarData = [
   },
   {
     sectionName: 'admin.sidebar.channels',
+    icon: 'channels',
     navItems: [
       {
         itemName: 'admin.sidebar.channels.email',
@@ -70,6 +71,7 @@ export const testSidebarData = [
   },
   {
     sectionName: 'admin.sidebar.agents',
+    icon: 'agent',
     navItems: [
       {
         itemName: 'admin.sidebar.agents.agent',
@@ -101,6 +103,7 @@ export const testSidebarData = [
   },
   {
     sectionName: 'admin.sidebar.help.helpCentre',
+    icon: 'help',
     navItems: [
       {
         itemName: 'admin.sidebar.help.helpCentreSetup',

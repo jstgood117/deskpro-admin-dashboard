@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, {FC} from 'react';
 
 import { ReactComponent as IconSetup } from '../../assets/svg/ic-setup.svg';
 import { ReactComponent as IconChannel } from '../../assets/svg/ic-channel.svg';
@@ -63,15 +63,15 @@ export interface IProps {
   name: string;
 }
 
-const Icon: SFC<IProps> = props => {
+const Icon: FC<IProps> = props => {
   switch (props.name) {
-    case 'admin.sidebar.setup':
+    case 'setup':
       return <IconSetup />;
-    case 'admin.sidebar.channels':
+    case 'channels':
       return <IconChannel />;
-    case 'admin.sidebar.agents':
+    case 'agent':
       return <IconAgent />;
-    case 'admin.sidebar.help.helpCentre':
+    case 'help':
       return <IconHelp />;
     case 'viewMode.table':
       return <IconTableView />;
