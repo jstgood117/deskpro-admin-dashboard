@@ -40,6 +40,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
         errorPolicy: 'all'
       });
       const { results } = response.data;
+
       setData(results);
       setFilteredData(results);
 

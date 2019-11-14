@@ -6,6 +6,9 @@ import { IViewData } from '../../resources/interfaces';
 import { setupFilters, diffUpdate } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 
+// test data
+import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
+
 import Loading from '../Loading';
 import Error from '../Error';
 import Header from '../Header';
@@ -46,8 +49,10 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
 
   };
 
-  if (data && data[queryName]) {
-    const {title, description, headerLinks, views} = data[queryName];
+  // TEST
+  // if (data && data[queryName]) {
+  if(testColumnData2) {
+    const {title, description, headerLinks, views} = (testColumnData2 as any)[queryName.toString()];
     return (
       <Fragment>
         <Header
