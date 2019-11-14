@@ -6,9 +6,9 @@ import Icon from './Icon';
 
 storiesOf('Icon', module)
   .addDecorator(withA11y)
-  .add('admin.sidebar.setup', () => <Icon name='admin.sidebar.setup' />)
-  .add('admin.sidebar.channels', () => <Icon name='admin.sidebar.channels' />)
-  .add('admin.sidebar.agents', () => <Icon name='admin.sidebar.agents' />)
+  .add('setup', () => <Icon name='setup' />)
+  .add('channels', () => <Icon name='channels' />)
+  .add('agent', () => <Icon name='agent' />)
   .add('viewMode.table', () => <Icon name='viewMode.table' />)
   .add('viewMode.list', () => <Icon name='viewMode.list' />)
   .add('viewMode.map', () => <Icon name='viewMode.map' />)
@@ -23,8 +23,8 @@ storiesOf('Icon', module)
   .add('sort', () => <Icon name='sort' />)
   .add('group', () => <Icon name='group' />)
   .add('view', () => <Icon name='view' />)
-  .add('admin.sidebar.help.helpCentre', () => (
-    <Icon name='admin.sidebar.help.helpCentre' />
+  .add('help', () => (
+    <Icon name='help' />
   ))
   .add('checkbox.indeterminate', () => <Icon name='checkbox.indeterminate' />)
   .add('close', () => <Icon name='close' />)
