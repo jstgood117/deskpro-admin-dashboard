@@ -1,15 +1,15 @@
-import React, { SFC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Autocomplete from 'react-autocomplete';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
-import { BoxSizingProperty, FontWeightProperty } from 'csstype';
+import { action } from '@storybook/addon-actions';
 
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
 import { IFilterProps } from '../FilterBox/FilterBox';
 import Input from '../Input';
 import Button from '../Button';
-import { action } from '@storybook/addon-actions';
+import { AutoCompleteItemStyle, MenuStyle } from '../AutoComplete/AutoComplete';
 
 export interface IItemType {
   label: string;
@@ -87,37 +87,6 @@ const StyledAutoComplete = styled.div<{ name: string }>`
   }
 `;
 
-const AutoCompleteItemStyle = (
-  isHighlighted: boolean,
-  theme: any,
-  selected: boolean
-) => {
-  return {
-    background: isHighlighted ? theme.textHover : theme.white,
-    padding: '0px 39px 0px 15px',
-    color: selected ? theme.activeColour : theme.staticColour,
-    fontSize: 14,
-    fontWeight: selected ? 'bold' : ('normal' as FontWeightProperty),
-    lineHeight: '150%',
-    height: 31,
-    display: 'flex',
-    alignItems: 'center',
-    boxSizing: 'border-box' as BoxSizingProperty
-  };
-};
-const MenuStyle = () => {
-  return {
-    position: 'absolute',
-    left: 0,
-    top: 34,
-    zIndex: 1,
-    borderRadius: '4px',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.25)',
-    background: 'rgba(255, 255, 255, 0.9)',
-    padding: '5px 0',
-    width: 'max-content'
-  };
-};
 export interface IProps {
   properties: IItemType[];
   options: IItemType[];
@@ -128,7 +97,7 @@ export interface IProps {
   filter?: IFilterProps;
 }
 
-const FilterOptions: SFC<IProps> = ({
+const FilterOptions: FC<IProps> = ({
   properties,
   options,
   setFilters,
@@ -142,6 +111,9 @@ const FilterOptions: SFC<IProps> = ({
   const [containProperties, setProperties] = useState(properties);
   const [containOptions, setOptions] = useState(options);
   const [filterValue, setFilterValue] = useState();
+  const AutoSelectOption = () => {
+    !currentOption && setOption(containOptions[0].label);
+  };
   useEffect(() => {
     if (currentOption || currentProperty) {
       filters[index].option = currentOption;
@@ -191,7 +163,7 @@ const FilterOptions: SFC<IProps> = ({
                     menuItem.label.toUpperCase() ===
                     e.target.value.toUpperCase()
                   ) {
-                    !currentOption && setOption(containOptions[0].label);
+                    AutoSelectOption();
                   }
                   return menuItem.label
                     .toUpperCase()
@@ -203,7 +175,7 @@ const FilterOptions: SFC<IProps> = ({
                 setProperty(val);
                 const newItems = properties.filter(menuItem => {
                   if (menuItem.label.toUpperCase() === val.toUpperCase()) {
-                    !currentOption && setOption(containOptions[0].label);
+                    AutoSelectOption();
                   }
                   return menuItem.label
                     .toUpperCase()
@@ -244,7 +216,9 @@ const FilterOptions: SFC<IProps> = ({
                 );
               }}
               value={
-                currentOption !== undefined ? currentOption : filter && filter.option
+                currentOption !== undefined
+                  ? currentOption
+                  : filter && filter.option
               }
               onChange={(e: any) => {
                 setOption(e.target.value);
@@ -284,7 +258,9 @@ const FilterOptions: SFC<IProps> = ({
           <Input
             style={{ width: 218 }}
             value={
-              filter && filter.filterKey !== undefined ? filter.filterKey : filterValue
+              filter && filter.filterKey !== undefined
+                ? filter.filterKey
+                : filterValue
             }
             onClear={() => {
               filters[index].filterKey = '';
