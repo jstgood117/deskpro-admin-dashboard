@@ -11,6 +11,7 @@ import { P1 } from '../Typography';
 import Icon from '../Icon';
 
 const InputStyled = styled(dpstyle.input)`
+  position: relative;
   background-color: transparent;
   height: 35px;
   font-family: Rubik, sans-serif;
@@ -34,6 +35,8 @@ const InputStyled = styled(dpstyle.input)`
 `;
 
 const InputWrapper = styled(dpstyle.div)<{ error: boolean }>`
+  display: inline-flex;
+  align-items: center;
   background: ${props => props.theme.greyLightest};
   border-radius: 4px;
   padding: 0 15px;
@@ -79,16 +82,29 @@ const IconErrorWrapper = styled.div`
   top: 10px;
 `;
 
+const ButtonClear = styled.div`
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding-right: 0;
+  position: absolute;
+  right: 11.75px;
+`;
+
 export type IProps = {
   containerStyle?: CSSProperties;
   containerClassName?: string;
   hasError?: boolean;
+  onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   errorMessage?: string;
+  showClear?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Input: SFC<IProps> = ({
   containerStyle,
   containerClassName = '',
+  onClear,
   hasError,
   errorMessage,
   ...props
@@ -100,7 +116,7 @@ const Input: SFC<IProps> = ({
     setHasValue((props.value || '').toString().length > 0);
   }, [props.value]);
 
-  const className = `${containerClassName} ${hasValue ? 'selected' : ''} ${
+  const className = `input-wrapper ${containerClassName} ${hasValue ? 'selected' : ''} ${
     hasFocus ? 'focus' : ''
   }`;
   return (
@@ -113,14 +129,23 @@ const Input: SFC<IProps> = ({
         <InputStyled
           onFocus={event => {
             setHasFocus(true);
-            if(props.onFocus) { props.onFocus(event); }
+            if (props.onFocus) {
+              props.onFocus(event);
+            }
           }}
           onBlur={event => {
             setHasFocus(false);
-            if(props.onFocus) { props.onBlur(event); }
+            if (props.onFocus) {
+              props.onBlur(event);
+            }
           }}
           {...props}
         />
+        {props.showClear && (hasValue || hasFocus) && (
+          <ButtonClear onClick={onClear}>
+            <Icon name='close' />
+          </ButtonClear>
+        )}
         {hasError && (
           <IconErrorWrapper>
             <Icon name='error' />
