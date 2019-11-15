@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from 'react';
 import Autocomplete from 'react-autocomplete';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
-import { action } from '@storybook/addon-actions';
 
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
@@ -130,7 +129,13 @@ const FilterOptions: FC<IProps> = ({
             <Autocomplete
               getItemValue={(item: IItemType) => item.label}
               items={containProperties}
-              inputProps={{ placeholder: props.placeholder }}
+              inputProps={{
+                placeholder: props.placeholder,
+                onFocus: () => {
+                  setProperty('');
+                  setProperties(properties);
+                }
+              }}
               renderItem={(item: IItemType, isHighlighted: boolean) => {
                 const selected = item.label === currentProperty;
                 return (
@@ -195,6 +200,12 @@ const FilterOptions: FC<IProps> = ({
             <Autocomplete
               getItemValue={(item: IItemType) => item.label}
               items={containOptions}
+              inputProps={{
+                onFocus: () => {
+                  setOption('');
+                  setOptions(options);
+                }
+              }}
               renderItem={(item: IItemType, isHighlighted: boolean) => {
                 const selected = item.label === currentOption;
                 return (
@@ -223,12 +234,6 @@ const FilterOptions: FC<IProps> = ({
               onChange={(e: any) => {
                 setOption(e.target.value);
                 const newItems = options.filter(menuItem => {
-                  if (
-                    menuItem.label.toUpperCase() ===
-                    e.target.value.toUpperCase()
-                  ) {
-                    !currentOption && setOption(containOptions[0].label);
-                  }
                   return menuItem.label
                     .toUpperCase()
                     .includes(e.target.value.toUpperCase());
@@ -238,9 +243,6 @@ const FilterOptions: FC<IProps> = ({
               onSelect={(val: string) => {
                 setOption(val);
                 const newItems = options.filter(menuItem => {
-                  if (menuItem.label.toUpperCase() === val.toUpperCase()) {
-                    !currentOption && setOption(containOptions[0].label);
-                  }
                   return menuItem.label
                     .toUpperCase()
                     .includes(val.toUpperCase());
@@ -277,7 +279,18 @@ const FilterOptions: FC<IProps> = ({
         <div style={{ paddingLeft: 10 }} className='remove-btn'>
           <Button
             styleType='tertiary'
-            onClick={action('clicked')}
+            onClick={() => {
+              const currentIndex = filters.indexOf(filter);
+              if (currentIndex > -1) {
+                filters.splice(currentIndex, 1);
+              }
+              if (filters.length === 0) {
+                setFilters &&
+                  setFilters([{ property: '', option: '', filterKey: '' }]);
+              } else {
+                setFilters && setFilters([...filters]);
+              }
+            }}
             size='small'
             iconOnly={true}
           >
