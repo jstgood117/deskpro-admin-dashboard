@@ -15,7 +15,7 @@ import {
   IRuleBuilderSchema,
   IPropertySchema,
   RuleOperatorType
-} from './interfaces';
+} from '../../resources/interfaces/filterMeta';
 import FormBuilder from './Form';
 
 const Container = styled(FlowLayout)`

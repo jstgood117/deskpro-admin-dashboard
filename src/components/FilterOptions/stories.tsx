@@ -3,11 +3,11 @@ import { storiesOf } from '@storybook/react';
 import { uniqueId } from 'lodash';
 
 import {
-  filterProperties,
-  filterOptions
+  testFilterMeta
 } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../FilterBox/FilterBox';
 import FilterOptions from './FilterOptions';
+import { convertRuleSchema } from '../RuleBuilder/utils';
 
 const initialFilters: IFilterProps[] = [
   { property: '', option: '', filterKey: '' }
@@ -21,13 +21,15 @@ const FilterOptionsComponent: React.FC = () => {
       key={uniqueId()}
     >
       <FilterOptions
-        properties={filterProperties}
-        options={filterOptions}
         placeholder='Select Property'
         setFilters={setFilters}
         filters={filters}
         index={0}
         filter={filters[0]}
+        schema={convertRuleSchema(
+          'admin_tickets.some_group_title',
+          testFilterMeta
+        )}
       />
     </div>
   );

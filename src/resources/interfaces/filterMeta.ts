@@ -41,3 +41,9 @@ export interface IRuleValue {
   operator: GroupOperatorType;
   rules: (IRuleItem | IRuleValue)[];
 }
+
+export type IFilterProps = {
+  property: string;
+  option: string;
+  filterKey: string;
+};

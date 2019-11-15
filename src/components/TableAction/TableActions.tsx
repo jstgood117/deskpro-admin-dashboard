@@ -11,9 +11,9 @@ import Button from '../Button';
 import Icon from '../Icon';
 
 import RuleBuilder from '../RuleBuilder/RuleBuilder';
-import { IRuleValue } from '../RuleBuilder/interfaces';
 import { initGroup, convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { IRuleValue } from '../../resources/interfaces/filterMeta';
 // import { addFilter, removeFilter } from '../../services/filters';
 export interface IProps {}
 

@@ -3,17 +3,16 @@ import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { uniqueId } from 'lodash';
 
-import { dpstyle } from '../Styled';
-import Button from '../Button';
 import Icon from '../Icon';
-import { IItemType } from '../AutoComplete/AutoComplete';
+import Button from '../Button';
+import { dpstyle } from '../Styled';
 import FilterOptions from '../FilterOptions';
+import { IRuleBuilderSchema } from '../../resources/interfaces/filterMeta';
 
 export type IProps = {
-  properties: IItemType[];
-  options: IItemType[];
   filters: IFilterProps[];
   setFilters: (e: any) => void;
+  schema: IRuleBuilderSchema;
 };
 
 export type IFilterProps = {
@@ -35,12 +34,7 @@ const StyledBox = styled(dpstyle.div)`
   }
 `;
 
-const FilterBox: SFC<IProps> = ({
-  properties,
-  options,
-  filters,
-  setFilters
-}) => {
+const FilterBox: SFC<IProps> = ({ filters, setFilters, schema }) => {
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
     filters[lastIndex].filterKey &&
@@ -62,13 +56,12 @@ const FilterBox: SFC<IProps> = ({
               key={uniqueId()}
             >
               <FilterOptions
-                properties={properties}
-                options={options}
                 placeholder='Select Property'
                 setFilters={setFilters}
                 filters={filters}
                 index={index}
                 filter={filter}
+                schema={schema}
               />
             </div>
           );

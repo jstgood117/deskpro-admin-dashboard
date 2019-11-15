@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import FilterOptions, { IProps } from './FilterOptions';
+import { convertRuleSchema } from '../RuleBuilder/utils';
+import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { IFilterProps } from '../FilterBox/FilterBox';
 
 describe('FilterOptions', () => {
   let props: IProps;
-  let mountedAutoComplete: any;
+  let mountedFilterOptions: any;
 
-  const items = [{ label: 'apple' }, { label: 'banana' }, { label: 'pear' }];
+  const initialFilters: IFilterProps[] = [
+    { property: '', option: '', filterKey: '' }
+  ];
+  const FilterOptionsComponent: React.FC<IProps> = _props => {
+    const [filters, setFilters] = useState(initialFilters);
+
+    return (
+      <FilterOptions
+        {..._props}
+        setFilters={setFilters}
+        filters={filters}
+        filter={filters[0]}
+      />
+    );
+  };
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedAutoComplete) {
-      mountedAutoComplete = bShallow
-        ? shallow(<FilterOptions {...props} />)
-        : mount(<FilterOptions {...props} />);
+    if (!mountedFilterOptions) {
+      mountedFilterOptions = bShallow
+        ? shallow(<FilterOptionsComponent {...props} />)
+        : mount(<FilterOptionsComponent {...props} />);
     }
-    return mountedAutoComplete;
+    return mountedFilterOptions;
   };
 
   beforeEach(() => {
     props = {
-      properties: items,
-      options: items,
-      placeholder: 'Select Property'
+      schema: convertRuleSchema(
+        'admin_tickets.some_group_title',
+        testFilterMeta
+      ),
+      placeholder: 'Select Property',
+      index: 0
     };
   });
 
