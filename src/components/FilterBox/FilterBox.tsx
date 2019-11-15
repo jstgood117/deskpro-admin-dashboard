@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, useCallback } from 'react';
 import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
 import { uniqueId } from 'lodash';
@@ -41,13 +41,24 @@ const FilterBox: SFC<IProps> = ({
   filters,
   setFilters
 }) => {
+  const onAdd = useCallback(() => {
+    const lastIndex = filters.length - 1;
+    filters[lastIndex].filterKey &&
+      filters[lastIndex].option &&
+      filters[lastIndex].property &&
+      setFilters([...filters, { property: '', option: '', filterKey: '' }]);
+  }, [filters, setFilters]);
   return (
     <StyledBox>
       {filters.length > 0 &&
         filters.map((filter, index: number) => {
           return (
             <div
-              style={{ display: 'flex', alignItems: 'center', paddingBottom: 14 }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingBottom: 14
+              }}
               key={uniqueId()}
             >
               <FilterOptions
@@ -63,7 +74,7 @@ const FilterBox: SFC<IProps> = ({
           );
         })}
       <div style={{ paddingTop: 2 }} className='add-filter'>
-        <Button styleType='tertiary' onClick={action('clicked')} size='small'>
+        <Button styleType='tertiary' onClick={onAdd} size='small'>
           <Icon name='plus' />
           Add Filter
         </Button>

@@ -6,7 +6,7 @@ import {
   filterOptions
 } from '../../resources/constants/mock/testFilterMeta';
 
-const initialFilters: IFilterProps[] = [{ property: '', option: '', filterKey: '' },{ property: '', option: '', filterKey: '' }];
+const initialFilters: IFilterProps[] = [{ property: '', option: '', filterKey: '' }];
 
 const FilterBoxComponent: React.FC = () => {
   const [filters, setFilters] = useState(initialFilters);
