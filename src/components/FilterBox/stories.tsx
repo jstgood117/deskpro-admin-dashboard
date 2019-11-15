@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import FilterBox, { IFilterProps } from './FilterBox';
-import {
-  filterProperties,
-  filterOptions
-} from '../../resources/constants/mock/testFilterMeta';
+import { convertRuleSchema } from '../RuleBuilder/utils';
+import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 
 const initialFilters: IFilterProps[] = [{ property: '', option: '', filterKey: '' }];
 
@@ -12,10 +10,12 @@ const FilterBoxComponent: React.FC = () => {
   const [filters, setFilters] = useState(initialFilters);
   return (
     <FilterBox
-      properties={filterProperties}
-      options={filterOptions}
       filters={filters}
       setFilters={setFilters}
+      schema={convertRuleSchema(
+        'admin_tickets.some_group_title',
+        testFilterMeta
+      )}
     />
   );
 };

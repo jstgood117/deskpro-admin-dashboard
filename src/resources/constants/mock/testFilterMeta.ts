@@ -149,25 +149,3 @@ export const testFilterMeta: FilterMeta[] = [
     dataPath: 'agent_team'
   }
 ];
-
-interface IItemType {
-  label: string;
-}
-export const filterProperties: IItemType[] = [
-  { label: 'Name' },
-  { label: 'Email' },
-  { label: 'Teams' },
-  { label: 'Permission groups' },
-  { label: 'Departments' },
-  { label: 'Access' }
-];
-export const filterOptions: IItemType[] = [
-  { label: 'Is' },
-  { label: 'Is Not' },
-  { label: 'Contains' },
-  { label: 'Does not contain' },
-  { label: 'Value is less than or qual to' },
-  { label: 'Value is equal or greater than' },
-  { label: 'Is null' },
-  { label: 'Is not null' }
-];

@@ -3,7 +3,7 @@ import {
   IRuleItem,
   IRuleBuilderSchema,
   IRuleOptions
-} from './interfaces';
+} from '../../resources/interfaces/filterMeta';
 import setWith from 'lodash/setWith';
 import get from 'lodash/get';
 import merge from 'lodash/merge';

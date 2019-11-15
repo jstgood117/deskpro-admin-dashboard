@@ -10,7 +10,7 @@ import {
   DropdownOption
 } from './Components';
 import { FlowLayout, Flex } from '../Styled';
-import { IRuleValue } from './interfaces';
+import { IRuleValue } from '../../resources/interfaces/filterMeta';
 import { GroupOperators, DeleteGroupOptions } from './constants';
 
 const HeaderContainer = styled(FlowLayout)`

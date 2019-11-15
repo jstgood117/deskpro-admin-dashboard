@@ -3,16 +3,17 @@ import Autocomplete from 'react-autocomplete';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
 
-import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
-import { IFilterProps } from '../FilterBox/FilterBox';
 import Input from '../Input';
 import Button from '../Button';
+import { DeskproAdminTheme } from '../Theme';
+import { IFilterProps } from '../FilterBox/FilterBox';
 import { AutoCompleteItemStyle, MenuStyle } from '../AutoComplete/AutoComplete';
-
-export interface IItemType {
-  label: string;
-}
+import {
+  IRuleBuilderSchema,
+  IPropertySchema,
+  RuleOperatorType
+} from '../../resources/interfaces/filterMeta';
 
 const StyledFilterOptions = styled.div`
   display: flex;
@@ -87,39 +88,55 @@ const StyledAutoComplete = styled.div<{ name: string }>`
 `;
 
 export interface IProps {
-  properties: IItemType[];
-  options: IItemType[];
   placeholder?: string;
   setFilters?: (e: any) => void;
   filters?: IFilterProps[];
   index?: number;
   filter?: IFilterProps;
+  schema: IRuleBuilderSchema;
 }
 
 const FilterOptions: FC<IProps> = ({
-  properties,
-  options,
   setFilters,
   filters,
   filter,
   index,
+  schema,
   ...props
 }) => {
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
-  const [containProperties, setProperties] = useState(properties);
-  const [containOptions, setOptions] = useState(options);
+  const [containProperties, setProperties] = useState(schema.properties);
+
+  const [containOptions, setOptions] = useState([]);
   const [filterValue, setFilterValue] = useState();
-  const AutoSelectOption = () => {
-    !currentOption && setOption(containOptions[0].label);
+  const AutoSelectOption = (val: string) => {
+    setOption(val);
   };
   useEffect(() => {
-    if (currentOption || currentProperty) {
-      filters[index].option = currentOption;
-      filters[index].property = currentProperty;
+    if (currentOption) {
+      containOptions.map(item => {
+        if (item === currentOption) filters[index].option = currentOption;
+        return true;
+      });
+    }
+    if (currentProperty) {
+      containProperties.map(item => {
+        if (item.title === currentProperty)
+          filters[index].property = currentProperty;
+        return true;
+      });
     }
     setFilters && setFilters(filters);
-  }, [currentOption, currentProperty, filters, index, setFilters]);
+  }, [
+    currentOption,
+    currentProperty,
+    filters,
+    index,
+    setFilters,
+    containOptions,
+    containProperties
+  ]);
 
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -127,17 +144,20 @@ const FilterOptions: FC<IProps> = ({
         <div style={{ width: 160 }}>
           <StyledAutoComplete name='property'>
             <Autocomplete
-              getItemValue={(item: IItemType) => item.label}
+              getItemValue={(item: IPropertySchema) => item.title}
               items={containProperties}
               inputProps={{
                 placeholder: props.placeholder,
                 onFocus: () => {
                   setProperty('');
-                  setProperties(properties);
+                  setProperties(schema.properties);
+                },
+                onBlur: () => {
+                  setProperty(filter && filter.property);
                 }
               }}
-              renderItem={(item: IItemType, isHighlighted: boolean) => {
-                const selected = item.label === currentProperty;
+              renderItem={(item: IPropertySchema, isHighlighted: boolean) => {
+                const selected = item.title === filter.property;
                 return (
                   <div
                     style={AutoCompleteItemStyle(
@@ -147,7 +167,7 @@ const FilterOptions: FC<IProps> = ({
                     )}
                     key={uniqueId()}
                   >
-                    {item.label}
+                    {item.title}
                     {selected && (
                       <span>
                         <Icon name='check-2' />
@@ -163,14 +183,15 @@ const FilterOptions: FC<IProps> = ({
               }
               onChange={(e: any) => {
                 setProperty(e.target.value);
-                const newItems = properties.filter(menuItem => {
+                const newItems = schema.properties.filter(menuItem => {
                   if (
-                    menuItem.label.toUpperCase() ===
+                    menuItem.title.toUpperCase() ===
                     e.target.value.toUpperCase()
                   ) {
-                    AutoSelectOption();
+                    setOptions(menuItem.operators);
+                    AutoSelectOption(menuItem.operators[0]);
                   }
-                  return menuItem.label
+                  return menuItem.title
                     .toUpperCase()
                     .includes(e.target.value.toUpperCase());
                 });
@@ -178,11 +199,12 @@ const FilterOptions: FC<IProps> = ({
               }}
               onSelect={(val: string) => {
                 setProperty(val);
-                const newItems = properties.filter(menuItem => {
-                  if (menuItem.label.toUpperCase() === val.toUpperCase()) {
-                    AutoSelectOption();
+                const newItems = schema.properties.filter(menuItem => {
+                  if (menuItem.title.toUpperCase() === val.toUpperCase()) {
+                    setOptions(menuItem.operators);
+                    AutoSelectOption(menuItem.operators[0]);
                   }
-                  return menuItem.label
+                  return menuItem.title
                     .toUpperCase()
                     .includes(val.toUpperCase());
                 });
@@ -198,16 +220,31 @@ const FilterOptions: FC<IProps> = ({
         <div style={{ width: 160 }}>
           <StyledAutoComplete name='option'>
             <Autocomplete
-              getItemValue={(item: IItemType) => item.label}
+              getItemValue={(item: RuleOperatorType[]) => item}
               items={containOptions}
+              renderInput={(inputProps: any) => {
+                return (
+                  <input
+                    {...inputProps}
+                    disabled={currentProperty ? false : true}
+                  />
+                );
+              }}
               inputProps={{
+                autoComplete: 'off',
                 onFocus: () => {
                   setOption('');
-                  setOptions(options);
+                  const newItems = schema.properties.filter(menuItem => {
+                    return menuItem.title === currentProperty;
+                  });
+                  setOptions(newItems[0].operators);
+                },
+                onBlur: () => {
+                  setOption(filter && filter.option);
                 }
               }}
-              renderItem={(item: IItemType, isHighlighted: boolean) => {
-                const selected = item.label === currentOption;
+              renderItem={(item: RuleOperatorType, isHighlighted: boolean) => {
+                const selected = item === filter.option;
                 return (
                   <div
                     style={AutoCompleteItemStyle(
@@ -217,7 +254,7 @@ const FilterOptions: FC<IProps> = ({
                     )}
                     key={uniqueId()}
                   >
-                    {item.label}
+                    {item}
                     {selected && (
                       <span>
                         <Icon name='check-2' />
@@ -233,8 +270,8 @@ const FilterOptions: FC<IProps> = ({
               }
               onChange={(e: any) => {
                 setOption(e.target.value);
-                const newItems = options.filter(menuItem => {
-                  return menuItem.label
+                const newItems = containOptions.filter(menuItem => {
+                  return menuItem
                     .toUpperCase()
                     .includes(e.target.value.toUpperCase());
                 });
@@ -242,10 +279,8 @@ const FilterOptions: FC<IProps> = ({
               }}
               onSelect={(val: string) => {
                 setOption(val);
-                const newItems = options.filter(menuItem => {
-                  return menuItem.label
-                    .toUpperCase()
-                    .includes(val.toUpperCase());
+                const newItems = containOptions.filter(menuItem => {
+                  return menuItem.toUpperCase().includes(val.toUpperCase());
                 });
                 setOptions(newItems);
               }}

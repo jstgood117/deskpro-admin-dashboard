@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import GroupHeader from './GroupHeader';
 import PropertyBuilder from './Property';
-import { IRuleBuilderSchema, IRuleValue, IRuleItem } from './interfaces';
+import { IRuleBuilderSchema, IRuleValue, IRuleItem } from '../../resources/interfaces/filterMeta';
 import {
   addNewGroup,
   addNewRule,

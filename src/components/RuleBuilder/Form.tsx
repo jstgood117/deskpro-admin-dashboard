@@ -3,7 +3,7 @@ import Form, { ObjectFieldTemplateProps } from 'react-jsonschema-form';
 import styled from 'styled-components';
 import get from 'lodash/get';
 
-import { IPropertySchema } from './interfaces';
+import { IPropertySchema } from '../../resources/interfaces/filterMeta';
 import Input from '../Input';
 import { Select, DropdownOption } from './Components';
 

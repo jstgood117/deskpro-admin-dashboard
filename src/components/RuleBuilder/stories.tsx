@@ -13,7 +13,7 @@ import GroupHeader from './GroupHeader';
 import PropertyBuilder from './Property';
 import { Flex } from '../Styled';
 import RuleBuilder from './RuleBuilder';
-import { IRuleBuilderSchema, IRuleValue } from './interfaces';
+import { IRuleBuilderSchema, IRuleValue } from '../../resources/interfaces/filterMeta';
 import { initGroup } from './utils';
 import Button from '../Button';
 
