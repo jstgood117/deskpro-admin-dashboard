@@ -22,6 +22,17 @@ const testTableColumns2 = {
       {
         'title': 'group.active',
         'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: false }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            emails\n            can_admin\n            can_agent\n            date_last_login\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
+        'filterDef': [{
+          'title':'Name',
+          'path':'col.name',
+          'type':'TEXT',
+          'operators':['EQUALS', 'CONTAINS']
+        },{
+          'title':'EMAIL',
+          'path':'col.name',
+          'type':'TEXT',
+          'operators':['EQUALS', 'CONTAINS']
+        }],
         'tableDef': {
           'columns': [
             {
@@ -152,6 +163,17 @@ const testTableColumns2 = {
       {
         'title': 'group.deleted',
         'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: true }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            emails\n            can_admin\n            can_agent\n            date_last_login\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
+        'filterDef': [{
+          'title':'Name',
+          'path':'col.name',
+          'type':'TEXT',
+          'operators':['EQUALS', 'CONTAINS']
+        },{
+          'title':'EMAIL',
+          'path':'col.name',
+          'type':'TEXT',
+          'operators':['EQUALS', 'CONTAINS']
+        }],
         'tableDef': {
           'columns': [
             {
