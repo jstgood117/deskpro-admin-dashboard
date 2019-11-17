@@ -76,7 +76,7 @@ const StyledForm = styled(dpstyle.div)`
   }
 `;
 const JsonSchemaForm: SFC<IProps> = ({ schema, uiSchema, formData }) => {
-  const onSubmit = ({ _formData }: any) => false;
+  const onSubmit = () => false;
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledForm>

@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import Tooltip from '../Tooltip';
 
-const LocaleConfigs: any = {
+type LocaleConfigsType = {
+  [GB: string]: {
+    flag: string;
+    name: string;
+  }
+};
+
+const LocaleConfigs: LocaleConfigsType = {
   GB: {
     flag: require('../../assets/flags/uk.png'),
     name: 'United Kingdom'
@@ -19,7 +26,7 @@ export interface IProps {
   code: string;
 }
 
-export const Locale: React.SFC<IProps> = ({ code }) => {
+export const Locale: React.SFC<IProps> = ({ code }: { code: string}) => {
   const config = LocaleConfigs[code];
   if (!config) {
     return null;

@@ -54,7 +54,7 @@ export type DeskproAdminThemeType = {
   s2: FontType;
 };
 
-const DeskproAdminTheme = {
+const DeskproAdminTheme: DeskproAdminThemeType = {
   mainFont: fontFamily,
   headerFont: fontFamily,
 
