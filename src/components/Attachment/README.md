@@ -4,7 +4,7 @@
 
   id: string - Id of input
   text?:  Text of Attachment
-  onChangeFile?: (event: any) => Event on change file
+  onChangeFile?: (event: SyntheticEvent<HTMLInputElement>) => Event on change file
 
 - it has no State
 

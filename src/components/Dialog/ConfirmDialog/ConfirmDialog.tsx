@@ -8,6 +8,7 @@ import DialogActions from '../DialogActions';
 import { FlowLayout, ControlBox } from '../../Styled';
 import Button from '../../Button';
 import Icon from '../../Icon';
+import { DeskproAdminThemeType } from '../../../style/DeskproAdminTheme';
 import { DeskproAdminTheme } from '../../Theme';
 
 type ConfirmDialogVariant = 'default' | 'danger';
@@ -66,7 +67,7 @@ interface IDialogStyle {
   leftButtonSyleType: 'danger' | 'primary';
   iconSize: number;
 }
-const getStyle = (variant: ConfirmDialogVariant, theme: any): IDialogStyle => {
+const getStyle = (variant: ConfirmDialogVariant, theme: DeskproAdminThemeType): IDialogStyle => {
   switch (variant) {
     case 'danger':
       return {

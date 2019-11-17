@@ -4,11 +4,13 @@ import Tippy, { TippyProps } from '@tippy.js/react';
 
 import 'tippy.js/dist/tippy.css';
 
+import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
+
 export type IProps = {
   styleType?: 'dark' | 'light' | 'lightBox';
 } & TippyProps;
 
-const getStyle = (styleType: 'dark' | 'light' | 'lightBox', theme: any) => {
+const getStyle = (styleType: 'dark' | 'light' | 'lightBox', theme: DeskproAdminThemeType) => {
   const styles = {
     light: {
       backgroundColor: '#fff',

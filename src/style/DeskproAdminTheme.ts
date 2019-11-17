@@ -1,5 +1,58 @@
+
+type FontFamilyType = string;
+
 const fontFamily =
-  'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif';
+  'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif' as FontFamilyType;
+
+type FontType = {
+  fontFamily?: FontFamilyType;
+  fontStyle?: string;
+  fontWeight?: number | string;
+  fontSize?: string;
+  lineHeight?: string;
+  color?: string;
+};
+
+export type DeskproAdminThemeType = {
+  mainFont: string,
+  headerFont: string;
+  btnBorderRadius: string;
+  staticColour: string;
+  textHover: string;
+  brandPrimary: string;
+  activeColour: string;
+  primaryHoverColour: string;
+  hoverColour: string;
+  secondaryColour: string;
+  greyDark: string;
+  static2Colour: string;
+  greyLight: string;
+  greyLighter: string;
+  greyLightest: string;
+  lightBlue: string;
+  warningColour: string;
+  successColour: string;
+  pageHeader: string;
+  white: string;
+  black: string;
+  pagePadding: string;
+  danger: string;
+  dangerLight: string;
+
+  h1: FontType;
+  h2: FontType;
+  h3: FontType;
+  h4: FontType;
+  h5: FontType;
+  h6: FontType;
+
+  p1: FontType;
+  p2: FontType;
+  p3: FontType;
+
+  s1: FontType;
+  s2: FontType;
+};
 
 const DeskproAdminTheme = {
   mainFont: fontFamily,

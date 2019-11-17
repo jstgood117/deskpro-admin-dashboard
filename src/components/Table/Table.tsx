@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { customSortMethod } from '../../utils/sort';
+import { ITableColumn } from '../../resources/interfaces';
 import { dpstyle } from '../Styled';
 
 export const TableStyled = styled(dpstyle.div)`
@@ -62,8 +63,8 @@ const generateSortType = (sortType: string) => {
   }
 };
 
-export const transformColumnData = (columns: any, intl: any) => {
-  const newCols = columns.map( (column: any) => {
+export const transformColumnData = (columns: ITableColumn[], intl: any) => {
+  const newCols = columns.map( (column: ITableColumn) => {
     return {
       id: column.title,
       Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
