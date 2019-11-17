@@ -2,20 +2,16 @@ import React, { SFC, useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 
-// import { testFilterMeta, operatorOptions, ValueType, OperatorTypes } from '../../resources/constants/mock/testFilterMeta';
 import { FilterType } from '../../services/filters/types';
 import { operators } from '../../services/filters/operators';
 
 import SearchBox from '../SearchBox';
 import Button from '../Button';
 import Icon from '../Icon';
-
 import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import FilterBox from '../FilterBox';
-// import { addFilter, removeFilter } from '../../services/filters';
-export interface IProps {}
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
