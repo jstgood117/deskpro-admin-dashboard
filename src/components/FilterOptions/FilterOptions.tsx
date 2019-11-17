@@ -141,7 +141,7 @@ const FilterOptions: FC<IProps> = ({
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledFilterOptions>
-        <div style={{ width: 160 }}>
+        <div style={{ minWidth: 160 }}>
           <StyledAutoComplete name='property'>
             <Autocomplete
               getItemValue={(item: IPropertySchema) => item.title}
@@ -217,7 +217,7 @@ const FilterOptions: FC<IProps> = ({
             </span>
           </StyledAutoComplete>
         </div>
-        <div style={{ width: 160 }}>
+        <div style={{ minWidth: 186 }}>
           <StyledAutoComplete name='option'>
             <Autocomplete
               getItemValue={(item: RuleOperatorType[]) => item}
@@ -287,13 +287,13 @@ const FilterOptions: FC<IProps> = ({
               menuStyle={MenuStyle()}
             />
             <span>
-              <Icon name='downVector' />
+              {currentProperty && <Icon name='downVector' />}
             </span>
           </StyledAutoComplete>
         </div>
         <div>
           <Input
-            style={{ width: 218 }}
+            style={{ minWidth: 218 }}
             value={
               filter && filter.filterKey !== undefined
                 ? filter.filterKey

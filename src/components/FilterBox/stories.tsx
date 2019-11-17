@@ -4,7 +4,9 @@ import FilterBox, { IFilterProps } from './FilterBox';
 import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 
-const initialFilters: IFilterProps[] = [{ property: '', option: '', filterKey: '' }];
+const initialFilters: IFilterProps[] = [
+  { property: '', option: '', filterKey: '' }
+];
 
 const FilterBoxComponent: React.FC = () => {
   const [filters, setFilters] = useState(initialFilters);
