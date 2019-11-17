@@ -1,5 +1,5 @@
 import React, { SFC, useState, useCallback } from 'react';
-import { debounce, chain } from 'lodash';
+import { debounce } from 'lodash';
 import styled from 'styled-components';
 
 // import { testFilterMeta, operatorOptions, ValueType, OperatorTypes } from '../../resources/constants/mock/testFilterMeta';
@@ -10,10 +10,10 @@ import SearchBox from '../SearchBox';
 import Button from '../Button';
 import Icon from '../Icon';
 
-import RuleBuilder from '../RuleBuilder/RuleBuilder';
-import { initGroup, convertRuleSchema } from '../RuleBuilder/utils';
+import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IRuleValue } from '../../resources/interfaces/filterMeta';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import FilterBox from '../FilterBox';
 // import { addFilter, removeFilter } from '../../services/filters';
 export interface IProps {}
 
@@ -35,19 +35,11 @@ const FlexStyled = styled.div`
 `;
 const FilterContainer = styled.div`
   position: absolute;
-  top: 50px;
+  top: 34px;
   bottom: 0;
-  left: 0;
+  left: 10px;
   right: 0;
   background-color: #fff;
-`;
-const FilterContent = styled.div<{ active: boolean }>`
-  display: ${props => (props.active ? 'block' : 'none')};
-  box-shadow: 0px 3px 10px rgba(28, 62, 85, 0.1);
-  padding: 10px;
-`;
-const ButtonContainer = styled.div`
-  margin-top: 20px;
 `;
 
 export interface IProps {
@@ -60,28 +52,33 @@ export interface IProps {
   filters?: FilterType[];
   onFilterChange?: (rules: FilterType[]) => void;
 }
+const initialFilters: IFilterProps[] = [
+  { property: '', option: '', filterKey: '' }
+];
 
 const TableActions: SFC<IProps> = props => {
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
   const [View, setViewValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const [filterValue, setFilterValue] = useState<IRuleValue[]>([initGroup()]);
   const [openedView, openView] = useState(false);
   const [openedSort, clickButtonSort] = useState(false);
   const [openedGroup, clickButtonGroup] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
+  const [filters, setFilters] = useState(initialFilters);
 
   const onSearchChange = (value: string) => {
     const { onFilterChange } = props;
     if (onFilterChange) {
-      onFilterChange([{
-        id:'*-CONTAINS-1',
-        columnName:'*',
-        operatorName:'CONTAINS',
-        operator:operators.CONTAINS,
-        value
-      }]);
+      onFilterChange([
+        {
+          id: '*-CONTAINS-1',
+          columnName: '*',
+          operatorName: 'CONTAINS',
+          operator: operators.CONTAINS,
+          value
+        }
+      ]);
     }
   };
 
@@ -96,37 +93,6 @@ const TableActions: SFC<IProps> = props => {
     debounceOnSearchChange(value);
   };
 
-  const handleChangeFilter = (newValue: IRuleValue[]) => {
-    const rules = chain(newValue)
-    .flatMap(builderItem => builderItem.rules)
-    .map((rule: any) => {
-      return {
-        id:`${rule.rule.propertyId}-${rule.rule.operator}`,
-        columnName:rule.rule.propertyId,
-        operatorName:rule.rule.operator,
-        operator:() => true,
-        value:rule.rule.value,
-      };
-    })
-    .value();
-
-    const { onFilterChange } = props;
-    if(onFilterChange) { onFilterChange(rules); }
-
-    setFilterValue(newValue);
-  };
-
-  const handleSaveFilter = () => {
-    clickOpenFilter(false);
-  };
-
-  // console.log(props.onFilterChange); // Call this with id:string, operatorName:string, value:string
-  // console.log(testFilterMeta); // This drives what can be rendered out for each filter
-  // console.log(props.filters); // Current filters; Don't render any filters that start `id` with '*-'
-  // console.log(operatorOptions); // All the Operator Options, dropdown ready!
-  // console.log(OperatorTypes); // Types of Operators
-  // console.log(ValueType); // Value types
-
   return (
     <StyledTableAction>
       <FlexStyled style={{ flex: 5, alignItems: 'center' }}>
@@ -139,7 +105,7 @@ const TableActions: SFC<IProps> = props => {
           />
         </FlexStyled>
         {props.filterMenu ? (
-          <FlexStyled style={{ paddingLeft: 10 }}>
+          <FlexStyled style={{ paddingLeft: 10, position: 'relative' }}>
             <Button
               styleType='secondary'
               onClick={() => {
@@ -150,6 +116,19 @@ const TableActions: SFC<IProps> = props => {
               <Icon name='filter' />
               Filter
             </Button>
+            <FilterContainer>
+              {openedFilter && (
+                <FilterBox
+                  filters={filters}
+                  setFilters={setFilters}
+                  schema={convertRuleSchema(
+                    'admin_tickets.some_group_title',
+                    testFilterMeta
+                  )}
+                  cancel={clickOpenFilter}
+                />
+              )}
+            </FilterContainer>
           </FlexStyled>
         ) : null}
       </FlexStyled>
@@ -212,24 +191,6 @@ const TableActions: SFC<IProps> = props => {
           </FlexStyled>
         ) : null}
       </FlexStyled>
-
-      <FilterContainer>
-        <FilterContent active={openedFilter}>
-          <RuleBuilder
-            value={filterValue}
-            onChange={handleChangeFilter}
-            schema={convertRuleSchema(
-              'admin_tickets.some_group_title',
-              testFilterMeta
-            )}
-          />
-          <ButtonContainer>
-            <Button styleType='primary' onClick={() => handleSaveFilter()}>
-              Save
-            </Button>
-          </ButtonContainer>
-        </FilterContent>
-      </FilterContainer>
     </StyledTableAction>
   );
 };
