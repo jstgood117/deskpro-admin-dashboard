@@ -62,10 +62,43 @@ export interface IProps {
   filters?: FilterType[];
   onFilterChange?: (rules: FilterType[]) => void;
 }
+
+interface IFilterButton {
+  active: boolean;
+  existing: boolean;
+}
 const initialFilters: IFilterProps[] = [
   { property: '', option: '', filterKey: '', applied: false }
 ];
 
+const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
+  button {
+    color: ${props =>
+      (props.active || props.existing) && props.theme.activeColour};
+    path {
+      fill: ${props =>
+        (props.active || props.existing) && props.theme.activeColour};
+    }
+    border: ${props =>
+      (props.active || props.existing) &&
+      `1px solid ${props.theme.activeColour}`};
+    background: ${props =>
+      (props.active || props.existing) && props.theme.hoverColour};
+  }
+  .add-btn {
+    button {
+      border-top-right-radius: ${props => props.existing && 0}px;
+      border-bottom-right-radius: ${props => props.existing && 0}px;
+      border-right: ${props => props.existing && 0}px;
+    }
+  }
+  .close-btn {
+    button {
+      border-top-left-radius: ${props => props.existing && 0}px;
+      border-bottom-left-radius: ${props => props.existing && 0}px;
+    }
+  }
+`;
 const TableActions: SFC<IProps> = props => {
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
@@ -133,7 +166,10 @@ const TableActions: SFC<IProps> = props => {
         filters.splice(currentIndex, 1);
       }
       if (filters.length === 0) {
-        setFilters && setFilters([{ property: '', option: '', filterKey: '' }]);
+        setFilters &&
+          setFilters([
+            { property: '', option: '', filterKey: '', applied: false }
+          ]);
       } else {
         setFilters && setFilters([...filters]);
       }
@@ -155,16 +191,44 @@ const TableActions: SFC<IProps> = props => {
           </FlexStyled>
           {props.filterMenu && (
             <FlexStyled style={{ paddingLeft: 10, position: 'relative' }}>
-              <Button
-                styleType='secondary'
-                onClick={() => {
-                  clickOpenFilter(!openedFilter);
-                }}
-                size='medium'
+              <StyledFilterButton
+                active={openedFilter}
+                existing={filters[0].applied}
               >
-                <Icon name='filter' />
-                Filter
-              </Button>
+                <Button
+                  className='add-btn'
+                  styleType='secondary'
+                  onClick={() => {
+                    clickOpenFilter(!openedFilter);
+                  }}
+                  size='medium'
+                >
+                  <Icon name='filter' />
+                  Filter{' '}
+                  {filters[0].applied &&
+                    `(${filters.filter(filter => filter.applied === true).length})`}
+                </Button>
+                {filters[0].applied && (
+                  <Button
+                    className='close-btn'
+                    styleType='secondary'
+                    onClick={() => {
+                      setFilters([
+                        {
+                          property: '',
+                          option: '',
+                          filterKey: '',
+                          applied: false
+                        }
+                      ]);
+                    }}
+                    size='medium'
+                    iconOnly={true}
+                  >
+                    <Icon name='close' />
+                  </Button>
+                )}
+              </StyledFilterButton>
               <FilterContainer>
                 {openedFilter && (
                   <FilterBox

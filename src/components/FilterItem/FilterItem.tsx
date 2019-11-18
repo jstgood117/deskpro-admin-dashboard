@@ -36,14 +36,7 @@ const ItemText = styled(dpstyle.div)`
 `;
 
 const FilterItem: FC<IProps> = ({ filter, onRemove }) => {
-  let option;
-  switch (filter.option) {
-    case 'EQUAL':
-      option = 'Is';
-      break;
-    default:
-      break;
-  }
+  const option = filter.option;
   return (
     <StyledItem>
       <ItemText>
