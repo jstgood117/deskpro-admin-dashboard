@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../../Theme';
 import Button from '../Button';
 import Icon from '../../Icon';
+import { DeskproAdminThemeType } from '../../../style/DeskproAdminTheme';
 
 type ButtonStyleType = 'primary' | 'secondary';
 type DropdownContentPosition = 'right' | 'left';
@@ -101,7 +102,7 @@ const WithDropdownStyle = styled.div<IStyleWrapper & IStyleProp>`
   }
 `;
 
-const getStyle = (styleType: ButtonStyleType, theme: any): IButtonStyle => {
+const getStyle = (styleType: ButtonStyleType, theme: DeskproAdminThemeType): IButtonStyle => {
   const styles = {
     primary: {
       static: {

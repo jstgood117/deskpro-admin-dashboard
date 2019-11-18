@@ -144,7 +144,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
       >
         <AllCheckStyle>
           <Checkbox
-            value={0}
+            value={String(0)}
             indeterminate={isAllIndeterminate}
             checked={isAllChecked}
             onChange={(event: SyntheticEvent<HTMLInputElement>) =>

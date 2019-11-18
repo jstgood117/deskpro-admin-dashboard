@@ -7,6 +7,8 @@ import { dpstyle } from '../Styled';
 import { H6 } from '../Typography';
 import Icon from '../Icon';
 
+import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
+
 type ButtonStyleType = 'primary' | 'secondary' | 'tertiary' | 'danger';
 type ButtonSizeType = 'small' | 'medium';
 
@@ -30,7 +32,7 @@ interface IButtonStyle {
 const getStyle = (
   styleType: ButtonStyleType,
   size: ButtonSizeType,
-  theme: any
+  theme: DeskproAdminThemeType
 ): IButtonStyle => {
   const styles = {
     small: {

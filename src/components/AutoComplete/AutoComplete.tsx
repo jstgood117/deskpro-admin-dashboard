@@ -3,7 +3,7 @@ import Autocomplete from 'react-autocomplete';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
 import { BoxSizingProperty, FontWeightProperty } from 'csstype';
-
+import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
 
@@ -53,7 +53,7 @@ const StyledAutoComplete = styled.div`
 
 export const AutoCompleteItemStyle = (
   isHighlighted: boolean,
-  theme: any,
+  theme: DeskproAdminThemeType,
   selected: boolean
 ) => {
   return {
