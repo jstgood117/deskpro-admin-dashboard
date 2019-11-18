@@ -1,4 +1,4 @@
-import * as queries from '../../schema/queries';
+import queries from '../../schema/queries';
 
 const getQueryBasedOnRoute = (route:string) => {
   switch(route) {

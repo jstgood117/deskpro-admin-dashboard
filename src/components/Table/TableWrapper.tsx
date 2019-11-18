@@ -1,6 +1,6 @@
 import React, { useEffect, SFC, useCallback, useState, Fragment } from 'react';
 import { withApollo } from 'react-apollo';
-import { gql, ApolloClient } from 'apollo-boost';
+import { /* gql, */ ApolloClient } from 'apollo-boost';
 import { injectIntl } from 'react-intl';
 
 import { runFilters } from '../../services/filters';
@@ -9,6 +9,8 @@ import { ITableSetup } from '../../resources/interfaces';
 
 import { logError } from '../Error/ErrorBoundary';
 
+import { testTableData2 } from '../../resources/constants/mock/testTableData2';
+
 import { transformColumnData } from './Table';
 import TableSync from './TableSync';
 import TableAsync from './TableAsync';
@@ -16,15 +18,13 @@ import TableAsync from './TableAsync';
 interface IProps {
   intl: any;
   client: ApolloClient<any>;
+  dataType: string;
   dataQuery: string;
   tableDef: ITableSetup;
   filters?: FilterType[];
 }
 
-// TODO how does memory vs async choice come through in the agents_getAgentsPage query?
-const bChooseSyncTable = true;
-
-const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef, filters}) => {
+const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef, filters, dataType}) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,11 +35,13 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
     setLoading(true);
 
     try {
-      const response = await client.query({
-        query: gql`${dataQuery}`,
-        errorPolicy: 'all'
-      });
-      const { results } = response.data;
+      // const response = await client.query({
+      //   query: gql`${dataQuery}`,
+      //   errorPolicy: 'all'
+      // });
+      // const { results } = response.data;
+
+      const { results } = testTableData2;
       setData(results);
       setFilteredData(results);
 
@@ -61,7 +63,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   }, [dataQuery]);
 
   useEffect(() => {
-    if (bChooseSyncTable) getData();
+    getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataQuery]);
 
@@ -71,13 +73,13 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
 
   return (
     <Fragment>
-      {bChooseSyncTable && (
+      {dataType === 'sync' && (
         <TableSync
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], intl)}
         />
       )}
-      {!bChooseSyncTable && (
+      {dataType === 'async' && (
         <TableAsync
           data={filteredData}
           columns={tableDef.columns}

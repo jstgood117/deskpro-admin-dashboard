@@ -71,7 +71,7 @@ export const addFilter = (
   filters:FilterType[],
   columnName: string,
   operatorName: string,
-  compareValue: any
+  compareValue: string
 ): FilterType[] => {
 
   const existingIds = filters.map(filter => filter.id);

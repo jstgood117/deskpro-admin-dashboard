@@ -1,24 +1,39 @@
-import React, { SFC } from 'react';
+import React, { SFC, createContext } from 'react';
 
-import { QUERY_AGENTS_PAGE } from '../../schema/queries';
+import queries from '../../schema/queries';
 import StandardTablePage from '../StandardTablePage';
 
 export interface IProps {
   path?: string;
 }
 
-// Everything is now defined by the path field
-// So what is the point of pageType and metadataQuery fields in the sidebar query payload?
-
-const PageType: SFC<IProps> = ({path}) => {
-  switch (path) {
-    case '/agents':
-      return <StandardTablePage query={QUERY_AGENTS_PAGE} queryName='agents_getAgentsPage' />;
-
-    default:
-      return <div><textarea value={path} style={{width: '50%', height: '500px', fontFamily: 'Monospace'}} readOnly={true} /></div>;
-  }
+export type PageContextValuesType = {
+  path: string;
 };
 
+export const PageContext = createContext({});
+
+const PageType: SFC<IProps> = ({path}) => {
+
+  const contextValues = {
+    path
+  } as PageContextValuesType;
+
+  let page = null;
+  switch (path) {
+    case '/agents':
+      page = <StandardTablePage path={path} query={queries.QUERY_AGENTS_PAGE} queryName='agents_getAgentsPage' />;
+      break;
+    default:
+      page = <div><textarea value={path} style={{width: '50%', height: '500px', fontFamily: 'Monospace'}} readOnly={true} /></div>;
+      break;
+  }
+
+  return (
+    <PageContext.Provider value={contextValues}>
+      {page}
+    </PageContext.Provider>
+  );
+};
 
 export default PageType;

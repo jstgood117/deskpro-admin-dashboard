@@ -59,7 +59,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           viewMode={props.viewMode}
           renderItem={(item, index) => (
             <ActiveAvatar
-              key={item.id}
+              key={index}
               active={item.active}
               name={item.name}
               avatar={item.avatar}
@@ -79,7 +79,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           viewMode={props.viewMode}
           overflowStyle={{ marginLeft: 8 }}
           renderItem={(item, idx) => (
-            <P1 key={item}>
+            <P1 key={idx}>
               <span> {idx !== 0 ? ', ' : ''}</span>
               {item}
             </P1>
@@ -107,7 +107,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           items={props.values}
           title={props.title}
           text={props.text}
-          renderItem={item => <P1 key={item}>{item}</P1>}
+          renderItem={(item, index) => <P1 key={index}>{item}</P1>}
         />
       );
 

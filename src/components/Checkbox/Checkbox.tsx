@@ -1,4 +1,4 @@
-import React, { SFC, CSSProperties } from 'react';
+import React, { SFC, CSSProperties, MouseEvent } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 
@@ -58,7 +58,7 @@ const CheckboxContainer = styled.label<{ size: number }>`
 export interface IProps {
   size?: number;
   checked: boolean;
-  value?: any;
+  value?: string;
   containerClassName?: string;
   containerStyle?: CSSProperties;
   disabled?: boolean;
@@ -66,7 +66,7 @@ export interface IProps {
   indeterminate?: boolean;
   showArrow?: boolean;
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
-  onArrowClick?: (event: any) => void;
+  onArrowClick?: (event: MouseEvent) => void;
 }
 
 const Checkbox: SFC<IProps> = ({

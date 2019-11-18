@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 
@@ -23,7 +23,7 @@ const Label = styled.label`
 export interface IProps {
   id: string;
   text?: string;
-  onChangeFile?: (event: any) => void;
+  onChangeFile?: (event: SyntheticEvent<HTMLInputElement>) => void;
 }
 
 const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {

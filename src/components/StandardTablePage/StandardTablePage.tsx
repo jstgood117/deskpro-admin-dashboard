@@ -6,6 +6,9 @@ import { IViewData } from '../../resources/interfaces';
 import { setupFilters, diffUpdate } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 
+// test data
+import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
+
 import Loading from '../Loading';
 import Error from '../Error';
 import Header from '../Header';
@@ -16,6 +19,7 @@ import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 
 export interface IProps {
+  path: string;
   query: DocumentNode;
   queryName: string;
 }
@@ -27,7 +31,7 @@ const BodyMargin = styled(dpstyle.div)`
 const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
-  const { loading, error, data } = useQuery(query, { errorPolicy: 'all' });
+  const { loading, error, /*data*/ } = useQuery(query, { errorPolicy: 'all' });
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -46,8 +50,10 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
 
   };
 
-  if (data && data[queryName]) {
-    const {title, description, headerLinks, views} = data[queryName];
+  // TEST
+  // if (data && data[queryName]) {
+  if(testColumnData2) {
+    const {title, description, headerLinks, views, dataType} = (testColumnData2 as any)[queryName.toString()];
     return (
       <Fragment>
         <Header
@@ -72,7 +78,7 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
               handleClick={index => { setTabState(index); }}
             />
           )}
-          {views && views[tabIndex] && <Table {...views[tabIndex]} filters={filters} />}
+          {views && views[tabIndex] && <Table {...views[tabIndex]} filters={filters} dataType={dataType} />}
         </BodyMargin>
       </Fragment>
     );
