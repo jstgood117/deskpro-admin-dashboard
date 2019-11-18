@@ -1,11 +1,11 @@
 import React from 'react';
 import TableData from '../../TableData';
-import { getRandomItem } from '../../../utils/getRandomColor';
+import { getColorByIndex } from '../../../utils/getRandomColor';
 import { ITableColor } from '../../../resources/interfaces';
 
-let randomItem: ITableColor;
-const getRandomColor = () => {
-  randomItem = getRandomItem();
+
+const getColor = (index: number): ITableColor => {
+  return getColorByIndex(index);
 };
 
 enum CellEnum {
@@ -22,8 +22,8 @@ const cellRenderer = (props: any) => {
   return React.createElement(TableData, props);
 };
 
-const generateAvatar = (team: any) => {
-  getRandomColor();
+const generateAvatar = (team: any, index: number) => {
+  const randomItem = getColor(index);
   return {
     ...team,
     textColor: randomItem.textColor,
@@ -60,7 +60,7 @@ export const create = (cell: any) => {
       return cellRenderer({ type: 'string', props: { values } });
 
     case 'TEXT_COMMA_SEP':
-      return cellRenderer({ type: 'string', props: { values: cell.value } });
+      return cellRenderer({ type: 'string', props: { values: cell.value, max: 1 } });
 
     case 'TEXT':
     default:

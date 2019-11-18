@@ -240,13 +240,23 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           })}
         </tbody>
       </table>
-      <Pagination
-        totalRecords={totalRecords}
-        rowsPerPage={rowsPerPage}
-        currentPage={currentPage}
-        onChangePage={handleChangeCurrentPage}
-        onChangeRowsPerPage={handleChangRowsPerPage}
-      />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          paddingTop: 9,
+          paddingBottom: 10,
+        }}
+      >
+        <Pagination
+          totalRecords={totalRecords}
+          rowsPerPage={rowsPerPage}
+          currentPage={currentPage}
+          onChangePage={handleChangeCurrentPage}
+          onChangeRowsPerPage={handleChangRowsPerPage}
+        />
+      </div>
     </TableStyled>
   );
 };

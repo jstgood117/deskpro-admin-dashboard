@@ -7,12 +7,8 @@ export const testTableData2 = {
       'last_name': 'Doe',
       'avatarUrn': '',
       'primary_email': 'testing@deskpro.com',
-      'emails': [
-        'testing@deskpro.com'
-      ],
-      'can_admin': true,
-      'can_agent': true,
-      'date_last_login': '2019-11-05 10:28:26',
+      'phone':'01234567890',
+      'access':'Administrator',
       'agent_teams': [
         {
           'id': '1',
@@ -45,13 +41,8 @@ export const testTableData2 = {
       'last_name': 'Mills',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/6',
       'primary_email': 'grimes.karson@example.org',
-      'emails': [
-        'grimes.karson@example.org',
-        'agnes67@example.org'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Administrator',
       'agent_teams': [],
       'agent_groups': [],
       '__typename': 'Agent'
@@ -63,13 +54,8 @@ export const testTableData2 = {
       'last_name': 'Reilly',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/7',
       'primary_email': 'gracie.rodriguez@example.org',
-      'emails': [
-        'gracie.rodriguez@example.org',
-        'ellis91@example.org'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Administrator',
       'agent_teams': [
         {
           'id': '2',
@@ -88,13 +74,8 @@ export const testTableData2 = {
       'last_name': 'McGlynn',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/8',
       'primary_email': 'elwin28@example.net',
-      'emails': [
-        'elwin28@example.net',
-        'columbus16@example.org'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Administrator',
       'agent_teams': [
         {
           'id': '3',
@@ -113,13 +94,8 @@ export const testTableData2 = {
       'last_name': 'Weber',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/9',
       'primary_email': 'bernadette70@example.net',
-      'emails': [
-        'bernadette70@example.net',
-        'mavis80@example.net'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Administrator',
       'agent_teams': [
         {
           'id': '1',
@@ -138,13 +114,8 @@ export const testTableData2 = {
       'last_name': 'Fritsch',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/10',
       'primary_email': 'ola49@example.net',
-      'emails': [
-        'ola49@example.net',
-        'caleigh.lockman@example.net'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [],
       'agent_groups': [],
       '__typename': 'Agent'
@@ -156,13 +127,8 @@ export const testTableData2 = {
       'last_name': 'Cronin',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/11',
       'primary_email': 'kulas.magnus@example.org',
-      'emails': [
-        'kulas.magnus@example.org',
-        'arnold.blanda@example.org'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [],
       'agent_groups': [],
       '__typename': 'Agent'
@@ -174,13 +140,8 @@ export const testTableData2 = {
       'last_name': 'Klein',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/12',
       'primary_email': 'germaine42@example.org',
-      'emails': [
-        'germaine42@example.org',
-        'carley47@example.net'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [
         {
           'id': '1',
@@ -199,13 +160,8 @@ export const testTableData2 = {
       'last_name': 'Robel',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/13',
       'primary_email': 'vivienne.huels@example.org',
-      'emails': [
-        'vivienne.huels@example.org',
-        'ozella89@example.org'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [],
       'agent_groups': [],
       '__typename': 'Agent'
@@ -217,13 +173,8 @@ export const testTableData2 = {
       'last_name': 'Kulas',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/14',
       'primary_email': 'greg82@example.net',
-      'emails': [
-        'greg82@example.net',
-        'arnold.ferry@example.org'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [],
       'agent_groups': [],
       '__typename': 'Agent'
@@ -235,13 +186,8 @@ export const testTableData2 = {
       'last_name': 'Cummerata',
       'avatarUrn': 'urn:deskpro:avatar:agent:blob/15',
       'primary_email': 'turner.brain@example.net',
-      'emails': [
-        'turner.brain@example.net',
-        'gerhold.tyson@example.com'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [
         {
           'id': '1',
@@ -260,12 +206,8 @@ export const testTableData2 = {
       'last_name': 'Content',
       'avatarUrn': '',
       'primary_email': 'content.publisher@deskprodemo.com',
-      'emails': [
-        'content.publisher@deskprodemo.com'
-      ],
-      'can_admin': false,
-      'can_agent': true,
-      'date_last_login': '',
+      'phone':'01234567890',
+      'access':'Agent',
       'agent_teams': [],
       'agent_groups': [],
       '__typename': 'Agent'

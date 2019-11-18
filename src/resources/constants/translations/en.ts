@@ -50,5 +50,6 @@ export const testTranslations = {
   'admin_common.col.can_admin': 'Can Admin',
   'admin_common.col.can_reports': 'Can Reports',
   'admin_common.col.last_login': 'Last login',
-  'admin_common.col.groups': 'Groups'
+  'admin_common.col.groups': 'Groups',
+  'admin_common.col.access': 'Access'
 };
