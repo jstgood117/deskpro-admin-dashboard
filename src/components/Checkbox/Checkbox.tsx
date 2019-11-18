@@ -17,6 +17,7 @@ const StyledCheckbox = styled.span<ICheckboxProps>`
   left: 0;
   width: ${props => props.size}px;
   height: ${props => props.size}px;
+  box-sizing: border-box;
   background: ${props => (props.checked ? props.theme.activeColour : '#fff')};
   border-radius: 3px;
   transition: all 150ms;

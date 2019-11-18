@@ -26,6 +26,7 @@ export interface IProps {
 
 const BodyMargin = styled(dpstyle.div)`
   margin: 34px;
+  padding-top: 40px;
 `;
 
 const StandardTablePage: SFC<IProps> = ({query, queryName}) => {

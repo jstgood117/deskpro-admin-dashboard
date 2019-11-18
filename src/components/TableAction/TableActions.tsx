@@ -20,6 +20,9 @@ const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
 const ViewItems = [{ link: 'View1' }, { link: 'View2' }];
 
 const StyledTableAction = styled(dpstyle.div)`
+  position: absolute;
+  right: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -206,7 +209,9 @@ const TableActions: SFC<IProps> = props => {
                   <Icon name='filter' />
                   Filter{' '}
                   {filters[0].applied &&
-                    `(${filters.filter(filter => filter.applied === true).length})`}
+                    `(${
+                      filters.filter(filter => filter.applied === true).length
+                    })`}
                 </Button>
                 {filters[0].applied && (
                   <Button

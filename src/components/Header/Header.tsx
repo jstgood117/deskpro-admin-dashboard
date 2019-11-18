@@ -10,7 +10,6 @@ import TableActions from '../TableAction';
 import Icon from '../Icon';
 import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 
-
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: ${props => props.theme.pagePadding};
@@ -86,16 +85,20 @@ export const HelpButton = styled.button`
   width: 45px;
   height: 45px;
   position: absolute;
+  right: 27px;
   right: ${props => props.theme.pagePadding};
-  top: ${props => props.theme.pagePadding};
+  top: 31px;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
 `;
 
-export const ActionContainer = styled(dpstyle.div)`
+const HeaderOptions = styled(dpstyle.div)`
+  display: inline-flex;
+  height: 34px;
+  width: 100%;
+  align-items: center;
+`;
+const ActionContainer = styled(dpstyle.div)`
   display: flex;
-  position: absolute;
-  right: ${props => props.theme.pagePadding};
-  bottom: ${props => props.theme.pagePadding};
 `;
 
 const Link = styled(dpstyle.a)`
@@ -109,7 +112,7 @@ const TableActionStyled = styled(dpstyle.div)`
   position: absolute;
   left: 33px;
   right: 27px;
-  bottom: -27px;
+  bottom: 27px;
 `;
 
 export interface IHeader {
@@ -134,8 +137,8 @@ export interface IProps {
   tableActions?: boolean;
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
-  filters?:FilterType[];
-  onFilterChange?:(rules:FilterType[]) => void;
+  filters?: FilterType[];
+  onFilterChange?: (rules: FilterType[]) => void;
 }
 
 const Header: SFC<IProps> = ({
@@ -163,7 +166,7 @@ const Header: SFC<IProps> = ({
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <HeaderStyled illustration={illustration}>
-        <div>
+        <div style={{ width: '100%' }}>
           <HeadingText size={1} messageId={title} />
           {description && (
             <HeaderDescription>
@@ -171,14 +174,49 @@ const Header: SFC<IProps> = ({
             </HeaderDescription>
           )}
           {links.length && (
-            <div>
-              {links.map((link, key) => (
-                <Link href={link.path} key={key}>
-                  {link.icon && <Icon name={link.icon} />}
-                  <TextLinkLabel messageId={link.title} />
-                </Link>
-              ))}
-            </div>
+            <HeaderOptions>
+              <div style={{ flex: 1 }}>
+                {links.map((link, key) => (
+                  <Link href={link.path} key={key}>
+                    {link.icon && <Icon name={link.icon} />}
+                    <TextLinkLabel messageId={link.title} />
+                  </Link>
+                ))}
+              </div>
+              <ActionContainer>
+                {showViewModeSwitcher && onChangeView && (
+                  <ViewModeContainer>
+                    <ViewModeButton
+                      onClick={() => changeView('table')}
+                      active={state === 'table'}
+                    >
+                      <Icon name='viewMode.table' />
+                    </ViewModeButton>
+                    <ViewModeButton
+                      onClick={() => changeView('list')}
+                      active={state === 'list'}
+                    >
+                      <Icon name='viewMode.list' />
+                    </ViewModeButton>
+                    <ViewModeButton
+                      onClick={() => changeView('map')}
+                      active={state === 'map'}
+                    >
+                      <Icon name='viewMode.map' />
+                    </ViewModeButton>
+                  </ViewModeContainer>
+                )}
+
+                {showNewButton && onNewClick && (
+                  <NewButton onClick={onNewClick}>
+                    <Icon name='plus' />
+                    <span>
+                      <FormattedMessage id='admin.page.new' />
+                    </span>
+                  </NewButton>
+                )}
+              </ActionContainer>
+            </HeaderOptions>
           )}
         </div>
 
@@ -188,39 +226,6 @@ const Header: SFC<IProps> = ({
           </HelpButton>
         )}
 
-        <ActionContainer>
-          {showViewModeSwitcher && onChangeView && (
-            <ViewModeContainer>
-              <ViewModeButton
-                onClick={() => changeView('table')}
-                active={state === 'table'}
-              >
-                <Icon name='viewMode.table' />
-              </ViewModeButton>
-              <ViewModeButton
-                onClick={() => changeView('list')}
-                active={state === 'list'}
-              >
-                <Icon name='viewMode.list' />
-              </ViewModeButton>
-              <ViewModeButton
-                onClick={() => changeView('map')}
-                active={state === 'map'}
-              >
-                <Icon name='viewMode.map' />
-              </ViewModeButton>
-            </ViewModeContainer>
-          )}
-
-          {showNewButton && onNewClick && (
-            <NewButton onClick={onNewClick}>
-              <Icon name='plus' />
-              <span>
-                <FormattedMessage id='admin.page.new' />
-              </span>
-            </NewButton>
-          )}
-        </ActionContainer>
         {tableActions && (
           <TableActionStyled>
             <TableActions
