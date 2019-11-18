@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { action } from '@storybook/addon-actions';
 
 import Icon from '../Icon';
 import { dpstyle } from '../Styled';
@@ -8,6 +7,7 @@ import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 export interface IProps {
   filter: IFilterProps;
+  onRemove?: (e: any) => void;
 }
 
 const StyledItem = styled.div`
@@ -35,7 +35,7 @@ const ItemText = styled(dpstyle.div)`
   color: ${props => props.theme.activeColour};
 `;
 
-const FilterItem: FC<IProps> = ({ filter }) => {
+const FilterItem: FC<IProps> = ({ filter, onRemove }) => {
   let option;
   switch (filter.option) {
     case 'EQUAL':
@@ -49,7 +49,7 @@ const FilterItem: FC<IProps> = ({ filter }) => {
       <ItemText>
         {filter.property} {option} {filter.filterKey}
       </ItemText>
-      <div style={{ display: 'flex' }} onClick={action('clicked')}>
+      <div style={{ display: 'flex' }} onClick={onRemove}>
         <Icon name='close' />
       </div>
     </StyledItem>

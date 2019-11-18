@@ -1,6 +1,5 @@
 import React, { SFC, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { action } from '@storybook/addon-actions';
 import { uniqueId } from 'lodash';
 
 import Icon from '../Icon';
@@ -9,19 +8,16 @@ import { dpstyle } from '../Styled';
 import FilterOptions from '../FilterOptions';
 import { IRuleBuilderSchema } from '../../resources/interfaces/filterMeta';
 import { DeskproAdminTheme } from '../Theme';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 export type IProps = {
   filters: IFilterProps[];
   setFilters: (e: any) => void;
   schema: IRuleBuilderSchema;
-  cancel?: (e: any) => void;
+  cancel?: () => void;
+  apply?: () => void;
 };
 
-export type IFilterProps = {
-  property: string;
-  option: string;
-  filterKey: string;
-};
 const StyledBox = styled(dpstyle.div)`
   width: fit-content;
   padding: 20px;
@@ -37,7 +33,13 @@ const StyledBox = styled(dpstyle.div)`
   }
 `;
 
-const FilterBox: SFC<IProps> = ({ filters, setFilters, schema, cancel }) => {
+const FilterBox: SFC<IProps> = ({
+  filters,
+  setFilters,
+  schema,
+  cancel,
+  apply
+}) => {
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
     filters[lastIndex].filterKey &&
@@ -80,7 +82,9 @@ const FilterBox: SFC<IProps> = ({ filters, setFilters, schema, cancel }) => {
           <div style={{ flex: 1 }}>
             <Button
               styleType='primary'
-              onClick={action('clicked')}
+              onClick={() => {
+                apply();
+              }}
               size='medium'
             >
               Apply Filter
@@ -90,7 +94,7 @@ const FilterBox: SFC<IProps> = ({ filters, setFilters, schema, cancel }) => {
             <Button
               styleType='tertiary'
               onClick={() => {
-                cancel && cancel(false);
+                cancel();
               }}
               size='medium'
             >

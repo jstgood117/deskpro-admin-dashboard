@@ -46,4 +46,5 @@ export type IFilterProps = {
   property: string;
   option: string;
   filterKey: string;
+  applied?: boolean;
 };
