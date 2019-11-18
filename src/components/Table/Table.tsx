@@ -72,6 +72,7 @@ const generateSortType = (sortType: string) => {
 };
 
 export const transformColumnData = (columns: ITableColumn[], intl: any) => {
+
   const newCols = columns.map( (column: ITableColumn) => {
     return {
       id: column.title,
