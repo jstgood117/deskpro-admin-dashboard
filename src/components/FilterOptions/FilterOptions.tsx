@@ -7,12 +7,12 @@ import Icon from '../Icon';
 import Input from '../Input';
 import Button from '../Button';
 import { DeskproAdminTheme } from '../Theme';
-import { IFilterProps } from '../FilterBox/FilterBox';
 import { AutoCompleteItemStyle, MenuStyle } from '../AutoComplete/AutoComplete';
 import {
   IRuleBuilderSchema,
   IPropertySchema,
-  RuleOperatorType
+  RuleOperatorType,
+  IFilterProps
 } from '../../resources/interfaces/filterMeta';
 
 const StyledFilterOptions = styled.div`

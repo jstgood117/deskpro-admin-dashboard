@@ -2,12 +2,16 @@ import {
   IRuleValue,
   IRuleItem,
   IRuleBuilderSchema,
-  IRuleOptions
+  IRuleOptions,
+  RuleOperatorType
 } from '../../resources/interfaces/filterMeta';
 import setWith from 'lodash/setWith';
 import get from 'lodash/get';
 import merge from 'lodash/merge';
-import { FilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import {
+  FilterMeta,
+  operatorDictionary
+} from '../../resources/constants/mock/testFilterMeta';
 
 export const generateId = (): string =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -245,11 +249,18 @@ export const convertRuleSchema = (
       }, {});
       merge(options, { choices });
     }
-
+    const getOperators = (items: string[]) => {
+      const result: RuleOperatorType[] = [];
+      items.map((val: string) => {
+        result.push(operatorDictionary[val]);
+        return true;
+      });
+      return result;
+    };
     schema.properties.push({
       propertyId: item.title,
       title: item.title,
-      operators: item.operators as any,
+      operators: getOperators(item.operators),
       type,
       options
     });

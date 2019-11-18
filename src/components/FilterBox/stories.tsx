@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import FilterBox, { IFilterProps } from './FilterBox';
+import FilterBox from './FilterBox';
 import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: IFilterProps[] = [
   { property: '', option: '', filterKey: '' }

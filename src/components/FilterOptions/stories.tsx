@@ -3,9 +3,9 @@ import { storiesOf } from '@storybook/react';
 import { uniqueId } from 'lodash';
 
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../FilterBox/FilterBox';
 import FilterOptions from './FilterOptions';
 import { convertRuleSchema } from '../RuleBuilder/utils';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: IFilterProps[] = [
   { property: '', option: '', filterKey: '' }

@@ -67,7 +67,17 @@ export const operatorOptions: OperatorOptionsTypes = [
     title: 'Yes / No'
   }
 ];
-
+export const operatorDictionary: any = {
+  IN: 'Contains',
+  NOT_IN: 'Not in',
+  EQUAL: 'Is',
+  NOT_EQUAL: 'Is not',
+  STARTS_WITH: 'Starts with',
+  ENDS_WITH: 'Ends with',
+  CONTAINS: 'Contains one of the following',
+  NOT_CONTAINS: 'Does not Contain one of the following',
+  YES_NO: 'Yes / No'
+};
 export const testFilterMeta: FilterMeta[] = [
   {
     title: 'Name',

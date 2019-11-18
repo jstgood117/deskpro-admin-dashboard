@@ -4,7 +4,7 @@ import { mount, shallow } from '../../test/enzyme';
 import FilterOptions, { IProps } from './FilterOptions';
 import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../FilterBox/FilterBox';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 describe('FilterOptions', () => {
   let props: IProps;
