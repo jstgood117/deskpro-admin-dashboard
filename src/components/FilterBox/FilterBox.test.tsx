@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import FilterBox, { IFilterProps } from './FilterBox';
+import FilterBox from './FilterBox';
 import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 describe('FilterBox', () => {
   let mountedFilterBox: any;
