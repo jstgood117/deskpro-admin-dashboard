@@ -34,7 +34,8 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   const getData = async () => {
     setLoading(true);
 
-    try {
+    // TODO: Covert filters into GQL fitlers.
+      try {
       // const response = await client.query({
       //   query: gql`${dataQuery}`,
       //   errorPolicy: 'all'
@@ -82,7 +83,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
       {dataType === 'async' && (
         <TableAsync
           data={filteredData}
-          columns={tableDef.columns}
+          columns={transformColumnData([...tableDef.columns], intl)}
           fetchData={fetchData}
           loading={loading}
           pageCount={totalPageCount}

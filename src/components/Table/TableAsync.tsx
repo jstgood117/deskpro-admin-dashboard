@@ -44,6 +44,7 @@ const TableAsync: FC<TableAsyncProps> = ({
   loading,
   pageCount: controlledPageCount
 }) => {
+
   const {
     getTableProps,
     getTableBodyProps,
