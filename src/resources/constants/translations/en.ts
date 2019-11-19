@@ -52,5 +52,15 @@ export const testTranslations = {
   'admin_common.col.can_reports': 'Can Reports',
   'admin_common.col.last_login': 'Last login',
   'admin_common.col.groups': 'Groups',
-  'admin_common.col.access': 'Access'
+  'admin_common.col.access': 'Access',
+
+  'admin_common.filter_operator.in': 'Contains',
+  'admin_common.filter_operator.not_in': 'Not in',
+  'admin_common.filter_operator.equal': 'Is',
+  'admin_common.filter_operator.not_equal': 'Is not',
+  'admin_common.filter_operator.starts_with': 'Starts with',
+  'admin_common.filter_operator.ends_with': 'Ends with',
+  'admin_common.filter_operator.contains': 'Contains one of the following',
+  'admin_common.filter_operator.not_contains': 'Does not Contain one of the following',
+  'admin_common.filter_operator.yes_no': 'Yes / No'
 };

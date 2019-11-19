@@ -2,13 +2,13 @@ import React, { SFC, useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 
+// import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import { operators } from '../../services/filters/operators';
 
 import SearchBox from '../SearchBox';
 import Button from '../Button';
 import Icon from '../Icon';
-import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import FilterBox from '../FilterBox';
@@ -123,6 +123,25 @@ const TableActions: SFC<IProps> = props => {
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
 
+
+  // const processFiltersToFilterTypes = (internalFilters: IFilterProps[]):FilterType[] => {
+
+  //   let serviceFilters:FilterType[] = [];
+  //   internalFilters.forEach((internalFilter:IFilterProps) => {
+  //     const {filterKey, property, option} = internalFilter;
+  //     serviceFilters = addFilter(serviceFilters, property, option, filterKey);
+  //   });
+
+  //   return serviceFilters;
+  // };
+
+  // console.log(props.onFilterChange); // Call this with id:string, operatorName:string, value:string
+  // console.log(testFilterMeta); // This drives what can be rendered out for each filter
+  // console.log(props.filters); // Current filters; Don't render any filters that start `id` with '*-'
+  // console.log(operatorOptions); // All the Operator Options, dropdown ready!
+  // console.log(OperatorTypes); // Types of Operators
+  // console.log(ValueType); // Value types
+
   const applyFilter = () => {
     filters.map(filter => {
       if (filter.option && filter.property && filter.filterKey)
@@ -132,6 +151,11 @@ const TableActions: SFC<IProps> = props => {
     setFilters && setFilters([...filters]);
     apply(true);
     clickOpenFilter(false);
+
+    // if(props.onFilterChange) {
+    //   props.onFilterChange(filters)
+    // }
+
   };
 
   const cancelFilter = () => {
@@ -248,10 +272,7 @@ const TableActions: SFC<IProps> = props => {
                   <FilterBox
                     filters={filters}
                     setFilters={setFilters}
-                    schema={convertRuleSchema(
-                      'admin_tickets.some_group_title',
-                      testFilterMeta
-                    )}
+                    options={testFilterMeta}
                     cancel={cancelFilter}
                     apply={applyFilter}
                   />

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import FilterOptions, { IProps } from './FilterOptions';
-import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
@@ -37,10 +36,7 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
-      schema: convertRuleSchema(
-        'admin_tickets.some_group_title',
-        testFilterMeta
-      ),
+      options: testFilterMeta,
       placeholder: 'Select Property',
       index: 0
     };
