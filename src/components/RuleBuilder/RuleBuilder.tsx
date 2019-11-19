@@ -17,6 +17,8 @@ import {
 
 const RuleItemContainer = styled.div`
   position: relative;
+  background: ${props => props.theme.white};
+  z-index: 10;
   .group-item,
   .group-container {
     position: relative;

@@ -198,9 +198,6 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
                   {column.render('Header')}
-                  <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' v' : ' ^') : ''}
-                  </span>
                 </th>
               ))}
             </tr>
