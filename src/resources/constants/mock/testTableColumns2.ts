@@ -21,7 +21,7 @@ const testTableColumns2 = {
     'views': [
       {
         'title': 'group.active',
-        'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: false }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            emails\n            can_admin\n            can_agent\n            date_last_login\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
+        'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: false }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
         'filterDef': [{
           'title':'Name',
           'path':'col.name',
@@ -66,28 +66,13 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.all_emails',
-              'field': 'TEXT_COMMA_SEP',
-              'sort': 'ALPHANUMERIC_ARRAY',
+              'title': 'col.phone',
+              'field': 'TEXT',
+              'sort': 'TEXT',
               'data': [
                 {
-                  'propName': 'value',
-                  'path': 'emails',
-                  'value': '',
-                  '__typename': 'TableColumnDataMap'
-                }
-              ],
-              'defaultShow': false,
-              '__typename': 'TableColumnDef'
-            },
-            {
-              'title': 'col.can_admin',
-              'field': 'BOOLEAN_YESNO',
-              'sort': 'BOOLEAN',
-              'data': [
-                {
-                  'propName': 'value',
-                  'path': 'can_admin',
+                  'propName': 'phone',
+                  'path': 'phone',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }
@@ -96,28 +81,13 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.can_reports',
-              'field': 'BOOLEAN_YESNO',
-              'sort': 'BOOLEAN',
+              'title': 'col.access',
+              'field': 'TEXT',
+              'sort': 'TEXT',
               'data': [
                 {
-                  'propName': 'value',
-                  'path': 'can_agent',
-                  'value': '',
-                  '__typename': 'TableColumnDataMap'
-                }
-              ],
-              'defaultShow': true,
-              '__typename': 'TableColumnDef'
-            },
-            {
-              'title': 'col.last_login',
-              'field': 'TIME_AGO',
-              'sort': 'DATETIME',
-              'data': [
-                {
-                  'propName': 'value',
-                  'path': 'date_last_login',
+                  'propName': 'access',
+                  'path': 'access',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }
@@ -162,7 +132,7 @@ const testTableColumns2 = {
       },
       {
         'title': 'group.deleted',
-        'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: true }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            emails\n            can_admin\n            can_agent\n            date_last_login\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
+        'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: true }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
         'filterDef': [{
           'title':'Name',
           'path':'col.name',
@@ -207,28 +177,13 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.all_emails',
-              'field': 'TEXT_COMMA_SEP',
-              'sort': 'ALPHANUMERIC_ARRAY',
+              'title': 'col.phone',
+              'field': 'TEXT',
+              'sort': 'TEXT',
               'data': [
                 {
-                  'propName': 'value',
-                  'path': 'emails',
-                  'value': '',
-                  '__typename': 'TableColumnDataMap'
-                }
-              ],
-              'defaultShow': false,
-              '__typename': 'TableColumnDef'
-            },
-            {
-              'title': 'col.can_admin',
-              'field': 'BOOLEAN_YESNO',
-              'sort': 'BOOLEAN',
-              'data': [
-                {
-                  'propName': 'value',
-                  'path': 'can_admin',
+                  'propName': 'phone',
+                  'path': 'phone',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }
@@ -237,28 +192,13 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.can_reports',
-              'field': 'BOOLEAN_YESNO',
-              'sort': 'BOOLEAN',
+              'title': 'col.access',
+              'field': 'TEXT',
+              'sort': 'TEXT',
               'data': [
                 {
-                  'propName': 'value',
-                  'path': 'can_agent',
-                  'value': '',
-                  '__typename': 'TableColumnDataMap'
-                }
-              ],
-              'defaultShow': true,
-              '__typename': 'TableColumnDef'
-            },
-            {
-              'title': 'col.last_login',
-              'field': 'TIME_AGO',
-              'sort': 'DATETIME',
-              'data': [
-                {
-                  'propName': 'value',
-                  'path': 'date_last_login',
+                  'propName': 'access',
+                  'path': 'access',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }

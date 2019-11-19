@@ -14,8 +14,11 @@ export const TableStyled = styled(dpstyle.div)`
         border-bottom: 1px solid ${props => props.theme.greyLight};
 
         & th {
-          padding: 0;
-          line-height: 26px;
+          white-space: nowrap;
+          padding: 0 16px 0 0;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 150%;
           color: ${props => props.theme.greyDark};
           text-align: left;
         }
@@ -31,10 +34,15 @@ export const TableStyled = styled(dpstyle.div)`
         border-bottom: 1px solid ${props => props.theme.greyLighter};
 
         & td {
-          padding: 0;
+          padding: 0 16px 0 0;
           text-align: left;
           line-height: 44px;
           color: ${props => props.theme.staticColour};
+
+          > * {
+            white-space: nowrap;
+            flex-wrap:nowrap;
+          }
 
           & img {
             width: 25px;
@@ -64,6 +72,7 @@ const generateSortType = (sortType: string) => {
 };
 
 export const transformColumnData = (columns: ITableColumn[], intl: any) => {
+
   const newCols = columns.map( (column: ITableColumn) => {
     return {
       id: column.title,
