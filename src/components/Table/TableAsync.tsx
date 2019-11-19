@@ -201,6 +201,7 @@ const TableAsync: FC<TableAsyncProps> = ({
         <thead>
           {headerGroups.map((headerGroup: any, indexOuter: number) => (
             <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
+              <th>&nbsp;</th>
               {headerGroup.headers.map((column: any, indexInner: number) => (
                 <th
                   key={indexInner}

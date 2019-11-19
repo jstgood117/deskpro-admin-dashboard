@@ -1,7 +1,7 @@
 const testTableColumns2 = {
   'agents_getAgentsPage': {
     '__typename': 'StandardDataPageData',
-    'dataType':'async',
+    'dataType':'sync',
     'title': 'admin_agents.agents.title',
     'description': 'admin_agents.agents.description',
     'illustration': 'agents-header',
