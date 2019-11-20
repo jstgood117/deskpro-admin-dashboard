@@ -1,4 +1,4 @@
-const { override } = require("customize-cra");
+const { useBabelRc, override } = require("customize-cra");
 const rewireStyledComponents = require("react-app-rewire-styled-components");
 
 const styledComponents = obj => config => {
@@ -7,6 +7,7 @@ const styledComponents = obj => config => {
 };
 
 module.exports = override(
+    useBabelRc(),
     styledComponents({
         displayName: (process.env.NODE_ENV !== "production")
     })

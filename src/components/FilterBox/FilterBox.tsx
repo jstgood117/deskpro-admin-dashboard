@@ -6,14 +6,13 @@ import Icon from '../Icon';
 import Button from '../Button';
 import { dpstyle } from '../Styled';
 import FilterOptions from '../FilterOptions';
-import { IRuleBuilderSchema } from '../../resources/interfaces/filterMeta';
 import { DeskproAdminTheme } from '../Theme';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 export type IProps = {
   filters: IFilterProps[];
   setFilters: (e: any) => void;
-  schema: IRuleBuilderSchema;
+  options: any;
   cancel?: () => void;
   apply?: () => void;
 };
@@ -36,16 +35,16 @@ const StyledBox = styled(dpstyle.div)`
 const FilterBox: SFC<IProps> = ({
   filters,
   setFilters,
-  schema,
+  options,
   cancel,
   apply
 }) => {
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
-    filters[lastIndex].filterKey &&
-      filters[lastIndex].option &&
-      filters[lastIndex].property &&
-      setFilters([...filters, { property: '', option: '', filterKey: '' }]);
+    filters[lastIndex].value &&
+      filters[lastIndex].operatorName &&
+      filters[lastIndex].columnName &&
+      setFilters([...filters, { columnName: '', operatorName: '', value: '' }]);
   }, [filters, setFilters]);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -67,7 +66,7 @@ const FilterBox: SFC<IProps> = ({
                   filters={filters}
                   index={index}
                   filter={filter}
-                  schema={schema}
+                  options={options}
                 />
               </div>
             );

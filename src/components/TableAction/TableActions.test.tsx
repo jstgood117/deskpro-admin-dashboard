@@ -22,7 +22,11 @@ describe('TableActions', () => {
       filterMenu: true,
       sortMenu: true,
       groupMenu: true,
-      viewMenu: true
+      viewMenu: true,
+      tableDef: {
+        columns:[]
+      },
+      intl: (value: string) => value
     };
     mountedTableActions = undefined;
   });

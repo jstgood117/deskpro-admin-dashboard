@@ -3,7 +3,10 @@ import { useQuery } from 'react-apollo';
 import { DocumentNode } from 'graphql';
 
 import { IViewData } from '../../resources/interfaces';
-import { setupFilters, diffUpdate } from '../../services/filters';
+import { setupFilters } from '../../services/filters';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
+
+import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 
 // test data
@@ -28,7 +31,8 @@ const BodyMargin = styled(dpstyle.div)`
   padding-top: 40px;
 `;
 
-const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
+const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
+
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const { loading, error /*data*/ } = useQuery(query, { errorPolicy: 'all' });
@@ -44,40 +48,49 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     return <Error apolloError={error} />;
   }
 
-  const onFilterChange = (newFilters: FilterType[]) => {
-    setFilters(diffUpdate(filters, newFilters));
+  const processFiltersToFilterTypes = (internalFilters: IFilterProps[]):FilterType[] => {
+
+    let serviceFilters:FilterType[] = [];
+    internalFilters.forEach((internalFilter:IFilterProps) => {
+      const {value, columnName, operatorName} = internalFilter;
+      if(columnName !== '' && operatorName !== '') {
+        serviceFilters = addFilter(serviceFilters, columnName, operatorName, value);
+      }
+    });
+
+    return serviceFilters;
+  };
+
+  const onFilterChange = (internalFilters: IFilterProps[]) => {
+
+    const serviceFilters = processFiltersToFilterTypes(internalFilters);
+    const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1' );
+    setFilters([searchFilter, ...serviceFilters]);
   };
 
   // TEST
   // if (data && data[queryName]) {
-  if (testColumnData2) {
-    const {
-      title,
-      description,
-      headerLinks,
-      views,
-      dataType,
-      illustration
-    } = (testColumnData2 as any)[queryName.toString()];
+  if( testColumnData2) {
+    const {title, description, headerLinks, views, dataType, illustration} = (testColumnData2 as any)[queryName.toString()];
     return (
       <Fragment>
-        <Header
-          title={title}
-          description={description}
-          links={headerLinks}
-          illustration={illustration}
-          defaulViewMode='table'
-          onChangeView={val => {
-            console.log('change view', val);
-          }}
-          showViewModeSwitcher={true}
-          showNewButton={true}
-          showHelpButton={true}
-          onNewClick={() => null}
-          tableActions={true}
-          filters={filters}
-          onFilterChange={onFilterChange}
-        />
+        {views && views[tabIndex] && (
+          <Header
+            title={title}
+            description={description}
+            links={headerLinks}
+            illustration={illustration}
+            defaulViewMode='table'
+            showViewModeSwitcher={true}
+            showNewButton={true}
+            showHelpButton={true}
+            onNewClick={() => null}
+            tableActions={true}
+            filters={[]}
+            onFilterChange={onFilterChange}
+            tableDef={views[tabIndex].tableDef}
+          />
+        )}
         <BodyMargin>
           {views && views.length > 1 && (
             <TabBar

@@ -4,7 +4,6 @@ import {
   addFilter,
   removeFilter,
   updateFilter,
-  diffUpdate
 } from './FilterService';
 
 export {
@@ -13,5 +12,4 @@ export {
   addFilter,
   removeFilter,
   updateFilter,
-  diffUpdate
 };

@@ -1,21 +1,22 @@
 import React, { SFC, useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
+import { injectIntl } from 'react-intl';
 
-import { FilterType } from '../../services/filters/types';
-import { operators } from '../../services/filters/operators';
+import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { ITableSetup } from '../../resources/interfaces';
 
+import { dpstyle } from '../Styled';
 import SearchBox from '../SearchBox';
 import Button from '../Button';
 import Icon from '../Icon';
-import { convertRuleSchema } from '../RuleBuilder/utils';
-import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import FilterBox from '../FilterBox';
-import { dpstyle } from '../Styled';
 import FilterItem from '../FilterItem';
+
 import OrderableMenu from '../Menu/OrderableMenu';
 import { testOrderableMenuItems } from '../../resources/constants/constants';
+import { transformColumnData } from '../Table/Table';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
@@ -61,14 +62,16 @@ const FilterContainer = styled.div`
 `;
 
 export interface IProps {
+  intl: any;
   showSearch: boolean;
   filterMenu: boolean;
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
   onSearchChange?: (e: any) => void;
-  filters?: FilterType[];
-  onFilterChange?: (rules: FilterType[]) => void;
+  filters?: IFilterProps[];
+  onFilterChange?: (rules: IFilterProps[]) => void;
+  tableDef: ITableSetup;
 }
 
 interface IFilterButton {
@@ -76,7 +79,7 @@ interface IFilterButton {
   existing: boolean;
 }
 const initialFilters: IFilterProps[] = [
-  { property: '', option: '', filterKey: '', applied: false }
+  { columnName: '', operatorName: '', value: '', applied: false }
 ];
 
 const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
@@ -109,7 +112,13 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: SFC<IProps> = props => {
+const TableActions: SFC<IProps> = ({
+  intl,
+  onFilterChange,
+  tableDef,
+  ...props
+}) => {
+
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -123,13 +132,28 @@ const TableActions: SFC<IProps> = props => {
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
 
+  const columnData = transformColumnData([...tableDef.columns], intl);
+
+  const getColumnNameFromPath = (fullPath: string) => {
+
+    const columnPath = fullPath.split('.').pop();
+
+    const column = columnData.find((_col: any) => _col.accessor === columnPath);
+    return column ? column.Header : columnPath;
+  };
+
   const applyFilter = () => {
     filters.map(filter => {
-      if (filter.option && filter.property && filter.filterKey)
+      if (filter.operatorName && filter.columnName && filter.value)
         filter.applied = true;
       return true;
     });
     setFilters && setFilters([...filters]);
+
+    if(onFilterChange) {
+      onFilterChange(filters);
+    }
+
     apply(true);
     clickOpenFilter(false);
   };
@@ -142,19 +166,21 @@ const TableActions: SFC<IProps> = props => {
         i = -1;
       }
     }
+
+    if(onFilterChange) {
+      onFilterChange(filters);
+    }
+
     clickOpenFilter(false);
   };
 
-  const onSearchChange = (searchInputValue: string) => {
-    const { onFilterChange } = props;
+  const onSearchChange = (_value: string) => {
     if (onFilterChange) {
       onFilterChange([
         {
-          id: '*-CONTAINS-1',
           columnName: '*',
           operatorName: 'CONTAINS',
-          operator: operators.CONTAINS,
-          value: searchInputValue
+          value
         }
       ]);
     }
@@ -180,13 +206,17 @@ const TableActions: SFC<IProps> = props => {
       if (filters.length === 0) {
         setFilters &&
           setFilters([
-            { property: '', option: '', filterKey: '', applied: false }
+            { columnName: '', operatorName: '', value: '', applied: false }
           ]);
       } else {
         setFilters && setFilters([...filters]);
       }
+
+      if(onFilterChange) {
+        onFilterChange(filters);
+      }
     },
-    [filters]
+    [filters, onFilterChange]
   );
 
   return (
@@ -229,9 +259,9 @@ const TableActions: SFC<IProps> = props => {
                     onClick={() => {
                       setFilters([
                         {
-                          property: '',
-                          option: '',
-                          filterKey: '',
+                          columnName: '',
+                          operatorName: '',
+                          value: '',
                           applied: false
                         }
                       ]);
@@ -248,10 +278,7 @@ const TableActions: SFC<IProps> = props => {
                   <FilterBox
                     filters={filters}
                     setFilters={setFilters}
-                    schema={convertRuleSchema(
-                      'admin_tickets.some_group_title',
-                      testFilterMeta
-                    )}
+                    options={testFilterMeta}
                     cancel={cancelFilter}
                     apply={applyFilter}
                   />
@@ -321,13 +348,15 @@ const TableActions: SFC<IProps> = props => {
         {applied &&
           filters.map(
             (filter, index: number) =>
-              filter.option &&
-              filter.property &&
-              filter.filterKey &&
+              filter.value &&
+              filter.columnName &&
+              filter.operatorName &&
               filter.applied && (
                 <div style={{ paddingRight: 8 }} key={index}>
                   <FilterItem
-                    filter={filter}
+                    columnName={getColumnNameFromPath(filter.columnName)}
+                    operatorName={filter.operatorName}
+                    value={filter.value}
                     onRemove={() => {
                       onRemove(filter);
                     }}
@@ -340,4 +369,4 @@ const TableActions: SFC<IProps> = props => {
   );
 };
 
-export default TableActions;
+export default injectIntl(TableActions);

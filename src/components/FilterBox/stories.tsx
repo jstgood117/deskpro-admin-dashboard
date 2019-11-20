@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import FilterBox from './FilterBox';
-import { convertRuleSchema } from '../RuleBuilder/utils';
+import { IntlProvider } from 'react-intl';
+
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { testTranslations } from '../../resources/constants/constants';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: IFilterProps[] = [
-  { property: '', option: '', filterKey: '' }
+  { columnName: '', operatorName: '', value: '' }
 ];
 
 const FilterBoxComponent: React.FC = () => {
   const [filters, setFilters] = useState(initialFilters);
   return (
-    <FilterBox
-      filters={filters}
-      setFilters={setFilters}
-      schema={convertRuleSchema(
-        'admin_tickets.some_group_title',
-        testFilterMeta
-      )}
-    />
+    <IntlProvider locale='en' messages={testTranslations}>
+      <FilterBox
+        filters={filters}
+        setFilters={setFilters}
+        options={testFilterMeta}
+      />
+    </IntlProvider>
   );
 };
 

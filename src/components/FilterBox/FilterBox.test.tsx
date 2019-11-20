@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import FilterBox from './FilterBox';
-import { convertRuleSchema } from '../RuleBuilder/utils';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
@@ -10,7 +9,7 @@ describe('FilterBox', () => {
   let mountedFilterBox: any;
 
   const initialFilters: IFilterProps[] = [
-    { property: '', option: '', filterKey: '' }
+    { columnName: '', operatorName: '', value: '' }
   ];
   const FilterBoxComponent: React.FC = () => {
     const [filters, setFilters] = useState(initialFilters);
@@ -18,10 +17,7 @@ describe('FilterBox', () => {
       <FilterBox
         filters={filters}
         setFilters={setFilters}
-        schema={convertRuleSchema(
-          'admin_tickets.some_group_title',
-          testFilterMeta
-        )}
+        options={testFilterMeta}
       />
     );
   };
