@@ -173,13 +173,12 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
             </span>
           )}
         </AllCheckStyle>
-        <div style={{ paddingRight: 24, zIndex: -1 }}>
+        <div style={{ paddingRight: 24 }}>
           <Button styleType='tertiary' size='small' iconOnly={true}>
             <Icon name='export' />
           </Button>
         </div>
         <Pagination
-          containerStyle={{ zIndex: -1 }}
           totalRecords={totalRecords}
           rowsPerPage={rowsPerPage}
           currentPage={currentPage}

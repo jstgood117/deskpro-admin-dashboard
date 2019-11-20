@@ -12,7 +12,7 @@ import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
-  padding: ${props => props.theme.pagePadding};
+  padding: 39px 30px 50px 30px;
   padding-bottom: 68px;
   position: relative;
   display: flex;
@@ -40,6 +40,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   border-radius: 4px;
   display: flex;
   width: max-content;
+  background: ${props => props.theme.white};
 `;
 
 const ViewModeButton = styled.button<{ active: boolean }>`
@@ -48,6 +49,7 @@ const ViewModeButton = styled.button<{ active: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0px;
   width: 44px;
   path {
     fill: ${props => (props.active ? '#1c3e55' : '#A9B0B0')};
@@ -106,6 +108,9 @@ const Link = styled(dpstyle.a)`
   font-size: 15px;
   svg {
     margin-right: 10px;
+  }
+  &:hover {
+    color: ${props => (props.color ? props.color : props.theme.brandPrimary)};
   }
 `;
 const TableActionStyled = styled(dpstyle.div)`

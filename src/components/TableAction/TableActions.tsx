@@ -47,6 +47,7 @@ const FlexStyled = styled.div`
   display: flex;
 `;
 const FilterContainer = styled.div`
+  z-index: 1;
   position: absolute;
   top: 34px;
   bottom: 0;
@@ -75,6 +76,7 @@ const initialFilters: IFilterProps[] = [
 ];
 
 const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
+  display: flex;
   button {
     color: ${props =>
       (props.active || props.existing) && props.theme.activeColour};
@@ -90,6 +92,7 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
   }
   .add-btn {
     button {
+      min-width: ${props => props.existing && 100}px;
       border-top-right-radius: ${props => props.existing && 0}px;
       border-bottom-right-radius: ${props => props.existing && 0}px;
       border-right: ${props => props.existing && 0}px;
