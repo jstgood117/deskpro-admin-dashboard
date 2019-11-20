@@ -9,10 +9,9 @@ import Input from '../Input';
 import Button from '../Button';
 import { DeskproAdminTheme } from '../Theme';
 import { AutoCompleteItemStyle, MenuStyle } from '../AutoComplete/AutoComplete';
-import {
-  IFilterProps
-} from '../../resources/interfaces/filterMeta';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import { operatorKeys, OperatorTypes } from '../../services/filters/operators';
+import { FilterMeta } from '../../resources/constants/mock/testFilterMeta';
 
 const StyledFilterOptions = styled.div`
   display: flex;
@@ -93,7 +92,7 @@ export interface IProps {
   filters?: IFilterProps[];
   index?: number;
   filter?: IFilterProps;
-  options: any[];
+  options: FilterMeta[];
 }
 
 const FilterOptions: FC<IProps> = ({
@@ -107,7 +106,7 @@ const FilterOptions: FC<IProps> = ({
 }) => {
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
-
+  const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
   const [filterValue, setFilterValue] = useState();
   const AutoSelectOption = (val: string) => {
@@ -115,7 +114,7 @@ const FilterOptions: FC<IProps> = ({
   };
 
   const getOptionPropertyByPath = (path: string) => {
-    const match = options.find(_option => _option.path === path);
+    const match = containProperties.find(_option => _option.path === path);
 
     return match ? match.title : '';
   };
@@ -132,7 +131,7 @@ const FilterOptions: FC<IProps> = ({
       });
     }
     if (currentProperty) {
-      options.map(item => {
+      containProperties.map(item => {
         if (item.path === currentProperty)
           filters[index].columnName = currentProperty;
         return true;
@@ -147,7 +146,7 @@ const FilterOptions: FC<IProps> = ({
     index,
     setFilters,
     containOptions,
-    options
+    containProperties
   ]);
 
   return (
@@ -157,12 +156,15 @@ const FilterOptions: FC<IProps> = ({
           <StyledAutoComplete name='columnName'>
             <Autocomplete
               getItemValue={(item: any) => item.path}
-              items={options}
+              items={containProperties}
               renderInput={(inputProps: any) => {
                 return (
                   <input
                     {...inputProps}
-                    value={inputProps.value && getOptionPropertyByPath(inputProps.value)}
+                    value={
+                      inputProps.value &&
+                      getOptionPropertyByPath(inputProps.value)
+                    }
                   />
                 );
               }}
@@ -172,13 +174,14 @@ const FilterOptions: FC<IProps> = ({
                 placeholder: props.placeholder,
                 onFocus: () => {
                   setProperty('');
+                  setProperties(options);
                 },
                 onBlur: () => {
                   setProperty(filter?.columnName && filter.columnName);
                 }
               }}
               renderItem={(item: any, isHighlighted: boolean) => {
-                const selected = item.path === currentProperty;
+                const selected = item.path === filter.columnName;
                 return (
                   <div
                     style={AutoCompleteItemStyle(
@@ -204,18 +207,29 @@ const FilterOptions: FC<IProps> = ({
               }
               onChange={(e: any) => {
                 setProperty(e.target.value);
-                options.forEach(_option => {
-                  if (
-                    _option.path === e.target.value
-                  ) {
+                const newItems = options.filter(_option => {
+                  if (_option.path === e.target.value) {
                     setOptions(_option.operators);
                     AutoSelectOption(_option.operators[0]);
                   }
+                  return _option.title
+                    .toUpperCase()
+                    .includes(e.target.value.toUpperCase());
                 });
+                setProperties(newItems);
               }}
               onSelect={(val: string) => {
                 setProperty(val);
-                options.forEach(_option => {
+                const newItems = options.filter(_option => {
+                  if (_option.path === val) {
+                    setOptions(_option.operators);
+                    AutoSelectOption(_option.operators[0]);
+                  }
+                  return _option.path === val;
+                });
+                setProperties(newItems);
+
+                containProperties.forEach(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
                     AutoSelectOption(_option.operators[0]);
@@ -238,9 +252,12 @@ const FilterOptions: FC<IProps> = ({
                 return (
                   <input
                     {...inputProps}
-                    value={inputProps.value
-                      ? intl.formatMessage({ id: getIntlOperatorTitle(inputProps.value) })
-                      : inputProps.value
+                    value={
+                      inputProps.value
+                        ? intl.formatMessage({
+                            id: getIntlOperatorTitle(inputProps.value)
+                          })
+                        : inputProps.value
                     }
                     disabled={currentProperty ? false : true}
                   />
@@ -251,7 +268,7 @@ const FilterOptions: FC<IProps> = ({
                 readOnly: true,
                 onFocus: () => {
                   setOption('');
-                  const newItems = options.filter(_option => {
+                  const newItems = containProperties.filter(_option => {
                     return _option.path === currentProperty;
                   });
                   setOptions(newItems[0].operators);
@@ -271,7 +288,8 @@ const FilterOptions: FC<IProps> = ({
                     )}
                     key={uniqueId()}
                   >
-                    {item && intl.formatMessage({ id: getIntlOperatorTitle(item) })}
+                    {item &&
+                      intl.formatMessage({ id: getIntlOperatorTitle(item) })}
                     {selected && (
                       <span>
                         <Icon name='check-2' />
@@ -287,24 +305,30 @@ const FilterOptions: FC<IProps> = ({
               }
               onChange={(e: any) => {
                 setOption(e.target.value);
+                const newItems = containOptions.filter(_option => {
+                  return _option
+                    .toUpperCase()
+                    .includes(e.target.value.toUpperCase());
+                });
+                setOptions(newItems);
               }}
               onSelect={(val: string) => {
                 setOption(val);
+                const newItems = containOptions.filter(_option => {
+                  return _option === val;
+                });
+                setOptions(newItems);
               }}
               menuStyle={MenuStyle()}
             />
-            <span>
-              {currentProperty && <Icon name='downVector' />}
-            </span>
+            <span>{currentProperty && <Icon name='downVector' />}</span>
           </StyledAutoComplete>
         </div>
         <div>
           <Input
             style={{ minWidth: 218 }}
             value={
-              filter && filter.value !== undefined
-                ? filter.value
-                : filterValue
+              filter && filter.value !== undefined ? filter.value : filterValue
             }
             onClear={() => {
               filters[index].value = '';
