@@ -1,7 +1,6 @@
 import React, { SFC, ReactElement, useState } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { renderToStaticMarkup } from 'react-dom/server';
 
 import { FilterType } from '../../services/filters/types';
 
@@ -16,11 +15,15 @@ const HeaderStyled = styled(dpstyle.div)<IHeader>`
   padding-bottom: 68px;
   position: relative;
   display: flex;
-  background-image: url("data:image/svg+xml,${props =>
-    encodeURIComponent(renderToStaticMarkup(props.illustration))}");
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 27px;
+  background-image: url("${props => require(`../../assets/svg/${props.illustration}.svg`)}");
   background-repeat: no-repeat;
-  background-position: 50%;
   background-size: contain;
+  background-position: 50%;
+
   & button {
     outline: none;
     cursor: pointer;
@@ -171,7 +174,7 @@ const Header: SFC<IProps> = ({
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <HeaderStyled illustration={illustration}>
-        <div style={{ width: '100%' }}>
+          <div style={{ width: '100%' }}>
           <HeadingText size={1} messageId={title} />
           {description && (
             <HeaderDescription>

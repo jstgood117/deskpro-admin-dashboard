@@ -57,7 +57,8 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
       description,
       headerLinks,
       views,
-      dataType
+      dataType,
+      illustration
     } = (testColumnData2 as any)[queryName.toString()];
     return (
       <Fragment>
@@ -65,7 +66,7 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
           title={title}
           description={description}
           links={headerLinks}
-          illustration={<Icon name='illustration' />}
+          illustration={illustration}
           defaulViewMode='table'
           onChangeView={() => {
             console.log('change view');
