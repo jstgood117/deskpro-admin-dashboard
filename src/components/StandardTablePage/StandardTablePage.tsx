@@ -52,9 +52,9 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
 
     let serviceFilters:FilterType[] = [];
     internalFilters.forEach((internalFilter:IFilterProps) => {
-      const {filterKey, property, option} = internalFilter;
-      if(property !== '' && option !== '') {
-        serviceFilters = addFilter(serviceFilters, property, option, filterKey);
+      const {value, columnName, operatorName} = internalFilter;
+      if(columnName !== '' && operatorName !== '') {
+        serviceFilters = addFilter(serviceFilters, columnName, operatorName, value);
       }
     });
 

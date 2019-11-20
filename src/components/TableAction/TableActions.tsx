@@ -79,7 +79,7 @@ interface IFilterButton {
   existing: boolean;
 }
 const initialFilters: IFilterProps[] = [
-  { property: '', option: '', filterKey: '', applied: false }
+  { columnName: '', operatorName: '', value: '', applied: false }
 ];
 
 const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
@@ -144,7 +144,7 @@ const TableActions: SFC<IProps> = ({
 
   const applyFilter = () => {
     filters.map(filter => {
-      if (filter.option && filter.property && filter.filterKey)
+      if (filter.operatorName && filter.columnName && filter.value)
         filter.applied = true;
       return true;
     });
@@ -178,9 +178,9 @@ const TableActions: SFC<IProps> = ({
     if (onFilterChange) {
       onFilterChange([
         {
-          property: '*',
-          option: 'CONTAINS',
-          filterKey: _value
+          columnName: '*',
+          operatorName: 'CONTAINS',
+          value
         }
       ]);
     }
@@ -206,7 +206,7 @@ const TableActions: SFC<IProps> = ({
       if (filters.length === 0) {
         setFilters &&
           setFilters([
-            { property: '', option: '', filterKey: '', applied: false }
+            { columnName: '', operatorName: '', value: '', applied: false }
           ]);
       } else {
         setFilters && setFilters([...filters]);
@@ -259,9 +259,9 @@ const TableActions: SFC<IProps> = ({
                     onClick={() => {
                       setFilters([
                         {
-                          property: '',
-                          option: '',
-                          filterKey: '',
+                          columnName: '',
+                          operatorName: '',
+                          value: '',
                           applied: false
                         }
                       ]);
@@ -348,15 +348,15 @@ const TableActions: SFC<IProps> = ({
         {applied &&
           filters.map(
             (filter, index: number) =>
-              filter.option &&
-              filter.property &&
-              filter.filterKey &&
+              filter.value &&
+              filter.columnName &&
+              filter.operatorName &&
               filter.applied && (
                 <div style={{ paddingRight: 8 }} key={index}>
                   <FilterItem
-                    property={getColumnNameFromPath(filter.property)}
-                    option={filter.option}
-                    filterKey={filter.filterKey}
+                    columnName={getColumnNameFromPath(filter.columnName)}
+                    operatorName={filter.operatorName}
+                    value={filter.value}
                     onRemove={() => {
                       onRemove(filter);
                     }}

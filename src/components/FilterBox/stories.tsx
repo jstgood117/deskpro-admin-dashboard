@@ -8,7 +8,7 @@ import { testTranslations } from '../../resources/constants/constants';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: IFilterProps[] = [
-  { property: '', option: '', filterKey: '' }
+  { columnName: '', operatorName: '', value: '' }
 ];
 
 const FilterBoxComponent: React.FC = () => {

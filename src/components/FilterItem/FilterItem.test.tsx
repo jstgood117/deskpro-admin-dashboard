@@ -9,9 +9,9 @@ describe('FilterOptions', () => {
   let mountedFilterItem: any;
 
   const filterData: IFilterProps = {
-    property: 'Team',
-    option: 'EQUAL',
-    filterKey: 'Audit'
+    columnName: 'Team',
+    operatorName: 'EQUAL',
+    value: 'Audit'
   };
 
   const wrapper = (bShallow: boolean) => {
@@ -25,9 +25,9 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
-      property: filterData.property,
-      filterKey: filterData.filterKey,
-      option: filterData.option
+      columnName: filterData.columnName,
+      value: filterData.value,
+      operatorName: filterData.operatorName
     };
   });
 

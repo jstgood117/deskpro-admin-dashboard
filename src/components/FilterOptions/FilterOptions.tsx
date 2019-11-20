@@ -56,8 +56,8 @@ const StyledAutoComplete = styled.div<{ name: string }>`
     width: 100%;
   }
   input {
-    border-top-left-radius: ${props => props.name === 'property' && 4}px;
-    border-bottom-left-radius: ${props => props.name === 'property' && 4}px;
+    border-top-left-radius: ${props => props.name === 'columnName' && 4}px;
+    border-bottom-left-radius: ${props => props.name === 'columnName' && 4}px;
     width: 100%;
     height: 34px;
     padding: 1px 30px 1px 10px;
@@ -127,14 +127,14 @@ const FilterOptions: FC<IProps> = ({
   useEffect(() => {
     if (currentOption) {
       containOptions.map(item => {
-        if (item === currentOption) filters[index].option = currentOption;
+        if (item === currentOption) filters[index].operatorName = currentOption;
         return true;
       });
     }
     if (currentProperty) {
       options.map(item => {
         if (item.path === currentProperty)
-          filters[index].property = currentProperty;
+          filters[index].columnName = currentProperty;
         return true;
       });
     }
@@ -154,7 +154,7 @@ const FilterOptions: FC<IProps> = ({
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledFilterOptions>
         <div style={{ minWidth: 160 }}>
-          <StyledAutoComplete name='property'>
+          <StyledAutoComplete name='columnName'>
             <Autocomplete
               getItemValue={(item: any) => item.path}
               items={options}
@@ -174,7 +174,7 @@ const FilterOptions: FC<IProps> = ({
                   setProperty('');
                 },
                 onBlur: () => {
-                  setProperty(filter?.property && filter.property);
+                  setProperty(filter?.columnName && filter.columnName);
                 }
               }}
               renderItem={(item: any, isHighlighted: boolean) => {
@@ -200,7 +200,7 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentProperty !== undefined
                   ? currentProperty
-                  : filter && filter.property
+                  : filter && filter.columnName
               }
               onChange={(e: any) => {
                 setProperty(e.target.value);
@@ -230,7 +230,7 @@ const FilterOptions: FC<IProps> = ({
           </StyledAutoComplete>
         </div>
         <div style={{ minWidth: 186 }}>
-          <StyledAutoComplete name='option'>
+          <StyledAutoComplete name='operatorName'>
             <Autocomplete
               getItemValue={(item: OperatorTypes[]) => item}
               items={containOptions}
@@ -257,11 +257,11 @@ const FilterOptions: FC<IProps> = ({
                   setOptions(newItems[0].operators);
                 },
                 onBlur: () => {
-                  setOption(filter && filter.option);
+                  setOption(filter && filter.operatorName);
                 }
               }}
               renderItem={(item: OperatorTypes, isHighlighted: boolean) => {
-                const selected = item === filter.option;
+                const selected = item === filter.operatorName;
                 return (
                   <div
                     style={AutoCompleteItemStyle(
@@ -283,7 +283,7 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentOption !== undefined
                   ? currentOption
-                  : filter && filter.option
+                  : filter && filter.operatorName
               }
               onChange={(e: any) => {
                 setOption(e.target.value);
@@ -302,17 +302,17 @@ const FilterOptions: FC<IProps> = ({
           <Input
             style={{ minWidth: 218 }}
             value={
-              filter && filter.filterKey !== undefined
-                ? filter.filterKey
+              filter && filter.value !== undefined
+                ? filter.value
                 : filterValue
             }
             onClear={() => {
-              filters[index].filterKey = '';
+              filters[index].value = '';
               setFilterValue('');
             }}
             showClear={true}
             onChange={event => {
-              filters[index].filterKey = event.target.value;
+              filters[index].value = event.target.value;
               setFilterValue(event.target.value);
             }}
             containerClassName='input-wrapper'
@@ -328,7 +328,7 @@ const FilterOptions: FC<IProps> = ({
               }
               if (filters.length === 0) {
                 setFilters &&
-                  setFilters([{ property: '', option: '', filterKey: '' }]);
+                  setFilters([{ columnName: '', operatorName: '', value: '' }]);
               } else {
                 setFilters && setFilters([...filters]);
               }

@@ -10,7 +10,7 @@ describe('FilterOptions', () => {
   let mountedFilterOptions: any;
 
   const initialFilters: IFilterProps[] = [
-    { property: '', option: '', filterKey: '' }
+    { columnName: '', operatorName: '', value: '' }
   ];
   const FilterOptionsComponent: React.FC<IProps> = _props => {
     const [filters, setFilters] = useState(initialFilters);

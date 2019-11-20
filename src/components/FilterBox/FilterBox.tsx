@@ -41,10 +41,10 @@ const FilterBox: SFC<IProps> = ({
 }) => {
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
-    filters[lastIndex].filterKey &&
-      filters[lastIndex].option &&
-      filters[lastIndex].property &&
-      setFilters([...filters, { property: '', option: '', filterKey: '' }]);
+    filters[lastIndex].value &&
+      filters[lastIndex].operatorName &&
+      filters[lastIndex].columnName &&
+      setFilters([...filters, { columnName: '', operatorName: '', value: '' }]);
   }, [filters, setFilters]);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
