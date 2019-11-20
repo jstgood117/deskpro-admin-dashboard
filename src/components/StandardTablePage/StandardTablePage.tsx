@@ -14,7 +14,6 @@ import Error from '../Error';
 import Header from '../Header';
 import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
-import Icon from '../Icon';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 

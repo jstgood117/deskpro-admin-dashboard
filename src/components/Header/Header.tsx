@@ -1,4 +1,4 @@
-import React, { SFC, ReactElement, useState } from 'react';
+import React, { SFC, useState } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -19,7 +19,10 @@ const HeaderStyled = styled(dpstyle.div)<IHeader>`
   left: 0;
   right: 0;
   bottom: 27px;
-  background-image: url("${props => require(`../../assets/svg/${props.illustration}.svg`)}");
+  background-image: url("${props =>
+    props.illustration
+      ? require(`../../assets/svg/${props.illustration}.svg`)
+      : require(`../../assets/svg/agents-header.svg`)}");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 50%;
@@ -124,7 +127,7 @@ const TableActionStyled = styled(dpstyle.div)`
 `;
 
 export interface IHeader {
-  illustration?: ReactElement;
+  illustration?: string;
 }
 
 export interface ILink {
@@ -136,7 +139,7 @@ export interface ILink {
 export interface IProps {
   title: string;
   description: string;
-  illustration?: ReactElement;
+  illustration?: string;
   links?: ILink[];
   showHelpButton?: boolean;
   showViewModeSwitcher?: boolean;
@@ -174,7 +177,7 @@ const Header: SFC<IProps> = ({
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <HeaderStyled illustration={illustration}>
-          <div style={{ width: '100%' }}>
+        <div style={{ width: '100%' }}>
           <HeadingText size={1} messageId={title} />
           {description && (
             <HeaderDescription>
