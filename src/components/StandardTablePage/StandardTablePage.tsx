@@ -31,8 +31,7 @@ const BodyMargin = styled(dpstyle.div)`
   padding-top: 40px;
 `;
 
-const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
-
+const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const { loading, error /*data*/ } = useQuery(query, { errorPolicy: 'all' });
@@ -48,13 +47,19 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
     return <Error apolloError={error} />;
   }
 
-  const processFiltersToFilterTypes = (internalFilters: IFilterProps[]):FilterType[] => {
-
-    let serviceFilters:FilterType[] = [];
-    internalFilters.forEach((internalFilter:IFilterProps) => {
-      const {value, columnName, operatorName} = internalFilter;
-      if(columnName !== '' && operatorName !== '') {
-        serviceFilters = addFilter(serviceFilters, columnName, operatorName, value);
+  const processFiltersToFilterTypes = (
+    internalFilters: IFilterProps[]
+  ): FilterType[] => {
+    let serviceFilters: FilterType[] = [];
+    internalFilters.forEach((internalFilter: IFilterProps) => {
+      const { value, columnName, operatorName } = internalFilter;
+      if (columnName !== '' && operatorName !== '') {
+        serviceFilters = addFilter(
+          serviceFilters,
+          columnName,
+          operatorName,
+          value
+        );
       }
     });
 
@@ -62,16 +67,22 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   };
 
   const onFilterChange = (internalFilters: IFilterProps[]) => {
-
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
-    const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1' );
+    const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
     setFilters([searchFilter, ...serviceFilters]);
   };
 
   // TEST
   // if (data && data[queryName]) {
-  if( testColumnData2) {
-    const {title, description, headerLinks, views, dataType, illustration} = (testColumnData2 as any)[queryName.toString()];
+  if (testColumnData2) {
+    const {
+      title,
+      description,
+      headerLinks,
+      views,
+      dataType,
+      illustration
+    } = (testColumnData2 as any)[queryName.toString()];
     return (
       <Fragment>
         {views && views[tabIndex] && (
@@ -87,6 +98,9 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
             onNewClick={() => null}
             tableActions={true}
             filters={[]}
+            onChangeView={val => {
+              console.log(val);
+            }}
             onFilterChange={onFilterChange}
             tableDef={views[tabIndex].tableDef}
           />
