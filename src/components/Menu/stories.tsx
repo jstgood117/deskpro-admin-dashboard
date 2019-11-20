@@ -39,7 +39,6 @@ const OrderableMenuComponent: React.FC<IMenuProps> = props => {
       order={val => SetList(val)}
       initialList={testOrderableMenuItems}
       menuItems={SortList}
-      submenuPosition={props.submenuPosition}
       setChecked={setChecked}
       checked={checked}
     />
@@ -75,7 +74,6 @@ storiesOf('Menu', module)
         <OrderableMenuComponent
           label='View'
           iconName='view'
-          submenuPosition='left'
         />
       </div>
     </div>

@@ -8,7 +8,6 @@
   iconName?: string - Component Icon;
   value?: Object - Selected value;
   onSelect?: (value: any) => void; - Select function;
-  submenuPosition? string: sub menu position;
 
 - it has value State. When click menu list, it will be updated.
 

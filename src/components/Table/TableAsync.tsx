@@ -1,6 +1,10 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
-import { onCheckboxChange, onSelectAllChange, onSelectEverything } from './helpers/functions';
+import {
+  onCheckboxChange,
+  onSelectAllChange,
+  onSelectEverything
+} from './helpers/functions';
 
 import { TableStyled } from './Table';
 import Checkbox from '../Checkbox';
@@ -19,23 +23,22 @@ type TableAsyncProps = {
 };
 
 const AllCheckStyle = styled.div`
-flex: 1;
-button {
-  display: contents;
-  svg {
-    padding-left: 10px;
+  flex: 1;
+  button {
+    display: contents;
+    svg {
+      padding-left: 10px;
+    }
   }
-}
-.selected-text {
-  padding-left:17px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 150%;
-  color:${props => props.theme.activeColour};
-}
+  .selected-text {
+    padding-left: 17px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 150%;
+    color: ${props => props.theme.activeColour};
+  }
 `;
-
 
 const TableAsync: FC<TableAsyncProps> = ({
   data,
@@ -44,7 +47,6 @@ const TableAsync: FC<TableAsyncProps> = ({
   loading,
   pageCount: controlledPageCount
 }) => {
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -98,7 +100,7 @@ const TableAsync: FC<TableAsyncProps> = ({
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
     setCurrentPage(datas.currentPage);
-    gotoPage(datas.currentPage-1);
+    gotoPage(datas.currentPage - 1);
   };
 
   const handleChangRowsPerPage = (rows: number) => {
@@ -110,12 +112,13 @@ const TableAsync: FC<TableAsyncProps> = ({
 
   useEffect(() => {
     const checkedLength = Object.keys(checked).length;
-    const indeterminate = (checkedLength !== 0 && checkedLength < page.length) ? true : false;
+    const indeterminate =
+      checkedLength !== 0 && checkedLength < page.length ? true : false;
     setIsAllIndeterminate(indeterminate);
-    setIsAllChecked((indeterminate || checkedLength >= page.length) ? true : false);
-
+    setIsAllChecked(
+      indeterminate || checkedLength >= page.length ? true : false
+    );
   }, [checked, page]);
-
 
   useEffect(() => {
     setChecked({});
@@ -123,10 +126,9 @@ const TableAsync: FC<TableAsyncProps> = ({
   }, [pageIndex, data]);
 
   useEffect(() => {
-
-    if(dropdownValue) {
+    if (dropdownValue) {
       const { link } = dropdownValue;
-      switch(link) {
+      switch (link) {
         case 'All':
           onSelectEverything(data, setChecked);
           break;
@@ -140,10 +142,9 @@ const TableAsync: FC<TableAsyncProps> = ({
     }
 
     setDropdownValue(undefined);
-
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
-  const items = [{ link: 'All on the page'}, { link: 'All' }];
+  const items = [{ link: 'All on the page' }, { link: 'All' }];
 
   return (
     <TableStyled>
@@ -157,27 +158,19 @@ const TableAsync: FC<TableAsyncProps> = ({
       >
         <AllCheckStyle>
           <Checkbox
-            value={String(0)}
-            indeterminate={isAllIndeterminate}
             checked={isAllChecked}
+            opened={opened}
+            clickButton={clickButton}
+            setDropdownValue={setDropdownValue}
+            dropdownValue={dropdownValue}
+            items={items}
+            value='checked'
+            indeterminate={isAllIndeterminate}
+            showArrow={true}
             onChange={(event: SyntheticEvent<HTMLInputElement>) =>
               handleSelectAllClick(event, pageIndex)
             }
           />
-          <Button
-            items={items}
-            size='medium'
-            styleType='secondary'
-            iconOnly={true}
-            onClick={() => {
-              clickButton(!opened);
-            }}
-            dropdownValue={dropdownValue}
-            opened={opened}
-            onSelect={(val: any) => setDropdownValue(val)}
-          >
-            <Icon name='downVector' />
-          </Button>
           {Object.keys(checked).length > 0 && (
             <span className='selected-text'>
               {Object.keys(checked).length} Selected
@@ -220,9 +213,11 @@ const TableAsync: FC<TableAsyncProps> = ({
               <tr
                 key={indexOuter}
                 {...row.getRowProps()}
-                className={checked.hasOwnProperty(row.original.id.toString())
-                  ? 'row--selected'
-                  : ''}
+                className={
+                  checked.hasOwnProperty(row.original.id.toString())
+                    ? 'row--selected'
+                    : ''
+                }
               >
                 <td>
                   <Checkbox

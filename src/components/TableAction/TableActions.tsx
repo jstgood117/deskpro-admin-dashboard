@@ -14,10 +14,11 @@ import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import FilterBox from '../FilterBox';
 import { dpstyle } from '../Styled';
 import FilterItem from '../FilterItem';
+import OrderableMenu from '../Menu/OrderableMenu';
+import { testOrderableMenuItems } from '../../resources/constants/constants';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
-const ViewItems = [{ link: 'View1' }, { link: 'View2' }];
 
 const StyledTableAction = styled(dpstyle.div)`
   position: absolute;
@@ -45,6 +46,9 @@ const FilterItems = styled(dpstyle.div)`
 `;
 const FlexStyled = styled.div`
   display: flex;
+  .dropdownContent {
+    top: 34px;
+  }
 `;
 const FilterContainer = styled.div`
   z-index: 1;
@@ -108,14 +112,16 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
 const TableActions: SFC<IProps> = props => {
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
-  const [View, setViewValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
-  const [openedView, openView] = useState(false);
   const [openedSort, clickButtonSort] = useState(false);
   const [openedGroup, clickButtonGroup] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
   const [applied, apply] = useState(false);
   const [filters, setFilters] = useState(initialFilters);
+  const [value, setValue] = useState();
+  const [SortList, SetList] = useState(testOrderableMenuItems);
+  const checkedState: { [key: string]: boolean } = {};
+  const [checked, setChecked] = useState(checkedState);
 
   const applyFilter = () => {
     filters.map(filter => {
@@ -139,7 +145,7 @@ const TableActions: SFC<IProps> = props => {
     clickOpenFilter(false);
   };
 
-  const onSearchChange = (value: string) => {
+  const onSearchChange = (searchInputValue: string) => {
     const { onFilterChange } = props;
     if (onFilterChange) {
       onFilterChange([
@@ -148,7 +154,7 @@ const TableActions: SFC<IProps> = props => {
           columnName: '*',
           operatorName: 'CONTAINS',
           operator: operators.CONTAINS,
-          value
+          value: searchInputValue
         }
       ]);
     }
@@ -159,10 +165,10 @@ const TableActions: SFC<IProps> = props => {
   const handleSearchChange = (
     event: React.SyntheticEvent<HTMLInputElement>
   ) => {
-    const { value } = event.currentTarget;
-    setSearchValue(value);
+    const searchInputValue = event.currentTarget.value;
+    setSearchValue(searchInputValue);
 
-    debounceOnSearchChange(value);
+    debounceOnSearchChange(searchInputValue);
   };
 
   const onRemove = useCallback(
@@ -256,22 +262,19 @@ const TableActions: SFC<IProps> = props => {
         </FlexStyled>
         <FlexStyled style={{ flex: 5, flexFlow: 'row-reverse' }}>
           {props.viewMenu && (
-            <FlexStyled style={{ paddingRight: 10 }}>
-              <Button
-                styleType='secondary'
-                onClick={() => {
-                  openView(!openedView);
-                }}
+            <FlexStyled>
+              <OrderableMenu
+                iconName='view'
+                label={value ? value['name'] : 'View'}
+                value={value}
+                onSelect={val => setValue(val)}
+                order={val => SetList(val)}
+                initialList={testOrderableMenuItems}
+                menuItems={SortList}
+                setChecked={setChecked}
+                checked={checked}
                 size='medium'
-                opened={openedView}
-                items={ViewItems}
-                dropdownValue={View}
-                onSelect={(val: any) => setViewValue(val)}
-              >
-                <Icon name='view' />
-                {View ? View.link : 'View'}
-                <Icon name='downVector' />
-              </Button>
+              />
             </FlexStyled>
           )}
           {props.groupMenu && (

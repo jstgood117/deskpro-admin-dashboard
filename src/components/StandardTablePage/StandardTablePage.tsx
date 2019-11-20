@@ -67,8 +67,8 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
           links={headerLinks}
           illustration={illustration}
           defaulViewMode='table'
-          onChangeView={() => {
-            console.log('change view');
+          onChangeView={val => {
+            console.log('change view', val);
           }}
           showViewModeSwitcher={true}
           showNewButton={true}

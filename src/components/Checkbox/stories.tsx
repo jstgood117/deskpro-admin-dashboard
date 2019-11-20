@@ -8,10 +8,18 @@ const CheckboxComponent: React.FC<{
   showArrow?: boolean;
 }> = ({ indeterminate, showArrow }) => {
   const [checked, setChecked] = useState(false);
+  const [opened, clickButton] = useState(false);
+  const [dropdownValue, setDropdownValue] = useState();
+  const items = [{ link: 'All on the page' }, { link: 'All' }];
 
   return (
     <Checkbox
       checked={checked}
+      opened={opened}
+      clickButton={clickButton}
+      setDropdownValue={setDropdownValue}
+      dropdownValue={dropdownValue}
+      items={items}
       value='checked'
       indeterminate={indeterminate}
       showArrow={showArrow}
