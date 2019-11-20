@@ -21,7 +21,6 @@ export type DeskproAdminThemeType = {
   textHover: string;
   brandPrimary: string;
   activeColour: string;
-  primaryHoverColour: string;
   hoverColour: string;
   secondaryColour: string;
   greyDark: string;
@@ -62,9 +61,8 @@ const DeskproAdminTheme: DeskproAdminThemeType = {
 
   staticColour: '#4c4f50',
   textHover: '#E8EBEE',
-  brandPrimary: '#3a8dde',
+  brandPrimary: '#3A8DDE',
   activeColour: '#1C3E55',
-  primaryHoverColour: '#3A8DDE',
   hoverColour: '#D2D8DD',
   secondaryColour: '#fff',
   greyDark: '#8B9293',

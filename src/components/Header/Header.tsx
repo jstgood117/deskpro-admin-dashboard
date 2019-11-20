@@ -1,7 +1,6 @@
-import React, { SFC, ReactElement, useState } from 'react';
+import React, { SFC, useState } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { renderToStaticMarkup } from 'react-dom/server';
 
 import { FilterType } from '../../services/filters/types';
 
@@ -12,15 +11,22 @@ import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
-  padding: ${props => props.theme.pagePadding};
+  padding: 39px 30px 50px 30px;
   padding-bottom: 68px;
   position: relative;
   display: flex;
-  background-image: url("data:image/svg+xml,${props =>
-    encodeURIComponent(renderToStaticMarkup(props.illustration))}");
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 27px;
+  background-image: url("${props =>
+    props.illustration
+      ? require(`../../assets/svg/${props.illustration}.svg`)
+      : require(`../../assets/svg/agents-header.svg`)}");
   background-repeat: no-repeat;
-  background-position: 50%;
   background-size: contain;
+  background-position: 50%;
+
   & button {
     outline: none;
     cursor: pointer;
@@ -40,6 +46,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   border-radius: 4px;
   display: flex;
   width: max-content;
+  background: ${props => props.theme.white};
 `;
 
 const ViewModeButton = styled.button<{ active: boolean }>`
@@ -48,6 +55,7 @@ const ViewModeButton = styled.button<{ active: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0px;
   width: 44px;
   path {
     fill: ${props => (props.active ? '#1c3e55' : '#A9B0B0')};
@@ -107,6 +115,9 @@ const Link = styled(dpstyle.a)`
   svg {
     margin-right: 10px;
   }
+  &:hover {
+    color: ${props => (props.color ? props.color : props.theme.brandPrimary)};
+  }
 `;
 const TableActionStyled = styled(dpstyle.div)`
   position: absolute;
@@ -116,7 +127,7 @@ const TableActionStyled = styled(dpstyle.div)`
 `;
 
 export interface IHeader {
-  illustration?: ReactElement;
+  illustration?: string;
 }
 
 export interface ILink {
@@ -128,7 +139,7 @@ export interface ILink {
 export interface IProps {
   title: string;
   description: string;
-  illustration?: ReactElement;
+  illustration?: string;
   links?: ILink[];
   showHelpButton?: boolean;
   showViewModeSwitcher?: boolean;

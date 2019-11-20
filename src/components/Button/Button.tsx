@@ -44,7 +44,7 @@ const getStyle = (
           size: 28
         },
         hover: {
-          backgroundColor: theme.primaryHoverColour,
+          backgroundColor: theme.brandPrimary,
           color: theme.white,
           svgColor: theme.white,
           size: 28
@@ -108,7 +108,7 @@ const getStyle = (
           size: 34
         },
         hover: {
-          backgroundColor: theme.primaryHoverColour,
+          backgroundColor: theme.brandPrimary,
           color: theme.white,
           svgColor: theme.white,
           size: 34

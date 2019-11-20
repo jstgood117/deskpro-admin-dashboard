@@ -14,7 +14,6 @@ import Error from '../Error';
 import Header from '../Header';
 import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
-import Icon from '../Icon';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 
@@ -29,10 +28,10 @@ const BodyMargin = styled(dpstyle.div)`
   padding-top: 40px;
 `;
 
-const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
+const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
-  const { loading, error, /*data*/ } = useQuery(query, { errorPolicy: 'all' });
+  const { loading, error /*data*/ } = useQuery(query, { errorPolicy: 'all' });
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -46,23 +45,31 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
   }
 
   const onFilterChange = (newFilters: FilterType[]) => {
-
     setFilters(diffUpdate(filters, newFilters));
-
   };
 
   // TEST
   // if (data && data[queryName]) {
-  if(testColumnData2) {
-    const {title, description, headerLinks, views, dataType} = (testColumnData2 as any)[queryName.toString()];
+  if (testColumnData2) {
+    const {
+      title,
+      description,
+      headerLinks,
+      views,
+      dataType,
+      illustration
+    } = (testColumnData2 as any)[queryName.toString()];
     return (
       <Fragment>
         <Header
           title={title}
           description={description}
           links={headerLinks}
-          illustration={<Icon name='illustration' />}
+          illustration={illustration}
           defaulViewMode='table'
+          onChangeView={() => {
+            console.log('change view');
+          }}
           showViewModeSwitcher={true}
           showNewButton={true}
           showHelpButton={true}
@@ -75,11 +82,17 @@ const StandardTablePage: SFC<IProps> = ({query, queryName}) => {
           {views && views.length > 1 && (
             <TabBar
               // Backend payload phrases are missing admin_common - should this be hard-coded like this?
-              tabItems={views.map((view: IViewData) => { return { messageId: `admin_common.${view.title}` };} )}
-              handleClick={index => { setTabState(index); }}
+              tabItems={views.map((view: IViewData) => {
+                return { messageId: `admin_common.${view.title}` };
+              })}
+              handleClick={index => {
+                setTabState(index);
+              }}
             />
           )}
-          {views && views[tabIndex] && <Table {...views[tabIndex]} filters={filters} dataType={dataType} />}
+          {views && views[tabIndex] && (
+            <Table {...views[tabIndex]} filters={filters} dataType={dataType} />
+          )}
         </BodyMargin>
       </Fragment>
     );

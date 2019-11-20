@@ -5,13 +5,12 @@ import { action } from '@storybook/addon-actions';
 
 import Header from './Header';
 import { testTranslations } from '../../resources/constants/constants';
-import Icon from '../Icon';
 
 storiesOf('Header', module)
   .add('with text', () => (
     <IntlProvider locale='en' messages={testTranslations}>
       <Header
-        illustration={<Icon name='illustration' />}
+        illustration='agents-header'
         title='admin_agents.agents.title'
         description='admin_agents.agents.description'
         defaulViewMode='table'
@@ -38,7 +37,7 @@ storiesOf('Header', module)
   .add('with table actions', () => (
     <IntlProvider locale='en' messages={testTranslations}>
       <Header
-        illustration={<Icon name='illustration' />}
+        illustration='agents-header'
         title='admin_agents.agents.title'
         description='admin_agents.agents.description'
         defaulViewMode='table'

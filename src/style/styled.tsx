@@ -105,7 +105,14 @@ export const TextString = ({
 /**
  * Standard text
  */
-export const TextLabel = styled(props => <TextString {...props} />)<{messageId?: string; bold?: boolean; small?: boolean; color?: string;}>`
+interface ITextLabel {
+  messageId?: string;
+  bold?: boolean;
+  small?: boolean;
+  color?: string;
+  underline?: boolean;
+}
+export const TextLabel = styled(props => <TextString {...props} />)<ITextLabel>`
   margin: 0;
   padding: 0;
   line-height: 150%;
@@ -116,7 +123,7 @@ export const TextLabel = styled(props => <TextString {...props} />)<{messageId?:
   font-weight: ${props => (props.bold ? 'bold' : 'normal')};
 `;
 
-export const MenuLabel = styled(props => <TextString {...props} />)<{messageId?: string;}>`
+export const MenuLabel = styled(props => <TextString {...props} />)<ITextLabel>`
   display: flex;
   align-items: center;
   font-family: ${props => props.theme.mainFont};
@@ -127,16 +134,16 @@ export const MenuLabel = styled(props => <TextString {...props} />)<{messageId?:
 /**
  * Standard text with link styling
  */
-export const TextLinkLabel = styled(props => <TextString {...props} />)<{messageId?: string; bold?: boolean; small?: boolean; color?: string; underline?: boolean;}>`
+export const TextLinkLabel = styled(props => <TextString {...props} />)<ITextLabel>`
   margin: 0;
   padding: 0;
-  line-height: 1;
+  line-height: 150%;
   display: inline-block;
   color: ${props => (props.color ? props.color : props.theme.brandPrimary)};
   text-decoration: ${props => (props.underline ? 'underline' : 'none')};
   cursor: pointer;
   font-family: ${props => props.theme.mainFont};
-  font-size: ${props => (props.small ? '12px' : '14px')};
+  font-size: ${props => (props.small ? '12px' : '15px')};
   font-weight: ${props => (props.bold ? 'bold' : 'normal')};
 `;
 
@@ -240,10 +247,13 @@ export const dpstyle = {
     padding: 0;
     line-height: 1;
     display: block;
-    color: ${props => props.theme.staticColour};
+    color: ${props => props.theme.activeColour};
     font-family: ${props => props.theme.headerFont};
     font-size: 28pt;
     font-weight: bold;
+    font-size: 40px;
+    line-height: 150%;
+    mix-blend-mode: normal;
   `,
 
   h2: styled.h2`
@@ -323,7 +333,7 @@ export const HeadingText = ({
   messageId,
   ...rest
 }: any & { messageId?: string; size: number | string }) => {
-  const s = parseInt((size + ''), 10);
+  const s = parseInt(size + '', 10);
   invariant(s && s >= 1 && s <= 6, 'size must be a number between 1 and 6');
 
   invariant(
@@ -356,7 +366,8 @@ export const HeadingText = ({
 };
 
 export const JsonFormStyle = styled(dpstyle.div)`
-  input[type='text'], input[type='number'] {
+  input[type='text'],
+  input[type='number'] {
     border-radius: 4px;
     &:focus {
       background-color: ${props => props.theme.secondaryColour};

@@ -113,7 +113,7 @@ const getStyle = (styleType: ButtonStyleType, theme: DeskproAdminThemeType): IBu
         betweenBorder: `2px solid ${theme.hoverColour}`
       },
       hover: {
-        backgroundColor: theme.primaryHoverColour,
+        backgroundColor: theme.brandPrimary,
         color: theme.white,
         svgColor: theme.white,
         border: 'none',

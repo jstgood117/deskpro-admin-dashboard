@@ -43,8 +43,9 @@ export const testTranslations = {
   'admin.page.new': 'New',
 
   'admin_agents.agents.title': 'Agents',
+  'admin_agents.agents.agents-header': 'illustration',
   'admin_agents.agents.description':
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    'The Agents section allow you to configure settings related to all agents in the system, whether or not they are using the helpdesk software at the moment.',
 
   'admin_common.col.all_emails': 'All emails',
   'admin_common.col.can_admin': 'Can Admin',

@@ -9,11 +9,13 @@ const testTableColumns2 = {
       {
         'title': 'admin_agents.page.link.login_log',
         'path': './login-log',
+        'icon': 'loginLog',
         '__typename': 'PageLink'
       },
       {
         'title': 'admin_common.page.link.settings',
         'path': './settings',
+        'icon': 'settings',
         '__typename': 'PageLink'
       }
     ],
