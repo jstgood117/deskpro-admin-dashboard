@@ -36,6 +36,7 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
+      intl: (value:  string) => value,
       options: testFilterMeta,
       placeholder: 'Select Property',
       index: 0

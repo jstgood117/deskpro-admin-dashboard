@@ -125,7 +125,7 @@ export const testFilterMeta: FilterMeta[] = [
     title: 'Email',
     operators: ['IN', 'NOT_IN'],
     type: 'AGENT_TEAM_LIST',
-    path: 'agent_team.*.id',
+    path: 'agent_team.*.primary_email',
     dataPath: 'agent_team'
   },
   {

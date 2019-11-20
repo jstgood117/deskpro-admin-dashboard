@@ -1,21 +1,22 @@
 import React, { SFC, useState, useCallback } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
+import { injectIntl } from 'react-intl';
 
-// import { addFilter } from '../../services/filters';
-import { FilterType } from '../../services/filters/types';
-import { operators } from '../../services/filters/operators';
+import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { ITableSetup } from '../../resources/interfaces';
 
+import { dpstyle } from '../Styled';
 import SearchBox from '../SearchBox';
 import Button from '../Button';
 import Icon from '../Icon';
-import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import FilterBox from '../FilterBox';
-import { dpstyle } from '../Styled';
 import FilterItem from '../FilterItem';
+
 import OrderableMenu from '../Menu/OrderableMenu';
 import { testOrderableMenuItems } from '../../resources/constants/constants';
+import { transformColumnData } from '../Table/Table';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
@@ -61,14 +62,16 @@ const FilterContainer = styled.div`
 `;
 
 export interface IProps {
+  intl: any;
   showSearch: boolean;
   filterMenu: boolean;
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
   onSearchChange?: (e: any) => void;
-  filters?: FilterType[];
-  onFilterChange?: (rules: FilterType[]) => void;
+  filters?: IFilterProps[];
+  onFilterChange?: (rules: IFilterProps[]) => void;
+  tableDef: ITableSetup;
 }
 
 interface IFilterButton {
@@ -109,7 +112,13 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: SFC<IProps> = props => {
+const TableActions: SFC<IProps> = ({
+  intl,
+  onFilterChange,
+  tableDef,
+  ...props
+}) => {
+
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
   const [searchValue, setSearchValue] = useState('');
@@ -123,24 +132,15 @@ const TableActions: SFC<IProps> = props => {
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
 
+  const columnData = transformColumnData([...tableDef.columns], intl);
 
-  // const processFiltersToFilterTypes = (internalFilters: IFilterProps[]):FilterType[] => {
+  const getColumnNameFromPath = (fullPath: string) => {
 
-  //   let serviceFilters:FilterType[] = [];
-  //   internalFilters.forEach((internalFilter:IFilterProps) => {
-  //     const {filterKey, property, option} = internalFilter;
-  //     serviceFilters = addFilter(serviceFilters, property, option, filterKey);
-  //   });
+    const columnPath = fullPath.split('.').pop();
 
-  //   return serviceFilters;
-  // };
-
-  // console.log(props.onFilterChange); // Call this with id:string, operatorName:string, value:string
-  // console.log(testFilterMeta); // This drives what can be rendered out for each filter
-  // console.log(props.filters); // Current filters; Don't render any filters that start `id` with '*-'
-  // console.log(operatorOptions); // All the Operator Options, dropdown ready!
-  // console.log(OperatorTypes); // Types of Operators
-  // console.log(ValueType); // Value types
+    const column = columnData.find((_col: any) => _col.accessor === columnPath);
+    return column ? column.Header : columnPath;
+  };
 
   const applyFilter = () => {
     filters.map(filter => {
@@ -149,13 +149,13 @@ const TableActions: SFC<IProps> = props => {
       return true;
     });
     setFilters && setFilters([...filters]);
+
+    if(onFilterChange) {
+      onFilterChange(filters);
+    }
+
     apply(true);
     clickOpenFilter(false);
-
-    // if(props.onFilterChange) {
-    //   props.onFilterChange(filters)
-    // }
-
   };
 
   const cancelFilter = () => {
@@ -166,19 +166,21 @@ const TableActions: SFC<IProps> = props => {
         i = -1;
       }
     }
+
+    if(onFilterChange) {
+      onFilterChange(filters);
+    }
+
     clickOpenFilter(false);
   };
 
-  const onSearchChange = (searchInputValue: string) => {
-    const { onFilterChange } = props;
+  const onSearchChange = (_value: string) => {
     if (onFilterChange) {
       onFilterChange([
         {
-          id: '*-CONTAINS-1',
-          columnName: '*',
-          operatorName: 'CONTAINS',
-          operator: operators.CONTAINS,
-          value: searchInputValue
+          property: '*',
+          option: 'CONTAINS',
+          filterKey: _value
         }
       ]);
     }
@@ -209,8 +211,12 @@ const TableActions: SFC<IProps> = props => {
       } else {
         setFilters && setFilters([...filters]);
       }
+
+      if(onFilterChange) {
+        onFilterChange(filters);
+      }
     },
-    [filters]
+    [filters, onFilterChange]
   );
 
   return (
@@ -348,7 +354,9 @@ const TableActions: SFC<IProps> = props => {
               filter.applied && (
                 <div style={{ paddingRight: 8 }} key={index}>
                   <FilterItem
-                    filter={filter}
+                    property={getColumnNameFromPath(filter.property)}
+                    option={filter.option}
+                    filterKey={filter.filterKey}
                     onRemove={() => {
                       onRemove(filter);
                     }}
@@ -361,4 +369,4 @@ const TableActions: SFC<IProps> = props => {
   );
 };
 
-export default TableActions;
+export default injectIntl(TableActions);

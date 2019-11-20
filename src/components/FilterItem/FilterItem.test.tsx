@@ -25,7 +25,9 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
-      filter: filterData
+      property: filterData.property,
+      filterKey: filterData.filterKey,
+      option: filterData.option
     };
   });
 

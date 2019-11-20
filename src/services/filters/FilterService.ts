@@ -29,8 +29,9 @@ export const runFilter = (data:object[], filter: FilterType) => {
     return data;
   }
 
+  const propName = columnName.split('.').pop();
   return data.filter((_row:any) => {
-    return _row.hasOwnProperty(columnName) && operator(_row[columnName.toString()], value);
+    return _row.hasOwnProperty(propName) && operator(_row[propName.toString()], value);
   });
 };
 
@@ -59,6 +60,7 @@ export const runFilters = (data:object[], filters: FilterType[]) => {
   }
 
   let filteredData = data;
+
   filters.forEach((_filter: FilterType) => {
     const { columnName } = _filter;
     filteredData = (columnName !== '*' ? runFilter(filteredData, _filter) : runFilterOnAllColumns(filteredData, _filter));
@@ -98,19 +100,4 @@ export const updateFilter = (filters: FilterType[], id: string, operatorName:str
   const filtersRemoved = removeFilter(filters, id);
   const filterAdded = addFilter(filtersRemoved, id.split('-')[0], operatorName, compareValue);
   return filterAdded;
-};
-
-export const diffUpdate = (currentFilters: FilterType[], newFilters: FilterType[]): FilterType[] => {
-  let updatedFilters:FilterType[] = [];
-
-  newFilters.forEach((newFilter:FilterType) => {
-    const currentFilter = getFilter(currentFilters, newFilter.id);
-    if(currentFilter && !compareFilter(currentFilter, newFilter)) {
-      updatedFilters = addFilter(updatedFilters, newFilter.columnName, newFilter.operatorName, newFilter.value);
-    } else {
-      updatedFilters = [...updatedFilters, currentFilter];
-    }
-  });
-
-  return updatedFilters;
 };

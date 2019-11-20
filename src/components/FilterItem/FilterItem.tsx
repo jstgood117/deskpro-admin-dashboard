@@ -1,12 +1,17 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { injectIntl } from 'react-intl';
+
+import { operatorKeys } from '../../services/filters/operators';
 
 import Icon from '../Icon';
 import { dpstyle } from '../Styled';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 export interface IProps {
-  filter: IFilterProps;
+  intl: any;
+  property: string;
+  filterKey: string;
+  option: string;
   onRemove?: (e: any) => void;
 }
 
@@ -35,12 +40,16 @@ const ItemText = styled(dpstyle.div)`
   color: ${props => props.theme.activeColour};
 `;
 
-const FilterItem: FC<IProps> = ({ filter, onRemove }) => {
-  const option = filter.option;
+const getIntlOperatorTitle = (operatorName: string) => {
+  return operatorKeys[operatorName];
+};
+
+const FilterItem: FC<IProps> = ({ intl, property, option, filterKey, onRemove }) => {
+
   return (
     <StyledItem>
       <ItemText>
-        {filter.property} {option} {filter.filterKey}
+      {property} {intl.formatMessage({ id: getIntlOperatorTitle(option) })} {filterKey}
       </ItemText>
       <div style={{ display: 'flex' }} onClick={onRemove}>
         <Icon name='close' />
@@ -49,4 +58,4 @@ const FilterItem: FC<IProps> = ({ filter, onRemove }) => {
   );
 };
 
-export default FilterItem;
+export default injectIntl(FilterItem);
