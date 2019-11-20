@@ -40,8 +40,7 @@ describe('OrderableMenu', () => {
     props = {
       label: 'Action',
       iconName: 'menu',
-      initialList: testOrderableMenuItems,
-      submenuPosition: 'left'
+      initialList: testOrderableMenuItems
     };
     mountedOrderableMenu = undefined;
   });

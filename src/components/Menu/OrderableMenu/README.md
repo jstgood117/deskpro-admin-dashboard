@@ -8,7 +8,6 @@
   onSelect?: (value: any) => void; - Select function;
   order?: (value: any) => void; - Order function when drag 
   menuItems?: Object[] - Menu List details;
-  submenuPosition? string: sub menu position;
   initialList?: Object[] - Initial Menu List details;
   setChecked?: (value: any) => void; - Set toggle function when drag 
   checked? Object; Toggle state

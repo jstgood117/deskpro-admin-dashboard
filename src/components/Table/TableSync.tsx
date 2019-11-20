@@ -23,12 +23,6 @@ const AllCheckStyle = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
-  button {
-    display: contents;
-    svg {
-      padding-left: 10px;
-    }
-  }
   .selected-text {
     padding-left: 17px;
     font-style: normal;
@@ -146,27 +140,19 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
       >
         <AllCheckStyle>
           <Checkbox
-            value={String(0)}
-            indeterminate={isAllIndeterminate}
             checked={isAllChecked}
+            opened={opened}
+            clickButton={clickButton}
+            setDropdownValue={setDropdownValue}
+            dropdownValue={dropdownValue}
+            items={items}
+            value='checked'
+            indeterminate={isAllIndeterminate}
+            showArrow={true}
             onChange={(event: SyntheticEvent<HTMLInputElement>) =>
               handleSelectAllClick(event, pageIndex)
             }
           />
-          <Button
-            items={items}
-            size='medium'
-            styleType='secondary'
-            iconOnly={true}
-            onClick={() => {
-              clickButton(!opened);
-            }}
-            dropdownValue={dropdownValue}
-            opened={opened}
-            onSelect={(val: any) => setDropdownValue(val)}
-          >
-            <Icon name='downVector' />
-          </Button>
           {Object.keys(checked).length > 0 && (
             <span className='selected-text'>
               {Object.keys(checked).length} Selected
@@ -242,7 +228,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           alignItems: 'center',
           justifyContent: 'flex-end',
           paddingTop: 9,
-          paddingBottom: 10,
+          paddingBottom: 10
         }}
       >
         <Pagination

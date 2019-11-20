@@ -6,13 +6,15 @@ const handleSearch = () => false;
 
 storiesOf('Table Action', module).add('Default', () => {
   return (
-    <TableActions
-      showSearch={true}
-      onSearchChange={handleSearch}
-      filterMenu={true}
-      sortMenu={true}
-      groupMenu={true}
-      viewMenu={true}
-    />
+    <div style={{padding:10, position:'relative'}}>
+      <TableActions
+        showSearch={true}
+        onSearchChange={handleSearch}
+        filterMenu={true}
+        sortMenu={true}
+        groupMenu={true}
+        viewMenu={true}
+      />
+    </div>
   );
 });

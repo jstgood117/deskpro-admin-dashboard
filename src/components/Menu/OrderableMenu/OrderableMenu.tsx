@@ -50,7 +50,6 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => {
 const MultiMenuComponent: SFC<IMenuProps> = ({
   item,
   onSelect,
-  submenuPosition,
   selectedValue
 }) => {
   const [clickedGear, clickGear] = useState(false);
@@ -62,7 +61,9 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          if(onSelect) { onSelect(item); }
+          if (onSelect) {
+            onSelect(item);
+          }
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
@@ -76,10 +77,6 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
             <div />
           )
         }
-        positionOptions={{
-          position: submenuPosition ? submenuPosition : 'right',
-          vAlign: 'top'
-        }}
       >
         <IconWrapper>
           <Icon name='drag-and-drop' />
@@ -104,7 +101,6 @@ const Menu: SFC<IMenuProps> = ({
   onSelect,
   order,
   menuItems,
-  submenuPosition,
   initialList,
   setChecked,
   checked,
@@ -132,7 +128,6 @@ const Menu: SFC<IMenuProps> = ({
           {item.name && item.subItems && (
             <MultiMenuComponent
               item={item}
-              submenuPosition={submenuPosition}
               onSelect={onSelect}
               selectedValue={selectedValue}
             />
@@ -163,7 +158,9 @@ const Menu: SFC<IMenuProps> = ({
                 OrderedList.push(menuItems[index]);
                 return true;
               });
-              if(order) { order(OrderedList); }
+              if (order) {
+                order(OrderedList);
+              }
             }}
             children={itemList}
           />
@@ -172,7 +169,9 @@ const Menu: SFC<IMenuProps> = ({
         <ResetWrapper
           onClick={e => {
             e.preventDefault();
-            if(order) { order(initialList); }
+            if (order) {
+              order(initialList);
+            }
           }}
         >
           <IconWrapper>
@@ -199,36 +198,37 @@ const OrderableMenu: SFC<IMenuProps> = ({
   onSelect,
   order,
   menuItems,
-  submenuPosition,
   initialList,
   setChecked,
-  checked
+  checked,
+  size
 }) => {
   const selected = !isNil(value) && value !== '';
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-      <MenuWrapper>
+      <MenuWrapper size={size}>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
-          menu={(
+          menu={
             <Menu
               onSelect={onSelect}
               order={order}
               menuItems={menuItems}
-              submenuPosition={submenuPosition}
               initialList={initialList}
               setChecked={setChecked}
               checked={checked}
               selectedValue={value}
             />
-          )}
+          }
         >
           {iconName && (
             <StyledIcon className='ic-menu'>
               <Icon name={iconName} />
             </StyledIcon>
           )}
-          <MenuLabel style={{ paddingRight: 8, paddingLeft: 11 }}>
+          <MenuLabel
+            style={{ paddingRight: 8, paddingLeft: iconName ? 11 : 8 }}
+          >
             {label}
           </MenuLabel>
           <StyledIcon className='ic-down'>

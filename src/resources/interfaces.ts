@@ -70,7 +70,6 @@ export interface IMenuProps {
   menuItems?: IMenuItemProps[];
   initialList?: IMenuItemProps[];
   value?: IMenuItemProps;
-  submenuPosition?: string;
   onSelect?: (value: IMenuItemProps) => void;
   order?: (value: IMenuItemProps[]) => void;
   setChecked?: (value: any) => void;
@@ -78,6 +77,7 @@ export interface IMenuProps {
   item?: IMenuItemProps;
   selectedValue?: IMenuItemProps;
   selected? : boolean;
+  size?: 'medium' | 'small';
 }
 
 export interface IMenuItemProps {

@@ -2,12 +2,12 @@ import React from 'react';
 import { MenuItem, SubMenuItem } from 'react-menu-list';
 import styled from 'styled-components';
 
-export const MenuWrapper = styled.div`
+export const MenuWrapper = styled.div<{ size?: string }>`
   display: inline-flex;
   .menu-btn {
     color: ${props => props.theme.greyDark};
     padding: 0px 13px 0px 14px;
-    height: 28px;
+    height: ${props => (props.size === 'medium' ? '34px' : '28px')};
     display: flex;
     align-items: center;
     background: ${props => props.theme.white};
