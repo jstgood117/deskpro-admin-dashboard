@@ -150,6 +150,7 @@ export interface IProps {
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
   filters?: IFilterProps[];
+  onSearchChange?: (value: string, filters: IFilterProps[]) => void;
   onFilterChange?: (filters: IFilterProps[]) => void;
   tableDef: ITableSetup;
 }
@@ -168,6 +169,7 @@ const Header: SFC<IProps> = ({
   tableActions,
   filters,
   onFilterChange,
+  onSearchChange,
   tableDef
 }) => {
   const [state, setState] = useState(defaulViewMode);
@@ -249,6 +251,7 @@ const Header: SFC<IProps> = ({
               groupMenu={true}
               viewMenu={true}
               filters={filters}
+              onSearchChange={onSearchChange}
               onFilterChange={onFilterChange}
               tableDef={tableDef}
             />

@@ -60,7 +60,6 @@ export const runFilters = (data:object[], filters: FilterType[]) => {
   }
 
   let filteredData = data;
-
   filters.forEach((_filter: FilterType) => {
     const { columnName } = _filter;
     filteredData = (columnName !== '*' ? runFilter(filteredData, _filter) : runFilterOnAllColumns(filteredData, _filter));
