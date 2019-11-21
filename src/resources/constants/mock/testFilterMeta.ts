@@ -90,8 +90,8 @@ export const testFilterMeta: FilterMeta[] = [
       'ENDS_WITH'
     ],
     type: 'TEXT',
-    path: 'agent_team.*.name',
-    dataPath: 'agent_team'
+    path: 'name',
+    dataPath: 'name'
   },
   {
     title: 'First name',
@@ -104,8 +104,8 @@ export const testFilterMeta: FilterMeta[] = [
       'ENDS_WITH'
     ],
     type: 'TEXT',
-    path: 'agent_team.*.firstname',
-    dataPath: 'agent_team'
+    path: 'firstname',
+    dataPath: 'firstname'
   },
   {
     title: 'Last Name',
@@ -118,24 +118,24 @@ export const testFilterMeta: FilterMeta[] = [
       'ENDS_WITH'
     ],
     type: 'TEXT',
-    path: 'agent_team.*.lastname',
-    dataPath: 'agent_team'
+    path: 'lastname',
+    dataPath: 'lastname'
   },
   {
     title: 'Email',
     operators: ['IN', 'NOT_IN'],
     type: 'AGENT_TEAM_LIST',
-    path: 'agent_team.*.primary_email',
-    dataPath: 'agent_team'
+    path: 'primary_email',
+    dataPath: 'primary_email'
   },
   {
     title: 'Team',
     operators: ['IN', 'NOT_IN'],
     type: 'CHOICE_FROM_DATA',
-    path: 'agent_team.*.agent_teams',
-    dataPath: 'agent_team',
+    path: 'agent_teams.name',
+    dataPath: 'agent_teams',
     valueProperty: 'id',
-    titleProperty: 'title',
+    titleProperty: 'name',
     uniqueValues: [
       {
         id: 1,
@@ -151,11 +151,25 @@ export const testFilterMeta: FilterMeta[] = [
       }
     ]
   },
+  // { // example of deep object search
+  //   title: 'Team - Custom',
+  //   operators: [
+  //     'CONTAINS',
+  //     'NOT_CONTAINS',
+  //     'EQUAL',
+  //     'NOT_EQUAL',
+  //     'STARTS_WITH',
+  //     'ENDS_WITH'
+  //   ],
+  //   type: 'TEXT',
+  //   path: 'agent_teams.name',
+  //   dataPath: 'agent_teams'
+  // },
   {
     title: 'Can Admin',
     operators: ['EQUAL'],
     type: 'BOOL',
-    path: 'agent_team.*.can_admin',
-    dataPath: 'agent_team'
+    path: 'can_admin',
+    dataPath: 'can_admin'
   }
 ];

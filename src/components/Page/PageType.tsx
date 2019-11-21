@@ -2,7 +2,6 @@ import React, { SFC, createContext } from 'react';
 
 import queries from '../../schema/queries';
 import StandardTablePage from '../StandardTablePage';
-import StandardTableProvider from '../../contexts/StandardTableContext';
 
 export interface IProps {
   path?: string;
@@ -23,13 +22,11 @@ const PageType: SFC<IProps> = ({ path }) => {
   switch (path) {
     case '/agents':
       page = (
-        <StandardTableProvider>
-          <StandardTablePage
-            path={path}
-            query={queries.QUERY_AGENTS_PAGE}
-            queryName='agents_getAgentsPage'
-          />
-        </StandardTableProvider>
+        <StandardTablePage
+          path={path}
+          query={queries.QUERY_AGENTS_PAGE}
+          queryName='agents_getAgentsPage'
+        />
       );
       break;
     default:

@@ -31,9 +31,6 @@ storiesOf('Header', module)
         ]}
         onChangeView={action('clicked onChangeView')}
         onNewClick={action('clicked onNewClick')}
-        tableDef={{
-          columns:[]
-        }}
       />
     </IntlProvider>
   ))
@@ -62,9 +59,6 @@ storiesOf('Header', module)
         ]}
         onChangeView={action('clicked onChangeView')}
         onNewClick={action('clicked onNewClick')}
-        tableDef={{
-          columns:[]
-        }}
       />
     </IntlProvider>
   ));

@@ -29,9 +29,11 @@ export const runFilter = (data:object[], filter: FilterType) => {
     return data;
   }
 
-  const propName = columnName.split('.').pop();
+  const propName = columnName;
+
   return data.filter((_row:any) => {
-    return _row.hasOwnProperty(propName) && operator(_row[propName.toString()], value);
+    const dataPath = propName.split('.')[0];
+    return _row.hasOwnProperty(dataPath) && operator(_row, propName.toString(), value);
   });
 };
 
@@ -47,7 +49,7 @@ export const runFilterOnAllColumns = (data:object[], filter: FilterType) => {
   return data.filter((_row:any) => (
     Object.keys(_row).some((_colKey:any) => (
       typeof _row[_colKey] === 'string'
-      ? operator(_row[_colKey], value)
+      ? operator(_row, _colKey, value)
       : false
     ))
   ));
