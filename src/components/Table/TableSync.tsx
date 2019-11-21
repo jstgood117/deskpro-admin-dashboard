@@ -6,34 +6,14 @@ import {
   onSelectEverything
 } from './helpers/functions';
 
-import { TableStyled } from './Table';
+import { TableStyled, TableProps, TableHeader, AllCheckStyle } from './Table';
 import Checkbox from '../Checkbox';
 import * as Cell from './Cell';
 import Button from '../Button';
 import Icon from '../Icon';
-import styled from 'styled-components';
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 
-type TableAsyncProps = {
-  data: any[];
-  columns: any[];
-};
-
-const AllCheckStyle = styled.div`
-  display: flex;
-  align-items: center;
-  flex: 1;
-  .selected-text {
-    padding-left: 17px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 150%;
-    color: ${props => props.theme.activeColour};
-  }
-`;
-
-const Table: FC<TableAsyncProps> = ({ data, columns }) => {
+const Table: FC<TableProps> = ({ data, columns }) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -130,14 +110,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
 
   return (
     <TableStyled>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          paddingTop: 9,
-          paddingBottom: 10
-        }}
-      >
+      <TableHeader>
         <AllCheckStyle>
           <Checkbox
             checked={isAllChecked}
@@ -171,7 +144,7 @@ const Table: FC<TableAsyncProps> = ({ data, columns }) => {
           onChangePage={handleChangeCurrentPage}
           onChangeRowsPerPage={handleChangRowsPerPage}
         />
-      </div>
+      </TableHeader>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any, indexOuter: number) => (

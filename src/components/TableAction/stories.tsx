@@ -1,16 +1,16 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import TableActions from './TableActions';
 import { IntlProvider } from 'react-intl';
+import { storiesOf } from '@storybook/react';
+
+import TableActions from './TableActions';
 import { testTranslations } from '../../resources/constants/constants';
 
 const handleSearch = () => false;
 
 storiesOf('Table Action', module).add('Default', () => {
   return (
-
     <IntlProvider locale='en' messages={testTranslations}>
-      <div style={{padding:10, position:'relative'}}>
+      <div style={{ padding: 10, position: 'relative' }}>
         <TableActions
           showSearch={true}
           onSearchChange={handleSearch}
@@ -19,7 +19,7 @@ storiesOf('Table Action', module).add('Default', () => {
           groupMenu={true}
           viewMenu={true}
           tableDef={{
-            columns:[]
+            columns: []
           }}
         />
       </div>

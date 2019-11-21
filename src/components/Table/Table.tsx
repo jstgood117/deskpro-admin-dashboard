@@ -26,7 +26,6 @@ export const TableStyled = styled(dpstyle.div)`
     }
     & tbody {
       & tr {
-
         &.row--selected {
           background-color: ${props => props.theme.greyLight};
         }
@@ -41,7 +40,7 @@ export const TableStyled = styled(dpstyle.div)`
 
           > * {
             white-space: nowrap;
-            flex-wrap:nowrap;
+            flex-wrap: nowrap;
           }
 
           & img {
@@ -57,13 +56,33 @@ export const TableStyled = styled(dpstyle.div)`
   }
 `;
 
-const generateSortType = (sortType: string) => {
+export const TableHeader = styled(dpstyle.div)`
+  display: flex;
+  align-items: center;
+  padding-top: 9px;
+  padding-bottom: 11px;
+`;
 
-  if(!sortType) {
+export const AllCheckStyle = styled(dpstyle.div)`
+  display: flex;
+  align-items: center;
+  flex: 1;
+  .selected-text {
+    padding-left: 17px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 150%;
+    color: ${props => props.theme.activeColour};
+  }
+`;
+
+const generateSortType = (sortType: string) => {
+  if (!sortType) {
     return 'alphanumeric';
   }
 
-  switch(sortType) {
+  switch (sortType) {
     case 'ALPHANUMERIC':
       return 'alphanumeric';
     default:
@@ -71,9 +90,16 @@ const generateSortType = (sortType: string) => {
   }
 };
 
-export const transformColumnData = (columns: ITableColumn[], intl: any) => {
+export type TableProps = {
+  data: any[];
+  columns: any[];
+  fetchData?: any;
+  loading?: boolean;
+  pageCount?: number;
+};
 
-  const newCols = columns.map( (column: ITableColumn) => {
+export const transformColumnData = (columns: ITableColumn[], intl: any) => {
+  const newCols = columns.map((column: ITableColumn) => {
     return {
       id: column.title,
       Header: intl.formatMessage({ id: `admin_common.${column.title}` }),

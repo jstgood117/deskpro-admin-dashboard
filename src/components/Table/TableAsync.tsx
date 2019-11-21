@@ -6,41 +6,14 @@ import {
   onSelectEverything
 } from './helpers/functions';
 
-import { TableStyled } from './Table';
+import { TableStyled, TableProps, TableHeader, AllCheckStyle } from './Table';
 import Checkbox from '../Checkbox';
 import * as Cell from './Cell';
-import styled from 'styled-components';
 import Button from '../Button';
 import Icon from '../Icon';
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 
-type TableAsyncProps = {
-  data: any[];
-  columns: any[];
-  fetchData: any;
-  loading: boolean;
-  pageCount: number;
-};
-
-const AllCheckStyle = styled.div`
-  flex: 1;
-  button {
-    display: contents;
-    svg {
-      padding-left: 10px;
-    }
-  }
-  .selected-text {
-    padding-left: 17px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 150%;
-    color: ${props => props.theme.activeColour};
-  }
-`;
-
-const TableAsync: FC<TableAsyncProps> = ({
+const TableAsync: FC<TableProps> = ({
   data,
   columns,
   fetchData,
@@ -148,14 +121,7 @@ const TableAsync: FC<TableAsyncProps> = ({
 
   return (
     <TableStyled>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          paddingTop: 9,
-          paddingBottom: 10
-        }}
-      >
+      <TableHeader>
         <AllCheckStyle>
           <Checkbox
             checked={isAllChecked}
@@ -189,7 +155,7 @@ const TableAsync: FC<TableAsyncProps> = ({
           onChangePage={handleChangeCurrentPage}
           onChangeRowsPerPage={handleChangRowsPerPage}
         />
-      </div>
+      </TableHeader>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any, indexOuter: number) => (
@@ -242,13 +208,6 @@ const TableAsync: FC<TableAsyncProps> = ({
           })}
         </tbody>
       </table>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          Showing {page.length} of ~{controlledPageCount * pageSize} results
-        </div>
-      )}
       {!loading && (
         <div
           style={{

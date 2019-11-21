@@ -1,8 +1,9 @@
 import React from 'react';
 import { MenuItem, SubMenuItem } from 'react-menu-list';
 import styled from 'styled-components';
+import { dpstyle } from '../Styled';
 
-export const MenuWrapper = styled.div<{ size?: string }>`
+export const MenuWrapper = styled(dpstyle.div)<{ size?: string }>`
   display: inline-flex;
   .menu-btn {
     color: ${props => props.theme.greyDark};
@@ -15,8 +16,10 @@ export const MenuWrapper = styled.div<{ size?: string }>`
     outline: none;
     box-sizing: border-box;
     border-radius: ${props => props.theme.btnBorderRadius};
-    cursor: pointer
-    &:hover {
+    cursor: pointer;
+  }
+  &:hover {
+    .menu-btn {
       border: 1px solid ${props => props.theme.activeColour};
       color: ${props => props.theme.activeColour};
       background: ${props => props.theme.hoverColour};
