@@ -5,13 +5,8 @@ import { DocumentNode } from 'graphql';
 import { IViewData } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
-
 import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
-
-// test data
-import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
-
 import Loading from '../Loading';
 import Error from '../Error';
 import Header from '../Header';
@@ -20,6 +15,8 @@ import TabBar from '../TabBar';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 import { StandardTableContext } from '../../contexts/StandardTableContext';
+// test data
+import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
 
 export interface IProps {
   path: string;
@@ -33,10 +30,9 @@ const BodyMargin = styled(dpstyle.div)`
 `;
 
 const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
-
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
-  const { loading, error /*data*/ } = useQuery(query, { errorPolicy: 'all' });
+  const { loading, error } = useQuery(query, { errorPolicy: 'all' });
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -74,20 +70,18 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     setFilters([searchFilter, ...serviceFilters]);
   };
 
-  // TEST
-  // if (data && data[queryName]) {
-  if (testColumnData2) {
-    const {
-      title,
-      description,
-      headerLinks,
-      views,
-      dataType,
-      illustration
-    } = (testColumnData2 as any)[queryName.toString()];
-    return (
+  return (
+    testColumnData2 && (
       <StandardTableContext.Consumer>
-        {({ contextValue, setcontextValue }) => {
+        {({ contextValue }) => {
+          const {
+            title,
+            description,
+            headerLinks,
+            views,
+            dataType,
+            illustration
+          } = (testColumnData2 as any)[queryName.toString()];
           console.log(contextValue);
           return (
             <Fragment>
@@ -135,9 +129,8 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
           );
         }}
       </StandardTableContext.Consumer>
-    );
-  }
-  return null;
+    )
+  );
 };
 
 export default StandardTablePage;
