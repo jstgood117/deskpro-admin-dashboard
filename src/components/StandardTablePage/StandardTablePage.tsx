@@ -5,13 +5,8 @@ import { DocumentNode } from 'graphql';
 import { IViewData } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
-
 import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
-
-// test data
-import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
-
 import Loading from '../Loading';
 import Error from '../Error';
 import Header from '../Header';
@@ -19,6 +14,9 @@ import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
+import { StandardTableContext } from '../../contexts/StandardTableContext';
+// test data
+import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
 
 export interface IProps {
   path: string;
@@ -34,7 +32,7 @@ const BodyMargin = styled(dpstyle.div)`
 const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
-  const { loading, error /*data*/ } = useQuery(query, { errorPolicy: 'all' });
+  const { loading, error } = useQuery(query, { errorPolicy: 'all' });
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -72,59 +70,67 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     setFilters([searchFilter, ...serviceFilters]);
   };
 
-  // TEST
-  // if (data && data[queryName]) {
-  if (testColumnData2) {
-    const {
-      title,
-      description,
-      headerLinks,
-      views,
-      dataType,
-      illustration
-    } = (testColumnData2 as any)[queryName.toString()];
-    return (
-      <Fragment>
-        {views && views[tabIndex] && (
-          <Header
-            title={title}
-            description={description}
-            links={headerLinks}
-            illustration={illustration}
-            defaulViewMode='table'
-            showViewModeSwitcher={true}
-            showNewButton={true}
-            showHelpButton={true}
-            onNewClick={() => null}
-            tableActions={true}
-            filters={[]}
-            onChangeView={val => {
-              console.log(val);
-            }}
-            onFilterChange={onFilterChange}
-            tableDef={views[tabIndex].tableDef}
-          />
-        )}
-        <BodyMargin>
-          {views && views.length > 1 && (
-            <TabBar
-              // Backend payload phrases are missing admin_common - should this be hard-coded like this?
-              tabItems={views.map((view: IViewData) => {
-                return { messageId: `admin_common.${view.title}` };
-              })}
-              handleClick={index => {
-                setTabState(index);
-              }}
-            />
-          )}
-          {views && views[tabIndex] && (
-            <Table {...views[tabIndex]} filters={filters} dataType={dataType} />
-          )}
-        </BodyMargin>
-      </Fragment>
-    );
-  }
-  return null;
+  return (
+    testColumnData2 && (
+      <StandardTableContext.Consumer>
+        {({ contextValue }) => {
+          const {
+            title,
+            description,
+            headerLinks,
+            views,
+            dataType,
+            illustration
+          } = (testColumnData2 as any)[queryName.toString()];
+          console.log(contextValue);
+          return (
+            <Fragment>
+              {views && views[tabIndex] && (
+                <Header
+                  title={title}
+                  description={description}
+                  links={headerLinks}
+                  illustration={illustration}
+                  defaulViewMode='table'
+                  showViewModeSwitcher={true}
+                  showNewButton={true}
+                  showHelpButton={true}
+                  onNewClick={() => null}
+                  tableActions={true}
+                  filters={[]}
+                  onChangeView={val => {
+                    console.log(val);
+                  }}
+                  onFilterChange={onFilterChange}
+                  tableDef={views[tabIndex].tableDef}
+                />
+              )}
+              <BodyMargin>
+                {views && views.length > 1 && (
+                  <TabBar
+                    // Backend payload phrases are missing admin_common - should this be hard-coded like this?
+                    tabItems={views.map((view: IViewData) => {
+                      return { messageId: `admin_common.${view.title}` };
+                    })}
+                    handleClick={index => {
+                      setTabState(index);
+                    }}
+                  />
+                )}
+                {views && views[tabIndex] && (
+                  <Table
+                    {...views[tabIndex]}
+                    filters={filters}
+                    dataType={dataType}
+                  />
+                )}
+              </BodyMargin>
+            </Fragment>
+          );
+        }}
+      </StandardTableContext.Consumer>
+    )
+  );
 };
 
 export default StandardTablePage;

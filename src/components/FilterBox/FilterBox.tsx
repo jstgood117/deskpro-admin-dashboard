@@ -8,6 +8,7 @@ import { dpstyle } from '../Styled';
 import FilterOptions from '../FilterOptions';
 import { DeskproAdminTheme } from '../Theme';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { StandardTableContext } from '../../contexts/StandardTableContext';
 
 export type IProps = {
   filters: IFilterProps[];
@@ -39,6 +40,7 @@ const FilterBox: SFC<IProps> = ({
   cancel,
   apply
 }) => {
+  const { setcontextValue } = React.useContext(StandardTableContext);
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
     filters[lastIndex].value &&
@@ -82,6 +84,7 @@ const FilterBox: SFC<IProps> = ({
             <Button
               styleType='primary'
               onClick={() => {
+                setcontextValue('Applied');
                 apply();
               }}
               size='medium'
