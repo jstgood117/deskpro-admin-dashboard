@@ -24,10 +24,7 @@ describe('Header', () => {
     props = {
       title: 'admin_agents.agents.title',
       description: 'admin_agents.agents.description',
-      illustration: null,
-      tableDef: {
-        columns:[]
-      },
+      illustration: null
     };
     mountedHeader = undefined;
   });

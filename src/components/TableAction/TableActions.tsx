@@ -1,11 +1,13 @@
-import React, { SFC, useState, useCallback } from 'react';
+import React, { SFC, useState, useCallback, useContext } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
-import { ITableSetup } from '../../resources/interfaces';
+import StandardTableContext, {
+  StandardTablePageContextValuesType
+} from '../../contexts/StandardTableContext';
 
 import { dpstyle } from '../Styled';
 import SearchBox from '../SearchBox';
@@ -16,7 +18,6 @@ import FilterItem from '../FilterItem';
 
 import OrderableMenu from '../Menu/OrderableMenu';
 import { testOrderableMenuItems } from '../../resources/constants/constants';
-import { transformColumnData } from '../Table/Table';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
@@ -68,10 +69,6 @@ export interface IProps {
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
-  filters?: IFilterProps[];
-  onFilterChange?: (rules: IFilterProps[]) => void;
-  onSearchChange?: (value: string, filters: IFilterProps[]) => void;
-  tableDef: ITableSetup;
 }
 
 interface IFilterButton {
@@ -114,11 +111,10 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
 `;
 const TableActions: SFC<IProps> = ({
   intl,
-  onFilterChange,
-  onSearchChange,
-  tableDef,
   ...props
 }) => {
+
+  const context:StandardTablePageContextValuesType = useContext(StandardTableContext);
 
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
@@ -133,14 +129,14 @@ const TableActions: SFC<IProps> = ({
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
 
-  const columnData = transformColumnData([...tableDef.columns], intl);
+  const {
+    onFilterChange,
+    onSearchChange,
+  } = context;
 
-  const getColumnNameFromPath = (fullPath: string) => {
-
-    const columnPath = fullPath.split('.').pop();
-
-    const column = columnData.find((_col: any) => _col.accessor === columnPath);
-    return column ? column.Header : columnPath;
+  const getFilterTitle = (path: string) => {
+    const match = testFilterMeta.find(_filter => _filter.path === path);
+    return match ? match.title : path;
   };
 
   const applyFilter = () => {
@@ -349,7 +345,7 @@ const TableActions: SFC<IProps> = ({
               filter.applied && (
                 <div style={{ paddingRight: 8 }} key={index}>
                   <FilterItem
-                    columnName={getColumnNameFromPath(filter.columnName)}
+                    columnName={getFilterTitle(filter.columnName)}
                     operatorName={filter.operatorName}
                     value={filter.value}
                     onRemove={() => {

@@ -47,6 +47,12 @@ const testTableColumns2 = {
                   'path': 'name',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
+                },
+                {
+                  'propName': 'avatar',
+                  'path': 'avatarUrn',
+                  'value': '',
+                  '__typename': 'TableColumnDataMap'
                 }
               ],
               'defaultShow': true,
@@ -121,7 +127,7 @@ const testTableColumns2 = {
                   'propName': 'value',
                   'path': 'agent_groups',
                   'value': '',
-                  '__typename': 'TableColumnDataMap'
+                  ' ': 'TableColumnDataMap'
                 }
               ],
               'defaultShow': true,
@@ -156,6 +162,12 @@ const testTableColumns2 = {
                 {
                   'propName': 'name',
                   'path': 'name',
+                  'value': '',
+                  '__typename': 'TableColumnDataMap'
+                },
+                {
+                  'propName': 'avatar',
+                  'path': 'avatarUrn',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }

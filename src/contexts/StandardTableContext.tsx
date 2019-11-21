@@ -1,21 +1,26 @@
-import React, { createContext, useState } from 'react';
+import React from 'react';
 
-const defaultContextValues: any = {
-  contextValue: '',
-  setcontextValue: () => {}
-};
-export const StandardTableContext = createContext(defaultContextValues);
+import { FilterType } from '../services/filters/types';
+import { ITableSetup, ITableColumn } from '../resources/interfaces';
+import { IFilterProps } from '../resources/interfaces/filterMeta';
 
-const StandardTableProvider = (props: any) => {
-  const [contextValue, setRegionValue] = useState('initial');
-  const setcontextValue = (param: string) => {
-    setRegionValue(param);
-  };
-  return (
-    <StandardTableContext.Provider value={{ contextValue, setcontextValue }}>
-      {props.children}
-    </StandardTableContext.Provider>
-  );
+export type StandardTablePageContextValuesType = {
+  filters: FilterType[];
+  onFilterChange: (rules: IFilterProps[]) => void;
+  onSearchChange: (value: string, filters: IFilterProps[]) => void;
+  tableDef: ITableSetup;
 };
 
-export default StandardTableProvider;
+const filters: FilterType[] = [];
+const columns: ITableColumn[] = [];
+
+const StandardTableContext = React.createContext({
+  filters,
+  onFilterChange: (rules: IFilterProps[]) => undefined,
+  onSearchChange: (value: string, filters: IFilterProps[]) => undefined,
+  tableDef: {columns},
+});
+
+export const StandardTableProvider = StandardTableContext.Provider;
+export const StandardTableConsumer = StandardTableContext.Consumer;
+export default StandardTableContext;

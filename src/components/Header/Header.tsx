@@ -2,9 +2,6 @@ import React, { SFC, useState } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
-import { ITableSetup } from '../../resources/interfaces';
-
 import { DeskproAdminTheme } from '../Theme';
 import TableActions from '../TableAction';
 import Icon from '../Icon';
@@ -149,10 +146,6 @@ export interface IProps {
   tableActions?: boolean;
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
-  filters?: IFilterProps[];
-  onSearchChange?: (value: string, filters: IFilterProps[]) => void;
-  onFilterChange?: (filters: IFilterProps[]) => void;
-  tableDef: ITableSetup;
 }
 
 const Header: SFC<IProps> = ({
@@ -167,10 +160,6 @@ const Header: SFC<IProps> = ({
   onChangeView,
   onNewClick,
   tableActions,
-  filters,
-  onFilterChange,
-  onSearchChange,
-  tableDef
 }) => {
   const [state, setState] = useState(defaulViewMode);
 
@@ -250,10 +239,6 @@ const Header: SFC<IProps> = ({
               sortMenu={true}
               groupMenu={true}
               viewMenu={true}
-              filters={filters}
-              onSearchChange={onSearchChange}
-              onFilterChange={onFilterChange}
-              tableDef={tableDef}
             />
           </TableActionStyled>
         )}
