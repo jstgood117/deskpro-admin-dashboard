@@ -27,6 +27,7 @@ storiesOf('Icon', module)
     <Icon name='help' />
   ))
   .add('checkbox.indeterminate', () => <Icon name='checkbox.indeterminate' />)
+  .add('checkbox.normal', () => <Icon name='checkbox.normal' />)
   .add('close', () => <Icon name='close' />)
   .add('admin', () => <Icon name='admin' />)
   .add('report', () => <Icon name='report' />)

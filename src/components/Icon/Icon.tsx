@@ -19,6 +19,7 @@ import { ReactComponent as IconLoginLog } from '../../assets/svg/ic-login-log.sv
 import { ReactComponent as IconSetting } from '../../assets/svg/ic-setting.svg';
 import { ReactComponent as Illustration } from '../../assets/svg/agents-header.svg';
 import { ReactComponent as IconIndeterminateCheckBox } from '../../assets/svg/ic-indeterminate-cb.svg';
+import { ReactComponent as IconNormalCheckBox } from '../../assets/svg/ic-normal-cb.svg';
 import { ReactComponent as IconClose } from '../../assets/svg/ic-close.svg';
 import { ReactComponent as IconAdmin } from '../../assets/svg/ic-admin.svg';
 import { ReactComponent as IconReport } from '../../assets/svg/ic-report.svg';
@@ -105,6 +106,8 @@ const Icon: FC<IProps> = props => {
       return <IconView />;
     case 'checkbox.indeterminate':
       return <IconIndeterminateCheckBox />;
+    case 'checkbox.normal':
+      return <IconNormalCheckBox />;
     case 'close':
       return <IconClose />;
     case 'admin':

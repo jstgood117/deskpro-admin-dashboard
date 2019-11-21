@@ -24,12 +24,7 @@ const StyledCheckbox = styled.span<ICheckboxProps>`
   background: ${props => (props.checked ? props.theme.activeColour : '#fff')};
   border-radius: 3px;
   transition: all 150ms;
-  border: solid 1.5px
-    ${props =>
-      props.checked && !props.indeterminate ? '#fff' : props.theme.greyLight};
-  &:hover {
-    border: solid ${props => props.theme.greyLight} 1.5px;
-  }
+  border: ${props => !props.checked && `solid 1.5px ${props.theme.greyLight}`};
   display: flex;
   svg {
     margin: auto;
@@ -138,6 +133,7 @@ const Checkbox: SFC<IProps> = ({
         checked={checked}
       >
         {indeterminate && checked && <Icon name='checkbox.indeterminate' />}
+        {!indeterminate && checked && <Icon name='checkbox.normal' />}
       </StyledCheckbox>
     </CheckboxContainer>
     {showArrow && (

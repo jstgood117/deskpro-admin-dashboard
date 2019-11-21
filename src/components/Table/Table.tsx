@@ -68,9 +68,9 @@ export const AllCheckStyle = styled(dpstyle.div)`
   align-items: center;
   flex: 1;
   .selected-text {
-    padding-left: 17px;
+    padding-left: 15px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 15px;
     line-height: 150%;
     color: ${props => props.theme.activeColour};

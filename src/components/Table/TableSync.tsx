@@ -120,7 +120,7 @@ const Table: FC<TableProps> = ({ data, columns }) => {
             dropdownValue={dropdownValue}
             items={items}
             value='checked'
-            indeterminate={isAllIndeterminate}
+            indeterminate={true}
             showArrow={true}
             onChange={(event: SyntheticEvent<HTMLInputElement>) =>
               handleSelectAllClick(event, pageIndex)
