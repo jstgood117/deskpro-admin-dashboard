@@ -30,7 +30,7 @@ const NameAndAvatar: React.SFC<IProps> = ({
       content={avatar ? avatar : name}
       {...avatarProps}
     />
-    <Name>{name}</Name>
+    <Name className='text'>{name}</Name>
   </FlowLayout>
 );
 

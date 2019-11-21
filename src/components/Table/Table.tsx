@@ -28,6 +28,11 @@ export const TableStyled = styled(dpstyle.div)`
       & tr {
         &.row--selected {
           background-color: ${props => props.theme.greyLight};
+          td {
+            .text {
+              color: ${props => props.theme.activeColour} !important;
+            }
+          }
         }
 
         border-bottom: 1px solid ${props => props.theme.greyLighter};
