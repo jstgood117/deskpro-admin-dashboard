@@ -14,7 +14,7 @@ import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
-import { StandardTableProvider, StandardTablePageContextValuesType } from '../../contexts/StandardTableContext';
+import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
 // test data
 import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
 
@@ -91,7 +91,7 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     illustration
   } = (testColumnData2 as any)[queryName.toString()];
 
-  const contextValue:StandardTablePageContextValuesType = {
+  const contextValue:StandardTableContextValues = {
     filters,
     onFilterChange,
     onSearchChange,

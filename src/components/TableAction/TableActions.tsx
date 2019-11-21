@@ -5,8 +5,9 @@ import { injectIntl } from 'react-intl';
 
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { IFilterProps } from '../../resources/interfaces/filterMeta';
-import StandardTableContext, {
-  StandardTablePageContextValuesType
+import {
+  StandardTableContext,
+  StandardTableContextValues
 } from '../../contexts/StandardTableContext';
 
 import { dpstyle } from '../Styled';
@@ -114,7 +115,7 @@ const TableActions: SFC<IProps> = ({
   ...props
 }) => {
 
-  const context:StandardTablePageContextValuesType = useContext(StandardTableContext);
+  const context:StandardTableContextValues = useContext(StandardTableContext);
 
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
