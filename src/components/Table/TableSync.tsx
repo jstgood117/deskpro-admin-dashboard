@@ -36,7 +36,6 @@ const Table: FC<TableProps> = ({ data, columns }) => {
 
   const [checked, setChecked] = useState<object>({});
   const [isAllChecked, setIsAllChecked] = useState(false);
-  const [isAllIndeterminate, setIsAllIndeterminate] = useState(false);
   const [opened, clickButton] = useState(false);
   const [dropdownValue, setDropdownValue] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -76,7 +75,6 @@ const Table: FC<TableProps> = ({ data, columns }) => {
     const checkedLength = Object.keys(checked).length;
     const indeterminate =
       checkedLength !== 0 && checkedLength < page.length ? true : false;
-    setIsAllIndeterminate(indeterminate);
     setIsAllChecked(
       indeterminate || checkedLength >= page.length ? true : false
     );

@@ -3,7 +3,7 @@ import {
 } from '../FilterService';
 import { FilterType } from '../types';
 
-const includesOperator = jest.fn((a:string, b:string) => a.includes(b));
+const includesOperator = jest.fn((row:any, prop:string, value:string) => row[prop].includes(value));
 
 const data = [{
   FirstName:'John',
@@ -18,6 +18,7 @@ describe('Run filter', () => {
     const filter = {
       id:'FirstName-EQUAL',
       columnName:'FirstName',
+      operatorName:'EQUAL',
       operator:includesOperator,
       value:'John'
     } as FilterType;
