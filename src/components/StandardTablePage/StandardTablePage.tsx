@@ -19,6 +19,7 @@ import Table from '../Table/TableWrapper';
 import TabBar from '../TabBar';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
+import { StandardTableContext } from '../../contexts/StandardTableContext';
 
 export interface IProps {
   path: string;
@@ -32,6 +33,7 @@ const BodyMargin = styled(dpstyle.div)`
 `;
 
 const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
+
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const { loading, error /*data*/ } = useQuery(query, { errorPolicy: 'all' });
@@ -84,44 +86,55 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
       illustration
     } = (testColumnData2 as any)[queryName.toString()];
     return (
-      <Fragment>
-        {views && views[tabIndex] && (
-          <Header
-            title={title}
-            description={description}
-            links={headerLinks}
-            illustration={illustration}
-            defaulViewMode='table'
-            showViewModeSwitcher={true}
-            showNewButton={true}
-            showHelpButton={true}
-            onNewClick={() => null}
-            tableActions={true}
-            filters={[]}
-            onChangeView={val => {
-              console.log(val);
-            }}
-            onFilterChange={onFilterChange}
-            tableDef={views[tabIndex].tableDef}
-          />
-        )}
-        <BodyMargin>
-          {views && views.length > 1 && (
-            <TabBar
-              // Backend payload phrases are missing admin_common - should this be hard-coded like this?
-              tabItems={views.map((view: IViewData) => {
-                return { messageId: `admin_common.${view.title}` };
-              })}
-              handleClick={index => {
-                setTabState(index);
-              }}
-            />
-          )}
-          {views && views[tabIndex] && (
-            <Table {...views[tabIndex]} filters={filters} dataType={dataType} />
-          )}
-        </BodyMargin>
-      </Fragment>
+      <StandardTableContext.Consumer>
+        {({ contextValue, setcontextValue }) => {
+          console.log(contextValue);
+          return (
+            <Fragment>
+              {views && views[tabIndex] && (
+                <Header
+                  title={title}
+                  description={description}
+                  links={headerLinks}
+                  illustration={illustration}
+                  defaulViewMode='table'
+                  showViewModeSwitcher={true}
+                  showNewButton={true}
+                  showHelpButton={true}
+                  onNewClick={() => null}
+                  tableActions={true}
+                  filters={[]}
+                  onChangeView={val => {
+                    console.log(val);
+                  }}
+                  onFilterChange={onFilterChange}
+                  tableDef={views[tabIndex].tableDef}
+                />
+              )}
+              <BodyMargin>
+                {views && views.length > 1 && (
+                  <TabBar
+                    // Backend payload phrases are missing admin_common - should this be hard-coded like this?
+                    tabItems={views.map((view: IViewData) => {
+                      return { messageId: `admin_common.${view.title}` };
+                    })}
+                    handleClick={index => {
+                      setTabState(index);
+                    }}
+                  />
+                )}
+                {views && views[tabIndex] && (
+                  <Table
+                    {...views[tabIndex]}
+                    filters={filters}
+                    dataType={dataType}
+                  />
+                )}
+              </BodyMargin>
+            </Fragment>
+          );
+        }}
+      </StandardTableContext.Consumer>
     );
   }
   return null;
