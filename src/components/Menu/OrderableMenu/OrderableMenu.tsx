@@ -77,6 +77,13 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
             <div />
           )
         }
+        positionOptions={{
+          position: 'left',
+          vAlign: 'top',
+          hAlign: 'left',
+          forceVAlign: true,
+          forcePosition: true
+        }}
       >
         <IconWrapper>
           <Icon name='drag-and-drop' />
@@ -220,6 +227,13 @@ const OrderableMenu: SFC<IMenuProps> = ({
               selectedValue={value}
             />
           }
+          positionOptions={{
+            position: 'bottom',
+            vAlign: 'top',
+            hAlign: 'left',
+            forceVAlign: true,
+            forcePosition: true
+          }}
         >
           {iconName && (
             <StyledIcon className='ic-menu'>

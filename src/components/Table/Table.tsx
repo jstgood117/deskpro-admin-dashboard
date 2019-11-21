@@ -1,7 +1,10 @@
+import React from 'react';
 import styled from 'styled-components';
 import { customSortMethod } from '../../utils/sort';
 import { ITableColumn } from '../../resources/interfaces';
 import { dpstyle } from '../Styled';
+import Checkbox from '../Checkbox';
+import * as Cell from './Cell';
 
 export const TableStyled = styled(dpstyle.div)`
   & table {
@@ -10,6 +13,7 @@ export const TableStyled = styled(dpstyle.div)`
 
     & thead {
       & tr {
+        height: 28px;
         border-top: 1px solid ${props => props.theme.greyLight};
         border-bottom: 1px solid ${props => props.theme.greyLight};
 
@@ -82,6 +86,18 @@ export const AllCheckStyle = styled(dpstyle.div)`
   }
 `;
 
+export const StyledPagination = styled(dpstyle.div)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 24px;
+  padding-bottom: 10px;
+`;
+
+export const StyledExportButton = styled(dpstyle.div)`
+  padding-right: 24px;
+`;
+
 const generateSortType = (sortType: string) => {
   if (!sortType) {
     return 'alphanumeric';
@@ -115,4 +131,69 @@ export const transformColumnData = (columns: ITableColumn[], intl: any) => {
   });
 
   return newCols;
+};
+
+export const getTable = (
+  headerGroups: [],
+  getTableBodyProps: () => void,
+  page: [],
+  prepareRow: (row: any) => void,
+  checked: object,
+  getTableProps: () => void,
+  handleCheckboxChange: (
+    event: React.SyntheticEvent<HTMLInputElement, Event>
+  ) => void
+) => {
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map((headerGroup: any, indexOuter: number) => (
+          <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
+            <th />
+            {headerGroup.headers.map((column: any, indexInner: number) => (
+              <th
+                key={indexInner}
+                {...column.getHeaderProps(column.getSortByToggleProps())}
+              >
+                {column.render('Header')}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {page.map((row: any, indexOuter: number) => {
+          prepareRow(row);
+          return (
+            <tr
+              key={indexOuter}
+              {...row.getRowProps()}
+              className={
+                checked.hasOwnProperty(row.original.id.toString())
+                  ? 'row--selected'
+                  : ''
+              }
+            >
+              <td>
+                <Checkbox
+                  value={row.original.id}
+                  checked={
+                    checked.hasOwnProperty(row.original.id.toString())
+                      ? true
+                      : false
+                  }
+                  onChange={handleCheckboxChange}
+                />
+              </td>
+              {row.cells.map((cell: any, indexInner: number) => (
+                <td key={indexInner} {...cell.getCellProps()}>
+                  {Cell.create(cell)}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 };

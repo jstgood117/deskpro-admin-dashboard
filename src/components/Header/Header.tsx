@@ -1,11 +1,11 @@
 import React, { SFC, useState } from 'react';
-import styled, { ThemeProvider, css } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
+import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 import { DeskproAdminTheme } from '../Theme';
 import TableActions from '../TableAction';
 import Icon from '../Icon';
-import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
@@ -24,11 +24,6 @@ const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 50%;
-
-  & button {
-    outline: none;
-    cursor: pointer;
-  }
 `;
 
 const HeaderDescription = styled(dpstyle.p)`
@@ -47,8 +42,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   background: ${props => props.theme.white};
 `;
 
-const ViewModeButton = styled.button<{ active: boolean }>`
-  border-radius: 4px;
+const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -56,36 +50,31 @@ const ViewModeButton = styled.button<{ active: boolean }>`
   border: 0px;
   width: 44px;
   path {
-    fill: ${props => (props.active ? '#1c3e55' : '#A9B0B0')};
+    fill: ${props =>
+      props.active ? props.theme.activeColour : props.theme.static2Colour};
   }
-  ${props =>
-    props.active &&
-    css`
-      background-color: ${_props => props.theme.hoverColour};
-    `}
+  background-color: ${props => props.active && props.theme.hoverColour};
 `;
 
-export const NewButton = styled.button`
+const NewButton = styled(dpstyle.button)`
   background-color: ${props => props.theme.activeColour};
-  border-radius: 4px;
   height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 10px;
-  color: #fff;
+  color: ${props => props.theme.white};
   margin-left: 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   & span {
-    margin-left: 10px;
-    font-size: 16px;
+    margin-left: 8px;
+    font-size: 15px;
   }
   &:hover {
     background-color: ${props => props.theme.brandPrimary};
   }
 `;
 
-export const HelpButton = styled.button`
+const HelpButton = styled.button`
   background: ${props => props.theme.brandPrimary};
   border-radius: 50%;
   width: 45px;
@@ -95,6 +84,8 @@ export const HelpButton = styled.button`
   right: ${props => props.theme.pagePadding};
   top: 31px;
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  outline: none;
+  cursor: pointer;
 `;
 
 const HeaderOptions = styled(dpstyle.div)`
@@ -159,7 +150,7 @@ const Header: SFC<IProps> = ({
   showNewButton,
   onChangeView,
   onNewClick,
-  tableActions,
+  tableActions
 }) => {
   const [state, setState] = useState(defaulViewMode);
 

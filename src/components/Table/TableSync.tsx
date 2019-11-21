@@ -1,17 +1,25 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
+
+import Pagination, { IPageChange } from '../Pagination/Pagination';
 import {
   onCheckboxChange,
   onSelectAllChange,
   onSelectEverything
 } from './helpers/functions';
+import {
+  TableStyled,
+  TableProps,
+  TableHeader,
+  AllCheckStyle,
+  getTable,
+  StyledPagination,
+  StyledExportButton
+} from './Table';
 
-import { TableStyled, TableProps, TableHeader, AllCheckStyle } from './Table';
 import Checkbox from '../Checkbox';
-import * as Cell from './Cell';
 import Button from '../Button';
 import Icon from '../Icon';
-import Pagination, { IPageChange } from '../Pagination/Pagination';
 
 const Table: FC<TableProps> = ({ data, columns }) => {
   const {
@@ -130,11 +138,11 @@ const Table: FC<TableProps> = ({ data, columns }) => {
             </span>
           )}
         </AllCheckStyle>
-        <div style={{ paddingRight: 24 }}>
+        <StyledExportButton>
           <Button styleType='tertiary' size='small' iconOnly={true}>
             <Icon name='export' />
           </Button>
-        </div>
+        </StyledExportButton>
         <Pagination
           totalRecords={totalRecords}
           rowsPerPage={rowsPerPage}
@@ -143,65 +151,16 @@ const Table: FC<TableProps> = ({ data, columns }) => {
           onChangeRowsPerPage={handleChangRowsPerPage}
         />
       </TableHeader>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup: any, indexOuter: number) => (
-            <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
-              <th>&nbsp;</th>
-              {headerGroup.headers.map((column: any, indexInner: number) => (
-                <th
-                  key={indexInner}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row: any, indexOuter: number) => {
-            prepareRow(row);
-            return (
-              <tr
-                key={indexOuter}
-                {...row.getRowProps()}
-                className={
-                  checked.hasOwnProperty(row.original.id.toString())
-                    ? 'row--selected'
-                    : ''
-                }
-              >
-                <td>
-                  <Checkbox
-                    value={row.original.id}
-                    checked={
-                      checked.hasOwnProperty(row.original.id.toString())
-                        ? true
-                        : false
-                    }
-                    onChange={handleCheckboxChange}
-                  />
-                </td>
-                {row.cells.map((cell: any, indexInner: number) => (
-                  <td key={indexInner} {...cell.getCellProps()}>
-                    {Cell.create(cell)}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          paddingTop: 9,
-          paddingBottom: 10
-        }}
-      >
+      {getTable(
+        headerGroups,
+        getTableBodyProps,
+        page,
+        prepareRow,
+        checked,
+        getTableProps,
+        handleCheckboxChange
+      )}
+      <StyledPagination>
         <Pagination
           totalRecords={totalRecords}
           rowsPerPage={rowsPerPage}
@@ -209,7 +168,7 @@ const Table: FC<TableProps> = ({ data, columns }) => {
           onChangePage={handleChangeCurrentPage}
           onChangeRowsPerPage={handleChangRowsPerPage}
         />
-      </div>
+      </StyledPagination>
     </TableStyled>
   );
 };

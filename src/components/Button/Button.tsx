@@ -280,7 +280,7 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
 `;
 
 export interface IItemProps {
-  label?: string;
+  label?: string | number;
   link: string;
 }
 

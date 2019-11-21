@@ -6,9 +6,8 @@ import { testTranslations } from '../../resources/constants/constants';
 
 storiesOf('Table Action', module).add('Default', () => {
   return (
-
     <IntlProvider locale='en' messages={testTranslations}>
-      <div style={{padding:10, position:'relative'}}>
+      <div style={{ padding: 10, position: 'relative' }}>
         <TableActions
           showSearch={true}
           filterMenu={true}
