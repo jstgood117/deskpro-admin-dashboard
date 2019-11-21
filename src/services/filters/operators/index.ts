@@ -1,6 +1,6 @@
+import { KeyValue } from '../../../resources/interfaces';
 import { equals } from './equals';
 import { includes } from './includes';
-
 export type OperatorTypes = 'IN' |
 'NOT_IN' |
 'EQUAL' |
@@ -10,10 +10,6 @@ export type OperatorTypes = 'IN' |
 'CONTAINS' |
 'NOT_CONTAINS' |
 'YES_NO';
-
-type KeyValue = {
-  [key: string]: any;
-};
 
 export const operators = {
   EQUAL:equals,

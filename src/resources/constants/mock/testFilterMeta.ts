@@ -20,7 +20,7 @@ export type OperatorOptionsTypes = OperatorOptionsType[];
 
 export type FilterMeta = {
   title: string;
-  operators: string[];
+  operators: OperatorType[];
   type: string;
   path: string;
   dataPath: string;

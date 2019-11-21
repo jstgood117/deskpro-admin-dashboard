@@ -13,6 +13,14 @@ import { IFilterProps } from '../../resources/interfaces/filterMeta';
 import { operatorKeys, OperatorTypes } from '../../services/filters/operators';
 import { FilterMeta } from '../../resources/constants/mock/testFilterMeta';
 
+import {
+  getIntlOperatorTitle,
+  getOptionPropertyByPath,
+  getPathByOptionProperty,
+  getOperatorByTitle,
+  getCurrentOperators
+} from './helpers/funcs';
+
 const StyledFilterOptions = styled.div`
   display: flex;
   align-items: center;
@@ -105,43 +113,38 @@ const FilterOptions: FC<IProps> = ({
   ...props
 }) => {
   const [currentProperty, setProperty] = useState();
+  const [currentPath, setCurrentPath] = useState();
   const [currentOption, setOption] = useState();
+  const [currentOperator, setCurrentOperator] = useState();
   const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
   const [filterValue, setFilterValue] = useState();
-  const AutoSelectOption = (val: string) => {
-    setOption(val);
-  };
 
-  const getOptionPropertyByPath = (path: string) => {
-    const match = containProperties.find(_option => _option.path === path);
-
-    return match ? match.title : '';
-  };
-
-  const getIntlOperatorTitle = (operatorName: OperatorTypes) => {
-    return operatorKeys[operatorName];
+  const AutoSelectOption = (val: OperatorTypes) => {
+    setOption(intl.formatMessage({ id: getIntlOperatorTitle(val, operatorKeys) }));
   };
 
   useEffect(() => {
-    if (currentOption) {
+    if (currentOperator) {
       containOptions.map(item => {
-        if (item === currentOption) filters[index].operatorName = currentOption;
+        if (item === currentOperator)
+          filters[index].operatorName = currentOperator;
         return true;
       });
     }
-    if (currentProperty) {
+
+    if (currentPath) {
       containProperties.map(item => {
-        if (item.path === currentProperty)
-          filters[index].columnName = currentProperty;
+        if (item.path === currentPath)
+          filters[index].columnName = currentPath;
         return true;
       });
     }
 
     setFilters && setFilters(filters);
   }, [
-    currentOption,
-    currentProperty,
+    currentOperator,
+    currentPath,
     filters,
     index,
     setFilters,
@@ -157,27 +160,18 @@ const FilterOptions: FC<IProps> = ({
             <Autocomplete
               getItemValue={(item: any) => item.path}
               items={containProperties}
-              renderInput={(inputProps: any) => {
-                return (
-                  <input
-                    {...inputProps}
-                    value={
-                      inputProps.value &&
-                      getOptionPropertyByPath(inputProps.value)
-                    }
-                  />
-                );
-              }}
               inputProps={{
                 autoComplete: 'off',
-                readOnly: true,
                 placeholder: props.placeholder,
                 onFocus: () => {
                   setProperty('');
                   setProperties(options);
                 },
                 onBlur: () => {
-                  setProperty(filter?.columnName && filter.columnName);
+                  setProperty(
+                    filter?.columnName &&
+                    getOptionPropertyByPath(filter.columnName, containProperties)
+                  );
                 }
               }}
               renderItem={(item: any, isHighlighted: boolean) => {
@@ -203,10 +197,12 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentProperty !== undefined
                   ? currentProperty
-                  : filter && filter.columnName
+                  : filter && getOptionPropertyByPath(filter.columnName, containProperties)
               }
               onChange={(e: any) => {
+
                 setProperty(e.target.value);
+                setCurrentPath(getPathByOptionProperty(e.target.value, containProperties));
                 const newItems = options.filter(_option => {
                   if (_option.path === e.target.value) {
                     setOptions(_option.operators);
@@ -219,7 +215,9 @@ const FilterOptions: FC<IProps> = ({
                 setProperties(newItems);
               }}
               onSelect={(val: string) => {
-                setProperty(val);
+
+                setProperty(getOptionPropertyByPath(val, containProperties));
+                setCurrentPath(val);
                 const newItems = options.filter(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
@@ -252,29 +250,23 @@ const FilterOptions: FC<IProps> = ({
                 return (
                   <input
                     {...inputProps}
-                    value={
-                      inputProps.value
-                        ? intl.formatMessage({
-                            id: getIntlOperatorTitle(inputProps.value)
-                          })
-                        : inputProps.value
-                    }
-                    disabled={currentProperty ? false : true}
+                    disabled={filter.columnName !== undefined ? false : true}
                   />
                 );
               }}
               inputProps={{
                 autoComplete: 'off',
-                readOnly: true,
                 onFocus: () => {
                   setOption('');
-                  const newItems = containProperties.filter(_option => {
-                    return _option.path === currentProperty;
-                  });
-                  setOptions(newItems[0].operators);
+                  setOptions(
+                    getCurrentOperators(currentPath, filter, containProperties)
+                  );
                 },
                 onBlur: () => {
-                  setOption(filter && filter.operatorName);
+                  setOption(
+                    currentOperator &&
+                    intl.formatMessage({ id: getIntlOperatorTitle(currentOperator, operatorKeys) })
+                  );
                 }
               }}
               renderItem={(item: OperatorTypes, isHighlighted: boolean) => {
@@ -289,7 +281,7 @@ const FilterOptions: FC<IProps> = ({
                     key={uniqueId()}
                   >
                     {item &&
-                      intl.formatMessage({ id: getIntlOperatorTitle(item) })}
+                      intl.formatMessage({ id: getIntlOperatorTitle(item, operatorKeys) })}
                     {selected && (
                       <span>
                         <Icon name='check-2' />
@@ -301,27 +293,34 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentOption !== undefined
                   ? currentOption
-                  : filter && filter.operatorName
+                  : filter?.operatorName &&
+                    intl.formatMessage({
+                      id: getIntlOperatorTitle(filter.operatorName, operatorKeys)
+                    })
               }
               onChange={(e: any) => {
                 setOption(e.target.value);
-                const newItems = containOptions.filter(_option => {
-                  return _option
+                setCurrentOperator(getOperatorByTitle(e.target.value, containOptions));
+                const currentOperators = getCurrentOperators(currentPath, filter, containProperties);
+                const newItems = currentOperators.filter(_option => {
+                  return intl.formatMessage({ id: getIntlOperatorTitle(_option, operatorKeys) })
                     .toUpperCase()
                     .includes(e.target.value.toUpperCase());
                 });
                 setOptions(newItems);
               }}
-              onSelect={(val: string) => {
-                setOption(val);
-                const newItems = containOptions.filter(_option => {
+              onSelect={(val: OperatorTypes) => {
+                setOption(intl.formatMessage({ id: getIntlOperatorTitle(val, operatorKeys) }));
+                setCurrentOperator(val);
+                const currentOperators = getCurrentOperators(currentPath, filter, containProperties);
+                const newItems = currentOperators.filter(_option => {
                   return _option === val;
                 });
                 setOptions(newItems);
               }}
               menuStyle={MenuStyle()}
             />
-            <span>{currentProperty && <Icon name='downVector' />}</span>
+            <span>{(currentProperty || filter.columnName) && <Icon name='downVector' />}</span>
           </StyledAutoComplete>
         </div>
         <div>
