@@ -68,9 +68,9 @@ export interface IProps {
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
-  onSearchChange?: (e: any) => void;
   filters?: IFilterProps[];
   onFilterChange?: (rules: IFilterProps[]) => void;
+  onSearchChange?: (value: string, filters: IFilterProps[]) => void;
   tableDef: ITableSetup;
 }
 
@@ -115,6 +115,7 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
 const TableActions: SFC<IProps> = ({
   intl,
   onFilterChange,
+  onSearchChange,
   tableDef,
   ...props
 }) => {
@@ -174,19 +175,13 @@ const TableActions: SFC<IProps> = ({
     clickOpenFilter(false);
   };
 
-  const onSearchChange = (_value: string) => {
-    if (onFilterChange) {
-      onFilterChange([
-        {
-          columnName: '*',
-          operatorName: 'CONTAINS',
-          value
-        }
-      ]);
+  const _onSearchChange = (_value: string) => {
+    if (onSearchChange) {
+      onSearchChange(_value, filters);
     }
   };
 
-  const debounceOnSearchChange = useCallback(debounce(onSearchChange, 300), []);
+  const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), []);
 
   const handleSearchChange = (
     event: React.SyntheticEvent<HTMLInputElement>

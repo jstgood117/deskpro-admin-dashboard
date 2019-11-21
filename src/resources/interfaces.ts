@@ -1,5 +1,9 @@
 import { CSSProperties } from 'react';
 
+export type KeyValue = {
+  [key: string]: any;
+};
+
 export interface IUser {
   locale: string;
 }
