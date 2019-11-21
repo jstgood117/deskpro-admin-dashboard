@@ -97,9 +97,9 @@ export interface IProps {
   intl: any;
   placeholder?: string;
   setFilters?: (e: any) => void;
-  filters?: IFilterProps[];
   index?: number;
   filter?: IFilterProps;
+  filters?: IFilterProps[];
   options: FilterMeta[];
 }
 
@@ -113,15 +113,16 @@ const FilterOptions: FC<IProps> = ({
   ...props
 }) => {
   const [currentProperty, setProperty] = useState();
-  const [currentPath, setCurrentPath] = useState();
   const [currentOption, setOption] = useState();
-  const [currentOperator, setCurrentOperator] = useState();
+  const [currentPath, setCurrentPath] = useState(filter.columnName);
+  const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
   const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
   const [filterValue, setFilterValue] = useState();
 
   const AutoSelectOption = (val: OperatorTypes) => {
     setOption(intl.formatMessage({ id: getIntlOperatorTitle(val, operatorKeys) }));
+    setCurrentOperator(val);
   };
 
   useEffect(() => {
@@ -170,12 +171,12 @@ const FilterOptions: FC<IProps> = ({
                 onBlur: () => {
                   setProperty(
                     filter?.columnName &&
-                    getOptionPropertyByPath(filter.columnName, containProperties)
+                    getOptionPropertyByPath(currentPath, containProperties)
                   );
                 }
               }}
               renderItem={(item: any, isHighlighted: boolean) => {
-                const selected = item.path === filter.columnName;
+                const selected = item.path === currentPath;
                 return (
                   <div
                     style={AutoCompleteItemStyle(
@@ -197,7 +198,7 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentProperty !== undefined
                   ? currentProperty
-                  : filter && getOptionPropertyByPath(filter.columnName, containProperties)
+                  : filter && getOptionPropertyByPath(currentPath, containProperties)
               }
               onChange={(e: any) => {
 
@@ -250,7 +251,7 @@ const FilterOptions: FC<IProps> = ({
                 return (
                   <input
                     {...inputProps}
-                    disabled={filter.columnName !== undefined ? false : true}
+                    disabled={currentPath !== undefined ? false : true}
                   />
                 );
               }}
@@ -263,6 +264,7 @@ const FilterOptions: FC<IProps> = ({
                   );
                 },
                 onBlur: () => {
+                  console.log(currentOperator);
                   setOption(
                     currentOperator &&
                     intl.formatMessage({ id: getIntlOperatorTitle(currentOperator, operatorKeys) })
@@ -270,7 +272,7 @@ const FilterOptions: FC<IProps> = ({
                 }
               }}
               renderItem={(item: OperatorTypes, isHighlighted: boolean) => {
-                const selected = item === filter.operatorName;
+                const selected = item === currentOperator;
                 return (
                   <div
                     style={AutoCompleteItemStyle(
@@ -293,9 +295,9 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentOption !== undefined
                   ? currentOption
-                  : filter?.operatorName &&
+                  : currentOperator &&
                     intl.formatMessage({
-                      id: getIntlOperatorTitle(filter.operatorName, operatorKeys)
+                      id: getIntlOperatorTitle(currentOperator, operatorKeys)
                     })
               }
               onChange={(e: any) => {
@@ -320,7 +322,7 @@ const FilterOptions: FC<IProps> = ({
               }}
               menuStyle={MenuStyle()}
             />
-            <span>{(currentProperty || filter.columnName) && <Icon name='downVector' />}</span>
+            <span>{(currentProperty || currentPath) && <Icon name='downVector' />}</span>
           </StyledAutoComplete>
         </div>
         <div>
