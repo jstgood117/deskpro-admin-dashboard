@@ -250,8 +250,6 @@ const FilterOptions: FC<IProps> = ({
               getItemValue={(item: OperatorTypes[]) => item}
               items={containOptions}
               renderInput={(inputProps: any) => {
-                console.log(currentPath);
-                console.log(currentProperty);
                 return (
                   <input
                     {...inputProps}
