@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Table from './TableSync';
-
+import Table from './Table';
 import {
   testTableColumns,
   testTableData
@@ -14,5 +13,6 @@ storiesOf('Table', module).add('with dummy data', () => (
     columns={testTableColumns}
     fetchData={() => false}
     pageCount={100}
+    tableType='sync'
   />
 ));

@@ -6,14 +6,11 @@ import { injectIntl } from 'react-intl';
 import { runFilters } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import { ITableSetup } from '../../resources/interfaces';
-
 import { logError } from '../Error/ErrorBoundary';
-
 import { testTableData2 } from '../../resources/constants/mock/testTableData2';
-
-import { transformColumnData } from './Table';
-import TableSync from './TableSync';
-import TableAsync from './TableAsync';
+import { ITableColumn } from '../../resources/interfaces';
+import { customSortMethod } from '../../utils/sort';
+import Table from './Table';
 
 interface IProps {
   intl: any;
@@ -23,6 +20,33 @@ interface IProps {
   tableDef: ITableSetup;
   filters?: FilterType[];
 }
+
+const generateSortType = (sortType: string) => {
+  if (!sortType) {
+    return 'alphanumeric';
+  }
+
+  switch (sortType) {
+    case 'ALPHANUMERIC':
+      return 'alphanumeric';
+    default:
+      return customSortMethod;
+  }
+};
+
+const transformColumnData = (columns: ITableColumn[], intl: any) => {
+  const newCols = columns.map((column: ITableColumn) => {
+    return {
+      id: column.title,
+      Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
+      accessor: column.data[0].path,
+      type: column.field,
+      sortType: generateSortType(column.sort)
+    };
+  });
+
+  return newCols;
+};
 
 const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef, filters, dataType}) => {
   const [data, setData] = useState([]);
@@ -75,18 +99,20 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
   return (
     <Fragment>
       {dataType === 'sync' && (
-        <TableSync
+        <Table
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], intl)}
+          tableType='sync'
         />
       )}
       {dataType === 'async' && (
-        <TableAsync
+        <Table
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], intl)}
           fetchData={fetchData}
           loading={loading}
           pageCount={totalPageCount}
+          tableType='async'
         />
       )}
     </Fragment>
