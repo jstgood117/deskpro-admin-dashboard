@@ -129,7 +129,7 @@ const Menu: SFC<IMenuProps> = ({
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
-            hAlign: 'right',
+            hAlign: 'left',
             forceVAlign: true,
             forceHAlign: true,
             forcePosition: true

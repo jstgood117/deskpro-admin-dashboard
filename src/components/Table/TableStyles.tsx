@@ -72,6 +72,7 @@ export const AllCheckStyle = styled(dpstyle.div)`
     font-size: 15px;
     line-height: 150%;
     color: ${props => props.theme.activeColour};
+    text-align: center;
   }
 `;
 

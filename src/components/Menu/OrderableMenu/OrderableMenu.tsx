@@ -19,7 +19,7 @@ import {
 } from '../MenuStyles';
 import Toggle from '../../Toggle';
 import { SingleSubMenuItem } from '../Menu';
-const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => (
+const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, value }) => (
   <MenuListWrapper>
     <MenuList>
       {menuItems.map((item, index: number) => (
@@ -28,7 +28,7 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => (
             <SingleSubMenuItem
               onSelect={onSelect}
               item={item}
-              selected={selectedValue && selectedValue.key === item.key}
+              selected={value && value.key === item.key}
             >
               <IconWrapper>
                 {item.icon && <Icon name={item.icon} />}
@@ -44,7 +44,7 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => (
 const MultiMenuComponent: SFC<IMenuProps> = ({
   item,
   onSelect,
-  selectedValue
+  value
 }) => {
   const [clickedGear, clickGear] = useState(false);
   return (
@@ -63,7 +63,7 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
             <MenuSub
               onSelect={onSelect}
               menuItems={item.subItems}
-              selectedValue={selectedValue}
+              value={value}
             />
           ) : (
             <div />
@@ -102,7 +102,7 @@ const Menu: SFC<IMenuProps> = ({
   initialList,
   setChecked,
   checked,
-  selectedValue
+  value
 }) => {
   const itemList = menuItems.map((item, index: number) => {
     return (
@@ -127,7 +127,7 @@ const Menu: SFC<IMenuProps> = ({
             <MultiMenuComponent
               item={item}
               onSelect={onSelect}
-              selectedValue={selectedValue}
+              value={value}
             />
           )}
         </div>
@@ -212,7 +212,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
               initialList={initialList}
               setChecked={setChecked}
               checked={checked}
-              selectedValue={value}
+              value={value}
             />
           }
           positionOptions={{

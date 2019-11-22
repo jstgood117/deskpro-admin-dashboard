@@ -17,6 +17,8 @@ import {
   AllCheckStyle,
   StyledPagination
 } from './TableStyles';
+import Menu from '../Menu';
+import { testDropdownItemsWithIcon } from '../../resources/constants/constants';
 
 export type IProps = {
   data: any[];
@@ -76,6 +78,7 @@ const Table: FC<IProps> = ({
   const [dropdownValue, setDropdownValue] = useState();
   const [opened, clickButton] = useState(false);
   const [totalRecords, setTotalRecords] = useState<number>(0);
+  const [menuValue, setMenuValue] = useState();
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -154,6 +157,36 @@ const Table: FC<IProps> = ({
             <span className='selected-text'>
               {Object.keys(checked).length} Selected
             </span>
+          )}
+          {Object.keys(checked).length > 0 && (
+            <div style={{ paddingLeft: 16, display: 'flex' }}>
+              <Menu
+                value={menuValue}
+                onSelect={val => setMenuValue(val)}
+                label={menuValue ? menuValue['name'] : 'Action'}
+                menuItems={testDropdownItemsWithIcon}
+                iconName='menu'
+              />
+              {menuValue && (
+                <div style={{ display: 'flex' }}>
+                  <div style={{ paddingLeft: 16 }}>
+                    <Button styleType='primary' onClick={() => {}}>
+                      Confirm
+                    </Button>
+                  </div>
+                  <div style={{ paddingLeft: 16 }}>
+                    <Button
+                      styleType='tertiary'
+                      onClick={() => {
+                        setMenuValue(undefined);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
           )}
         </AllCheckStyle>
         <div style={{ paddingRight: 24 }}>

@@ -6,6 +6,7 @@ import { dpstyle } from '../Styled';
 export const MenuWrapper = styled(dpstyle.div)<{ size?: string }>`
   display: inline-flex;
   .menu-btn {
+    width: max-content;
     color: ${props => props.theme.greyDark};
     padding: 0px 13px 0px 14px;
     height: ${props => (props.size === 'medium' ? '34px' : '28px')};
