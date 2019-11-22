@@ -216,6 +216,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
       <MenuWrapper size={size}>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
+          menuZIndex={2}
           menu={
             <Menu
               onSelect={onSelect}

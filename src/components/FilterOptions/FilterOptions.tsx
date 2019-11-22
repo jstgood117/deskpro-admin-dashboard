@@ -121,7 +121,9 @@ const FilterOptions: FC<IProps> = ({
   const [filterValue, setFilterValue] = useState();
 
   const AutoSelectOption = (val: OperatorTypes) => {
-    setOption(intl.formatMessage({ id: getIntlOperatorTitle(val, operatorKeys) }));
+    setOption(
+      intl.formatMessage({ id: getIntlOperatorTitle(val, operatorKeys) })
+    );
     setCurrentOperator(val);
   };
 
@@ -136,8 +138,7 @@ const FilterOptions: FC<IProps> = ({
 
     if (currentPath) {
       containProperties.map(item => {
-        if (item.path === currentPath)
-          filters[index].columnName = currentPath;
+        if (item.path === currentPath) filters[index].columnName = currentPath;
         return true;
       });
     }
@@ -171,7 +172,7 @@ const FilterOptions: FC<IProps> = ({
                 onBlur: () => {
                   setProperty(
                     filter?.columnName &&
-                    getOptionPropertyByPath(currentPath, containProperties)
+                      getOptionPropertyByPath(currentPath, containProperties)
                   );
                 }
               }}
@@ -198,12 +199,14 @@ const FilterOptions: FC<IProps> = ({
               value={
                 currentProperty !== undefined
                   ? currentProperty
-                  : filter && getOptionPropertyByPath(currentPath, containProperties)
+                  : filter &&
+                    getOptionPropertyByPath(currentPath, containProperties)
               }
               onChange={(e: any) => {
-
                 setProperty(e.target.value);
-                setCurrentPath(getPathByOptionProperty(e.target.value, containProperties));
+                setCurrentPath(
+                  getPathByOptionProperty(e.target.value, containProperties)
+                );
                 const newItems = options.filter(_option => {
                   if (_option.path === e.target.value) {
                     setOptions(_option.operators);
@@ -216,7 +219,6 @@ const FilterOptions: FC<IProps> = ({
                 setProperties(newItems);
               }}
               onSelect={(val: string) => {
-
                 setProperty(getOptionPropertyByPath(val, containProperties));
                 setCurrentPath(val);
                 const newItems = options.filter(_option => {
@@ -248,10 +250,12 @@ const FilterOptions: FC<IProps> = ({
               getItemValue={(item: OperatorTypes[]) => item}
               items={containOptions}
               renderInput={(inputProps: any) => {
+                console.log(currentPath);
+                console.log(currentProperty);
                 return (
                   <input
                     {...inputProps}
-                    disabled={currentPath !== undefined ? false : true}
+                    disabled={!currentProperty && !currentPath}
                   />
                 );
               }}
@@ -264,10 +268,11 @@ const FilterOptions: FC<IProps> = ({
                   );
                 },
                 onBlur: () => {
-                  console.log(currentOperator);
                   setOption(
                     currentOperator &&
-                    intl.formatMessage({ id: getIntlOperatorTitle(currentOperator, operatorKeys) })
+                      intl.formatMessage({
+                        id: getIntlOperatorTitle(currentOperator, operatorKeys)
+                      })
                   );
                 }
               }}
@@ -283,7 +288,9 @@ const FilterOptions: FC<IProps> = ({
                     key={uniqueId()}
                   >
                     {item &&
-                      intl.formatMessage({ id: getIntlOperatorTitle(item, operatorKeys) })}
+                      intl.formatMessage({
+                        id: getIntlOperatorTitle(item, operatorKeys)
+                      })}
                     {selected && (
                       <span>
                         <Icon name='check-2' />
@@ -302,19 +309,36 @@ const FilterOptions: FC<IProps> = ({
               }
               onChange={(e: any) => {
                 setOption(e.target.value);
-                setCurrentOperator(getOperatorByTitle(e.target.value, containOptions));
-                const currentOperators = getCurrentOperators(currentPath, filter, containProperties);
+                setCurrentOperator(
+                  getOperatorByTitle(e.target.value, containOptions)
+                );
+                const currentOperators = getCurrentOperators(
+                  currentPath,
+                  filter,
+                  containProperties
+                );
                 const newItems = currentOperators.filter(_option => {
-                  return intl.formatMessage({ id: getIntlOperatorTitle(_option, operatorKeys) })
+                  return intl
+                    .formatMessage({
+                      id: getIntlOperatorTitle(_option, operatorKeys)
+                    })
                     .toUpperCase()
                     .includes(e.target.value.toUpperCase());
                 });
                 setOptions(newItems);
               }}
               onSelect={(val: OperatorTypes) => {
-                setOption(intl.formatMessage({ id: getIntlOperatorTitle(val, operatorKeys) }));
+                setOption(
+                  intl.formatMessage({
+                    id: getIntlOperatorTitle(val, operatorKeys)
+                  })
+                );
                 setCurrentOperator(val);
-                const currentOperators = getCurrentOperators(currentPath, filter, containProperties);
+                const currentOperators = getCurrentOperators(
+                  currentPath,
+                  filter,
+                  containProperties
+                );
                 const newItems = currentOperators.filter(_option => {
                   return _option === val;
                 });
@@ -322,7 +346,9 @@ const FilterOptions: FC<IProps> = ({
               }}
               menuStyle={MenuStyle()}
             />
-            <span>{(currentProperty || currentPath) && <Icon name='downVector' />}</span>
+            <span>
+              {(currentProperty || currentPath) && <Icon name='downVector' />}
+            </span>
           </StyledAutoComplete>
         </div>
         <div>

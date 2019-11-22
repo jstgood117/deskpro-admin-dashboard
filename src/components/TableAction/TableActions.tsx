@@ -24,6 +24,7 @@ const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
 
 const StyledTableAction = styled(dpstyle.div)`
+  z-index: 1;
   position: absolute;
   right: 0;
   left: 0;
@@ -42,6 +43,7 @@ const TableItems = styled(dpstyle.div)`
   width: 100%;
 `;
 const FilterItems = styled(dpstyle.div)`
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   width: 100%;
@@ -54,7 +56,7 @@ const FlexStyled = styled.div`
   }
 `;
 const FilterContainer = styled.div`
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   top: 34px;
   bottom: 0;
@@ -110,12 +112,8 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: SFC<IProps> = ({
-  intl,
-  ...props
-}) => {
-
-  const context:StandardTableContextValues = useContext(StandardTableContext);
+const TableActions: SFC<IProps> = ({ intl, ...props }) => {
+  const context: StandardTableContextValues = useContext(StandardTableContext);
 
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
@@ -130,10 +128,7 @@ const TableActions: SFC<IProps> = ({
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
 
-  const {
-    onFilterChange,
-    onSearchChange,
-  } = context;
+  const { onFilterChange, onSearchChange } = context;
 
   const getFilterTitle = (path: string) => {
     const match = testFilterMeta.find(_filter => _filter.path === path);
@@ -148,7 +143,7 @@ const TableActions: SFC<IProps> = ({
     });
     setFilters && setFilters([...filters]);
 
-    if(onFilterChange) {
+    if (onFilterChange) {
       onFilterChange(filters);
     }
 
@@ -165,7 +160,7 @@ const TableActions: SFC<IProps> = ({
       }
     }
 
-    if(onFilterChange) {
+    if (onFilterChange) {
       onFilterChange(filters);
     }
 
@@ -178,7 +173,10 @@ const TableActions: SFC<IProps> = ({
     }
   };
 
-  const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), []);
+  const debounceOnSearchChange = useCallback(
+    debounce(_onSearchChange, 300),
+    []
+  );
 
   const handleSearchChange = (
     event: React.SyntheticEvent<HTMLInputElement>
@@ -204,7 +202,7 @@ const TableActions: SFC<IProps> = ({
         setFilters && setFilters([...filters]);
       }
 
-      if(onFilterChange) {
+      if (onFilterChange) {
         onFilterChange(filters);
       }
     },
@@ -212,7 +210,7 @@ const TableActions: SFC<IProps> = ({
   );
 
   return (
-    <StyledTableAction>
+    <StyledTableAction className='table-actions'>
       <TableItems>
         <FlexStyled style={{ flex: 5, alignItems: 'center' }}>
           <FlexStyled>
@@ -336,27 +334,29 @@ const TableActions: SFC<IProps> = ({
           )}
         </FlexStyled>
       </TableItems>
-      <FilterItems>
-        {applied &&
-          filters.map(
-            (filter, index: number) =>
-              filter.value &&
-              filter.columnName &&
-              filter.operatorName &&
-              filter.applied && (
-                <div style={{ paddingRight: 8 }} key={index}>
-                  <FilterItem
-                    columnName={getFilterTitle(filter.columnName)}
-                    operatorName={filter.operatorName}
-                    value={filter.value}
-                    onRemove={() => {
-                      onRemove(filter);
-                    }}
-                  />
-                </div>
-              )
-          )}
-      </FilterItems>
+      {filters[0].applied && (
+        <FilterItems>
+          {applied &&
+            filters.map(
+              (filter, index: number) =>
+                filter.value &&
+                filter.columnName &&
+                filter.operatorName &&
+                filter.applied && (
+                  <div style={{ padding: 4 }} key={index}>
+                    <FilterItem
+                      columnName={getFilterTitle(filter.columnName)}
+                      operatorName={filter.operatorName}
+                      value={filter.value}
+                      onRemove={() => {
+                        onRemove(filter);
+                      }}
+                    />
+                  </div>
+                )
+            )}
+        </FilterItems>
+      )}
     </StyledTableAction>
   );
 };
