@@ -52,14 +52,18 @@ export const SingleSubMenuItem: SFC<IMenuProps> = props => {
     </StyledMenuItem>
   );
 };
-export const MultiSubMenuItem: SFC<IMenuProps> = ({
-  item,
-  onSelect
-}) => {
+export const MultiSubMenuItem: SFC<IMenuProps> = ({ item, onSelect }) => {
   return (
     <StyledSubMenuItem
       highlightedStyle={{ background: '#E8EBEE' }}
       menu={<MenuSub menuItems={item.subItems} onSelect={onSelect} />}
+      positionOptions={{
+        position: 'right',
+        vAlign: 'top',
+        hAlign: 'left',
+        forceVAlign: true,
+        forcePosition: true
+      }}
     >
       <IconWrapper>{item.icon && <Icon name={item.icon} />}</IconWrapper>
       <TextLabel style={{ paddingRight: 15 }}>{item.name}</TextLabel>
@@ -122,6 +126,14 @@ const Menu: SFC<IMenuProps> = ({
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
           menu={<MenuSub menuItems={menuItems} onSelect={onSelect} />}
+          positionOptions={{
+            position: 'bottom',
+            vAlign: 'top',
+            hAlign: 'right',
+            forceVAlign: true,
+            forceHAlign: true,
+            forcePosition: true
+          }}
         >
           {iconName && (
             <StyledIcon className='ic-menu' style={{ paddingRight: 8 }}>

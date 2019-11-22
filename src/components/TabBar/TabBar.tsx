@@ -45,7 +45,7 @@ const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
                 messageId={tab.messageId}
                 index={index}
                 value={tabIndex}
-                onClick={e => {
+                onClick={() => {
                   changeTab(index);
                 }}
               />

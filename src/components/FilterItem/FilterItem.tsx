@@ -16,6 +16,7 @@ export interface IProps {
 }
 
 const StyledItem = styled.div`
+  width: max-content;
   height: 32px;
   background: ${props => props.theme.hoverColour};
   border-radius: 40px;
@@ -31,6 +32,7 @@ const StyledItem = styled.div`
   }
 `;
 const ItemText = styled(dpstyle.div)`
+  width: max-content;
   flex: 1;
   padding-left: 8px;
   padding-right: 15px;
@@ -44,12 +46,18 @@ const getIntlOperatorTitle = (operatorName: string) => {
   return operatorKeys[operatorName];
 };
 
-const FilterItem: FC<IProps> = ({ intl, columnName, operatorName, value, onRemove }) => {
-
+const FilterItem: FC<IProps> = ({
+  intl,
+  columnName,
+  operatorName,
+  value,
+  onRemove
+}) => {
   return (
     <StyledItem>
       <ItemText>
-      {columnName} {intl.formatMessage({ id: getIntlOperatorTitle(operatorName) })} {value}
+        {columnName}{' '}
+        {intl.formatMessage({ id: getIntlOperatorTitle(operatorName) })} {value}
       </ItemText>
       <div style={{ display: 'flex' }} onClick={onRemove}>
         <Icon name='close' />

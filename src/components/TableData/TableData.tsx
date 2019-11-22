@@ -79,7 +79,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           viewMode={props.viewMode}
           overflowStyle={{ marginLeft: 8 }}
           renderItem={(item, idx) => (
-            <P1 key={idx}>
+            <P1 key={idx} className='text'>
               <span> {idx !== 0 ? ', ' : ''}</span>
               {item}
             </P1>
@@ -107,7 +107,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           items={props.values}
           title={props.title}
           text={props.text}
-          renderItem={(item, index) => <P1 key={index}>{item}</P1>}
+          renderItem={(item, index) => <P1 key={index} className='text'>{item}</P1>}
         />
       );
 
@@ -118,7 +118,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
       return <P1>{props.duration}</P1>;
 
     case 'date_time':
-      return <P1>{props.date_time}</P1>;
+      return <P1 className='text'>{props.date_time}</P1>;
 
     case 'yes_no':
       return props.checked ? <Icon name='check' /> : null;
@@ -170,7 +170,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
       );
 
     case 'count':
-      return <P1>{props.count}</P1>;
+      return <P1 className='text'>{props.count}</P1>;
 
     case 'id':
       return (
@@ -180,7 +180,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
       );
 
     case 'timezone':
-      return <P1>{props.timezone}</P1>;
+      return <P1 className='text'>{props.timezone}</P1>;
 
     case 'label':
       return (

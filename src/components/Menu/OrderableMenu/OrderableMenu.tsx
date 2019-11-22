@@ -2,7 +2,6 @@ import React, { SFC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { isNil, uniqueId } from 'lodash';
 import { MenuList, MenuButton } from 'react-menu-list';
-
 import Icon from '../../Icon';
 import { MenuLabel, TextLabel } from '../../Styled';
 import { DeskproAdminTheme } from '../../Theme';
@@ -20,33 +19,28 @@ import {
 } from '../MenuStyles';
 import Toggle from '../../Toggle';
 import { SingleSubMenuItem } from '../Menu';
-
-const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => {
-  return (
-    <MenuListWrapper>
-      <MenuList>
-        {menuItems.map((item, index: number) => {
-          return (
-            <div key={index}>
-              {item.name && (
-                <SingleSubMenuItem
-                  onSelect={onSelect}
-                  item={item}
-                  selected={selectedValue && selectedValue.key === item.key}
-                >
-                  <IconWrapper>
-                    {item.icon && <Icon name={item.icon} />}
-                  </IconWrapper>
-                  {item.name}
-                </SingleSubMenuItem>
-              )}
-            </div>
-          );
-        })}
-      </MenuList>
-    </MenuListWrapper>
-  );
-};
+const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, selectedValue }) => (
+  <MenuListWrapper>
+    <MenuList>
+      {menuItems.map((item, index: number) => (
+        <div key={index}>
+          {item.name && (
+            <SingleSubMenuItem
+              onSelect={onSelect}
+              item={item}
+              selected={selectedValue && selectedValue.key === item.key}
+            >
+              <IconWrapper>
+                {item.icon && <Icon name={item.icon} />}
+              </IconWrapper>
+              {item.name}
+            </SingleSubMenuItem>
+          )}
+        </div>
+      ))}
+    </MenuList>
+  </MenuListWrapper>
+);
 const MultiMenuComponent: SFC<IMenuProps> = ({
   item,
   onSelect,
@@ -61,9 +55,7 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          if (onSelect) {
-            onSelect(item);
-          }
+          onSelect && onSelect(item);
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
@@ -77,6 +69,13 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
             <div />
           )
         }
+        positionOptions={{
+          position: 'left',
+          vAlign: 'top',
+          hAlign: 'left',
+          forceVAlign: true,
+          forcePosition: true
+        }}
       >
         <IconWrapper>
           <Icon name='drag-and-drop' />
@@ -96,7 +95,6 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     </div>
   );
 };
-
 const Menu: SFC<IMenuProps> = ({
   onSelect,
   order,
@@ -158,9 +156,7 @@ const Menu: SFC<IMenuProps> = ({
                 OrderedList.push(menuItems[index]);
                 return true;
               });
-              if (order) {
-                order(OrderedList);
-              }
+              order && order(OrderedList);
             }}
             children={itemList}
           />
@@ -169,9 +165,7 @@ const Menu: SFC<IMenuProps> = ({
         <ResetWrapper
           onClick={e => {
             e.preventDefault();
-            if (order) {
-              order(initialList);
-            }
+            order && order(initialList);
           }}
         >
           <IconWrapper>
@@ -209,6 +203,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
       <MenuWrapper size={size}>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
+          menuZIndex={2}
           menu={
             <Menu
               onSelect={onSelect}
@@ -220,6 +215,13 @@ const OrderableMenu: SFC<IMenuProps> = ({
               selectedValue={value}
             />
           }
+          positionOptions={{
+            position: 'bottom',
+            vAlign: 'top',
+            hAlign: 'left',
+            forceVAlign: true,
+            forcePosition: true
+          }}
         >
           {iconName && (
             <StyledIcon className='ic-menu'>
@@ -239,5 +241,4 @@ const OrderableMenu: SFC<IMenuProps> = ({
     </ThemeProvider>
   );
 };
-
 export default OrderableMenu;
