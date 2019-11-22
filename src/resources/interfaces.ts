@@ -79,7 +79,6 @@ export interface IMenuProps {
   setChecked?: (value: any) => void;
   checked?: {[key: string]: any};
   item?: IMenuItemProps;
-  selectedValue?: IMenuItemProps;
   selected? : boolean;
   size?: 'medium' | 'small';
 }
