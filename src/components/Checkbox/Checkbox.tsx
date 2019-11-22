@@ -4,6 +4,7 @@ import Icon from '../Icon';
 import Button from '../Button';
 import { IItemProps } from '../Button/Button';
 import { dpstyle } from '../Styled';
+import Tooltip from '../Tooltip';
 
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   display: none;
@@ -137,31 +138,35 @@ const Checkbox: SFC<IProps> = ({
       </StyledCheckbox>
     </CheckboxContainer>
     {showArrow && (
-      <ArrowButton
-        checked={checked}
-        opened={opened}
-        onClick={event => {
-          event.preventDefault();
-          if (onArrowClick) {
-            onArrowClick(event);
-          }
-        }}
-      >
-        <Button
-          className='arrow-btn'
-          items={items}
-          size='medium'
-          styleType='secondary'
-          iconOnly={true}
-          onClick={() => {
-            clickButton(!opened);
-          }}
-          opened={opened}
-          onSelect={(val: any) => setDropdownValue(val)}
-        >
-          <Icon name='downVector' />
-        </Button>
-      </ArrowButton>
+      <Tooltip content='Select' styleType='dark' className='mt-10' placement='bottom'>
+        <span>
+          <ArrowButton
+            checked={checked}
+            opened={opened}
+            onClick={event => {
+              event.preventDefault();
+              if (onArrowClick) {
+                onArrowClick(event);
+              }
+            }}
+          >
+            <Button
+              className='arrow-btn'
+              items={items}
+              size='medium'
+              styleType='secondary'
+              iconOnly={true}
+              onClick={() => {
+                clickButton(!opened);
+              }}
+              opened={opened}
+              onSelect={(val: any) => setDropdownValue(val)}
+            >
+              <Icon name='downVector' />
+            </Button>
+          </ArrowButton>
+        </span>
+      </Tooltip>
     )}
   </CheckboxWrapper>
 );
