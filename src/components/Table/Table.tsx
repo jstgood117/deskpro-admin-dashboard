@@ -1,8 +1,5 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
-import styled from 'styled-components';
-
-import { dpstyle } from '../Styled';
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 import {
   onCheckboxChange,
@@ -14,88 +11,12 @@ import Checkbox from '../Checkbox';
 import Button from '../Button';
 import * as Cell from './Cell';
 import Icon from '../Icon';
-
-const TableStyled = styled(dpstyle.div)`
-  & table {
-    width: 100%;
-    border-collapse: collapse;
-    & thead {
-      & tr {
-        height: 28px;
-        border-top: 1px solid ${props => props.theme.greyLight};
-        border-bottom: 1px solid ${props => props.theme.greyLight};
-        & th {
-          white-space: nowrap;
-          padding: 0 16px 0 0;
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 150%;
-          color: ${props => props.theme.greyDark};
-          text-align: left;
-        }
-      }
-    }
-    & tbody {
-      & tr {
-        &.row--selected {
-          background-color: ${props => props.theme.greyLight};
-          td {
-            .text {
-              color: ${props => props.theme.activeColour} !important;
-            }
-          }
-        }
-        border-bottom: 1px solid ${props => props.theme.greyLighter};
-        & td {
-          padding: 0 16px 0 0;
-          text-align: left;
-          line-height: 44px;
-          color: ${props => props.theme.staticColour};
-          > * {
-            white-space: nowrap;
-            flex-wrap: nowrap;
-          }
-          & img {
-            width: 25px;
-            height: 25px;
-            border-radius: 12px;
-            vertical-align: middle;
-            margin-right: 15px;
-          }
-        }
-      }
-    }
-  }
-`;
-
-const TableHeader = styled(dpstyle.div)`
-  display: flex;
-  align-items: center;
-  padding-top: 9px;
-  padding-bottom: 11px;
-`;
-
-const AllCheckStyle = styled(dpstyle.div)`
-  display: flex;
-  align-items: center;
-  flex: 1;
-  .selected-text {
-    padding-left: 15px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 150%;
-    color: ${props => props.theme.activeColour};
-  }
-`;
-
-const StyledPagination = styled(dpstyle.div)`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-top: 24px;
-  padding-bottom: 10px;
-`;
+import {
+  TableStyled,
+  TableHeader,
+  AllCheckStyle,
+  StyledPagination
+} from './TableStyles';
 
 export type IProps = {
   data: any[];
@@ -201,18 +122,9 @@ const Table: FC<IProps> = ({
 
   useEffect(() => {
     if (dropdownValue) {
-      const { link } = dropdownValue;
-      switch (link) {
-        case 'All':
-          onSelectEverything(data, setChecked);
-          break;
-
-        case 'All on the page':
-          onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
-          break;
-        default:
-          break;
-      }
+      dropdownValue.link === 'All' && onSelectEverything(data, setChecked);
+      dropdownValue.link === 'All on the page' &&
+        onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
     }
 
     setDropdownValue(undefined);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Table from './TableSync';
+import Table from './Table';
 import { ITableColumn } from '../../resources/interfaces';
 
 const testData = [
