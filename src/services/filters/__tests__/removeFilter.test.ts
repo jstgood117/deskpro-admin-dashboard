@@ -9,7 +9,7 @@ describe('Remove filter', () => {
   test('removes a filter from filters array based on `id`', () => {
     const filters = [{
       id:'FirstName-EQUAL',
-      columnName:'FirstName',
+      property:'FirstName',
       operator:mockOperator,
       value:'123'
     }] as FilterType[];

@@ -19,12 +19,12 @@ describe('Run filters', () => {
 
     const filters = [{
       id:'FirstName-EQUAL',
-      columnName:'FirstName',
+      property:'FirstName',
       operator:mockOperator1,
       value:'John'
     }, {
       id:'LastName-EQUAL',
-      columnName:'LastName',
+      property:'LastName',
       operator:mockOperator2,
       value:'Doe'
     }] as FilterType[];

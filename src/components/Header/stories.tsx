@@ -44,7 +44,6 @@ storiesOf('Header', module)
         showViewModeSwitcher={true}
         showNewButton={true}
         showHelpButton={true}
-        tableActions={true}
         links={[
           {
             title: 'LoginLog',

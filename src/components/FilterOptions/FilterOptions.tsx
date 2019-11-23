@@ -63,8 +63,8 @@ const StyledAutoComplete = styled.div<{ name: string }>`
     width: 100%;
   }
   input {
-    border-top-left-radius: ${props => props.name === 'columnName' && 4}px;
-    border-bottom-left-radius: ${props => props.name === 'columnName' && 4}px;
+    border-top-left-radius: ${props => props.name === 'property' && 4}px;
+    border-bottom-left-radius: ${props => props.name === 'property' && 4}px;
     width: 100%;
     height: 34px;
     padding: 1px 30px 1px 10px;
@@ -114,7 +114,7 @@ const FilterOptions: FC<IProps> = ({
 }) => {
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
-  const [currentPath, setCurrentPath] = useState(filter.columnName);
+  const [currentPath, setCurrentPath] = useState(filter.property);
   const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
   const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
@@ -138,7 +138,7 @@ const FilterOptions: FC<IProps> = ({
 
     if (currentPath) {
       containProperties.map(item => {
-        if (item.path === currentPath) filters[index].columnName = currentPath;
+        if (item.path === currentPath) filters[index].property = currentPath;
         return true;
       });
     }
@@ -158,7 +158,7 @@ const FilterOptions: FC<IProps> = ({
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledFilterOptions>
         <div style={{ minWidth: 160 }}>
-          <StyledAutoComplete name='columnName'>
+          <StyledAutoComplete name='property'>
             <Autocomplete
               getItemValue={(item: any) => item.path}
               items={containProperties}
@@ -171,7 +171,7 @@ const FilterOptions: FC<IProps> = ({
                 },
                 onBlur: () => {
                   setProperty(
-                    filter?.columnName &&
+                    filter?.property &&
                       getOptionPropertyByPath(currentPath, containProperties)
                   );
                 }
@@ -377,7 +377,7 @@ const FilterOptions: FC<IProps> = ({
               }
               if (filters.length === 0) {
                 setFilters &&
-                  setFilters([{ columnName: '', operatorName: '', value: '' }]);
+                  setFilters([{ property: '', operatorName: '', value: '' }]);
               } else {
                 setFilters && setFilters([...filters]);
               }

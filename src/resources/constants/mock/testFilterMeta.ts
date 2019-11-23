@@ -124,7 +124,7 @@ export const testFilterMeta: FilterMeta[] = [
   {
     title: 'Email',
     operators: ['IN', 'NOT_IN'],
-    type: 'AGENT_TEAM_LIST',
+    type: 'TEXT',
     path: 'primary_email',
     dataPath: 'primary_email'
   },
@@ -138,15 +138,15 @@ export const testFilterMeta: FilterMeta[] = [
     titleProperty: 'name',
     uniqueValues: [
       {
-        id: 1,
+        value: 1,
         title: 'Team 1'
       },
       {
-        id: 2,
+        value: 2,
         title: 'Team 2'
       },
       {
-        id: 3,
+        value: 3,
         title: 'Team 3'
       }
     ]

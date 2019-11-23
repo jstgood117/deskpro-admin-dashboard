@@ -9,7 +9,7 @@ describe('FilterOptions', () => {
   let mountedFilterItem: any;
 
   const filterData: IFilterProps = {
-    columnName: 'Team',
+    property: 'Team',
     operatorName: 'EQUAL',
     value: 'Audit'
   };
@@ -25,7 +25,7 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
-      columnName: filterData.columnName,
+      property: filterData.property,
       value: filterData.value,
       operatorName: filterData.operatorName
     };

@@ -11,7 +11,7 @@ import { IFilterProps } from '../../resources/interfaces/filterMeta';
 
 
 const initialFilters: IFilterProps[] = [
-  { columnName: '', operatorName: '', value: '' }
+  { property: '', operatorName: '', value: '' }
 ];
 const FilterOptionsComponent: React.FC = () => {
   const [filters, setFilters] = useState(initialFilters);

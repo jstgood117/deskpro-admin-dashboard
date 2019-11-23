@@ -1,12 +1,12 @@
 import { filterFactory } from './FilterFactory';
 import { FilterType } from './types';
 
-const generateFilterId = (columnName:string, operatorName:string, iterator: number = 1) => {
-  return `${columnName}-${operatorName}-${iterator}`;
+const generateFilterId = (property:string, operatorName:string, iterator: number = 1) => {
+  return `${property}-${operatorName}-${iterator}`;
 };
 
-export const setupFilters = (columnName:string) => {
-  return addFilter([], columnName, 'CONTAINS', '');
+export const setupFilters = (property:string) => {
+  return addFilter([], property, 'CONTAINS', '');
 };
 
 export const getFilter =  (filters:FilterType[], id:string)  => {
@@ -23,13 +23,13 @@ export const compareFilter =  (filterA:FilterType, filterB:FilterType)  => {
 
 export const runFilter = (data:object[], filter: FilterType) => {
 
-  const { columnName, operator, value } = filter;
+  const { property, operator, value } = filter;
 
   if(!data) {
     return data;
   }
 
-  const propName = columnName;
+  const propName = property;
 
   return data.filter((_row:any) => {
     const dataPath = propName.split('.')[0];
@@ -63,8 +63,8 @@ export const runFilters = (data:object[], filters: FilterType[]) => {
 
   let filteredData = data;
   filters.forEach((_filter: FilterType) => {
-    const { columnName } = _filter;
-    filteredData = (columnName !== '*' ? runFilter(filteredData, _filter) : runFilterOnAllColumns(filteredData, _filter));
+    const { property } = _filter;
+    filteredData = (property !== '*' ? runFilter(filteredData, _filter) : runFilterOnAllColumns(filteredData, _filter));
   });
 
   return filteredData;
@@ -72,20 +72,20 @@ export const runFilters = (data:object[], filters: FilterType[]) => {
 
 export const addFilter = (
   filters:FilterType[],
-  columnName: string,
+  property: string,
   operatorName: string,
   compareValue: string
 ): FilterType[] => {
 
   const existingIds = filters.map(filter => filter.id);
 
-  let id = generateFilterId(columnName, operatorName);
+  let id = generateFilterId(property, operatorName);
   let i = 1;
   while(existingIds.includes(id)) {
-    id = generateFilterId(columnName, operatorName, ++i);
+    id = generateFilterId(property, operatorName, ++i);
   }
 
-  const newFilter: FilterType = filterFactory(id, columnName, operatorName, compareValue);
+  const newFilter: FilterType = filterFactory(id, property, operatorName, compareValue);
 
   return [
     ...filters,
