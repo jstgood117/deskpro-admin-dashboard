@@ -19,6 +19,7 @@ import {
 } from './TableStyles';
 import Menu from '../Menu';
 import { testDropdownItemsWithIcon } from '../../resources/constants/constants';
+import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 export type IProps = {
   data: any[];
@@ -79,6 +80,7 @@ const Table: FC<IProps> = ({
   const [opened, clickButton] = useState(false);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [menuValue, setMenuValue] = useState();
+  const [deleteModal, showDeleteModal] = useState(false);
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -170,7 +172,12 @@ const Table: FC<IProps> = ({
               {menuValue && (
                 <div style={{ display: 'flex' }}>
                   <div style={{ paddingLeft: 16 }}>
-                    <Button styleType='primary' onClick={() => {}}>
+                    <Button
+                      styleType='primary'
+                      onClick={() => {
+                        showDeleteModal(true);
+                      }}
+                    >
                       Confirm
                     </Button>
                   </div>
@@ -263,6 +270,27 @@ const Table: FC<IProps> = ({
           />
         </StyledPagination>
       )}
+      <ConfirmDialog
+        icon='trash'
+        isOpen={deleteModal}
+        variant='danger'
+        title='Delete agent?'
+        leftButtonText='Delete Agents'
+        rightButtonText='Keep Agents'
+        onLeftButtonClick={() => {
+          showDeleteModal(false);
+          setMenuValue(undefined);
+          setIsAllChecked(false);
+          setChecked({});
+        }}
+        onRightButtonClick={() => {
+          showDeleteModal(false);
+          setMenuValue(undefined);
+          setIsAllChecked(false);
+          setChecked({});
+        }}
+        text={`Deleting 304 agents will change their status to 'deleted'`}
+      />
     </TableStyled>
   );
 };
