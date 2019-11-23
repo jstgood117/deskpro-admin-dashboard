@@ -30,7 +30,7 @@ export const getCurrentOperators = (
   containProperties: FilterMeta[]
 ) => {
   const newItems = containProperties.filter(_option => {
-    return (_option.path === currentPath || _option.path === filter.columnName);
+    return (_option.path === currentPath || _option.path === filter.property);
   });
   return newItems[0] ? newItems[0].operators : [];
 };

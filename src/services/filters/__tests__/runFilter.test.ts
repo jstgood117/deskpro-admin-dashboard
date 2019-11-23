@@ -17,7 +17,7 @@ describe('Run filter', () => {
   test('Runs filter and calls operator on the data', () => {
     const filter = {
       id:'FirstName-EQUAL',
-      columnName:'FirstName',
+      property:'FirstName',
       operatorName:'EQUAL',
       operator:includesOperator,
       value:'John'

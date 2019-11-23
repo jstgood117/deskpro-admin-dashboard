@@ -106,7 +106,7 @@ describe('FilterOptions',() => {
 
       const path = 'db.col.pathname';
       const filter =  {
-        columnName: 'db.col.doesntmatch',
+        property: 'db.col.doesntmatch',
         operatorName: 'CONTAINS',
         value: 'test'
       };
@@ -127,7 +127,7 @@ describe('FilterOptions',() => {
 
       const path = 'db.col.doesntmatch';
       const filter =  {
-        columnName: 'db.col.pathname',
+        property: 'db.col.pathname',
         operatorName: 'CONTAINS',
         value: 'test'
       };
@@ -148,7 +148,7 @@ describe('FilterOptions',() => {
 
       const path = 'db.col.unmatching';
       const filter =  {
-        columnName: 'db.col.unmatching',
+        property: 'db.col.unmatching',
         operatorName: 'CONTAINS',
         value: 'test'
       };

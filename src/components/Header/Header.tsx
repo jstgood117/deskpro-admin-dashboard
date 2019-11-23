@@ -4,19 +4,12 @@ import { FormattedMessage } from 'react-intl';
 
 import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 import { DeskproAdminTheme } from '../Theme';
-import TableActions from '../TableAction';
 import Icon from '../Icon';
 
 const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
-  padding: 39px 30px 50px 30px;
-  padding-bottom: 68px;
-  position: relative;
+  padding: 39px 30px 60px 30px;
   display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 27px;
   background-image: url("${props =>
     props.illustration
       ? require(`../../assets/svg/${props.illustration}.svg`)
@@ -107,12 +100,6 @@ const Link = styled(dpstyle.a)`
   &:hover {
     color: ${props => (props.color ? props.color : props.theme.brandPrimary)};
   }
-`;
-const TableActionStyled = styled(dpstyle.div)`
-  position: absolute;
-  left: 33px;
-  right: 27px;
-  bottom: 27px;
 `;
 
 export interface IHeader {
@@ -220,18 +207,6 @@ const Header: SFC<IProps> = ({
           <HelpButton>
             <Icon name='question' />
           </HelpButton>
-        )}
-
-        {tableActions && (
-          <TableActionStyled>
-            <TableActions
-              showSearch={true}
-              filterMenu={true}
-              sortMenu={true}
-              groupMenu={true}
-              viewMenu={true}
-            />
-          </TableActionStyled>
         )}
       </HeaderStyled>
     </ThemeProvider>

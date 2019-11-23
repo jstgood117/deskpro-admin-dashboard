@@ -15,6 +15,7 @@ import TabBar from '../TabBar';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
+import TableActions from '../TableAction';
 // test data
 import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
 
@@ -24,9 +25,13 @@ export interface IProps {
   queryName: string;
 }
 
+const TableActionStyled = styled(dpstyle.div)`
+  margin-top:-30px;
+  margin-bottom:24px;
+`;
+
 const BodyMargin = styled(dpstyle.div)`
-  margin: 34px;
-  padding-top: 40px;
+  margin:0 34px 34px 34px;
 `;
 
 const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
@@ -50,11 +55,11 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
   ): FilterType[] => {
     let serviceFilters: FilterType[] = [];
     internalFilters.forEach((internalFilter: IFilterProps) => {
-      const { value, columnName, operatorName } = internalFilter;
-      if (columnName !== '' && operatorName !== '') {
+      const { value, property, operatorName } = internalFilter;
+      if (property !== '' && operatorName !== '') {
         serviceFilters = addFilter(
           serviceFilters,
-          columnName,
+          property,
           operatorName,
           value
         );
@@ -74,7 +79,7 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     if (onFilterChange) {
       onFilterChange([
         {
-          columnName: '*',
+          property: '*',
           operatorName: 'CONTAINS',
           value:_value
         }
@@ -113,13 +118,21 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
               showNewButton={true}
               showHelpButton={true}
               onNewClick={() => null}
-              tableActions={true}
               onChangeView={val => {
                 console.log(val);
               }}
             />
           )}
           <BodyMargin>
+            <TableActionStyled>
+              <TableActions
+                showSearch={true}
+                filterMenu={true}
+                sortMenu={true}
+                groupMenu={true}
+                viewMenu={true}
+              />
+            </TableActionStyled>
             {views && views.length > 1 && (
               <TabBar
                 // Backend payload phrases are missing admin_common - should this be hard-coded like this?

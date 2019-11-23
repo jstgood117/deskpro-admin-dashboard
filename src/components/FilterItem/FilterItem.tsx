@@ -9,7 +9,7 @@ import { dpstyle } from '../Styled';
 
 export interface IProps {
   intl: any;
-  columnName: string;
+  property: string;
   value: string;
   operatorName: string;
   onRemove?: (e: any) => void;
@@ -48,7 +48,7 @@ const getIntlOperatorTitle = (operatorName: string) => {
 
 const FilterItem: FC<IProps> = ({
   intl,
-  columnName,
+  property,
   operatorName,
   value,
   onRemove
@@ -56,7 +56,7 @@ const FilterItem: FC<IProps> = ({
   return (
     <StyledItem>
       <ItemText>
-        {columnName}{' '}
+        {property}{' '}
         {intl.formatMessage({ id: getIntlOperatorTitle(operatorName) })} {value}
       </ItemText>
       <div style={{ display: 'flex' }} onClick={onRemove}>

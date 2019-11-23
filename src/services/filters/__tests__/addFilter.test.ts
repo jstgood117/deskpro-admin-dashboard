@@ -10,7 +10,7 @@ const equals = (a:any, b:any) => a === b;
 
 (filterFactory as jest.Mock).mockImplementation(() => ({
     id:'FirstName-EQUAL',
-    columnName:'FirstName',
+    property:'FirstName',
     operator:equals,
     value:'123'
   }
@@ -19,15 +19,15 @@ const equals = (a:any, b:any) => a === b;
 describe('addFilter', () => {
   test('adds a new filter to a filters object', () => {
     const filters = [] as FilterType[];
-    const columnName = 'FirstName';
+    const property = 'FirstName';
     const operatorName = 'EQUAL';
     const compareValue = '123';
 
-    const newFilters = addFilter(filters, columnName, operatorName, compareValue);
+    const newFilters = addFilter(filters, property, operatorName, compareValue);
 
     expect(newFilters).toEqual([{
       id:'FirstName-EQUAL',
-      columnName:'FirstName',
+      property:'FirstName',
       operator:equals,
       value:'123'
     }]);

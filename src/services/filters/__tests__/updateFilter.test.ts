@@ -9,7 +9,7 @@ describe('updateFilter', () => {
   test('updates filter in filters object', () => {
     const filters = [{
       id:'FirstName-EQUAL',
-      columnName:'EQUAL',
+      property:'EQUAL',
       operator:equals,
       value:'123'
     }] as FilterType[];
@@ -20,7 +20,7 @@ describe('updateFilter', () => {
     const newFilters = updateFilter(filters, id, operatorName, compareValue);
 
     expect(newFilters[0].id).toEqual('FirstName-CONTAINS-1');
-    expect(newFilters[0].columnName).toEqual('FirstName');
+    expect(newFilters[0].property).toEqual('FirstName');
     expect(newFilters[0].value).toEqual('abc');
   });
 });

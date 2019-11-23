@@ -44,8 +44,8 @@ const FilterBox: SFC<IProps> = ({
     const lastIndex = filters.length - 1;
     filters[lastIndex].value &&
       filters[lastIndex].operatorName &&
-      filters[lastIndex].columnName &&
-      setFilters([...filters, { columnName: '', operatorName: '', value: '' }]);
+      filters[lastIndex].property &&
+      setFilters([...filters, { property: '', operatorName: '', value: '' }]);
   }, [filters, setFilters]);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
