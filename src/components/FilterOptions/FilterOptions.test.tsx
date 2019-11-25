@@ -3,13 +3,13 @@ import { mount, shallow } from '../../test/enzyme';
 
 import FilterOptions, { IProps } from './FilterOptions';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 describe('FilterOptions', () => {
   let props: IProps;
   let mountedFilterOptions: any;
 
-  const initialFilters: IFilterProps[] = [
+  const initialFilters: FilterProps[] = [
     { property: '', operatorName: '', value: '' }
   ];
   const FilterOptionsComponent: React.FC<IProps> = _props => {

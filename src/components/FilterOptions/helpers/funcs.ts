@@ -1,5 +1,4 @@
-import { FilterMeta } from '../../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../../../resources/interfaces/filterMeta';
+import { FilterMeta, FilterProps } from '../../../resources/interfaces/filterMeta';
 import { KeyValue } from '../../../resources/interfaces';
 
 export const getIntlOperatorTitle = (operatorName: string, operatorKeys: KeyValue) => {
@@ -26,7 +25,7 @@ export const getOperatorByTitle = (title: string, containOptions: any[]) => {
 
 export const getCurrentOperators = (
   currentPath: string,
-  filter:IFilterProps,
+  filter:FilterProps,
   containProperties: FilterMeta[]
 ) => {
   const newItems = containProperties.filter(_option => {

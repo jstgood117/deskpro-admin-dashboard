@@ -1,4 +1,4 @@
-import { OperatorType } from '../../../resources/constants/mock/testFilterMeta';
+import { OperatorType } from '../../../resources/interfaces/filterMeta';
 
 import {
   getIntlOperatorTitle,

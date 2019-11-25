@@ -7,10 +7,10 @@ import Button from '../Button';
 import { dpstyle } from '../Styled';
 import FilterOptions from '../FilterOptions';
 import { DeskproAdminTheme } from '../Theme';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 export type IProps = {
-  filters: IFilterProps[];
+  filters: FilterProps[];
   setFilters: (e: any) => void;
   options: any;
   cancel?: () => void;

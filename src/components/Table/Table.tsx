@@ -136,7 +136,7 @@ const Table: FC<IProps> = ({
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
   const items = [{ link: 'All on the page' }, { link: 'All' }];
-
+console.log(menuValue);
   return (
     <TableStyled>
       <TableHeader>

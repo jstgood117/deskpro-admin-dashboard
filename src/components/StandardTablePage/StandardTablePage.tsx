@@ -4,7 +4,7 @@ import { DocumentNode } from 'graphql';
 
 import { IViewData } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import Loading from '../Loading';
@@ -51,10 +51,10 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
   }
 
   const processFiltersToFilterTypes = (
-    internalFilters: IFilterProps[]
+    internalFilters: FilterProps[]
   ): FilterType[] => {
     let serviceFilters: FilterType[] = [];
-    internalFilters.forEach((internalFilter: IFilterProps) => {
+    internalFilters.forEach((internalFilter: FilterProps) => {
       const { value, property, operatorName } = internalFilter;
       if (property !== '' && operatorName !== '') {
         serviceFilters = addFilter(
@@ -69,7 +69,7 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     return serviceFilters;
   };
 
-  const onFilterChange = (internalFilters: IFilterProps[]) => {
+  const onFilterChange = (internalFilters: FilterProps[]) => {
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
     const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
     setFilters([searchFilter, ...serviceFilters]);
@@ -100,7 +100,8 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     filters,
     onFilterChange,
     onSearchChange,
-    tableDef:views[tabIndex].tableDef
+    tableDef:views[tabIndex].tableDef,
+    filterDef:views[tabIndex].filterDef
   };
 
   return (

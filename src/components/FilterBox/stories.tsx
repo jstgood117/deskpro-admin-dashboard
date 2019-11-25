@@ -5,9 +5,9 @@ import { IntlProvider } from 'react-intl';
 
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
 import { testTranslations } from '../../resources/constants/constants';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 
-const initialFilters: IFilterProps[] = [
+const initialFilters: FilterProps[] = [
   { property: '', operatorName: '', value: '' }
 ];
 

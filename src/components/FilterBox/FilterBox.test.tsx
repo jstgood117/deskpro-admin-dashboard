@@ -3,12 +3,12 @@ import { mount, shallow } from '../../test/enzyme';
 
 import FilterBox from './FilterBox';
 import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 describe('FilterBox', () => {
   let mountedFilterBox: any;
 
-  const initialFilters: IFilterProps[] = [
+  const initialFilters: FilterProps[] = [
     { property: '', operatorName: '', value: '' }
   ];
   const FilterBoxComponent: React.FC = () => {
