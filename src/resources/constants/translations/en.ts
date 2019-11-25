@@ -48,12 +48,17 @@ export const testTranslations = {
   'admin_agents.agents.title': 'Agents',
   'admin_agents.agents.agents-header': 'illustration',
   'admin_agents.agents.description':
-    'The Agents section allow you to configure settings related to all agents in the system, whether or not they are using the helpdesk software at the moment.',
+    'The Agents section allow you to configure settings related to all agents in the system, whether or not they are using the helpdesk.',
 
   'admin_agents_teams.teams.title': 'Agent Teams',
   'admin_agents_teams.teams.agents-header': 'illustration',
   'admin_agents_teams.teams.description':
-    'The Agents Teams section allow you to configure settings related to all agents teams in the system, whether or not they are using the helpdesk software at the moment.',
+    'The Agents Teams section allow you to configure settings related to all agents teams in the system, whether or not they are using the helpdesk.',
+
+  'admin_agents_groups.groups.title': 'Agent Groups',
+  'admin_agents_groups.groups.agents-header': 'illustration',
+  'admin_agents_groups.groups.description':
+    'The Agents Teams section allow you to configure settings related to all agents teams in the system, whether or not they are using the helpdesk.',
 
   'admin_common.col.all_emails': 'All emails',
   'admin_common.col.can_admin': 'Can Admin',
