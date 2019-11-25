@@ -2,8 +2,8 @@ const testTableColumns3 = {
   'agents_teams_getTeams': {
     '__typename': 'StandardDataPageData',
     'dataType':'sync',
-    'title': 'admin_agents_teams.teams.title',
-    'description': 'admin_agents_teams.teams.description',
+    'title': 'admin_agents_groups.groups.title',
+    'description': 'admin_agents_groups.groups.description',
     'illustration': 'agents-header',
     'headerLinks': [
       {
@@ -26,7 +26,7 @@ const testTableColumns3 = {
         'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: false }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
         'filterDef': [
           {
-            title: 'Name',
+            title: 'Sys Name',
             operators: [
               'CONTAINS',
               'NOT_CONTAINS',
@@ -36,8 +36,36 @@ const testTableColumns3 = {
               'ENDS_WITH'
             ],
             type: 'TEXT',
-            path: 'name',
-            dataPath: 'name'
+            path: 'sys_name',
+            dataPath: 'sys_name'
+          },
+          {
+            title: 'Title',
+            operators: [
+              'CONTAINS',
+              'NOT_CONTAINS',
+              'EQUAL',
+              'NOT_EQUAL',
+              'STARTS_WITH',
+              'ENDS_WITH'
+            ],
+            type: 'TEXT',
+            path: 'title',
+            dataPath: 'title'
+          },
+          {
+            title: 'Note',
+            operators: [
+              'CONTAINS',
+              'NOT_CONTAINS',
+              'EQUAL',
+              'NOT_EQUAL',
+              'STARTS_WITH',
+              'ENDS_WITH'
+            ],
+            type: 'TEXT',
+            path: 'note',
+            dataPath: 'note'
           },
           {
             title: 'Members',
@@ -64,19 +92,43 @@ const testTableColumns3 = {
         'tableDef': {
           'columns': [
             {
-              'title': 'col.name',
-              'field': 'NAME_AVATAR',
-              'sort': 'NAME_AVATAR',
+              'title': 'col.sys_name',
+              'field': 'TEXT',
+              'sort': 'TEXT',
               'data': [
                 {
-                  'propName': 'name',
-                  'path': 'name',
+                  'propName': 'sys_name',
+                  'path': 'sys_name',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
-                },
+                }
+              ],
+              'defaultShow': true,
+              '__typename': 'TableColumnDef'
+            },
+            {
+              'title': 'col.title',
+              'field': 'TEXT',
+              'sort': 'TEXT',
+              'data': [
                 {
-                  'propName': 'avatar',
-                  'path': 'avatarUrn',
+                  'propName': 'title',
+                  'path': 'title',
+                  'value': '',
+                  '__typename': 'TableColumnDataMap'
+                }
+              ],
+              'defaultShow': true,
+              '__typename': 'TableColumnDef'
+            },
+            {
+              'title': 'col.note',
+              'field': 'TEXT',
+              'sort': 'TEXT',
+              'data': [
+                {
+                  'propName': 'note',
+                  'path': 'note',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }
@@ -108,32 +160,108 @@ const testTableColumns3 = {
         'title': 'group.deleted',
         'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: true }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
         'filterDef': [{
-          'title':'Name',
-          'path':'col.name',
-          'type':'TEXT',
-          'operators':['EQUALS', 'CONTAINS']
-        },{
-          'title':'EMAIL',
-          'path':'col.name',
-          'type':'TEXT',
-          'operators':['EQUALS', 'CONTAINS']
+          title: 'Sys Name',
+          operators: [
+            'CONTAINS',
+            'NOT_CONTAINS',
+            'EQUAL',
+            'NOT_EQUAL',
+            'STARTS_WITH',
+            'ENDS_WITH'
+          ],
+          type: 'TEXT',
+          path: 'sys_name',
+          dataPath: 'sys_name'
+        },
+        {
+          title: 'Title',
+          operators: [
+            'CONTAINS',
+            'NOT_CONTAINS',
+            'EQUAL',
+            'NOT_EQUAL',
+            'STARTS_WITH',
+            'ENDS_WITH'
+          ],
+          type: 'TEXT',
+          path: 'title',
+          dataPath: 'title'
+        },
+        {
+          title: 'Note',
+          operators: [
+            'CONTAINS',
+            'NOT_CONTAINS',
+            'EQUAL',
+            'NOT_EQUAL',
+            'STARTS_WITH',
+            'ENDS_WITH'
+          ],
+          type: 'TEXT',
+          path: 'note',
+          dataPath: 'note'
+        },
+        {
+          title: 'Members',
+          operators: ['IN', 'NOT_IN'],
+          type: 'CHOICE_FROM_DATA',
+          path: 'members.name',
+          dataPath: 'members',
+          uniqueValues: [
+            {
+              value: 26,
+              title: 'John Doe'
+            },
+            {
+              value: 22,
+              title: 'Natalie White'
+            },
+            {
+              value: 31,
+              title: 'Juan Hernandez'
+            }
+          ]
         }],
         'tableDef': {
           'columns': [
             {
-              'title': 'col.name',
-              'field': 'NAME_AVATAR',
-              'sort': 'NAME_AVATAR',
+              'title': 'col.sys_name',
+              'field': 'TEXT',
+              'sort': 'TEXT',
               'data': [
                 {
-                  'propName': 'name',
-                  'path': 'name',
+                  'propName': 'sys_name',
+                  'path': 'sys_name',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
-                },
+                }
+              ],
+              'defaultShow': true,
+              '__typename': 'TableColumnDef'
+            },
+            {
+              'title': 'col.title',
+              'field': 'TEXT',
+              'sort': 'TEXT',
+              'data': [
                 {
-                  'propName': 'avatar',
-                  'path': 'avatarUrn',
+                  'propName': 'title',
+                  'path': 'title',
+                  'value': '',
+                  '__typename': 'TableColumnDataMap'
+                }
+              ],
+              'defaultShow': true,
+              '__typename': 'TableColumnDef'
+            },
+            {
+              'title': 'col.note',
+              'field': 'TEXT',
+              'sort': 'TEXT',
+              'data': [
+                {
+                  'propName': 'note',
+                  'path': 'note',
                   'value': '',
                   '__typename': 'TableColumnDataMap'
                 }

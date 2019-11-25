@@ -8,12 +8,15 @@ import { FilterType } from '../../services/filters/types';
 import { ITableSetup } from '../../resources/interfaces';
 import { logError } from '../Error/ErrorBoundary';
 import { testTableData2 } from '../../resources/constants/mock/testTableData2';
+import { testTableData3 } from '../../resources/constants/mock/testTableData3';
+import { testTableData4 } from '../../resources/constants/mock/testTableData4';
 import { ITableColumn } from '../../resources/interfaces';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
 
 interface IProps {
   intl: any;
+  path: string; // TODO: Remove when db
   client: ApolloClient<any>;
   dataType: string;
   dataQuery: string;
@@ -48,7 +51,7 @@ const transformColumnData = (columns: ITableColumn[], intl: any) => {
   return newCols;
 };
 
-const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, tableDef, filters, dataType}) => {
+const TableWrapper: SFC<ITableSetup & IProps> = ({intl, path, client, dataQuery, tableDef, filters, dataType}) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -65,8 +68,15 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, client, dataQuery, table
       //   errorPolicy: 'all'
       // });
       // const { results } = response.data;
+      let results: any[] = [];
+      if(path === '/agents') {
+        results = testTableData2.results;
+      } else if(path === '/agents/teams') {
+        results = testTableData3.results;
+      } else if(path === '/agents/groups') {
+        results = testTableData4.results;
+      }
 
-      const { results } = testTableData2;
       setData(results);
       setFilteredData(results);
 

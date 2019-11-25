@@ -51,14 +51,14 @@ const App: SFC = () => {
 
   const onError = (err:string) => { logError(err); };
 
-  const onRouteRender = () => <Redirect to='/agents' />;
+  const onRouteRender = () => <Redirect to='/agent-teams' />;
 
   const renderSidebar = flatMap(
     (data.sidebar as ISidebarSection[]).map(section => section.navItems),
     sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
   )
-    .filter(s => s.path)
-    .map(s => <Route key={s.path} exact={true} path={s.path} render={() => <PageType {...s} />} />);
+    .filter(_section => _section.path)
+    .map(_section => <Route key={_section.path} exact={true} path={_section.path} render={() => <PageType {..._section} />} />);
 
   return (
     <HashRouter>

@@ -267,8 +267,6 @@ const testTableColumns2 = {
             type: 'CHOICE_FROM_DATA',
             path: 'agent_teams.name',
             dataPath: 'agent_teams',
-            valueProperty: 'id',
-            titleProperty: 'name',
             uniqueValues: [
               {
                 value: 1,

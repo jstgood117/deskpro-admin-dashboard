@@ -1,4 +1,4 @@
-export const testTableData2 = {
+export const testTableData3 = {
   'results': [
     {
       'id': '2',
