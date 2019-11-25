@@ -136,7 +136,7 @@ const Table: FC<IProps> = ({
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
   const items = [{ link: 'All on the page' }, { link: 'All' }];
-console.log(menuValue);
+
   return (
     <TableStyled>
       <TableHeader>
@@ -209,56 +209,58 @@ console.log(menuValue);
           onChangeRowsPerPage={handleChangRowsPerPage}
         />
       </TableHeader>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup: any, indexOuter: number) => (
-            <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
-              <th />
-              {headerGroup.headers.map((column: any, indexInner: number) => (
-                <th
-                  key={indexInner}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row: any, indexOuter: number) => {
-            prepareRow(row);
-            return (
-              <tr
-                key={indexOuter}
-                {...row.getRowProps()}
-                className={
-                  checked.hasOwnProperty(row.original.id.toString())
-                    ? 'row--selected'
-                    : ''
-                }
-              >
-                <td>
-                  <Checkbox
-                    value={row.original.id}
-                    checked={
-                      checked.hasOwnProperty(row.original.id.toString())
-                        ? true
-                        : false
-                    }
-                    onChange={handleCheckboxChange}
-                  />
-                </td>
-                {row.cells.map((cell: any, indexInner: number) => (
-                  <td key={indexInner} {...cell.getCellProps()}>
-                    {Cell.create(cell)}
-                  </td>
+      <div className='overflow'>
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup: any, indexOuter: number) => (
+              <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
+                <th />
+                {headerGroup.headers.map((column: any, indexInner: number) => (
+                  <th
+                    key={indexInner}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render('Header')}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row: any, indexOuter: number) => {
+              prepareRow(row);
+              return (
+                <tr
+                  key={indexOuter}
+                  {...row.getRowProps()}
+                  className={
+                    checked.hasOwnProperty(row.original.id.toString())
+                      ? 'row--selected'
+                      : ''
+                  }
+                >
+                  <td>
+                    <Checkbox
+                      value={row.original.id}
+                      checked={
+                        checked.hasOwnProperty(row.original.id.toString())
+                          ? true
+                          : false
+                      }
+                      onChange={handleCheckboxChange}
+                    />
+                  </td>
+                  {row.cells.map((cell: any, indexInner: number) => (
+                    <td key={indexInner} {...cell.getCellProps()}>
+                      {Cell.create(cell)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       {!loading && (
         <StyledPagination>
           <Pagination

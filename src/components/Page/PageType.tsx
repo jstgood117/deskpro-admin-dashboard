@@ -18,6 +18,9 @@ const PageType: SFC<IProps> = ({ path }) => {
     path
   } as PageContextValuesType;
 
+  console.log('HELLO!');
+  console.log(path);
+
   let page = null;
   switch (path) {
     case '/agents':
@@ -29,6 +32,24 @@ const PageType: SFC<IProps> = ({ path }) => {
         />
       );
       break;
+    case '/agents/teams':
+        page = (
+          <StandardTablePage
+            path={path}
+            query={queries.QUERY_AGENTS_TEAM_PAGE}
+            queryName='agents_teams_getTeams'
+          />
+        );
+        break;
+    case '/agents/groups':
+        page = (
+          <StandardTablePage
+            path={path}
+            query={queries.QUERY_AGENTS_TEAM_PAGE}
+            queryName='agents_teams_getTeams'
+          />
+        );
+        break;
     default:
       page = (
         <div>
