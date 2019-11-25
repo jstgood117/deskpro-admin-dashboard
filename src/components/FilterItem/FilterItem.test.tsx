@@ -2,13 +2,13 @@ import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import FilterItem, { IProps } from './FilterItem';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 describe('FilterOptions', () => {
   let props: IProps;
   let mountedFilterItem: any;
 
-  const filterData: IFilterProps = {
+  const filterData: FilterProps = {
     property: 'Team',
     operatorName: 'EQUAL',
     value: 'Audit'
@@ -25,6 +25,7 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
+      intl: null,
       property: filterData.property,
       value: filterData.value,
       operatorName: filterData.operatorName

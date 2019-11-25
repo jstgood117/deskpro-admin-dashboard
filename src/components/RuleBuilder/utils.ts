@@ -11,7 +11,7 @@ import merge from 'lodash/merge';
 import {
   FilterMeta,
   operatorDictionary
-} from '../../resources/constants/mock/testFilterMeta';
+} from '../../resources/interfaces/filterMeta';
 
 export const generateId = (): string =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -224,7 +224,6 @@ export const updateRule = (
   return changeRuleValue(rootValue, currentValue, 'rules', rules);
 };
 
-// Conver rule schema from testFilterMeta
 export const convertRuleSchema = (
   groupTitle: string,
   input: FilterMeta[]

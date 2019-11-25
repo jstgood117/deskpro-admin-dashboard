@@ -3,10 +3,10 @@ import { storiesOf } from '@storybook/react';
 import { IntlProvider } from 'react-intl';
 
 import FilterItem from './FilterItem';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { testTranslations } from '../../resources/constants/constants';
 
-const filter: IFilterProps = { property: 'Team', operatorName: 'EQUAL', value: 'Audit' };
+const filter: FilterProps = { property: 'Team', operatorName: 'EQUAL', value: 'Audit' };
 
 storiesOf('FilterItem', module).add('default', () => (
   <IntlProvider locale='en' messages={testTranslations}>

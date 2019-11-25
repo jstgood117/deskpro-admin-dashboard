@@ -1,9 +1,9 @@
 const testTableColumns2 = {
-  'agents_getAgentsPage': {
+  'agents_teams_getTeams': {
     '__typename': 'StandardDataPageData',
     'dataType':'sync',
-    'title': 'admin_agents.agents.title',
-    'description': 'admin_agents.agents.description',
+    'title': 'admin_agents_teams.teams.title',
+    'description': 'admin_agents_teams.teams.description',
     'illustration': 'agents-header',
     'headerLinks': [
       {
@@ -19,11 +19,11 @@ const testTableColumns2 = {
         '__typename': 'PageLink'
       }
     ],
-    'newLink': '/panel:/agents/new',
+    'newLink': '/panel:/agents_team/new',
     'views': [
       {
         'title': 'group.active',
-        'dataQuery': '{\n  agents_teams_getTeams {\n    id\n    name\n    avatarUrn\n    members {\n      id\n      name\n    }\n  }\n}',
+        'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: false }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
         'filterDef': [
           {
             title: 'Name',
@@ -80,8 +80,6 @@ const testTableColumns2 = {
             type: 'CHOICE_FROM_DATA',
             path: 'agent_teams.name',
             dataPath: 'agent_teams',
-            valueProperty: 'id',
-            titleProperty: 'name',
             uniqueValues: [
               {
                 value: 1,
@@ -211,87 +209,17 @@ const testTableColumns2 = {
       {
         'title': 'group.deleted',
         'dataQuery': '\n                        query {\n                            results: agents_getAgents(filter: { is_deleted: true }) {\n                                \n            id\n            name\n            first_name\n            last_name\n            avatarUrn,\n            primary_email\n            agent_teams {\n              id\n              name\n              avatarUrn\n            }\n            agent_groups {\n              id\n              sys_name\n              title\n              note\n            }\n        \n                            }\n                        }\n                    ',
-        'filterDef': [
-          {
-            title: 'Name',
-            operators: [
-              'CONTAINS',
-              'NOT_CONTAINS',
-              'EQUAL',
-              'NOT_EQUAL',
-              'STARTS_WITH',
-              'ENDS_WITH'
-            ],
-            type: 'TEXT',
-            path: 'name',
-            dataPath: 'name'
-          },
-          {
-            title: 'First name',
-            operators: [
-              'CONTAINS',
-              'NOT_CONTAINS',
-              'EQUAL',
-              'NOT_EQUAL',
-              'STARTS_WITH',
-              'ENDS_WITH'
-            ],
-            type: 'TEXT',
-            path: 'firstname',
-            dataPath: 'firstname'
-          },
-          {
-            title: 'Last Name',
-            operators: [
-              'CONTAINS',
-              'NOT_CONTAINS',
-              'EQUAL',
-              'NOT_EQUAL',
-              'STARTS_WITH',
-              'ENDS_WITH'
-            ],
-            type: 'TEXT',
-            path: 'lastname',
-            dataPath: 'lastname'
-          },
-          {
-            title: 'Email',
-            operators: ['IN', 'NOT_IN'],
-            type: 'TEXT',
-            path: 'primary_email',
-            dataPath: 'primary_email'
-          },
-          {
-            title: 'Team',
-            operators: ['IN', 'NOT_IN'],
-            type: 'CHOICE_FROM_DATA',
-            path: 'agent_teams.name',
-            dataPath: 'agent_teams',
-            valueProperty: 'id',
-            titleProperty: 'name',
-            uniqueValues: [
-              {
-                value: 1,
-                title: 'Team 1'
-              },
-              {
-                value: 2,
-                title: 'Team 2'
-              },
-              {
-                value: 3,
-                title: 'Team 3'
-              }
-            ]
-          },
-          {
-            title: 'Can Admin',
-            operators: ['EQUAL'],
-            type: 'BOOL',
-            path: 'can_admin',
-            dataPath: 'can_admin'
-          }
-        ],
+        'filterDef': [{
+          'title':'Name',
+          'path':'col.name',
+          'type':'TEXT',
+          'operators':['EQUALS', 'CONTAINS']
+        },{
+          'title':'EMAIL',
+          'path':'col.name',
+          'type':'TEXT',
+          'operators':['EQUALS', 'CONTAINS']
+        }],
         'tableDef': {
           'columns': [
             {
