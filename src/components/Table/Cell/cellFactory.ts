@@ -23,7 +23,7 @@ const cellRenderer = (props: any) => {
 };
 
 const generateAvatar = (team: any, index: number) => {
-  const randomItem = getColor(index);
+  const randomItem = getColor(Math.floor(Math.random() * 20));
   return {
     ...team,
     textColor: randomItem.textColor,
