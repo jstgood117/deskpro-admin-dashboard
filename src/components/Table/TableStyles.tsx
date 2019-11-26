@@ -4,7 +4,8 @@ import { dpstyle } from '../Styled';
 export const TableStyled = styled(dpstyle.div)`
   > .overflow {
 
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: scroll;
 
     & table {
       width: 100%;
@@ -15,6 +16,9 @@ export const TableStyled = styled(dpstyle.div)`
           border-top: 1px solid ${props => props.theme.greyLight};
           border-bottom: 1px solid ${props => props.theme.greyLight};
           & th {
+            :first-child {
+              width:30px;
+            }
             white-space: nowrap;
             padding: 0 16px 0 0;
             font-weight: 600;
@@ -37,10 +41,14 @@ export const TableStyled = styled(dpstyle.div)`
           }
           border-bottom: 1px solid ${props => props.theme.greyLighter};
           & td {
+            :first-child {
+              width:30px;
+            }
             padding: 0 16px 0 0;
             text-align: left;
             line-height: 44px;
             color: ${props => props.theme.staticColour};
+            vertical-align: middle;
             > * {
               white-space: nowrap;
               flex-wrap: nowrap;
