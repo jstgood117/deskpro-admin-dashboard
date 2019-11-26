@@ -46,6 +46,10 @@ const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
     setFilters(setupFilters('*'));
   }, []);
 
+  useEffect(() => {
+    setFilters(setupFilters('*'));
+  }, [path]);
+
   if (loading) {
     return <Loading />;
   }
@@ -73,23 +77,21 @@ const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
   };
 
   const onFilterChange = (internalFilters: FilterProps[]) => {
+
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
     const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
     setFilters([searchFilter, ...serviceFilters]);
   };
 
-  const onSearchChange = (_value: string) => {
-    if (onFilterChange) {
-      onFilterChange([
-        {
-          property: '*',
-          operatorName: 'CONTAINS',
-          value:_value
-        }
-      ]);
-    }
+  const onSearchChange = (_value: string, internalFilters: FilterProps[]) => {
+    const searchFilter = processFiltersToFilterTypes([{
+      property: '*',
+      operatorName: 'CONTAINS',
+      value:_value
+    }, ...internalFilters]);
+    setFilters(searchFilter);
   };
-console.log(path);
+
   /// TODO: Remove & link to table data
   let tableData: any = [];
   if(path === '/agents') {
@@ -110,6 +112,7 @@ console.log(path);
   } = (tableData as any)[queryName.toString()];
 
   const contextValue:StandardTableContextValues = {
+    path,
     filters,
     onFilterChange,
     onSearchChange,
