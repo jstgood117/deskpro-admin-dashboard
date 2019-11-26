@@ -193,7 +193,6 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
       return <P1 className='text'>{props.timezone}</P1>;
 
     case 'label':
-      console.log('a', props)
       return (
         <Label
           label={props.label}
