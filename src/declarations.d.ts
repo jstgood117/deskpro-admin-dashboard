@@ -7,3 +7,5 @@ declare module 'react-sortablejs';
 declare module 'react-autocomplete';
 declare module 'multi-select-react';
 declare module 'react-csv';
+declare module 'react-select';
+declare module 'chroma-js';
