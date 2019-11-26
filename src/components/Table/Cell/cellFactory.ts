@@ -15,7 +15,8 @@ enum CellEnum {
   BOOLEAN_YESNO = 'BOOLEAN_YESNO',
   TIME_AGO = 'TIME_AGO',
   AGENT_TEAM_LIST = 'AGENT_TEAM_LIST',
-  AGENT_GROUP_LIST = 'AGENT_GROUP_LIST'
+  AGENT_GROUP_LIST = 'AGENT_GROUP_LIST',
+  TEAM_MEMBERS_LIST = 'TEAM_MEMBERS_LIST'
 }
 
 const cellRenderer = (props: any) => {
@@ -56,8 +57,8 @@ export const create = (cell: any) => {
       return cellRenderer({ type: 'multiple_teams', props: agentTeamProps });
 
     case 'AGENT_GROUP_LIST':
-      const values = [cell.value.map((_item: any) => _item.title)];
-      return cellRenderer({ type: 'string', props: { values } });
+      const agentGroupList = [cell.value.map((_item: any) => _item.title)];
+      return cellRenderer({ type: 'string', props: { values: agentGroupList } });
 
     case 'TEXT_COMMA_SEP':
       return cellRenderer({ type: 'string', props: { values: cell.value, max: 1 } });

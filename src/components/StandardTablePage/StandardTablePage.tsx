@@ -4,7 +4,7 @@ import { DocumentNode } from 'graphql';
 
 import { IViewData } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import Loading from '../Loading';
@@ -18,6 +18,8 @@ import { StandardTableProvider, StandardTableContextValues } from '../../context
 import TableActions from '../TableAction';
 // test data
 import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
+import testColumnData3 from '../../resources/constants/mock/testTableColumns3';
+import testColumnData4 from '../../resources/constants/mock/testTableColumns4';
 
 export interface IProps {
   path: string;
@@ -34,7 +36,8 @@ const BodyMargin = styled(dpstyle.div)`
   margin:0 34px 34px 34px;
 `;
 
-const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
+const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
+
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const { loading, error } = useQuery(query, { errorPolicy: 'all' });
@@ -51,10 +54,10 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
   }
 
   const processFiltersToFilterTypes = (
-    internalFilters: IFilterProps[]
+    internalFilters: FilterProps[]
   ): FilterType[] => {
     let serviceFilters: FilterType[] = [];
-    internalFilters.forEach((internalFilter: IFilterProps) => {
+    internalFilters.forEach((internalFilter: FilterProps) => {
       const { value, property, operatorName } = internalFilter;
       if (property !== '' && operatorName !== '') {
         serviceFilters = addFilter(
@@ -69,7 +72,7 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     return serviceFilters;
   };
 
-  const onFilterChange = (internalFilters: IFilterProps[]) => {
+  const onFilterChange = (internalFilters: FilterProps[]) => {
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
     const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
     setFilters([searchFilter, ...serviceFilters]);
@@ -86,6 +89,16 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
       ]);
     }
   };
+console.log(path);
+  /// TODO: Remove & link to table data
+  let tableData: any = [];
+  if(path === '/agents') {
+    tableData = testColumnData2;
+  } else if(path === '/agents/teams') {
+    tableData = testColumnData3;
+  } else if(path === '/agents/groups') {
+    tableData = testColumnData4;
+  }
 
   const {
     title,
@@ -94,17 +107,18 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
     views,
     dataType,
     illustration
-  } = (testColumnData2 as any)[queryName.toString()];
+  } = (tableData as any)[queryName.toString()];
 
   const contextValue:StandardTableContextValues = {
     filters,
     onFilterChange,
     onSearchChange,
-    tableDef:views[tabIndex].tableDef
+    tableDef:views[tabIndex].tableDef,
+    filterDef:views[tabIndex].filterDef
   };
 
   return (
-    testColumnData2 && (
+    tableData && (
       <StandardTableProvider value={contextValue}>
         <>
           {views && views[tabIndex] && (
@@ -135,7 +149,8 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
             </TableActionStyled>
             {views && views.length > 1 && (
               <TabBar
-                // Backend payload phrases are missing admin_common - should this be hard-coded like this?
+                // Backend payload phrases are missing admin_common -
+                // should this be hard-coded like this?
                 tabItems={views.map((view: IViewData) => {
                   return { messageId: `admin_common.${view.title}` };
                 })}
@@ -147,6 +162,7 @@ const StandardTablePage: SFC<IProps> = ({ query, queryName }) => {
             {views && views[tabIndex] && (
               <Table
                 {...views[tabIndex]}
+                path={path} // TODO: When hooked up to live db, not required
                 filters={filters}
                 dataType={dataType}
               />

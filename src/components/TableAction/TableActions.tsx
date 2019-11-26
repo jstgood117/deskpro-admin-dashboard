@@ -3,8 +3,10 @@ import { debounce } from 'lodash';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 
-import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import {
+  FilterProps,
+  FilterMeta
+} from '../../resources/interfaces/filterMeta';
 import {
   StandardTableContext,
   StandardTableContextValues
@@ -75,7 +77,7 @@ interface IFilterButton {
   active: boolean;
   existing: boolean;
 }
-const initialFilters: IFilterProps[] = [
+const initialFilters: FilterProps[] = [
   { property: '', operatorName: '', value: '', applied: false }
 ];
 
@@ -125,10 +127,10 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
 
-  const { onFilterChange, onSearchChange } = context;
+  const { onFilterChange, onSearchChange, filterDef } = context;
 
   const getFilterTitle = (path: string) => {
-    const match = testFilterMeta.find(_filter => _filter.path === path);
+    const match = filterDef.find((_filter: FilterMeta) => _filter.path === path);
     return match ? match.title : path;
   };
 
@@ -265,7 +267,7 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
                   <FilterBox
                     filters={filters}
                     setFilters={setFilters}
-                    options={testFilterMeta}
+                    options={filterDef}
                     cancel={cancelFilter}
                     apply={applyFilter}
                   />

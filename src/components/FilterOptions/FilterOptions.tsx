@@ -9,9 +9,9 @@ import Input from '../Input';
 import Button from '../Button';
 import { DeskproAdminTheme } from '../Theme';
 import { AutoCompleteItemStyle, MenuStyle } from '../AutoComplete/AutoComplete';
-import { IFilterProps } from '../../resources/interfaces/filterMeta';
+import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { operatorKeys, OperatorTypes } from '../../services/filters/operators';
-import { FilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { FilterMeta } from '../../resources/interfaces/filterMeta';
 
 import {
   getIntlOperatorTitle,
@@ -98,8 +98,8 @@ export interface IProps {
   placeholder?: string;
   setFilters?: (e: any) => void;
   index?: number;
-  filter?: IFilterProps;
-  filters?: IFilterProps[];
+  filter?: FilterProps;
+  filters?: FilterProps[];
   options: FilterMeta[];
 }
 

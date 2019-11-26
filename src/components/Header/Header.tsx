@@ -16,7 +16,7 @@ const HeaderStyled = styled(dpstyle.div)<IHeader>`
       : require(`../../assets/svg/agents-header.svg`)}");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: 50%;
+  background-position: 100%;
 `;
 
 const HeaderDescription = styled(dpstyle.p)`

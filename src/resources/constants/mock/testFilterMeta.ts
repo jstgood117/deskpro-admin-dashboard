@@ -1,83 +1,5 @@
-export type ValueTypes = 'BOOL' | 'TEXT' | 'CHOICE_FROM_DATA';
+import { FilterMeta } from '../../interfaces/filterMeta';
 
-export type OperatorType =
-  | 'IN'
-  | 'NOT_IN'
-  | 'EQUAL'
-  | 'NOT_EQUAL'
-  | 'STARTS_WITH'
-  | 'ENDS_WITH'
-  | 'CONTAINS'
-  | 'NOT_CONTAINS'
-  | 'YES_NO';
-
-export type OperatorOptionsType = {
-  value: OperatorType;
-  title: string;
-};
-
-export type OperatorOptionsTypes = OperatorOptionsType[];
-
-export type FilterMeta = {
-  title: string;
-  operators: OperatorType[];
-  type: string;
-  path: string;
-  dataPath: string;
-  valueProperty?: string;
-  titleProperty?: string;
-  uniqueValues?: any[];
-};
-
-export const operatorOptions: OperatorOptionsTypes = [
-  {
-    value: 'IN',
-    title: 'In'
-  },
-  {
-    value: 'NOT_IN',
-    title: 'Not in'
-  },
-  {
-    value: 'EQUAL',
-    title: 'Equal to'
-  },
-  {
-    value: 'NOT_EQUAL',
-    title: 'Not equal to'
-  },
-  {
-    value: 'STARTS_WITH',
-    title: 'Starts with'
-  },
-  {
-    value: 'ENDS_WITH',
-    title: 'Ends with'
-  },
-  {
-    value: 'CONTAINS',
-    title: 'Contains'
-  },
-  {
-    value: 'NOT_CONTAINS',
-    title: 'Does not contain'
-  },
-  {
-    value: 'YES_NO',
-    title: 'Yes / No'
-  }
-];
-export const operatorDictionary: any = {
-  IN: 'Contains',
-  NOT_IN: 'Not in',
-  EQUAL: 'Is',
-  NOT_EQUAL: 'Is not',
-  STARTS_WITH: 'Starts with',
-  ENDS_WITH: 'Ends with',
-  CONTAINS: 'Contains one of the following',
-  NOT_CONTAINS: 'Does not Contain one of the following',
-  YES_NO: 'Yes / No'
-};
 export const testFilterMeta: FilterMeta[] = [
   {
     title: 'Name',
@@ -134,8 +56,6 @@ export const testFilterMeta: FilterMeta[] = [
     type: 'CHOICE_FROM_DATA',
     path: 'agent_teams.name',
     dataPath: 'agent_teams',
-    valueProperty: 'id',
-    titleProperty: 'name',
     uniqueValues: [
       {
         value: 1,
