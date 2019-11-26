@@ -65,6 +65,7 @@ const NewButton = styled(dpstyle.button)`
   &:hover {
     background-color: ${props => props.theme.brandPrimary};
   }
+  border: none;
 `;
 
 const HelpButton = styled.button`
@@ -121,7 +122,6 @@ export interface IProps {
   showViewModeSwitcher?: boolean;
   defaulViewMode?: 'table' | 'list' | 'map';
   showNewButton?: boolean;
-  tableActions?: boolean;
   onChangeView?: (viewMode: string) => void;
   onNewClick?: () => void;
 }
@@ -136,8 +136,7 @@ const Header: SFC<IProps> = ({
   defaulViewMode = 'table',
   showNewButton,
   onChangeView,
-  onNewClick,
-  tableActions
+  onNewClick
 }) => {
   const [state, setState] = useState(defaulViewMode);
 

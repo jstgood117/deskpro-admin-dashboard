@@ -28,7 +28,7 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   width: ${props =>
     props.styles && props.styles.width ? props.styles.width : 'fit-content'};
   height: ${props =>
-    props.styles && props.styles.height ? props.styles.height : '24px'};
+    props.styles && props.styles.height ? props.styles.height : '22px'};
   border: ${props =>
     props.styleType === 'lined' && props.styles && props.styles.borderColor
       ? `1.5px solid ${props.styles.borderColor}`
@@ -48,7 +48,6 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   ${props =>
     props.showBoxShadow &&
     css`
-      border: 2px solid transparent;
       &:hover {
         box-shadow: 0px 3px 5px rgba(159, 204, 243, 0.25);
         border-color: ${_props => _props.theme.lightBlue};

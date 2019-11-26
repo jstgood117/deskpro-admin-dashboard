@@ -70,24 +70,42 @@ const Table: FC<IProps> = ({
   ) as any;
 
   const csvData: any[] = [];
-  page.map((row: any) => {
-    const temp = Object.assign({}, row.values);
-    temp['col.groups'] = temp['col.groups'].map((item: any) => {
-      return item.title;
+  page &&
+    page.length > 0 &&
+    page.map((row: any) => {
+      const temp = Object.assign({}, row.values);
+      temp['col.groups'] =
+        temp['col.groups'] &&
+        temp['col.groups'].length > 0 &&
+        temp['col.groups'].map((item: any) => {
+          return item.title;
+        });
+      temp['col.teams'] =
+        temp['col.teams'] &&
+        temp['col.teams'].length > 0 &&
+        temp['col.teams'].map((item: any) => {
+          return item.name;
+        });
+      temp['col.members'] =
+        temp['col.members'] &&
+        temp['col.members'].length > 0 &&
+        temp['col.members'].map((item: any) => {
+          return item.name;
+        });
+      csvData.push(temp);
+      return true;
     });
-    temp['col.teams'] = temp['col.teams'].map((item: any) => {
-      return item.name;
-    });
-    csvData.push(temp);
-    return true;
-  });
   const headers = [
     { label: 'Name', key: 'col.name' },
     { label: 'Email', key: 'col.email' },
     { label: 'Phone', key: 'col.phone' },
     { label: 'Access', key: 'col.access' },
     { label: 'Teams', key: 'col.teams' },
-    { label: 'Groups', key: 'col.groups' }
+    { label: 'Groups', key: 'col.groups' },
+    { label: 'Members', key: 'col.members' },
+    { label: 'Title', key: 'col.title' },
+    { label: 'Note', key: 'col.note' },
+    { label: 'SysName', key: 'col.sys_name' }
   ];
 
   useEffect(() => {
@@ -97,7 +115,7 @@ const Table: FC<IProps> = ({
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [dropdownValue, setDropdownValue] = useState();
   const [opened, clickButton] = useState(false);
   const [totalRecords, setTotalRecords] = useState<number>(0);

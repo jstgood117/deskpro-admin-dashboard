@@ -47,6 +47,7 @@ const FilterBox: SFC<IProps> = ({
       filters[lastIndex].property &&
       setFilters([...filters, { property: '', operatorName: '', value: '' }]);
   }, [filters, setFilters]);
+
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledBox>

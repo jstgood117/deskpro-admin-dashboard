@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect, FC} from 'react';
+import React, { Fragment, useState, useEffect, FC } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -21,7 +21,7 @@ const SectionHeaderWrapper = styled.div`
 const IconWrapper = styled.div`
   height: 100%;
   display: flex;
-  width: 44px;
+  width: 55px;
   align-items: center;
   & svg {
     margin: auto;
@@ -33,9 +33,16 @@ const SectionTitle = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  font-family: Helvetica;
+  font-size: 15px;
+  line-height: 150%;
+  color: #4c4f50;
 `;
 
-const SectionHeader: FC<{ sectionName: string, icon: string }> = ({ sectionName, icon }) => (
+const SectionHeader: FC<{ sectionName: string; icon: string }> = ({
+  sectionName,
+  icon
+}) => (
   <SectionHeaderWrapper>
     <IconWrapper>
       <Icon name={icon} />
@@ -47,7 +54,7 @@ const SectionHeader: FC<{ sectionName: string, icon: string }> = ({ sectionName,
 );
 
 const List = styled.ul`
-  margin: 10px 0 15px 0;
+  margin: 18px 0 15px 0;
   padding: 0;
 
   &.collapsed {
@@ -60,6 +67,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  line-height: 1.2;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -67,7 +75,7 @@ const ListItem = styled.li`
 `;
 
 const SubgroupTitleContainer = styled.div`
-  padding: 10px 16px 10px 39px;
+  padding: 6px 10px 6px 44px;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -76,8 +84,8 @@ const SubgroupTitleContainer = styled.div`
   font-weight: bold;
 
   &:hover {
-		background-color: #d4dbdf;
-	}
+    background-color: #d4dbdf;
+  }
 `;
 
 export interface IProps {
@@ -102,18 +110,31 @@ const TopLevelNavGroup: FC<{ navItem: ISidebarItem }> = ({ navItem }) => {
   }, [isOpen, setOpen, navItem.navItems, loc]);
 
   const className = isOpen ? '' : 'collapsed';
-  const caretStyle = isOpen ? {} : {transform: 'rotate(180deg)'};
+  const caretStyle = isOpen ? {} : { transform: 'rotate(180deg)' };
 
   return (
     <Fragment>
       <SubgroupTitleContainer onClick={() => setOpen(!isOpen)}>
         <BoxLayout>
-          <BoxFill><TextLabel bold={1}><FormattedMessage id={navItem.itemName} /></TextLabel></BoxFill>
-          <Box><CaretDown style={caretStyle} /></Box>
+          <BoxFill>
+            <TextLabel bold={1}>
+              <FormattedMessage id={navItem.itemName} />
+            </TextLabel>
+          </BoxFill>
+          <Box>
+            <CaretDown style={caretStyle} />
+          </Box>
         </BoxLayout>
       </SubgroupTitleContainer>
       <List className={className}>
-        {navItem.navItems.map((n, idx) => <SidebarItem key={idx} path={n.path!!} itemName={n.itemName} depth={1} />)}
+        {navItem.navItems.map((n, idx) => (
+          <SidebarItem
+            key={idx}
+            path={n.path!!}
+            itemName={n.itemName}
+            depth={1}
+          />
+        ))}
       </List>
     </Fragment>
   );
@@ -124,18 +145,24 @@ const SidebarSection: FC<IProps> = props => {
 
   return (
     <Fragment>
-      <SectionHeader sectionName={sectionName} icon={icon}/>
+      <SectionHeader sectionName={sectionName} icon={icon} />
       {navItems && (
         <List>
-            {navItems.map((navItem, index) => {
-              return (
-                <ListItem key={`${index}.group`}>
-                  {!navItem.navItems || !navItem.navItems.length
-                  ? <SidebarItem path={navItem.path!!} itemName={navItem.itemName} depth={0} />
-                  : <TopLevelNavGroup navItem={navItem} />}
-                </ListItem>
-              );
-            })}
+          {navItems.map((navItem, index) => {
+            return (
+              <ListItem key={`${index}.group`}>
+                {!navItem.navItems || !navItem.navItems.length ? (
+                  <SidebarItem
+                    path={navItem.path!!}
+                    itemName={navItem.itemName}
+                    depth={0}
+                  />
+                ) : (
+                  <TopLevelNavGroup navItem={navItem} />
+                )}
+              </ListItem>
+            );
+          })}
         </List>
       )}
     </Fragment>

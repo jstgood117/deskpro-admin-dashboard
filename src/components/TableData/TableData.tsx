@@ -49,7 +49,13 @@ interface IProps {
 const TableData: React.SFC<IProps> = ({ type, props }) => {
   switch (type) {
     case 'avatar_text':
-      return <NameAndAvatar name={props.name} avatar={props.avatar} />;
+      return (
+        <NameAndAvatar
+          name={props.name}
+          avatar={props.avatar}
+          styleProperties={props.properties}
+        />
+      );
 
     case 'multiple_agents':
       const max = props.max || 3;
@@ -107,7 +113,11 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           items={props.values}
           title={props.title}
           text={props.text}
-          renderItem={(item, index) => <P1 key={index} className='text'>{item}</P1>}
+          renderItem={(item, index) => (
+            <P1 key={index} className='text'>
+              {item}
+            </P1>
+          )}
         />
       );
 
