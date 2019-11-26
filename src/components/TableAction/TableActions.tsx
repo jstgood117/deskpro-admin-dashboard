@@ -1,4 +1,4 @@
-import React, { SFC, useState, useCallback, useContext } from 'react';
+import React, { SFC, useState, useCallback, useContext, useEffect } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
@@ -77,7 +77,7 @@ interface IFilterButton {
   active: boolean;
   existing: boolean;
 }
-const initialFilters: FilterProps[] = [
+const initialFilter: FilterProps[] = [
   { property: '', operatorName: '', value: '', applied: false }
 ];
 
@@ -121,7 +121,7 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
   const [openedGroup, clickButtonGroup] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
   const [applied, apply] = useState(false);
-  const [filters, setFilters] = useState(initialFilters);
+  const [internalFilters, setFilters] = useState(initialFilter);
   const [value, setValue] = useState();
   const [SortList, SetList] = useState(testOrderableMenuItems);
   const checkedState: { [key: string]: boolean } = {};
@@ -129,21 +129,28 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
 
   const { onFilterChange, onSearchChange, filterDef } = context;
 
+
+  useEffect(() => {
+    setFilters([
+      { property: '', operatorName: '', value: '', applied: false }
+    ]);
+  }, []);
+
   const getFilterTitle = (path: string) => {
     const match = filterDef.find((_filter: FilterMeta) => _filter.path === path);
     return match ? match.title : path;
   };
 
   const applyFilter = () => {
-    filters.map(filter => {
+    internalFilters.map(filter => {
       if (filter.operatorName && filter.property && filter.value)
         filter.applied = true;
       return true;
     });
-    setFilters && setFilters([...filters]);
+    setFilters && setFilters(internalFilters);
 
     if (onFilterChange) {
-      onFilterChange(filters);
+      onFilterChange(internalFilters);
     }
 
     apply(true);
@@ -151,8 +158,8 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
   };
 
   const cancelFilter = () => {
-    for (let i = 0; i < filters.length; i++) {
-      const filter = filters[i];
+    for (let i = 0; i < internalFilters.length; i++) {
+      const filter = internalFilters[i];
       if (!filter.applied) {
         onRemove(filter);
         i = -1;
@@ -160,21 +167,22 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
     }
 
     if (onFilterChange) {
-      onFilterChange(filters);
+      onFilterChange(internalFilters);
     }
 
     clickOpenFilter(false);
   };
 
   const _onSearchChange = (_value: string) => {
+
     if (onSearchChange) {
-      onSearchChange(_value, filters);
+      onSearchChange(_value, internalFilters);
     }
   };
 
   const debounceOnSearchChange = useCallback(
     debounce(_onSearchChange, 300),
-    []
+    [internalFilters]
   );
 
   const handleSearchChange = (
@@ -188,24 +196,24 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
 
   const onRemove = useCallback(
     filter => {
-      const currentIndex = filters.indexOf(filter);
+      const currentIndex = internalFilters.indexOf(filter);
       if (currentIndex > -1) {
-        filters.splice(currentIndex, 1);
+        internalFilters.splice(currentIndex, 1);
       }
-      if (filters.length === 0) {
+      if (internalFilters.length === 0) {
         setFilters &&
           setFilters([
             { property: '', operatorName: '', value: '', applied: false }
           ]);
       } else {
-        setFilters && setFilters([...filters]);
+        setFilters && setFilters([...internalFilters]);
       }
 
       if (onFilterChange) {
-        onFilterChange(filters);
+        onFilterChange(internalFilters);
       }
     },
-    [filters, onFilterChange]
+    [internalFilters, onFilterChange]
   );
 
   return (
@@ -224,7 +232,7 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
             <FlexStyled style={{ paddingLeft: 10, position: 'relative' }}>
               <StyledFilterButton
                 active={openedFilter}
-                existing={filters[0].applied}
+                existing={internalFilters[0].applied}
               >
                 <Button
                   className='add-btn'
@@ -236,12 +244,12 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
                 >
                   <Icon name='filter' />
                   Filter{' '}
-                  {filters[0].applied &&
+                  {internalFilters[0].applied &&
                     `(${
-                      filters.filter(filter => filter.applied === true).length
+                      internalFilters.filter(filter => filter.applied === true).length
                     })`}
                 </Button>
-                {filters[0].applied && (
+                {internalFilters[0].applied && (
                   <Button
                     className='close-btn'
                     styleType='secondary'
@@ -265,7 +273,7 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
               <FilterContainer>
                 {openedFilter && (
                   <FilterBox
-                    filters={filters}
+                    filters={internalFilters}
                     setFilters={setFilters}
                     options={filterDef}
                     cancel={cancelFilter}
@@ -333,10 +341,10 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
           )}
         </FlexStyled>
       </TableItems>
-      {filters[0].applied && (
+      {internalFilters[0].applied && (
         <FilterItems>
           {applied &&
-            filters.map(
+            internalFilters.map(
               (filter, index: number) =>
                 filter.value &&
                 filter.property &&

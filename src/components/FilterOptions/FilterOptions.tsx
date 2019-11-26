@@ -112,6 +112,7 @@ const FilterOptions: FC<IProps> = ({
   options,
   ...props
 }) => {
+
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
@@ -142,7 +143,6 @@ const FilterOptions: FC<IProps> = ({
         return true;
       });
     }
-
     setFilters && setFilters(filters);
   }, [
     currentOperator,
