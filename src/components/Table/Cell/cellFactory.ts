@@ -3,7 +3,6 @@ import TableData from '../../TableData';
 import { getColorByIndex } from '../../../utils/getRandomColor';
 import { ITableColor } from '../../../resources/interfaces';
 
-
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
 };
@@ -37,7 +36,10 @@ export const create = (cell: any) => {
 
   switch (type as CellEnum) {
     case 'NAME_AVATAR':
-      const avatarProps = { type: 'avatar_text', props: { name: cell.value } };
+      const avatarProps = {
+        type: 'avatar_text',
+        props: { name: cell.value, properties: getColor(Math.floor(Math.random() * 20)) }
+      };
       return cellRenderer(avatarProps);
 
     case 'BOOLEAN_YESNO':
@@ -58,10 +60,16 @@ export const create = (cell: any) => {
 
     case 'AGENT_GROUP_LIST':
       const agentGroupList = [cell.value.map((_item: any) => _item.title)];
-      return cellRenderer({ type: 'string', props: { values: agentGroupList } });
+      return cellRenderer({
+        type: 'string',
+        props: { values: agentGroupList }
+      });
 
     case 'TEXT_COMMA_SEP':
-      return cellRenderer({ type: 'string', props: { values: cell.value, max: 1 } });
+      return cellRenderer({
+        type: 'string',
+        props: { values: cell.value, max: 1 }
+      });
 
     case 'TEXT':
     default:

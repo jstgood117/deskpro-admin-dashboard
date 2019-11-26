@@ -49,10 +49,6 @@ export const TableStyled = styled(dpstyle.div)`
             line-height: 44px;
             color: ${props => props.theme.staticColour};
             vertical-align: middle;
-            > * {
-              white-space: nowrap;
-              flex-wrap: nowrap;
-            }
             & img {
               width: 25px;
               height: 25px;
