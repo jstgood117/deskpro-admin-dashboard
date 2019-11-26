@@ -18,9 +18,6 @@ const PageType: SFC<IProps> = ({ path }) => {
     path
   } as PageContextValuesType;
 
-  console.log('HELLO!');
-  console.log(path);
-
   let page = null;
   switch (path) {
     case '/agents':
