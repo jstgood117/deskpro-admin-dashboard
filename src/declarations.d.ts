@@ -5,3 +5,5 @@ declare module 'react-day-picker';
 declare module 'moment';
 declare module 'react-sortablejs';
 declare module 'react-autocomplete';
+declare module 'multi-select-react';
+declare module 'react-csv';

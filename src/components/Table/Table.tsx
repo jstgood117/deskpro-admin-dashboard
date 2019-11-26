@@ -20,6 +20,7 @@ import {
 import Menu from '../Menu';
 import { testDropdownItemsWithIcon } from '../../resources/constants/constants';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
+import { CSVLink } from 'react-csv';
 
 export type IProps = {
   data: any[];
@@ -67,6 +68,27 @@ const Table: FC<IProps> = ({
     usePagination,
     useRowSelect
   ) as any;
+
+  const csvData: any[] = [];
+  page.map((row: any) => {
+    const temp = Object.assign({}, row.values);
+    temp['col.groups'] = temp['col.groups'].map((item: any) => {
+      return item.title;
+    });
+    temp['col.teams'] = temp['col.teams'].map((item: any) => {
+      return item.name;
+    });
+    csvData.push(temp);
+    return true;
+  });
+  const headers = [
+    { label: 'Name', key: 'col.name' },
+    { label: 'Email', key: 'col.email' },
+    { label: 'Phone', key: 'col.phone' },
+    { label: 'Access', key: 'col.access' },
+    { label: 'Teams', key: 'col.teams' },
+    { label: 'Groups', key: 'col.groups' }
+  ];
 
   useEffect(() => {
     fetchData && fetchData({ pageIndex, pageSize });
@@ -169,7 +191,7 @@ const Table: FC<IProps> = ({
                 menuItems={testDropdownItemsWithIcon}
                 iconName='menu'
               />
-              {menuValue && (
+              {menuValue && menuValue.name === 'Delete Agents' && (
                 <div style={{ display: 'flex' }}>
                   <div style={{ paddingLeft: 16 }}>
                     <Button
@@ -197,9 +219,16 @@ const Table: FC<IProps> = ({
           )}
         </AllCheckStyle>
         <div style={{ paddingRight: 24 }}>
-          <Button styleType='tertiary' size='small' iconOnly={true}>
-            <Icon name='export' />
-          </Button>
+          <CSVLink
+            data={csvData}
+            filename={'Agents.csv'}
+            headers={headers}
+            target='_blank'
+          >
+            <Button styleType='tertiary' size='small' iconOnly={true}>
+              <Icon name='export' />
+            </Button>
+          </CSVLink>
         </div>
         <Pagination
           totalRecords={totalRecords}
