@@ -73,8 +73,6 @@ const Table: FC<IProps> = ({
   page &&
     page.length > 0 &&
     page.map((row: any) => {
-      console.log(row.values);
-
       const temp = Object.assign({}, row.values);
       temp['col.groups'] =
         temp['col.groups'] &&
