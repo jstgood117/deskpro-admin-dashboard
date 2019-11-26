@@ -67,6 +67,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  line-height: 1.2;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -75,7 +76,6 @@ const ListItem = styled.li`
 
 const SubgroupTitleContainer = styled.div`
   padding: 6px 10px 6px 44px;
-  font-size: 14px;
   display: flex;
   align-items: center;
   flex-direction: row;

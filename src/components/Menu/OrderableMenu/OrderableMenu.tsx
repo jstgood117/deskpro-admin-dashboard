@@ -218,7 +218,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
-            hAlign: 'left',
+            hAlign: 'right',
             forceVAlign: true,
             forcePosition: true
           }}

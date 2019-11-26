@@ -30,7 +30,6 @@ const NameAndAvatar: React.SFC<IProps> = ({
   containerClassName,
   styleProperties
 }) => {
-  console.log(styleProperties);
   return (
     <FlowLayout style={containerStyle} className={containerClassName}>
       <Avatar

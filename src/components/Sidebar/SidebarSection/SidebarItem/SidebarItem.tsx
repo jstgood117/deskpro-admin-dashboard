@@ -10,7 +10,6 @@ interface IStyleProps {
 
 const SidebarItemStyled = styled(NavLink)<IStyleProps>`
   padding: 6px 10px 6px 44px;
-  font-size: 14px;
   color: ${props => props.theme.staticColour};
   text-decoration: none;
   margin: 0;

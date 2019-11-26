@@ -53,7 +53,7 @@ export const create = (cell: any) => {
 
     case 'AGENT_TEAM_LIST':
       const agentTeamProps = {
-        styleType: 'avatar',
+        styleType: 'label',
         teams: cell.value.map(generateAvatar)
       };
       return cellRenderer({ type: 'multiple_teams', props: agentTeamProps });
