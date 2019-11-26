@@ -43,6 +43,11 @@ export interface ITableColumn {
   sort?: string;
 }
 
+export type ColumnOrder = {
+  column: string;
+  show: boolean;
+};
+
 export interface ISidebarSection {
   sectionName: string;
   icon: string;

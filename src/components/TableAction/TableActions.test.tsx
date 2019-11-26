@@ -3,6 +3,10 @@ import { mount, shallow } from '../../test/enzyme';
 
 import TableActions, { IProps } from './TableActions';
 
+import {
+  ColumnOrder
+} from '../../resources/interfaces';
+
 describe('TableActions', () => {
   let props: IProps;
   let mountedTableActions: any;
@@ -23,7 +27,12 @@ describe('TableActions', () => {
       sortMenu: true,
       groupMenu: true,
       viewMenu: true,
-      intl: (value: string) => value
+      intl: (value: string) => value,
+      onOrderChange: (order: ColumnOrder[]) => {
+        order.sort();
+        return;
+      }
+
     };
     mountedTableActions = undefined;
   });

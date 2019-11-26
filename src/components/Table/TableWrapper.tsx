@@ -5,7 +5,7 @@ import { injectIntl } from 'react-intl';
 
 import { runFilters } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
-import { ITableSetup } from '../../resources/interfaces';
+import { ITableSetup, ColumnOrder } from '../../resources/interfaces';
 import { logError } from '../Error/ErrorBoundary';
 import { testTableData2 } from '../../resources/constants/mock/testTableData2';
 import { testTableData3 } from '../../resources/constants/mock/testTableData3';
@@ -21,6 +21,7 @@ interface IProps {
   dataType: string;
   dataQuery: string;
   tableDef: ITableSetup;
+  columnOrder: ColumnOrder[];
   filters?: FilterType[];
 }
 
@@ -37,21 +38,35 @@ const generateSortType = (sortType: string) => {
   }
 };
 
-const transformColumnData = (columns: ITableColumn[], intl: any) => {
-  const newCols = columns.map((column: ITableColumn) => {
-    return {
-      id: column.title,
-      Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
-      accessor: column.data[0].path,
-      type: column.field,
-      sortType: generateSortType(column.sort)
-    };
+const transformColumnData = (columns: ITableColumn[], columnOrder: ColumnOrder[], intl: any) => {
+
+  const newCols: any[] = [];
+  columnOrder.forEach((_order: ColumnOrder) => {
+    const column = columns.find(_col => _order.column === _col.title);
+    if(_order.show) {
+      newCols.push({
+        id: column.title,
+        Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
+        accessor: column.data[0].path,
+        type: column.field,
+        sortType: generateSortType(column.sort)
+      });
+    }
   });
 
   return newCols;
 };
 
-const TableWrapper: SFC<ITableSetup & IProps> = ({intl, path, client, dataQuery, tableDef, filters, dataType}) => {
+const TableWrapper: SFC<ITableSetup & IProps> = ({
+  intl,
+  path,
+  client,
+  dataQuery,
+  tableDef,
+  filters,
+  dataType,
+  columnOrder
+}) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -111,14 +126,14 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({intl, path, client, dataQuery,
       {dataType === 'sync' && (
         <Table
           data={filteredData}
-          columns={transformColumnData([...tableDef.columns], intl)}
+          columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
           tableType='sync'
         />
       )}
       {dataType === 'async' && (
         <Table
           data={filteredData}
-          columns={transformColumnData([...tableDef.columns], intl)}
+          columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
           fetchData={fetchData}
           loading={loading}
           pageCount={totalPageCount}

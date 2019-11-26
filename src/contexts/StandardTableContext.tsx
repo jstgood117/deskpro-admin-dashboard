@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FilterType } from '../services/filters/types';
-import { ITableSetup, ITableColumn } from '../resources/interfaces';
+import { ITableSetup, ITableColumn, ColumnOrder } from '../resources/interfaces';
 import { FilterProps, FilterMeta } from '../resources/interfaces/filterMeta';
 
 export type StandardTableContextValues = {
@@ -11,6 +11,7 @@ export type StandardTableContextValues = {
   onSearchChange: (value: string, filters: FilterProps[]) => void;
   tableDef: ITableSetup;
   filterDef: FilterMeta[];
+  initialColumnOrder: ColumnOrder[];
 };
 
 const filterDef: FilterMeta[] = [];
@@ -23,7 +24,8 @@ const defaultContextValues: StandardTableContextValues = {
   onFilterChange: (rules: FilterProps[]) => undefined,
   onSearchChange: (value: string, filters: FilterProps[]) => undefined,
   tableDef: {columns},
-  filterDef
+  filterDef,
+  initialColumnOrder:[]
 };
 export const StandardTableContext = React.createContext(defaultContextValues);
 export const StandardTableProvider = StandardTableContext.Provider;
