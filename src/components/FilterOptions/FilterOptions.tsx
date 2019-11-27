@@ -20,6 +20,7 @@ import {
   getOperatorByTitle,
   getCurrentOperators
 } from './helpers/funcs';
+import MultiSelect from '../MultiSelect';
 
 const StyledFilterOptions = styled.div`
   display: flex;
@@ -52,6 +53,12 @@ const StyledFilterOptions = styled.div`
   }
   .focus {
     border: 1px solid ${props => props.theme.lightBlue};
+  }
+  .basic-multi-select {
+    .select__control {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
   }
 `;
 const StyledAutoComplete = styled.div<{ name: string }>`
@@ -112,7 +119,6 @@ const FilterOptions: FC<IProps> = ({
   options,
   ...props
 }) => {
-
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
@@ -350,7 +356,10 @@ const FilterOptions: FC<IProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
-          <Input
+          <div style={{ minWidth: 218 }}>
+            <MultiSelect />
+          </div>
+          {/* <Input
             style={{ minWidth: 218 }}
             value={
               filter && filter.value !== undefined ? filter.value : filterValue
@@ -365,7 +374,7 @@ const FilterOptions: FC<IProps> = ({
               setFilterValue(event.target.value);
             }}
             containerClassName='input-wrapper'
-          />
+          /> */}
         </div>
         <div style={{ paddingLeft: 10 }} className='remove-btn'>
           <Button
