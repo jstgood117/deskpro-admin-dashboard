@@ -13,6 +13,12 @@ export const getOptionPropertyByPath = (path: string, containProperties: FilterM
   return match ? match.title : '';
 };
 
+export const getTypeByPath = (path: string, containProperties: FilterMeta[]) => {
+  const match = containProperties.find(_option => _option.path === path);
+
+  return match ? match.type : 'TEXT';
+};
+
 export const getPathByOptionProperty = (title: string, containProperties: FilterMeta[]) => {
   const match = containProperties.find(_option => _option.title === title);
   return match ? match.path : '';

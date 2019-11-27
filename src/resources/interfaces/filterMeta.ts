@@ -47,6 +47,7 @@ export type FilterProps = {
   operatorName: string;
   value: string;
   applied?: boolean;
+  type?: string;
 };
 
 export type FilterValueType = 'BOOL' | 'TEXT' | 'CHOICE_FROM_DATA';
