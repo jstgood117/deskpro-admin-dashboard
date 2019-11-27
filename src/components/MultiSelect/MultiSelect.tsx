@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 
-import Select from 'react-select';
+import Select, { components } from 'react-select';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { dpstyle } from '../Styled';
@@ -10,7 +10,7 @@ import { DeskproAdminTheme } from '../Theme';
 export interface IProps {}
 
 const colourOptions = [
-  { value: 'blue', label: 'Blue' },
+  { value: 'blue', label: 'Blue', icon: <Icon name='downVector' /> },
   { value: 'purple', label: 'Purple' },
   { value: 'red', label: 'Red' },
   { value: 'orange', label: 'Orange' },
@@ -19,6 +19,10 @@ const colourOptions = [
   { value: 'forest', label: 'Forest' },
   { value: 'slate', label: 'Slate' },
   { value: 'silver', label: 'Silver' }
+];
+const temp = [
+  { value: 'blue', label: 'Blue', icon: <Icon name='downVector' /> },
+  { value: 'purple', label: 'Purple' }
 ];
 
 const colourStyles = {
@@ -48,7 +52,13 @@ const colourStyles = {
       fontWeight: isSelected ? '600' : '400',
       fontSize: 14,
       paddingLeft: 15,
-      lineHeight: '150%'
+      lineHeight: '150%',
+      display: 'flex',
+      alignItems: 'center',
+      ':active': {
+        ...styles[':active'],
+        backgroundColor: '#E8EBEE'
+      }
     };
   },
   multiValue: (styles: any, { data }: any) => ({
@@ -85,13 +95,19 @@ const StyledMultiSelect = styled(dpstyle.div)`
     border-radius: 4px;
     background: ${props => props.theme.white};
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    overflow-y: hidden;
     margin: 0;
+    .select__menu-list {
+      overflow-y: hidden;
+    }
+    .select__option {
+      .option-label {
+        flex: 1;
+      }
+    }
   }
   .select__control {
     min-height: 34px;
-    .select__value-container {
-      padding: 0px 9px;
-    }
     .select__indicators {
       padding-right: 12px;
       cursor: default;
@@ -102,6 +118,49 @@ const StyledMultiSelect = styled(dpstyle.div)`
 const DropdownIndicator = () => {
   return <Icon name='downVector' />;
 };
+
+const { Option } = components;
+
+const IconOption = (props: any) => (
+  <Option {...props}>
+    <div className='option-label'>{props.data.label}</div>
+    {props.isSelected && (
+      <span className='option-icon'>
+        <Icon name='check-2' />
+      </span>
+    )}
+  </Option>
+);
+
+const ValueContainer = ({ children, ...props }: any) => {
+  const { getValue } = props;
+  const nbValues = getValue().length;
+  if (nbValues < 3) {
+    return (
+      <components.ValueContainer {...props}>
+        {children}
+      </components.ValueContainer>
+    );
+  }
+  return (
+    <components.ValueContainer {...props} options={temp}>
+      {children[0][0]}
+      {children[0][1]}
+      <span
+        style={{
+          fontStyle: 'normal',
+          fontWeight: 'bold',
+          fontSize: 12,
+          lineHeight: '150%',
+          color: '#8B9293'
+        }}
+      >
+        +{nbValues - 2}
+      </span>
+    </components.ValueContainer>
+  );
+};
+
 const MultiSelect: SFC<IProps> = () => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -118,7 +177,9 @@ const MultiSelect: SFC<IProps> = () => {
           components={{
             ClearIndicator: false,
             DropdownIndicator,
-            IndicatorSeparator: null
+            IndicatorSeparator: null,
+            Option: IconOption,
+            ValueContainer
           }}
         />
       </StyledMultiSelect>

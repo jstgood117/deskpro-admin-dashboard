@@ -367,9 +367,12 @@ const FilterOptions: FC<IProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
-          {((currentType === undefined && filter.type === undefined) ||
-            currentType === 'TEXT' ||
-            filter.type === 'TEXT') && (
+          {currentType === 'CHOICE_FROM_DATA' ||
+          filter.type === 'CHOICE_FROM_DATA' ? (
+            <div style={{ minWidth: 218 }}>
+              <MultiSelect />
+            </div>
+          ) : (
             <Input
               disabled={!currentProperty && !currentPath}
               style={{ minWidth: 218 }}
@@ -389,12 +392,6 @@ const FilterOptions: FC<IProps> = ({
               }}
               containerClassName='input-wrapper'
             />
-          )}
-          {(currentType === 'CHOICE_FROM_DATA' ||
-            filter.type === 'CHOICE_FROM_DATA') && (
-            <div style={{ minWidth: 218 }}>
-              <MultiSelect />
-            </div>
           )}
         </div>
         <div style={{ paddingLeft: 10 }} className='remove-btn'>
