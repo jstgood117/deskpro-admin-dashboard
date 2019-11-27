@@ -22,6 +22,7 @@ import {
   getCurrentOperators
 } from './helpers/funcs';
 import MultiSelect from '../MultiSelect';
+import { IOptions } from '../MultiSelect/MultiSelect';
 
 const StyledFilterOptions = styled.div`
   display: flex;
@@ -100,6 +101,14 @@ const StyledAutoComplete = styled.div<{ name: string }>`
     height: 34px;
   }
 `;
+
+const multiSelectOtions: IOptions[] = [
+  { value: 'accounting', label: 'Accounting' },
+  { value: 'filter1', label: 'Filter1' },
+  { value: 'filter2', label: 'Filter2' },
+  { value: 'filter3', label: 'Filter3' },
+  { value: 'item', label: 'Item' }
+];
 
 export interface IProps {
   intl: any;
@@ -369,8 +378,8 @@ const FilterOptions: FC<IProps> = ({
         <div>
           {currentType === 'CHOICE_FROM_DATA' ||
           filter.type === 'CHOICE_FROM_DATA' ? (
-            <div style={{ minWidth: 218 }}>
-              <MultiSelect />
+            <div style={{ minWidth: 218, width: 'max-content' }}>
+              <MultiSelect options={multiSelectOtions}/>
             </div>
           ) : (
             <Input

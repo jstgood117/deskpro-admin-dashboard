@@ -7,25 +7,16 @@ import { dpstyle } from '../Styled';
 import Icon from '../Icon';
 import { DeskproAdminTheme } from '../Theme';
 
-export interface IProps {}
+export interface IProps {
+  options: IOptions[];
+}
 
-const colourOptions = [
-  { value: 'blue', label: 'Blue', icon: <Icon name='downVector' /> },
-  { value: 'purple', label: 'Purple' },
-  { value: 'red', label: 'Red' },
-  { value: 'orange', label: 'Orange' },
-  { value: 'yellow', label: 'Yellow' },
-  { value: 'green', label: 'Green' },
-  { value: 'forest', label: 'Forest' },
-  { value: 'slate', label: 'Slate' },
-  { value: 'silver', label: 'Silver' }
-];
-const temp = [
-  { value: 'blue', label: 'Blue', icon: <Icon name='downVector' /> },
-  { value: 'purple', label: 'Purple' }
-];
+export interface IOptions {
+  value: string;
+  label: string;
+}
 
-const colourStyles = {
+const selectStyles = {
   control: (styles: any) => {
     return {
       ...styles,
@@ -34,6 +25,7 @@ const colourStyles = {
       borderRadius: 4,
       minHeight: 'unset',
       boxShadow: 'none',
+      borderColor: '#D3D6D7',
       ':focus-within': {
         ...styles[':focus-within'],
         border: 'border: 1px solid',
@@ -61,7 +53,7 @@ const colourStyles = {
       }
     };
   },
-  multiValue: (styles: any, { data }: any) => ({
+  multiValue: (styles: any) => ({
     ...styles,
     borderRadius: 40,
     paddingLeft: 6,
@@ -76,7 +68,7 @@ const colourStyles = {
     fontSize: 13,
     color: '#1C3E55'
   }),
-  multiValueRemove: (styles: any, { data }: any) => {
+  multiValueRemove: (styles: any) => {
     return {
       ...styles,
       fontStyle: 'normal',
@@ -143,7 +135,7 @@ const ValueContainer = ({ children, ...props }: any) => {
     );
   }
   return (
-    <components.ValueContainer {...props} options={temp}>
+    <components.ValueContainer {...props}>
       {children[0][0]}
       {children[0][1]}
       <span
@@ -161,18 +153,18 @@ const ValueContainer = ({ children, ...props }: any) => {
   );
 };
 
-const MultiSelect: SFC<IProps> = () => {
+const MultiSelect: SFC<IProps> = ({options}) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledMultiSelect>
         <Select
           isMulti={true}
           name='colors'
-          options={colourOptions}
+          options={options}
           className='basic-multi-select'
           classNamePrefix='select'
           placeholder='Select value'
-          styles={colourStyles}
+          styles={selectStyles}
           hideSelectedOptions={false}
           components={{
             ClearIndicator: false,
