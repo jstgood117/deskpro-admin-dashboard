@@ -17,6 +17,7 @@ import {
   getIntlOperatorTitle,
   getOptionPropertyByPath,
   getPathByOptionProperty,
+  getTypeByPath,
   getOperatorByTitle,
   getCurrentOperators
 } from './helpers/funcs';
@@ -120,6 +121,7 @@ const FilterOptions: FC<IProps> = ({
   ...props
 }) => {
   const [currentProperty, setProperty] = useState();
+  const [currentType, setType] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
   const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
@@ -149,6 +151,12 @@ const FilterOptions: FC<IProps> = ({
         return true;
       });
     }
+    if (currentType) {
+      containProperties.map(item => {
+        if (item.path === currentPath) filters[index].type = currentType;
+        return true;
+      });
+    }
     setFilters && setFilters(filters);
   }, [
     currentOperator,
@@ -157,9 +165,11 @@ const FilterOptions: FC<IProps> = ({
     index,
     setFilters,
     containOptions,
-    containProperties
+    containProperties,
+    currentType
   ]);
-
+  console.log('options', options);
+  console.log('currentType', currentType);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledFilterOptions>
@@ -226,6 +236,7 @@ const FilterOptions: FC<IProps> = ({
               }}
               onSelect={(val: string) => {
                 setProperty(getOptionPropertyByPath(val, containProperties));
+                setType(getTypeByPath(val, containProperties));
                 setCurrentPath(val);
                 const newItems = options.filter(_option => {
                   if (_option.path === val) {
@@ -356,25 +367,35 @@ const FilterOptions: FC<IProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
-          <div style={{ minWidth: 218 }}>
-            <MultiSelect />
-          </div>
-          {/* <Input
-            style={{ minWidth: 218 }}
-            value={
-              filter && filter.value !== undefined ? filter.value : filterValue
-            }
-            onClear={() => {
-              filters[index].value = '';
-              setFilterValue('');
-            }}
-            showClear={true}
-            onChange={event => {
-              filters[index].value = event.target.value;
-              setFilterValue(event.target.value);
-            }}
-            containerClassName='input-wrapper'
-          /> */}
+          {((currentType === undefined && filter.type === undefined) ||
+            currentType === 'TEXT' ||
+            filter.type === 'TEXT') && (
+            <Input
+              disabled={!currentProperty && !currentPath}
+              style={{ minWidth: 218 }}
+              value={
+                filter && filter.value !== undefined
+                  ? filter.value
+                  : filterValue
+              }
+              onClear={() => {
+                filters[index].value = '';
+                setFilterValue('');
+              }}
+              showClear={true}
+              onChange={event => {
+                filters[index].value = event.target.value;
+                setFilterValue(event.target.value);
+              }}
+              containerClassName='input-wrapper'
+            />
+          )}
+          {(currentType === 'CHOICE_FROM_DATA' ||
+            filter.type === 'CHOICE_FROM_DATA') && (
+            <div style={{ minWidth: 218 }}>
+              <MultiSelect />
+            </div>
+          )}
         </div>
         <div style={{ paddingLeft: 10 }} className='remove-btn'>
           <Button
