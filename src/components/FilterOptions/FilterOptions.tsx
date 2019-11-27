@@ -25,7 +25,7 @@ import MultiSelect from '../MultiSelect';
 
 const StyledFilterOptions = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   .input-wrapper {
     background: ${props => props.theme.white};
     border: 1px solid ${props => props.theme.greyLight};

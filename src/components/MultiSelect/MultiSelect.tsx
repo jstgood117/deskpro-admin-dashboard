@@ -1,36 +1,24 @@
 import React, { SFC } from 'react';
 
 import Select from 'react-select';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 import { dpstyle } from '../Styled';
+import Icon from '../Icon';
+import { DeskproAdminTheme } from '../Theme';
 
 export interface IProps {}
 
 const colourOptions = [
-  {
-    value: 'itemCategory',
-    label: 'Item Category',
-    color: '#4C4F50',
-    isFixed: true,
-    isDisabled: true
-  },
-  { value: 'blue', label: 'Blue', color: '#4C4F50' },
-  { value: 'purple', label: 'Purple', color: '#4C4F50' },
-  { value: 'red', label: 'Red', color: '#4C4F50' },
-  { value: 'orange', label: 'Orange', color: '#4C4F50' },
-  { value: 'yellow', label: 'Yellow', color: '#4C4F50' },
-  { value: 'green', label: 'Green', color: '#4C4F50' },
-  { value: 'forest', label: 'Forest', color: '#4C4F50' },
-  { value: 'slate', label: 'Slate', color: '#4C4F50' },
-  { value: 'silver', label: 'Silver', color: '#4C4F50' },
-  {
-    value: 'itemCategory2',
-    label: 'Item Category2',
-    color: '#4C4F50',
-    isFixed: true,
-    isDisabled: true
-  }
+  { value: 'blue', label: 'Blue' },
+  { value: 'purple', label: 'Purple' },
+  { value: 'red', label: 'Red' },
+  { value: 'orange', label: 'Orange' },
+  { value: 'yellow', label: 'Yellow' },
+  { value: 'green', label: 'Green' },
+  { value: 'forest', label: 'Forest' },
+  { value: 'slate', label: 'Slate' },
+  { value: 'silver', label: 'Silver' }
 ];
 
 const colourStyles = {
@@ -40,7 +28,6 @@ const colourStyles = {
       backgroundColor: '#FFFFFF',
       boxSizing: 'border-box',
       borderRadius: 4,
-      height: 34,
       minHeight: 'unset',
       boxShadow: 'none',
       ':focus-within': {
@@ -53,25 +40,39 @@ const colourStyles = {
       }
     };
   },
-  option: (styles: any, { data, isFocused }: any) => {
+  option: (styles: any, { data, isFocused, isSelected }: any) => {
     return {
       ...styles,
       backgroundColor: !data.isDisabled && isFocused ? '#E8EBEE' : '#FFFFFF',
-      color: data.color,
-      fontWeight: data.isFixed ? '600' : '400',
+      color: isSelected ? '#1C3E55' : '#4C4F50',
+      fontWeight: isSelected ? '600' : '400',
       fontSize: 14,
       paddingLeft: 15,
       lineHeight: '150%'
     };
   },
-  multiValueLabel: (styles: any, { data }: any) => ({
+  multiValue: (styles: any, { data }: any) => ({
     ...styles,
-    color: data.color
+    borderRadius: 40,
+    paddingLeft: 6,
+    paddingRight: 8,
+    marginRight: 4,
+    background: '#E8EBEE'
+  }),
+  multiValueLabel: (styles: any) => ({
+    ...styles,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 13,
+    color: '#1C3E55'
   }),
   multiValueRemove: (styles: any, { data }: any) => {
     return {
       ...styles,
-      color: data.color,
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      fontSize: 13,
+      color: '#1C3E55',
       ':hover': {
         backgroundColor: 'transparent'
       }
@@ -81,37 +82,47 @@ const colourStyles = {
 
 const StyledMultiSelect = styled(dpstyle.div)`
   .select__menu {
+    border-radius: 4px;
+    background: ${props => props.theme.white};
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     margin: 0;
-    border-radius: 0;
-    background: #ffffff;
-    box-shadow: none;
-    border: 1px solid #d3d6d7;
-    border-top: 0px;
-    box-sizing: border-box;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
   }
-  .select__indicators {
-    height: 32px;
+  .select__control {
+    min-height: 34px;
+    .select__value-container {
+      padding: 0px 9px;
+    }
+    .select__indicators {
+      padding-right: 12px;
+      cursor: default;
+    }
   }
 `;
 
+const DropdownIndicator = () => {
+  return <Icon name='downVector' />;
+};
 const MultiSelect: SFC<IProps> = () => {
   return (
-    <StyledMultiSelect>
-      <Select
-        isMulti={true}
-        name='colors'
-        options={colourOptions}
-        className='basic-multi-select'
-        classNamePrefix='select'
-        styles={colourStyles}
-        components={{
-          DropdownIndicator: null,
-          IndicatorSeparator: null
-        }}
-      />
-    </StyledMultiSelect>
+    <ThemeProvider theme={DeskproAdminTheme}>
+      <StyledMultiSelect>
+        <Select
+          isMulti={true}
+          name='colors'
+          options={colourOptions}
+          className='basic-multi-select'
+          classNamePrefix='select'
+          placeholder='Select value'
+          styles={colourStyles}
+          hideSelectedOptions={false}
+          components={{
+            ClearIndicator: false,
+            DropdownIndicator,
+            IndicatorSeparator: null
+          }}
+        />
+      </StyledMultiSelect>
+    </ThemeProvider>
   );
 };
 
