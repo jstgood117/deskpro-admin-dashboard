@@ -17,16 +17,13 @@ import {
   getIntlOperatorTitle,
   getOptionPropertyByPath,
   getPathByOptionProperty,
-  getTypeByPath,
   getOperatorByTitle,
   getCurrentOperators
 } from './helpers/funcs';
-import MultiSelect from '../MultiSelect';
-import { IOptions } from '../MultiSelect/MultiSelect';
 
 const StyledFilterOptions = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   .input-wrapper {
     background: ${props => props.theme.white};
     border: 1px solid ${props => props.theme.greyLight};
@@ -55,12 +52,6 @@ const StyledFilterOptions = styled.div`
   }
   .focus {
     border: 1px solid ${props => props.theme.lightBlue};
-  }
-  .basic-multi-select {
-    .select__control {
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
-    }
   }
 `;
 const StyledAutoComplete = styled.div<{ name: string }>`
@@ -102,14 +93,6 @@ const StyledAutoComplete = styled.div<{ name: string }>`
   }
 `;
 
-const multiSelectOtions: IOptions[] = [
-  { value: 'accounting', label: 'Accounting' },
-  { value: 'filter1', label: 'Filter1' },
-  { value: 'filter2', label: 'Filter2' },
-  { value: 'filter3', label: 'Filter3' },
-  { value: 'item', label: 'Item' }
-];
-
 export interface IProps {
   intl: any;
   placeholder?: string;
@@ -129,8 +112,8 @@ const FilterOptions: FC<IProps> = ({
   options,
   ...props
 }) => {
+
   const [currentProperty, setProperty] = useState();
-  const [currentType, setType] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
   const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
@@ -160,12 +143,6 @@ const FilterOptions: FC<IProps> = ({
         return true;
       });
     }
-    if (currentType) {
-      containProperties.map(item => {
-        if (item.path === currentPath) filters[index].type = currentType;
-        return true;
-      });
-    }
     setFilters && setFilters(filters);
   }, [
     currentOperator,
@@ -174,11 +151,9 @@ const FilterOptions: FC<IProps> = ({
     index,
     setFilters,
     containOptions,
-    containProperties,
-    currentType
+    containProperties
   ]);
-  console.log('options', options);
-  console.log('currentType', currentType);
+
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledFilterOptions>
@@ -245,7 +220,6 @@ const FilterOptions: FC<IProps> = ({
               }}
               onSelect={(val: string) => {
                 setProperty(getOptionPropertyByPath(val, containProperties));
-                setType(getTypeByPath(val, containProperties));
                 setCurrentPath(val);
                 const newItems = options.filter(_option => {
                   if (_option.path === val) {
@@ -376,32 +350,22 @@ const FilterOptions: FC<IProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
-          {currentType === 'CHOICE_FROM_DATA' ||
-          filter.type === 'CHOICE_FROM_DATA' ? (
-            <div style={{ minWidth: 218, width: 'max-content' }}>
-              <MultiSelect options={multiSelectOtions}/>
-            </div>
-          ) : (
-            <Input
-              disabled={!currentProperty && !currentPath}
-              style={{ minWidth: 218 }}
-              value={
-                filter && filter.value !== undefined
-                  ? filter.value
-                  : filterValue
-              }
-              onClear={() => {
-                filters[index].value = '';
-                setFilterValue('');
-              }}
-              showClear={true}
-              onChange={event => {
-                filters[index].value = event.target.value;
-                setFilterValue(event.target.value);
-              }}
-              containerClassName='input-wrapper'
-            />
-          )}
+          <Input
+            style={{ minWidth: 218 }}
+            value={
+              filter && filter.value !== undefined ? filter.value : filterValue
+            }
+            onClear={() => {
+              filters[index].value = '';
+              setFilterValue('');
+            }}
+            showClear={true}
+            onChange={event => {
+              filters[index].value = event.target.value;
+              setFilterValue(event.target.value);
+            }}
+            containerClassName='input-wrapper'
+          />
         </div>
         <div style={{ paddingLeft: 10 }} className='remove-btn'>
           <Button
