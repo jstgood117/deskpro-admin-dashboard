@@ -11,4 +11,6 @@ const options: IOptions[] = [
   { value: 'item', label: 'Item' }
 ];
 
-storiesOf('MultiSelect', module).add('default', () => <MultiSelect options={options}/>);
+storiesOf('MultiSelect', module)
+  .add('searchable type', () => <MultiSelect options={options} type='autocomplete' />)
+  .add('button type', () => <MultiSelect options={options} type='fixed' />);

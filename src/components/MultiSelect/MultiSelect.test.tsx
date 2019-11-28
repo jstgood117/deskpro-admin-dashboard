@@ -18,7 +18,8 @@ describe('MultiSelect', () => {
 
   beforeEach(() => {
     props = {
-      options: [{ value: 'accounting', label: 'Accounting' }]
+      options: [{ value: 'accounting', label: 'Accounting' }],
+      type: 'autocomplete'
     };
   });
 
