@@ -121,7 +121,6 @@ const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
     setFilters(searchFilter);
   };
 
-
   const onOrderChange = (
     _columnOrder: ColumnOrder[]
   ) => {

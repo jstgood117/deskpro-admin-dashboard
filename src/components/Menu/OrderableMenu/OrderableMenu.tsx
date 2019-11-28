@@ -102,8 +102,10 @@ const Menu: SFC<IMenuProps> = ({
   initialList,
   setChecked,
   checked,
-  value
+  value,
+  initialChecked
 }) => {
+
   const itemList = menuItems.map((item, index: number) => {
     return (
       <div
@@ -166,6 +168,7 @@ const Menu: SFC<IMenuProps> = ({
           onClick={e => {
             e.preventDefault();
             order && order(initialList);
+            initialChecked && setChecked(initialChecked);
           }}
         >
           <IconWrapper>
@@ -195,6 +198,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
   initialList,
   setChecked,
   checked,
+  initialChecked,
   size
 }) => {
   const selected = !isNil(value) && value !== '';
@@ -212,6 +216,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
               initialList={initialList}
               setChecked={setChecked}
               checked={checked}
+              initialChecked={initialChecked}
               value={value}
             />
           }

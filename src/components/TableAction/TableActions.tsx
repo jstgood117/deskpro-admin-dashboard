@@ -119,7 +119,13 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
 `;
 const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
-  const { onFilterChange, onSearchChange, filterDef, tableDef, initialColumnOrder } = context;
+  const {
+    onFilterChange,
+    onSearchChange,
+    filterDef,
+    tableDef,
+    initialColumnOrder
+  } = context;
 
   const {
     columnsViewList,
@@ -137,6 +143,7 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
   const [value, setValue] = useState();
   const [SortList, SetList] = useState(columnsViewList);
   const [checked, setChecked] = useState<KeyValue>(checkedState);
+  const [initialChecked] = useState<KeyValue>(checkedState);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
   const [resetColumnOrder] = useState<IMenuItemProps[]>(columnsViewList);
 
@@ -327,6 +334,7 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
                 menuItems={SortList}
                 setChecked={setChecked}
                 checked={checked}
+                initialChecked={initialChecked}
                 size='medium'
               />
             </FlexStyled>
