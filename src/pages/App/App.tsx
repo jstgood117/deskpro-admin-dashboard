@@ -51,7 +51,7 @@ const App: SFC = () => {
 
   const onError = (err:string) => { logError(err); };
 
-  const onRouteRender = () => <Redirect to='/agent-teams' />;
+  const onRouteRender = () => <Redirect to='/agents' />;
 
   const renderSidebar = flatMap(
     (data.sidebar as ISidebarSection[]).map(section => section.navItems),

@@ -9,10 +9,6 @@ import {
 } from '../../resources/interfaces';
 
 import {
-  testOrderableMenuItems
-} from '../../resources/constants/constants';
-
-import {
   FilterProps,
   FilterMeta
 } from '../../resources/interfaces/filterMeta';
@@ -142,6 +138,7 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
   const [SortList, SetList] = useState(columnsViewList);
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
+  const [resetColumnOrder] = useState<IMenuItemProps[]>(columnsViewList);
 
   useEffect(() => {
     setFilters([
@@ -326,7 +323,7 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
                 value={value}
                 onSelect={val => setValue(val)}
                 order={val => SetList(val)}
-                initialList={testOrderableMenuItems}
+                initialList={resetColumnOrder}
                 menuItems={SortList}
                 setChecked={setChecked}
                 checked={checked}
