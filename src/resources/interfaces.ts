@@ -43,6 +43,11 @@ export interface ITableColumn {
   sort?: string;
 }
 
+export type ColumnOrder = {
+  column: string;
+  show: boolean;
+};
+
 export interface ISidebarSection {
   sectionName: string;
   icon: string;
@@ -78,6 +83,7 @@ export interface IMenuProps {
   order?: (value: IMenuItemProps[]) => void;
   setChecked?: (value: any) => void;
   checked?: {[key: string]: any};
+  initialChecked?: {[key: string]: any};
   item?: IMenuItemProps;
   selected? : boolean;
   size?: 'medium' | 'small';

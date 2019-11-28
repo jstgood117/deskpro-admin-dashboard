@@ -2,7 +2,7 @@ import React, { SFC, useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import { DocumentNode } from 'graphql';
 
-import { IViewData } from '../../resources/interfaces';
+import { IViewData, ColumnOrder, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter } from '../../services/filters';
@@ -16,6 +16,7 @@ import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
 import TableActions from '../TableAction';
+
 // test data
 import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
 import testColumnData3 from '../../resources/constants/mock/testTableColumns3';
@@ -38,8 +39,36 @@ const BodyMargin = styled(dpstyle.div)`
 
 const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
 
+  /// TODO: Remove & link to table data
+  let tableData: any = [];
+  if(path === '/agents') {
+    tableData = testColumnData2;
+  } else if(path === '/agents/teams') {
+    tableData = testColumnData3;
+  } else if(path === '/agents/groups') {
+    tableData = testColumnData4;
+  }
+
+  const {
+    title,
+    description,
+    headerLinks,
+    views,
+    dataType,
+    illustration
+  } = (tableData as any)[queryName.toString()];
+
   const [tabIndex, setTabState] = useState(0);
+  const tableDef = views[tabIndex].tableDef;
+  const filterDef = views[tabIndex].filterDef;
+
+  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map((_column: ITableColumn) => ({
+    column:_column.title,
+    show: true
+  }));
+
   const [filters, setFilters] = useState<FilterType[]>([]);
+  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
   const { loading, error } = useQuery(query, { errorPolicy: 'all' });
 
   useEffect(() => {
@@ -92,32 +121,20 @@ const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
     setFilters(searchFilter);
   };
 
-  /// TODO: Remove & link to table data
-  let tableData: any = [];
-  if(path === '/agents') {
-    tableData = testColumnData2;
-  } else if(path === '/agents/teams') {
-    tableData = testColumnData3;
-  } else if(path === '/agents/groups') {
-    tableData = testColumnData4;
-  }
-
-  const {
-    title,
-    description,
-    headerLinks,
-    views,
-    dataType,
-    illustration
-  } = (tableData as any)[queryName.toString()];
+  const onOrderChange = (
+    _columnOrder: ColumnOrder[]
+  ) => {
+    setColumnOrder(_columnOrder);
+  };
 
   const contextValue:StandardTableContextValues = {
     path,
     filters,
     onFilterChange,
     onSearchChange,
-    tableDef:views[tabIndex].tableDef,
-    filterDef:views[tabIndex].filterDef
+    tableDef,
+    filterDef,
+    initialColumnOrder
   };
 
   return (
@@ -148,6 +165,7 @@ const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
                 sortMenu={true}
                 groupMenu={true}
                 viewMenu={true}
+                onOrderChange={onOrderChange}
               />
             </TableActionStyled>
             {views && views.length > 1 && (
@@ -168,6 +186,7 @@ const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
                 path={path} // TODO: When hooked up to live db, not required
                 filters={filters}
                 dataType={dataType}
+                columnOrder={columnOrder}
               />
             )}
           </BodyMargin>

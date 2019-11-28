@@ -2,11 +2,17 @@ import React, { SFC, useState, useCallback, useContext, useEffect } from 'react'
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
+import {
+  IMenuItemProps,
+  ColumnOrder,
+  KeyValue
+} from '../../resources/interfaces';
 
 import {
   FilterProps,
   FilterMeta
 } from '../../resources/interfaces/filterMeta';
+
 import {
   StandardTableContext,
   StandardTableContextValues
@@ -18,9 +24,8 @@ import Button from '../Button';
 import Icon from '../Icon';
 import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
-
 import OrderableMenu from '../Menu/OrderableMenu';
-import { testOrderableMenuItems } from '../../resources/constants/constants';
+import { generateViewList } from './generateViewList';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
@@ -71,6 +76,7 @@ export interface IProps {
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
+  onOrderChange: (columnOrder: ColumnOrder[]) => void;
 }
 
 interface IFilterButton {
@@ -111,8 +117,20 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: SFC<IProps> = ({ intl, ...props }) => {
+const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
+  const {
+    onFilterChange,
+    onSearchChange,
+    filterDef,
+    tableDef,
+    initialColumnOrder
+  } = context;
+
+  const {
+    columnsViewList,
+    checkedState
+  } = generateViewList(tableDef);
 
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
@@ -123,18 +141,37 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
   const [applied, apply] = useState(false);
   const [internalFilters, setFilters] = useState(initialFilter);
   const [value, setValue] = useState();
-  const [SortList, SetList] = useState(testOrderableMenuItems);
-  const checkedState: { [key: string]: boolean } = {};
-  const [checked, setChecked] = useState(checkedState);
-
-  const { onFilterChange, onSearchChange, filterDef } = context;
-
+  const [SortList, SetList] = useState(columnsViewList);
+  const [checked, setChecked] = useState<KeyValue>(checkedState);
+  const [initialChecked] = useState<KeyValue>(checkedState);
+  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
+  const [resetColumnOrder] = useState<IMenuItemProps[]>(columnsViewList);
 
   useEffect(() => {
     setFilters([
       { property: '', operatorName: '', value: '', applied: false }
     ]);
   }, []);
+
+  useEffect(() => {
+
+    const _columnOrder: ColumnOrder[] = Array(SortList.length);
+    SortList.forEach((_column: IMenuItemProps, index: number) => {
+
+      _columnOrder[index] = {
+        column:_column.name,
+        show: checked[_column.key]
+      };
+
+    });
+
+    setColumnOrder(_columnOrder);
+
+  }, [checked, SortList]);
+
+  useEffect(() => {
+    onOrderChange(columnOrder);
+  }, [columnOrder, onOrderChange]);
 
   const getFilterTitle = (path: string) => {
     const match = filterDef.find((_filter: FilterMeta) => _filter.path === path);
@@ -293,10 +330,11 @@ const TableActions: SFC<IProps> = ({ intl, ...props }) => {
                 value={value}
                 onSelect={val => setValue(val)}
                 order={val => SetList(val)}
-                initialList={testOrderableMenuItems}
+                initialList={resetColumnOrder}
                 menuItems={SortList}
                 setChecked={setChecked}
                 checked={checked}
+                initialChecked={initialChecked}
                 size='medium'
               />
             </FlexStyled>
