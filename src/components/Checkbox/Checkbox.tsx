@@ -2,7 +2,7 @@ import React, { SFC, CSSProperties, MouseEvent } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 import Button from '../Button';
-import { IItemProps } from '../Button/Button';
+import { IItemProps } from '../Button/DropdownButton';
 import { dpstyle } from '../Styled';
 import Tooltip from '../Tooltip';
 
@@ -138,7 +138,12 @@ const Checkbox: SFC<IProps> = ({
       </StyledCheckbox>
     </CheckboxContainer>
     {showArrow && (
-      <Tooltip content='Select' styleType='dark' className='mt-10' placement='bottom'>
+      <Tooltip
+        content='Select'
+        styleType='dark'
+        className='mt-10'
+        placement='bottom'
+      >
         <span>
           <ArrowButton
             checked={checked}

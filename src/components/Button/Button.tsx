@@ -8,6 +8,7 @@ import { H6 } from '../Typography';
 import Icon from '../Icon';
 
 import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
+import { IItemProps } from './DropdownButton';
 
 type ButtonStyleType = 'primary' | 'secondary' | 'tertiary' | 'danger';
 type ButtonSizeType = 'small' | 'medium';
@@ -278,11 +279,6 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
     }
   }
 `;
-
-export interface IItemProps {
-  label?: string | number;
-  link: string;
-}
 
 export type IProps = {
   children?: ReactNode;

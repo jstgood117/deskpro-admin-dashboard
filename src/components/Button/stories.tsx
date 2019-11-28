@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button, { IItemProps } from './Button';
+import Button from './Button';
 import Icon from '../Icon';
 import WithDropdownButton from './WithDropdownButton';
+import DropdownButton, { IItemProps } from './DropdownButton';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 
@@ -18,28 +19,16 @@ interface IDropdownBtn {
   iconOnly?: boolean;
 }
 const DropdownButtonComponent: React.FC<IDropdownBtn> = props => {
-  const [opened, clickButton] = useState(false);
-  const [dropdownValue, setDropdownValue] = useState();
+  const [value, setValue] = useState();
 
   return (
-    <Button
-      styleType={props.styleType}
-      onClick={() => {
-        clickButton(!opened);
+    <DropdownButton
+      {...props}
+      setValue={val => {
+        setValue(val);
       }}
-      size={props.size}
-      opened={opened}
-      items={props.items}
-      showClearButton={props.showClearButton}
-      dropdownValue={dropdownValue}
-      onSelect={(val: any) => setDropdownValue(val)}
-      onClear={() => setDropdownValue('')}
-      iconOnly={props.iconOnly}
-    >
-      {!props.iconOnly && <Icon name={props.icon} />}
-      {!props.iconOnly && (dropdownValue ? dropdownValue.link : props.label)}
-      <Icon name='downVector' />
-    </Button>
+      value={value}
+    />
   );
 };
 
@@ -73,21 +62,23 @@ storiesOf('Button', module)
   .add('button/small/icon-text/tertiary/dropdown', () => (
     <DropdownButtonComponent
       icon='filter'
-      label='Item'
       items={SortItems}
       size='small'
       styleType='tertiary'
-    />
+    >
+      Item
+    </DropdownButtonComponent>
   ))
   .add('button/medium/icon-text/secondary/dropdown', () => (
     <DropdownButtonComponent
       icon='filter'
-      label='Item'
       showClearButton={true}
       items={SortItems}
       size='medium'
       styleType='secondary'
-    />
+    >
+      Item
+    </DropdownButtonComponent>
   ))
   .add('button/small/icon-text/primary', () => (
     <Button styleType='primary' onClick={action('clicked')} size='small'>
@@ -173,21 +164,23 @@ storiesOf('Button', module)
   .add('button/medium/icon/primary/dropdownOnly', () => (
     <DropdownButtonComponent
       icon='filter'
-      label='Item'
       items={SortItems}
       size='medium'
       styleType='primary'
       iconOnly={true}
-    />
+    >
+      Item
+    </DropdownButtonComponent>
   ))
   .add('button/medium/icon/secondary/dropdownOnly', () => (
     <DropdownButtonComponent
-      label='Item'
       items={SortItems}
       size='medium'
       styleType='secondary'
       iconOnly={true}
-    />
+    >
+      Item
+    </DropdownButtonComponent>
   ))
   .add('button/medium/primary/withDropdownButton', () => (
     <div style={{ position: 'absolute', right: 10 }}>

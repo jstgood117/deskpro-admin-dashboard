@@ -5,6 +5,7 @@ import { DeskproAdminTheme } from '../../Theme';
 import Button from '../Button';
 import Icon from '../../Icon';
 import { DeskproAdminThemeType } from '../../../style/DeskproAdminTheme';
+import DropdownButton from '../DropdownButton';
 
 type ButtonStyleType = 'primary' | 'secondary';
 type DropdownContentPosition = 'right' | 'left';
@@ -102,7 +103,10 @@ const WithDropdownStyle = styled.div<IStyleWrapper & IStyleProp>`
   }
 `;
 
-const getStyle = (styleType: ButtonStyleType, theme: DeskproAdminThemeType): IButtonStyle => {
+const getStyle = (
+  styleType: ButtonStyleType,
+  theme: DeskproAdminThemeType
+): IButtonStyle => {
   const styles = {
     primary: {
       static: {
@@ -141,7 +145,7 @@ const getStyle = (styleType: ButtonStyleType, theme: DeskproAdminThemeType): IBu
 };
 
 const WithDropdownButton: FC<IProps> = props => {
-  const [opened, clickButton] = useState(false);
+  const [, setValue] = useState();
   const styles = getStyle(props.styleType, DeskproAdminTheme);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -162,22 +166,16 @@ const WithDropdownButton: FC<IProps> = props => {
           {props.icon && <Icon name={props.icon} />}
           {props.children}
         </Button>
-        <Button
+        <DropdownButton
           className='rightBtn'
-          onClick={() => {
-            clickButton(!opened);
-          }}
-          opened={opened}
-          onSelect={(val: any) => {
-            props.handleSelect(val);
-          }}
           items={SortItems}
           size={props.size}
           styleType={props.styleType}
           iconOnly={true}
-        >
-          <Icon name='downVector' />
-        </Button>
+          setValue={val => {
+            setValue(val);
+          }}
+        />
       </WithDropdownStyle>
     </ThemeProvider>
   );
