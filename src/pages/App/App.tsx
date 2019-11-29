@@ -1,17 +1,14 @@
 import React, { SFC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { IntlProvider } from 'react-intl';
-import { flatMap } from 'lodash';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { logError } from '../../components/Error/ErrorBoundary';
 import Sidebar from '../../components/Sidebar';
-import { ISidebarSection } from '../../resources/interfaces';
 import { testTranslations } from '../../resources/constants/translations/en';
-import PageType from '../../components/Page/PageType';
 import { QueryService } from '../../services/query';
-
 import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
+import { generatePageRoutes } from './helpers/funcs';
 
 interface KeyValue {
   [key: string]: string;
@@ -50,15 +47,8 @@ const App: SFC = () => {
   }, {});
 
   const onError = (err:string) => { logError(err); };
-
   const onRouteRender = () => <Redirect to='/agents' />;
-
-  const renderSidebar = flatMap(
-    (data.sidebar as ISidebarSection[]).map(section => section.navItems),
-    sectionItem => flatMap(sectionItem, ss => ss.navItems || []).concat(sectionItem)
-  )
-    .filter(_section => _section.path)
-    .map(_section => <Route key={_section.path} exact={true} path={_section.path} render={() => <PageType {..._section} />} />);
+  const routes = generatePageRoutes(data.sidebar);
 
   return (
     <HashRouter>
@@ -74,7 +64,7 @@ const App: SFC = () => {
           <BodyContainer>
             <Switch>
               <Route exact={true} path='/' render={onRouteRender} />
-              {renderSidebar}
+              {routes}
             </Switch>
           </BodyContainer>
         </AppContainer>
