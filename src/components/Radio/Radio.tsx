@@ -14,8 +14,7 @@ export interface IProps {
   className?: string;
   setOption: (val: string | number | string[]) => void;
   option: string | number | string[];
-  value: string;
-  // value: string | number | string[];
+  value: string | number | string[];
   containerStyle?: CSSProperties;
 }
 
