@@ -1,4 +1,5 @@
 import { IMenuItemProps } from '../../interfaces';
+import { IOptions } from '../../../components/MultiSelect/MultiSelect';
 
 export const testDropdownItemsWithIcon: IMenuItemProps[] = [
   { name: 'Delete Agents', icon: 'trash' },
@@ -47,4 +48,13 @@ export const testDropdownItemsWithIcon: IMenuItemProps[] = [
   {
     name: 'Set Language'
   }
+];
+
+export const testHandlingTeamList: IOptions[] = [
+  { value: 'accounting', label: 'Accounting' },
+  { value: 'business', label: 'Business' },
+  { value: 'design', label: 'Design' },
+  { value: 'hr', label: 'HR' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'finance', label: 'Finance' }
 ];

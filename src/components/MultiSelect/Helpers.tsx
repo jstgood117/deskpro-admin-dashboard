@@ -125,7 +125,8 @@ export const StyledMultiSelectButton = styled(dpstyle.div)`
       background: #d2d8dd;
       border-color: #1c3e55;
     }
-    min-height: 34px;
+    min-height: 28px;
+    width: max-content;
     .select__indicators {
       padding-right: 12px;
       cursor: default;

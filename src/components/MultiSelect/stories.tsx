@@ -1,7 +1,22 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import MultiSelect, { IOptions } from './MultiSelect';
+import MultiSelect, { IOptions, IProps } from './MultiSelect';
+
+const MultiSelectComponent: React.FC<{
+  options: IOptions[];
+  type: 'fixed' | 'autocomplete';
+}> = props => {
+  const [selectedOptions, selectOptions] = React.useState([]);
+
+  return (
+    <MultiSelect
+      {...props}
+      selectOptions={selectOptions}
+      selectedOptions={selectedOptions}
+    />
+  );
+};
 
 const options: IOptions[] = [
   { value: 'accounting', label: 'Accounting' },
@@ -12,5 +27,9 @@ const options: IOptions[] = [
 ];
 
 storiesOf('MultiSelect', module)
-  .add('searchable type', () => <MultiSelect options={options} type='autocomplete' />)
-  .add('button type', () => <MultiSelect options={options} type='fixed' />);
+  .add('searchable type', () => (
+    <MultiSelectComponent options={options} type='autocomplete' />
+  ))
+  .add('button type', () => (
+    <MultiSelectComponent options={options} type='fixed' />
+  ));

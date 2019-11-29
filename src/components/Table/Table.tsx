@@ -18,9 +18,13 @@ import {
   StyledPagination
 } from './TableStyles';
 import Menu from '../Menu';
-import { testDropdownItemsWithIcon } from '../../resources/constants/constants';
+import {
+  testDropdownItemsWithIcon,
+  testHandlingTeamList
+} from '../../resources/constants/constants';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 import { CSVLink } from 'react-csv';
+import MultiSelect from '../MultiSelect';
 
 export type IProps = {
   data: any[];
@@ -121,6 +125,7 @@ const Table: FC<IProps> = ({
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [menuValue, setMenuValue] = useState();
   const [deleteModal, showDeleteModal] = useState(false);
+  const [selectedOptions, selectOptions] = React.useState([]);
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -209,13 +214,23 @@ const Table: FC<IProps> = ({
                 menuItems={testDropdownItemsWithIcon}
                 iconName='menu'
               />
-              {menuValue && menuValue.name === 'Delete Agents' && (
-                <div style={{ display: 'flex' }}>
+              {menuValue && menuValue.name === 'Add Team' && (
+                <div style={{ display: 'flex', paddingLeft: 15 }}>
+                  <MultiSelect
+                    options={testHandlingTeamList}
+                    type='fixed'
+                    selectOptions={selectOptions}
+                  />
+                </div>
+              )}
+              {((menuValue && menuValue.name === 'Delete Agents') ||
+                selectedOptions.length > 0) && (
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <div style={{ paddingLeft: 16 }}>
                     <Button
                       styleType='primary'
                       onClick={() => {
-                        showDeleteModal(true);
+                        menuValue.name === 'Delete Agents' && showDeleteModal(true);
                       }}
                     >
                       Confirm
@@ -226,6 +241,8 @@ const Table: FC<IProps> = ({
                       styleType='tertiary'
                       onClick={() => {
                         setMenuValue(undefined);
+                        setMenuValue(undefined);
+                        selectOptions([]);
                       }}
                     >
                       Cancel
