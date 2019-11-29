@@ -16,6 +16,8 @@ import {
 export interface IProps {
   options: IOptions[];
   type: 'fixed' | 'autocomplete';
+  selectOptions: (value: IOptions[]) => void;
+  selectedOptions?: IOptions[];
 }
 
 export interface IOptions {
@@ -23,7 +25,10 @@ export interface IOptions {
   label: string;
 }
 
-const MultiSelect: SFC<IProps> = ({ options, type }) => {
+const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
+  const onChange = (selectedOptions: IOptions[]) => {
+    selectOptions(selectedOptions);
+  };
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       {type === 'autocomplete' && (
@@ -60,6 +65,7 @@ const MultiSelect: SFC<IProps> = ({ options, type }) => {
             placeholder={null}
             styles={selectStyles}
             hideSelectedOptions={false}
+            onChange={onChange}
             components={{
               ClearIndicator: false,
               DropdownIndicator,

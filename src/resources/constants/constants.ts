@@ -1,7 +1,7 @@
 import { testTranslations } from './translations/en';
 import { testSidebarData } from './sidebar';
 import { testTableColumns } from './mock/testTableColumns';
-import { testDropdownItemsWithIcon } from './mock/testDropdownItemsWithIcon';
+import { testDropdownItemsWithIcon, testHandlingTeamList } from './mock/testDropdownItemsWithIcon';
 import { testDropdownItemsWithoutIcon } from './mock/testDropdownItemsWithoutIcon';
 import { testOrderableMenuItems } from './mock/testOrderableMenuItems';
 import { testNavData } from './mock/testNavData';
@@ -16,6 +16,7 @@ export {
   testSidebarData,
   testTableColumns,
   testDropdownItemsWithIcon,
+  testHandlingTeamList,
   testDropdownItemsWithoutIcon,
   testOrderableMenuItems,
   testNavData,
