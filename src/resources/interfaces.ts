@@ -62,7 +62,6 @@ export interface ISidebarItem {
   navItems?: ISidebarItem[]; // having this array turns this SidebarItem into a SidebarSubSection
 }
 
-
 export interface ITableSetup {
   columns: ITableColumn[];
 }

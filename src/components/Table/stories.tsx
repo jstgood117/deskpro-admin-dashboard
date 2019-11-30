@@ -9,6 +9,7 @@ import {
 
 storiesOf('Table', module).add('with dummy data', () => (
   <Table
+    path='/agents'
     data={testTableData}
     columns={testTableColumns}
     fetchData={() => false}

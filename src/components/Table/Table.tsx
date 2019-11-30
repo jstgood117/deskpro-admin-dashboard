@@ -1,41 +1,51 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
+import { CSVLink } from 'react-csv';
+
+import { IMenuItemProps } from '../../resources/interfaces';
+
+import {
+  testHandlingTeamList
+} from '../../resources/constants/constants';
+import { ActionFactory } from '../../services/actions/ActionFactory';
+
 import Pagination, { IPageChange } from '../Pagination/Pagination';
+import Checkbox from '../Checkbox';
+import Button from '../Button';
+import Icon from '../Icon';
+import Menu from '../Menu';
+import ConfirmDialog from '../Dialog/ConfirmDialog';
+import MultiSelect from '../MultiSelect';
+
+import * as Cell from './Cell';
+import { TableType, TableParams } from './types';
 import {
   onCheckboxChange,
   onSelectAllChange,
-  onSelectEverything
+  onSelectEverything,
+  generateTableParams,
+  convertActionsToMenuFormat
 } from './helpers/functions';
-
-import Checkbox from '../Checkbox';
-import Button from '../Button';
-import * as Cell from './Cell';
-import Icon from '../Icon';
 import {
   TableStyled,
   TableHeader,
   AllCheckStyle,
   StyledPagination
 } from './TableStyles';
-import Menu from '../Menu';
-import {
-  testDropdownItemsWithIcon,
-  testHandlingTeamList
-} from '../../resources/constants/constants';
-import ConfirmDialog from '../Dialog/ConfirmDialog';
-import { CSVLink } from 'react-csv';
-import MultiSelect from '../MultiSelect';
+
 
 export type IProps = {
+  path: string;
   data: any[];
   columns: any[];
   fetchData?: any;
   loading?: boolean;
   pageCount?: number;
-  tableType: 'sync' | 'async';
+  tableType: TableType;
 };
 
 const Table: FC<IProps> = ({
+  path,
   data,
   columns,
   fetchData,
@@ -43,20 +53,10 @@ const Table: FC<IProps> = ({
   pageCount: controlledPageCount,
   tableType
 }) => {
-  const useTableParam =
-    tableType === 'async'
-      ? {
-          columns,
-          data,
-          initialState: { pageIndex: 0 },
-          manualPagination: true,
-          pageCount: controlledPageCount
-        }
-      : {
-          columns,
-          data,
-          initialState: { pageIndex: 0 }
-        };
+
+  const tableParams: TableParams =
+    generateTableParams(tableType, columns, data, controlledPageCount);
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -67,7 +67,7 @@ const Table: FC<IProps> = ({
     gotoPage,
     state: { pageIndex, pageSize }
   } = useTable(
-    useTableParam as any,
+    tableParams,
     useSortBy,
     usePagination,
     useRowSelect
@@ -126,6 +126,7 @@ const Table: FC<IProps> = ({
   const [menuValue, setMenuValue] = useState();
   const [deleteModal, showDeleteModal] = useState(false);
   const [selectedOptions, selectOptions] = React.useState([]);
+  const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -181,6 +182,12 @@ const Table: FC<IProps> = ({
     setDropdownValue(undefined);
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
+  useEffect(() => {
+    const _actions = ActionFactory(path);
+    const _menuItems = convertActionsToMenuFormat(_actions);
+    setMenuItems(_menuItems);
+  }, [path]);
+
   const items = [{ link: 'All on the page' }, { link: 'All' }];
 
   return (
@@ -212,7 +219,7 @@ const Table: FC<IProps> = ({
                 value={menuValue}
                 onSelect={val => setMenuValue(val)}
                 label={menuValue ? menuValue['name'] : 'Action'}
-                menuItems={testDropdownItemsWithIcon}
+                menuItems={menuItems}
                 iconName='menu'
               />
               {menuValue && menuValue.name === 'Add Team' && (
