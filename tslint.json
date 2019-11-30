@@ -6,11 +6,8 @@
     "semicolon": true,
     "no-var-requires": false,
     "jsx-no-lambda": false,
-    "jsx-wrap-multiline": false,
     "no-bitwise": false,
     "no-console": false,
-    "no-shadowed-variable": false,
-    "no-unused-expression": false,
     "no-empty": false,
     "indent": [true, "spaces", 2]
   },

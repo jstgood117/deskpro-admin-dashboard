@@ -184,7 +184,7 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
         filter.applied = true;
       return true;
     });
-    setFilters && setFilters(internalFilters);
+    if(setFilters) { setFilters(internalFilters); }
 
     if (onFilterChange) {
       onFilterChange(internalFilters);
@@ -238,12 +238,13 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
         internalFilters.splice(currentIndex, 1);
       }
       if (internalFilters.length === 0) {
-        setFilters &&
+        if(setFilters) {
           setFilters([
             { property: '', operatorName: '', value: '', applied: false }
           ]);
+        }
       } else {
-        setFilters && setFilters([...internalFilters]);
+        if(setFilters) { setFilters([...internalFilters]); }
       }
 
       if (onFilterChange) {

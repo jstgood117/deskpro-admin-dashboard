@@ -94,7 +94,7 @@ const TeamOverflow: React.SFC<IProps> = ({
       <Tooltip
         key={item.id}
         styleType='lightBox'
-        content={
+        content={(
           <List>
             <S1>Team members</S1>
             {items.map((member: any) => (
@@ -105,7 +105,7 @@ const TeamOverflow: React.SFC<IProps> = ({
               />
             ))}
           </List>
-        }
+        )}
       >
         <span>{component}</span>
       </Tooltip>

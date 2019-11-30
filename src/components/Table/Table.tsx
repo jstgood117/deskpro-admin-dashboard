@@ -74,8 +74,7 @@ const Table: FC<IProps> = ({
   ) as any;
 
   const csvData: any[] = [];
-  page &&
-    page.length > 0 &&
+  if(page && page.length > 0) {
     page.map((row: any) => {
       const temp = Object.assign({}, row.values);
       temp['col.groups'] =
@@ -99,6 +98,7 @@ const Table: FC<IProps> = ({
       csvData.push(temp);
       return true;
     });
+  }
   const headers = [
     { label: 'Name', key: 'col.name' },
     { label: 'Email', key: 'col.email' },
@@ -113,7 +113,7 @@ const Table: FC<IProps> = ({
   ];
 
   useEffect(() => {
-    fetchData && fetchData({ pageIndex, pageSize });
+    if(fetchData) { fetchData({ pageIndex, pageSize }); }
   }, [fetchData, pageIndex, pageSize]);
 
   const [checked, setChecked] = useState<object>({});
@@ -172,9 +172,10 @@ const Table: FC<IProps> = ({
 
   useEffect(() => {
     if (dropdownValue) {
-      dropdownValue.link === 'All' && onSelectEverything(data, setChecked);
-      dropdownValue.link === 'All on the page' &&
+      if (dropdownValue.link === 'All') { onSelectEverything(data, setChecked); }
+      if(dropdownValue.link === 'All on the page') {
         onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
+      }
     }
 
     setDropdownValue(undefined);
@@ -230,7 +231,7 @@ const Table: FC<IProps> = ({
                     <Button
                       styleType='primary'
                       onClick={() => {
-                        menuValue.name === 'Delete Agents' && showDeleteModal(true);
+                        if(menuValue.name === 'Delete Agents') { showDeleteModal(true); }
                       }}
                     >
                       Confirm

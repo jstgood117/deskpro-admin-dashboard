@@ -18,11 +18,13 @@ export const generatePageRoutes = (links: ISidebarSection[]) => {
         key={_section.path}
         exact={true}
         path={_section.path}
-        render={() => <PageType
-          path={_section.path}
-          pageType={_section.pageType}
-          metadataQuery={_section.metadataQuery}
-        />}
+        render={() => (
+          <PageType
+            path={_section.path}
+            pageType={_section.pageType}
+            metadataQuery={_section.metadataQuery}
+          />
+        )}
       />
     ));
 };
