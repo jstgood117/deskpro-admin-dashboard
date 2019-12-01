@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import MultiSelect, { IOptions, IProps } from './MultiSelect';
+import MultiSelect, { IOptions } from './MultiSelect';
 
 const MultiSelectComponent: React.FC<{
   options: IOptions[];
