@@ -108,7 +108,7 @@ const testTableColumns2 = {
         'tableDef': {
           'columns': [
             {
-              'title': 'col.name',
+              'title': 'agents.col.name',
               'field': 'NAME_AVATAR',
               'sort': 'NAME_AVATAR',
               'data': [
@@ -129,7 +129,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.email',
+              'title': 'agents.col.email',
               'field': 'TEXT',
               'sort': 'ALPHANUMERIC',
               'data': [
@@ -144,7 +144,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.phone',
+              'title': 'agents.col.phone',
               'field': 'TEXT',
               'sort': 'TEXT',
               'data': [
@@ -159,7 +159,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.access',
+              'title': 'agents.col.access',
               'field': 'TEXT',
               'sort': 'TEXT',
               'data': [
@@ -174,7 +174,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.teams',
+              'title': 'agents.col.teams',
               'field': 'AGENT_TEAM_LIST',
               'sort': 'AGENT_TEAM_LIST',
               'data': [
@@ -189,7 +189,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.groups',
+              'title': 'agents.col.groups',
               'field': 'AGENT_GROUP_LIST',
               'sort': 'AGENT_GROUP_LIST',
               'data': [
@@ -293,7 +293,7 @@ const testTableColumns2 = {
         'tableDef': {
           'columns': [
             {
-              'title': 'col.name',
+              'title': 'agents.col.name',
               'field': 'NAME_AVATAR',
               'sort': 'NAME_AVATAR',
               'data': [
@@ -314,7 +314,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.email',
+              'title': 'agents.col.email',
               'field': 'TEXT',
               'sort': 'ALPHANUMERIC',
               'data': [
@@ -329,7 +329,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.phone',
+              'title': 'agents.col.phone',
               'field': 'TEXT',
               'sort': 'TEXT',
               'data': [
@@ -344,7 +344,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.access',
+              'title': 'agents.col.access',
               'field': 'TEXT',
               'sort': 'TEXT',
               'data': [
@@ -359,7 +359,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.teams',
+              'title': 'agents.col.teams',
               'field': 'AGENT_TEAM_LIST',
               'sort': 'AGENT_TEAM_LIST',
               'data': [
@@ -374,7 +374,7 @@ const testTableColumns2 = {
               '__typename': 'TableColumnDef'
             },
             {
-              'title': 'col.groups',
+              'title': 'agents.col.groups',
               'field': 'AGENT_GROUP_LIST',
               'sort': 'AGENT_GROUP_LIST',
               'data': [

@@ -2,6 +2,8 @@ export const testTranslations = {
   'test': 'Test',
 
   'admin_common.page.link.login_log': 'Login',
+  'admin_common.table.action': 'Action',
+  'admin_common.table.view': 'View',
 
   'admin.sidebar.setup': 'Setup',
   'admin.sidebar.setup.dashboard': 'Dashboard',
@@ -79,5 +81,19 @@ export const testTranslations = {
   'admin_common.filter_operator.contains': 'Contains one of the following',
   'admin_common.filter_operator.not_contains': 'Does not Contain one of the following',
   'admin_common.filter_operator.yes_no': 'Yes / No',
+
+  'action.agents.delete_action': 'Delete Agent',
+  'action.agents.change_team': 'Change Team',
+  'action.agents.add_team': 'Add Team',
+  'action.agents.remove_team': 'Remove Team',
+  'action.agents.remove_all_teams': 'Remove All Teams',
+
+  'agents.col.name':'Name',
+  'agents.col.email':'Email',
+  'agents.col.phone':'Phone',
+  'agents.col.access':'Access',
+  'agents.col.teams':'Teams',
+  'agents.col.groups':'Groups'
+
 
 };

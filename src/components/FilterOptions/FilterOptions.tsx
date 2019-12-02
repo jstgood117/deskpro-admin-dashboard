@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import Autocomplete from 'react-autocomplete';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
-import { injectIntl } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import Icon from '../Icon';
 import Input from '../Input';
@@ -94,7 +94,6 @@ const StyledAutoComplete = styled.div<{ name: string }>`
 `;
 
 export interface IProps {
-  intl: any;
   placeholder?: string;
   setFilters?: (e: any) => void;
   index?: number;
@@ -103,7 +102,7 @@ export interface IProps {
   options: FilterMeta[];
 }
 
-const FilterOptions: FC<IProps> = ({
+const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   intl,
   setFilters,
   filters,

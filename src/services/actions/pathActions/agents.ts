@@ -2,7 +2,7 @@ import {
   DELETE_AGENTS,
   ADD_TEAM,
   REMOVE_TEAM,
-  REMOVE_ALL_ADD_TEAM
+  REMOVE_ALL_TEAMS
 } from '../../../schema/mutations/Agents';
 
 import { ActionsType } from '../types';
@@ -36,8 +36,8 @@ const agents: ActionsType[] = [
         actions: null
       },
       {
-        title:'action.agents.remove_all_add_team',
-        schema:REMOVE_ALL_ADD_TEAM,
+        title:'action.agents.remove_all_teams',
+        schema:REMOVE_ALL_TEAMS,
         type:'action',
         actions: null
       }
