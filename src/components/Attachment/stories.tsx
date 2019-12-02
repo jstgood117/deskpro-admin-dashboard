@@ -6,8 +6,7 @@ import FileUpload from './FileUpload';
 
 const FileUploadComponent: React.FC = () => {
   const [file, onChangeFile] = useState();
-
-  return <FileUpload onChangeFile={onChangeFile} files={file}/>;
+  return <FileUpload onChangeFile={onChangeFile} files={file} />;
 };
 
 storiesOf('File Upload', module)
