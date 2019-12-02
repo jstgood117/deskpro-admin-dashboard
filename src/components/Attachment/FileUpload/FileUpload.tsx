@@ -12,20 +12,29 @@ const InputFile = styled.input.attrs({
   display: none;
 `;
 
-const Label = styled(dpstyle.div)`
+const Label = styled(dpstyle.div)<{ dragOver: boolean }>`
   display: inline-flex;
   font-size: 13px;
   color: ${props => props.theme.greyDark};
-  background: ${props => props.theme.white};
-  border: 1px dashed ${props => props.theme.greyLight};
+  background: ${props =>
+    !props.dragOver ? props.theme.white : props.theme.pageHeader};
+  button {
+    background: ${props =>
+      !props.dragOver ? props.theme.white : props.theme.pageHeader};
+  }
+  border: 1px dashed;
+  border-color: ${props =>
+    !props.dragOver ? props.theme.greyLight : props.theme.brandPrimary};
   border-radius: 4px;
   padding: 10px 16px;
   align-items: center;
 `;
 
-const StyledChooseFile = styled.label`
-  background: ${props => props.theme.white};
-  border: 1px solid ${props => props.theme.greyLight};
+const StyledChooseFile = styled.label<{ dragOver: boolean }>`
+  background: ${props =>
+    !props.dragOver ? props.theme.white : props.theme.pageHeader};
+  border: 1px solid;
+  border-color: ${props => props.theme.greyLight};
   box-sizing: border-box;
   border-radius: 4px;
   height: 28px;
@@ -35,6 +44,14 @@ const StyledChooseFile = styled.label`
   cursor: pointer;
   svg {
     margin: auto;
+  }
+  &:hover {
+    color: ${props => props.theme.activeColour};
+    path {
+      fill: ${props => props.theme.activeColour};
+    }
+    border-color: ${props => props.theme.activeColour};
+    background: ${props => props.theme.hoverColour};
   }
 `;
 
@@ -46,6 +63,7 @@ export interface IProps {
 
 const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
+  const [dragOver, setDragover] = useState(false);
   const reader = new FileReader();
   reader.onloadend = () => {
     setImagePreviewUrl(reader.result);
@@ -69,10 +87,21 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
             : onChangeFile(undefined);
         }}
       />
-      <FileDrop onDrop={onChangeFile}>
+      <FileDrop
+        onDrop={(e: FileList) => {
+          onChangeFile(e);
+          setDragover(false);
+        }}
+        onDragOver={() => {
+          setDragover(true);
+        }}
+        onDragLeave={() => {
+          setDragover(false);
+        }}
+      >
         {!file && (
-          <Label>
-            <StyledChooseFile htmlFor={id}>
+          <Label dragOver={dragOver}>
+            <StyledChooseFile htmlFor={id} dragOver={dragOver}>
               <span
                 style={{ paddingLeft: 14, paddingRight: 10, display: 'flex' }}
               >
@@ -103,7 +132,7 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
           </Label>
         )}
         {file && (
-          <Label>
+          <Label dragOver={dragOver}>
             {fileType === 'image' && imagePreviewUrl ? (
               <img
                 src={imagePreviewUrl}
@@ -124,11 +153,7 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
               <Icon name='file' />
             </span>
             {fileName}
-            <Tooltip
-              content='Remove current file'
-              styleType='dark'
-              placement='bottom'
-            >
+            <Tooltip content='Remove file' styleType='dark' placement='bottom'>
               <span style={{ paddingLeft: 8 }}>
                 <Button
                   styleType='tertiary'
@@ -142,13 +167,14 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
                 </Button>
               </span>
             </Tooltip>
-            <Tooltip content='Edit' styleType='dark' placement='bottom'>
+            <Tooltip content='Edit file' styleType='dark' placement='bottom'>
               <span style={{ paddingLeft: 8 }}>
                 <StyledChooseFile
                   htmlFor={id}
+                  dragOver={dragOver}
                   style={{ width: 26, height: 26, boxSizing: 'content-box' }}
                 >
-                  <Icon name='pencil' />
+                  <Icon name='upload' />
                 </StyledChooseFile>
               </span>
             </Tooltip>
