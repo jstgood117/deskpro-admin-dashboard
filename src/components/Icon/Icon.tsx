@@ -1,4 +1,6 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
+import styled from 'styled-components';
+import Tooltip from '../Tooltip';
 
 import { ReactComponent as IconSetup } from '../../assets/svg/ic-setup.svg';
 import { ReactComponent as IconChannel } from '../../assets/svg/ic-channel.svg';
@@ -69,7 +71,13 @@ import { ReactComponent as IconQuestionText } from '../../assets/svg/ic-question
 export interface IProps {
   name: string;
 }
-
+const StyledIcon = styled.span`
+  &:hover {
+    path {
+      fill: ${props => props.theme.activeColour};
+    }
+  }
+`;
 const Icon: FC<IProps> = props => {
   switch (props.name) {
     case 'setup':
@@ -199,9 +207,21 @@ const Icon: FC<IProps> = props => {
     case 'elephant':
       return <IconElephant />;
     case 'info-text':
-      return <IconInfoText />;
+      return (
+        <Tooltip content='Info text' styleType='light' placement='bottom'>
+          <StyledIcon>
+            <IconInfoText />
+          </StyledIcon>
+        </Tooltip>
+      );
     case 'info-question-text':
-      return <IconQuestionText />;
+      return (
+        <Tooltip content='Question text' styleType='light' placement='bottom'>
+          <StyledIcon>
+            <IconQuestionText />
+          </StyledIcon>
+        </Tooltip>
+      );
     default:
       return <IconSetup />;
   }

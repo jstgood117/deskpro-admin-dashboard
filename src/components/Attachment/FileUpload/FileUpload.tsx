@@ -50,7 +50,9 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
   reader.onloadend = () => {
     setImagePreviewUrl(reader.result);
   };
-  files && files.length > 0 && reader.readAsDataURL(files[0]);
+  if (files && files.length > 0) {
+    reader.readAsDataURL(files[0]);
+  }
   const file = files && files[0];
   const fileTypes = file && file.type;
   const fileType = fileTypes && fileTypes.split('/')[0];
@@ -62,7 +64,9 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
         onChange={e => {
           e.target.files && e.target.files.length > 0
             ? onChangeFile(e.target.files)
-            : files && onChangeFile(files);
+            : files
+            ? onChangeFile(files)
+            : onChangeFile(undefined);
         }}
       />
       <FileDrop onDrop={onChangeFile}>
