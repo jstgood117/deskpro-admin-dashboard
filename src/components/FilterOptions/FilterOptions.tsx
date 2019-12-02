@@ -143,7 +143,11 @@ const FilterOptions: FC<IProps> = ({
         return true;
       });
     }
-    setFilters && setFilters(filters);
+
+    if(setFilters) {
+      setFilters(filters);
+    }
+
   }, [
     currentOperator,
     currentPath,
@@ -375,11 +379,10 @@ const FilterOptions: FC<IProps> = ({
               if (currentIndex > -1) {
                 filters.splice(currentIndex, 1);
               }
-              if (filters.length === 0) {
-                setFilters &&
-                  setFilters([{ property: '', operatorName: '', value: '' }]);
-              } else {
-                setFilters && setFilters([...filters]);
+              if (filters.length === 0 && setFilters) {
+                setFilters([{ property: '', operatorName: '', value: '' }]);
+              } else if(setFilters) {
+                setFilters([...filters]);
               }
             }}
             size='small'

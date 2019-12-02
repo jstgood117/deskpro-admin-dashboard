@@ -5,6 +5,6 @@ export const ActionFactory = (path: string) => {
     case '/agents':
       return agents;
     default:
-      break;
+      return null;
   }
 };

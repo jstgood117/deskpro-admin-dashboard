@@ -1,6 +1,15 @@
 import _ from 'lodash';
-
-type setCheckedType = React.Dispatch<React.SetStateAction<object>>;
+import {
+  IMenuItemProps
+} from '../../../resources/interfaces';
+import {
+  ActionsType
+} from '../../../services/actions/types';
+import {
+  setCheckedType,
+  TableParams,
+  TableType
+} from '../types';
 
 export const onCheckboxChange = (
   value:string,
@@ -56,4 +65,57 @@ export const onSelectEverything = (data: object[], setChecked: setCheckedType) =
     [_row.id]:true
   }));
   setChecked(Object.assign({}, ...ids));
+};
+
+
+export const generateTableParams = (
+  tableType: TableType,
+  columns: any[],
+  data: any[],
+  controlledPageCount: number
+): TableParams => {
+  return tableType === 'async'
+  ? {
+      columns,
+      data,
+      initialState: { pageIndex: 0 },
+      manualPagination: true,
+      pageCount: controlledPageCount
+    }
+  : {
+      columns,
+      data,
+      initialState: { pageIndex: 0 }
+    };
+};
+
+const generateMenuItem = (item: ActionsType) => {
+  switch(item.type) {
+    case 'action':
+      return {
+        name: item.title,
+        ...(item.icon && {icon: item.icon})
+      };
+    case 'separator':
+      return {};
+    case 'folder':
+      return  {
+        name:  item.title,
+        icon: item.icon,
+        subItems: convertActionsToMenuFormat(item.actions)
+      };
+  }
+};
+
+export const convertActionsToMenuFormat = (
+  actions: ActionsType[]
+): IMenuItemProps[] => {
+
+  if(!actions) {
+    return [];
+  }
+
+  return actions.map(_item => (
+    generateMenuItem(_item)
+  ));
 };

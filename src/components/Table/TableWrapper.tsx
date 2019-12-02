@@ -38,7 +38,11 @@ const generateSortType = (sortType: string) => {
   }
 };
 
-const transformColumnData = (columns: ITableColumn[], columnOrder: ColumnOrder[], intl: any) => {
+const transformColumnData = (
+  columns: ITableColumn[],
+  columnOrder: ColumnOrder[],
+  intl: any
+) => {
 
   const newCols: any[] = [];
   columnOrder.forEach((_order: ColumnOrder) => {
@@ -125,6 +129,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({
     <Fragment>
       {dataType === 'sync' && (
         <Table
+          path={path}
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
           tableType='sync'
@@ -132,6 +137,7 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({
       )}
       {dataType === 'async' && (
         <Table
+          path={path}
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
           fetchData={fetchData}
