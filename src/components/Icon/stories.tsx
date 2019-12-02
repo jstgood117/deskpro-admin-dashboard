@@ -23,9 +23,7 @@ storiesOf('Icon', module)
   .add('sort', () => <Icon name='sort' />)
   .add('group', () => <Icon name='group' />)
   .add('view', () => <Icon name='view' />)
-  .add('help', () => (
-    <Icon name='help' />
-  ))
+  .add('help', () => <Icon name='help' />)
   .add('checkbox.indeterminate', () => <Icon name='checkbox.indeterminate' />)
   .add('checkbox.normal', () => <Icon name='checkbox.normal' />)
   .add('close', () => <Icon name='close' />)
@@ -60,4 +58,9 @@ storiesOf('Icon', module)
   .add('export', () => <Icon name='export' />)
   .add('move-down', () => <Icon name='move-down' />)
   .add('move-left', () => <Icon name='move-left' />)
-  .add('move-up', () => <Icon name='move-up' />);
+  .add('move-up', () => <Icon name='move-up' />)
+  .add('file', () => <Icon name='file' />)
+  .add('drag-and-drop', () => <Icon name='drag-and-drop' />)
+  .add('drag-and-drop-file', () => <Icon name='drag-and-drop-file' />)
+  .add('pencil', () => <Icon name='pencil' />)
+  .add('elephant', () => <Icon name='elephant' />);

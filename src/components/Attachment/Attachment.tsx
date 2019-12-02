@@ -21,7 +21,7 @@ const Label = styled.label`
 `;
 
 export interface IProps {
-  id: string;
+  id?: string;
   text?: string;
   onChangeFile?: (event: SyntheticEvent<HTMLInputElement>) => void;
 }
@@ -29,7 +29,7 @@ export interface IProps {
 const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {
   return (
     <div>
-      <InputFile id={id} onChange={onChangeFile}/>
+      <InputFile id={id} onChange={onChangeFile} />
       <Label htmlFor={id}>
         <Icon name='attachment' />
         {text}
@@ -37,5 +37,7 @@ const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {
     </div>
   );
 };
-
+Attachment.defaultProps = {
+  id: '1'
+};
 export default Attachment;
