@@ -4,6 +4,7 @@ import FileDrop from 'react-file-drop';
 import Icon from '../../Icon';
 import Button from '../../Button';
 import Tooltip from '../../Tooltip';
+import { dpstyle } from '../../Styled';
 
 const InputFile = styled.input.attrs({
   type: 'file'
@@ -11,17 +12,12 @@ const InputFile = styled.input.attrs({
   display: none;
 `;
 
-const Label = styled.div`
+const Label = styled(dpstyle.div)`
   display: inline-flex;
-  font-family: ${props => props.theme.mainFont};
-  font-style: normal;
-  font-weight: normal;
   font-size: 13px;
-  line-height: 150%;
   color: ${props => props.theme.greyDark};
   background: ${props => props.theme.white};
   border: 1px dashed ${props => props.theme.greyLight};
-  box-sizing: border-box;
   border-radius: 4px;
   padding: 10px 16px;
   align-items: center;
