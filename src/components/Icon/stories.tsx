@@ -64,4 +64,6 @@ storiesOf('Icon', module)
   .add('drag-and-drop-file', () => <Icon name='drag-and-drop-file' />)
   .add('pencil', () => <Icon name='pencil' />)
   .add('upload', () => <Icon name='upload' />)
-  .add('elephant', () => <Icon name='elephant' />);
+  .add('elephant', () => <Icon name='elephant' />)
+  .add('info-text', () => <Icon name='info-text' />)
+  .add('info-question-text', () => <Icon name='info-question-text' />);

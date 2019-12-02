@@ -22,7 +22,7 @@ const defaultContextValues: StandardTableContextValues = {
   path: '/',
   filters,
   onFilterChange: (rules: FilterProps[]) => undefined,
-  onSearchChange: (value: string, filters: FilterProps[]) => undefined,
+  onSearchChange: (value: string, _filters: FilterProps[]) => undefined,
   tableDef: {columns},
   filterDef,
   initialColumnOrder:[]

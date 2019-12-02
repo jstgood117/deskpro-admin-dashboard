@@ -1,4 +1,6 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
+import styled from 'styled-components';
+import Tooltip from '../Tooltip';
 
 import { ReactComponent as IconSetup } from '../../assets/svg/ic-setup.svg';
 import { ReactComponent as IconChannel } from '../../assets/svg/ic-channel.svg';
@@ -64,11 +66,19 @@ import { ReactComponent as IconDragAndDrop } from '../../assets/svg/ic-drag-drop
 import { ReactComponent as IconPencil } from '../../assets/svg/ic-pencil.svg';
 import { ReactComponent as IconElephant } from '../../assets/svg/ic-elephant.svg';
 import { ReactComponent as IconUpload } from '../../assets/svg/ic-upload.svg';
+import { ReactComponent as IconInfoText } from '../../assets/svg/ic-info-text.svg';
+import { ReactComponent as IconQuestionText } from '../../assets/svg/ic-question-text.svg';
 
 export interface IProps {
   name: string;
 }
-
+const StyledIcon = styled.span`
+  &:hover {
+    path {
+      fill: ${props => props.theme.activeColour};
+    }
+  }
+`;
 const Icon: FC<IProps> = props => {
   switch (props.name) {
     case 'setup':
@@ -199,6 +209,22 @@ const Icon: FC<IProps> = props => {
       return <IconElephant />;
     case 'upload':
       return <IconUpload />;
+    case 'info-text':
+      return (
+        <Tooltip content='Info text' styleType='light' placement='bottom'>
+          <StyledIcon>
+            <IconInfoText />
+          </StyledIcon>
+        </Tooltip>
+      );
+    case 'info-question-text':
+      return (
+        <Tooltip content='Question text' styleType='light' placement='bottom'>
+          <StyledIcon>
+            <IconQuestionText />
+          </StyledIcon>
+        </Tooltip>
+      );
     default:
       return <IconSetup />;
   }

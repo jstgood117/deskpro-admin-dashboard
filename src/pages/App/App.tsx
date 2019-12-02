@@ -4,23 +4,13 @@ import { IntlProvider } from 'react-intl';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import { logError } from '../../components/Error/ErrorBoundary';
-import Sidebar from '../../components/Sidebar';
 import { testTranslations } from '../../resources/constants/translations/en';
 import { QueryService } from '../../services/query';
+import Sidebar from '../../components/Sidebar';
+
 import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
-import { generatePageRoutes } from './helpers/funcs';
 
-interface KeyValue {
-  [key: string]: string;
-}
-
-// Crudely add development translations
-const __mergeInDevI18Keys = (currentTranslations:object[], _testTranslations:KeyValue) => {
-  return [...Object.keys(testTranslations).map((_key: string) => {
-    const message = _testTranslations.hasOwnProperty(_key) ? _testTranslations[_key.toString()] : '';
-    return {id: _key, message, __typename: 'AdminTranslation'};
-  }), ...currentTranslations];
-};
+import { generatePageRoutes, __mergeInDevI18Keys } from './helpers/funcs';
 
 const App: SFC = () => {
 
@@ -34,6 +24,7 @@ const App: SFC = () => {
   if (loading) {
     return <p>Loading</p>;
   }
+
   if (error) {
     return <p>Error</p>;
   }
@@ -47,6 +38,8 @@ const App: SFC = () => {
   }, {});
 
   const onError = (err:string) => { logError(err); };
+
+  // TODO: Remove this, should be going directly to
   const onRouteRender = () => <Redirect to='/agents' />;
   const routes = generatePageRoutes(data.sidebar);
 

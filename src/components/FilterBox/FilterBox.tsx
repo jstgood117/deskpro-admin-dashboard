@@ -42,10 +42,11 @@ const FilterBox: SFC<IProps> = ({
 
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
-    filters[lastIndex].value &&
+    if(filters[lastIndex].value &&
       filters[lastIndex].operatorName &&
-      filters[lastIndex].property &&
-      setFilters([...filters, { property: '', operatorName: '', value: '' }]);
+      filters[lastIndex].property) {
+        setFilters([...filters, { property: '', operatorName: '', value: '' }]);
+      }
   }, [filters, setFilters]);
 
   return (
