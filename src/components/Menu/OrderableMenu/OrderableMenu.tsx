@@ -55,7 +55,9 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          onSelect && onSelect(item);
+          if(onSelect) {
+            onSelect(item);
+          }
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
@@ -158,7 +160,7 @@ const Menu: SFC<IMenuProps> = ({
                 OrderedList.push(menuItems[index]);
                 return true;
               });
-              order && order(OrderedList);
+              if(order) { order(OrderedList); }
             }}
             children={itemList}
           />
@@ -167,8 +169,8 @@ const Menu: SFC<IMenuProps> = ({
         <ResetWrapper
           onClick={e => {
             e.preventDefault();
-            order && order(initialList);
-            initialChecked && setChecked(initialChecked);
+            if(order) { order(initialList); }
+            if(initialChecked) { setChecked(initialChecked); }
           }}
         >
           <IconWrapper>
@@ -208,7 +210,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
           menuZIndex={2}
-          menu={
+          menu={(
             <Menu
               onSelect={onSelect}
               order={order}
@@ -219,7 +221,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
               initialChecked={initialChecked}
               value={value}
             />
-          }
+          )}
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',

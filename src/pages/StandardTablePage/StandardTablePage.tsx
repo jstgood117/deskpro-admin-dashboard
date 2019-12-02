@@ -7,15 +7,15 @@ import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
-import Loading from '../Loading';
-import Error from '../Error';
-import Header from '../Header';
-import Table from '../Table/TableWrapper';
-import TabBar from '../TabBar';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import Header from '../../components/Header';
+import Table from '../../components/Table/TableWrapper';
+import TabBar from '../../components/TabBar';
 import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
-import TableActions from '../TableAction';
+import TableActions from '../../components/TableAction';
 
 // test data
 import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
