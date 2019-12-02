@@ -38,7 +38,7 @@ describe('OrderableMenu', () => {
 
   beforeEach(() => {
     props = {
-      label: 'Action',
+      label: 'admin_common.table.action',
       iconName: 'menu',
       initialList: testOrderableMenuItems
     };

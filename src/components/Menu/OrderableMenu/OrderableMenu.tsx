@@ -2,6 +2,7 @@ import React, { SFC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { isNil, uniqueId } from 'lodash';
 import { MenuList, MenuButton } from 'react-menu-list';
+import { FormattedMessage  } from 'react-intl';
 import Icon from '../../Icon';
 import { MenuLabel, TextLabel } from '../../Styled';
 import { DeskproAdminTheme } from '../../Theme';
@@ -33,7 +34,7 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, value }) => (
               <IconWrapper>
                 {item.icon && <Icon name={item.icon} />}
               </IconWrapper>
-              {item.name}
+              <FormattedMessage id={item.name} />
             </SingleSubMenuItem>
           )}
         </div>
@@ -83,7 +84,9 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
           <Icon name='drag-and-drop' />
         </IconWrapper>
         <IconWrapper>{item.icon && <Icon name={item.icon} />}</IconWrapper>
-        <TextLabel style={{ paddingRight: 43 }}>{item.name}</TextLabel>
+        <TextLabel style={{ paddingRight: 43 }}>
+          <FormattedMessage id={item.name} />
+        </TextLabel>
         <SettingIcon
           onClick={() => {
             clickGear(true);
@@ -124,7 +127,7 @@ const Menu: SFC<IMenuProps> = ({
               <IconWrapper>
                 {item.icon && <Icon name={item.icon} />}
               </IconWrapper>
-              {item.name}
+              <FormattedMessage id={item.name} />
             </SingleSubMenuItem>
           )}
           {item.name && item.subItems && (
@@ -238,7 +241,7 @@ const OrderableMenu: SFC<IMenuProps> = ({
           <MenuLabel
             style={{ paddingRight: 8, paddingLeft: iconName ? 11 : 8 }}
           >
-            {label}
+            <FormattedMessage id={label} />
           </MenuLabel>
           <StyledIcon className='ic-down'>
             <Icon name='downVector' />

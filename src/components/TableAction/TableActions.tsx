@@ -1,7 +1,7 @@
 import React, { SFC, useState, useCallback, useContext, useEffect } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
-import { injectIntl } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import {
   IMenuItemProps,
   ColumnOrder,
@@ -70,7 +70,6 @@ const FilterContainer = styled.div`
 `;
 
 export interface IProps {
-  intl: any;
   showSearch: boolean;
   filterMenu: boolean;
   sortMenu: boolean;
@@ -117,7 +116,7 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
+const TableActions: SFC<IProps & WrappedComponentProps> = ({ intl, onOrderChange, ...props }) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
   const {
     onFilterChange,
@@ -327,7 +326,7 @@ const TableActions: SFC<IProps> = ({ intl, onOrderChange, ...props }) => {
             <FlexStyled>
               <OrderableMenu
                 iconName='view'
-                label={value ? value['name'] : 'View'}
+                label={value ? value['name'] : 'admin_common.table.view'}
                 value={value}
                 onSelect={val => setValue(val)}
                 order={val => SetList(val)}
