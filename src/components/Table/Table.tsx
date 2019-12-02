@@ -285,7 +285,7 @@ const Table: FC<IProps> = ({
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup: any, indexOuter: number) => (
-              <tr key={indexOuter} {...headerGroup.getHeaderGroupProps()}>
+              <tr key={indexOuter} {...(headerGroup.getHeaderGroupProps && headerGroup.getHeaderGroupProps())}>
                 <th />
                 {headerGroup.headers.map((column: any, indexInner: number) => (
                   <th
