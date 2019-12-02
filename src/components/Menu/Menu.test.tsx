@@ -26,7 +26,7 @@ describe('Menu', () => {
 
   beforeEach(() => {
     props = {
-      label: 'Action',
+      label: 'admin_common.table.action',
       iconName: 'menu',
       menuItems: testDropdownItemsWithIcon
     };

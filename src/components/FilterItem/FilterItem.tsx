@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { injectIntl } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { operatorKeys } from '../../services/filters/operators';
 
@@ -8,7 +8,6 @@ import Icon from '../Icon';
 import { dpstyle } from '../Styled';
 
 export interface IProps {
-  intl: any;
   property: string;
   value: string;
   operatorName: string;
@@ -46,7 +45,7 @@ const getIntlOperatorTitle = (operatorName: string) => {
   return operatorKeys[operatorName];
 };
 
-const FilterItem: FC<IProps> = ({
+const FilterItem: FC<IProps & WrappedComponentProps> = ({
   intl,
   property,
   operatorName,

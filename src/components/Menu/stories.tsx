@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
+import { IntlProvider } from 'react-intl';
+
+import { testTranslations } from '../../resources/constants/constants';
 
 import Menu from './Menu';
 import {
@@ -14,13 +17,15 @@ const MenuComponent: React.FC<IMenuProps> = props => {
   const [value, setValue] = useState();
 
   return (
-    <Menu
-      menuItems={props.menuItems}
-      iconName={props.iconName}
-      value={value}
-      label={value ? value['name'] : props.label}
-      onSelect={val => setValue(val)}
-    />
+    <IntlProvider locale='en' messages={testTranslations}>
+      <Menu
+        menuItems={props.menuItems}
+        iconName={props.iconName}
+        value={value}
+        label={value ? value['name'] : props.label}
+        onSelect={val => setValue(val)}
+      />
+    </IntlProvider>
   );
 };
 
@@ -30,31 +35,33 @@ const OrderableMenuComponent: React.FC<IMenuProps> = props => {
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
   return (
-    <OrderableMenu
-      iconName={props.iconName}
-      value={value}
-      label={value ? value['name'] : props.label}
-      onSelect={val => setValue(val)}
-      order={val => SetList(val)}
-      initialList={testOrderableMenuItems}
-      menuItems={SortList}
-      setChecked={setChecked}
-      checked={checked}
-    />
+    <IntlProvider locale='en' messages={testTranslations}>
+      <OrderableMenu
+        iconName={props.iconName}
+        value={value}
+        label={value ? value['name'] : props.label}
+        onSelect={val => setValue(val)}
+        order={val => SetList(val)}
+        initialList={testOrderableMenuItems}
+        menuItems={SortList}
+        setChecked={setChecked}
+        checked={checked}
+      />
+    </IntlProvider>
   );
 };
 
 storiesOf('Menu', module)
   .add('Menu with dummy data and icon', () => (
     <MenuComponent
-      label='Action'
+      label='admin_common.table.action'
       menuItems={testDropdownItemsWithIcon}
       iconName='menu'
     />
   ))
   .add('Menu with dummy data and without icon', () => (
     <MenuComponent
-      label='Action'
+      label='admin_common.table.action'
       menuItems={testDropdownItemsWithoutIcon}
     />
   ))
@@ -71,7 +78,7 @@ storiesOf('Menu', module)
     >
       <div style={{ position: 'absolute', right: 10 }}>
         <OrderableMenuComponent
-          label='View'
+          label='admin_common.table.view'
           iconName='view'
         />
       </div>

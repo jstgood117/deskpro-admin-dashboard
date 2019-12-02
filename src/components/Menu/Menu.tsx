@@ -2,6 +2,7 @@ import React, { SFC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import isNil from 'lodash/isNil';
 import { MenuList, MenuButton } from 'react-menu-list';
+import { injectIntl, WrappedComponentProps} from 'react-intl';
 
 import Icon from '../Icon';
 import { MenuLabel, TextLabel } from '../Styled';
@@ -17,7 +18,7 @@ import {
   StyledIcon
 } from './MenuStyles';
 
-export const SingleSubMenuItem: SFC<IMenuProps> = props => {
+const singleSubMenuItem: SFC<IMenuProps & WrappedComponentProps> = props => {
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
@@ -52,7 +53,9 @@ export const SingleSubMenuItem: SFC<IMenuProps> = props => {
     </StyledMenuItem>
   );
 };
-export const MultiSubMenuItem: SFC<IMenuProps> = ({ item, onSelect }) => {
+export const SingleSubMenuItem = injectIntl(singleSubMenuItem);
+
+export const multiSubMenuItem: SFC<IMenuProps & WrappedComponentProps> = ({ intl, item, onSelect }) => {
   return (
     <StyledSubMenuItem
       highlightedStyle={{ background: '#E8EBEE' }}
@@ -66,7 +69,7 @@ export const MultiSubMenuItem: SFC<IMenuProps> = ({ item, onSelect }) => {
       }}
     >
       <IconWrapper>{item.icon && <Icon name={item.icon} />}</IconWrapper>
-      <TextLabel style={{ paddingRight: 15 }}>{item.name}</TextLabel>
+      <TextLabel style={{ paddingRight: 15 }}>{intl.formatMessage({ id: item.name })}</TextLabel>
       <span
         style={{
           position: 'absolute',
@@ -80,8 +83,9 @@ export const MultiSubMenuItem: SFC<IMenuProps> = ({ item, onSelect }) => {
     </StyledSubMenuItem>
   );
 };
+export const MultiSubMenuItem = injectIntl(multiSubMenuItem);
 
-const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems }) => {
+const menuSub: SFC<IMenuProps & WrappedComponentProps> = ({ intl, onSelect, menuItems }) => {
   return (
     <MenuListWrapper>
       <MenuList>
@@ -94,7 +98,7 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems }) => {
                     <IconWrapper>
                       {item.icon && <Icon name={item.icon} />}
                     </IconWrapper>
-                    {item.name}
+                    {intl.formatMessage({ id: item.name })}
                   </SingleSubMenuItem>
                 )}
                 {item.name && item.subItems && (
@@ -112,7 +116,10 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems }) => {
     </MenuListWrapper>
   );
 };
-const Menu: SFC<IMenuProps> = ({
+export const MenuSub = injectIntl(menuSub);
+
+const menu: SFC<IMenuProps & WrappedComponentProps> = ({
+  intl,
   iconName,
   label,
   value,
@@ -140,7 +147,7 @@ const Menu: SFC<IMenuProps> = ({
               <Icon name={iconName} />
             </StyledIcon>
           )}
-          <MenuLabel>{label}</MenuLabel>
+          <MenuLabel>{intl.formatMessage({ id: label })}</MenuLabel>
           <StyledIcon className='ic-down' style={{ paddingLeft: 8 }}>
             <Icon name='downVector' />
           </StyledIcon>
@@ -149,5 +156,7 @@ const Menu: SFC<IMenuProps> = ({
     </ThemeProvider>
   );
 };
+
+export const Menu = injectIntl(menu);
 
 export default Menu;

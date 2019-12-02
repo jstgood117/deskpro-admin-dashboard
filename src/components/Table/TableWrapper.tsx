@@ -1,7 +1,7 @@
 import React, { useEffect, SFC, useCallback, useState, Fragment } from 'react';
 import { withApollo } from 'react-apollo';
 import { /* gql, */ ApolloClient } from 'apollo-boost';
-import { injectIntl } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { runFilters } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
@@ -15,7 +15,6 @@ import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
 
 interface IProps {
-  intl: any;
   path: string; // TODO: Remove when db
   client: ApolloClient<any>;
   dataType: string;
@@ -61,7 +60,7 @@ const transformColumnData = (
   return newCols;
 };
 
-const TableWrapper: SFC<ITableSetup & IProps> = ({
+const TableWrapper: SFC<ITableSetup & IProps & WrappedComponentProps> = ({
   intl,
   path,
   client,
@@ -150,4 +149,4 @@ const TableWrapper: SFC<ITableSetup & IProps> = ({
   );
 };
 
-export default injectIntl(withApollo<ITableSetup & IProps>(TableWrapper));
+export default injectIntl(withApollo<ITableSetup & IProps & WrappedComponentProps>(TableWrapper));

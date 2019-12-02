@@ -23,8 +23,8 @@ export const REMOVE_TEAM = gql`
   }
 `;
 
-export const REMOVE_ALL_ADD_TEAM = gql`
-  mutation RemoveAllAddTeam ($payload: Object!) {
+export const REMOVE_ALL_TEAMS = gql`
+  mutation RemoveAllTeams ($payload: Object!) {
     update_agent(payload: $payload)
   }
 `;

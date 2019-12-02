@@ -218,7 +218,7 @@ const Table: FC<IProps> = ({
               <Menu
                 value={menuValue}
                 onSelect={val => setMenuValue(val)}
-                label={menuValue ? menuValue['name'] : 'Action'}
+                label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
                 menuItems={menuItems}
                 iconName='menu'
               />
@@ -231,14 +231,14 @@ const Table: FC<IProps> = ({
                   />
                 </div>
               )}
-              {((menuValue && menuValue.name === 'Delete Agents') ||
+              {((menuValue && menuValue.name === 'actions.agents.delete_agent') ||
                 selectedOptions.length > 0) && (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <div style={{ paddingLeft: 16 }}>
                     <Button
                       styleType='primary'
                       onClick={() => {
-                        if(menuValue.name === 'Delete Agents') { showDeleteModal(true); }
+                        if(menuValue.name === 'actions.agents.delete_agent') { showDeleteModal(true); }
                       }}
                     >
                       Confirm
