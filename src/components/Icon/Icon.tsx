@@ -63,6 +63,7 @@ import { ReactComponent as IconFile } from '../../assets/svg/ic-file.svg';
 import { ReactComponent as IconDragAndDrop } from '../../assets/svg/ic-drag-drop-file.svg';
 import { ReactComponent as IconPencil } from '../../assets/svg/ic-pencil.svg';
 import { ReactComponent as IconElephant } from '../../assets/svg/ic-elephant.svg';
+import { ReactComponent as IconUpload } from '../../assets/svg/ic-upload.svg';
 
 export interface IProps {
   name: string;
@@ -196,6 +197,8 @@ const Icon: FC<IProps> = props => {
       return <IconPencil />;
     case 'elephant':
       return <IconElephant />;
+    case 'upload':
+      return <IconUpload />;
     default:
       return <IconSetup />;
   }
