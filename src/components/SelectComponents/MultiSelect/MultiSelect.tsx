@@ -2,27 +2,23 @@ import React, { SFC } from 'react';
 import Select from 'react-select';
 import { ThemeProvider } from 'styled-components';
 
-import { DeskproAdminTheme } from '../Theme';
+import { DeskproAdminTheme } from '../../Theme';
 import {
   StyledMultiSelect,
-  StyledMultiSelectButton,
+  StyledSelectButton,
   selectStyles,
   IconOption,
   DropdownIndicator,
   MultiSelectValueContainer,
-  SingleSelectValueContainer
-} from './Helpers';
+  MultiSelectValueContainer2
+} from '../Helpers';
+import { IOptions } from '../interfaces';
 
 export interface IProps {
   options: IOptions[];
   type: 'fixed' | 'autocomplete';
   selectOptions: (value: IOptions[]) => void;
   selectedOptions?: IOptions[];
-}
-
-export interface IOptions {
-  value: string;
-  label: string;
 }
 
 const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
@@ -53,7 +49,7 @@ const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
         </StyledMultiSelect>
       )}
       {type === 'fixed' && (
-        <StyledMultiSelectButton>
+        <StyledSelectButton>
           <Select
             isSearchable={false}
             closeMenuOnSelect={false}
@@ -71,10 +67,10 @@ const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
               DropdownIndicator,
               IndicatorSeparator: null,
               Option: IconOption,
-              ValueContainer: SingleSelectValueContainer
+              ValueContainer: MultiSelectValueContainer2
             }}
           />
-        </StyledMultiSelectButton>
+        </StyledSelectButton>
       )}
     </ThemeProvider>
   );

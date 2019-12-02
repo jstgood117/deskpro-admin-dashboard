@@ -1,5 +1,5 @@
 import { IMenuItemProps } from '../../interfaces';
-import { IOptions } from '../../../components/MultiSelect/MultiSelect';
+import { IOptions } from '../../../components/SelectComponents/interfaces';
 
 export const testDropdownItemsWithIcon: IMenuItemProps[] = [
   { name: 'Delete Agents', icon: 'trash' },

@@ -44,6 +44,10 @@ export const selectStyles = {
       }
     };
   },
+  singleValue: (styles: any) => ({
+    ...styles,
+    color: '#1C3E55'
+  }),
   multiValue: (styles: any) => ({
     ...styles,
     borderRadius: 40,
@@ -98,7 +102,7 @@ export const StyledMultiSelect = styled(dpstyle.div)`
   }
 `;
 
-export const StyledMultiSelectButton = styled(dpstyle.div)`
+export const StyledSelectButton = styled(dpstyle.div)`
   .select__menu {
     border-radius: 4px;
     background: ${props => props.theme.white};
@@ -126,13 +130,17 @@ export const StyledMultiSelectButton = styled(dpstyle.div)`
       border-color: #1c3e55;
     }
     min-height: 28px;
-    width: max-content;
     .select__indicators {
       padding-right: 12px;
       cursor: default;
     }
     .select__multi-value {
       display: none;
+    }
+  }
+  .basic-single-select {
+    .select__placeholder {
+      color: #1c3e55;
     }
   }
 `;
@@ -183,7 +191,7 @@ export const MultiSelectValueContainer = ({ children, ...props }: any) => {
   );
 };
 
-export const SingleSelectValueContainer = ({ children, ...props }: any) => {
+export const MultiSelectValueContainer2 = ({ children, ...props }: any) => {
   return (
     <components.ValueContainer {...props}>
       {children}

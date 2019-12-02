@@ -1,7 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import MultiSelect, { IOptions } from './MultiSelect';
+import MultiSelect from './MultiSelect';
+import SingleSelect from './SingleSelect';
+import { IOptions } from './interfaces';
 
 const MultiSelectComponent: React.FC<{
   options: IOptions[];
@@ -18,6 +20,21 @@ const MultiSelectComponent: React.FC<{
   );
 };
 
+const SingleSelectComponent: React.FC<{
+  options: IOptions[];
+}> = props => {
+  const [selectedOption, selectOptions] = React.useState();
+
+  return (
+    <SingleSelect
+      {...props}
+      selectOption={selectOptions}
+      selectedOption={selectedOption}
+      placeholder='Select Item'
+    />
+  );
+};
+
 const options: IOptions[] = [
   { value: 'accounting', label: 'Accounting' },
   { value: 'filter1', label: 'Filter1' },
@@ -26,10 +43,11 @@ const options: IOptions[] = [
   { value: 'item', label: 'Item' }
 ];
 
-storiesOf('MultiSelect', module)
-  .add('searchable type', () => (
+storiesOf('SelectComponents', module)
+  .add('SingleSelect', () => <SingleSelectComponent options={options} />)
+  .add('MultiSelect - searchable type', () => (
     <MultiSelectComponent options={options} type='autocomplete' />
   ))
-  .add('button type', () => (
+  .add('MultiSelect - button type', () => (
     <MultiSelectComponent options={options} type='fixed' />
   ));
