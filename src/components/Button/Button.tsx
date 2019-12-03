@@ -10,7 +10,12 @@ import Icon from '../Icon';
 import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
 import { IItemProps } from './DropdownButton';
 
-type ButtonStyleType = 'primary' | 'secondary' | 'tertiary' | 'danger';
+type ButtonStyleType =
+  | 'primary'
+  | 'secondary'
+  | 'tertiary'
+  | 'danger'
+  | 'imageButton';
 type ButtonSizeType = 'small' | 'medium';
 
 interface IButtonStyle {
@@ -33,7 +38,8 @@ interface IButtonStyle {
 const getStyle = (
   styleType: ButtonStyleType,
   size: ButtonSizeType,
-  theme: DeskproAdminThemeType
+  theme: DeskproAdminThemeType,
+  imageBtnSelected?: boolean
 ): IButtonStyle => {
   const styles = {
     small: {
@@ -98,6 +104,26 @@ const getStyle = (
           size: 28,
           border: `1px solid ${theme.danger}`
         }
+      },
+      imageButton: {
+        static: {
+          backgroundColor: imageBtnSelected
+            ? 'rgba(232, 235, 238, 1)'
+            : theme.white,
+          color: theme.staticColour,
+          svgColor: theme.white,
+          size: 28,
+          border: `none`
+        },
+        hover: {
+          backgroundColor: imageBtnSelected
+            ? 'rgba(232, 235, 238, 1)'
+            : 'rgba(232, 235, 238, 0.5)',
+          color: theme.staticColour,
+          svgColor: theme.white,
+          size: 28,
+          border: `none`
+        }
       }
     },
     medium: {
@@ -161,6 +187,26 @@ const getStyle = (
           svgColor: theme.white,
           size: 34,
           border: `1px solid ${theme.danger}`
+        }
+      },
+      imageButton: {
+        static: {
+          backgroundColor: imageBtnSelected
+            ? 'rgba(232, 235, 238, 1)'
+            : theme.white,
+          color: theme.staticColour,
+          svgColor: theme.white,
+          size: 34,
+          border: `none`
+        },
+        hover: {
+          backgroundColor: imageBtnSelected
+            ? 'rgba(232, 235, 238, 1)'
+            : 'rgba(232, 235, 238, 0.5)',
+          color: theme.staticColour,
+          svgColor: theme.white,
+          size: 34,
+          border: `none`
         }
       }
     }
@@ -278,6 +324,14 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
       fill: ${props => props.theme.activeColour};
     }
   }
+  .selected-image-btn {
+    font-weight: bold;
+  }
+  img {
+    padding-right: 8px;
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 export type IProps = {
@@ -294,6 +348,7 @@ export type IProps = {
   dropdownValue?: any;
   iconOnly?: boolean;
   className?: string;
+  imageBtnSelected?: boolean;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 const Button: SFC<IProps> = ({
@@ -309,19 +364,21 @@ const Button: SFC<IProps> = ({
   children,
   dropdownValue,
   iconOnly,
-  className
+  className,
+  imageBtnSelected
 }) => {
-  const styles = getStyle(styleType, size, DeskproAdminTheme);
+  const styles = getStyle(styleType, size, DeskproAdminTheme, imageBtnSelected);
   const selected = !isNil(dropdownValue) && dropdownValue !== '';
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <ButtonWrapper
         hasClearButton={showClearButton && selected}
-        className={`${className?className:''}`}
+        className={`${className ? className : ''}`}
       >
         <ButtonStyled
           styles={styles}
-          className={`${selected ? 'selected' : ''}`}
+          className={`${selected ? 'selected' : ''} ${imageBtnSelected &&
+            'selected-image-btn'}`}
           onClick={onClick}
           hasClearButton={showClearButton && selected}
           iconOnly={iconOnly}
