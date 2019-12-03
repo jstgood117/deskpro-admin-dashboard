@@ -86,6 +86,7 @@ export const selectStyles = {
 };
 
 export const StyledMultiSelect = styled(dpstyle.div)`
+  display: inline-flex;
   .select__menu {
     border-radius: 4px;
     background: ${props => props.theme.white};
@@ -113,6 +114,7 @@ export const StyledMultiSelect = styled(dpstyle.div)`
 `;
 
 export const SecondarySelectButton = styled(dpstyle.div)`
+  display: inline-flex;
   .select__menu {
     border-radius: 4px;
     background: ${props => props.theme.white};
@@ -151,6 +153,7 @@ export const SecondarySelectButton = styled(dpstyle.div)`
 `;
 
 export const LargeSelectButton = styled(dpstyle.div)`
+  display: inline-flex;
   .select__menu {
     border-radius: 4px;
     background: ${props => props.theme.white};
