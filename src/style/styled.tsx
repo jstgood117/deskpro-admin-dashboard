@@ -312,7 +312,7 @@ export const dpstyle = {
     border-radius: 4px;
     cursor: pointer;
     outline: none;
-    font-family: Rubik, sans-serif;
+    font-family: ${props => props.theme.mainFont};
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
