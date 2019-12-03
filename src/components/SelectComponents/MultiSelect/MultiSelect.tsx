@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../../Theme';
 import {
   StyledMultiSelect,
-  StyledSelectButton,
+  SecondarySelectButton,
   selectStyles,
   IconOption,
   DropdownIndicator,
@@ -49,7 +49,7 @@ const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
         </StyledMultiSelect>
       )}
       {type === 'fixed' && (
-        <StyledSelectButton>
+        <SecondarySelectButton>
           <Select
             isSearchable={false}
             closeMenuOnSelect={false}
@@ -70,7 +70,7 @@ const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
               ValueContainer: MultiSelectValueContainer2
             }}
           />
-        </StyledSelectButton>
+        </SecondarySelectButton>
       )}
     </ThemeProvider>
   );

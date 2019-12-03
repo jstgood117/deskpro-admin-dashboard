@@ -7,11 +7,13 @@ import { IOptions } from '../interfaces';
 describe('SingleSelect', () => {
   let props: {
     options: IOptions[];
+    type: 'tertiary' | 'large';
   };
   let mountedSingleSelect: any;
 
   const SingleSelectComponent: React.FC<{
     options: IOptions[];
+    type: 'tertiary' | 'large';
   }> = _props => {
     const [selectedOption, selectOptions] = React.useState();
 
@@ -35,7 +37,8 @@ describe('SingleSelect', () => {
 
   beforeEach(() => {
     props = {
-      options: [{ value: 'accounting', label: 'Accounting' }]
+      options: [{ value: 'accounting', label: 'Accounting' }],
+      type: 'large'
     };
   });
 

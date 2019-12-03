@@ -4,10 +4,10 @@ import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../../Theme';
 import {
-  StyledSelectButton,
+  LargeSelectButton,
   selectStyles,
   IconOption,
-  DropdownIndicator
+  DropdownIndicator2
 } from '../Helpers';
 import { IOptions } from '../interfaces';
 
@@ -16,35 +16,46 @@ export interface IProps {
   selectOption: (value: IOptions) => void;
   selectedOption?: IOptions;
   placeholder?: string;
+  type: 'tertiary' | 'large';
+  closeMenuOnSelect?: boolean;
 }
 
-const SingleSelect: SFC<IProps> = ({ options, selectOption, placeholder }) => {
-  const onChange = (selectedOption: IOptions) => {
-    selectOption(selectedOption);
+const SingleSelect: SFC<IProps> = ({
+  options,
+  selectOption,
+  placeholder,
+  type,
+  closeMenuOnSelect,
+  selectedOption
+}) => {
+  const onChange = (value: IOptions) => {
+    selectOption(value);
   };
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-      <StyledSelectButton>
-        <Select
-          isSearchable={false}
-          closeMenuOnSelect={false}
-          isMulti={false}
-          name='colors'
-          options={options}
-          classNamePrefix='select'
-          className='basic-single-select'
-          placeholder={placeholder ? placeholder : 'Select Item'}
-          styles={selectStyles}
-          hideSelectedOptions={false}
-          onChange={onChange}
-          components={{
-            ClearIndicator: false,
-            DropdownIndicator,
-            IndicatorSeparator: null,
-            Option: IconOption
-          }}
-        />
-      </StyledSelectButton>
+      {type === 'large' && (
+        <LargeSelectButton>
+          <Select
+            isSearchable={false}
+            closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
+            isMulti={false}
+            name='colors'
+            options={options}
+            classNamePrefix='select'
+            className='basic-single-select'
+            placeholder={placeholder ? placeholder : 'Select Item'}
+            styles={selectStyles}
+            hideSelectedOptions={false}
+            onChange={onChange}
+            components={{
+              ClearIndicator: false,
+              DropdownIndicator2,
+              IndicatorSeparator: null,
+              Option: IconOption
+            }}
+          />
+        </LargeSelectButton>
+      )}
     </ThemeProvider>
   );
 };

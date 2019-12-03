@@ -22,6 +22,7 @@ const MultiSelectComponent: React.FC<{
 
 const SingleSelectComponent: React.FC<{
   options: IOptions[];
+  type: 'tertiary' | 'large';
 }> = props => {
   const [selectedOption, selectOptions] = React.useState();
 
@@ -44,7 +45,7 @@ const options: IOptions[] = [
 ];
 
 storiesOf('SelectComponents', module)
-  .add('SingleSelect', () => <SingleSelectComponent options={options} />)
+  .add('SingleSelect-large', () => <SingleSelectComponent options={options} type='large'/>)
   .add('MultiSelect - searchable type', () => (
     <MultiSelectComponent options={options} type='autocomplete' />
   ))
