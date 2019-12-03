@@ -15,7 +15,6 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Menu from '../Menu';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
-import MultiSelect from '../MultiSelect';
 
 import * as Cell from './Cell';
 import { TableType, TableParams } from './types';
@@ -32,6 +31,7 @@ import {
   AllCheckStyle,
   StyledPagination
 } from './TableStyles';
+import MultiSelect from '../SelectComponents/MultiSelect';
 
 
 export type IProps = {

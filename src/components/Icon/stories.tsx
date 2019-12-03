@@ -66,4 +66,5 @@ storiesOf('Icon', module)
   .add('upload', () => <Icon name='upload' />)
   .add('elephant', () => <Icon name='elephant' />)
   .add('info-text', () => <Icon name='info-text' />)
-  .add('info-question-text', () => <Icon name='info-question-text' />);
+  .add('info-question-text', () => <Icon name='info-question-text' />)
+  .add('down', () => <Icon name='down' />);

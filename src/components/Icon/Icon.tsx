@@ -68,6 +68,7 @@ import { ReactComponent as IconElephant } from '../../assets/svg/ic-elephant.svg
 import { ReactComponent as IconUpload } from '../../assets/svg/ic-upload.svg';
 import { ReactComponent as IconInfoText } from '../../assets/svg/ic-info-text.svg';
 import { ReactComponent as IconQuestionText } from '../../assets/svg/ic-question-text.svg';
+import { ReactComponent as IconDown } from '../../assets/svg/ic-down.svg';
 
 export interface IProps {
   name: string;
@@ -209,6 +210,8 @@ const Icon: FC<IProps> = props => {
       return <IconElephant />;
     case 'upload':
       return <IconUpload />;
+    case 'down':
+      return <IconDown />;
     case 'info-text':
       return (
         <Tooltip content='Info text' styleType='light' placement='bottom'>
