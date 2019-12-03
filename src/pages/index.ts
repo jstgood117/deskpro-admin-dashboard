@@ -1,7 +1,7 @@
-import Settings from './Settings';
+import AgentsSettings from './Agents/Settings';
 import { KeyValue } from '../resources/interfaces';
 
 export const RouteToPage: KeyValue = {
-  '/sysadmin/settings': Settings
+  '/agents/settings': AgentsSettings,
 };
 
