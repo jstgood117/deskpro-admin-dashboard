@@ -59,6 +59,8 @@ export const StyledSubMenuItem = styled(props => <SubMenuItem {...props} />)`
 `;
 
 export const MenuListWrapper = styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
   background: ${props => props.theme.white};
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: ${props => props.theme.btnBorderRadius};

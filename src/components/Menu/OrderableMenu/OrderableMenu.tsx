@@ -31,9 +31,11 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, value }) => (
               item={item}
               selected={value && value.key === item.key}
             >
-              <IconWrapper>
-                {item.icon && <Icon name={item.icon} />}
-              </IconWrapper>
+              {item.icon && (
+                <IconWrapper>
+                  <Icon name={item.icon} />
+                </IconWrapper>
+              )}
               <FormattedMessage id={item.name} />
             </SingleSubMenuItem>
           )}
