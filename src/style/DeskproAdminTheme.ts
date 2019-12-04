@@ -1,8 +1,6 @@
-
 type FontFamilyType = string;
 
-const fontFamily =
-  'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif' as FontFamilyType;
+const fontFamily = 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif' as FontFamilyType;
 
 type FontType = {
   fontFamily?: FontFamilyType;
@@ -14,7 +12,7 @@ type FontType = {
 };
 
 export type DeskproAdminThemeType = {
-  mainFont: string,
+  mainFont: string;
   headerFont: string;
   btnBorderRadius: string;
   staticColour: string;
@@ -37,6 +35,8 @@ export type DeskproAdminThemeType = {
   pagePadding: string;
   danger: string;
   dangerLight: string;
+  purpleColour: string;
+  purpleLight: string;
 
   h1: FontType;
   h2: FontType;
@@ -79,7 +79,8 @@ const DeskproAdminTheme: DeskproAdminThemeType = {
   pagePadding: '34px',
   danger: '#E84954',
   dangerLight: '#FBE1E3',
-
+  purpleColour: '#7a56de',
+  purpleLight: '#ebe4f2',
   h1: {
     fontFamily,
     fontStyle: 'normal',
