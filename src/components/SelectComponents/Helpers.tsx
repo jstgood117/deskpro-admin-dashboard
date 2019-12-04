@@ -179,7 +179,6 @@ export const LargeSelectButton = styled(dpstyle.div)`
       min-width: 330px;
       .select__value-container {
         padding: 0px;
-        height: 100%;
         .select__single-value {
           color: #4c4f50;
           height: 100%;
@@ -195,9 +194,73 @@ export const LargeSelectButton = styled(dpstyle.div)`
           fill: #1c3e55;
         }
       }
-      min-height: 28px;
       .select__indicators {
         cursor: default;
+      }
+    }
+    .select__placeholder {
+      color: #4c4f50;
+    }
+  }
+`;
+
+export const WithImageSelectButton = styled(dpstyle.div)`
+  display: inline-flex;
+  .select__menu {
+    border-radius: 4px;
+    background: ${props => props.theme.white};
+    overflow-y: hidden;
+    margin: 0;
+    .select__menu-list {
+      overflow-y: hidden;
+    }
+    .select__option {
+      .option-label {
+        flex: 1;
+      }
+    }
+  }
+  .basic-single-select {
+    .select__control {
+      padding-left: 11px;
+      height: 34px;
+      min-width: 200px;
+      border: 1px solid #d3d6d7;
+      border-radius: 4px;
+      box-sizing: border-box;
+      .select__value-container {
+        padding: 0px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        .select__single-value {
+          color: #4c4f50;
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+      }
+      &:hover {
+        box-shadow: none;
+        border: 1px solid #a9b0b0;
+      }
+      &:focus-within {
+        box-shadow: none;
+        background: #e8ebee;
+        border: 1px solid #1c3e55;
+        path {
+          fill: #1c3e55;
+        }
+        .select__single-value {
+          color: #1c3e55;
+        }
+        .select__placeholder {
+          color: #1c3e55;
+        }
+      }
+      .select__indicators {
+        cursor: default;
+        height: 100%;
       }
     }
     .select__placeholder {
@@ -217,6 +280,15 @@ const { Option } = components;
 
 export const IconOption = (props: any) => (
   <Option {...props}>
+    {props.data.image && (
+      <img
+        src={require(`../../assets/brands/${props.data.image}.png`)}
+        width={18}
+        height={18}
+        style={{ paddingRight: 8 }}
+        alt='optionImage'
+      />
+    )}
     <div className='option-label'>{props.data.label}</div>
     {props.isSelected && (
       <span className='option-icon'>
@@ -260,6 +332,25 @@ export const MultiSelectValueContainer2 = ({ children, ...props }: any) => {
     <components.ValueContainer {...props}>
       {children}
       <div>Select Team</div>
+    </components.ValueContainer>
+  );
+};
+export const SingleSelectImageContainer = ({ children, ...props }: any) => {
+  const value = props.getValue()[0];
+  return (
+    <components.ValueContainer {...props}>
+      <div style={{ display: 'flex' }}>
+        {value && value.image && (
+          <img
+            src={require(`../../assets/brands/${value.image}.png`)}
+            width={18}
+            height={18}
+            style={{ paddingRight: 8 }}
+            alt='optionImage'
+          />
+        )}
+        {children}
+      </div>
     </components.ValueContainer>
   );
 };
