@@ -9,6 +9,7 @@ import Icon from '../Icon';
 
 import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
 import { IItemProps } from './DropdownButton';
+import { ISizeTypes } from '../../resources/interfaces';
 
 type ButtonStyleType =
   | 'primary'
@@ -16,7 +17,6 @@ type ButtonStyleType =
   | 'tertiary'
   | 'danger'
   | 'imageButton';
-type ButtonSizeType = 'small' | 'medium';
 
 interface IButtonStyle {
   static: {
@@ -37,7 +37,7 @@ interface IButtonStyle {
 
 const getStyle = (
   styleType: ButtonStyleType,
-  size: ButtonSizeType,
+  size: ISizeTypes,
   theme: DeskproAdminThemeType,
   imageBtnSelected?: boolean
 ): IButtonStyle => {
@@ -337,7 +337,7 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
 export type IProps = {
   children?: ReactNode;
   styleType: ButtonStyleType;
-  size?: ButtonSizeType;
+  size?: ISizeTypes;
   opened?: boolean;
   items?: IItemProps[] | any;
   showClearButton?: boolean;

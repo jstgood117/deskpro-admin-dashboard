@@ -86,7 +86,7 @@ export interface IMenuProps {
   initialChecked?: {[key: string]: any};
   item?: IMenuItemProps;
   selected? : boolean;
-  size?: 'medium' | 'small';
+  size?: ISizeTypes;
 }
 
 export interface IMenuItemProps {
@@ -105,3 +105,5 @@ export interface ITabsProps {
   label?: string;
   messageId?: string;
 }
+
+export type ISizeTypes = 'small' | 'medium';

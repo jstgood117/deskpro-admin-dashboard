@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Button from '../Button';
 import Icon from '../Icon';
+import { ISizeTypes } from '../../resources/interfaces';
 
 export interface IItemProps {
   label?: string | number;
@@ -14,7 +15,7 @@ interface IProps {
   className?: string;
   showClearButton?: boolean;
   items: IItemProps[];
-  size?: 'small' | 'medium';
+  size?: ISizeTypes;
   styleType: 'primary' | 'secondary' | 'tertiary';
   iconOnly?: boolean;
   setValue?: (val: any) => void;
