@@ -146,6 +146,7 @@ const TableData: React.SFC<IProps> = ({ type, props }) => {
           checked={props.checked}
           value={props.value}
           onChange={props.onChange}
+          size='small'
         />
       );
 

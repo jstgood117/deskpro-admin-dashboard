@@ -5,9 +5,11 @@ import { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../../Theme';
 import {
   LargeSelectButton,
+  WithImageSelectButton,
   selectStyles,
   IconOption,
-  DropdownIndicator2
+  DropdownIndicator2,
+  SingleSelectImageContainer
 } from '../Helpers';
 import { IOptions } from '../interfaces';
 
@@ -16,7 +18,7 @@ export interface IProps {
   selectOption: (value: IOptions) => void;
   selectedOption?: IOptions;
   placeholder?: string;
-  type: 'tertiary' | 'large';
+  type: 'withImage' | 'large';
   closeMenuOnSelect?: boolean;
 }
 
@@ -25,8 +27,7 @@ const SingleSelect: SFC<IProps> = ({
   selectOption,
   placeholder,
   type,
-  closeMenuOnSelect,
-  selectedOption
+  closeMenuOnSelect
 }) => {
   const onChange = (value: IOptions) => {
     selectOption(value);
@@ -55,6 +56,30 @@ const SingleSelect: SFC<IProps> = ({
             }}
           />
         </LargeSelectButton>
+      )}
+      {type === 'withImage' && (
+        <WithImageSelectButton>
+          <Select
+            isSearchable={false}
+            closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
+            isMulti={false}
+            name='colors'
+            options={options}
+            classNamePrefix='select'
+            className='basic-single-select'
+            placeholder={placeholder ? placeholder : 'Select Item'}
+            styles={selectStyles}
+            hideSelectedOptions={false}
+            onChange={onChange}
+            components={{
+              ClearIndicator: false,
+              DropdownIndicator2,
+              IndicatorSeparator: null,
+              Option: IconOption,
+              ValueContainer: SingleSelectImageContainer
+            }}
+          />
+        </WithImageSelectButton>
       )}
     </ThemeProvider>
   );

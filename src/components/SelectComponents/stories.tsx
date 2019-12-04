@@ -22,7 +22,7 @@ const MultiSelectComponent: React.FC<{
 
 const SingleSelectComponent: React.FC<{
   options: IOptions[];
-  type: 'tertiary' | 'large';
+  type: 'withImage' | 'large';
 }> = props => {
   const [selectedOption, selectOptions] = React.useState();
 
@@ -43,9 +43,17 @@ const options: IOptions[] = [
   { value: 'filter3', label: 'Filter3' },
   { value: 'item', label: 'Item' }
 ];
+const imageOptions: IOptions[] = [
+  { image: 'brand1', value: 'accounting', label: 'Accounting' },
+  { image: 'brand2', value: 'filter1', label: 'Filter1' },
+  { image: 'brand3', value: 'filter2', label: 'Filter2' },
+  { image: 'brand4', value: 'filter3', label: 'Filter3' },
+  { image: 'brand5', value: 'item', label: 'Item' }
+];
 
 storiesOf('SelectComponents', module)
   .add('SingleSelect-large', () => <SingleSelectComponent options={options} type='large'/>)
+  .add('SingleSelect-with-image', () => <SingleSelectComponent options={imageOptions} type='withImage'/>)
   .add('MultiSelect - searchable type', () => (
     <MultiSelectComponent options={options} type='autocomplete' />
   ))

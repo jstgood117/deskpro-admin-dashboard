@@ -1,7 +1,8 @@
 import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
+import { ISizeTypes } from '../../resources/interfaces';
 
-const SliderStyled = styled.span`
+const SliderStyled = styled.span<{ size: ISizeTypes }>`
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -14,12 +15,12 @@ const SliderStyled = styled.span`
   &::before {
     position: absolute;
     content: '';
-    height: 8px;
-    width: 8px;
-    left: 2px;
-    bottom: 2px;
+    height: ${props => (props.size === 'small' ? 8 : 12)}px;
+    width: ${props => (props.size === 'small' ? 8 : 12)}px;
+    left: ${props => (props.size === 'small' ? 2 : 3)}px;
+    bottom: ${props => (props.size === 'small' ? 2 : 3)}px;
     background-color: white;
-    transition: 0.4s;
+    transition: 0.2s;
     border-radius: 50%;
   }
 `;
@@ -30,11 +31,11 @@ const InputStyled = styled.input.attrs({ type: 'checkbox' })`
   height: 0;
 `;
 
-const LabelStyled = styled.label`
+const LabelStyled = styled.label<{ size: ISizeTypes }>`
   position: relative;
   display: inline-block;
-  width: 18px;
-  height: 12px;
+  width: ${props => (props.size === 'small' ? 18 : 27)}px;
+  height: ${props => (props.size === 'small' ? 12 : 18)}px;
   input:checked + span {
     background-color: ${props => props.theme.successColour};
   }
@@ -42,7 +43,8 @@ const LabelStyled = styled.label`
     box-shadow: 0 0 1px ${props => props.theme.successColour};
   }
   input:checked + span:before {
-    transform: translateX(6px);
+    transform: ${props =>
+      props.size === 'small' ? 'translateX(6px)' : 'translateX(9px)'};
   }
 `;
 
@@ -54,6 +56,7 @@ export interface IProps {
   disabled?: boolean;
   inputProps?: object;
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+  size: ISizeTypes;
 }
 
 const Toggle: React.SFC<IProps> = ({
@@ -63,10 +66,11 @@ const Toggle: React.SFC<IProps> = ({
   style,
   disabled,
   inputProps,
-  onChange
+  onChange,
+  size
 }) => {
   return (
-    <LabelStyled style={style} className={className}>
+    <LabelStyled style={style} className={className} size={size}>
       <InputStyled
         checked={checked}
         value={value}
@@ -74,7 +78,7 @@ const Toggle: React.SFC<IProps> = ({
         onChange={onChange}
         {...inputProps}
       />
-      <SliderStyled />
+      <SliderStyled size={size} />
     </LabelStyled>
   );
 };

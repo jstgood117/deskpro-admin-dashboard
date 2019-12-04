@@ -32,7 +32,8 @@ describe('Toggle', () => {
   beforeEach(() => {
     props = {
       checked: false,
-      onChange: () => null
+      onChange: () => null,
+      size: 'small'
     };
   });
 

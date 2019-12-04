@@ -4,9 +4,7 @@ import { CSVLink } from 'react-csv';
 
 import { IMenuItemProps } from '../../resources/interfaces';
 
-import {
-  testHandlingTeamList
-} from '../../resources/constants/constants';
+import { testHandlingTeamList } from '../../resources/constants/constants';
 import { ActionFactory } from '../../services/actions/ActionFactory';
 
 import Pagination, { IPageChange } from '../Pagination/Pagination';
@@ -33,7 +31,6 @@ import {
 } from './TableStyles';
 import MultiSelect from '../SelectComponents/MultiSelect';
 
-
 export type IProps = {
   path: string;
   data: any[];
@@ -53,9 +50,17 @@ const Table: FC<IProps> = ({
   pageCount: controlledPageCount,
   tableType
 }) => {
+  let headers = [];
+  headers = columns.map(column => {
+    return { label: column.id, key: column.id };
+  });
 
-  const tableParams: TableParams =
-    generateTableParams(tableType, columns, data, controlledPageCount);
+  const tableParams: TableParams = generateTableParams(
+    tableType,
+    columns,
+    data,
+    controlledPageCount
+  );
 
   const {
     getTableProps,
@@ -66,54 +71,34 @@ const Table: FC<IProps> = ({
     setPageSize,
     gotoPage,
     state: { pageIndex, pageSize }
-  } = useTable(
-    tableParams,
-    useSortBy,
-    usePagination,
-    useRowSelect
-  ) as any;
+  } = useTable(tableParams, useSortBy, usePagination, useRowSelect) as any;
 
   const csvData: any[] = [];
-  if(page && page.length > 0) {
+
+  if (page && page.length > 0) {
     page.map((row: any) => {
       const temp = Object.assign({}, row.values);
-      temp['col.groups'] =
-        temp['col.groups'] &&
-        temp['col.groups'].length > 0 &&
-        temp['col.groups'].map((item: any) => {
-          return item.title;
-        });
-      temp['col.teams'] =
-        temp['col.teams'] &&
-        temp['col.teams'].length > 0 &&
-        temp['col.teams'].map((item: any) => {
-          return item.name;
-        });
-      temp['col.members'] =
-        temp['col.members'] &&
-        temp['col.members'].length > 0 &&
-        temp['col.members'].map((item: any) => {
-          return item.name;
-        });
+
+      columns.map(column => {
+        if (Array.isArray(temp[column.id])) {
+          temp[column.id] =
+            temp[column.id] &&
+            temp[column.id].length > 0 &&
+            temp[column.id].map((item: any) => {
+              return item.name ? item.name : item.title;
+            });
+        }
+        return true;
+      });
       csvData.push(temp);
       return true;
     });
   }
-  const headers = [
-    { label: 'Name', key: 'col.name' },
-    { label: 'Email', key: 'col.email' },
-    { label: 'Phone', key: 'col.phone' },
-    { label: 'Access', key: 'col.access' },
-    { label: 'Teams', key: 'col.teams' },
-    { label: 'Groups', key: 'col.groups' },
-    { label: 'Members', key: 'col.members' },
-    { label: 'Title', key: 'col.title' },
-    { label: 'Note', key: 'col.note' },
-    { label: 'SysName', key: 'col.sys_name' }
-  ];
 
   useEffect(() => {
-    if(fetchData) { fetchData({ pageIndex, pageSize }); }
+    if (fetchData) {
+      fetchData({ pageIndex, pageSize });
+    }
   }, [fetchData, pageIndex, pageSize]);
 
   const [checked, setChecked] = useState<object>({});
@@ -173,8 +158,10 @@ const Table: FC<IProps> = ({
 
   useEffect(() => {
     if (dropdownValue) {
-      if (dropdownValue.link === 'All') { onSelectEverything(data, setChecked); }
-      if(dropdownValue.link === 'All on the page') {
+      if (dropdownValue.link === 'All') {
+        onSelectEverything(data, setChecked);
+      }
+      if (dropdownValue.link === 'All on the page') {
         onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
       }
     }
@@ -218,7 +205,9 @@ const Table: FC<IProps> = ({
               <Menu
                 value={menuValue}
                 onSelect={val => setMenuValue(val)}
-                label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
+                label={
+                  menuValue ? menuValue['name'] : 'admin_common.table.action'
+                }
                 menuItems={menuItems}
                 iconName='menu'
               />
@@ -231,14 +220,17 @@ const Table: FC<IProps> = ({
                   />
                 </div>
               )}
-              {((menuValue && menuValue.name === 'actions.agents.delete_agent') ||
+              {((menuValue &&
+                menuValue.name === 'actions.agents.delete_agent') ||
                 selectedOptions.length > 0) && (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <div style={{ paddingLeft: 16 }}>
                     <Button
                       styleType='primary'
                       onClick={() => {
-                        if(menuValue.name === 'actions.agents.delete_agent') { showDeleteModal(true); }
+                        if (menuValue.name === 'actions.agents.delete_agent') {
+                          showDeleteModal(true);
+                        }
                       }}
                     >
                       Confirm
@@ -285,7 +277,11 @@ const Table: FC<IProps> = ({
         <table {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup: any, indexOuter: number) => (
-              <tr key={indexOuter} {...(headerGroup.getHeaderGroupProps && headerGroup.getHeaderGroupProps())}>
+              <tr
+                key={indexOuter}
+                {...(headerGroup.getHeaderGroupProps &&
+                  headerGroup.getHeaderGroupProps())}
+              >
                 <th />
                 {headerGroup.headers.map((column: any, indexInner: number) => (
                   <th

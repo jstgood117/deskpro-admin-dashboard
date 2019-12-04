@@ -7,10 +7,11 @@ import brand2 from '../../../assets/brands/brand2.png';
 import brand3 from '../../../assets/brands/brand3.png';
 import brand4 from '../../../assets/brands/brand4.png';
 import brand5 from '../../../assets/brands/brand5.png';
+import { ISizeTypes } from '../../../resources/interfaces';
 
 export interface IProps {
   children?: ReactNode;
-  size: 'small' | 'medium';
+  size: ISizeTypes;
   selectBtn: (val: string) => void;
   selected: string;
 }

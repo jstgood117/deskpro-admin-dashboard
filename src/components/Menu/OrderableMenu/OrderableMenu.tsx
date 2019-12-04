@@ -146,6 +146,7 @@ const Menu: SFC<IMenuProps> = ({
               onChange={event =>
                 setChecked({ ...checked, [item.key]: event.target.checked })
               }
+              size='small'
             />
           </span>
         )}
