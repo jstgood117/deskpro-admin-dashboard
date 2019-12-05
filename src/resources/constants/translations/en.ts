@@ -1,5 +1,5 @@
 export const testTranslations = {
-  'test': 'Test',
+  test: 'Test',
 
   'admin_common.page.link.login_log': 'Login',
   'admin_common.table.action': 'Action',
@@ -79,7 +79,8 @@ export const testTranslations = {
   'admin_common.filter_operator.starts_with': 'Starts with',
   'admin_common.filter_operator.ends_with': 'Ends with',
   'admin_common.filter_operator.contains': 'Contains one of the following',
-  'admin_common.filter_operator.not_contains': 'Does not Contain one of the following',
+  'admin_common.filter_operator.not_contains':
+    'Does not Contain one of the following',
   'admin_common.filter_operator.yes_no': 'Yes / No',
 
   'action.agents.delete_action': 'Delete Agent',
@@ -88,12 +89,14 @@ export const testTranslations = {
   'action.agents.remove_team': 'Remove Team',
   'action.agents.remove_all_teams': 'Remove All Teams',
 
-  'agents.col.name':'Name',
-  'agents.col.email':'Email',
-  'agents.col.phone':'Phone',
-  'agents.col.access':'Access',
-  'agents.col.teams':'Teams',
-  'agents.col.groups':'Groups'
+  'agents.col.name': 'Name',
+  'agents.col.email': 'Email',
+  'agents.col.phone': 'Phone',
+  'agents.col.access': 'Access',
+  'agents.col.teams': 'Teams',
+  'agents.col.groups': 'Groups',
 
-
+  'admin.settings.draggable.from': 'From',
+  'admin.settings.draggable.replyTo': 'Reply-To',
+  'admin.settings.draggable.xOriginalFrom': 'X-Original-From'
 };
