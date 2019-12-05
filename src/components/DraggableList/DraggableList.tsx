@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { SFC } from 'react';
 import styled from 'styled-components';
 import { uniqueId } from 'lodash';
 
@@ -6,8 +6,6 @@ import SortableList from '../SortableList';
 import { dpstyle } from '../Styled';
 import Icon from '../Icon';
 import { FormattedMessage } from 'react-intl';
-
-export type IProps = {};
 
 const LIStyle = styled(dpstyle.div)`
   display: flex;
@@ -42,20 +40,19 @@ const DraggableListStyle = styled(dpstyle.div)`
   }
 `;
 
-const DraggableList: SFC = () => {
-  const initialState: string[] = [
-    'admin.settings.draggable.from',
-    'admin.settings.draggable.replyTo',
-    'admin.settings.draggable.xOriginalFrom'
-  ];
-  const [SortList, SetList] = useState(initialState);
+export interface IProps {
+  items: string[];
+  SetList: (values: string[]) => void;
+}
+
+const DraggableList: SFC<IProps> = ({ items, SetList }) => {
   return (
     <DraggableListStyle>
       <SortableList
-        onChange={items => {
-          SetList(items);
+        onChange={values => {
+          SetList(values);
         }}
-        children={SortList.map(val => (
+        children={items.map(val => (
           <LIStyle key={uniqueId()} data-id={val} className='item'>
             <Icon name='drag-and-drop' />
             <TextWrapper>
