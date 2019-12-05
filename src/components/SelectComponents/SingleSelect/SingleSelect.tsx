@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../../Theme';
 import {
+  SecondarySelectButton,
   LargeSelectButton,
   WithImageSelectButton,
   selectStyles,
@@ -13,72 +14,78 @@ import {
 } from '../Helpers';
 import { IOptions } from '../interfaces';
 
+
+
 export interface IProps {
   options: IOptions[];
   selectOption: (value: IOptions) => void;
   selectedOption?: IOptions;
   placeholder?: string;
-  type: 'withImage' | 'large';
+  type: 'withImage' | 'medium' | 'large';
   closeMenuOnSelect?: boolean;
 }
+
+
 
 const SingleSelect: SFC<IProps> = ({
   options,
   selectOption,
   placeholder,
   type,
-  closeMenuOnSelect
+  closeMenuOnSelect,
+  selectedOption
 }) => {
   const onChange = (value: IOptions) => {
     selectOption(value);
   };
+  const generateSelect = (overrides:object = {}) => {
+    return (
+      <Select
+        isSearchable={false}
+        closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
+        isMulti={false}
+        name='colors'
+        options={options}
+        classNamePrefix='select'
+        className='basic-single-select'
+        placeholder={placeholder ? placeholder : 'Select Item'}
+        styles={selectStyles}
+        hideSelectedOptions={false}
+        onChange={onChange}
+        defaultValue={selectedOption}
+        components={{
+          ClearIndicator: false,
+          DropdownIndicator2,
+          IndicatorSeparator: null,
+          Option: IconOption
+        }}
+        {...options}
+      />
+    );
+  };
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
+      {type === 'medium' && (
+        <SecondarySelectButton>
+          {generateSelect()}
+        </SecondarySelectButton>
+      )}
       {type === 'large' && (
         <LargeSelectButton>
-          <Select
-            isSearchable={false}
-            closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
-            isMulti={false}
-            name='colors'
-            options={options}
-            classNamePrefix='select'
-            className='basic-single-select'
-            placeholder={placeholder ? placeholder : 'Select Item'}
-            styles={selectStyles}
-            hideSelectedOptions={false}
-            onChange={onChange}
-            components={{
-              ClearIndicator: false,
-              DropdownIndicator2,
-              IndicatorSeparator: null,
-              Option: IconOption
-            }}
-          />
+          {generateSelect()}
         </LargeSelectButton>
       )}
       {type === 'withImage' && (
         <WithImageSelectButton>
-          <Select
-            isSearchable={false}
-            closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
-            isMulti={false}
-            name='colors'
-            options={options}
-            classNamePrefix='select'
-            className='basic-single-select'
-            placeholder={placeholder ? placeholder : 'Select Item'}
-            styles={selectStyles}
-            hideSelectedOptions={false}
-            onChange={onChange}
-            components={{
+          {generateSelect({
+            components: {
               ClearIndicator: false,
               DropdownIndicator2,
               IndicatorSeparator: null,
               Option: IconOption,
               ValueContainer: SingleSelectImageContainer
-            }}
-          />
+            }
+          })}
         </WithImageSelectButton>
       )}
     </ThemeProvider>

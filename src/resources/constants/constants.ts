@@ -18,8 +18,8 @@ export {
   testDropdownItemsWithIcon,
   testHandlingTeamList,
   testDropdownItemsWithoutIcon,
-  testOrderableMenuItems,
   testNavData,
+  testOrderableMenuItems,
   testTableData,
   testView,
   testPageData
