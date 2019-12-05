@@ -7,13 +7,13 @@ import { IOptions } from '../interfaces';
 describe('SingleSelect', () => {
   let props: {
     options: IOptions[];
-    type: 'withImage' | 'large';
+    type: 'withImage' | 'medium' | 'large';
   };
   let mountedSingleSelect: any;
 
   const SingleSelectComponent: React.FC<{
     options: IOptions[];
-    type: 'withImage' | 'large';
+    type: 'withImage' | 'medium' | 'large';
   }> = _props => {
     const [selectedOption, selectOptions] = React.useState();
 

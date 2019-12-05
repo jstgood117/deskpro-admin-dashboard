@@ -2,7 +2,6 @@ import React, { SFC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { IntlProvider } from 'react-intl';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
-
 import { logError } from '../../components/Error/ErrorBoundary';
 import { testTranslations } from '../../resources/constants/translations/en';
 import { QueryService } from '../../services/query';
@@ -20,7 +19,6 @@ const App: SFC = () => {
   const query = queryService.getQueryBasedOnRoute('/');
 
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all', variables: { locale } });
-
   if (loading) {
     return <p>Loading</p>;
   }

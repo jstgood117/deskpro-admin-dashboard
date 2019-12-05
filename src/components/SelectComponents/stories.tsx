@@ -22,7 +22,7 @@ const MultiSelectComponent: React.FC<{
 
 const SingleSelectComponent: React.FC<{
   options: IOptions[];
-  type: 'withImage' | 'large';
+  type: 'withImage' | 'medium' | 'large';
 }> = props => {
   const [selectedOption, selectOptions] = React.useState();
 
