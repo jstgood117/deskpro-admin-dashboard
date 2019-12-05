@@ -1,6 +1,7 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 import { CSVLink } from 'react-csv';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { IMenuItemProps } from '../../resources/interfaces';
 
@@ -41,7 +42,8 @@ export type IProps = {
   tableType: TableType;
 };
 
-const Table: FC<IProps> = ({
+const Table: FC<IProps & WrappedComponentProps> = ({
+  intl,
   path,
   data,
   columns,
@@ -52,7 +54,7 @@ const Table: FC<IProps> = ({
 }) => {
   let headers = [];
   headers = columns.map(column => {
-    return { label: column.id, key: column.id };
+    return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
 
   const tableParams: TableParams = generateTableParams(
@@ -365,4 +367,4 @@ const Table: FC<IProps> = ({
   );
 };
 
-export default Table;
+export default injectIntl(Table);
