@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
-import { IntlProvider } from 'react-intl';
-
-import { testTranslations } from '../../resources/constants/constants';
 
 import Menu from './Menu';
 import {
@@ -17,15 +14,13 @@ const MenuComponent: React.FC<IMenuProps> = props => {
   const [value, setValue] = useState();
 
   return (
-    <IntlProvider locale='en' messages={testTranslations}>
-      <Menu
-        menuItems={props.menuItems}
-        iconName={props.iconName}
-        value={value}
-        label={value ? value['name'] : props.label}
-        onSelect={val => setValue(val)}
-      />
-    </IntlProvider>
+    <Menu
+      menuItems={props.menuItems}
+      iconName={props.iconName}
+      value={value}
+      label={value ? value['name'] : props.label}
+      onSelect={val => setValue(val)}
+    />
   );
 };
 
@@ -35,19 +30,17 @@ const OrderableMenuComponent: React.FC<IMenuProps> = props => {
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);
   return (
-    <IntlProvider locale='en' messages={testTranslations}>
-      <OrderableMenu
-        iconName={props.iconName}
-        value={value}
-        label={value ? value['name'] : props.label}
-        onSelect={val => setValue(val)}
-        order={val => SetList(val)}
-        initialList={testOrderableMenuItems}
-        menuItems={SortList}
-        setChecked={setChecked}
-        checked={checked}
-      />
-    </IntlProvider>
+    <OrderableMenu
+      iconName={props.iconName}
+      value={value}
+      label={value ? value['name'] : props.label}
+      onSelect={val => setValue(val)}
+      order={val => SetList(val)}
+      initialList={testOrderableMenuItems}
+      menuItems={SortList}
+      setChecked={setChecked}
+      checked={checked}
+    />
   );
 };
 

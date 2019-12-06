@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { IntlProvider } from 'react-intl';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient, InMemoryCache } from 'apollo-boost';
 import { createHttpLink } from 'apollo-link-http';
@@ -8,7 +7,6 @@ import { createHttpLink } from 'apollo-link-http';
 import generateConfig, { ConfigType } from '../../config/config';
 import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
 import Table from './TableWrapper';
-import { testTranslations } from '../../resources/constants/constants';
 import { FilterType } from '../../services/filters/types';
 import {
   StandardTableProvider,
@@ -49,18 +47,16 @@ const client = new ApolloClient({
 });
 storiesOf('Table', module).add('with dummy data', () => (
   <ApolloProvider client={client}>
-    <IntlProvider locale='en' messages={testTranslations}>
-      <StandardTableProvider value={contextValue}>
-        {views && views[0] && (
-          <Table
-            {...views[0]}
-            path='/agents' // TODO: When hooked up to live db, not required
-            filters={filters}
-            dataType='async'
-            columnOrder={columnOrder}
-          />
-        )}
-      </StandardTableProvider>
-    </IntlProvider>
+    <StandardTableProvider value={contextValue}>
+      {views && views[0] && (
+        <Table
+          {...views[0]}
+          path='/agents' // TODO: When hooked up to live db, not required
+          filters={filters}
+          dataType='async'
+          columnOrder={columnOrder}
+        />
+      )}
+    </StandardTableProvider>
   </ApolloProvider>
 ));

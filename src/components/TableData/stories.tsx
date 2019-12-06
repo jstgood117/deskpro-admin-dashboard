@@ -4,11 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
 import TableData from './TableData';
-import { IntlProvider } from 'react-intl';
-import {
-  testTranslations,
-  testTableData
-} from '../../resources/constants/constants';
+import { testTableData } from '../../resources/constants/constants';
 import { DeskproAdminTheme } from '../Theme';
 import { getRandomItem } from '../../utils/getRandomColor';
 import { ITableColor } from '../../resources/interfaces';
@@ -27,11 +23,9 @@ const getRandomColor = (): ITableColor => {
 };
 
 const Container: React.SFC = props => (
-  <IntlProvider locale='en' messages={testTranslations}>
-    <ThemeProvider theme={DeskproAdminTheme}>
-      <MemoryRouter>{props.children}</MemoryRouter>
-    </ThemeProvider>
-  </IntlProvider>
+  <ThemeProvider theme={DeskproAdminTheme}>
+    <MemoryRouter>{props.children}</MemoryRouter>
+  </ThemeProvider>
 );
 
 storiesOf('Table Data', module)
