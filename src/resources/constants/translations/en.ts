@@ -98,5 +98,6 @@ export const testTranslations = {
 
   'admin.settings.draggable.from': 'From',
   'admin.settings.draggable.replyTo': 'Reply-To',
-  'admin.settings.draggable.xOriginalFrom': 'X-Original-From'
+  'admin.settings.draggable.xOriginalFrom': 'X-Original-From',
+  'admin.settings.headers.dollarSignTooltip': 'Changing this feature will affect your pricing. Click to see pricing information.'
 };
