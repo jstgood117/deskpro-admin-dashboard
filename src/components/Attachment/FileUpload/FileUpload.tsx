@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import FileDrop from 'react-file-drop';
+import { uniqueId } from 'lodash';
 import Icon from '../../Icon';
 import Button from '../../Button';
 import Tooltip from '../../Tooltip';
@@ -60,6 +61,7 @@ export interface IProps {
   onChangeFile?: (e: any) => void;
   files: FileList;
 }
+const randomId = uniqueId().toString();
 
 const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
@@ -185,6 +187,6 @@ const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
   );
 };
 FileUpload.defaultProps = {
-  id: '1'
+  id: randomId
 };
 export default FileUpload;

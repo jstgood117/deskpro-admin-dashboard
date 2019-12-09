@@ -17,7 +17,8 @@ const RadioComponent: React.FC<{
         }}
         option={option}
         value='option1'
-        containerStyle={{ marginRight: 12 }}
+        id='option1'
+        label='option1'
       />
       <Radio
         className={className}
@@ -25,7 +26,9 @@ const RadioComponent: React.FC<{
           setOption(val);
         }}
         option={option}
+        id='option2'
         value='option2'
+        label='option2'
       />
     </div>
   );
