@@ -1,5 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
+import { uniqueId } from 'lodash';
 import Icon from '../Icon';
 
 const InputFile = styled.input.attrs({
@@ -25,7 +26,7 @@ export interface IProps {
   text?: string;
   onChangeFile?: (event: SyntheticEvent<HTMLInputElement>) => void;
 }
-
+const randomId = uniqueId().toString();
 const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {
   return (
     <div>
@@ -38,6 +39,6 @@ const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {
   );
 };
 Attachment.defaultProps = {
-  id: '1'
+  id: randomId
 };
 export default Attachment;

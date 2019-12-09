@@ -126,6 +126,7 @@ const AgentSecurity: FC<any> = () => {
                 setScreenOption(val);
               }}
               value='lock'
+              id='lock'
               option={screenOption}
             />
             <RadioLabel>Lock Screen</RadioLabel>
@@ -136,6 +137,7 @@ const AgentSecurity: FC<any> = () => {
               setOption={(val: any) => {
                 setScreenOption(val);
               }}
+              id='login'
               value='login'
               option={screenOption}
             />

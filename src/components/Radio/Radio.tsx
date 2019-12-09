@@ -16,6 +16,8 @@ export interface IProps {
   option: string | number | string[];
   value: string | number | string[];
   containerStyle?: CSSProperties;
+  id: string;
+  label?: string;
 }
 
 interface IRadioProps {
@@ -61,27 +63,42 @@ const InnerCircle = styled.div<IRadioProps>`
   border-radius: 50%;
   margin: auto;
 `;
+const Label = styled.label`
+  font-family: ${props => props.theme.mainFont};
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 150%;
+  color: ${props => props.theme.staticColour};
+  cursor: pointer;
+  padding-left: 8px;
+`;
 const Radio: SFC<IProps> = ({
   className,
   setOption,
   option,
   value,
-  containerStyle
+  id,
+  label
 }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-      <RadioContainer className={className} style={containerStyle}>
-        <HiddenRadio
-          value={value}
-          checked={option === value}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setOption(e.target.value);
-          }}
-        />
-        <StyledRadio checked={option === value}>
-          <InnerCircle checked={option === value} />
-        </StyledRadio>
-      </RadioContainer>
+      <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+        <RadioContainer className={className}>
+          <HiddenRadio
+            id={id}
+            value={value}
+            checked={option === value}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setOption(e.target.value);
+            }}
+          />
+          <StyledRadio checked={option === value}>
+            <InnerCircle checked={option === value} />
+          </StyledRadio>
+        </RadioContainer>
+        {label && <Label htmlFor={id}>{label}</Label>}
+      </div>
     </ThemeProvider>
   );
 };

@@ -149,6 +149,7 @@ const AdminSecurity: FC<any> = () => {
                 setScreenOption(val);
               }}
               value='lock'
+              id='lock'
               option={screenOption}
             />
             <RadioLabel>Lock Screen</RadioLabel>
@@ -160,6 +161,7 @@ const AdminSecurity: FC<any> = () => {
                 setScreenOption(val);
               }}
               value='login'
+              id='login'
               option={screenOption}
             />
             <RadioLabel>Login Screen</RadioLabel>
