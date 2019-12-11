@@ -1,4 +1,4 @@
-import React, { SFC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 export interface IProps {
@@ -14,6 +14,6 @@ const CardStyled = styled.div`
   position: relative;
 `;
 
-const Card: SFC<IProps> = ({ children }) => <CardStyled>{children}</CardStyled>;
+const Card: FC<IProps> = ({ children }) => <CardStyled>{children}</CardStyled>;
 
 export default Card;

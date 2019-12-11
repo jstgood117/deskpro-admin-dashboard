@@ -1,4 +1,4 @@
-import React, { SFC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled, { CSSProperties, ThemeProvider, css } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
@@ -55,7 +55,7 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
     `}
 `;
 
-const Label: SFC<IProps & IStyleProps> = ({
+const Label: FC<IProps & IStyleProps> = ({
   label,
   styleType,
   icon,

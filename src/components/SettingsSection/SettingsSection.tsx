@@ -1,4 +1,4 @@
-import React, { SFC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import Toggle from '../Toggle';
@@ -42,7 +42,7 @@ const Label = styled.div`
   align-items: center;
 `;
 
-export const SettingsSection:SFC<SettingsSectionProps> = ({
+export const SettingsSection:FC<SettingsSectionProps> = ({
   label,
   children,
   actions,

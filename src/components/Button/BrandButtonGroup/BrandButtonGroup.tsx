@@ -1,4 +1,4 @@
-import React, { SFC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import Button from '../Button';
@@ -24,7 +24,7 @@ const StyledButton = styled.div`
   padding-right: 24px;
 `;
 
-const BrandButtonGroup: SFC<IProps> = ({ size, selected, selectBtn }) => {
+const BrandButtonGroup: FC<IProps> = ({ size, selected, selectBtn }) => {
   return (
     <GroupStyled>
       <StyledButton>

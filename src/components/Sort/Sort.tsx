@@ -1,4 +1,4 @@
-import React, { SFC, CSSProperties, useState } from 'react';
+import React, { FC, CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 
 import Icon from '../Icon';
@@ -46,7 +46,7 @@ export interface ISortIconProps {
   style?: CSSProperties;
   className?: string;
 }
-const SortIcon: SFC<ISortIconProps> = ({ sortType, style, className }) => {
+const SortIcon: FC<ISortIconProps> = ({ sortType, style, className }) => {
   return (
     <IconContainer style={style} className={className}>
       <IconItem selected={sortType === 'asc'}>
@@ -64,7 +64,7 @@ export interface IProps {
   sortSelected: ISortItem | null;
   onSelectSort: (item: ISortItem) => void;
 }
-const Sort: SFC<IProps> = ({ items, sortSelected = null, onSelectSort }) => {
+const Sort: FC<IProps> = ({ items, sortSelected = null, onSelectSort }) => {
   const [opened, open] = useState(false);
   const selectSort = (item: ISortItem) => {
     const sortItem =

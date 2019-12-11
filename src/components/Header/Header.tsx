@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -126,7 +126,7 @@ export interface IProps {
   onNewClick?: () => void;
 }
 
-const Header: SFC<IProps> = ({
+const Header: FC<IProps> = ({
   title,
   description,
   illustration,

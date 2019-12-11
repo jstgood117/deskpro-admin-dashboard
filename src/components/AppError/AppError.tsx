@@ -1,10 +1,10 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 
 type AppErrorType = {
   message: string;
 };
 
-const AppError: SFC<AppErrorType> =  ({
+const AppError: FC<AppErrorType> =  ({
   message
 }) => {
 

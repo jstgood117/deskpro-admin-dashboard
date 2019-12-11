@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import isNil from 'lodash/isNil';
 import { MenuList, MenuButton } from 'react-menu-list';
@@ -18,7 +18,7 @@ import {
   StyledIcon
 } from './MenuStyles';
 
-const singleSubMenuItem: SFC<IMenuProps & WrappedComponentProps> = props => {
+const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
@@ -55,7 +55,7 @@ const singleSubMenuItem: SFC<IMenuProps & WrappedComponentProps> = props => {
 };
 export const SingleSubMenuItem = injectIntl(singleSubMenuItem);
 
-export const multiSubMenuItem: SFC<IMenuProps & WrappedComponentProps> = ({ intl, item, onSelect }) => {
+export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({ intl, item, onSelect }) => {
   return (
     <StyledSubMenuItem
       highlightedStyle={{ background: '#E8EBEE' }}
@@ -85,7 +85,7 @@ export const multiSubMenuItem: SFC<IMenuProps & WrappedComponentProps> = ({ intl
 };
 export const MultiSubMenuItem = injectIntl(multiSubMenuItem);
 
-const menuSub: SFC<IMenuProps & WrappedComponentProps> = ({ intl, onSelect, menuItems }) => {
+const menuSub: FC<IMenuProps & WrappedComponentProps> = ({ intl, onSelect, menuItems }) => {
   return (
     <MenuListWrapper>
       <MenuList>
@@ -118,7 +118,7 @@ const menuSub: SFC<IMenuProps & WrappedComponentProps> = ({ intl, onSelect, menu
 };
 export const MenuSub = injectIntl(menuSub);
 
-const menu: SFC<IMenuProps & WrappedComponentProps> = ({
+const menu: FC<IMenuProps & WrappedComponentProps> = ({
   intl,
   iconName,
   label,

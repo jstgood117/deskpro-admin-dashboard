@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,15 +25,11 @@ const InlileEditWrapper = styled(dpstyle.div)`
   }
 `;
 
-const StyledEditBox = styled(dpstyle.div)<{ editing: boolean }>`
+const StyledEditBox = styled(dpstyle.div1)<{ editing: boolean }>`
   display: flex;
   align-items: center;
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 150%;
-  color: #4c4f50;
   height: 40px;
   border-radius: 6px;
   padding-left: 8px;
@@ -69,7 +65,7 @@ const ButtonWrapper = styled.div`
     }
   }
 `;
-const InlileEdit: SFC<IProps> = ({ error, inputValues, setValues }) => {
+const InlileEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
   const [editing, setEdit] = useState(false);
   const [inlineValues, setInlineValues] = useState(inputValues);
 

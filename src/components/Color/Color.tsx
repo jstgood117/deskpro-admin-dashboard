@@ -12,7 +12,7 @@ const ColorStyled = styled.div<{ color: string }>`
   margin-right: 8px;
 `;
 
-export const Color: React.SFC<{ color: string; label: string }> = ({
+export const Color: React.FC<{ color: string; label: string }> = ({
   color,
   label
 }) => (

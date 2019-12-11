@@ -46,7 +46,7 @@ interface IProps {
     | 'input';
   props: any;
 }
-const TableData: React.SFC<IProps> = ({ type, props }) => {
+const TableData: React.FC<IProps> = ({ type, props }) => {
   switch (type) {
     case 'avatar_text':
       return (

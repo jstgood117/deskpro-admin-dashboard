@@ -1,4 +1,4 @@
-import React, { ReactNode, SFC } from 'react';
+import React, { ReactNode, FC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { isNil } from 'lodash';
 
@@ -351,7 +351,7 @@ export type IProps = {
   imageBtnSelected?: boolean;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
-const Button: SFC<IProps> = ({
+const Button: FC<IProps> = ({
   styleType,
   size,
   showClearButton,

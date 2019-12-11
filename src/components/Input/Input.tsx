@@ -1,5 +1,5 @@
 import React, {
-  SFC,
+  FC,
   useState,
   InputHTMLAttributes,
   useEffect,
@@ -101,7 +101,7 @@ export type IProps = {
   showClear?: boolean;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const Input: SFC<IProps> = ({
+const Input: FC<IProps> = ({
   containerStyle,
   containerClassName = '',
   onClear,

@@ -34,7 +34,7 @@ export interface IProps {
   renderItem: (item: any, index: number) => React.ReactElement;
 }
 
-const OverflowList: React.SFC<IProps> = ({
+const OverflowList: React.FC<IProps> = ({
   max,
   items = [],
   viewMode = 'text',

@@ -22,7 +22,7 @@ const getRandomColor = (): ITableColor => {
   return randomItem;
 };
 
-const Container: React.SFC = props => (
+const Container: React.FC = props => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <MemoryRouter>{props.children}</MemoryRouter>
   </ThemeProvider>

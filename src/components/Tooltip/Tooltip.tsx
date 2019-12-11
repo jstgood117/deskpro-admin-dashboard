@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import Tippy, { TippyProps } from '@tippy.js/react';
 
@@ -34,7 +34,7 @@ const getStyle = (styleType: 'dark' | 'light' | 'lightBox', theme: DeskproAdminT
   return styles[styleType] || styles.dark;
 };
 
-const Tooltip: SFC<IProps> = styled(
+const Tooltip: FC<IProps> = styled(
   ({ suppressClassNameWarning, styleType, ...props }) => <Tippy arrow={false} {...props} />
 ).attrs({
   suppressClassNameWarning: true

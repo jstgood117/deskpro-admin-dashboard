@@ -22,7 +22,7 @@ export interface IStyleProp {
   background: string;
   textColor: string;
 }
-const NameAndAvatar: React.SFC<IProps> = ({
+const NameAndAvatar: React.FC<IProps> = ({
   name,
   avatar,
   avatarProps,

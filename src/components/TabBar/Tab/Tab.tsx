@@ -1,4 +1,4 @@
-import React, { SFC, Fragment } from 'react';
+import React, { FC, Fragment } from 'react';
 import styled from 'styled-components';
 
 import { dpstyle, TextString } from '../../Styled';
@@ -35,7 +35,7 @@ export interface IProps {
   onClick?: (e: any) => void;
 }
 
-const Tab: SFC<IProps> = props => (
+const Tab: FC<IProps> = props => (
   <Fragment>
     <TabStyled active={props.index === props.value} onClick={props.onClick}>
       {props.label ? (

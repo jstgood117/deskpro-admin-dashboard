@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,7 +14,7 @@ export interface IProps {
   apolloError?: any;
 }
 
-const Error: SFC<IProps & IStyleProps> = ({apolloError}) => (
+const Error: FC<IProps & IStyleProps> = ({apolloError}) => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <ErrorStyled>
       <h2><FormattedMessage id='admin.page.error' /></h2>

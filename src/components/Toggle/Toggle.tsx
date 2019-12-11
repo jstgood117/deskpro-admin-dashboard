@@ -59,7 +59,7 @@ export interface IProps {
   size: ISizeTypes;
 }
 
-const Toggle: React.SFC<IProps> = ({
+const Toggle: React.FC<IProps> = ({
   checked,
   value,
   className,

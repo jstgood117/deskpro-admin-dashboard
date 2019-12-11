@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Autocomplete from 'react-autocomplete';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
@@ -84,7 +84,7 @@ export const MenuStyle = () => {
   };
 };
 
-const AutoComplete: SFC<IProps> = ({ menuItems, ...props }) => {
+const AutoComplete: FC<IProps> = ({ menuItems, ...props }) => {
   const [value, setValue] = useState();
   const [containItems, setItems] = useState(menuItems);
   return (

@@ -18,7 +18,7 @@ const ColorPalleteView = styled.div<{ backgroundColor: string }>`
   margin-right: 10px;
 `;
 
-const ColorPallete: React.SFC<{ backgroundColor: string }> = ({
+const ColorPallete: React.FC<{ backgroundColor: string }> = ({
   backgroundColor
 }) => {
   return (

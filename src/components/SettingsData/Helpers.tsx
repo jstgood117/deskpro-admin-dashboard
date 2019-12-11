@@ -17,14 +17,10 @@ const StyledHeader = styled(dpstyle.div)`
   background-size: contain;
   background-position: 100%;
 `;
-const StyledText = styled.div<{ isTitle: boolean }>`
-  font-family: Rubik;
-  font-style: normal;
+const StyledText = styled(dpstyle.div1)<{ isTitle: boolean }>`
   font-weight: ${props => (props.isTitle ? 500 : 'normal')};
-  line-height: 150%;
   display: flex;
   align-items: center;
-  color: ${props => props.theme.staticColour};
 `;
 const StyledSettingInfo = styled(dpstyle.div)`
   width: 100%;

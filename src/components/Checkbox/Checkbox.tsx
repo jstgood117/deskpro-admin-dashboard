@@ -1,4 +1,4 @@
-import React, { SFC, CSSProperties, MouseEvent } from 'react';
+import React, { FC, CSSProperties, MouseEvent } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 import Button from '../Button';
@@ -98,7 +98,7 @@ export interface IProps {
   items?: IItemProps[];
 }
 
-const Checkbox: SFC<IProps> = ({
+const Checkbox: FC<IProps> = ({
   size = 16,
   checked,
   value,

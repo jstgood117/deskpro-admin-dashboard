@@ -24,7 +24,7 @@ const ColorStyled = styled(dpstyle.div)`
 export interface IProps {
   children: ReactNode;
 }
-export const Code: React.SFC<IProps> = props => (
+export const Code: React.FC<IProps> = props => (
   <div style={{ display: 'inline-flex' }}>
     <ColorStyled>{props.children}</ColorStyled>
   </div>

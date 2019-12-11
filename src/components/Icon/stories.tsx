@@ -68,4 +68,5 @@ storiesOf('Icon', module)
   .add('info-text', () => <Icon name='info-text' />)
   .add('info-question-text', () => <Icon name='info-question-text' />)
   .add('down', () => <Icon name='down' />)
-  .add('ic-dollar-sign', () => <Icon name='ic-dollar-sign' />);
+  .add('ic-dollar-sign', () => <Icon name='ic-dollar-sign' />)
+  .add('ic-help-center', () => <Icon name='ic-help-center' />);

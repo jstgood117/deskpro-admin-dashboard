@@ -1,4 +1,4 @@
-import React, { ReactNode, SFC } from 'react';
+import React, { ReactNode, FC } from 'react';
 import styled from 'styled-components';
 
 const DialogTitleStyled = styled.div`
@@ -22,7 +22,7 @@ export type IProps = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const DialogTitle: SFC<IProps> = ({ children, ...props }) => (
+const DialogTitle: FC<IProps> = ({ children, ...props }) => (
   <DialogTitleStyled {...props}>
     <div>{children}</div>
   </DialogTitleStyled>

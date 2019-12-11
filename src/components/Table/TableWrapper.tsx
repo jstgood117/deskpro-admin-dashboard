@@ -1,4 +1,4 @@
-import React, { useEffect, SFC, useCallback, useState, Fragment } from 'react';
+import React, { useEffect, FC, useCallback, useState, Fragment } from 'react';
 import { withApollo } from 'react-apollo';
 import { /* gql, */ ApolloClient } from 'apollo-boost';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
@@ -60,7 +60,7 @@ const transformColumnData = (
   return newCols;
 };
 
-const TableWrapper: SFC<ITableSetup & IProps & WrappedComponentProps> = ({
+const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   intl,
   path,
   client,

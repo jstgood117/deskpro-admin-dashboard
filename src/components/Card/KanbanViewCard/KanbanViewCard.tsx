@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import Card from '../Card';
@@ -92,7 +92,7 @@ const StyledNameSection = styled.div<StyleProps>`
       ? '0px'
       : '5px'};
 `;
-const KanbanViewCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
+const KanbanViewCard: FC<IProps> = ({ checkbox, cardDetails, styleType }) => {
   const [checked, setChecked] = useState(false);
   return (
     <CardStyled>

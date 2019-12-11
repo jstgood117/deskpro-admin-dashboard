@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Pagination, { IPageChange } from './Pagination';
 
-const PaginationComponent: React.SFC = () => {
+const PaginationComponent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 

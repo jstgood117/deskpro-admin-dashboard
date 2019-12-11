@@ -1,4 +1,4 @@
-import React, { SFC, CSSProperties } from 'react';
+import React, { FC, CSSProperties } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
@@ -67,7 +67,7 @@ export interface IProps {
   showBoxShadow?: boolean;
 }
 
-const Avatar: SFC<IProps> = ({
+const Avatar: FC<IProps> = ({
   size = 25,
   textSize = 22,
   selected,

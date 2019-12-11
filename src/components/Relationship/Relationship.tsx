@@ -1,4 +1,4 @@
-import React, { SFC, CSSProperties } from 'react';
+import React, { FC, CSSProperties } from 'react';
 import styled from 'styled-components';
 
 import Icon from '../Icon';
@@ -43,7 +43,7 @@ export interface IProps {
   renderItem: (item: any, index: number) => React.ReactElement;
 }
 
-const Relationship: SFC<IProps> = ({
+const Relationship: FC<IProps> = ({
   icon,
   items,
   text,

@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,7 +12,7 @@ const LoadingStyled = styled.div<IStyleProps>`
 
 export interface IProps {}
 
-const Loading: SFC<IProps & IStyleProps> =props => (
+const Loading: FC<IProps & IStyleProps> =props => (
   <ThemeProvider theme={DeskproAdminTheme}>
     <LoadingStyled><FormattedMessage id='admin.page.loading' /></LoadingStyled>
   </ThemeProvider>

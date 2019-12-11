@@ -63,7 +63,7 @@ export interface IProps {
 }
 const randomId = uniqueId().toString();
 
-const FileUpload: React.SFC<IProps> = ({ id, onChangeFile, files }) => {
+const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState();
   const [dragOver, setDragover] = useState(false);
   const reader = new FileReader();

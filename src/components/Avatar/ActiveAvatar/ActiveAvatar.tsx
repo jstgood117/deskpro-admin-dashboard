@@ -39,7 +39,7 @@ export interface IProps {
   containerStyle?: CSSProperties;
   containerClassName?: string;
 }
-const ActiveAvatar: React.SFC<IProps> = ({
+const ActiveAvatar: React.FC<IProps> = ({
   name,
   avatar,
   active,

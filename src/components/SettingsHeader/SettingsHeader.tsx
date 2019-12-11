@@ -1,4 +1,4 @@
-import React, { SFC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 type SettingsHeaderProps = {
@@ -11,7 +11,7 @@ const Row = styled.div`
 
 const Col = styled.div``;
 
-export const SettingsHeader:SFC<SettingsHeaderProps> = ({
+export const SettingsHeader:FC<SettingsHeaderProps> = ({
   children
 }) => {
   return (
