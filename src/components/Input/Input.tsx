@@ -142,12 +142,12 @@ const Input: SFC<IProps> = ({
           {...props}
         />
         {props.showClear && (hasValue || hasFocus) && (
-          <ButtonClear onClick={onClear}>
+          <ButtonClear onClick={onClear} className='close-icon'>
             <Icon name='close' />
           </ButtonClear>
         )}
         {hasError && (
-          <IconErrorWrapper>
+          <IconErrorWrapper className='error-icon'>
             <Icon name='error' />
           </IconErrorWrapper>
         )}
