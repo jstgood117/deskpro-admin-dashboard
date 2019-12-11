@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { JSONSchema6Definition } from 'json-schema';
 import Form, { ObjectFieldTemplateProps } from 'react-jsonschema-form';
@@ -75,7 +75,7 @@ const StyledForm = styled(dpstyle.div)`
     font-family: ${props => props.theme.mainFont};
   }
 `;
-const JsonSchemaForm: SFC<IProps> = ({ schema, uiSchema, formData }) => {
+const JsonSchemaForm: FC<IProps> = ({ schema, uiSchema, formData }) => {
   const onSubmit = () => false;
   return (
     <ThemeProvider theme={DeskproAdminTheme}>

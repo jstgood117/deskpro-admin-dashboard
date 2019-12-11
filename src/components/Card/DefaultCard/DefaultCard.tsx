@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import Card from '../Card';
@@ -73,7 +73,7 @@ const StyledPermission = styled.div<StyleProps>`
 const StyledAdmin = styled.div<StyleProps>`
   padding-left: ${props => (props.styleType === 'default1' ? '5px' : '25px')};
 `;
-const UserDefaultCard: SFC<IProps> = ({ checkbox, cardDetails, styleType }) => {
+const UserDefaultCard: FC<IProps> = ({ checkbox, cardDetails, styleType }) => {
   const [checked, setChecked] = useState(false);
   return (
     <CardStyled>

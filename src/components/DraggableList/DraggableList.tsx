@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { uniqueId } from 'lodash';
 
@@ -15,16 +15,11 @@ const LIStyle = styled(dpstyle.div)`
   cursor: default;
 `;
 
-const TextWrapper = styled(dpstyle.div)`
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
+const TextWrapper = styled(dpstyle.div1)`
   font-size: 14px;
-  line-height: 150%;
   padding-left: 8px;
   display: flex;
   align-items: center;
-  color: ${props => props.theme.staticColour};
 `;
 
 const DraggableListStyle = styled(dpstyle.div)`
@@ -45,7 +40,7 @@ export interface IProps {
   SetList: (values: string[]) => void;
 }
 
-const DraggableList: SFC<IProps> = ({ items, SetList }) => {
+const DraggableList: FC<IProps> = ({ items, SetList }) => {
   return (
     <DraggableListStyle>
       <SortableList

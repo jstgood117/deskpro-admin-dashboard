@@ -1,4 +1,4 @@
-import React, { SFC, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 type SettingsSubSectionProps = {
@@ -18,7 +18,7 @@ const Label = styled.div`
   margin-bottom: 15px;
 `;
 
-const SettingsSubSection: SFC<SettingsSubSectionProps> = ({
+const SettingsSubSection: FC<SettingsSubSectionProps> = ({
   label,
   children
 }) => {

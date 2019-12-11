@@ -1,4 +1,4 @@
-import React, { SFC, useCallback } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
 
@@ -32,7 +32,7 @@ const StyledBox = styled(dpstyle.div)`
   }
 `;
 
-const FilterBox: SFC<IProps> = ({
+const FilterBox: FC<IProps> = ({
   filters,
   setFilters,
   options,

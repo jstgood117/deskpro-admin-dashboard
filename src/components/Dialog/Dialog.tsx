@@ -1,4 +1,4 @@
-import React, { SFC, ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled, { ThemeProvider, css } from 'styled-components';
 import Modal from 'react-modal';
 
@@ -14,7 +14,7 @@ export type IProps = {
   onRequestClose?(event: React.MouseEvent | React.KeyboardEvent): void;
 } & ReactModal.Props;
 
-const ModalAdapter: SFC<IProps> = ({
+const ModalAdapter: FC<IProps> = ({
   className = 'ReactModal',
   children,
   ...props
@@ -81,7 +81,7 @@ const ModalStyled = styled(ModalAdapter)<IProps>`
   }
 `;
 
-const Dialog: React.SFC<IProps> = ({ ...props }) => {
+const Dialog: React.FC<IProps> = ({ ...props }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <ModalStyled {...props} />

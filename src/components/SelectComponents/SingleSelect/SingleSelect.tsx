@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import Select from 'react-select';
 import { ThemeProvider } from 'styled-components';
 
@@ -14,8 +14,6 @@ import {
 } from '../Helpers';
 import { IOptions } from '../interfaces';
 
-
-
 export interface IProps {
   options: IOptions[];
   selectOption: (value: IOptions) => void;
@@ -25,9 +23,7 @@ export interface IProps {
   closeMenuOnSelect?: boolean;
 }
 
-
-
-const SingleSelect: SFC<IProps> = ({
+const SingleSelect: FC<IProps> = ({
   options,
   selectOption,
   placeholder,
@@ -38,7 +34,7 @@ const SingleSelect: SFC<IProps> = ({
   const onChange = (value: IOptions) => {
     selectOption(value);
   };
-  const generateSelect = (overrides:object = {}) => {
+  const generateSelect = () => {
     return (
       <Select
         isSearchable={false}
@@ -66,26 +62,33 @@ const SingleSelect: SFC<IProps> = ({
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       {type === 'medium' && (
-        <SecondarySelectButton>
-          {generateSelect()}
-        </SecondarySelectButton>
+        <SecondarySelectButton>{generateSelect()}</SecondarySelectButton>
       )}
       {type === 'large' && (
-        <LargeSelectButton>
-          {generateSelect()}
-        </LargeSelectButton>
+        <LargeSelectButton>{generateSelect()}</LargeSelectButton>
       )}
       {type === 'withImage' && (
         <WithImageSelectButton>
-          {generateSelect({
-            components: {
+          <Select
+            isSearchable={false}
+            closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
+            isMulti={false}
+            name='colors'
+            options={options}
+            classNamePrefix='select'
+            className='basic-single-select'
+            placeholder={placeholder ? placeholder : 'Select Item'}
+            styles={selectStyles}
+            hideSelectedOptions={false}
+            onChange={onChange}
+            components={{
               ClearIndicator: false,
               DropdownIndicator2,
               IndicatorSeparator: null,
               Option: IconOption,
               ValueContainer: SingleSelectImageContainer
-            }
-          })}
+            }}
+          />
         </WithImageSelectButton>
       )}
     </ThemeProvider>

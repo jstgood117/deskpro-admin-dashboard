@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../Theme';
@@ -40,7 +40,7 @@ const ItemStyle = styled(FlowLayout)<IItemStyleProps>`
   cursor: pointer;
 `;
 
-const Navigation: SFC<IProps> = ({ itemList }) => {
+const Navigation: FC<IProps> = ({ itemList }) => {
   const [value, setValue] = useState('');
   return (
     <ThemeProvider theme={DeskproAdminTheme}>

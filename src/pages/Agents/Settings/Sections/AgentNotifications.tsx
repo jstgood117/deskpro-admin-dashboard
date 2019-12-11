@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { dpstyle } from '../../../../components/Styled';
 import SettingsSection from '../../../../components/SettingsSection';
@@ -27,7 +27,7 @@ const PTag = styled(dpstyle.p)`
   line-height: 150%;
 `;
 
-const AgentNotification: SFC<IProps> = () => {
+const AgentNotification: FC<IProps> = () => {
 
   const [sectionToggle, setSectionToggle] = React.useState(true);
 

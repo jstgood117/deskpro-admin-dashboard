@@ -14,7 +14,7 @@ export interface IProps {
   value: number;
 }
 
-export const Currency: React.SFC<IProps> = ({ currency, value }) => {
+export const Currency: React.FC<IProps> = ({ currency, value }) => {
   return (
     <P1>
       {currency && <CurrencyLabel>{currency}</CurrencyLabel>}

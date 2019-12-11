@@ -26,7 +26,7 @@ export interface IProps {
   code: string;
 }
 
-export const Locale: React.SFC<IProps> = ({ code }: { code: string}) => {
+export const Locale: React.FC<IProps> = ({ code }: { code: string}) => {
   const config = LocaleConfigs[code];
   if (!config) {
     return null;

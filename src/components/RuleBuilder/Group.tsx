@@ -23,7 +23,7 @@ const Body = styled.div`
   padding-right: 8px;
 `;
 
-const GroupRuleBuilder: React.SFC = ({ ...props }) => {
+const GroupRuleBuilder: React.FC = ({ ...props }) => {
   return (
     <Container className='rule-item'>
       <GroupMoveButtons label='Where' />

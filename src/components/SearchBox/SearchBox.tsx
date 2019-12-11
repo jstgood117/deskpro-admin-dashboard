@@ -1,5 +1,5 @@
 import React, {
-  SFC,
+  FC,
   useState,
   InputHTMLAttributes,
   useEffect,
@@ -92,7 +92,7 @@ export type IProps = {
   onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const SearchBox: SFC<IProps> = ({
+const SearchBox: FC<IProps> = ({
   containerStyle,
   containerClassName = '',
   onClear,

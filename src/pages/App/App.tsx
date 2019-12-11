@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { IntlProvider } from 'react-intl';
 import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface
 
 import { generatePageRoutes, __mergeInDevI18Keys } from './helpers/funcs';
 
-const App: SFC = () => {
+const App: FC = () => {
 
   const locale = navigator.language;
 

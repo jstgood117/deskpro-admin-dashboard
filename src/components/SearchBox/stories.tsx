@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import SearchBox from './SearchBox';
 
-const SearchComponent: React.SFC = () => {
+const SearchComponent: React.FC = () => {
   const [value, setValue] = useState('');
 
   return (

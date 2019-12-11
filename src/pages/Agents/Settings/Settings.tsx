@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import SingleSelect from '../../../components/SelectComponents/SingleSelect';
 import SettingsHeader from '../../../components/SettingsHeader';
@@ -23,7 +23,7 @@ const ColsSpread = styled.div`
   padding-bottom:15px;
 `;
 
-const Settings: SFC<IProps> = () => {
+const Settings: FC<IProps> = () => {
 
   return (
     <>

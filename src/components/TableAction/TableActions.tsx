@@ -1,4 +1,4 @@
-import React, { SFC, useState, useCallback, useContext, useEffect } from 'react';
+import React, { FC, useState, useCallback, useContext, useEffect } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
@@ -116,7 +116,7 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: SFC<IProps & WrappedComponentProps> = ({ intl, onOrderChange, ...props }) => {
+const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange, ...props }) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
   const {
     onFilterChange,

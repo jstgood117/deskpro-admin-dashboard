@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { isNil, uniqueId } from 'lodash';
 import { MenuList, MenuButton } from 'react-menu-list';
@@ -20,7 +20,7 @@ import {
 } from '../MenuStyles';
 import Toggle from '../../Toggle';
 import { SingleSubMenuItem } from '../Menu';
-const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, value }) => (
+const MenuSub: FC<IMenuProps> = ({ onSelect, menuItems, value }) => (
   <MenuListWrapper>
     <MenuList>
       {menuItems.map((item, index: number) => (
@@ -44,7 +44,7 @@ const MenuSub: SFC<IMenuProps> = ({ onSelect, menuItems, value }) => (
     </MenuList>
   </MenuListWrapper>
 );
-const MultiMenuComponent: SFC<IMenuProps> = ({
+const MultiMenuComponent: FC<IMenuProps> = ({
   item,
   onSelect,
   value
@@ -102,7 +102,7 @@ const MultiMenuComponent: SFC<IMenuProps> = ({
     </div>
   );
 };
-const Menu: SFC<IMenuProps> = ({
+const Menu: FC<IMenuProps> = ({
   onSelect,
   order,
   menuItems,
@@ -196,7 +196,7 @@ const Menu: SFC<IMenuProps> = ({
     </MenuListWrapper>
   );
 };
-const OrderableMenu: SFC<IMenuProps> = ({
+const OrderableMenu: FC<IMenuProps> = ({
   iconName,
   label,
   value,

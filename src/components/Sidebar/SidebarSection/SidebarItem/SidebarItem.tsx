@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { NavLink } from 'react-router-dom';
@@ -36,7 +36,7 @@ export interface IProps {
   depth?: number;
 }
 
-const SidebarItem: SFC<IProps> = ({ path, itemName, depth }) => {
+const SidebarItem: FC<IProps> = ({ path, itemName, depth }) => {
   const style: React.CSSProperties = {};
   if (depth) {
     style.paddingLeft = 44 + (depth || 0) * 15 + 'px';

@@ -116,7 +116,7 @@ export interface ITableCellSortProps {
   };
 }
 export type TableCellProps = ITableCellCommonProps & ITableCellSortProps;
-const TableCell: React.SFC<TableCellProps> = ({
+const TableCell: React.FC<TableCellProps> = ({
   container = 'body',
   textAlign = 'inherit',
   className,

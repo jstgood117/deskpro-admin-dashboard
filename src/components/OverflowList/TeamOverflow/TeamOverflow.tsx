@@ -38,7 +38,7 @@ export interface IProps {
   styleType: 'avatar' | 'name-avatar' | 'label';
 }
 
-const TeamOverflow: React.SFC<IProps> = ({
+const TeamOverflow: React.FC<IProps> = ({
   max,
   items = [],
   styleType = 'avatar'

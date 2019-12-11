@@ -1,4 +1,4 @@
-import React, { ReactNode, SFC } from 'react';
+import React, { ReactNode, FC } from 'react';
 import styled from 'styled-components';
 
 const DialogContentTextStyled = styled.div`
@@ -14,7 +14,7 @@ export type IProps = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLParagraphElement>;
 
-const DialogContentText: SFC<IProps> = ({ children, ...props }) => (
+const DialogContentText: FC<IProps> = ({ children, ...props }) => (
   <DialogContentTextStyled {...props}>{children}</DialogContentTextStyled>
 );
 

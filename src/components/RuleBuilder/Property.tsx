@@ -50,7 +50,7 @@ export interface IProps {
   updateRule?: (rule: IRuleItem, index: number) => void;
 }
 
-const PropertyBuilder: React.SFC<IProps> = ({
+const PropertyBuilder: React.FC<IProps> = ({
   index,
   parentValue,
   rule,

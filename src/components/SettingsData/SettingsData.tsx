@@ -11,7 +11,7 @@ interface IProps {
   type: string;
   props?: any;
 }
-const SettingsData: React.SFC<IProps> = ({ type, props }) => {
+const SettingsData: React.FC<IProps> = ({ type, props }) => {
   const [closed, setClose] = React.useState(false);
   switch (type) {
     case 'header-card':

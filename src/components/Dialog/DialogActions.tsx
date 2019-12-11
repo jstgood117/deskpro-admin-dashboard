@@ -1,4 +1,4 @@
-import React, { ReactNode, SFC } from 'react';
+import React, { ReactNode, FC } from 'react';
 import styled from 'styled-components';
 
 const DialogActionsStyled = styled.div`
@@ -15,7 +15,7 @@ export type IProps = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const DialogActions: SFC<IProps> = ({ children, ...props }) => (
+const DialogActions: FC<IProps> = ({ children, ...props }) => (
   <DialogActionsStyled {...props}>{children}</DialogActionsStyled>
 );
 

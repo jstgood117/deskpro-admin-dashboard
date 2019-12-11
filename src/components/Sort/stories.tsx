@@ -33,7 +33,7 @@ const SortItems = [
   }
 ];
 
-const SortMenuComponent: React.SFC = () => {
+const SortMenuComponent: React.FC = () => {
   const [sort, setSort] = useState<ISortItem>(null);
   const onSelectSort = (data: ISortItem) => setSort(data);
 
@@ -42,7 +42,7 @@ const SortMenuComponent: React.SFC = () => {
   );
 };
 
-const SortHeaderComponent: React.SFC = () => {
+const SortHeaderComponent: React.FC = () => {
   const [sort, setSort] = useState<ISortItem>(null);
   const onSelectSort = (data: ISortItem) => setSort(data);
 

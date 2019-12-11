@@ -1,4 +1,4 @@
-import React, { SFC, CSSProperties } from 'react';
+import React, { FC, CSSProperties } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { DeskproAdminTheme } from '../Theme';
 
@@ -73,7 +73,7 @@ const Label = styled.label`
   cursor: pointer;
   padding-left: 8px;
 `;
-const Radio: SFC<IProps> = ({
+const Radio: FC<IProps> = ({
   className,
   setOption,
   option,

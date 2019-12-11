@@ -134,7 +134,9 @@ export const MenuLabel = styled(props => <TextString {...props} />)<ITextLabel>`
 /**
  * Standard text with link styling
  */
-export const TextLinkLabel = styled(props => <TextString {...props} />)<ITextLabel>`
+export const TextLinkLabel = styled(props => <TextString {...props} />)<
+  ITextLabel
+>`
   margin: 0;
   padding: 0;
   line-height: 150%;
@@ -163,7 +165,16 @@ export const dpstyle = {
     font-family: ${props => props.theme.mainFont};
     box-sizing: content-box;
   `,
+  div1: styled.div`
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 100%;
+    line-height: 150%;
+    color: ${props => props.theme.staticColor};
+    box-sizing: content-box;
 
+  `,
   nav: styled.nav`
     margin: 0;
     padding: 0;

@@ -51,7 +51,7 @@ export interface IProps {
   onUpLevel?: (rule: IRuleValue, index: number) => void;
 }
 
-const GroupHeader: React.SFC<IProps> = ({
+const GroupHeader: React.FC<IProps> = ({
   index,
   parentValue,
   currentValue,

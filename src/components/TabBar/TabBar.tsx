@@ -1,4 +1,4 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import Tab from './Tab';
@@ -20,7 +20,7 @@ export interface IProps {
   sharedTabsCount?: number;
 }
 
-const TabBar: SFC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
+const TabBar: FC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
   const [tabIndex, setTabState] = useState(0);
   const [dropdownValue, setDropdownValue] = useState();
   const moreItems = tabItems.slice(sharedTabsCount);

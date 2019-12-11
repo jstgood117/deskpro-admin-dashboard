@@ -1,4 +1,4 @@
-import React, { SFC, createContext } from 'react';
+import React, { FC, createContext } from 'react';
 
 import StandardTablePage from './StandardTablePage';
 
@@ -21,7 +21,7 @@ const getPageComponent = (props: IProps) => {
 
 export const PageContext = createContext({});
 
-const PageType: SFC<IProps> = (props: IProps) => {
+const PageType: FC<IProps> = (props: IProps) => {
 
   const contextValues = {
     path: props.path

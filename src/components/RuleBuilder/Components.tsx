@@ -62,7 +62,7 @@ interface IMoveButtonProps {
   onMoveUp?: () => void;
   onMoveDown?: () => void;
 }
-const MoveButtons: React.SFC<IMoveButtonProps> = ({
+const MoveButtons: React.FC<IMoveButtonProps> = ({
   disabledMoveUp,
   disabledMoveDown,
   onMoveUp,
@@ -105,7 +105,7 @@ interface IActionButtonProps {
   disabled?: boolean;
   onClick?: (e: DivEventClickType) => void;
 }
-const ActionButton: React.SFC<IActionButtonProps> = ({
+const ActionButton: React.FC<IActionButtonProps> = ({
   iconName,
   toolip = '',
   disabled,
@@ -219,7 +219,7 @@ interface IDropdownIconProps {
   disabled?: boolean;
   renderItem?: (item: any, index: number) => void;
 }
-const DropdownIcon: React.SFC<IDropdownIconProps> = ({
+const DropdownIcon: React.FC<IDropdownIconProps> = ({
   iconName,
   items,
   disabled,
@@ -268,7 +268,7 @@ export interface IDropdownTextProps {
   items?: any[];
   renderItem?: (item: any, index: number) => void;
 }
-const DropdownText: React.SFC<IDropdownTextProps> = ({
+const DropdownText: React.FC<IDropdownTextProps> = ({
   text,
   items,
   renderItem
@@ -350,7 +350,7 @@ export interface ISelectProps {
   items?: any[];
   renderItem?: (item: any, index: number) => void;
 }
-const Select: React.SFC<ISelectProps> = ({
+const Select: React.FC<ISelectProps> = ({
   placeholder,
   style,
   position,
@@ -401,7 +401,7 @@ const GroupMoveButtonLabel = styled(Text)`
   font-weight: 500;
   margin-left: 16px;
 `;
-const GroupMoveButtons: React.SFC<IGroupMoveButtonsProps> = ({
+const GroupMoveButtons: React.FC<IGroupMoveButtonsProps> = ({
   label,
   ...props
 }) => {

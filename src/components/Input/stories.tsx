@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import Input from './Input';
 
-const InputComponent: React.SFC<{
+const InputComponent: React.FC<{
   hasError?: boolean;
   showClear?: boolean;
   errorMessage?: string;

@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { FC } from 'react';
 import Select from 'react-select';
 import { ThemeProvider } from 'styled-components';
 
@@ -21,7 +21,7 @@ export interface IProps {
   selectedOptions?: IOptions[];
 }
 
-const MultiSelect: SFC<IProps> = ({ options, type, selectOptions }) => {
+const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
   const onChange = (selectedOptions: IOptions[]) => {
     selectOptions(selectedOptions);
   };

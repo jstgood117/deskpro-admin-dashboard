@@ -27,7 +27,7 @@ export interface IProps {
   onChangeFile?: (event: SyntheticEvent<HTMLInputElement>) => void;
 }
 const randomId = uniqueId().toString();
-const Attachment: React.SFC<IProps> = ({ id, text, onChangeFile }) => {
+const Attachment: React.FC<IProps> = ({ id, text, onChangeFile }) => {
   return (
     <div>
       <InputFile id={id} onChange={onChangeFile} />

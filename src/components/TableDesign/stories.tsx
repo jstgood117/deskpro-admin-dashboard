@@ -38,7 +38,7 @@ interface IMoreTextProps {
   max: number;
   length: number;
 }
-const MoreText: React.SFC<IMoreTextProps> = ({ max, length }) => {
+const MoreText: React.FC<IMoreTextProps> = ({ max, length }) => {
   if (length <= max) {
     return null;
   }
@@ -59,7 +59,7 @@ const BadeImage = styled.img`
   object-fit: cover;
 `;
 
-const Team: React.SFC<{
+const Team: React.FC<{
   teamView: 'avatar' | 'avatar-text' | 'label' | 'avatar-label';
   team: any;
   index: number;
@@ -121,7 +121,7 @@ const Team: React.SFC<{
   }
 };
 
-const TableDesignComponent: React.SFC = () => {
+const TableDesignComponent: React.FC = () => {
   const [selected, setSelected] = useState([]);
 
   const onSelect = (id: number) => {
@@ -187,7 +187,7 @@ const TableDesignComponent: React.SFC = () => {
   );
 };
 
-const TableDesignTeamAvatarComponent: React.SFC<{
+const TableDesignTeamAvatarComponent: React.FC<{
   teamView: 'avatar' | 'avatar-text' | 'label' | 'avatar-label';
 }> = ({ teamView }) => {
   const [selected, setSelected] = useState([]);
@@ -290,7 +290,7 @@ const TableDesignTeamAvatarComponent: React.SFC<{
   );
 };
 
-const TableDesignTimeComponent: React.SFC<{
+const TableDesignTimeComponent: React.FC<{
   timeView: 'absolute' | 'relative';
 }> = ({ timeView }) => {
   const [selected, setSelected] = useState([]);
@@ -406,7 +406,7 @@ const TableDesignTimeComponent: React.SFC<{
   );
 };
 
-const TableSortingComponent: React.SFC = () => {
+const TableSortingComponent: React.FC = () => {
   const [selected, setSelected] = useState([]);
   const [sort, setSort] = useState<ISortItem>(null);
   const [data, setData] = useState(testTableData);

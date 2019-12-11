@@ -1,4 +1,4 @@
-import React, { SFC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
 import { DocumentNode } from 'graphql';
 
@@ -37,7 +37,7 @@ const BodyMargin = styled(dpstyle.div)`
   margin:0 34px 34px 34px;
 `;
 
-const StandardTablePage: SFC<IProps> = ({ path, query, queryName }) => {
+const StandardTablePage: FC<IProps> = ({ path, query, queryName }) => {
 
   /// TODO: Remove & link to table data
   let tableData: any = [];

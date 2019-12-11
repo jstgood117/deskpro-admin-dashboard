@@ -26,7 +26,7 @@ export interface ICustomProps {
   onChange: (arg0: string) => void;
 }
 
-export const SearchComponent: React.SFC<ICustomProps> = ({ onChange }) => {
+export const SearchComponent: React.FC<ICustomProps> = ({ onChange }) => {
   const [value, setValue] = useState('');
   useEffect(() => {
     onChange(value);
@@ -46,10 +46,10 @@ export const SearchComponent: React.SFC<ICustomProps> = ({ onChange }) => {
   );
 };
 
-export const ButtonComponent: React.SFC<ICustomProps> = props => {
+export const ButtonComponent: React.FC<ICustomProps> = props => {
   return <Button styleType='primary'>{props.value}</Button>;
 };
 
-export const CheckboxWidget: React.SFC<ICustomProps> = props => {
+export const CheckboxWidget: React.FC<ICustomProps> = props => {
   return <CheckboxComponent indeterminate={true} />;
 };
