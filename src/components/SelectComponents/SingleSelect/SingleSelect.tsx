@@ -40,7 +40,6 @@ const SingleSelect: FC<IProps> = ({
         isSearchable={false}
         closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
         isMulti={false}
-        name='colors'
         options={options}
         classNamePrefix='select'
         className='basic-single-select'
@@ -55,7 +54,6 @@ const SingleSelect: FC<IProps> = ({
           IndicatorSeparator: null,
           Option: IconOption
         }}
-        {...options}
       />
     );
   };
@@ -73,7 +71,6 @@ const SingleSelect: FC<IProps> = ({
             isSearchable={false}
             closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
             isMulti={false}
-            name='colors'
             options={options}
             classNamePrefix='select'
             className='basic-single-select'
