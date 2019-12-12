@@ -155,49 +155,49 @@ const SettingsData: React.FC<IProps> = ({ type, props }) => {
               <StyledText isTitle={false}>Here are some examples:</StyledText>
             </Row>
             <Row>
-              <Column className='is-6'>
+              <Column className='is-5'>
                 <Row>
-                  <Column className='is-10'>
+                  <Column className='is-11'>
                     <Code>{'<YEAR>-<MONTH>-(append 3 digits)'}</Code>
                   </Column>
-                  <Column className='is-2'>
+                  <Column className='is-1'>
                     <ArrowRightIcon>
                       <Icon name='ic-arrow-right' />
                     </ArrowRightIcon>
                   </Column>
                 </Row>
                 <Row>
-                  <Column className='is-10'>
+                  <Column className='is-11'>
                     <Code>{'<?><?><?><?><?><?>'}</Code>
                   </Column>
-                  <Column className='is-2'>
+                  <Column className='is-1'>
                     <ArrowRightIcon>
                       <Icon name='ic-arrow-right' />
                     </ArrowRightIcon>
                   </Column>
                 </Row>
                 <Row>
-                  <Column className='is-10'>
+                  <Column className='is-11'>
                     <Code>{'<YEAR>-<A><A><?><?><?>'}</Code>
                   </Column>
-                  <Column className='is-2'>
+                  <Column className='is-1'>
                     <ArrowRightIcon>
                       <Icon name='ic-arrow-right' />
                     </ArrowRightIcon>
                   </Column>
                 </Row>
                 <Row>
-                  <Column className='is-10'>
+                  <Column className='is-11'>
                     <Code>{'TICKET-<A><A><#><#><#><#>'}</Code>
                   </Column>
-                  <Column className='is-2'>
+                  <Column className='is-1'>
                     <ArrowRightIcon>
                       <Icon name='ic-arrow-right' />
                     </ArrowRightIcon>
                   </Column>
                 </Row>
               </Column>
-              <Column>
+              <Column style={{ paddingLeft: 18 }}>
                 <Row>
                   <Code>2020-10-001</Code>,&nbsp;<Code>2020-10</Code>&nbsp;
                   <StyledText isTitle={false}>(Counting upwards)</StyledText>
