@@ -1,9 +1,17 @@
 import React, { useState, useEffect, CSSProperties } from 'react';
 import styled, { css } from 'styled-components';
+import Select from 'react-select';
 
 import { dpstyle, FlowLayout } from '../Styled';
 import Icon from '../Icon';
 import { H6, P1 } from '../Typography';
+import {
+  selectStyles,
+  IconOption,
+  DropdownIndicator,
+  PaginationSelectButton
+} from '../SelectComponents/Helpers';
+import { IOptions } from '../SelectComponents/interfaces';
 
 const Container = styled(FlowLayout)``;
 
@@ -29,77 +37,10 @@ const Button = styled(dpstyle.button)`
     `}
 `;
 
-const ListContainer = styled(dpstyle.div)`
-  display: flex;
-  flex-direction: column;
-  border-radius: 3px;
-  padding: 5px 0;
-  position: absolute;
-  background: #fff;
-  min-width: 120px;
-  max-height: 200px;
-  overflow-y: auto;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  z-index: 1;
-  top: 30px;
-  left: 0;
-  width: 100%;
-`;
-
-const ListItem = styled(FlowLayout)<{ active: boolean }>`
-  padding: 0px 15px;
-  min-height: 31px;
-  z-index: 1;
-  color: ${props => props.theme.staticColour};
-  font-size: 14px;
-  font-weight: ${props => (props.active ? 500 : 'normal')};
-  justify-content: space-between;
-  &:hover {
-    background: ${props => props.theme.textHover};
-  }
-`;
-
-const Option = styled(FlowLayout)<{ active: boolean }>`
-  background: #fff;
-  position: relative;
-  border-radius: 3px;
-  border: 1px solid ${props => props.theme.greyLight};
-  height: 28px;
-  padding: 0px 12px;
-  cursor: pointer;
-  margin-right: 7px;
-  color: ${props => props.theme.greyDark};
-  > div {
-    font-weight: normal;
-    margin-right: 20px;
-  }
-  justify-content: space-between;
-  min-width: ${props => props.minWidth || 64}px;
-  ${props =>
-    props.active &&
-    css`
-      background: ${props.theme.hoverColour};
-      border-color: ${props.theme.activeColour};
-      path {
-        fill: ${props.theme.activeColour};
-      }
-    `} {
-  }
-`;
-
-const DropdownContentPanel = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 0;
-`;
-
 const Total = styled(H6)`
   color: ${props => props.theme.staticColour};
   font-weight: normal;
-  margin-left: 3px;
+  margin-left: 10px;
 `;
 
 const Label = styled(P1)`
@@ -123,13 +64,13 @@ export interface IPageItem {
   end: number;
   page: number;
   label: string;
+  value: number;
 }
 
 export interface IProps {
   totalRecords: number;
   rowsPerPage: number;
   currentPage: number;
-  rowsPerPageOptions?: number[];
   containerStyle?: CSSProperties;
   containerClassName?: string;
   onChangePage: (data: IPageChange) => void;
@@ -140,7 +81,6 @@ const Pagination: React.FC<IProps> = ({
   totalRecords,
   rowsPerPage = 10,
   currentPage = 1,
-  rowsPerPageOptions = [200, 100, 50, 20, 10],
   containerStyle,
   containerClassName,
   onChangePage,
@@ -148,9 +88,13 @@ const Pagination: React.FC<IProps> = ({
 }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [pages, setPages] = useState<IPageItem[]>([]);
-  const [showRowsPerPage, setShowRowsPerPage] = useState(false);
-  const [showPages, setShowPages] = useState(false);
-
+  const rowsPerPageOptions = [
+    { value: 200, label: 200 },
+    { value: 100, label: 100 },
+    { value: 50, label: 50 },
+    { value: 20, label: 20 },
+    { value: 10, label: 10 }
+  ];
   const updatePage = (page: number) => {
     const pageData = pages[page - 1];
     onChangePage({
@@ -185,11 +129,13 @@ const Pagination: React.FC<IProps> = ({
       const start = (page - 1) * rowsPerPage + 1;
       const end = Math.min(start + rowsPerPage - 1, totalRecords);
       const label = `${formatNumber(start)}-${formatNumber(end)}`;
+      const value = start + end;
       _pages.push({
         start,
         end,
         page,
-        label
+        label,
+        value
       });
       page += 1;
     }
@@ -198,73 +144,61 @@ const Pagination: React.FC<IProps> = ({
     setTotalPages(total);
     setPages(_pages);
   }, [totalRecords, rowsPerPage, currentPage]);
-
   return (
     <Container style={containerStyle} className={containerClassName}>
       <Label>Rows per page:</Label>
-      <Option
-        active={showRowsPerPage}
-        minWidth={59}
-        onClick={() => setShowRowsPerPage(!showRowsPerPage)}
-      >
-        <P1>{rowsPerPage}</P1>
-        <Icon name='downVector' />
-
-        {showRowsPerPage && (
-          <ListContainer>
-            {rowsPerPageOptions.map(item => (
-              <ListItem
-                key={item}
-                active={rowsPerPage === item}
-                onClick={event => {
-                  event.preventDefault();
-                  onChangeRowsPerPage(item);
-                }}
-              >
-                {formatNumber(item)}
-                {rowsPerPage === item && <Icon name='check-2' />}
-              </ListItem>
-            ))}
-            <DropdownContentPanel />
-          </ListContainer>
-        )}
-      </Option>
-
+      <PaginationSelectButton minWidth={64}>
+        <Select
+          isSearchable={false}
+          closeMenuOnSelect={true}
+          isMulti={false}
+          options={rowsPerPageOptions}
+          styles={selectStyles}
+          classNamePrefix='select'
+          placeholder={null}
+          hideSelectedOptions={false}
+          onChange={(option: IOptions) => {
+            onChangeRowsPerPage(Number(option.value));
+          }}
+          defaultValue={{ value: rowsPerPage, label: rowsPerPage }}
+          components={{
+            ClearIndicator: false,
+            DropdownIndicator,
+            IndicatorSeparator: null,
+            Option: IconOption
+          }}
+        />
+      </PaginationSelectButton>
       <Divider />
-
-      <Option
-        active={showPages}
-        minWidth={94}
-        onClick={() => setShowPages(!showPages)}
-      >
-        <H6>{pages[currentPage - 1] && pages[currentPage - 1].label}</H6>
-        <Icon name='downVector' />
-
-        {showPages && (
-          <ListContainer>
-            {pages.map(item => (
-              <ListItem
-                key={item.page}
-                active={currentPage === item.page}
-                onClick={event => {
-                  event.preventDefault();
-                  onChangePage({
-                    currentPage: item.page,
-                    totalPages,
-                    start: item.start,
-                    end: item.end
-                  });
-                }}
-              >
-                {item.label}
-                {currentPage === item.page && <Icon name='check-2' />}
-              </ListItem>
-            ))}
-            <DropdownContentPanel />
-          </ListContainer>
+      <PaginationSelectButton minWidth={94}>
+        {pages.length > 0 && currentPage && (
+          <Select
+            isSearchable={false}
+            closeMenuOnSelect={true}
+            isMulti={false}
+            options={pages}
+            styles={selectStyles}
+            classNamePrefix='select'
+            placeholder={null}
+            hideSelectedOptions={false}
+            defaultValue={pages[currentPage - 1]}
+            onChange={(option: any) => {
+              onChangePage({
+                currentPage: option.page,
+                totalPages,
+                start: option.start,
+                end: option.end
+              });
+            }}
+            components={{
+              ClearIndicator: false,
+              DropdownIndicator,
+              IndicatorSeparator: null,
+              Option: IconOption
+            }}
+          />
         )}
-      </Option>
-
+      </PaginationSelectButton>
       <Total>of {formatNumber(totalRecords)}</Total>
 
       <Button disabled={currentPage === 1} onClick={onPrevClick}>

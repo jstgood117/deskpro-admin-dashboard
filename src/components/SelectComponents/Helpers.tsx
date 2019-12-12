@@ -90,6 +90,8 @@ export const StyledMultiSelect = styled(dpstyle.div)`
   display: inline-flex;
   .select__menu {
     border-radius: 4px;
+    width: max-content;
+    min-width: 100%;
     background: ${props => props.theme.white};
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     overflow-y: hidden;
@@ -121,7 +123,9 @@ export const SecondarySelectButton = styled(dpstyle.div)`
     background: ${props => props.theme.white};
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
     overflow-y: hidden;
+    width: max-content;
     margin: 0;
+    min-width: 100%;
     .select__menu-list {
       overflow-y: hidden;
     }
@@ -152,10 +156,58 @@ export const SecondarySelectButton = styled(dpstyle.div)`
     }
   }
 `;
+export const PaginationSelectButton = styled(dpstyle.div)<{ minWidth: number }>`
+  display: inline-flex;
+  .select__menu {
+    border-radius: 4px;
+    background: ${props => props.theme.white};
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
+    overflow-y: hidden;
+    width: max-content;
+    margin: 0;
+    min-width: 100%;
+    .select__menu-list {
+      overflow-y: hidden;
+    }
+    .select__option {
+      .option-label {
+        flex: 1;
+      }
+    }
+  }
+  .select__control--is-focused {
+    border-color: #1c3e55 !important;
+    svg {
+      path {
+        fill: #1c3e55 !important;
+      }
+    }
+    .select__single-value {
+      color: #1c3e55 !important;
+    }
+    background: #d2d8dd !important;
+  }
+  .select__control {
+    min-width: ${props => props.minWidth}px;
+    border-radius: 3px;
+    border-color: #d3d6d7;
+    color: #8b9293;
+    min-height: 28px;
+    .select__indicators {
+      padding-right: 12px;
+      cursor: default;
+    }
+    .select__multi-value {
+      display: none;
+    }
+  }
+`;
 
 export const LargeSelectButton = styled(dpstyle.div)`
   display: inline-flex;
   .select__menu {
+    width: max-content;
+    min-width: 100%;
     border-radius: 4px;
     background: ${props => props.theme.white};
     overflow-y: hidden;
@@ -209,6 +261,8 @@ export const WithImageSelectButton = styled(dpstyle.div)`
   display: inline-flex;
   .select__menu {
     border-radius: 4px;
+    width: max-content;
+    min-width: 100%;
     background: ${props => props.theme.white};
     overflow-y: hidden;
     margin: 0;
