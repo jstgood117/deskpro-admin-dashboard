@@ -8,4 +8,5 @@ storiesOf('Settings Data', module)
   .add('header-medium-card', () => <SettingsData type='header-medium-card' />)
   .add('setting-info', () => <SettingsData type='setting-info' />)
   .add('setting-info-inUse', () => <SettingsData type='setting-info-inUse' />)
-  .add('feature-billing', () => <SettingsData type='feature-billing' />);
+  .add('feature-billing', () => <SettingsData type='feature-billing' />)
+  .add('reference-code-panel', () => <SettingsData type='reference-code-panel' />);

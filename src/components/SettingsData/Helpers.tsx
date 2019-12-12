@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Card from '../Card';
@@ -17,24 +17,31 @@ const StyledHeader = styled(dpstyle.div)`
   background-size: contain;
   background-position: 100%;
 `;
-const StyledText = styled(dpstyle.div1)<{ isTitle: boolean }>`
+export const StyledText = styled(dpstyle.div1)<{ isTitle: boolean }>`
   font-weight: ${props => (props.isTitle ? 500 : 'normal')};
+  display: block;
+  font-size: 13px;
+  color: #4c4f50;
+`;
+export const ArrowRightIcon = styled.div`
   display: flex;
   align-items: center;
+  padding-left: 10px;
+  height: 100%;
 `;
+
 const StyledSettingInfo = styled(dpstyle.div)`
   width: 100%;
   height: 100%;
   border-left: 4px solid #9fccf3;
   background: rgba(225, 238, 251, 0.3);
   padding: 16px 49px 16px 16px;
-  opacity: 0.9;
   position: relative;
   box-sizing: border-box;
 `;
 const CloseIconWrapper = styled.div`
   position: absolute;
-  right: 9px;
+  right: 18px;
   top: 18px;
   width: 10px;
   height: 10px;
@@ -164,13 +171,12 @@ export const HeaderMediumCard = () => {
 export const SettingInfo: React.FC<{
   onClose: (val: boolean) => void;
   closed: boolean;
+  children?: ReactNode;
 }> = props => {
   if (!props.closed) {
     return (
       <StyledSettingInfo>
-        <StyledText isTitle={false} style={{ fontSize: 13 }}>
-          Setting Info
-        </StyledText>
+        {props.children}
         <CloseIconWrapper
           onClick={() => {
             props.onClose(true);
@@ -219,12 +225,11 @@ export const SettingInfoInUse = () => {
           right: 0
         }}
       >
-        <SettingInfo
-          onClose={(val: boolean) => {
-            setClose(val);
-          }}
-          closed={closed}
-        />
+        <SettingInfo onClose={setClose} closed={closed}>
+          <StyledText isTitle={false} style={{ fontSize: 13 }}>
+            Setting Info
+          </StyledText>
+        </SettingInfo>
       </div>
     </div>
   );

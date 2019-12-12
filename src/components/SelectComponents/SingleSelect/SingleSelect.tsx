@@ -10,7 +10,9 @@ import {
   selectStyles,
   IconOption,
   DropdownIndicator2,
-  SingleSelectImageContainer
+  SingleSelectImageContainer,
+  StyledSelect,
+  DropdownIndicator
 } from '../Helpers';
 import { IOptions } from '../interfaces';
 
@@ -19,7 +21,7 @@ export interface IProps {
   selectOption: (value: IOptions) => void;
   selectedOption?: IOptions;
   placeholder?: string;
-  type: 'withImage' | 'medium' | 'large';
+  type: 'withImage' | 'medium' | 'large' | 'autocomplete';
   closeMenuOnSelect?: boolean;
 }
 
@@ -87,6 +89,25 @@ const SingleSelect: FC<IProps> = ({
             }}
           />
         </WithImageSelectButton>
+      )}
+      {type === 'autocomplete' && (
+        <StyledSelect>
+          <Select
+            isMulti={false}
+            options={options}
+            className='basic-multi-select'
+            classNamePrefix='select'
+            placeholder='Select value'
+            styles={selectStyles}
+            hideSelectedOptions={false}
+            components={{
+              ClearIndicator: false,
+              DropdownIndicator,
+              IndicatorSeparator: null,
+              Option: IconOption
+            }}
+          />
+        </StyledSelect>
       )}
     </ThemeProvider>
   );
