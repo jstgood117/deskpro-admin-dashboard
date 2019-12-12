@@ -37,73 +37,6 @@ const Button = styled(dpstyle.button)`
     `}
 `;
 
-const ListContainer = styled(dpstyle.div)`
-  display: flex;
-  flex-direction: column;
-  border-radius: 3px;
-  padding: 5px 0;
-  position: absolute;
-  background: #fff;
-  min-width: 120px;
-  max-height: 200px;
-  overflow-y: auto;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  z-index: 1;
-  top: 30px;
-  left: 0;
-  width: 100%;
-`;
-
-const ListItem = styled(FlowLayout)<{ active: boolean }>`
-  padding: 0px 15px;
-  min-height: 31px;
-  z-index: 1;
-  color: ${props => props.theme.staticColour};
-  font-size: 14px;
-  font-weight: ${props => (props.active ? 500 : 'normal')};
-  justify-content: space-between;
-  &:hover {
-    background: ${props => props.theme.textHover};
-  }
-`;
-
-const Option = styled(FlowLayout)<{ active: boolean }>`
-  background: #fff;
-  position: relative;
-  border-radius: 3px;
-  border: 1px solid ${props => props.theme.greyLight};
-  height: 28px;
-  padding: 0px 12px;
-  cursor: pointer;
-  margin-right: 7px;
-  color: ${props => props.theme.greyDark};
-  > div {
-    font-weight: normal;
-    margin-right: 20px;
-  }
-  justify-content: space-between;
-  min-width: ${props => props.minWidth || 64}px;
-  ${props =>
-    props.active &&
-    css`
-      background: ${props.theme.hoverColour};
-      border-color: ${props.theme.activeColour};
-      path {
-        fill: ${props.theme.activeColour};
-      }
-    `} {
-  }
-`;
-
-const DropdownContentPanel = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 0;
-`;
-
 const Total = styled(H6)`
   color: ${props => props.theme.staticColour};
   font-weight: normal;
@@ -155,7 +88,6 @@ const Pagination: React.FC<IProps> = ({
 }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [pages, setPages] = useState<IPageItem[]>([]);
-  const [showPages, setShowPages] = useState(false);
   const rowsPerPageOptions = [
     { value: 200, label: 200 },
     { value: 100, label: 100 },
