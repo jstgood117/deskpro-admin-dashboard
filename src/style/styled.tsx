@@ -173,7 +173,6 @@ export const dpstyle = {
     line-height: 150%;
     color: ${props => props.theme.staticColor};
     box-sizing: content-box;
-
   `,
   nav: styled.nav`
     margin: 0;
@@ -417,5 +416,77 @@ export const JsonFormStyle = styled(dpstyle.div)`
       line-height: 150%;
       color: ${props => props.theme.greyDark};
     }
+  }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  *,
+  ::after,
+  ::before {
+    box-sizing: inherit;
+  }
+  &:not(:last-child) {
+    margin-bottom: 8px;
+  }
+  .is-1 {
+    flex: none;
+    width: 8.3%;
+  }
+  .is-2 {
+    flex: none;
+    width: 16.7%;
+  }
+  .is-3 {
+    flex: none;
+    width: 25%;
+  }
+  .is-4 {
+    flex: none;
+    width: 33.3%;
+  }
+  .is-5 {
+    flex: none;
+    width: 43.7%;
+  }
+  .is-6 {
+    flex: none;
+    width: 50%;
+  }
+  .is-7 {
+    flex: none;
+    width: 58.3%;
+  }
+  .is-8 {
+    flex: none;
+    width: 66.6%;
+  }
+  .is-9 {
+    flex: none;
+    width: 75%;
+  }
+  .is-10 {
+    flex: none;
+    width: 83.6%;
+  }
+  .is-11 {
+    flex: none;
+    width: 91.7%;
+  }
+  .is-12 {
+    flex: none;
+    width: 100%;
+  }
+`;
+
+export const Column = styled.div`
+  display: block;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  *,
+  ::after,
+  ::before {
+    box-sizing: inherit;
   }
 `;

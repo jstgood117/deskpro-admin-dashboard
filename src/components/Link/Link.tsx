@@ -6,6 +6,7 @@ import Icon from '../Icon';
 
 export interface IProps {
   children?: ReactNode;
+  href: string;
 }
 
 const StyledLink = styled(dpstyle.div1)`
@@ -21,16 +22,24 @@ const StyledLink = styled(dpstyle.div1)`
   box-sizing: border-box;
   align-items: center;
   cursor: pointer;
+  text-decloratoin
 `;
 
 const Link: FC<IProps> = props => {
   return (
-    <StyledLink>
-      <div style={{ paddingRight: 12, display: 'flex' }}>
-        <Icon name='ic-help-center' />
-      </div>
-      {props.children}
-    </StyledLink>
+    <a
+      href={props.href}
+      style={{ textDecoration: 'none' }}
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      <StyledLink>
+        <div style={{ paddingRight: 12, display: 'flex' }}>
+          <Icon name='ic-help-center' />
+        </div>
+        {props.children}
+      </StyledLink>
+    </a>
   );
 };
 

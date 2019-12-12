@@ -71,6 +71,7 @@ import { ReactComponent as IconQuestionText } from '../../assets/svg/ic-question
 import { ReactComponent as IconDown } from '../../assets/svg/ic-down.svg';
 import { ReactComponent as IconDollarSign } from '../../assets/svg/ic-dollar-sign.svg';
 import { ReactComponent as IconHelpCenter } from '../../assets/svg/ic-helpCenter.svg';
+import { ReactComponent as IconArrowRight} from '../../assets/svg/ic-arrow-right.svg';
 
 export interface IProps {
   name: string;
@@ -220,6 +221,8 @@ const Icon: FC<IProps> = props => {
       return <IconDollarSign />;
     case 'ic-help-center':
       return <IconHelpCenter />;
+    case 'ic-arrow-right':
+      return <IconArrowRight />;
     case 'info-text':
       return (
         <Tooltip content='Info text' styleType='light' placement='bottom'>

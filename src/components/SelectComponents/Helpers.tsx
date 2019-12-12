@@ -86,7 +86,7 @@ export const selectStyles = {
   }
 };
 
-export const StyledMultiSelect = styled(dpstyle.div)`
+export const StyledSelect = styled(dpstyle.div)`
   display: inline-flex;
   .select__menu {
     border-radius: 4px;

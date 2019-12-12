@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../../Theme';
 import {
-  StyledMultiSelect,
+  StyledSelect,
   SecondarySelectButton,
   selectStyles,
   IconOption,
@@ -28,10 +28,9 @@ const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       {type === 'autocomplete' && (
-        <StyledMultiSelect>
+        <StyledSelect>
           <Select
             isMulti={true}
-            name='colors'
             options={options}
             className='basic-multi-select'
             classNamePrefix='select'
@@ -46,7 +45,7 @@ const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
               ValueContainer: MultiSelectValueContainer
             }}
           />
-        </StyledMultiSelect>
+        </StyledSelect>
       )}
       {type === 'fixed' && (
         <SecondarySelectButton>
@@ -54,7 +53,6 @@ const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
             isSearchable={false}
             closeMenuOnSelect={false}
             isMulti={true}
-            name='colors'
             options={options}
             className='basic-multi-select'
             classNamePrefix='select'
