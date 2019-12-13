@@ -94,6 +94,7 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
 
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
     const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
+
     setFilters([searchFilter, ...serviceFilters]);
   };
 
