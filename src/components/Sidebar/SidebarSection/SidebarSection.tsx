@@ -75,13 +75,12 @@ const ListItem = styled.li`
 `;
 
 const SubgroupTitleContainer = styled.div`
-  padding: 6px 10px 6px 44px;
+  padding: 6px 15px 6px 44px;
   display: flex;
   align-items: center;
   flex-direction: row;
   cursor: pointer;
   color: ${props => props.theme.staticColour};
-  font-weight: bold;
 
   &:hover {
     background-color: #d4dbdf;
@@ -117,7 +116,7 @@ const TopLevelNavGroup: FC<{ navItem: ISidebarItem }> = ({ navItem }) => {
       <SubgroupTitleContainer onClick={() => setOpen(!isOpen)}>
         <BoxLayout>
           <BoxFill>
-            <TextLabel bold={1}>
+            <TextLabel>
               <FormattedMessage id={navItem.itemName} />
             </TextLabel>
           </BoxFill>
