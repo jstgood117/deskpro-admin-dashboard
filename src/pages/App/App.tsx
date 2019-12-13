@@ -16,7 +16,7 @@ const App: FC = () => {
   const locale = navigator.language;
 
   const queryService = QueryService();
-  const query = queryService.getQueryBasedOnRoute('/');
+  const query = queryService.getQuery('initial');
 
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all', variables: { locale } });
   if (loading) {

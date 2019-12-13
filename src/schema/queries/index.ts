@@ -1,11 +1,20 @@
 import QUERY_PAGE from './Page';
-import QUERY_AGENTS_PAGE from './AgentsPage/AgentsColumns';
-import QUERY_AGENTS_TEAM_PAGE from './AgentsTeamPage/AgentsTeamColumns';
 import QUERY_INITIAL from './Setup';
+import STANDARD_TABLES_PAGE from './StandardTablesPage';
+import STANDARD_SETTING_PAGE from './StandardSettingsPage';
 
-export default {
+export {
   QUERY_PAGE,
-  QUERY_AGENTS_PAGE,
-  QUERY_AGENTS_TEAM_PAGE,
-  QUERY_INITIAL
+  QUERY_INITIAL,
+  STANDARD_TABLES_PAGE,
+  STANDARD_SETTING_PAGE
 };
+
+const queries = {
+  QUERY_PAGE,
+  QUERY_INITIAL,
+  STANDARD_TABLES_PAGE,
+  STANDARD_SETTING_PAGE
+};
+
+export default queries;
