@@ -97,9 +97,10 @@ const SingleSelect: FC<IProps> = ({
             options={options}
             className='basic-multi-select'
             classNamePrefix='select'
-            placeholder='Select value'
+            placeholder={placeholder ? placeholder : 'Select Item'}
             styles={selectStyles}
             hideSelectedOptions={false}
+            defaultValue={selectedOption}
             components={{
               ClearIndicator: false,
               DropdownIndicator,
