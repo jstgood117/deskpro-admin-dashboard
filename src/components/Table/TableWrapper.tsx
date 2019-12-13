@@ -111,9 +111,6 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
     setFilteredData(runFilters(data, filters));
   }, [filters, data]);
 
-console.log(dataType);
-console.log(filteredData);
-
   return (
     <Fragment>
       {dataType === 'sync' && (
