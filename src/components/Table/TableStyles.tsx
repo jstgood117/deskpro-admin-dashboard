@@ -4,8 +4,8 @@ import { dpstyle } from '../Styled';
 export const TableStyled = styled(dpstyle.div)`
   > .overflow {
 
-    overflow-y: hidden;
-    overflow-x: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
 
     & table {
       width: 100%;
