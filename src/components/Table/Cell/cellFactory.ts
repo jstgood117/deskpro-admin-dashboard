@@ -1,6 +1,6 @@
 import React from 'react';
 import TableData from '../../TableData';
-import { getColorByIndex } from '../../../utils/getRandomColor';
+import { getColorByIndex, getColorByChar } from '../../../utils/getRandomColor';
 import { ITableColor } from '../../../resources/interfaces';
 
 const getColor = (index: number): ITableColor => {
@@ -48,7 +48,10 @@ export const create = (cell: any) => {
     case 'NAME_AVATAR':
       const avatarProps = {
         type: 'avatar_text',
-        props: { name: cell.value, properties: getColor(Math.floor(Math.random() * 20)) }
+        props: {
+          name: cell.value,
+          properties: getColorByChar(cell.value.charAt(0))
+        }
       };
       return cellRenderer(avatarProps);
 
