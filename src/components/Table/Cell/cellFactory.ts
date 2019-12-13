@@ -14,6 +14,7 @@ enum CellEnum {
   BOOLEAN_YESNO = 'BOOLEAN_YESNO',
   TIME_AGO = 'TIME_AGO',
   AGENT_TEAM_LIST = 'AGENT_TEAM_LIST',
+  AGENT_LIST = 'AGENT_LIST',
   AGENT_GROUP_LIST = 'AGENT_GROUP_LIST',
   TEAM_MEMBERS_LIST = 'TEAM_MEMBERS_LIST'
 }
@@ -22,10 +23,19 @@ const cellRenderer = (props: any) => {
   return React.createElement(TableData, props);
 };
 
-const generateAvatar = (team: any, index: number) => {
+const generateTeamAvatar = (team: any) => {
   const randomItem = getColor(Math.floor(Math.random() * 20));
   return {
     ...team,
+    textColor: randomItem.textColor,
+    textBackgroundColor: randomItem.background
+  };
+};
+
+const generateAgentAvatar = (agent: any) => {
+  const randomItem = getColor(Math.floor(Math.random() * 20));
+  return {
+    ...agent,
     textColor: randomItem.textColor,
     textBackgroundColor: randomItem.background
   };
@@ -54,7 +64,7 @@ export const create = (cell: any) => {
     case 'AGENT_TEAM_LIST':
       const agentTeamProps = {
         styleType: 'label',
-        teams: cell.value.map(generateAvatar)
+        teams: cell.value.map(generateTeamAvatar)
       };
       return cellRenderer({ type: 'multiple_teams', props: agentTeamProps });
 
@@ -64,6 +74,13 @@ export const create = (cell: any) => {
         type: 'string',
         props: { values: agentGroupList }
       });
+
+    case 'AGENT_LIST':
+      const agentsProps = {
+        styleType: 'label',
+        agents: cell.value.map(generateAgentAvatar)
+      };
+      return cellRenderer({ type: 'multiple_agents', props: agentsProps });
 
     case 'TEXT_COMMA_SEP':
       return cellRenderer({

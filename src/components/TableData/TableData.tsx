@@ -74,7 +74,7 @@ const TableData: React.FC<IProps> = ({ type, props }) => {
               avatarProps={props.avatarProps}
             />
           )}
-          items={props.teams}
+          items={props.agents}
         />
       );
 
