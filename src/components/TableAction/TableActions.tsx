@@ -209,6 +209,24 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
     clickOpenFilter(false);
   };
 
+  const resetFilters = () => {
+
+    const initialFilters = [
+      {
+        property: '',
+        operatorName: '',
+        value: '',
+        applied: false
+      }
+    ];
+
+    setFilters(initialFilters);
+
+    if (onFilterChange) {
+      onFilterChange(initialFilters);
+    }
+  };
+
   const _onSearchChange = (_value: string) => {
 
     if (onSearchChange) {
@@ -291,14 +309,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
                     className='close-btn'
                     styleType='secondary'
                     onClick={() => {
-                      setFilters([
-                        {
-                          property: '',
-                          operatorName: '',
-                          value: '',
-                          applied: false
-                        }
-                      ]);
+                      resetFilters();
                     }}
                     size='medium'
                     iconOnly={true}
