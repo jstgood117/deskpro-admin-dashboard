@@ -1,15 +1,12 @@
 import React, { useEffect, FC, useCallback, useState, Fragment } from 'react';
 import { withApollo } from 'react-apollo';
-import { /* gql, */ ApolloClient } from 'apollo-boost';
+import { gql, ApolloClient } from 'apollo-boost';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import { runFilters } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import { ITableSetup, ColumnOrder } from '../../resources/interfaces';
 import { logError } from '../Error/ErrorBoundary';
-import { testTableData2 } from '../../resources/constants/mock/testTableData2';
-import { testTableData3 } from '../../resources/constants/mock/testTableData3';
-import { testTableData4 } from '../../resources/constants/mock/testTableData4';
 import { ITableColumn } from '../../resources/interfaces';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
@@ -49,7 +46,7 @@ const transformColumnData = (
     if(_order.show) {
       newCols.push({
         id: column.title,
-        Header: intl.formatMessage({ id: `admin_common.${column.title}` }),
+        Header: intl.formatMessage({ id: column.title }),
         accessor: column.data[0].path,
         type: column.field,
         sortType: generateSortType(column.sort)
@@ -78,22 +75,12 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
 
   const getData = async () => {
     setLoading(true);
-
-    // TODO: Covert filters into GQL fitlers.
-      try {
-      // const response = await client.query({
-      //   query: gql`${dataQuery}`,
-      //   errorPolicy: 'all'
-      // });
-      // const { results } = response.data;
-      let results: any[] = [];
-      if(path === '/agents') {
-        results = testTableData2.results;
-      } else if(path === '/agents/teams') {
-        results = testTableData3.results;
-      } else if(path === '/agents/groups') {
-        results = testTableData4.results;
-      }
+    try {
+      const response = await client.query({
+        query: gql`${dataQuery}`,
+        errorPolicy: 'all'
+      });
+      const { results } = response.data;
 
       setData(results);
       setFilteredData(results);

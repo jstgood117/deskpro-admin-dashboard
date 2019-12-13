@@ -155,7 +155,7 @@ const Header: FC<IProps> = ({
               <FormattedMessage id={description} />
             </HeaderDescription>
           )}
-          {links.length && (
+          {links && links.length && (
             <HeaderOptions>
               <div style={{ flex: 1 }}>
                 {links.map((link, key) => (
