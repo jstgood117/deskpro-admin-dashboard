@@ -4,14 +4,12 @@ import StandardTablePage from './StandardTablePage';
 
 import { IProps, PageContextValuesType } from './types';
 import { RouteToPage } from '../pages';
-import { pathToQuery } from './pathToQuery';
 
 const getPageComponent = (props: IProps) => {
   const { path, pageType } = props;
   switch (pageType) {
-    case 'StandardTablePage':
-      const query = pathToQuery[path];
-      return <StandardTablePage path={path} query={query} queryName={props.metadataQuery} />;
+    case 'StandardDataPage':
+      return <StandardTablePage path={path} />;
     default:
       return RouteToPage.hasOwnProperty(path)
         ? React.createElement(RouteToPage[path], {path})

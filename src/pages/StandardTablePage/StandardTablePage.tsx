@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
-import { DocumentNode } from 'graphql';
 
 import { IViewData, ColumnOrder, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
+import { QueryService } from '../../services/query';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import Header from '../../components/Header';
@@ -17,15 +17,8 @@ import { dpstyle } from '../../style/styled';
 import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
 
-// test data
-import testColumnData2 from '../../resources/constants/mock/testTableColumns2';
-import testColumnData3 from '../../resources/constants/mock/testTableColumns3';
-import testColumnData4 from '../../resources/constants/mock/testTableColumns4';
-
 export interface IProps {
   path: string;
-  query: DocumentNode;
-  queryName: string;
 }
 
 const TableActionStyled = styled(dpstyle.div)`
@@ -37,18 +30,31 @@ const BodyMargin = styled(dpstyle.div)`
   margin:0 34px 34px 34px;
 `;
 
-const StandardTablePage: FC<IProps> = ({ path, query, queryName }) => {
+const StandardTablePage: FC<IProps> = ({ path }) => {
 
-  /// TODO: Remove & link to table data
-  let tableData: any = [];
-  if(path === '/agents') {
-    tableData = testColumnData2;
-  } else if(path === '/agents/teams') {
-    tableData = testColumnData3;
-  } else if(path === '/agents/groups') {
-    tableData = testColumnData4;
+  const [tabIndex, setTabState] = useState(0);
+  const [filters, setFilters] = useState<FilterType[]>([]);
+  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>([]);
+
+  useEffect(() => {
+    setFilters(setupFilters('*'));
+  }, [path]);
+
+
+  const queryService = QueryService();
+  const query = queryService.getQuery('standardTablePage');
+
+  const response = useQuery(query, { errorPolicy: 'all', variables: { path } });
+
+  if (response.loading) {
+    return <Loading />;
   }
 
+  if (response.error) {
+    return <Error apolloError={response.error} />;
+  }
+
+  const tableData = response.data;
   const {
     title,
     description,
@@ -56,9 +62,7 @@ const StandardTablePage: FC<IProps> = ({ path, query, queryName }) => {
     views,
     dataType,
     illustration
-  } = (tableData as any)[queryName.toString()];
-
-  const [tabIndex, setTabState] = useState(0);
+  } = (response.data as any)['standardDataPage'];
   const tableDef = views[tabIndex].tableDef;
   const filterDef = views[tabIndex].filterDef;
 
@@ -66,25 +70,6 @@ const StandardTablePage: FC<IProps> = ({ path, query, queryName }) => {
     column:_column.title,
     show: true
   }));
-
-  const [filters, setFilters] = useState<FilterType[]>([]);
-  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
-  const { loading, error } = useQuery(query, { errorPolicy: 'all' });
-
-  useEffect(() => {
-    setFilters(setupFilters('*'));
-  }, []);
-
-  useEffect(() => {
-    setFilters(setupFilters('*'));
-  }, [path]);
-
-  if (loading) {
-    return <Loading />;
-  }
-  if (error) {
-    return <Error apolloError={error} />;
-  }
 
   const processFiltersToFilterTypes = (
     internalFilters: FilterProps[]
@@ -161,7 +146,7 @@ const StandardTablePage: FC<IProps> = ({ path, query, queryName }) => {
             <TableActionStyled>
               <TableActions
                 showSearch={true}
-                filterMenu={true}
+                filterMenu={filterDef?.length > 0}
                 sortMenu={true}
                 groupMenu={true}
                 viewMenu={true}
@@ -185,7 +170,7 @@ const StandardTablePage: FC<IProps> = ({ path, query, queryName }) => {
                 {...views[tabIndex]}
                 path={path} // TODO: When hooked up to live db, not required
                 filters={filters}
-                dataType={dataType}
+                dataType={dataType || 'sync'}
                 columnOrder={columnOrder}
               />
             )}

@@ -1,11 +1,11 @@
 import queries from '../../schema/queries';
 
-const getQueryBasedOnRoute = (route:string) => {
-  switch(route) {
-    case '/agents':
-      return queries['QUERY_AGENTS_PAGE'];
-    case '/':
+const getQuery = (type:string) => {
+  switch(type) {
+    case 'initial':
       return queries['QUERY_INITIAL'];
+    case 'standardTablePage':
+      return queries['STANDARD_TABLES_PAGE'];
     default:
       return {};
   }
@@ -13,6 +13,6 @@ const getQueryBasedOnRoute = (route:string) => {
 
 export const QueryService = () => {
   return {
-    getQueryBasedOnRoute
+    getQuery
   };
 };
