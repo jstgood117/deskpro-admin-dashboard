@@ -72,6 +72,8 @@ import { ReactComponent as IconDown } from '../../assets/svg/ic-down.svg';
 import { ReactComponent as IconDollarSign } from '../../assets/svg/ic-dollar-sign.svg';
 import { ReactComponent as IconHelpCenter } from '../../assets/svg/ic-helpCenter.svg';
 import { ReactComponent as IconArrowRight} from '../../assets/svg/ic-arrow-right.svg';
+import { ReactComponent as IconSortDownActive} from '../../assets/svg/ic-sort-down-active.svg';
+import { ReactComponent as IconSortUpActive} from '../../assets/svg/ic-sort-up-active.svg';
 
 export interface IProps {
   name: string;
@@ -223,6 +225,10 @@ const Icon: FC<IProps> = props => {
       return <IconHelpCenter />;
     case 'ic-arrow-right':
       return <IconArrowRight />;
+    case 'ic-sort-down-active':
+      return <IconSortDownActive />;
+    case 'ic-sort-up-active':
+      return <IconSortUpActive />;
     case 'info-text':
       return (
         <Tooltip content='Info text' styleType='light' placement='bottom'>
