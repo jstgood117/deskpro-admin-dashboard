@@ -28,7 +28,8 @@ import {
   TableStyled,
   TableHeader,
   AllCheckStyle,
-  StyledPagination
+  StyledPagination,
+  StyledTh
 } from './TableStyles';
 import MultiSelect from '../SelectComponents/MultiSelect';
 
@@ -289,8 +290,27 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                   <th
                     key={indexInner}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
+                    style={{
+                      border: column.isSorted && '1px solid #D3D6D7'
+                    }}
                   >
-                    {column.render('Header')}
+                    <StyledTh>
+                      {column.render('Header')}
+
+                      {column.isSorted &&
+                        (column.isSortedDesc ? (
+                          <span className='sort-icon'>
+                            <Icon name='ic-sort-up-active' />
+                          </span>
+                        ) : (
+                          <span className='sort-icon'>
+                            <Icon name='ic-sort-down-active' />
+                          </span>
+                        ))}
+                      <span className='filter-icon'>
+                        <Icon name='filter' />
+                      </span>
+                    </StyledTh>
                   </th>
                 ))}
               </tr>

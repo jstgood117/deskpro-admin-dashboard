@@ -105,5 +105,8 @@ export const testTranslations = {
   'admin.settings.inlineEdit.after': 'After',
   'admin.settings.inlineEdit.emailsWith': 'emails with',
   'admin.settings.inlineEdit.minutes': 'minutes',
-  'admin.settings.inlineEdit.rejectMessagesFor': 'reject messages for'
+  'admin.settings.inlineEdit.rejectMessagesFor': 'reject messages for',
+
+  'group.active': 'Active',
+  'group.deleted': 'Deleted'
 };

@@ -3,7 +3,6 @@ import { dpstyle } from '../Styled';
 
 export const TableStyled = styled(dpstyle.div)`
   > .overflow {
-
     overflow-y: auto;
     overflow-x: auto;
 
@@ -17,15 +16,44 @@ export const TableStyled = styled(dpstyle.div)`
           border-bottom: 1px solid ${props => props.theme.greyLight};
           & th {
             :first-child {
-              width:30px;
+              width: 30px;
             }
+            cursor: pointer;
             white-space: nowrap;
-            padding: 0 16px 0 0;
+            padding: 4px 16px 4px 10px;
             font-weight: 600;
             font-size: 14px;
             line-height: 150%;
             color: ${props => props.theme.greyDark};
             text-align: left;
+            &:hover {
+              background: rgba(232, 235, 238, 0.5);
+              .filter-icon {
+                margin-left: 8px;
+                display: flex;
+                background: ${props => props.theme.white};
+                border-radius: 3px;
+                width: 19px;
+                height: 19px;
+                svg {
+                  margin: auto;
+                  path {
+                    fill: ${props => props.theme.static2Colour};
+                  }
+                }
+              }
+              .sort-icon {
+                svg {
+                  margin: auto;
+                  .active {
+                    fill: ${props => props.theme.activeColour};
+                  }
+                }
+              }
+            }
+            .filter-icon {
+              display: none;
+            }
           }
         }
       }
@@ -42,9 +70,9 @@ export const TableStyled = styled(dpstyle.div)`
           border-bottom: 1px solid ${props => props.theme.greyLighter};
           & td {
             :first-child {
-              width:30px;
+              width: 30px;
             }
-            padding: 0 16px 0 0;
+            padding: 4px 16px 4px 10px;
             text-align: left;
             line-height: 44px;
             color: ${props => props.theme.staticColour};
@@ -91,4 +119,13 @@ export const StyledPagination = styled(dpstyle.div)`
   justify-content: flex-end;
   padding-top: 24px;
   padding-bottom: 10px;
+`;
+
+export const StyledTh = styled.div`
+  display: flex;
+  align-items: center;
+  .sort-icon {
+    display: flex;
+    padding-left: 10px;
+  }
 `;
