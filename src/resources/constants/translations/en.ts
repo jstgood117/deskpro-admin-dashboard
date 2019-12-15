@@ -78,9 +78,9 @@ export const testTranslations = {
   'admin_common.filter_operator.not_equal': 'Is not',
   'admin_common.filter_operator.starts_with': 'Starts with',
   'admin_common.filter_operator.ends_with': 'Ends with',
-  'admin_common.filter_operator.contains': 'Contains one of the following',
+  'admin_common.filter_operator.contains': 'Contains',
   'admin_common.filter_operator.not_contains':
-    'Does not Contain one of the following',
+    'Not contains',
   'admin_common.filter_operator.yes_no': 'Yes / No',
 
   'action.agents.delete_action': 'Delete Agent',
