@@ -25,6 +25,7 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   display: inline-flex;
   align-items: center;
   border-radius: 4px;
+  box-sizing: border-box;
   width: ${props =>
     props.styles && props.styles.width ? props.styles.width : 'fit-content'};
   height: ${props =>

@@ -6,7 +6,7 @@ import { IntlProvider } from 'react-intl';
 import { DeskproAdminTheme } from '../src/components/Theme';
 import { testTranslations } from '../src/resources/constants/constants';
 import '../src/style/text-antialiased.css';
-
+import '../src/style/fonts.css';
 const req = require.context('../src/', true, /.stories\..sx$/);
 
 function loadStories() {
