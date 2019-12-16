@@ -1,5 +1,5 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
-import { useTable, useSortBy, usePagination, useRowSelect} from 'react-table';
+import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
@@ -289,9 +289,11 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                             <Icon name='ic-sort-down-active' />
                           </span>
                         ))}
-                      <span className='filter-icon'>
-                        <Icon name='filter' />
-                      </span>
+                      {column.isSorted && (
+                        <span className='filter-icon'>
+                          <Icon name='filter' />
+                        </span>
+                      )}
                     </StyledTh>
                   </th>
                 ))}
@@ -315,7 +317,9 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                     <Checkbox
                       value={(row.original as any).id}
                       checked={
-                        checked.hasOwnProperty((row.original as any).id.toString())
+                        checked.hasOwnProperty(
+                          (row.original as any).id.toString()
+                        )
                           ? true
                           : false
                       }
