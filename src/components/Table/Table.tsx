@@ -23,7 +23,8 @@ import {
   onSelectAllChange,
   onSelectEverything,
   generateTableParams,
-  convertActionsToMenuFormat
+  convertActionsToMenuFormat,
+  generateCSVData
 } from './helpers/functions';
 import {
   TableStyled,
@@ -77,27 +78,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
     state: { pageIndex, pageSize }
   } = useTable(tableParams, useSortBy, usePagination, useRowSelect) as any;
 
-  const csvData: any[] = [];
-
-  if (page && page.length > 0) {
-    page.map((row: any) => {
-      const temp = Object.assign({}, row.values);
-
-      columns.map(column => {
-        if (Array.isArray(temp[column.id])) {
-          temp[column.id] =
-            temp[column.id] &&
-            temp[column.id].length > 0 &&
-            temp[column.id].map((item: any) => {
-              return item.name ? item.name : item.title;
-            });
-        }
-        return true;
-      });
-      csvData.push(temp);
-      return true;
-    });
-  }
+  const csvData = generateCSVData(page, columns);
 
   useEffect(() => {
     if (fetchData) {
@@ -260,7 +241,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
         <div style={{ paddingRight: 24 }}>
           <CSVLink
             data={csvData}
-            filename={'Agents.csv'}
+            filename={'export.csv'}
             headers={headers}
             target='_blank'
           >
