@@ -1,5 +1,4 @@
-import { Column } from 'react-table';
-export const testTableColumns: Column[] = [
+export const testTableColumns: any[] = [
   { id: 'selection', width: 20 },
   { Header: 'Name', accessor: 'name' },
   { Header: 'Email', accessor: 'email' },

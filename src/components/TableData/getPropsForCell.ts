@@ -1,7 +1,6 @@
-import React from 'react';
-import TableData from '../../TableData';
-import { getColorByIndex, getColorByChar } from '../../../utils/getRandomColor';
-import { ITableColor } from '../../../resources/interfaces';
+import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
+import { ITableColor } from '../../resources/interfaces';
+import { ITableDataProps } from './types';
 
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
@@ -18,10 +17,6 @@ enum CellEnum {
   AGENT_GROUP_LIST = 'AGENT_GROUP_LIST',
   TEAM_MEMBERS_LIST = 'TEAM_MEMBERS_LIST'
 }
-
-const cellRenderer = (props: any) => {
-  return React.createElement(TableData, props);
-};
 
 const generateTeamAvatar = (team: any) => {
   const randomItem = getColor(Math.floor(Math.random() * 20));
@@ -41,62 +36,57 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-export const create = (cell: any) => {
+export const getPropsForCell = (cell: any): ITableDataProps => {
   const { type } = cell.column;
 
   switch (type as CellEnum) {
     case 'NAME_AVATAR':
-      const avatarProps = {
+      return {
         type: 'avatar_text',
         props: {
           name: cell.value,
           properties: getColorByChar(cell.value.charAt(0))
         }
       };
-      return cellRenderer(avatarProps);
 
     case 'BOOLEAN_YESNO':
-      return cellRenderer({ type: 'yes_no', props: { checked: cell.value } });
+      return { type: 'yes_no', props: { checked: cell.value } };
 
     case 'TIME_AGO':
-      return cellRenderer({
+      return {
         type: 'date_time',
         props: { date_time: cell.value }
-      });
+      };
 
     case 'AGENT_TEAM_LIST':
       const agentTeamProps = {
         styleType: 'label',
         teams: cell.value.map(generateTeamAvatar)
       };
-      return cellRenderer({ type: 'multiple_teams', props: agentTeamProps });
+      return { type: 'multiple_teams', props: agentTeamProps };
 
     case 'AGENT_GROUP_LIST':
       const agentGroupList = [cell.value.map((_item: any) => _item.title)];
-      return cellRenderer({
+      return {
         type: 'string',
         props: { values: agentGroupList }
-      });
+      };
 
     case 'AGENT_LIST':
       const agentsProps = {
         styleType: 'label',
         agents: cell.value.map(generateAgentAvatar)
       };
-      return cellRenderer({ type: 'multiple_agents', props: agentsProps });
+      return { type: 'multiple_agents', props: agentsProps };
 
     case 'TEXT_COMMA_SEP':
-      return cellRenderer({
+      return {
         type: 'string',
         props: { values: cell.value, max: 1 }
-      });
+      };
 
     case 'TEXT':
     default:
-      return cellRenderer({ type: 'string', props: { values: [cell.value] } });
+      return { type: 'string', props: { values: [cell.value] } };
   }
-};
-
-export default {
-  create
 };

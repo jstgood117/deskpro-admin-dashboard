@@ -55,7 +55,7 @@
     "react-scripts": "^3.2.0",
     "react-select": "^3.0.8",
     "react-sortablejs": "^1.5.1",
-    "react-table": "^7.0.0-beta.12",
+    "react-table": "^7.0.0-rc.10",
     "reflexbox": "^4.0.6",
     "rollbar": "^2.14.4",
     "sortablejs": "^1.10.1",
