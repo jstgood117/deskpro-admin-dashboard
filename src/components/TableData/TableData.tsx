@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { ITableDataProps } from './types';
 
 import OverflowList from '../OverflowList/OverflowList';
 import NameAndAvatar from '../Avatar/NameAndAvatar';
@@ -20,33 +21,7 @@ import Toogle from '../Toggle';
 import Input from '../Input';
 import Label from '../Label';
 
-interface IProps {
-  type:
-    | 'avatar_text'
-    | 'multiple_agents'
-    | 'string'
-    | 'icon'
-    | 'relationships'
-    | 'duration'
-    | 'date_time'
-    | 'yes_no'
-    | 'link'
-    | 'toogle'
-    | 'attachment'
-    | 'locale'
-    | 'team'
-    | 'multiple_teams'
-    | 'count'
-    | 'id'
-    | 'timezone'
-    | 'label'
-    | 'currency'
-    | 'code'
-    | 'color'
-    | 'input';
-  props: any;
-}
-const TableData: React.FC<IProps> = ({ type, props }) => {
+const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
   switch (type) {
     case 'avatar_text':
       return (

@@ -10,3 +10,4 @@ declare module 'react-csv';
 declare module 'react-select';
 declare module 'chroma-js';
 declare module 'react-file-drop';
+declare module 'react-table';
