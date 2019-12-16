@@ -7,8 +7,16 @@ module.exports = {
         loader: 'graphql-tag/loader'
       },
       {
-        test: /\.(gif|svg|jpg|png|ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        loader: 'url-loader?limit=100000&name=fonts/[name].[ext]'
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
       }
     ]
   }
