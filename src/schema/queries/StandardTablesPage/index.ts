@@ -1,30 +1,46 @@
 import { gql } from 'apollo-boost';
-export default gql`
+export default gql`  
 query StandardDataPage($path: String!) {
   standardDataPage(path: $path) {
     title
     description
     illustration
     headerLinks {
-        title
+      title
       path
       icon
     }
     newLink
     views {
-      title
       dataQuery
       tableDef {
         columns {
           title
-          field
-          data {
-            propName
-            path
-            value
-          }
           sortField
           defaultShow
+          field {
+            __typename
+            ...on TableColumnValueField {
+              value { dataPath, staticJson, staticValue }
+            }
+            ...on TableColumnArrayValueField {
+              valuesArray { dataPath, staticJson, staticValue }
+            }
+            ...on TableColumnPhraseMap {
+              phraseMap {
+                value
+                phraseId
+              }
+            }
+            ...on TableColumnNameAvatar {
+              name { dataPath, staticJson, staticValue }
+              avatar { dataPath, staticJson, staticValue }
+            }
+            ...on TableColumnMoney {
+              amount { dataPath, staticJson, staticValue }
+              currency { dataPath, staticJson, staticValue }
+            }
+          }
         }
       }
       filterDef {
