@@ -37,8 +37,7 @@ export interface IViewData {
 
 export interface ITableColumn {
   title: string;
-  field?: string;
-  data?: any[];
+  field: any; // TODO types
   defaultShow?: boolean;
   sort?: string;
 }

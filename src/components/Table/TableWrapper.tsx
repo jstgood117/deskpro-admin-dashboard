@@ -45,10 +45,10 @@ const transformColumnData = (
     const column = columns.find(_col => _order.column === _col.title);
     if(_order.show) {
       newCols.push({
-        columnProps:column.data,
+        columnProps:column.field,
         id: column.title,
         Header: intl.formatMessage({ id: column.title }),
-        accessor: column.data[0].path,
+        accessor: '', // TODO
         type: column.field,
         sortType: generateSortType(column.sort)
       });
@@ -89,6 +89,8 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
       setTotalPageCount(Math.ceil(results.length / pageSize));
       setLoading(false);
     } catch(err) {
+      console.debug("Error for query: " + dataQuery);
+      console.error(err);
       logError(err);
       setLoading(false);
     }

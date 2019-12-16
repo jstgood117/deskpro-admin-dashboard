@@ -1,22 +1,12 @@
+import get from 'lodash/get';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
 import { ITableColor, KeyValue } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
+import { API_TableColumnField, API_TablePayloadValue } from '../../codegen/types';
 
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
 };
-
-enum CellEnum {
-  NAME_AVATAR = 'NAME_AVATAR',
-  TEXT = 'TEXT',
-  TEXT_COMMA_SEP = 'TEXT_COMMA_SEP',
-  BOOLEAN_YESNO = 'BOOLEAN_YESNO',
-  TIME_AGO = 'TIME_AGO',
-  AGENT_TEAM_LIST = 'AGENT_TEAM_LIST',
-  AGENT_LIST = 'AGENT_LIST',
-  AGENT_GROUP_LIST = 'AGENT_GROUP_LIST',
-  TEAM_MEMBERS_LIST = 'TEAM_MEMBERS_LIST'
-}
 
 const generateTeamAvatar = (team: any) => {
   const randomItem = getColor(Math.floor(Math.random() * 20));
@@ -47,58 +37,79 @@ export const getPropsForCell = (cell: any) => {
   return props;
 };
 
-export const generateComponentProps = (cell: any): ITableDataProps => {
-  const { column } = cell;
-  const { type } = column;
+const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
+  if (value.dataPath) {
+    return get(row, value.dataPath);
+  } else if (value.staticValue) {
+    return value.staticValue;
+  } else if (value.staticJson) {
+    try {
+      return JSON.parse(value.staticJson);
+    } catch (e) {
+      console.error("Failed to parse JSON string", value.staticJson);
+      console.error(e);
+      return null;
+    }
+  } else {
+    return null;
+  }
+};
 
-  switch (type as CellEnum) {
-    case 'NAME_AVATAR':
+export const generateComponentProps = (cell: any): ITableDataProps => {
+  const type = cell.column.type as API_TableColumnField;
+  const row = cell.row.original;
+
+  switch (type.__typename) {
+    case 'TableColumnNameAvatar':
+      const name = getPayloadValue(row, type.name) || 'undef';
       return {
         type: 'avatar_text',
         props: {
-          name: cell.value,
-          properties: getColorByChar(cell.value.charAt(0))
+          name: name,
+          properties: getColorByChar(name.charAt(0))
         }
       };
 
-    case 'BOOLEAN_YESNO':
-      return { type: 'yes_no', props: { checked: cell.value } };
+    case 'TableColumnBoolYesNo':
+      return { type: 'yes_no', props: { checked: getPayloadValue(row, type.value) } };
 
-    case 'TIME_AGO':
+    case 'TableColumnTimeAgo':
       return {
         type: 'date_time',
-        props: { date_time: cell.value }
+        props: { date_time: getPayloadValue(row, type.value) }
       };
 
-    case 'AGENT_TEAM_LIST':
+    case 'TableColumnAgentTeamList':
       const agentTeamProps = {
         styleType: 'label',
-        teams: cell.value.map(generateTeamAvatar)
+        teams: getPayloadValue(row, type.valuesArray).map(generateTeamAvatar)
       };
       return { type: 'multiple_teams', props: agentTeamProps };
 
-    case 'AGENT_GROUP_LIST':
-      const agentGroupList = [cell.value.map((_item: any) => _item.title)];
+    case 'TableColumnAgentGroupList':
+      const agentGroupList = [getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title)];
       return {
         type: 'string',
         props: { values: agentGroupList }
       };
 
-    case 'AGENT_LIST':
+    case 'TableColumnAgentList':
       const agentsProps = {
         styleType: 'label',
-        agents: cell.value.map(generateAgentAvatar)
+        agents: getPayloadValue(row, type.valuesArray).map(generateAgentAvatar)
       };
       return { type: 'multiple_agents', props: agentsProps };
 
-    case 'TEXT_COMMA_SEP':
+    case 'TableColumnTextCommaSep':
       return {
         type: 'string',
-        props: { values: cell.value, max: 1 }
+        props: { values: getPayloadValue(row, type.valuesArray), max: 1 }
       };
 
-    case 'TEXT':
+    case 'TableColumnText':
+      return { type: 'string', props: { values: [getPayloadValue(row, type.value)] } };
+
     default:
-      return { type: 'string', props: { values: [cell.value] } };
+      return { type: 'string', props: { values: ['Unknown column type: ' + type.__typename] } };
   }
 };

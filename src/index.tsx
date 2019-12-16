@@ -9,10 +9,12 @@ import { debug, appDebug } from './logging';
 import generateConfig from './config';
 import { ConfigType } from './config/config';
 
+import introspectionResult from "./codegen/introspection.json";
+
 import App from './pages/App/App';
 import AppError from './components/AppError';
 
-import { InMemoryCache } from 'apollo-boost';
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-boost';
 
 if ('production' !== process.env.NODE_ENV) {
     debug.enable('*,-sockjs-client:*');
@@ -28,9 +30,16 @@ const AppWrap = () => {
   }
 
   appDebug('API URL: ' + apiUrl);
+
+  const fragmentMatcher = new IntrospectionFragmentMatcher({
+    introspectionQueryResultData: introspectionResult,
+  });
+
   const link = createHttpLink({ uri: apiUrl });
   const client = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      fragmentMatcher
+    }),
     link,
   });
 
