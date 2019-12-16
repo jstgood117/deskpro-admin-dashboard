@@ -1,5 +1,5 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
-import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
+import { useTable, useSortBy, usePagination, useRowSelect} from 'react-table';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
@@ -13,9 +13,10 @@ import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Icon from '../Icon';
 import Menu from '../Menu';
+import TableData from '../TableData';
+import { getPropsForCell } from '../TableData/getPropsForCell';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-import * as Cell from './Cell';
 import { TableType, TableParams } from './types';
 import {
   onCheckboxChange,
@@ -324,16 +325,16 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                   key={indexOuter}
                   {...row.getRowProps()}
                   className={
-                    checked.hasOwnProperty(row.original.id.toString())
+                    checked.hasOwnProperty((row.original as any).id.toString())
                       ? 'row--selected'
                       : ''
                   }
                 >
                   <td>
                     <Checkbox
-                      value={row.original.id}
+                      value={(row.original as any).id}
                       checked={
-                        checked.hasOwnProperty(row.original.id.toString())
+                        checked.hasOwnProperty((row.original as any).id.toString())
                           ? true
                           : false
                       }
@@ -342,7 +343,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                   </td>
                   {row.cells.map((cell: any, indexInner: number) => (
                     <td key={indexInner} {...cell.getCellProps()}>
-                      {Cell.create(cell)}
+                      <TableData {...getPropsForCell(cell)} />
                     </td>
                   ))}
                 </tr>
