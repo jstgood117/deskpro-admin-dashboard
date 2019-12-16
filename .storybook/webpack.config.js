@@ -9,10 +9,6 @@ module.exports = ({config}) => {
       presets: [['react-app', { flow: false, typescript: true }]],
     },
   });
-  config.module.rules.push({
-    test: /\.(gif|svg|jpg|png|ttf|eot|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-    loader: 'url-loader'
-  });
   config.resolve.extensions.push('.ts', '.tsx');
   return config;
 };
