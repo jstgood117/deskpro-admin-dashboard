@@ -1,5 +1,5 @@
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
-import { ITableColor } from '../../resources/interfaces';
+import { ITableColor, KeyValue } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
 
 const getColor = (index: number): ITableColor => {
@@ -36,8 +36,20 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-export const getPropsForCell = (cell: any): ITableDataProps => {
-  const { type } = cell.column;
+export const getPropsForCell = (cell: any) => {
+  const { row, column } = cell;
+  const { columnProps } = column;
+
+  const props:  KeyValue = {};
+  columnProps.forEach((columnProp: any) => {
+    return props[columnProp.path] = row.original[columnProp.path];
+  }, {});
+  return props;
+};
+
+export const generateComponentProps = (cell: any): ITableDataProps => {
+  const { column } = cell;
+  const { type } = column;
 
   switch (type as CellEnum) {
     case 'NAME_AVATAR':

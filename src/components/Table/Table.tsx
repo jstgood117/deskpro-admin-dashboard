@@ -14,7 +14,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Menu from '../Menu';
 import TableData from '../TableData';
-import { getPropsForCell } from '../TableData/getPropsForCell';
+import { generateComponentProps } from '../TableData/getPropsForCell';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 import { TableType, TableParams } from './types';
@@ -328,7 +328,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                   </td>
                   {row.cells.map((cell: any, indexInner: number) => (
                     <td key={indexInner} {...cell.getCellProps()}>
-                      <TableData {...getPropsForCell(cell)} />
+                      <TableData {...generateComponentProps(cell)} />
                     </td>
                   ))}
                 </tr>
