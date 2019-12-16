@@ -1,38 +1,25 @@
 import _ from 'lodash';
-import {
-  IMenuItemProps
-} from '../../../resources/interfaces';
-import {
-  ActionsType
-} from '../../../services/actions/types';
-import {
-  setCheckedType,
-  TableParams,
-  TableType
-} from '../types';
+import { IMenuItemProps } from '../../../resources/interfaces';
+import { ActionsType } from '../../../services/actions/types';
+import { setCheckedType, TableParams, TableType } from '../types';
 
 export const onCheckboxChange = (
   value: string,
   checked: object,
   setChecked: setCheckedType
 ) => {
-
   const keys = Object.keys(checked);
 
   if (keys.includes(value)) {
-
     const newIds = keys
       .filter(_id => _id !== value)
       .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
     setChecked(newIds);
-
   } else {
-
     setChecked({
       ...checked,
       [value]: true
     });
-
   }
 };
 
@@ -43,12 +30,10 @@ export const onSelectAllChange = (
   pageSize: number,
   data: object[]
 ) => {
-
   if (!isChecked) {
     setChecked({});
   } else {
-
-    const startPos = Math.max(((currentPage * pageSize)), 0);
+    const startPos = Math.max(currentPage * pageSize, 0);
     const endPos = Math.min(startPos + pageSize, data.length);
 
     const showingRows = _.slice(data, startPos, endPos);
@@ -59,14 +44,15 @@ export const onSelectAllChange = (
   }
 };
 
-export const onSelectEverything = (data: object[], setChecked: setCheckedType) => {
-
+export const onSelectEverything = (
+  data: object[],
+  setChecked: setCheckedType
+) => {
   const ids = data.map((_row: any) => ({
     [_row.id]: true
   }));
   setChecked(Object.assign({}, ...ids));
 };
-
 
 export const generateTableParams = (
   tableType: TableType,
@@ -76,17 +62,17 @@ export const generateTableParams = (
 ): TableParams => {
   return tableType === 'async'
     ? {
-      columns,
-      data,
-      initialState: { pageIndex: 0 },
-      manualPagination: true,
-      pageCount: controlledPageCount
-    }
+        columns,
+        data,
+        initialState: { pageIndex: 0 },
+        manualPagination: true,
+        pageCount: controlledPageCount
+      }
     : {
-      columns,
-      data,
-      initialState: { pageIndex: 0 }
-    };
+        columns,
+        data,
+        initialState: { pageIndex: 0 }
+      };
 };
 
 const generateMenuItem = (item: ActionsType) => {
@@ -110,14 +96,11 @@ const generateMenuItem = (item: ActionsType) => {
 export const convertActionsToMenuFormat = (
   actions: ActionsType[]
 ): IMenuItemProps[] => {
-
   if (!actions) {
     return [];
   }
 
-  return actions.map(_item => (
-    generateMenuItem(_item)
-  ));
+  return actions.map(_item => generateMenuItem(_item));
 };
 
 export const generateCSVData = (table: any, columnsMeta: any) => {
@@ -126,13 +109,15 @@ export const generateCSVData = (table: any, columnsMeta: any) => {
   if (table && table.length > 0) {
     table.map((row: any) => {
       const temp = Object.assign({}, row.values);
-
       columnsMeta.map((columnMeta: any) => {
         if (Array.isArray(temp[columnMeta.id])) {
           temp[columnMeta.id] =
             temp[columnMeta.id] &&
             temp[columnMeta.id].length > 0 &&
             temp[columnMeta.id].map((meta: any) => {
+              if (typeof meta === 'string') {
+                return meta;
+              }
               return meta.name ? meta.name : meta.title;
             });
         }
