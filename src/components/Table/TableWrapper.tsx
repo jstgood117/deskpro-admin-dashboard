@@ -45,6 +45,7 @@ const transformColumnData = (
     const column = columns.find(_col => _order.column === _col.title);
     if(_order.show) {
       newCols.push({
+        data:column.data,
         id: column.title,
         Header: intl.formatMessage({ id: column.title }),
         accessor: column.data[0].path,
