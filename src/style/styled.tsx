@@ -1,8 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { Flex as BaseFlex, Box as BaseBox } from 'reflexbox/styled-components';
 import invariant from 'invariant';
 import { FormattedMessage } from 'react-intl';
+import { fontFaces } from './fonts';
+
+export const GlobalStyles = createGlobalStyle`
+  ${fontFaces}
+`;
 
 export const Flex = styled(BaseFlex)`
   margin: 0;
