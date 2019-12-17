@@ -22,6 +22,7 @@ export interface ITableDataProps {
     | 'code'
     | 'color'
     | 'input'
-    | 'phrase';
+    | 'phrase'
+    | 'template';
   props: any;
 }
