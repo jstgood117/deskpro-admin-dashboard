@@ -69,6 +69,7 @@ export const PrimaryInputWrapper = styled(dpstyle.div)<{ error: boolean }>`
   input {
     &.focus {
       box-shadow: 0px 0px 8px ${props => props.theme.hoverColour};
+      border-color: #9fccf3;
     }
   }
   ${props =>

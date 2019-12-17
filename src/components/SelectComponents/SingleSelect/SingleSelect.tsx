@@ -21,8 +21,9 @@ export interface IProps {
   selectOption: (value: IOptions) => void;
   selectedOption?: IOptions;
   placeholder?: string;
-  type: 'withImage' | 'medium' | 'large' | 'autocomplete';
+  type: 'withImage' | 'medium' | 'large' | 'primary';
   closeMenuOnSelect?: boolean;
+  isSearchable?: boolean;
 }
 
 const SingleSelect: FC<IProps> = ({
@@ -31,7 +32,8 @@ const SingleSelect: FC<IProps> = ({
   placeholder,
   type,
   closeMenuOnSelect,
-  selectedOption
+  selectedOption,
+  isSearchable
 }) => {
   const onChange = (value: IOptions) => {
     selectOption(value);
@@ -39,7 +41,7 @@ const SingleSelect: FC<IProps> = ({
   const generateSelect = () => {
     return (
       <Select
-        isSearchable={false}
+        isSearchable={isSearchable}
         closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
         isMulti={false}
         options={options}
@@ -70,7 +72,7 @@ const SingleSelect: FC<IProps> = ({
       {type === 'withImage' && (
         <WithImageSelectButton>
           <Select
-            isSearchable={false}
+            isSearchable={isSearchable}
             closeMenuOnSelect={closeMenuOnSelect ? closeMenuOnSelect : true}
             isMulti={false}
             options={options}
@@ -90,9 +92,10 @@ const SingleSelect: FC<IProps> = ({
           />
         </WithImageSelectButton>
       )}
-      {type === 'autocomplete' && (
+      {type === 'primary' && (
         <StyledSelect>
           <Select
+            isSearchable={isSearchable}
             isMulti={false}
             options={options}
             className='basic-multi-select'
@@ -113,5 +116,7 @@ const SingleSelect: FC<IProps> = ({
     </ThemeProvider>
   );
 };
-
+SingleSelect.defaultProps = {
+  isSearchable: false
+};
 export default SingleSelect;
