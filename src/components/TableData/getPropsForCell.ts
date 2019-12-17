@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
 import { ITableColor, KeyValue } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
@@ -38,7 +39,9 @@ export const getPropsForCell = (cell: any) => {
 };
 
 const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-  if (value.dataPath) {
+  if(value.dataPath.charAt(0) === '$') {
+    jp.query(row, value.dataPath);
+  } else if (value.dataPath) {
     return get(row, value.dataPath);
   } else if (value.staticValue) {
     return value.staticValue;
@@ -46,7 +49,7 @@ const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
     try {
       return JSON.parse(value.staticJson);
     } catch (e) {
-      console.error("Failed to parse JSON string", value.staticJson);
+      console.error('Failed to parse JSON string', value.staticJson);
       console.error(e);
       return null;
     }
@@ -65,7 +68,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'avatar_text',
         props: {
-          name: name,
+          name,
           properties: getColorByChar(name.charAt(0))
         }
       };

@@ -28,6 +28,7 @@
     "graphql-tag": "^2.10.1",
     "install": "^0.13.0",
     "invariant": "^2.2.4",
+    "jsonpath": "^1.0.2",
     "lodash": "^4.17.15",
     "logrocket": "^1.0.3",
     "moment": "^2.24.0",
