@@ -20,6 +20,7 @@ import Attachment from '../Attachment';
 import Toogle from '../Toggle';
 import Input from '../Input';
 import Label from '../Label';
+import Handlebars from '../Handlebars';
 
 const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
   switch (type) {
@@ -198,6 +199,9 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
 
     case 'color':
       return <Color color={props.color} label={props.label} />;
+
+    case 'template':
+      return <Handlebars template={props.template} data={props.data} />;
 
     default:
       return null;

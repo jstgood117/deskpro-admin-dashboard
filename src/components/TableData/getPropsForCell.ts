@@ -119,6 +119,9 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
     case 'TableColumnText':
       return { type: 'string', props: { values: [getPayloadValue(row, type.value)] } };
 
+    // case 'TableColumnTemplate':
+    //   return { type: 'template', props: { template: '<p>{{testing}}</p>', data: {testing:123} } };
+
     default:
       return { type: 'string', props: { values: ['Unknown column type: ' + type.__typename] } };
   }
