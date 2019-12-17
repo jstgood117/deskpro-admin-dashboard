@@ -3,7 +3,11 @@ import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
 import { ITableColor } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
-import { API_TableColumnField, API_TablePayloadValue } from '../../codegen/types';
+import {
+  API_TableColumnField,
+  API_TablePayloadValue,
+  API_TableColumnPhraseMapItem
+} from '../../codegen/types';
 
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
@@ -25,6 +29,13 @@ const generateAgentAvatar = (agent: any) => {
     textColor: randomItem.textColor,
     textBackgroundColor: randomItem.background
   };
+};
+
+const convertPhrases = (values:string[], phraseMap: API_TableColumnPhraseMapItem[]) => {
+  return values.map(value => {
+    const match = phraseMap.find(_map => _map.value === value);
+    return match ? match.phraseId : value;
+  });
 };
 
 export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
@@ -96,6 +107,13 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'string',
         props: { values: getPayloadValue(row, type.valuesArray), max: 1 }
+      };
+
+    case 'TableColumnTextPhraseCommaSep':
+      const values = getPayloadValue(row, type.valuesArray);
+      return {
+        type: 'phrase',
+        props: { values: convertPhrases(values, type.phraseMap), max: 1 }
       };
 
     case 'TableColumnText':
