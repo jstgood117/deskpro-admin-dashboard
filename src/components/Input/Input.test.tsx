@@ -9,7 +9,7 @@ import { DeskproAdminTheme } from '../Theme';
 configure({ adapter: new Adapter() });
 
 describe('Input', () => {
-  const props: IProps = {};
+  let props: IProps;
   let mountedInput: any;
 
   const wrapper = (bShallow: boolean) => {
@@ -30,6 +30,9 @@ describe('Input', () => {
   };
 
   beforeEach(() => {
+    props = {
+      inputType: 'secondary'
+    };
     mountedInput = undefined;
   });
 

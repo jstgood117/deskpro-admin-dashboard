@@ -65,7 +65,7 @@ const ButtonWrapper = styled.div`
     }
   }
 `;
-const InlileEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
+const InlineEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
   const [editing, setEdit] = useState(false);
   const [inlineValues, setInlineValues] = useState(inputValues);
 
@@ -88,12 +88,11 @@ const InlileEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
                   inlineValues[2]
                 ]);
               }}
+              inputType='primary'
               style={{
                 width: 30,
                 height: 30,
-                textAlign: 'center',
-                border: !error && '1px solid #D3D6D7',
-                background: '#FFFFFF'
+                textAlign: 'center'
               }}
             />
           ) : (
@@ -110,12 +109,11 @@ const InlileEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
               placeholder='Placeholder'
               type='number'
               hasError={error}
+              inputType='primary'
               style={{
                 width: 30,
                 height: 30,
-                textAlign: 'center',
-                border: !error && '1px solid #D3D6D7',
-                background: '#FFFFFF'
+                textAlign: 'center'
               }}
               onChange={event => {
                 setInlineValues([
@@ -142,12 +140,11 @@ const InlileEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
               value={inlineValues[2]}
               placeholder='Placeholder'
               hasError={error}
+              inputType='primary'
               style={{
                 width: 30,
                 height: 30,
-                textAlign: 'center',
-                border: !error && '1px solid #D3D6D7',
-                background: '#FFFFFF'
+                textAlign: 'center'
               }}
               type='number'
               onChange={event => {
@@ -212,4 +209,4 @@ const InlileEdit: FC<IProps> = ({ error, inputValues, setValues }) => {
   );
 };
 
-export default InlileEdit;
+export default InlineEdit;

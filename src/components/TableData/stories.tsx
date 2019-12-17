@@ -83,7 +83,11 @@ storiesOf('Table Data', module)
   .add('Inline edit 1 (input)', () => (
     <TableData
       type='input'
-      props={{ value: 'anthony.martin@example.or', onChange: () => false }}
+      props={{
+        inputType: 'secondary',
+        value: 'anthony.martin@example.or',
+        onChange: () => false
+      }}
     />
   ))
   .add('Inline edit 2 (input)', () => (
@@ -93,6 +97,7 @@ storiesOf('Table Data', module)
         value: 'anthony.martin@example.or',
         onChange: () => false,
         hasError: true,
+        inputType: 'secondary',
         errorMessage: 'Please enter an email in the format of example@mail only'
       }}
     />

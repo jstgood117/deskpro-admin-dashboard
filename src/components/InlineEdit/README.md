@@ -1,4 +1,4 @@
-# InlileEdit Component Contract
+# InlineEdit Component Contract
 
 * it has Props of:
 	error: boolean - saving error flag

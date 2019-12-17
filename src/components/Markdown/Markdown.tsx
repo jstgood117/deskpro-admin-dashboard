@@ -64,7 +64,7 @@ const Markdown: FC<IProps> = () => {
         <OptionWrapper>
           <SingleSelect
             options={options}
-            type='autocomplete'
+            type='primary'
             selectOption={selectOptions}
             selectedOption={selectedOption}
             placeholder='0 digits'
