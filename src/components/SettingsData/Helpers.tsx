@@ -205,7 +205,9 @@ export const SettingInfoInUse = () => {
       <StyledText
         style={{
           fontSize: 15,
-          maxWidth: 271
+          maxWidth: 271,
+          marginTop: 31,
+          display: 'flex'
         }}
         isTitle={true}
       >
