@@ -139,7 +139,6 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
   const [openedFilter, clickOpenFilter] = useState(false);
   const [applied, apply] = useState(false);
   const [internalFilters, setFilters] = useState(initialFilter);
-  const [value, setValue] = useState();
   const [SortList, SetList] = useState(columnsViewList);
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [initialChecked] = useState<KeyValue>(checkedState);
@@ -338,7 +337,6 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
               <OrderableMenu
                 iconName='view'
                 label={'admin_common.table.view'}
-                onSelect={val => setValue(val)}
                 order={val => SetList(val)}
                 initialList={resetColumnOrder}
                 menuItems={SortList}
