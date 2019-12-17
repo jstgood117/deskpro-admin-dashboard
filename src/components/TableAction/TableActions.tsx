@@ -337,8 +337,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
             <FlexStyled>
               <OrderableMenu
                 iconName='view'
-                label={value ? value['name'] : 'admin_common.table.view'}
-                value={value}
+                label={'admin_common.table.view'}
                 onSelect={val => setValue(val)}
                 order={val => SetList(val)}
                 initialList={resetColumnOrder}

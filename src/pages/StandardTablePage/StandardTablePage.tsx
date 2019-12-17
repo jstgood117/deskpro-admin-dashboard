@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useQuery } from 'react-apollo';
+import styled from 'styled-components';
 
 import { IViewData, ColumnOrder, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
@@ -12,7 +13,6 @@ import Error from '../../components/Error';
 import Header from '../../components/Header';
 import Table from '../../components/Table/TableWrapper';
 import TabBar from '../../components/TabBar';
-import styled from 'styled-components';
 import { dpstyle } from '../../style/styled';
 import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';

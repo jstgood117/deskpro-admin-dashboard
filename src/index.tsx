@@ -9,7 +9,7 @@ import { debug, appDebug } from './logging';
 import generateConfig from './config';
 import { ConfigType } from './config/config';
 
-import introspectionResult from "./codegen/introspection.json";
+import introspectionResult from './codegen/introspection.json';
 
 import App from './pages/App/App';
 import AppError from './components/AppError';
@@ -17,14 +17,13 @@ import AppError from './components/AppError';
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-boost';
 
 if ('production' !== process.env.NODE_ENV) {
-    debug.enable('*,-sockjs-client:*');
+  debug.enable('*,-sockjs-client:*');
 }
 
 const config: ConfigType = generateConfig();
 const { apiUrl } = config;
 
 const AppWrap = () => {
-
   if (!apiUrl) {
     return <AppError message={'API_URL missing'} />;
   }
@@ -32,7 +31,7 @@ const AppWrap = () => {
   appDebug('API URL: ' + apiUrl);
 
   const fragmentMatcher = new IntrospectionFragmentMatcher({
-    introspectionQueryResultData: introspectionResult,
+    introspectionQueryResultData: introspectionResult
   });
 
   const link = createHttpLink({ uri: apiUrl });
@@ -40,7 +39,7 @@ const AppWrap = () => {
     cache: new InMemoryCache({
       fragmentMatcher
     }),
-    link,
+    link
   });
 
   return (
