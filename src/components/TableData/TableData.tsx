@@ -54,6 +54,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
       );
 
     case 'string':
+    case 'phrase':
       return (
         <OverflowList
           max={props.max || 3}
@@ -62,7 +63,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
           renderItem={(item, idx) => (
             <P1 key={idx} className='text'>
               <span> {idx !== 0 ? ', ' : ''}</span>
-              {item}
+              {type === 'phrase' ? <FormattedMessage id={item} /> : item}
             </P1>
           )}
           items={props.values}
