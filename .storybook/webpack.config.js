@@ -8,6 +8,10 @@ module.exports = ({config}) => {
     options: {
       presets: [['react-app', { flow: false, typescript: true }]],
     },
+  },{
+    test: /\.(eot|ttf|woff|otf|woff2)$/,
+    include: [path.resolve(__dirname, '../src/assets/fonts')],
+    use: ['file-loader']
   });
   config.resolve.extensions.push('.ts', '.tsx');
   return config;
