@@ -108,5 +108,10 @@ export const testTranslations = {
   'admin.settings.inlineEdit.rejectMessagesFor': 'reject messages for',
 
   'group.active': 'Active',
-  'group.deleted': 'Deleted'
+  'group.deleted': 'Deleted',
+
+  'apikeys.api_flag.api_v1': 'Legacy API',
+  'apikeys.api_flag.api_v2': 'API',
+  'apikeys.api_flag.admin': 'Admin',
+  'apikeys.api_flag.super': 'Super',
 };

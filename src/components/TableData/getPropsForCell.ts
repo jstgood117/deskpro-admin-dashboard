@@ -1,8 +1,13 @@
 import get from 'lodash/get';
+import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
-import { ITableColor, KeyValue } from '../../resources/interfaces';
+import { ITableColor } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
-import { API_TableColumnField, API_TablePayloadValue } from '../../codegen/types';
+import {
+  API_TableColumnField,
+  API_TablePayloadValue,
+  API_TableColumnPhraseMapItem
+} from '../../codegen/types';
 
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
@@ -26,19 +31,17 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-export const getPropsForCell = (cell: any) => {
-  const { row, column } = cell;
-  const { columnProps } = column;
-
-  const props:  KeyValue = {};
-  columnProps.forEach((columnProp: any) => {
-    return props[columnProp.path] = row.original[columnProp.path];
-  }, {});
-  return props;
+const convertPhrases = (values:string[], phraseMap: API_TableColumnPhraseMapItem[]) => {
+  return values.map(value => {
+    const match = phraseMap.find(_map => _map.value === value);
+    return match ? match.phraseId : value;
+  });
 };
 
-const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-  if (value.dataPath) {
+export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
+  if(value.dataPath && value.dataPath.charAt(0) === '$') {
+    return jp.query(row, value.dataPath);
+  } else if (value.dataPath) {
     return get(row, value.dataPath);
   } else if (value.staticValue) {
     return value.staticValue;
@@ -46,7 +49,7 @@ const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
     try {
       return JSON.parse(value.staticJson);
     } catch (e) {
-      console.error("Failed to parse JSON string", value.staticJson);
+      console.error('Failed to parse JSON string', value.staticJson);
       console.error(e);
       return null;
     }
@@ -65,7 +68,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'avatar_text',
         props: {
-          name: name,
+          name,
           properties: getColorByChar(name.charAt(0))
         }
       };
@@ -104,6 +107,13 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'string',
         props: { values: getPayloadValue(row, type.valuesArray), max: 1 }
+      };
+
+    case 'TableColumnTextPhraseCommaSep':
+      const values = getPayloadValue(row, type.valuesArray);
+      return {
+        type: 'phrase',
+        props: { values: convertPhrases(values, type.phraseMap), max: 1 }
       };
 
     case 'TableColumnText':
