@@ -1,7 +1,7 @@
 import get from 'lodash/get';
 import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
-import { ITableColor, KeyValue } from '../../resources/interfaces';
+import { ITableColor } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
 import { API_TableColumnField, API_TablePayloadValue } from '../../codegen/types';
 
@@ -27,20 +27,9 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-export const getPropsForCell = (cell: any) => {
-  const { row, column } = cell;
-  const { columnProps } = column;
-
-  const props:  KeyValue = {};
-  columnProps.forEach((columnProp: any) => {
-    return props[columnProp.path] = row.original[columnProp.path];
-  }, {});
-  return props;
-};
-
-const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-  if(value.dataPath.charAt(0) === '$') {
-    jp.query(row, value.dataPath);
+export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
+  if(value.dataPath && value.dataPath.charAt(0) === '$') {
+    return jp.query(row, value.dataPath);
   } else if (value.dataPath) {
     return get(row, value.dataPath);
   } else if (value.staticValue) {
