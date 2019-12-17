@@ -45,6 +45,7 @@ const InputWidget = (props: any) => {
       style={{ height: 24 }}
       containerStyle={{ height: 26 }}
       value={props.value || ''}
+      inputType='secondary'
       onChange={event => props.onChange(event.target.value)}
     />
   );

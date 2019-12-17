@@ -111,7 +111,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   options,
   ...props
 }) => {
-
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
@@ -143,10 +142,9 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
       });
     }
 
-    if(setFilters) {
+    if (setFilters) {
       setFilters(filters);
     }
-
   }, [
     currentOperator,
     currentPath,
@@ -354,6 +352,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
         </div>
         <div>
           <Input
+            inputType='secondary'
             style={{ minWidth: 218 }}
             value={
               filter && filter.value !== undefined ? filter.value : filterValue
@@ -367,7 +366,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
               filters[index].value = event.target.value;
               setFilterValue(event.target.value);
             }}
-            containerClassName='input-wrapper'
           />
         </div>
         <div style={{ paddingLeft: 10 }} className='remove-btn'>
@@ -380,7 +378,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
               }
               if (filters.length === 0 && setFilters) {
                 setFilters([{ property: '', operatorName: '', value: '' }]);
-              } else if(setFilters) {
+              } else if (setFilters) {
                 setFilters([...filters]);
               }
             }}

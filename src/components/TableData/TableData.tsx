@@ -75,6 +75,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
           value={props.value}
           onChange={props.onChange}
           hasError={props.hasError}
+          inputType={props.inputType}
           errorMessage={props.errorMessage}
         />
       );

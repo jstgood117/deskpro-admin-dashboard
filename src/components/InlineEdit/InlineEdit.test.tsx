@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import InlileEdit from './InlileEdit';
+import InlineEdit from './InlineEdit';
 
 describe('Input', () => {
   let props: { error: boolean };
@@ -10,7 +10,7 @@ describe('Input', () => {
   const InlileEditComponent: React.FC<{ error: boolean }> = _props => {
     const [inputValues, setValues] = React.useState([0, 0, 0]);
     return (
-      <InlileEdit
+      <InlineEdit
         inputValues={inputValues}
         setValues={(vals: number[]) => setValues(vals)}
         {...props}
