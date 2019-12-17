@@ -1,6 +1,7 @@
 import get from 'lodash/get';
+import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
-import { ITableColor, KeyValue } from '../../resources/interfaces';
+import { ITableColor } from '../../resources/interfaces';
 import { ITableDataProps } from './types';
 import { API_TableColumnField, API_TablePayloadValue } from '../../codegen/types';
 
@@ -26,19 +27,10 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-export const getPropsForCell = (cell: any) => {
-  const { row, column } = cell;
-  const { columnProps } = column;
-
-  const props:  KeyValue = {};
-  columnProps.forEach((columnProp: any) => {
-    return props[columnProp.path] = row.original[columnProp.path];
-  }, {});
-  return props;
-};
-
-const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-  if (value.dataPath) {
+export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
+  if(value.dataPath && value.dataPath.charAt(0) === '$') {
+    return jp.query(row, value.dataPath);
+  } else if (value.dataPath) {
     return get(row, value.dataPath);
   } else if (value.staticValue) {
     return value.staticValue;
@@ -46,7 +38,7 @@ const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
     try {
       return JSON.parse(value.staticJson);
     } catch (e) {
-      console.error("Failed to parse JSON string", value.staticJson);
+      console.error('Failed to parse JSON string', value.staticJson);
       console.error(e);
       return null;
     }
@@ -65,7 +57,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'avatar_text',
         props: {
-          name: name,
+          name,
           properties: getColorByChar(name.charAt(0))
         }
       };
