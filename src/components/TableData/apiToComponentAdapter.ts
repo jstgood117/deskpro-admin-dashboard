@@ -39,22 +39,24 @@ const convertPhrases = (values:string[], phraseMap: API_TableColumnPhraseMapItem
 };
 
 export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-  if(value.dataPath && value.dataPath.charAt(0) === '$') {
-    return jp.query(row, value.dataPath);
-  } else if (value.dataPath) {
-    return get(row, value.dataPath);
-  } else if (value.staticValue) {
-    return value.staticValue;
-  } else if (value.staticJson) {
-    try {
-      return JSON.parse(value.staticJson);
-    } catch (e) {
-      console.error('Failed to parse JSON string', value.staticJson);
-      console.error(e);
+
+  switch(true)  {
+    case value.dataPath && value.dataPath.charAt(0) === '$':
+      return jp.query(row, value.dataPath);
+    case !!value.dataPath:
+      return get(row, value.dataPath);
+    case !!value.staticValue:
+      return value.staticValue;
+    case !!value.staticJson:
+      try {
+        return JSON.parse(value.staticJson);
+      } catch (e) {
+        console.error('Failed to parse JSON string', value.staticJson);
+        console.error(e);
+        return null;
+      }
+    default:
       return null;
-    }
-  } else {
-    return null;
   }
 };
 
