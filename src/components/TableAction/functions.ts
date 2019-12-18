@@ -5,9 +5,30 @@ import {
   IMenuItemProps
 } from '../../resources/interfaces';
 
+import { IntlShape } from 'react-intl';
+
 type GenerateResultType = {
   checkedState: KeyValue;
   columnsViewList: IMenuItemProps[];
+};
+
+type SortMenuItem = {
+  link: string;
+};
+
+export const generatSortMenuItems = (tableDef: ITableSetup, intl: IntlShape): SortMenuItem[] => {
+
+  if(!tableDef || !tableDef.columns) {
+    return [];
+  }
+
+  const columnsViewList: SortMenuItem[] = tableDef.columns.map((column: ITableColumn, index: number) => {
+    return {
+      link:intl.formatMessage({id: column.title})
+    };
+  });
+
+  return columnsViewList;
 };
 
 export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {

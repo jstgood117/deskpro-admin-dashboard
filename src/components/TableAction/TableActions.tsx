@@ -25,9 +25,8 @@ import Icon from '../Icon';
 import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
 import OrderableMenu from '../Menu/OrderableMenu';
-import { generateViewList } from './generateViewList';
+import { generateViewList, generatSortMenuItems } from './functions';
 
-const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
 
 const StyledTableAction = styled(dpstyle.div)`
@@ -139,7 +138,8 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
   const [openedFilter, clickOpenFilter] = useState(false);
   const [applied, apply] = useState(false);
   const [internalFilters, setFilters] = useState(initialFilter);
-  const [SortList, SetList] = useState(columnsViewList);
+  const [sortList, setList] = useState(columnsViewList);
+  const [sortMenuItems] = useState(generatSortMenuItems(tableDef, intl));
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [initialChecked] = useState<KeyValue>(checkedState);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
@@ -153,8 +153,8 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
 
   useEffect(() => {
 
-    const _columnOrder: ColumnOrder[] = Array(SortList.length);
-    SortList.forEach((_column: IMenuItemProps, index: number) => {
+    const _columnOrder: ColumnOrder[] = Array(sortList.length);
+    sortList.forEach((_column: IMenuItemProps, index: number) => {
 
       _columnOrder[index] = {
         column:_column.name,
@@ -165,7 +165,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
 
     setColumnOrder(_columnOrder);
 
-  }, [checked, SortList]);
+  }, [checked, sortList]);
 
   useEffect(() => {
     onOrderChange(columnOrder);
@@ -337,9 +337,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
               <OrderableMenu
                 iconName='view'
                 label={'admin_common.table.view'}
-                order={val => SetList(val)}
+                order={val => setList(val)}
                 initialList={resetColumnOrder}
-                menuItems={SortList}
+                menuItems={sortList}
                 setChecked={setChecked}
                 checked={checked}
                 initialChecked={initialChecked}
@@ -375,7 +375,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
                 }}
                 size='medium'
                 opened={openedSort}
-                items={SortItems}
+                items={sortMenuItems}
                 dropdownValue={Sort}
                 onSelect={(val: any) => setSortValue(val)}
               >
