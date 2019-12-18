@@ -1,4 +1,4 @@
-import {getPayloadValue} from '../getPropsForCell';
+import {getPayloadValue} from '../apiToComponentAdapter';
 import { API_TablePayloadValue } from '../../../codegen/types';
 describe('getPayloadValue', () => {
 

@@ -39,22 +39,24 @@ const convertPhrases = (values:string[], phraseMap: API_TableColumnPhraseMapItem
 };
 
 export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-  if(value.dataPath && value.dataPath.charAt(0) === '$') {
-    return jp.query(row, value.dataPath);
-  } else if (value.dataPath) {
-    return get(row, value.dataPath);
-  } else if (value.staticValue) {
-    return value.staticValue;
-  } else if (value.staticJson) {
-    try {
-      return JSON.parse(value.staticJson);
-    } catch (e) {
-      console.error('Failed to parse JSON string', value.staticJson);
-      console.error(e);
+
+  switch(true)  {
+    case value.dataPath && value.dataPath.charAt(0) === '$':
+      return jp.query(row, value.dataPath);
+    case !!value.dataPath:
+      return get(row, value.dataPath);
+    case !!value.staticValue:
+      return value.staticValue;
+    case !!value.staticJson:
+      try {
+        return JSON.parse(value.staticJson);
+      } catch (e) {
+        console.error('Failed to parse JSON string', value.staticJson);
+        console.error(e);
+        return null;
+      }
+    default:
       return null;
-    }
-  } else {
-    return null;
   }
 };
 
@@ -74,6 +76,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       };
 
     case 'TableColumnBoolYesNo':
+    case 'TableColumnBoolOnOff':
       return { type: 'yes_no', props: { checked: getPayloadValue(row, type.value) } };
 
     case 'TableColumnTimeAgo':
@@ -116,11 +119,23 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
         props: { values: convertPhrases(values, type.phraseMap), max: 1 }
       };
 
+    case 'TableColumnTextPhrase':
+      return { type: 'string', props: { values: convertPhrases(values, type.phraseMap) } };
+
     case 'TableColumnText':
       return { type: 'string', props: { values: [getPayloadValue(row, type.value)] } };
 
+    case 'TableColumnInteger':
+      return { type: 'count', props: { values: [getPayloadValue(row, type.value)] } };
+
     // case 'TableColumnTemplate':
     //   return { type: 'template', props: { template: '<p>{{testing}}</p>', data: {testing:123} } };
+
+    case 'TableColumnMoney':
+      return { type: 'currency', props: {
+        amount: getPayloadValue(row, type.amount),
+        currency: getPayloadValue(row, type.currency)
+      }};
 
     default:
       return { type: 'string', props: { values: ['Unknown column type: ' + type.__typename] } };

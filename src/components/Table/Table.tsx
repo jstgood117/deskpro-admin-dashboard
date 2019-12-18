@@ -14,7 +14,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import Menu from '../Menu';
 import TableData from '../TableData';
-import { generateComponentProps } from '../TableData/getPropsForCell';
+import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 import { TableType, TableParams } from './types';
