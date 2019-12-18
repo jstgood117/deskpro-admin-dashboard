@@ -158,7 +158,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         />
       );
 
-    case 'count':
+      case 'count':
       return <P1 className='text'>{props.count}</P1>;
 
     case 'id':
