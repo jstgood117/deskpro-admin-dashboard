@@ -24,7 +24,8 @@ export const generatSortMenuItems = (tableDef: ITableSetup, intl: IntlShape): So
 
   const columnsViewList: SortMenuItem[] = tableDef.columns.map((column: ITableColumn, index: number) => {
     return {
-      link:intl.formatMessage({id: column.title})
+      label: intl.formatMessage({id: column.title}),
+      link: column.title
     };
   });
 

@@ -39,7 +39,8 @@ export interface ITableColumn {
   title: string;
   field: any; // TODO types
   defaultShow?: boolean;
-  sort?: string;
+  sortField?: string;
+  sortType?: string;
 }
 
 export type ColumnOrder = {

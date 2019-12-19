@@ -139,9 +139,7 @@ export const MenuLabel = styled(props => <TextString {...props} />)<ITextLabel>`
 /**
  * Standard text with link styling
  */
-export const TextLinkLabel = styled(props => <TextString {...props} />)<
-  ITextLabel
->`
+export const TextLinkLabel = styled(props => <TextString {...props} />)<ITextLabel>`
   margin: 0;
   padding: 0;
   line-height: 150%;
