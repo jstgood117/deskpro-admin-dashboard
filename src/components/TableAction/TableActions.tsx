@@ -26,6 +26,7 @@ import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
 import OrderableMenu from '../Menu/OrderableMenu';
 import { generateViewList, generatSortMenuItems } from './functions';
+import { SortType } from '../Table/types';
 
 const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
 
@@ -75,6 +76,7 @@ export interface IProps {
   groupMenu: boolean;
   viewMenu: boolean;
   onOrderChange: (columnOrder: ColumnOrder[]) => void;
+  onSortChange: (sortItems: SortType[]) => void;
 }
 
 interface IFilterButton {
@@ -115,7 +117,12 @@ const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
     }
   }
 `;
-const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange, ...props }) => {
+const TableActions: FC<IProps & WrappedComponentProps> = ({
+  intl,
+  onOrderChange,
+  onSortChange,
+  ...props
+}) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
   const {
     onFilterChange,
@@ -231,6 +238,17 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
     if (onSearchChange) {
       onSearchChange(_value, internalFilters);
     }
+  };
+
+  const handleSortChange = (val:any) => {
+
+    const id = val.link;
+
+    onSortChange([{ id, desc:false }]);
+    setSortValue({
+      ...val,
+      link: intl.formatMessage({id}),
+    });
   };
 
   const debounceOnSearchChange = useCallback(
@@ -377,7 +395,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({ intl, onOrderChange,
                 opened={openedSort}
                 items={sortMenuItems}
                 dropdownValue={Sort}
-                onSelect={(val: any) => setSortValue(val)}
+                onSelect={(val: any) => handleSortChange(val)}
               >
                 <Icon name='sort' />
                 {Sort ? Sort.link : 'Sort'}

@@ -58,20 +58,24 @@ export const generateTableParams = (
   tableType: TableType,
   columns: any[],
   data: any[],
-  controlledPageCount: number
+  controlledPageCount: number,
 ): TableParams => {
   return tableType === 'async'
     ? {
         columns,
         data,
-        initialState: { pageIndex: 0 },
+        initialState: {
+          pageIndex: 0
+        },
         manualPagination: true,
-        pageCount: controlledPageCount
+        pageCount: controlledPageCount,
       }
     : {
         columns,
         data,
-        initialState: { pageIndex: 0 }
+        initialState: {
+          pageIndex: 0,
+        }
       };
 };
 

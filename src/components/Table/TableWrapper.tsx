@@ -10,6 +10,7 @@ import { logError } from '../Error/ErrorBoundary';
 import { ITableColumn } from '../../resources/interfaces';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
+import { SortType } from './types';
 
 interface IProps {
   path: string; // TODO: Remove when db
@@ -19,6 +20,7 @@ interface IProps {
   tableDef: ITableSetup;
   columnOrder: ColumnOrder[];
   filters?: FilterType[];
+  sortBy?: SortType[];
 }
 
 const generateSortType = (sortType: string) => {
@@ -48,9 +50,9 @@ const transformColumnData = (
         columnProps:column.field,
         id: column.title,
         Header: intl.formatMessage({ id: column.title }),
-        accessor: '', // TODO
+        accessor: column.sortField || '',
         type: column.field,
-        sortType: generateSortType(column.sort)
+        sortType: generateSortType(column.sortField)
       });
     }
   });
@@ -66,7 +68,8 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   tableDef,
   filters,
   dataType,
-  columnOrder
+  columnOrder,
+  sortBy
 }) => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -89,7 +92,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
       setTotalPageCount(Math.ceil(results.length / pageSize));
       setLoading(false);
     } catch(err) {
-      console.debug("Error for query: " + dataQuery);
+      console.debug('sError for query: ' + dataQuery);
       console.error(err);
       logError(err);
       setLoading(false);
@@ -122,6 +125,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           data={filteredData}
           columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
           tableType='sync'
+          sortBy={sortBy}
         />
       )}
       {dataType === 'async' && (
@@ -133,6 +137,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           loading={loading}
           pageCount={totalPageCount}
           tableType='async'
+          sortBy={sortBy}
         />
       )}
     </Fragment>

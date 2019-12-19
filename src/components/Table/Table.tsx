@@ -17,7 +17,7 @@ import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-import { TableType, TableParams } from './types';
+import { TableType, TableParams, SortType } from './types';
 import {
   onCheckboxChange,
   onSelectAllChange,
@@ -43,6 +43,7 @@ export type IProps = {
   loading?: boolean;
   pageCount?: number;
   tableType: TableType;
+  sortBy: SortType[]
 };
 
 const Table: FC<IProps & WrappedComponentProps> = ({
@@ -53,8 +54,10 @@ const Table: FC<IProps & WrappedComponentProps> = ({
   fetchData,
   loading,
   pageCount: controlledPageCount,
-  tableType
+  tableType,
+  sortBy
 }) => {
+
   let headers = [];
   headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
@@ -68,6 +71,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
   );
 
   const {
+    toggleSortBy,
     getTableProps,
     getTableBodyProps,
     headerGroups,
@@ -78,6 +82,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
     state: { pageIndex, pageSize }
   } = useTable(tableParams, useSortBy, usePagination, useRowSelect) as any;
 
+
   const csvData = generateCSVData(page, columns);
 
   useEffect(() => {
@@ -85,6 +90,13 @@ const Table: FC<IProps & WrappedComponentProps> = ({
       fetchData({ pageIndex, pageSize });
     }
   }, [fetchData, pageIndex, pageSize]);
+
+  useEffect(() => {
+    if(sortBy.length) {
+      toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy]);
 
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -163,6 +175,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
   const items = [{ link: 'All on the page' }, { link: 'All' }];
 
   return (
+    <>
     <TableStyled>
       <TableHeader>
         <AllCheckStyle>
@@ -225,7 +238,6 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                     <Button
                       styleType='tertiary'
                       onClick={() => {
-                        setMenuValue(undefined);
                         setMenuValue(undefined);
                         selectOptions([]);
                       }}
@@ -370,6 +382,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
         text={`Deleting 304 agents will change their status to 'deleted'`}
       />
     </TableStyled>
+    </>
   );
 };
 

@@ -16,6 +16,7 @@ import TabBar from '../../components/TabBar';
 import { dpstyle } from '../../style/styled';
 import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
+import { SortType } from '../../components/Table/types';
 
 export interface IProps {
   path: string;
@@ -35,6 +36,7 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
   const [tabIndex, setTabState] = useState(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>([]);
+  const [sortItems, setSortItems] = useState<SortType[]>([]);
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -113,6 +115,12 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
     setColumnOrder(_columnOrder);
   };
 
+  const onSortChange = (
+    _sortItems: SortType[]
+  ) => {
+    setSortItems(_sortItems);
+  };
+
   const contextValue:StandardTableContextValues = {
     path,
     filters,
@@ -147,11 +155,12 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
             <TableActionStyled>
               <TableActions
                 showSearch={true}
-                filterMenu={filterDef?.length > 0}
+                filterMenu={filterDef.length > 0}
                 sortMenu={true}
                 groupMenu={true}
                 viewMenu={true}
                 onOrderChange={onOrderChange}
+                onSortChange={onSortChange}
               />
             </TableActionStyled>
             {views && views.length > 1 && (
@@ -173,6 +182,7 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
                 filters={filters}
                 dataType={dataType || 'sync'}
                 columnOrder={columnOrder}
+                sortBy={sortItems}
               />
             )}
           </BodyMargin>
