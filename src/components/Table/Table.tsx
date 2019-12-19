@@ -1,5 +1,11 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
-import { useTable, useSortBy, usePagination, useRowSelect } from 'react-table';
+import {
+  useTable,
+  useSortBy,
+  usePagination,
+  useRowSelect,
+  useExpanded
+} from 'react-table';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
@@ -43,7 +49,7 @@ export type IProps = {
   loading?: boolean;
   pageCount?: number;
   tableType: TableType;
-  sortBy: SortType[]
+  sortBy: SortType[];
 };
 
 const Table: FC<IProps & WrappedComponentProps> = ({
@@ -57,7 +63,6 @@ const Table: FC<IProps & WrappedComponentProps> = ({
   tableType,
   sortBy
 }) => {
-
   let headers = [];
   headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
@@ -80,8 +85,13 @@ const Table: FC<IProps & WrappedComponentProps> = ({
     setPageSize,
     gotoPage,
     state: { pageIndex, pageSize }
-  } = useTable(tableParams, useSortBy, usePagination, useRowSelect) as any;
-
+  } = useTable(
+    tableParams,
+    useExpanded,
+    useSortBy,
+    usePagination,
+    useRowSelect
+  ) as any;
 
   const csvData = generateCSVData(page, columns);
 
@@ -92,7 +102,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
   }, [fetchData, pageIndex, pageSize]);
 
   useEffect(() => {
-    if(sortBy.length) {
+    if (sortBy.length) {
       toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -176,181 +186,94 @@ const Table: FC<IProps & WrappedComponentProps> = ({
 
   return (
     <>
-    <TableStyled>
-      <TableHeader>
-        <AllCheckStyle>
-          <Checkbox
-            checked={isAllChecked}
-            opened={opened}
-            clickButton={clickButton}
-            setDropdownValue={setDropdownValue}
-            dropdownValue={dropdownValue}
-            items={items}
-            value='checked'
-            indeterminate={true}
-            showArrow={true}
-            onChange={(event: SyntheticEvent<HTMLInputElement>) =>
-              handleSelectAllClick(event, pageIndex)
-            }
-          />
-          {Object.keys(checked).length > 0 && (
-            <span className='selected-text'>
-              {Object.keys(checked).length} Selected
-            </span>
-          )}
-          {Object.keys(checked).length > 0 && (
-            <div style={{ paddingLeft: 16, display: 'flex' }}>
-              <Menu
-                value={menuValue}
-                onSelect={val => setMenuValue(val)}
-                label={
-                  menuValue ? menuValue['name'] : 'admin_common.table.action'
-                }
-                menuItems={menuItems}
-                iconName='menu'
-              />
-              {menuValue && menuValue.name === 'action.agents.add_team' && (
-                <div style={{ display: 'flex', paddingLeft: 15 }}>
-                  <MultiSelect
-                    options={testHandlingTeamList}
-                    type='fixed'
-                    selectOptions={selectOptions}
-                  />
-                </div>
-              )}
-              {((menuValue &&
-                menuValue.name === 'action.agents.delete_action') ||
-                selectedOptions.length > 0) && (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div style={{ paddingLeft: 16 }}>
-                    <Button
-                      styleType='primary'
-                      onClick={() => {
-                        if (menuValue.name === 'action.agents.delete_action') {
-                          showDeleteModal(true);
-                        }
-                      }}
-                    >
-                      Confirm
-                    </Button>
-                  </div>
-                  <div style={{ paddingLeft: 16 }}>
-                    <Button
-                      styleType='tertiary'
-                      onClick={() => {
-                        setMenuValue(undefined);
-                        selectOptions([]);
-                      }}
-                    >
-                      Cancel
-                    </Button>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-        </AllCheckStyle>
-        <div style={{ paddingRight: 24 }}>
-          <CSVLink
-            data={csvData}
-            filename={'export.csv'}
-            headers={headers}
-            target='_blank'
-          >
-            <Button styleType='tertiary' size='small' iconOnly={true}>
-              <Icon name='export' />
-            </Button>
-          </CSVLink>
-        </div>
-        <Pagination
-          totalRecords={totalRecords}
-          rowsPerPage={rowsPerPage}
-          currentPage={currentPage}
-          onChangePage={handleChangeCurrentPage}
-          onChangeRowsPerPage={handleChangRowsPerPage}
-        />
-      </TableHeader>
-      <div className='overflow'>
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroup: any, indexOuter: number) => (
-              <tr
-                key={indexOuter}
-                {...(headerGroup.getHeaderGroupProps &&
-                  headerGroup.getHeaderGroupProps())}
-              >
-                <th />
-                {headerGroup.headers.map((column: any, indexInner: number) => (
-                  <th
-                    key={indexInner}
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    style={{
-                      border: column.isSorted && '1px solid #D3D6D7'
-                    }}
-                  >
-                    <StyledTh>
-                      {column.render('Header')}
-
-                      {column.isSorted &&
-                        (column.isSortedDesc ? (
-                          <span className='sort-icon'>
-                            <Icon name='ic-sort-up-active' />
-                          </span>
-                        ) : (
-                          <span className='sort-icon'>
-                            <Icon name='ic-sort-down-active' />
-                          </span>
-                        ))}
-                      {column.isSorted && (
-                        <span className='filter-icon'>
-                          <Icon name='filter' />
-                        </span>
-                      )}
-                    </StyledTh>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row: any, indexOuter: number) => {
-              prepareRow(row);
-              return (
-                <tr
-                  key={indexOuter}
-                  {...row.getRowProps()}
-                  className={
-                    checked.hasOwnProperty((row.original as any).id.toString())
-                      ? 'row--selected'
-                      : ''
+      <TableStyled>
+        <TableHeader>
+          <AllCheckStyle>
+            <Checkbox
+              checked={isAllChecked}
+              opened={opened}
+              clickButton={clickButton}
+              setDropdownValue={setDropdownValue}
+              dropdownValue={dropdownValue}
+              items={items}
+              value='checked'
+              indeterminate={true}
+              showArrow={true}
+              onChange={(event: SyntheticEvent<HTMLInputElement>) =>
+                handleSelectAllClick(event, pageIndex)
+              }
+            />
+            {Object.keys(checked).length > 0 && (
+              <span className='selected-text'>
+                {Object.keys(checked).length} Selected
+              </span>
+            )}
+            {Object.keys(checked).length > 0 && (
+              <div style={{ paddingLeft: 16, display: 'flex' }}>
+                <Menu
+                  value={menuValue}
+                  onSelect={val => setMenuValue(val)}
+                  label={
+                    menuValue ? menuValue['name'] : 'admin_common.table.action'
                   }
-                >
-                  <td>
-                    <Checkbox
-                      value={(row.original as any).id}
-                      checked={
-                        checked.hasOwnProperty(
-                          (row.original as any).id.toString()
-                        )
-                          ? true
-                          : false
-                      }
-                      onChange={handleCheckboxChange}
+                  menuItems={menuItems}
+                  iconName='menu'
+                />
+                {menuValue && menuValue.name === 'Add Team' && (
+                  <div style={{ display: 'flex', paddingLeft: 15 }}>
+                    <MultiSelect
+                      options={testHandlingTeamList}
+                      type='fixed'
+                      selectOptions={selectOptions}
                     />
-                  </td>
-                  {row.cells.map((cell: any, indexInner: number) => (
-                    <td key={indexInner} {...cell.getCellProps()}>
-                      <TableData {...generateComponentProps(cell)} />
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      {!loading && (
-        <StyledPagination>
+                  </div>
+                )}
+                {((menuValue &&
+                  menuValue.name === 'actions.agents.delete_agent') ||
+                  selectedOptions.length > 0) && (
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ paddingLeft: 16 }}>
+                      <Button
+                        styleType='primary'
+                        onClick={() => {
+                          if (
+                            menuValue.name === 'actions.agents.delete_agent'
+                          ) {
+                            showDeleteModal(true);
+                          }
+                        }}
+                      >
+                        Confirm
+                      </Button>
+                    </div>
+                    <div style={{ paddingLeft: 16 }}>
+                      <Button
+                        styleType='tertiary'
+                        onClick={() => {
+                          setMenuValue(undefined);
+                          selectOptions([]);
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </AllCheckStyle>
+          <div style={{ paddingRight: 24 }}>
+            <CSVLink
+              data={csvData}
+              filename={'export.csv'}
+              headers={headers}
+              target='_blank'
+            >
+              <Button styleType='tertiary' size='small' iconOnly={true}>
+                <Icon name='export' />
+              </Button>
+            </CSVLink>
+          </div>
           <Pagination
             totalRecords={totalRecords}
             rowsPerPage={rowsPerPage}
@@ -358,30 +281,134 @@ const Table: FC<IProps & WrappedComponentProps> = ({
             onChangePage={handleChangeCurrentPage}
             onChangeRowsPerPage={handleChangRowsPerPage}
           />
-        </StyledPagination>
-      )}
-      <ConfirmDialog
-        icon='trash'
-        isOpen={deleteModal}
-        variant='danger'
-        title='Delete agent?'
-        leftButtonText='Delete Agents'
-        rightButtonText='Keep Agents'
-        onLeftButtonClick={() => {
-          showDeleteModal(false);
-          setMenuValue(undefined);
-          setIsAllChecked(false);
-          setChecked({});
-        }}
-        onRightButtonClick={() => {
-          showDeleteModal(false);
-          setMenuValue(undefined);
-          setIsAllChecked(false);
-          setChecked({});
-        }}
-        text={`Deleting 304 agents will change their status to 'deleted'`}
-      />
-    </TableStyled>
+        </TableHeader>
+        <div className='overflow'>
+          <table {...getTableProps()}>
+            <thead>
+              {headerGroups.map((headerGroup: any, indexOuter: number) => (
+                <tr
+                  key={indexOuter}
+                  {...(headerGroup.getHeaderGroupProps &&
+                    headerGroup.getHeaderGroupProps())}
+                >
+                  <th />
+                  {headerGroup.headers.map(
+                    (column: any, indexInner: number) => (
+                      <th
+                        key={indexInner}
+                        {...column.getHeaderProps(
+                          column.getSortByToggleProps()
+                        )}
+                        style={{
+                          border: column.isSorted && '1px solid #D3D6D7'
+                        }}
+                      >
+                        <StyledTh>
+                          {column.render('Header')}
+
+                          {column.isSorted &&
+                            (column.isSortedDesc ? (
+                              <span className='sort-icon'>
+                                <Icon name='ic-sort-up-active' />
+                              </span>
+                            ) : (
+                              <span className='sort-icon'>
+                                <Icon name='ic-sort-down-active' />
+                              </span>
+                            ))}
+                          {column.isSorted && (
+                            <span className='filter-icon'>
+                              <Icon name='filter' />
+                            </span>
+                          )}
+                        </StyledTh>
+                      </th>
+                    )
+                  )}
+                </tr>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row: any, indexOuter: number) => {
+                prepareRow(row);
+                return (
+                  <tr
+                    key={indexOuter}
+                    {...row.getRowProps()}
+                    className={
+                      checked.hasOwnProperty(
+                        (row.original as any).id.toString()
+                      )
+                        ? 'row--selected'
+                        : ''
+                    }
+                  >
+                    <td>
+                      <Checkbox
+                        value={(row.original as any).id}
+                        checked={
+                          checked.hasOwnProperty(
+                            (row.original as any).id.toString()
+                          )
+                            ? true
+                            : false
+                        }
+                        onChange={handleCheckboxChange}
+                      />
+                    </td>
+                    {row.cells.map((cell: any, indexInner: number) => (
+                      <td key={indexInner} {...cell.getCellProps()}>
+                        <span
+                          style={{ display: 'flex' }}
+                          {...cell.row.getExpandedToggleProps({
+                            style: {
+                              paddingLeft: `${row.depth * 2}rem`
+                            }
+                          })}
+                        >
+                          <TableData {...generateComponentProps(cell)} />
+                        </span>
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {!loading && (
+          <StyledPagination>
+            <Pagination
+              totalRecords={totalRecords}
+              rowsPerPage={rowsPerPage}
+              currentPage={currentPage}
+              onChangePage={handleChangeCurrentPage}
+              onChangeRowsPerPage={handleChangRowsPerPage}
+            />
+          </StyledPagination>
+        )}
+        <ConfirmDialog
+          icon='trash'
+          isOpen={deleteModal}
+          variant='danger'
+          title='Delete agent?'
+          leftButtonText='Delete Agents'
+          rightButtonText='Keep Agents'
+          onLeftButtonClick={() => {
+            showDeleteModal(false);
+            setMenuValue(undefined);
+            setIsAllChecked(false);
+            setChecked({});
+          }}
+          onRightButtonClick={() => {
+            showDeleteModal(false);
+            setMenuValue(undefined);
+            setIsAllChecked(false);
+            setChecked({});
+          }}
+          text={`Deleting 304 agents will change their status to 'deleted'`}
+        />
+      </TableStyled>
     </>
   );
 };
