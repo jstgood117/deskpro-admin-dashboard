@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { isNil, uniqueId } from 'lodash';
+import { uniqueId } from 'lodash';
 import { MenuList, MenuButton } from 'react-menu-list';
 import { FormattedMessage  } from 'react-intl';
 import Icon from '../../Icon';
@@ -209,13 +209,14 @@ const OrderableMenu: FC<IMenuProps> = ({
   initialChecked,
   size
 }) => {
-  const selected = !isNil(value) && value !== '';
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <MenuWrapper size={size}>
         <MenuButton
-          className={`menu-btn ${selected ? 'selected' : ''}`}
+          className={`menu-btn`}
           menuZIndex={2}
+          openedClassName='selected'
+          openedStyle={{background: '#D2D8DD'}}
           menu={(
             <Menu
               onSelect={onSelect}

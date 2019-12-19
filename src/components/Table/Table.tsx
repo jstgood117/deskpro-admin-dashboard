@@ -209,7 +209,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                 menuItems={menuItems}
                 iconName='menu'
               />
-              {menuValue && menuValue.name === 'Add Team' && (
+              {menuValue && menuValue.name === 'action.agents.add_team' && (
                 <div style={{ display: 'flex', paddingLeft: 15 }}>
                   <MultiSelect
                     options={testHandlingTeamList}
@@ -219,14 +219,14 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                 </div>
               )}
               {((menuValue &&
-                menuValue.name === 'actions.agents.delete_agent') ||
+                menuValue.name === 'action.agents.delete_action') ||
                 selectedOptions.length > 0) && (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <div style={{ paddingLeft: 16 }}>
                     <Button
                       styleType='primary'
                       onClick={() => {
-                        if (menuValue.name === 'actions.agents.delete_agent') {
+                        if (menuValue.name === 'action.agents.delete_action') {
                           showDeleteModal(true);
                         }
                       }}

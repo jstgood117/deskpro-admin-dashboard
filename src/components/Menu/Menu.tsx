@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { ThemeProvider } from 'styled-components';
 import isNil from 'lodash/isNil';
 import { MenuList, MenuButton } from 'react-menu-list';
-import { injectIntl, WrappedComponentProps} from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import Icon from '../Icon';
 import { MenuLabel, TextLabel } from '../Styled';
@@ -55,7 +55,11 @@ const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
 };
 export const SingleSubMenuItem = injectIntl(singleSubMenuItem);
 
-export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({ intl, item, onSelect }) => {
+export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({
+  intl,
+  item,
+  onSelect
+}) => {
   return (
     <StyledSubMenuItem
       highlightedStyle={{ background: '#E8EBEE' }}
@@ -69,7 +73,9 @@ export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({ intl,
       }}
     >
       <IconWrapper>{item.icon && <Icon name={item.icon} />}</IconWrapper>
-      <TextLabel style={{ paddingRight: 15 }}>{intl.formatMessage({ id: item.name })}</TextLabel>
+      <TextLabel style={{ paddingRight: 15 }}>
+        {intl.formatMessage({ id: item.name })}
+      </TextLabel>
       <span
         style={{
           position: 'absolute',
@@ -85,7 +91,11 @@ export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({ intl,
 };
 export const MultiSubMenuItem = injectIntl(multiSubMenuItem);
 
-const menuSub: FC<IMenuProps & WrappedComponentProps> = ({ intl, onSelect, menuItems }) => {
+const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
+  intl,
+  onSelect,
+  menuItems
+}) => {
   return (
     <MenuListWrapper>
       <MenuList>
@@ -132,6 +142,8 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
       <MenuWrapper>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
+          openedClassName='selected'
+          openedStyle={{background: '#D2D8DD'}}
           menu={<MenuSub menuItems={menuItems} onSelect={onSelect} />}
           positionOptions={{
             position: 'bottom',
