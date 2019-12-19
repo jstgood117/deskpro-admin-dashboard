@@ -41,13 +41,12 @@ const transformColumnData = (
   columnOrder: ColumnOrder[],
   intl: any
 ) => {
-
   const newCols: any[] = [];
   columnOrder.forEach((_order: ColumnOrder) => {
     const column = columns.find(_col => _order.column === _col.title);
-    if(_order.show) {
+    if (_order.show) {
       newCols.push({
-        columnProps:column.field,
+        columnProps: column.field,
         id: column.title,
         Header: intl.formatMessage({ id: column.title }),
         accessor: column.sortField || '',
@@ -81,7 +80,9 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
     setLoading(true);
     try {
       const response = await client.query({
-        query: gql`${dataQuery}`,
+        query: gql`
+          ${dataQuery}
+        `,
         errorPolicy: 'all'
       });
       const { results } = response.data;
@@ -91,7 +92,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
 
       setTotalPageCount(Math.ceil(results.length / pageSize));
       setLoading(false);
-    } catch(err) {
+    } catch (err) {
       console.debug('sError for query: ' + dataQuery);
       console.error(err);
       logError(err);
@@ -100,7 +101,6 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   };
 
   const fetchData = useCallback(() => {
-
     if (!loading) {
       getData();
     }
@@ -116,14 +116,17 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   useEffect(() => {
     setFilteredData(runFilters(data, filters));
   }, [filters, data]);
-
   return (
     <Fragment>
       {dataType === 'sync' && (
         <Table
           path={path}
           data={filteredData}
-          columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
+          columns={transformColumnData(
+            [...tableDef.columns],
+            columnOrder,
+            intl
+          )}
           tableType='sync'
           sortBy={sortBy}
         />
@@ -132,7 +135,11 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
         <Table
           path={path}
           data={filteredData}
-          columns={transformColumnData([...tableDef.columns], columnOrder, intl)}
+          columns={transformColumnData(
+            [...tableDef.columns],
+            columnOrder,
+            intl
+          )}
           fetchData={fetchData}
           loading={loading}
           pageCount={totalPageCount}
@@ -144,4 +151,6 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(withApollo<ITableSetup & IProps & WrappedComponentProps>(TableWrapper));
+export default injectIntl(
+  withApollo<ITableSetup & IProps & WrappedComponentProps>(TableWrapper)
+);
