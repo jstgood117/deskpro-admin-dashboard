@@ -18,6 +18,8 @@ import { StandardTableProvider, StandardTableContextValues } from '../../context
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
 
+//import { getColumnUniqueValues } from './helpers';
+
 export interface IProps {
   path: string;
 }
@@ -42,7 +44,6 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
     setFilters(setupFilters('*'));
   }, [path]);
 
-
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
 
@@ -57,6 +58,7 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
   }
 
   const tableData = response.data;
+
   const {
     title,
     description,
@@ -121,6 +123,11 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
     setSortItems(_sortItems);
   };
 
+  const getUniqueValues = (columnName: string): string[] => {
+    return [];//getColumnUniqueValues(tableData, columnName);
+  };
+
+
   const contextValue:StandardTableContextValues = {
     path,
     filters,
@@ -161,6 +168,7 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
                 viewMenu={true}
                 onOrderChange={onOrderChange}
                 onSortChange={onSortChange}
+                getUniqueValues={getUniqueValues}
               />
             </TableActionStyled>
             {views && views.length > 1 && (

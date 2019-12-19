@@ -9,7 +9,7 @@ import {
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { IMenuItemProps } from '../../resources/interfaces';
+import { IMenuItemProps, KeyValue } from '../../resources/interfaces';
 
 import { testHandlingTeamList } from '../../resources/constants/constants';
 import { ActionFactory } from '../../services/actions/ActionFactory';
@@ -43,7 +43,7 @@ import MultiSelect from '../SelectComponents/MultiSelect';
 
 export type IProps = {
   path: string;
-  data: any[];
+  data: KeyValue[];
   columns: any[];
   fetchData?: any;
   loading?: boolean;
@@ -74,6 +74,8 @@ const Table: FC<IProps & WrappedComponentProps> = ({
     data,
     controlledPageCount
   );
+
+  //console.log(getColumnUniqueValues(data, 'name'));
 
   const {
     toggleSortBy,

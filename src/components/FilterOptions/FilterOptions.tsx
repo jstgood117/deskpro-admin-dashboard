@@ -100,6 +100,7 @@ export interface IProps {
   filter?: FilterProps;
   filters?: FilterProps[];
   options: FilterMeta[];
+  getUniqueValues?: (columnName: string) => string[];
 }
 
 const FilterOptions: FC<IProps & WrappedComponentProps> = ({
@@ -109,8 +110,10 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   filter,
   index,
   options,
+  getUniqueValues,
   ...props
 }) => {
+
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
@@ -205,9 +208,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
               }
               onChange={(e: any) => {
                 setProperty(e.target.value);
-                setCurrentPath(
-                  getPathByOptionProperty(e.target.value, containProperties)
-                );
+                setCurrentPath(getPathByOptionProperty(e.target.value, containProperties));
                 const newItems = options.filter(_option => {
                   if (_option.path === e.target.value) {
                     setOptions(_option.operators);
@@ -220,8 +221,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
                 setProperties(newItems);
               }}
               onSelect={(val: string) => {
-                setProperty(getOptionPropertyByPath(val, containProperties));
-                setCurrentPath(val);
                 const newItems = options.filter(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
@@ -230,13 +229,15 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
                   return _option.path === val;
                 });
                 setProperties(newItems);
-
                 containProperties.forEach(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
                     AutoSelectOption(_option.operators[0]);
                   }
                 });
+                if(getUniqueValues) {
+                  console.log(getUniqueValues(val));
+                }
               }}
               menuStyle={MenuStyle()}
             />

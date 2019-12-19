@@ -77,6 +77,7 @@ export interface IProps {
   viewMenu: boolean;
   onOrderChange: (columnOrder: ColumnOrder[]) => void;
   onSortChange: (sortItems: SortType[]) => void;
+  getUniqueValues?: (columnName: string) => string[];
 }
 
 interface IFilterButton {
@@ -121,6 +122,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   intl,
   onOrderChange,
   onSortChange,
+  getUniqueValues,
   ...props
 }) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
@@ -344,6 +346,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                     options={filterDef}
                     cancel={cancelFilter}
                     apply={applyFilter}
+                    getUniqueValues={getUniqueValues}
                   />
                 )}
               </FilterContainer>
