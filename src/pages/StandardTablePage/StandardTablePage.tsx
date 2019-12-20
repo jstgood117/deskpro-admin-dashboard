@@ -3,7 +3,7 @@ import { useQuery, withApollo } from 'react-apollo';
 import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
 
-import { IViewData, ColumnOrder, ITableColumn, KeyValue, IPageData } from '../../resources/interfaces';
+import { IViewData, ColumnOrder, ITableColumn, KeyValue } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter, runFilters } from '../../services/filters';
@@ -20,11 +20,8 @@ import { StandardTableProvider, StandardTableContextValues } from '../../context
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
 
-import { getColumnUniqueValues } from './helpers';
-
-export type ResponseData = {
-  standardDataPage: IPageData;
-};
+import { treeify, getColumnUniqueValues } from './helpers';
+import { ResponseData } from './types';
 
 export interface IProps {
   path: string;
@@ -77,10 +74,10 @@ const StandardTablePage: FC<IProps> = ({
         query: gql`${dataQuery}`,
         errorPolicy: 'all'
       });
-      const { results } = dataResponse.data;
-
-      setTableData(results);
-      setFilteredData(results);
+      const { results }: { results: KeyValue[]} = dataResponse.data;
+      const treedResults = treeify(results);
+      setTableData(treedResults);
+      setFilteredData(treedResults);
       setTotalPageCount(Math.ceil(results.length / pageSize));
 
     } catch(err) {
