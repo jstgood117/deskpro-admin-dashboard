@@ -75,8 +75,6 @@ const Table: FC<IProps & WrappedComponentProps> = ({
     controlledPageCount
   );
 
-  //console.log(getColumnUniqueValues(data, 'name'));
-
   const {
     toggleSortBy,
     getTableProps,

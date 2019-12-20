@@ -120,7 +120,9 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
   const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
+  const [containType, setType] = useState();
   const [filterValue, setFilterValue] = useState();
+  const [uniqueValues, setUniqueValues] = useState<string[]>([]);
 
   const AutoSelectOption = (val: OperatorTypes) => {
     setOption(
@@ -221,9 +223,18 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
                 setProperties(newItems);
               }}
               onSelect={(val: string) => {
+                setProperty(getOptionPropertyByPath(val, containProperties));
+                setCurrentPath(val);
                 const newItems = options.filter(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
+                    setType(_option.type);
+
+                    getUniqueValues &&
+                    _option.type === 'CHOICE_FROM_DATA'
+                      ? setUniqueValues(getUniqueValues(val))
+                      : setUniqueValues([]);
+
                     AutoSelectOption(_option.operators[0]);
                   }
                   return _option.path === val;
@@ -235,9 +246,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
                     AutoSelectOption(_option.operators[0]);
                   }
                 });
-                if(getUniqueValues) {
-                  console.log(getUniqueValues(val));
-                }
               }}
               menuStyle={MenuStyle()}
             />
@@ -352,6 +360,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
+          {console.log(containType, uniqueValues)}
           <Input
             inputType='secondary'
             style={{ minWidth: 218 }}
