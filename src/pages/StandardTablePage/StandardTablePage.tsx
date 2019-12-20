@@ -1,13 +1,15 @@
-import React, { FC, useState, useEffect } from 'react';
-import { useQuery } from 'react-apollo';
+import React, { FC, useState, useEffect, useCallback } from 'react';
+import { useQuery, withApollo } from 'react-apollo';
+import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
 
-import { IViewData, ColumnOrder, ITableColumn } from '../../resources/interfaces';
+import { IViewData, ColumnOrder, ITableColumn, KeyValue, IPageData } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
-import { addFilter } from '../../services/filters';
+import { addFilter, runFilters } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import { QueryService } from '../../services/query';
+import { logError } from '../../components/Error/ErrorBoundary';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import Header from '../../components/Header';
@@ -18,8 +20,15 @@ import { StandardTableProvider, StandardTableContextValues } from '../../context
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
 
+import { getColumnUniqueValues } from './helpers';
+
+export type ResponseData = {
+  standardDataPage: IPageData;
+};
+
 export interface IProps {
   path: string;
+  client: ApolloClient<any>;
 }
 
 const TableActionStyled = styled(dpstyle.div)`
@@ -31,32 +40,89 @@ const BodyMargin = styled(dpstyle.div)`
   margin:0 34px 34px 34px;
 `;
 
-const StandardTablePage: FC<IProps> = ({ path }) => {
+const StandardTablePage: FC<IProps> = ({
+  path,
+  client
+}) => {
 
-  const [tabIndex, setTabState] = useState(0);
+  const [gqlError, setGqlError] = useState<boolean>(false);
+  const [tabIndex, setTabState] = useState<number>(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>([]);
   const [sortItems, setSortItems] = useState<SortType[]>([]);
+  const [pageResponse, setPageResponse] = useState<any>();
+  const [tableData, setTableData] = useState<KeyValue[]>();
+  const [filteredData, setFilteredData] = useState<KeyValue[]>([]);
+  const [totalPageCount, setTotalPageCount] = useState<number>(1);
+  const [pageSize] = useState<number>(10);
+
+  const queryService = QueryService();
+  const query = queryService.getQuery('standardTablePage');
+
+  useQuery(query, { errorPolicy: 'all', variables: { path },
+    onCompleted: (_response: ResponseData) => {
+      setPageResponse(_response);
+    },
+    onError: (error: ApolloError) => {
+      setGqlError(true);
+    }
+  });
+
+  const getTableData = useCallback(async (_response: ResponseData) => {
+
+    const dataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+
+    try {
+      const dataResponse = await client.query({
+        query: gql`${dataQuery}`,
+        errorPolicy: 'all'
+      });
+      const { results } = dataResponse.data;
+
+      setTableData(results);
+      setFilteredData(results);
+      setTotalPageCount(Math.ceil(results.length / pageSize));
+
+    } catch(err) {
+      console.debug('sError for query: ' + dataQuery);
+      console.error(err);
+      logError(err);
+    }
+  }, [client, pageSize, tabIndex]);
 
   useEffect(() => {
     setFilters(setupFilters('*'));
   }, [path]);
 
+  const fetchData = useCallback(() => {
 
-  const queryService = QueryService();
-  const query = queryService.getQuery('standardTablePage');
+    if (pageResponse) {
+      getTableData(pageResponse);
+    }
+  }, [pageResponse, getTableData]);
 
-  const response = useQuery(query, { errorPolicy: 'all', variables: { path } });
+  useEffect(() => {
 
-  if (response.loading) {
+    if (pageResponse) {
+      getTableData(pageResponse);
+    }
+
+  }, [pageResponse, getTableData]);
+
+  useEffect(() => {
+    if(tableData) {
+      setFilteredData(runFilters(tableData, filters));
+    }
+  }, [filters, tableData]);
+
+  if (!tableData) {
     return <Loading />;
   }
 
-  if (response.error) {
-    return <Error apolloError={response.error} />;
+  if (gqlError) {
+    return <Error />;
   }
 
-  const tableData = response.data;
   const {
     title,
     description,
@@ -64,7 +130,8 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
     views,
     dataType,
     illustration
-  } = (response.data as any)['standardDataPage'];
+  } = (pageResponse as any)['standardDataPage'];
+
   const tableDef = views[tabIndex].tableDef;
   const filterDef = views[tabIndex].filterDef;
 
@@ -121,6 +188,10 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
     setSortItems(_sortItems);
   };
 
+  const getUniqueValues = (columnName: string): string[] => {
+    return getColumnUniqueValues(filteredData, columnName);
+  };
+
   const contextValue:StandardTableContextValues = {
     path,
     filters,
@@ -161,6 +232,7 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
                 viewMenu={true}
                 onOrderChange={onOrderChange}
                 onSortChange={onSortChange}
+                getUniqueValues={getUniqueValues}
               />
             </TableActionStyled>
             {views && views.length > 1 && (
@@ -179,7 +251,9 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
               <Table
                 {...views[tabIndex]}
                 path={path} // TODO: When hooked up to live db, not required
-                filters={filters}
+                data={filteredData}
+                fetchData={fetchData}
+                totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}
                 columnOrder={columnOrder}
                 sortBy={sortItems}
@@ -192,4 +266,4 @@ const StandardTablePage: FC<IProps> = ({ path }) => {
   );
 };
 
-export default StandardTablePage;
+export default withApollo<IProps>(StandardTablePage);

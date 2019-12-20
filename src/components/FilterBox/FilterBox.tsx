@@ -15,6 +15,7 @@ export type IProps = {
   options: any;
   cancel?: () => void;
   apply?: () => void;
+  getUniqueValues?: (columnName: string) => string[];
 };
 
 const StyledBox = styled(dpstyle.div)`
@@ -37,7 +38,8 @@ const FilterBox: FC<IProps> = ({
   setFilters,
   options,
   cancel,
-  apply
+  apply,
+  getUniqueValues
 }) => {
 
   const onAdd = useCallback(() => {
@@ -70,6 +72,7 @@ const FilterBox: FC<IProps> = ({
                   index={index}
                   filter={filter}
                   options={options}
+                  getUniqueValues={getUniqueValues}
                 />
               </div>
             );

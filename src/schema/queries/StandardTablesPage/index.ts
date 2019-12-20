@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-export default gql`  
+export default gql`
 query StandardDataPage($path: String!) {
   standardDataPage(path: $path) {
     title

@@ -1,12 +1,7 @@
-import React, { useEffect, FC, useCallback, useState, Fragment } from 'react';
-import { withApollo } from 'react-apollo';
-import { gql, ApolloClient } from 'apollo-boost';
+import React, { FC, Fragment } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { runFilters } from '../../services/filters';
-import { FilterType } from '../../services/filters/types';
 import { ITableSetup, ColumnOrder } from '../../resources/interfaces';
-import { logError } from '../Error/ErrorBoundary';
 import { ITableColumn } from '../../resources/interfaces';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
@@ -14,12 +9,14 @@ import { SortType } from './types';
 
 interface IProps {
   path: string; // TODO: Remove when db
-  client: ApolloClient<any>;
   dataType: string;
+  fetchData: () => void;
+  totalPageCount: number;
+  data:any[];
   dataQuery: string;
+  loading: boolean;
   tableDef: ITableSetup;
   columnOrder: ColumnOrder[];
-  filters?: FilterType[];
   sortBy?: SortType[];
 }
 
@@ -62,66 +59,21 @@ const transformColumnData = (
 const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   intl,
   path,
-  client,
-  dataQuery,
+  data,
+  loading,
+  fetchData,
+  totalPageCount,
   tableDef,
-  filters,
   dataType,
   columnOrder,
   sortBy
 }) => {
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [totalPageCount, setTotalPageCount] = useState(1);
-  const [pageSize] = useState<number>(10);
-
-  const getData = async () => {
-    setLoading(true);
-    try {
-      const response = await client.query({
-        query: gql`
-          ${dataQuery}
-        `,
-        errorPolicy: 'all'
-      });
-      const { results } = response.data;
-
-      setData(results);
-      setFilteredData(results);
-
-      setTotalPageCount(Math.ceil(results.length / pageSize));
-      setLoading(false);
-    } catch (err) {
-      console.debug('sError for query: ' + dataQuery);
-      console.error(err);
-      logError(err);
-      setLoading(false);
-    }
-  };
-
-  const fetchData = useCallback(() => {
-    if (!loading) {
-      getData();
-    }
-    // disable warning, otherwise component is constantly refreshed
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataQuery]);
-
-  useEffect(() => {
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataQuery]);
-
-  useEffect(() => {
-    setFilteredData(runFilters(data, filters));
-  }, [filters, data]);
   return (
     <Fragment>
       {dataType === 'sync' && (
         <Table
           path={path}
-          data={filteredData}
+          data={data}
           columns={transformColumnData(
             [...tableDef.columns],
             columnOrder,
@@ -134,7 +86,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
       {dataType === 'async' && (
         <Table
           path={path}
-          data={filteredData}
+          data={data}
           columns={transformColumnData(
             [...tableDef.columns],
             columnOrder,
@@ -151,6 +103,4 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(
-  withApollo<ITableSetup & IProps & WrappedComponentProps>(TableWrapper)
-);
+export default injectIntl(TableWrapper);

@@ -100,6 +100,7 @@ export interface IProps {
   filter?: FilterProps;
   filters?: FilterProps[];
   options: FilterMeta[];
+  getUniqueValues?: (columnName: string) => string[];
 }
 
 const FilterOptions: FC<IProps & WrappedComponentProps> = ({
@@ -109,15 +110,19 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   filter,
   index,
   options,
+  getUniqueValues,
   ...props
 }) => {
+
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
   const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
   const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
+  const [containType, setType] = useState();
   const [filterValue, setFilterValue] = useState();
+  const [uniqueValues, setUniqueValues] = useState<string[]>([]);
 
   const AutoSelectOption = (val: OperatorTypes) => {
     setOption(
@@ -205,9 +210,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
               }
               onChange={(e: any) => {
                 setProperty(e.target.value);
-                setCurrentPath(
-                  getPathByOptionProperty(e.target.value, containProperties)
-                );
+                setCurrentPath(getPathByOptionProperty(e.target.value, containProperties));
                 const newItems = options.filter(_option => {
                   if (_option.path === e.target.value) {
                     setOptions(_option.operators);
@@ -225,12 +228,18 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
                 const newItems = options.filter(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
+                    setType(_option.type);
+
+                    getUniqueValues &&
+                    _option.type === 'CHOICE_FROM_DATA'
+                      ? setUniqueValues(getUniqueValues(val))
+                      : setUniqueValues([]);
+
                     AutoSelectOption(_option.operators[0]);
                   }
                   return _option.path === val;
                 });
                 setProperties(newItems);
-
                 containProperties.forEach(_option => {
                   if (_option.path === val) {
                     setOptions(_option.operators);
@@ -351,6 +360,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
+          {console.log(containType, uniqueValues)}
           <Input
             inputType='secondary'
             style={{ minWidth: 218 }}
