@@ -19,7 +19,7 @@ export const processSortParam = (a:any) => {
   return a;
 };
 
-export const customSortMethod = (a:any, b:any, col:string) => {
+export const customSortMethod = (a:any, b:any, col:string): number => {
 
   // force any string values to lowercase
   a = processSortParam(a.values[col]);

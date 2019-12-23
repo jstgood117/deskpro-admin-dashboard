@@ -1,18 +1,18 @@
 import React, { FC, Fragment } from 'react';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { injectIntl, WrappedComponentProps, IntlShape } from 'react-intl';
 
 import { ITableSetup, ITableColumn } from '../../resources/interfaces';
-import { ColumnOrder } from '../../types';
+import { KeyValue, ColumnOrder } from '../../types';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
-import { SortType } from './types';
+import { SortType, ColumnMeta } from './types';
 
 interface IProps {
   path: string; // TODO: Remove when db
   dataType: string;
   fetchData: () => void;
   totalPageCount: number;
-  data:any[];
+  data:KeyValue[];
   dataQuery: string;
   loading: boolean;
   tableDef: ITableSetup;
@@ -36,9 +36,9 @@ const generateSortType = (sortType: string) => {
 const transformColumnData = (
   columns: ITableColumn[],
   columnOrder: ColumnOrder[],
-  intl: any
+  intl: IntlShape
 ) => {
-  const newCols: any[] = [];
+  const newCols: ColumnMeta[] = [];
   columnOrder.forEach((_order: ColumnOrder) => {
     const column = columns.find(_col => _order.column === _col.title);
     if (_order.show) {

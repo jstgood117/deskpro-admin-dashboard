@@ -7,7 +7,7 @@ import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
-import { addFilter, runFilters } from '../../services/filters';
+import { runFilters } from '../../services/filters';
 import { FilterType } from '../../services/filters/types';
 import { QueryService } from '../../services/query';
 import { logError } from '../../components/Error/ErrorBoundary';
@@ -17,12 +17,18 @@ import Header from '../../components/Header';
 import Table from '../../components/Table/TableWrapper';
 import TabBar from '../../components/TabBar';
 import { dpstyle } from '../../style/styled';
-import { StandardTableProvider, StandardTableContextValues } from '../../contexts/StandardTableContext';
+import {
+  StandardTableProvider,
+  StandardTableContextValues
+} from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
 
-import { treeify, getColumnUniqueValues } from './helpers';
 import { ResponseData } from './types';
+
+import { getColumnUniqueValues } from './helpers/getColumnUniqueValues';
+import { treeify } from './helpers/treeify';
+import { processFiltersToFilterTypes } from './helpers/processFiltersToFilterTypes';
 
 export interface IProps {
   path: string;
@@ -137,25 +143,6 @@ const StandardTablePage: FC<IProps> = ({
     column:_column.title,
     show: true
   }));
-
-  const processFiltersToFilterTypes = (
-    internalFilters: FilterProps[]
-  ): FilterType[] => {
-    let serviceFilters: FilterType[] = [];
-    internalFilters.forEach((internalFilter: FilterProps) => {
-      const { value, property, operatorName } = internalFilter;
-      if (property !== '' && operatorName !== '') {
-        serviceFilters = addFilter(
-          serviceFilters,
-          property,
-          operatorName,
-          value
-        );
-      }
-    });
-
-    return serviceFilters;
-  };
 
   const onFilterChange = (internalFilters: FilterProps[]) => {
 
