@@ -1,4 +1,4 @@
-import { KeyValue } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 
 import { equals } from './equals';
 import { includes } from './includes';

@@ -1,5 +1,6 @@
 import AgentsSettings from './Agents/Settings';
-import { KeyValue } from '../resources/interfaces';
+import { KeyValue } from '../types';
+
 
 export const RouteToPage: KeyValue = {
   '/agents/settings': AgentsSettings,

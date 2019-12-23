@@ -18,7 +18,7 @@ import {
 
 export type InputStyleType = 'primary' | 'secondary';
 
-export type IProps = {
+export type Props = {
   containerStyle?: CSSProperties;
   containerClassName?: string;
   hasError?: boolean;
@@ -28,7 +28,7 @@ export type IProps = {
   inputType: InputStyleType;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const Input: FC<IProps> = ({
+const Input: FC<Props> = ({
   containerStyle,
   containerClassName = '',
   onClear,

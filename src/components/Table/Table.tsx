@@ -8,8 +8,8 @@ import {
 } from 'react-table';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-
-import { IMenuItemProps, KeyValue } from '../../resources/interfaces';
+import { KeyValue } from '../../types';
+import { IMenuItemProps } from '../../resources/interfaces';
 
 import { testHandlingTeamList } from '../../resources/constants/constants';
 import { ActionFactory } from '../../services/actions/ActionFactory';
@@ -41,7 +41,7 @@ import {
 } from './TableStyles';
 import MultiSelect from '../SelectComponents/MultiSelect';
 
-export type IProps = {
+export type Props = {
   path: string;
   data: KeyValue[];
   columns: any[];
@@ -52,7 +52,7 @@ export type IProps = {
   sortBy: SortType[];
 };
 
-const Table: FC<IProps & WrappedComponentProps> = ({
+const Table: FC<Props & WrappedComponentProps> = ({
   intl,
   path,
   data,

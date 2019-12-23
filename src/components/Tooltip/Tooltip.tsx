@@ -6,7 +6,7 @@ import 'tippy.js/dist/tippy.css';
 
 import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
 
-export type IProps = {
+export type Props = {
   styleType?: 'dark' | 'light' | 'lightBox';
 } & TippyProps;
 
@@ -34,7 +34,7 @@ const getStyle = (styleType: 'dark' | 'light' | 'lightBox', theme: DeskproAdminT
   return styles[styleType] || styles.dark;
 };
 
-const Tooltip: FC<IProps> = styled(
+const Tooltip: FC<Props> = styled(
   ({ suppressClassNameWarning, styleType, ...props }) => <Tippy arrow={false} {...props} />
 ).attrs({
   suppressClassNameWarning: true

@@ -3,9 +3,7 @@ import { mount, shallow } from '../../test/enzyme';
 
 import TableActions, { IProps } from './TableActions';
 
-import {
-  ColumnOrder
-} from '../../resources/interfaces';
+import { ColumnOrder } from '../../types';
 
 describe('TableActions', () => {
   let props: IProps;

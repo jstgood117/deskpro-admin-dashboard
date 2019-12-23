@@ -11,11 +11,11 @@ const DialogActionsStyled = styled.div`
   }
 `;
 
-export type IProps = {
+export type Props = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const DialogActions: FC<IProps> = ({ children, ...props }) => (
+const DialogActions: FC<Props> = ({ children, ...props }) => (
   <DialogActionsStyled {...props}>{children}</DialogActionsStyled>
 );
 

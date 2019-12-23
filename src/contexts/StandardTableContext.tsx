@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { FilterType } from '../services/filters/types';
-import { ITableSetup, ITableColumn, ColumnOrder } from '../resources/interfaces';
+import { ColumnOrder } from '../types';
+import { ITableSetup, ITableColumn } from '../resources/interfaces';
 import { FilterProps, FilterMeta } from '../resources/interfaces/filterMeta';
 
 export type StandardTableContextValues = {

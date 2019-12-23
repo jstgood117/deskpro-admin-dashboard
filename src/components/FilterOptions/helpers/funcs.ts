@@ -1,5 +1,5 @@
 import { FilterMeta, FilterProps } from '../../../resources/interfaces/filterMeta';
-import { KeyValue } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 
 export const getIntlOperatorTitle = (operatorName: string, operatorKeys: KeyValue) => {
   return (operatorName && operatorKeys.hasOwnProperty(operatorName))

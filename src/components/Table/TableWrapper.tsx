@@ -1,8 +1,8 @@
 import React, { FC, Fragment } from 'react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { ITableSetup, ColumnOrder } from '../../resources/interfaces';
-import { ITableColumn } from '../../resources/interfaces';
+import { ITableSetup, ITableColumn } from '../../resources/interfaces';
+import { ColumnOrder } from '../../types';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
 import { SortType } from './types';

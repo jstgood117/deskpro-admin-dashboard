@@ -8,8 +8,12 @@ import { H6 } from '../Typography';
 import Icon from '../Icon';
 
 import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
-import { IItemProps } from './DropdownButton';
-import { ISizeTypes } from '../../resources/interfaces';
+import { SizeTypes } from '../../types';
+
+export interface IItemProps {
+  label?: string | number;
+  link: string;
+}
 
 type ButtonStyleType =
   | 'primary'
@@ -37,7 +41,7 @@ interface IButtonStyle {
 
 const getStyle = (
   styleType: ButtonStyleType,
-  size: ISizeTypes,
+  size: SizeTypes,
   theme: DeskproAdminThemeType,
   imageBtnSelected?: boolean
 ): IButtonStyle => {
@@ -334,10 +338,10 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
   }
 `;
 
-export type IProps = {
+export type Props = {
   children?: ReactNode;
   styleType: ButtonStyleType;
-  size?: ISizeTypes;
+  size?: SizeTypes;
   opened?: boolean;
   items?: IItemProps[] | any;
   showClearButton?: boolean;
@@ -351,7 +355,7 @@ export type IProps = {
   imageBtnSelected?: boolean;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
-const Button: FC<IProps> = ({
+const Button: FC<Props> = ({
   styleType,
   size,
   showClearButton,
@@ -422,3 +426,5 @@ const Button: FC<IProps> = ({
 };
 
 export default Button;
+
+

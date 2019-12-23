@@ -1,4 +1,6 @@
-import { KeyValue } from '../../resources/interfaces';
+import {
+  KeyValue
+} from '../../types';
 
 export const getColumnUniqueValues = (tableData:KeyValue[], columnProp:string): string[] => {
 

@@ -1,9 +1,12 @@
 import {
-  KeyValue,
   ITableSetup,
   ITableColumn,
   IMenuItemProps
 } from '../../resources/interfaces';
+
+import {
+  KeyValue,
+} from '../../types';
 
 import { IntlShape } from 'react-intl';
 

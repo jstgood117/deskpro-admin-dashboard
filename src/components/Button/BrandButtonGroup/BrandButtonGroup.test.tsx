@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../../test/enzyme';
 
 import BrandButtonGroup from './BrandButtonGroup';
-import { ISizeTypes } from '../../../resources/interfaces';
+import { SizeTypes } from '../../../types';
 
 describe('BrandButtonGroup', () => {
   let props: {
-    size?: ISizeTypes;
+    size?: SizeTypes;
   };
   let mountedBrandButtonGroupComponent: any;
 
   const BrandButtonGroupComponent: React.FC<{
-    size?: ISizeTypes;
+    size?: SizeTypes;
   }> = _props => {
     const [selected, selectBtn] = useState();
     return (

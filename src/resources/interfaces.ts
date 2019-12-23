@@ -1,8 +1,5 @@
+import { SizeTypes } from '../types';
 import { CSSProperties } from 'react';
-
-export type KeyValue = {
-  [key: string]: any;
-};
 
 export interface IUser {
   locale: string;
@@ -43,10 +40,6 @@ export interface ITableColumn {
   sortType?: string;
 }
 
-export type ColumnOrder = {
-  column: string;
-  show: boolean;
-};
 
 export interface ISidebarSection {
   sectionName: string;
@@ -86,7 +79,7 @@ export interface IMenuProps {
   initialChecked?: {[key: string]: any};
   item?: IMenuItemProps;
   selected? : boolean;
-  size?: ISizeTypes;
+  size?: SizeTypes;
 }
 
 export interface IMenuItemProps {
@@ -105,5 +98,3 @@ export interface ITabsProps {
   label?: string;
   messageId?: string;
 }
-
-export type ISizeTypes = 'small' | 'medium';

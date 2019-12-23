@@ -10,11 +10,11 @@ const DialogContentTextStyled = styled.div`
   color: ${props => props.theme.activeColour};
 `;
 
-export type IProps = {
+export type Props = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLParagraphElement>;
 
-const DialogContentText: FC<IProps> = ({ children, ...props }) => (
+const DialogContentText: FC<Props> = ({ children, ...props }) => (
   <DialogContentTextStyled {...props}>{children}</DialogContentTextStyled>
 );
 

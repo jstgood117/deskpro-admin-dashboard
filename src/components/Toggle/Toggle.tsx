@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
-import { ISizeTypes } from '../../resources/interfaces';
+import { SizeTypes } from '../../types';
 
-const SliderStyled = styled.span<{ size: ISizeTypes }>`
+const SliderStyled = styled.span<{ size: SizeTypes }>`
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -31,7 +31,7 @@ const InputStyled = styled.input.attrs({ type: 'checkbox' })`
   height: 0;
 `;
 
-const LabelStyled = styled.label<{ size: ISizeTypes }>`
+const LabelStyled = styled.label<{ size: SizeTypes }>`
   position: relative;
   display: inline-block;
   width: ${props => (props.size === 'small' ? 18 : 27)}px;
@@ -56,7 +56,7 @@ export interface IProps {
   disabled?: boolean;
   inputProps?: object;
   onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
-  size: ISizeTypes;
+  size: SizeTypes;
 }
 
 const Toggle: React.FC<IProps> = ({

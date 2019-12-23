@@ -6,7 +6,7 @@ import Button from '../Button';
 import Icon from '../../Icon';
 import { DeskproAdminThemeType } from '../../../style/DeskproAdminTheme';
 import DropdownButton from '../DropdownButton';
-import { ISizeTypes } from '../../../resources/interfaces';
+import { SizeTypes } from '../../../types';
 
 type ButtonStyleType = 'primary' | 'secondary';
 type DropdownContentPosition = 'right' | 'left';
@@ -32,7 +32,7 @@ export interface IProps {
   children?: ReactNode;
   styleType: ButtonStyleType;
   contentPosistion?: DropdownContentPosition;
-  size?: ISizeTypes;
+  size?: SizeTypes;
   icon?: string;
   handleSelect: (e: any) => void;
 }
@@ -42,7 +42,7 @@ interface IStyleWrapper {
 }
 interface IStyleProp {
   contentPosistion?: DropdownContentPosition;
-  size?: ISizeTypes;
+  size?: SizeTypes;
 }
 const SortItems = [
   { label: 'Add Agent', link: 'Sort1' },

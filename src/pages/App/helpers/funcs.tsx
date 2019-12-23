@@ -2,7 +2,7 @@ import React from 'react';
 import { flatMap } from 'lodash';
 import { Route } from 'react-router-dom';
 
-import { KeyValue } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 import PageType from '../../PageType';
 
 import { ISidebarSection, ISidebarItem } from '../../../resources/interfaces';

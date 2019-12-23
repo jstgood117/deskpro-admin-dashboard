@@ -3,7 +3,8 @@ import { useQuery, withApollo } from 'react-apollo';
 import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
 
-import { IViewData, ColumnOrder, ITableColumn, KeyValue } from '../../resources/interfaces';
+import { KeyValue, ColumnOrder } from '../../types';
+import { IViewData, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { addFilter, runFilters } from '../../services/filters';
