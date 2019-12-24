@@ -1,5 +1,8 @@
 import React from 'react';
-import { mount, shallow } from '../../test/enzyme';
+import {
+  mountWithIntl,
+  shallowWithIntl
+} from '../../test/mock-intl';
 
 import Header, { IProps } from './Header';
 
@@ -10,10 +13,10 @@ describe('Header', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedHeader) {
       mountedHeader = bShallow
-        ? shallow(
+        ? shallowWithIntl(
             <Header {...props} />
           )
-        : mount(
+        : mountWithIntl(
             <Header {...props} />
           );
     }
