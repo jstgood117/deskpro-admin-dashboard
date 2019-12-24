@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import FilterBox from './FilterBox';
 
-import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { testFilterMeta } from '../../fixtures/gql/StandardTablesPage/filterMeta';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: FilterProps[] = [

@@ -1,5 +1,5 @@
-import { testSidebarData } from '../sidebar';
-import { testTranslations } from '../translations/en';
+import { testSidebarData } from '../../../resources/constants/sidebar';
+import { testTranslations } from '../../../resources/constants/translations/en';
 
 export const testInitialData = {
   initial: {

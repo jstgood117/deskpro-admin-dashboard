@@ -18,7 +18,7 @@ import Icon from '../Icon';
 import { ISortItem, ITableColor } from '../../resources/interfaces';
 import {
   testTableData
-} from '../../resources/constants/mock/testTableData';
+} from '../../fixtures/gql/StandardTablesPage/tableData1';
 import Label from '../Label';
 import { getRandomItem } from '../../utils/getRandomColor';
 

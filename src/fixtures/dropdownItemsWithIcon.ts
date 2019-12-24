@@ -1,7 +1,8 @@
-import { IMenuItemProps } from '../../interfaces';
+import { IMenuItemProps } from '../resources/interfaces';
+import { IOptions } from '../components/SelectComponents/interfaces';
 
-export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
-  { name: 'Delete Agents' },
+export const testDropdownItemsWithIcon: IMenuItemProps[] = [
+  { name: 'Delete Agents', icon: 'trash' },
   {},
   {
     name: 'Change Team',
@@ -9,7 +10,8 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
       { name: 'Add Team' },
       { name: 'Remove Team' },
       { name: 'Remove All & Add Team' }
-    ]
+    ],
+    icon: 'user.check'
   },
   {
     name: 'Change Permission Group',
@@ -17,7 +19,8 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
       { name: 'Add Permission Group' },
       { name: 'Remove Permission Group' },
       { name: 'Remove All & Add Permission Group' }
-    ]
+    ],
+    icon: 'chat'
   },
   {
     name: 'Change Access',
@@ -26,7 +29,8 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
       { name: 'Add Reports Admin Access' },
       { name: 'Remove Admin Access' },
       { name: 'Remove All & Add Admin Access' }
-    ]
+    ],
+    icon: 'user.setting'
   },
   {
     name: 'Change Alias',
@@ -34,7 +38,8 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
       { name: 'Add Alias' },
       { name: 'Remove Alias' },
       { name: 'Remove All & Add Alias' }
-    ]
+    ],
+    icon: 'user.alias'
   },
   {},
   {
@@ -43,4 +48,13 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
   {
     name: 'Set Language'
   }
+];
+
+export const testHandlingTeamList: IOptions[] = [
+  { value: 'accounting', label: 'Accounting' },
+  { value: 'business', label: 'Business' },
+  { value: 'design', label: 'Design' },
+  { value: 'hr', label: 'HR' },
+  { value: 'sales', label: 'Sales' },
+  { value: 'finance', label: 'Finance' }
 ];

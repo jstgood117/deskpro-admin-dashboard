@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import { uniqueId } from 'lodash';
 
-import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { testFilterMeta } from '../../fixtures/gql/StandardTablesPage/filterMeta';
 import FilterOptions from './FilterOptions';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 

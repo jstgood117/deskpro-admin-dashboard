@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import FilterOptions, { IProps } from './FilterOptions';
-import { testFilterMeta } from '../../resources/constants/mock/testFilterMeta';
+import { testFilterMeta } from '../../fixtures/gql/StandardTablesPage/filterMeta';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 describe('FilterOptions', () => {
