@@ -1,4 +1,4 @@
-import { IPageData } from '../../interfaces';
+import { IPageData } from '../../../resources/interfaces';
 
 export const testPageData: IPageData = {
   __typename: 'StandardDataPageData',

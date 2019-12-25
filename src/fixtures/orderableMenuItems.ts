@@ -1,4 +1,4 @@
-import { IMenuItemProps } from '../../interfaces';
+import { IMenuItemProps } from '../resources/interfaces';
 
 export const testOrderableMenuItems: IMenuItemProps[] = [
   { key: 0, name: 'Name' },

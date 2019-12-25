@@ -7,11 +7,11 @@ const DialogContentStyled = styled.div`
   overflow-y: auto;
 `;
 
-export type IProps = {
+export type Props = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const DialogContent: FC<IProps> = ({ children, ...props }) => (
+const DialogContent: FC<Props> = ({ children, ...props }) => (
   <DialogContentStyled {...props}>{children}</DialogContentStyled>
 );
 

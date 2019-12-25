@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Table from './Table';
+import Table, { Props } from './Table';
 import { ITableColumn } from '../../resources/interfaces';
 
 const testData = [
@@ -21,7 +21,7 @@ const testCols: ITableColumn[] = [
 ];
 
 describe('Table', () => {
-  let props: any;
+  let props: Props;
   let mountedTable: any;
   let shallowTable: any;
 

@@ -2,11 +2,8 @@ import React, { FC, useState, useCallback, useContext, useEffect } from 'react';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import {
-  IMenuItemProps,
-  ColumnOrder,
-  KeyValue
-} from '../../resources/interfaces';
+import { IMenuItemProps } from '../../resources/interfaces';
+import { KeyValue, ColumnOrder } from '../../types';
 
 import {
   FilterProps,
@@ -84,6 +81,7 @@ interface IFilterButton {
   active: boolean;
   existing: boolean;
 }
+
 const initialFilter: FilterProps[] = [
   { property: '', operatorName: '', value: '', applied: false }
 ];
@@ -244,7 +242,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   };
 
   const handleSortChange = (val:any) => {
-
+console.log(val);
     const id = val.link;
 
     onSortChange([{ id, desc:false }]);

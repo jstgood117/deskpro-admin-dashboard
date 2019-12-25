@@ -13,7 +13,7 @@ import brand3 from '../../assets/brands/brand3.png';
 import brand4 from '../../assets/brands/brand4.png';
 import brand5 from '../../assets/brands/brand5.png';
 import BrandButtonGroup from './BrandButtonGroup';
-import { ISizeTypes } from '../../resources/interfaces';
+import { SizeTypes } from '../../types';
 
 const SortItems = [{ link: 'Sort1' }, { link: 'Sort2' }, { link: 'Sort3' }];
 
@@ -22,12 +22,12 @@ interface IDropdownBtn {
   label?: string;
   showClearButton?: boolean;
   items: IItemProps[];
-  size?: ISizeTypes;
+  size?: SizeTypes;
   styleType: 'primary' | 'secondary' | 'tertiary';
   iconOnly?: boolean;
 }
 interface IImageBtn {
-  size?: ISizeTypes;
+  size?: SizeTypes;
 }
 const DropdownButtonComponent: React.FC<IDropdownBtn> = props => {
   const [value, setValue] = useState();

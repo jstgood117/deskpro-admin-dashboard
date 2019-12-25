@@ -1,4 +1,4 @@
-import { KeyValue } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 import { first, last, get, startsWith as _startsWith } from 'lodash';
 
 export const startsWith = (row: KeyValue, prop:string, value:string) => {

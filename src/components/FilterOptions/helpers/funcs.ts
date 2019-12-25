@@ -1,5 +1,5 @@
 import { FilterMeta, FilterProps } from '../../../resources/interfaces/filterMeta';
-import { KeyValue } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 
 export const getIntlOperatorTitle = (operatorName: string, operatorKeys: KeyValue) => {
   return (operatorName && operatorKeys.hasOwnProperty(operatorName))
@@ -24,7 +24,7 @@ export const getPathByOptionProperty = (title: string, containProperties: Filter
   return match ? match.path : '';
 };
 
-export const getOperatorByTitle = (title: string, containOptions: any[]) => {
+export const getOperatorByTitle = (title: string, containOptions: string[]) => {
   const match = containOptions.find(_option => _option === title);
   return match ? match : '';
 };

@@ -1,7 +1,13 @@
 import _ from 'lodash';
 import { IMenuItemProps } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 import { ActionsType } from '../../../services/actions/types';
-import { setCheckedType, TableParams, TableType } from '../types';
+import {
+  setCheckedType,
+  TableParams,
+  TableType,
+  ColumnMeta
+} from '../types';
 
 export const onCheckboxChange = (
   value: string,
@@ -37,7 +43,7 @@ export const onSelectAllChange = (
     const endPos = Math.min(startPos + pageSize, data.length);
 
     const showingRows = _.slice(data, startPos, endPos);
-    const ids = showingRows.map((_row: any) => ({
+    const ids = showingRows.map((_row: KeyValue) => ({
       [_row.id]: true
     }));
     setChecked(Object.assign({}, ...ids));
@@ -48,7 +54,7 @@ export const onSelectEverything = (
   data: object[],
   setChecked: setCheckedType
 ) => {
-  const ids = data.map((_row: any) => ({
+  const ids = data.map((_row: KeyValue) => ({
     [_row.id]: true
   }));
   setChecked(Object.assign({}, ...ids));
@@ -57,7 +63,7 @@ export const onSelectEverything = (
 export const generateTableParams = (
   tableType: TableType,
   columns: any[],
-  data: any[],
+  data: KeyValue[],
   controlledPageCount: number,
 ): TableParams => {
   return tableType === 'async'
@@ -107,13 +113,13 @@ export const convertActionsToMenuFormat = (
   return actions.map(_item => generateMenuItem(_item));
 };
 
-export const generateCSVData = (table: any, columnsMeta: any) => {
-  const csvData: any[] = [];
+export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) => {
+  const csvData: KeyValue[] = [];
 
   if (table && table.length > 0) {
-    table.map((row: any) => {
+    table.map((row: KeyValue) => {
       const temp = Object.assign({}, row.values);
-      columnsMeta.map((columnMeta: any) => {
+      columnsMeta.map((columnMeta: ColumnMeta) => {
         if (Array.isArray(temp[columnMeta.id])) {
           temp[columnMeta.id] =
             temp[columnMeta.id] &&

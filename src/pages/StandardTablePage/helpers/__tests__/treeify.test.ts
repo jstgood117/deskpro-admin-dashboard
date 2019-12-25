@@ -1,4 +1,4 @@
-import {treeify} from '../helpers';
+import {treeify} from '../treeify';
 
 const data = [
   {

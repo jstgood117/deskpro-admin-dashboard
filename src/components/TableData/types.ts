@@ -1,3 +1,4 @@
+import { KeyValue } from '../../types';
 export interface ITableDataProps {
   type:
     | 'avatar_text'
@@ -24,5 +25,5 @@ export interface ITableDataProps {
     | 'input'
     | 'phrase'
     | 'template';
-  props: any;
+  props: KeyValue;
 }

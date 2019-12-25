@@ -8,8 +8,8 @@ import {
 } from 'react-table';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-
-import { IMenuItemProps, KeyValue } from '../../resources/interfaces';
+import { KeyValue } from '../../types';
+import { IMenuItemProps } from '../../resources/interfaces';
 
 import { testHandlingTeamList } from '../../resources/constants/constants';
 import { ActionFactory } from '../../services/actions/ActionFactory';
@@ -23,7 +23,7 @@ import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-import { TableType, TableParams, SortType } from './types';
+import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import {
   onCheckboxChange,
   onSelectAllChange,
@@ -41,18 +41,18 @@ import {
 } from './TableStyles';
 import MultiSelect from '../SelectComponents/MultiSelect';
 
-export type IProps = {
+export type Props = {
   path: string;
   data: KeyValue[];
   columns: any[];
-  fetchData?: any;
+  fetchData?: () => void;
   loading?: boolean;
   pageCount?: number;
   tableType: TableType;
   sortBy: SortType[];
 };
 
-const Table: FC<IProps & WrappedComponentProps> = ({
+const Table: FC<Props & WrappedComponentProps> = ({
   intl,
   path,
   data,
@@ -97,7 +97,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
 
   useEffect(() => {
     if (fetchData) {
-      fetchData({ pageIndex, pageSize });
+      fetchData();
     }
   }, [fetchData, pageIndex, pageSize]);
 
@@ -285,7 +285,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
-              {headerGroups.map((headerGroup: any, indexOuter: number) => (
+              {headerGroups.map((headerGroup: HeaderGroup, indexOuter: number) => (
                 <tr
                   key={indexOuter}
                   {...(headerGroup.getHeaderGroupProps &&
@@ -293,7 +293,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                 >
                   <th />
                   {headerGroup.headers.map(
-                    (column: any, indexInner: number) => (
+                    (column: KeyValue, indexInner: number) => (
                       <th
                         key={indexInner}
                         {...column.getHeaderProps(
@@ -329,7 +329,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map((row: any, indexOuter: number) => {
+              {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return (
                   <tr
@@ -337,7 +337,7 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                     {...row.getRowProps()}
                     className={
                       checked.hasOwnProperty(
-                        (row.original as any).id.toString()
+                        (row.original as KeyValue).id.toString()
                       )
                         ? 'row--selected'
                         : ''
@@ -345,10 +345,10 @@ const Table: FC<IProps & WrappedComponentProps> = ({
                   >
                     <td>
                       <Checkbox
-                        value={(row.original as any).id}
+                        value={(row.original as KeyValue).id}
                         checked={
                           checked.hasOwnProperty(
-                            (row.original as any).id.toString()
+                            (row.original as KeyValue).id.toString()
                           )
                             ? true
                             : false

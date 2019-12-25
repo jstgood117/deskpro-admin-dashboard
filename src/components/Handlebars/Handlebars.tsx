@@ -1,7 +1,7 @@
 import React, { SFC } from 'react';
 import Handlebars from 'handlebars';
 
-import { KeyValue } from '../../resources/interfaces';
+import { KeyValue } from '../../types';
 
 export type HandlebarsProps = {
   template: string;

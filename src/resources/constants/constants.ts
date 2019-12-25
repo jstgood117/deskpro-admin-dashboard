@@ -1,14 +1,14 @@
 import { testTranslations } from './translations/en';
 import { testSidebarData } from './sidebar';
-import { testTableColumns } from './mock/testTableColumns';
-import { testDropdownItemsWithIcon, testHandlingTeamList } from './mock/testDropdownItemsWithIcon';
-import { testDropdownItemsWithoutIcon } from './mock/testDropdownItemsWithoutIcon';
-import { testOrderableMenuItems } from './mock/testOrderableMenuItems';
-import { testNavData } from './mock/testNavData';
-import { testTableData } from './mock/testTableData';
-import { testPageData } from './mock/testPageData';
-import { testView } from './mock/testView';
-import { testInitialData } from './mock/testInitialData';
+import { testTableColumns } from '../../fixtures/gql/StandardTablesPage/columns1';
+import { testDropdownItemsWithIcon, testHandlingTeamList } from '../../fixtures/dropdownItemsWithIcon';
+import { testDropdownItemsWithoutIcon } from '../../fixtures/dropdownItemsWithoutIcon';
+import { testOrderableMenuItems } from '../../fixtures/orderableMenuItems';
+import { testNavData } from '../../fixtures/navData';
+import { testTableData } from '../../fixtures/gql/StandardTablesPage/tableData1';
+import { testPageData } from '../../fixtures/gql/StandardTablesPage/results1';
+import { testView } from '../../fixtures/gql/StandardTablesPage/view';
+import { testInitialData } from '../../fixtures/gql/Setup/results1';
 
 export {
   testInitialData,

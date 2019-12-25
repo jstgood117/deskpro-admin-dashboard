@@ -1,8 +1,9 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import TableActions from './TableActions';
-import { ColumnOrder } from '../../resources/interfaces';
+import { ColumnOrder } from '../../types';
 import { SortType } from '../Table/types';
+import TableActions from './TableActions';
+
 storiesOf('Table Action', module).add('Default', () => {
   const onOrderChange = (order: ColumnOrder[]) => {
     order.sort();

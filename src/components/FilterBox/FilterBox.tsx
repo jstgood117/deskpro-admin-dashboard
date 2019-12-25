@@ -9,7 +9,7 @@ import FilterOptions from '../FilterOptions';
 import { DeskproAdminTheme } from '../Theme';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 
-export type IProps = {
+export type Props = {
   filters: FilterProps[];
   setFilters: (e: any) => void;
   options: any;
@@ -33,7 +33,7 @@ const StyledBox = styled(dpstyle.div)`
   }
 `;
 
-const FilterBox: FC<IProps> = ({
+const FilterBox: FC<Props> = ({
   filters,
   setFilters,
   options,

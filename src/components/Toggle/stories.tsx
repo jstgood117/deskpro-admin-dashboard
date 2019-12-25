@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Toggle from './Toggle';
-import { ISizeTypes } from '../../resources/interfaces';
+import { SizeTypes } from '../../types';
 
-const ToggleComponent: React.FC<{ size: ISizeTypes }> = props => {
+const ToggleComponent: React.FC<{ size: SizeTypes }> = props => {
   const [checked, setChecked] = useState(false);
 
   return (

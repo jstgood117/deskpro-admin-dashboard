@@ -1,4 +1,4 @@
-import { FilterMeta } from '../../interfaces/filterMeta';
+import { FilterMeta } from '../../../resources/interfaces/filterMeta';
 
 export const testFilterMeta: FilterMeta[] = [
   {

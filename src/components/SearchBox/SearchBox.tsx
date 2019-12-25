@@ -86,13 +86,13 @@ const ButtonClear = styled.div`
   right: 11.75px;
 `;
 
-export type IProps = {
+export type Props = {
   containerStyle?: CSSProperties;
   containerClassName?: string;
   onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-const SearchBox: FC<IProps> = ({
+const SearchBox: FC<Props> = ({
   containerStyle,
   containerClassName = '',
   onClear,

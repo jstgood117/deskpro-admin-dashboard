@@ -1,10 +1,10 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Button, { IProps } from './Button';
+import Button, { Props } from './Button';
 
 describe('Button', () => {
-  let props: IProps;
+  let props: Props;
   let mountedButton: any;
 
   const wrapper = (bShallow: boolean) => {

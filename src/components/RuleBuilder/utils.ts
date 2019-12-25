@@ -1,17 +1,17 @@
+import setWith from 'lodash/setWith';
+import get from 'lodash/get';
+import merge from 'lodash/merge';
 import {
   IRuleValue,
   IRuleItem,
   IRuleBuilderSchema,
   IRuleOptions,
-  RuleOperatorType
-} from '../../resources/interfaces/filterMeta';
-import setWith from 'lodash/setWith';
-import get from 'lodash/get';
-import merge from 'lodash/merge';
-import {
+  RuleOperatorType,
   FilterMeta,
   operatorDictionary
 } from '../../resources/interfaces/filterMeta';
+
+import { KeyValue } from  '../../types';
 
 export const generateId = (): string =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -82,7 +82,7 @@ export const changeRuleValue = (
   rootValue: IRuleValue,
   currentValue: IRuleValue,
   key: string,
-  value: any
+  value: IRuleItem[]
 ): IRuleValue => {
   const rs = { ...rootValue };
 
@@ -234,7 +234,7 @@ export const convertRuleSchema = (
   };
 
   input.forEach(item => {
-    const mapTypes: any = {
+    const mapTypes: KeyValue = {
       BOOL: 'text',
       TEXT: 'text',
       CHOICE_FROM_DATA: 'select'

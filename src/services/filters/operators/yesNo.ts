@@ -1,4 +1,4 @@
-import { KeyValue } from '../../../resources/interfaces';
+import { KeyValue } from '../../../types';
 import { get, first, last } from 'lodash';
 export const yesNo = (row: KeyValue, prop:string, value: never) => {
 

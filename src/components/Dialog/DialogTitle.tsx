@@ -18,11 +18,11 @@ const DialogTitleStyled = styled.div`
   }
 `;
 
-export type IProps = {
+export type Props = {
   children?: ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const DialogTitle: FC<IProps> = ({ children, ...props }) => (
+const DialogTitle: FC<Props> = ({ children, ...props }) => (
   <DialogTitleStyled {...props}>
     <div>{children}</div>
   </DialogTitleStyled>
