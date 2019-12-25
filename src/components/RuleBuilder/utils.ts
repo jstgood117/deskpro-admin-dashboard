@@ -82,7 +82,7 @@ export const changeRuleValue = (
   rootValue: IRuleValue,
   currentValue: IRuleValue,
   key: string,
-  value: IRuleItem[]
+  value: any
 ): IRuleValue => {
   const rs = { ...rootValue };
 
