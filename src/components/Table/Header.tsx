@@ -17,9 +17,7 @@ import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 import {
   IPageChange,
-  objectUseState,
-  booleanUseState,
-  anyUseState
+  objectUseState
 } from './types';
 
 import {
@@ -29,16 +27,13 @@ import {
 } from './TableStyles';
 
 import {
+  onSelectEverything,
   onSelectAllChange,
   convertActionsToMenuFormat,
   generateCSVData,
 } from './helpers/functions';
 
 export type Props = {
-  isAllChecked: boolean;
-  setIsAllChecked: booleanUseState;
-  dropdownValue: any;
-  setDropdownValue: anyUseState;
   setChecked: objectUseState;
   pageSize: number;
   pageIndex: number;
@@ -56,10 +51,6 @@ export type Props = {
 
 const Header: FC<Props & WrappedComponentProps> = ({
   intl,
-  isAllChecked,
-  setIsAllChecked,
-  dropdownValue,
-  setDropdownValue,
   setChecked,
   pageSize,
   pageIndex,
@@ -84,12 +75,39 @@ const Header: FC<Props & WrappedComponentProps> = ({
   const [deleteModal, showDeleteModal] = useState(false);
   const [selectedOptions, selectOptions] = React.useState([]);
   const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
+  const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
+  const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
+  const [dropdownValue, setDropdownValue] = useState();
 
   useEffect(() => {
     const _actions = ActionFactory(path);
     const _menuItems = convertActionsToMenuFormat(_actions);
     setMenuItems(_menuItems);
   }, [path]);
+
+  useEffect(() => {
+    const checkedLength = Object.keys(checked).length;
+    const indeterminate =
+      checkedLength !== 0 && checkedLength < page.length ? true : false;
+    setIsIndeterminate(indeterminate);
+    setIsAllChecked(
+      indeterminate || checkedLength >= page.length ? true : false
+    );
+  }, [checked, page]);
+
+  useEffect(() => {
+    if (dropdownValue) {
+      if (dropdownValue.link === 'All') {
+        onSelectEverything(data, setChecked);
+      }
+      if (dropdownValue.link === 'All on the page') {
+        onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
+      }
+    }
+
+    setDropdownValue(undefined);
+  }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
+
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -105,8 +123,6 @@ const Header: FC<Props & WrappedComponentProps> = ({
   };
 
   const csvData = generateCSVData(page, columns);
-
-
   const items = [{ link: 'All on the page' }, { link: 'All' }];
 
 
@@ -123,7 +139,7 @@ const Header: FC<Props & WrappedComponentProps> = ({
               dropdownValue={dropdownValue}
               items={items}
               value='checked'
-              indeterminate={true}
+              indeterminate={isIndeterminate}
               showArrow={true}
               onChange={(event: SyntheticEvent<HTMLInputElement>) =>
                 handleSelectAllClick(event, pageIndex)

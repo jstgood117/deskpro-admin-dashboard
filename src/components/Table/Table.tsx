@@ -7,7 +7,6 @@ import {
   useExpanded
 } from 'react-table';
 
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { KeyValue } from '../../types';
 
 import Pagination, { IPageChange } from '../Pagination/Pagination';
@@ -19,8 +18,6 @@ import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import {
   onCheckboxChange,
-  onSelectAllChange,
-  onSelectEverything,
   generateTableParams,
 } from './helpers/functions';
 import {
@@ -40,8 +37,7 @@ export type Props = {
   sortBy: SortType[];
 };
 
-const Table: FC<Props & WrappedComponentProps> = ({
-  intl,
+const Table: FC<Props> = ({
   path,
   data,
   columns,
@@ -92,9 +88,7 @@ const Table: FC<Props & WrappedComponentProps> = ({
 
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
-  const [dropdownValue, setDropdownValue] = useState();
   const [totalRecords, setTotalRecords] = useState<number>(0);
 
   const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
@@ -114,40 +108,14 @@ const Table: FC<Props & WrappedComponentProps> = ({
   };
 
   useEffect(() => {
-    const checkedLength = Object.keys(checked).length;
-    const indeterminate =
-      checkedLength !== 0 && checkedLength < page.length ? true : false;
-    setIsAllChecked(
-      indeterminate || checkedLength >= page.length ? true : false
-    );
-  }, [checked, page]);
-
-  useEffect(() => {
     setChecked({});
     setTotalRecords(data.length);
   }, [pageIndex, data]);
-
-  useEffect(() => {
-    if (dropdownValue) {
-      if (dropdownValue.link === 'All') {
-        onSelectEverything(data, setChecked);
-      }
-      if (dropdownValue.link === 'All on the page') {
-        onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
-      }
-    }
-
-    setDropdownValue(undefined);
-  }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
   return (
     <>
       <TableStyled>
         <Header
-          isAllChecked={isAllChecked}
-          setIsAllChecked={setIsAllChecked}
-          dropdownValue={dropdownValue}
-          setDropdownValue={setDropdownValue}
           setChecked={setChecked}
           pageSize={pageSize}
           pageIndex={pageIndex}
@@ -272,4 +240,4 @@ const Table: FC<Props & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(Table);
+export default Table;
