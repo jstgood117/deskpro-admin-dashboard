@@ -3,7 +3,7 @@ import { IMenuItemProps } from '../../../resources/interfaces';
 import { KeyValue } from '../../../types';
 import { ActionsType } from '../../../services/actions/types';
 import {
-  setCheckedType,
+  objectUseState,
   TableParams,
   TableType,
   ColumnMeta
@@ -12,7 +12,7 @@ import {
 export const onCheckboxChange = (
   value: string,
   checked: object,
-  setChecked: setCheckedType
+  setChecked: objectUseState
 ) => {
   const keys = Object.keys(checked);
 
@@ -31,7 +31,7 @@ export const onCheckboxChange = (
 
 export const onSelectAllChange = (
   isChecked: boolean,
-  setChecked: setCheckedType,
+  setChecked: objectUseState,
   currentPage: number,
   pageSize: number,
   data: object[]
@@ -52,7 +52,7 @@ export const onSelectAllChange = (
 
 export const onSelectEverything = (
   data: object[],
-  setChecked: setCheckedType
+  setChecked: objectUseState
 ) => {
   const ids = data.map((_row: KeyValue) => ({
     [_row.id]: true

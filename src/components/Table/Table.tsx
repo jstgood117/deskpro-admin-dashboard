@@ -6,22 +6,15 @@ import {
   useRowSelect,
   useExpanded
 } from 'react-table';
-import { CSVLink } from 'react-csv';
+
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { KeyValue } from '../../types';
-import { IMenuItemProps } from '../../resources/interfaces';
-
-import { testHandlingTeamList } from '../../resources/constants/constants';
-import { ActionFactory } from '../../services/actions/ActionFactory';
 
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 import Checkbox from '../Checkbox';
-import Button from '../Button';
 import Icon from '../Icon';
-import Menu from '../Menu';
 import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
-import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import {
@@ -29,8 +22,6 @@ import {
   onSelectAllChange,
   onSelectEverything,
   generateTableParams,
-  convertActionsToMenuFormat,
-  generateCSVData
 } from './helpers/functions';
 import {
   TableStyled,
@@ -93,8 +84,6 @@ const Table: FC<Props & WrappedComponentProps> = ({
     useRowSelect
   ) as any;
 
-  const csvData = generateCSVData(page, columns);
-
   useEffect(() => {
     if (fetchData) {
       fetchData();
@@ -115,23 +104,6 @@ const Table: FC<Props & WrappedComponentProps> = ({
   const [dropdownValue, setDropdownValue] = useState();
   const [opened, clickButton] = useState(false);
   const [totalRecords, setTotalRecords] = useState<number>(0);
-  const [menuValue, setMenuValue] = useState();
-  const [deleteModal, showDeleteModal] = useState(false);
-  const [selectedOptions, selectOptions] = React.useState([]);
-  const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
-
-  const handleSelectAllClick = (
-    event: SyntheticEvent<HTMLInputElement>,
-    _pageIndex: number
-  ) => {
-    onSelectAllChange(
-      event.currentTarget.checked,
-      setChecked,
-      _pageIndex,
-      pageSize,
-      data
-    );
-  };
 
   const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
     onCheckboxChange(event.currentTarget.value, checked, setChecked);
@@ -176,112 +148,12 @@ const Table: FC<Props & WrappedComponentProps> = ({
     setDropdownValue(undefined);
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
-  useEffect(() => {
-    const _actions = ActionFactory(path);
-    const _menuItems = convertActionsToMenuFormat(_actions);
-    setMenuItems(_menuItems);
-  }, [path]);
-
   const items = [{ link: 'All on the page' }, { link: 'All' }];
 
   return (
     <>
       <TableStyled>
-        <TableHeader>
-          <AllCheckStyle>
-            <Checkbox
-              checked={isAllChecked}
-              opened={opened}
-              clickButton={clickButton}
-              setDropdownValue={setDropdownValue}
-              dropdownValue={dropdownValue}
-              items={items}
-              value='checked'
-              indeterminate={true}
-              showArrow={true}
-              onChange={(event: SyntheticEvent<HTMLInputElement>) =>
-                handleSelectAllClick(event, pageIndex)
-              }
-            />
-            {Object.keys(checked).length > 0 && (
-              <span className='selected-text'>
-                {Object.keys(checked).length} Selected
-              </span>
-            )}
-            {Object.keys(checked).length > 0 && (
-              <div style={{ paddingLeft: 16, display: 'flex' }}>
-                <Menu
-                  value={menuValue}
-                  onSelect={val => setMenuValue(val)}
-                  label={
-                    menuValue ? menuValue['name'] : 'admin_common.table.action'
-                  }
-                  menuItems={menuItems}
-                  iconName='menu'
-                />
-                {menuValue && menuValue.name === 'Add Team' && (
-                  <div style={{ display: 'flex', paddingLeft: 15 }}>
-                    <MultiSelect
-                      options={testHandlingTeamList}
-                      type='fixed'
-                      selectOptions={selectOptions}
-                    />
-                  </div>
-                )}
-                {((menuValue &&
-                  menuValue.name === 'actions.agents.delete_agent') ||
-                  selectedOptions.length > 0) && (
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ paddingLeft: 16 }}>
-                      <Button
-                        styleType='primary'
-                        onClick={() => {
-                          if (
-                            menuValue.name === 'actions.agents.delete_agent'
-                          ) {
-                            showDeleteModal(true);
-                          }
-                        }}
-                      >
-                        Confirm
-                      </Button>
-                    </div>
-                    <div style={{ paddingLeft: 16 }}>
-                      <Button
-                        styleType='tertiary'
-                        onClick={() => {
-                          setMenuValue(undefined);
-                          selectOptions([]);
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </AllCheckStyle>
-          <div style={{ paddingRight: 24 }}>
-            <CSVLink
-              data={csvData}
-              filename={'export.csv'}
-              headers={headers}
-              target='_blank'
-            >
-              <Button styleType='tertiary' size='small' iconOnly={true}>
-                <Icon name='export' />
-              </Button>
-            </CSVLink>
-          </div>
-          <Pagination
-            totalRecords={totalRecords}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onChangePage={handleChangeCurrentPage}
-            onChangeRowsPerPage={handleChangRowsPerPage}
-          />
-        </TableHeader>
+
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
@@ -387,27 +259,6 @@ const Table: FC<Props & WrappedComponentProps> = ({
             />
           </StyledPagination>
         )}
-        <ConfirmDialog
-          icon='trash'
-          isOpen={deleteModal}
-          variant='danger'
-          title='Delete agent?'
-          leftButtonText='Delete Agents'
-          rightButtonText='Keep Agents'
-          onLeftButtonClick={() => {
-            showDeleteModal(false);
-            setMenuValue(undefined);
-            setIsAllChecked(false);
-            setChecked({});
-          }}
-          onRightButtonClick={() => {
-            showDeleteModal(false);
-            setMenuValue(undefined);
-            setIsAllChecked(false);
-            setChecked({});
-          }}
-          text={`Deleting 304 agents will change their status to 'deleted'`}
-        />
       </TableStyled>
     </>
   );

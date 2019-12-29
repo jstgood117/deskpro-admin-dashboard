@@ -34,4 +34,13 @@ export type HeaderGroup = {
   getFooterGroupProps: (userProps?: any) => void;
 };
 
-export type setCheckedType = React.Dispatch<React.SetStateAction<object>>;
+export type objectUseState = React.Dispatch<React.SetStateAction<object>>;
+export type booleanUseState = React.Dispatch<React.SetStateAction<boolean>>;
+export type anyUseState = React.Dispatch<any>;
+
+export interface IPageChange {
+  currentPage: number;
+  totalPages: number;
+  start: number;
+  end: number;
+}
