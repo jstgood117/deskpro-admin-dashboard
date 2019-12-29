@@ -39,12 +39,11 @@ export type Props = {
   setIsAllChecked: booleanUseState;
   dropdownValue: any;
   setDropdownValue: anyUseState;
-  items: any;
   setChecked: objectUseState;
   pageSize: number;
   pageIndex: number;
   data: KeyValue[];
-  checked: boolean;
+  checked: object;
   path: string;
   page: any;
   columns: any[];
@@ -61,7 +60,6 @@ const Header: FC<Props & WrappedComponentProps> = ({
   setIsAllChecked,
   dropdownValue,
   setDropdownValue,
-  items,
   setChecked,
   pageSize,
   pageIndex,
@@ -107,6 +105,10 @@ const Header: FC<Props & WrappedComponentProps> = ({
   };
 
   const csvData = generateCSVData(page, columns);
+
+
+  const items = [{ link: 'All on the page' }, { link: 'All' }];
+
 
   return (
     <>

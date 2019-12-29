@@ -15,7 +15,7 @@ import Checkbox from '../Checkbox';
 import Icon from '../Icon';
 import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
-
+import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import {
   onCheckboxChange,
@@ -25,12 +25,9 @@ import {
 } from './helpers/functions';
 import {
   TableStyled,
-  TableHeader,
-  AllCheckStyle,
   StyledPagination,
   StyledTh
 } from './TableStyles';
-import MultiSelect from '../SelectComponents/MultiSelect';
 
 export type Props = {
   path: string;
@@ -54,10 +51,6 @@ const Table: FC<Props & WrappedComponentProps> = ({
   tableType,
   sortBy
 }) => {
-  let headers = [];
-  headers = columns.map(column => {
-    return { label: intl.formatMessage({ id: column.id }), key: column.id };
-  });
 
   const tableParams: TableParams = generateTableParams(
     tableType,
@@ -102,7 +95,6 @@ const Table: FC<Props & WrappedComponentProps> = ({
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [dropdownValue, setDropdownValue] = useState();
-  const [opened, clickButton] = useState(false);
   const [totalRecords, setTotalRecords] = useState<number>(0);
 
   const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
@@ -114,7 +106,7 @@ const Table: FC<Props & WrappedComponentProps> = ({
     gotoPage(datas.currentPage - 1);
   };
 
-  const handleChangRowsPerPage = (rows: number) => {
+  const handleChangeRowsPerPage = (rows: number) => {
     setPageSize(rows);
     setRowsPerPage(rows);
     setCurrentPage(1);
@@ -148,12 +140,28 @@ const Table: FC<Props & WrappedComponentProps> = ({
     setDropdownValue(undefined);
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
-  const items = [{ link: 'All on the page' }, { link: 'All' }];
-
   return (
     <>
       <TableStyled>
-
+        <Header
+          isAllChecked={isAllChecked}
+          setIsAllChecked={setIsAllChecked}
+          dropdownValue={dropdownValue}
+          setDropdownValue={setDropdownValue}
+          setChecked={setChecked}
+          pageSize={pageSize}
+          pageIndex={pageIndex}
+          data={data}
+          checked={checked}
+          path={path}
+          page={page}
+          columns={columns}
+          totalRecords={totalRecords}
+          rowsPerPage={rowsPerPage}
+          currentPage={currentPage}
+          handleChangeCurrentPage={handleChangeCurrentPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
@@ -255,7 +263,7 @@ const Table: FC<Props & WrappedComponentProps> = ({
               rowsPerPage={rowsPerPage}
               currentPage={currentPage}
               onChangePage={handleChangeCurrentPage}
-              onChangeRowsPerPage={handleChangRowsPerPage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
             />
           </StyledPagination>
         )}
