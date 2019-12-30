@@ -12,6 +12,7 @@ describe('Pagination', () => {
 
     return (
       <Radio
+        id='value1'
         value='value1'
         setOption={(val: any) => setOption(val)}
         option={option}

@@ -3,13 +3,13 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
-import SearchBox, { IProps } from './SearchBox';
+import SearchBox, { Props } from './SearchBox';
 import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
 describe('SearchBox', () => {
-  let props: IProps;
+  let props: Props;
   let mountedSearchBox: any;
 
   const wrapper = (bShallow: boolean) => {
@@ -36,9 +36,8 @@ describe('SearchBox', () => {
     mountedSearchBox = undefined;
   });
 
-  it('always renders a <div>, <svg>, <input>', () => {
+  it('always renders a <div>, <input>', () => {
     expect(wrapper(false).find('div').length).toBe(1);
     expect(wrapper(false).find('input').length).toBe(1);
-    expect(wrapper(false).find('svg').length).toBe(1);
   });
 });

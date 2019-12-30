@@ -85,7 +85,7 @@
     "@types/debug": "^4.1.5",
     "@types/enzyme": "^3.10.4",
     "@types/enzyme-adapter-react-16": "^1.0.5",
-    "@types/jest": "^24.0.24",
+    "@types/jest": "^24.0.25",
     "@types/lodash": "^4.14.149",
     "@types/node": "12.12.21",
     "@types/react": "^16.9.16",
@@ -114,13 +114,15 @@
     "build": "react-app-rewired build",
     "lint": "$(npm bin)/tslint --project tsconfig.json",
     "test": "react-app-rewired test",
+    "coverage": "react-app-rewired test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:build": "build-storybook",
     "build-storybook": "build-storybook -s public",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
     "precommit": "lint-staged",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "jest:coverage": "jest --watchAll --config jest.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"

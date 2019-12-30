@@ -5,7 +5,7 @@ describe('Routes', () => {
 
     const siderbarLinks = [
       {'sectionName':'admin_nav.section.setup','icon':'setup','navItems':[
-        {'itemName':'admin_nav.item.dashboard','path':'/','pageType':null,'metadataQuery':null,'navItems':null,'__typename':'SidebarItem'}
+        {'itemName':'admin_nav.item.dashboard','path':'/','pageType':'','metadataQuery':'','__typename':'SidebarItem'}
       ]
     }];
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { MockIntlProvider } from './mock-react-intl';
+import { MockIntlProvider } from '../__mocks__/mock-react-intl';
 
 import { DeskproAdminTheme } from '../src/components/Theme';
 import '../src/style/text-antialiased.css';
