@@ -1,2 +1,2 @@
-import ActionFactory from './ActionFactory';
+import {ActionFactory} from './ActionFactory';
 export default ActionFactory;

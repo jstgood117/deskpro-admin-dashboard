@@ -8,10 +8,10 @@ export const processSortParam = (a:any) => {
     a.props.hasOwnProperty('sortingvalue')
   ) {
     a = !isNaN(parseFloat(a.props.sortingvalue))
-      ? parseFloat(a.props.sortingvalue)
-      : typeof a.props.sortingvalue === 'string'
-      ? a.props.sortingvalue.toLowerCase()
-      : 0;
+          ? parseFloat(a.props.sortingvalue)
+          : typeof a.props.sortingvalue === 'string'
+            ? a.props.sortingvalue.toLowerCase()
+            : 0;
   }
 
   a = a === null || a === undefined ? '-' : a;
@@ -40,9 +40,9 @@ export const customSortMethod = (a:any, b:any, col:string): number => {
     return 1;
   }
 
-  if (a <= b) {
+  if (a < b) {
     return -1;
   }
 
-  return 0;
+  return -1;
 };
