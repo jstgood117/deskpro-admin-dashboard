@@ -77,6 +77,20 @@ const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
   const fileTypes = file && file.type;
   const fileType = fileTypes && fileTypes.split('/')[0];
   const fileName = file && file.name;
+
+  const onDrop = (e: FileList) => {
+    onChangeFile(e);
+    setDragover(false);
+  };
+
+  const onDragOver = () => {
+    setDragover(true);
+  };
+
+  const onDragLeave = () => {
+    setDragover(false);
+  };
+
   return (
     <div>
       <InputFile
@@ -90,16 +104,9 @@ const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
         }}
       />
       <FileDrop
-        onDrop={(e: FileList) => {
-          onChangeFile(e);
-          setDragover(false);
-        }}
-        onDragOver={() => {
-          setDragover(true);
-        }}
-        onDragLeave={() => {
-          setDragover(false);
-        }}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
+        onDragLeave={onDragLeave}
       >
         {!file && (
           <Label dragOver={dragOver}>
