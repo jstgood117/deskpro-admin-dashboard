@@ -25,7 +25,6 @@ describe('FilterOptions', () => {
 
   beforeEach(() => {
     props = {
-      intl: null,
       property: filterData.property,
       value: filterData.value,
       operatorName: filterData.operatorName

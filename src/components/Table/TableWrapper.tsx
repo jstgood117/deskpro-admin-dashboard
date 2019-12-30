@@ -9,7 +9,7 @@ import { SortType, ColumnMeta } from './types';
 
 interface IProps {
   path: string; // TODO: Remove when db
-  dataType: string;
+  dataType: 'sync' | 'async';
   fetchData: () => void;
   totalPageCount: number;
   data:KeyValue[];
@@ -70,35 +70,20 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
 }) => {
   return (
     <Fragment>
-      {dataType === 'sync' && (
-        <Table
-          path={path}
-          data={data}
-          columns={transformColumnData(
-            [...tableDef.columns],
-            columnOrder,
-            intl
-          )}
-          tableType='sync'
-          sortBy={sortBy}
-        />
-      )}
-      {dataType === 'async' && (
-        <Table
-          path={path}
-          data={data}
-          columns={transformColumnData(
-            [...tableDef.columns],
-            columnOrder,
-            intl
-          )}
-          fetchData={fetchData}
-          loading={loading}
-          pageCount={totalPageCount}
-          tableType='async'
-          sortBy={sortBy}
-        />
-      )}
+      <Table
+        path={path}
+        data={data}
+        columns={transformColumnData(
+          [...tableDef.columns],
+          columnOrder,
+          intl
+        )}
+        fetchData={dataType === 'async' ? fetchData : undefined}
+        loading={loading}
+        pageCount={totalPageCount}
+        tableType={dataType}
+        sortBy={sortBy}
+      />
     </Fragment>
   );
 };

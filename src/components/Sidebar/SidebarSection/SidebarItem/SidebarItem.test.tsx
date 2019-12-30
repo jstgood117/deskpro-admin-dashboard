@@ -33,7 +33,7 @@ describe('SidebarItem', () => {
 
   describe('when itemName and path are defined', () => {
     it('renders the label', () => {
-      expect(wrapper(false).text()).toContain('Test');
+      expect(wrapper(false).text()).toContain('test');
     });
 
     it('renders the link', () => {

@@ -26,15 +26,35 @@ describe('generateCSVData', () => {
     const columnsMeta = [{
       id:'name',
       title:'Name',
+      Header:'Name',
+      accessor:'name',
+      type:'name',
+      sortType:'TEXT',
+      columnProps:{}
     },{
       id:'email',
       title:'Email',
+      Header:'Email',
+      accessor:'email',
+      type:'email',
+      sortType:'TEXT',
+      columnProps:{}
     },{
       id:'emails',
-      title:'All Emails'
+      title:'All Emails',
+      Header:'Emails',
+      accessor:'emails',
+      type:'emails',
+      sortType:'TEXT',
+      columnProps:{}
     },{
       id:'agents',
-      title:'Agents'
+      title:'Agents',
+      Header:'Agents',
+      accessor:'agents',
+      type:'agents',
+      sortType:'TEXT',
+      columnProps:{}
     }];
 
     const csvData = generateCSVData(table, columnsMeta);

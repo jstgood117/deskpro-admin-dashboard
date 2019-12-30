@@ -4,6 +4,7 @@ import { mount, shallow } from '../../test/enzyme';
 import TableActions, { IProps } from './TableActions';
 
 import { ColumnOrder } from '../../types';
+import { SortType } from '../Table/types';
 
 describe('TableActions', () => {
   let props: IProps;
@@ -25,7 +26,7 @@ describe('TableActions', () => {
       sortMenu: true,
       groupMenu: true,
       viewMenu: true,
-      intl: (value: string) => value,
+      onSortChange: (sortItems: SortType[]) => {},
       onOrderChange: (order: ColumnOrder[]) => {
         order.sort();
         return;

@@ -3,13 +3,13 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
-import Input, { IProps } from './Input';
+import Input, { Props } from './Input';
 import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
 describe('Input', () => {
-  let props: IProps;
+  let props: Props;
   let mountedInput: any;
 
   const wrapper = (bShallow: boolean) => {
