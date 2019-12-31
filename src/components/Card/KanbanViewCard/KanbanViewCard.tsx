@@ -115,8 +115,10 @@ const KanbanViewCard: FC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   size={
                     styleType === 'view1' ? 65 : styleType === 'view2' ? 44 : 30
                   }
-                  type='image'
-                  content={cardDetails.avatar}
+                  type={cardDetails.avatar ? 'image' : 'text'}
+                  content={cardDetails.avatar ? cardDetails.avatar : cardDetails.userName}
+                  textColor='#f9e6e1'
+                  textBackgroundColor='#ec6c4e'
                 />
               </AvatarWrapper>
             )}
@@ -126,8 +128,10 @@ const KanbanViewCard: FC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   <AvatarWrapper styleType={styleType}>
                     <Avatar
                       size={30}
-                      type='image'
-                      content={cardDetails.avatar}
+                      type={cardDetails.avatar ? 'image' : 'text'}
+                      content={cardDetails.avatar ? cardDetails.avatar : cardDetails.userName}
+                      textColor='#f9e6e1'
+                      textBackgroundColor='#ec6c4e'
                     />
                   </AvatarWrapper>
                 )}

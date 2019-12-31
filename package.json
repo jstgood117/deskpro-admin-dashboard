@@ -114,16 +114,15 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "lint": "$(npm bin)/tslint --project tsconfig.json",
-    "test": "react-app-rewired test",
-    "coverage": "react-app-rewired test --env=jsdom --watchAll=false --coverage",
+    "test": "jest --config jest.config.js",
+    "coverage": "jest --config jest.config.js --coverage",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "storybook:build": "build-storybook",
     "build-storybook": "build-storybook -s public",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
     "precommit": "lint-staged",
-    "generate": "graphql-codegen",
-    "jest:coverage": "jest --watchAll --config jest.config.js"
+    "generate": "graphql-codegen"
   },
   "eslintConfig": {
     "extends": "react-app"
