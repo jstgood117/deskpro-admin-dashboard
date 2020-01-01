@@ -14,7 +14,7 @@ import { logError } from '../../components/Error/ErrorBoundary';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import Header from '../../components/Header';
-import Table from '../../components/Table/TableWrapper';
+import TableWrapper from '../../components/Table/TableWrapper';
 import TabBar from '../../components/TabBar';
 import { dpstyle } from '../../style/styled';
 import {
@@ -58,6 +58,7 @@ const StandardTablePage: FC<IProps> = ({
   const [tableData, setTableData] = useState<KeyValue[]>();
   const [filteredData, setFilteredData] = useState<KeyValue[]>([]);
   const [totalPageCount, setTotalPageCount] = useState<number>(1);
+  const [view, setView] = useState<'table' | 'list' | 'card'>('table');
   const [pageSize] = useState<number>(10);
 
   const queryService = QueryService();
@@ -197,14 +198,12 @@ const StandardTablePage: FC<IProps> = ({
               description={description}
               links={headerLinks}
               illustration={illustration}
-              defaulViewMode='table'
+              defaulViewMode={view}
               showViewModeSwitcher={true}
               showNewButton={true}
               showHelpButton={true}
               onNewClick={() => null}
-              onChangeView={val => {
-                console.log(val);
-              }}
+              onChangeView={val => setView(val)}
             />
           )}
           <BodyMargin>
@@ -233,8 +232,9 @@ const StandardTablePage: FC<IProps> = ({
               />
             )}
             {views && views[tabIndex] && (
-              <Table
+              <TableWrapper
                 {...views[tabIndex]}
+                view={view}
                 path={path} // TODO: When hooked up to live db, not required
                 data={filteredData}
                 fetchData={fetchData}

@@ -124,8 +124,6 @@ const Header: FC<Props & WrappedComponentProps> = ({
 
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
-
-
   return (
     <>
       <TableStyled>

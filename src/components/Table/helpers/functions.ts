@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { IMenuItemProps } from '../../../resources/interfaces';
 import { KeyValue } from '../../../types';
 import { ActionsType } from '../../../services/actions/types';
+import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
 import {
   objectUseState,
   TableParams,
@@ -140,4 +141,15 @@ export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) =>
   }
 
   return csvData;
+};
+
+export const generateCardProps = (row: any): UserType => {
+
+  const { original } = row;
+  return {
+    userName: original.name,
+    userNumber: original.phone,
+    userMail: original.primary_email,
+    // avatar: original.avatarUrn
+  };
 };

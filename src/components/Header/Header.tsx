@@ -120,9 +120,9 @@ export interface IProps {
   links?: ILink[];
   showHelpButton?: boolean;
   showViewModeSwitcher?: boolean;
-  defaulViewMode?: 'table' | 'list' | 'map';
+  defaulViewMode?: 'table' | 'list' | 'card';
   showNewButton?: boolean;
-  onChangeView?: (viewMode: string) => void;
+  onChangeView?: (viewMode: 'table' | 'list' | 'card') => void;
   onNewClick?: () => void;
 }
 
@@ -140,7 +140,7 @@ const Header: FC<IProps> = ({
 }) => {
   const [state, setState] = useState(defaulViewMode);
 
-  function changeView(viewMode: 'table' | 'list' | 'map') {
+  function changeView(viewMode: 'table' | 'list' | 'card') {
     setState(viewMode);
     onChangeView(viewMode);
   }
@@ -181,8 +181,8 @@ const Header: FC<IProps> = ({
                       <Icon name='viewMode.list' />
                     </ViewModeButton>
                     <ViewModeButton
-                      onClick={() => changeView('map')}
-                      active={state === 'map'}
+                      onClick={() => changeView('card')}
+                      active={state === 'card'}
                     >
                       <Icon name='viewMode.map' />
                     </ViewModeButton>
