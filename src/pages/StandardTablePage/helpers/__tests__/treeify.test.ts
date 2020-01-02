@@ -104,7 +104,7 @@ describe('treeify',() => {
     ]);
   });
 
-  test('if `id`, `custom_parent` and `custom_children`, use them to locate children and store in final structure', () => {
+  test('if `id`, `custom_parent` and `custom_children`, use them to locate children and store in final structure.', () => {
 
     const result = treeify(testData2, 'id', 'custom_parent', 'custom_children');
 
