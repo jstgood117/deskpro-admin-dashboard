@@ -126,7 +126,7 @@ const Table: FC<Props> = ({
             prepareRow(row);
             return (
               <div key={indexOuter}>
-                <KanbanViewCard checkbox={true} styleType='view3' cardDetails={generateCardProps(row)} />
+                <KanbanViewCard checkbox={true} styleType='view4' cardDetails={generateCardProps(row)} />
               </div>
             );
           })}

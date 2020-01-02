@@ -223,8 +223,8 @@ const StandardTablePage: FC<IProps> = ({
               <TabBar
                 // Backend payload phrases are missing admin_common -
                 // should this be hard-coded like this?
-                tabItems={views.map((view: IViewData) => {
-                  return { messageId: view.title };
+                tabItems={views.map((_view: IViewData) => {
+                  return { messageId: _view.title };
                 })}
                 handleClick={index => {
                   setTabState(index);
