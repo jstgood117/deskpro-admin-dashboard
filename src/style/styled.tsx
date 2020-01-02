@@ -15,7 +15,7 @@ export const Flex = styled(BaseFlex)`
   border: 0;
   font-size: 16px;
   line-height: 1;
-  color: ${props => props.theme.staticColor};
+  color: ${props => props.theme.staticColour};
   font: ${props => props.theme.mainFont};
   box-sizing: content-box;
 `;
@@ -35,8 +35,7 @@ export const FlowLayout = styled(Flex)`
  * <BoxLayout>
  *   <BoxFill>Foo bar baz</BoxFill>
  *   <Box><CloseIcon /></Box>
- * </BoxLayout>
- * ```
+ * </BoxLayout>ur * ```
  */
 export const BoxLayout = styled(Flex).attrs(_props => ({
   flexWrap: 'nowrap',
@@ -54,7 +53,7 @@ export const Box = styled(BaseBox)`
   border: 0;
   font-size: 100%;
   line-height: 1;
-  color: ${props => props.theme.staticColor};
+  color: ${props => props.theme.staticColour};
   font: ${props => props.theme.mainFont};
   box-sizing: content-box;
   img,
@@ -164,7 +163,7 @@ export const dpstyle = {
     vertical-align: baseline;
     display: block;
     line-height: 1;
-    color: ${props => props.theme.staticColor};
+    color: ${props => props.theme.staticColour};
     font-family: ${props => props.theme.mainFont};
     box-sizing: content-box;
   `,
@@ -174,7 +173,7 @@ export const dpstyle = {
     font-weight: normal;
     font-size: 100%;
     line-height: 150%;
-    color: ${props => props.theme.staticColor};
+    color: ${props => props.theme.staticColour};
     box-sizing: content-box;
   `,
   nav: styled.nav`
@@ -185,7 +184,7 @@ export const dpstyle = {
     vertical-align: baseline;
     display: block;
     line-height: 1;
-    color: ${props => props.theme.staticColor};
+    color: ${props => props.theme.staticColour};
     font-family: ${props => props.theme.mainFont};
     box-sizing: content-box;
   `,
@@ -198,7 +197,7 @@ export const dpstyle = {
     vertical-align: baseline;
     display: block;
     line-height: 1;
-    color: ${props => props.theme.staticColor};
+    color: ${props => props.theme.staticColour};
     font-family: ${props => props.theme.mainFont};
     box-sizing: content-box;
   `,
@@ -221,7 +220,7 @@ export const dpstyle = {
     font-size: 100%;
     display: block;
     line-height: 1;
-    color: ${props => props.theme.staticColor};
+    color: ${props => props.theme.staticColour};
     font-family: ${props => props.theme.mainFont};
     box-sizing: content-box;
   `,
@@ -346,8 +345,8 @@ export const HeadingText = ({
   messageId,
   ...rest
 }: any & { messageId?: string; size: number | string }) => {
-  const s = parseInt(size + '', 10);
-  invariant(s && s >= 1 && s <= 6, 'size must be a number between 1 and 6');
+  const _size = parseInt(size + '', 10);
+  invariant(_size && _size >= 1 && _size <= 6, 'size must be a number between 1 and 6');
 
   invariant(
     !(messageId && rest.children && rest.children.length),
@@ -362,7 +361,7 @@ export const HeadingText = ({
     );
   }
 
-  switch (s) {
+  switch (_size) {
     case 1:
       return <HeadingText1 {...rest} />;
     case 2:

@@ -1,6 +1,6 @@
 type FontFamilyType = string;
 
-const fontFamily = 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif' as FontFamilyType;
+export const fontFamily = 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif' as FontFamilyType;
 
 type FontType = {
   fontFamily?: FontFamilyType;
