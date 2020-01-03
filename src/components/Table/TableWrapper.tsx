@@ -73,7 +73,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
 }) => {
   return (
     <Fragment>
-      {view === 'table' && 
+      {view === 'table' && (
         <Table
           path={path}
           data={data}
@@ -88,9 +88,10 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           tableType={dataType}
           sortBy={sortBy}
         />
+        )
       }
       {
-        view === 'card' && 
+        view === 'card' && (
           <Card
             path={path}
             data={data}
@@ -105,6 +106,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
             tableType={dataType}
             sortBy={sortBy}
           />
+        )
       }
     </Fragment>
   );
