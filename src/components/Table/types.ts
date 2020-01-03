@@ -9,6 +9,7 @@ export type TableParams = {
   data: KeyValue[];
   initialState: {
     pageIndex: number;
+    pageSize: number;
     sortBy?:SortType[];
   };
   manualPagination?: boolean;

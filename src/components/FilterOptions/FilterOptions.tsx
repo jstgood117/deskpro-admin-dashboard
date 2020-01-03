@@ -360,7 +360,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
-          {console.log(containType, uniqueValues)}
           <Input
             inputType='secondary'
             style={{ minWidth: 218 }}

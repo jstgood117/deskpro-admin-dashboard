@@ -72,7 +72,8 @@ export const generateTableParams = (
         columns,
         data,
         initialState: {
-          pageIndex: 0
+          pageIndex: 0,
+          pageSize: 100,
         },
         manualPagination: true,
         pageCount: controlledPageCount,
@@ -82,6 +83,7 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
+          pageSize: 100,
         }
       };
 };

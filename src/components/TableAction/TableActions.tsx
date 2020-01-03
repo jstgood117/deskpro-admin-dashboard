@@ -242,7 +242,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   };
 
   const handleSortChange = (val:any) => {
-console.log(val);
+
     const id = val.link;
 
     onSortChange([{ id, desc:false }]);
