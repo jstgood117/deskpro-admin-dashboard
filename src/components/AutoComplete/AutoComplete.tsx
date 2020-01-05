@@ -10,6 +10,7 @@ import Icon from '../Icon';
 export interface IProps {
   menuItems: IItemType[];
   placeholder?: string;
+  onChange?: (val: IItemType) => void;
 }
 
 export interface IItemType {
@@ -85,6 +86,7 @@ export const MenuStyle = () => {
 };
 
 const AutoComplete: FC<IProps> = ({ menuItems, ...props }) => {
+
   const [value, setValue] = useState();
   const [containItems, setItems] = useState(menuItems);
   return (
@@ -121,9 +123,16 @@ const AutoComplete: FC<IProps> = ({ menuItems, ...props }) => {
               return menuItem.label.includes(e.target.value);
             });
             setItems(newItems);
+
+            if(typeof props.onChange === 'function') {
+              props.onChange(e.target.value);
+            }
           }}
           onSelect={(val: IItemType) => {
             setValue(val);
+            if(typeof props.onChange === 'function') {
+              props.onChange(val);
+            }
           }}
           menuStyle={{
             position: 'absolute',
