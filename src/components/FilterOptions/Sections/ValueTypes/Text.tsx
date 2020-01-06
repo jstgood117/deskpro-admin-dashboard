@@ -5,7 +5,7 @@ import Icon from '../../../Icon';
 import Input from '../../../Input';
 import Button from '../../../Button';
 
-import { FilterProps } from '../../../../resources/interfaces/filterMeta';
+import { Props } from './types';
 
 const StyledFilterOptions = styled.div`
   display: flex;
@@ -40,15 +40,6 @@ const StyledFilterOptions = styled.div`
     border: 1px solid ${props => props.theme.lightBlue};
   }
 `;
-
-export type Props = {
-  filter?: FilterProps;
-  filterValue: any;
-  filters: FilterProps[];
-  index: number;
-  setFilterValue: React.Dispatch<any>;
-  setFilters?: (e: any) => void;
-};
 
 export const Text: SFC<Props> = ({
   filter,

@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, Dispatch, SetStateAction } from 'react';
 import Autocomplete from 'react-autocomplete';
 
 import { StyledAutoComplete } from '../FilterOptions';
@@ -30,14 +30,14 @@ type Props = {
   currentProperty: any;
   containProperties: FilterMeta[];
   getUniqueValues?: (columnName: string) => string[];
-  setType: React.Dispatch<any>;
-  setProperty: React.Dispatch<any>;
-  setUniqueValues: React.Dispatch<React.SetStateAction<string[]>>;
-  setProperties: React.Dispatch<React.SetStateAction<FilterMeta[]>>;
-  setOptions: React.Dispatch<React.SetStateAction<any[]>>;
-  setOption: React.Dispatch<any>;
-  setCurrentOperator: React.Dispatch<React.SetStateAction<string>>;
-  setCurrentPath: React.Dispatch<React.SetStateAction<string>>;
+  setType: Dispatch<any>;
+  setProperty: Dispatch<any>;
+  setUniqueValues: Dispatch<SetStateAction<string[]>>;
+  setProperties: Dispatch<SetStateAction<FilterMeta[]>>;
+  setOptions: Dispatch<SetStateAction<any[]>>;
+  setOption: Dispatch<any>;
+  setCurrentOperator: Dispatch<SetStateAction<string>>;
+  setCurrentPath: Dispatch<SetStateAction<string>>;
 };
 
 const Property: SFC<WrappedComponentProps & Props> = ({

@@ -153,6 +153,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
         index={index}
         setFilterValue={setFilterValue}
         setFilters={setFilters}
+        uniqueValues={uniqueValues}
       />
 
     </ThemeProvider>
