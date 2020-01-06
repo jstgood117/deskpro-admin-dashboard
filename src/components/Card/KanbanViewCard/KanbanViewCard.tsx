@@ -23,11 +23,11 @@ export interface UserType {
 export interface IProps {
   checkbox: boolean;
   cardDetails?: UserType;
-  styleType: 'view1' | 'view2' | 'view3';
+  styleType: 'view1' | 'view2' | 'view3' | 'view4';
 }
 
 interface StyleProps {
-  styleType: 'view1' | 'view2' | 'view3';
+  styleType: 'view1' | 'view2' | 'view3' | 'view4';
 }
 
 const CardStyled = styled.div`
@@ -57,7 +57,7 @@ const ContentWrapper = styled.div<StyleProps>`
   padding-top: 14px;
   padding-bottom: 14px;
   width: 100%;
-  padding-left: ${props => (props.styleType === 'view3' ? '42px' : '0px')};
+  padding-left: ${props => ((props.styleType === 'view3' || props.styleType === 'view4') ? '42px' : '0px')};
 `;
 
 const AvatarWrapper = styled.div<StyleProps>`
@@ -83,7 +83,8 @@ const StyledAdmin = styled.div`
 `;
 
 const StyledNameSection = styled.div<StyleProps>`
-  display: flex;
+  display: ${props =>
+    props.styleType === 'view4' ? 'block' : 'flex'};
   alignitems: center;
   padding-bottom: ${props =>
     props.styleType === 'view1'
@@ -115,19 +116,23 @@ const KanbanViewCard: FC<IProps> = ({ checkbox, cardDetails, styleType }) => {
                   size={
                     styleType === 'view1' ? 65 : styleType === 'view2' ? 44 : 30
                   }
-                  type='image'
-                  content={cardDetails.avatar}
+                  type={cardDetails.avatar ? 'image' : 'text'}
+                  content={cardDetails.avatar ? cardDetails.avatar : cardDetails.userName}
+                  textColor='#f9e6e1'
+                  textBackgroundColor='#ec6c4e'
                 />
               </AvatarWrapper>
             )}
             <ContentWrapper styleType={styleType}>
               <StyledNameSection styleType={styleType}>
-                {styleType === 'view3' && (
+                {(styleType === 'view3' || styleType === 'view4') && (
                   <AvatarWrapper styleType={styleType}>
                     <Avatar
                       size={30}
-                      type='image'
-                      content={cardDetails.avatar}
+                      type={cardDetails.avatar ? 'image' : 'text'}
+                      content={cardDetails.avatar ? cardDetails.avatar : cardDetails.userName}
+                      textColor='#f9e6e1'
+                      textBackgroundColor='#ec6c4e'
                     />
                   </AvatarWrapper>
                 )}

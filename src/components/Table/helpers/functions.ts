@@ -2,8 +2,9 @@ import _ from 'lodash';
 import { IMenuItemProps } from '../../../resources/interfaces';
 import { KeyValue } from '../../../types';
 import { ActionsType } from '../../../services/actions/types';
+import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
 import {
-  setCheckedType,
+  objectUseState,
   TableParams,
   TableType,
   ColumnMeta
@@ -12,7 +13,7 @@ import {
 export const onCheckboxChange = (
   value: string,
   checked: object,
-  setChecked: setCheckedType
+  setChecked: objectUseState
 ) => {
   const keys = Object.keys(checked);
 
@@ -31,7 +32,7 @@ export const onCheckboxChange = (
 
 export const onSelectAllChange = (
   isChecked: boolean,
-  setChecked: setCheckedType,
+  setChecked: objectUseState,
   currentPage: number,
   pageSize: number,
   data: object[]
@@ -52,7 +53,7 @@ export const onSelectAllChange = (
 
 export const onSelectEverything = (
   data: object[],
-  setChecked: setCheckedType
+  setChecked: objectUseState
 ) => {
   const ids = data.map((_row: KeyValue) => ({
     [_row.id]: true
@@ -71,7 +72,8 @@ export const generateTableParams = (
         columns,
         data,
         initialState: {
-          pageIndex: 0
+          pageIndex: 0,
+          pageSize: 100,
         },
         manualPagination: true,
         pageCount: controlledPageCount,
@@ -81,6 +83,7 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
+          pageSize: 100,
         }
       };
 };
@@ -140,4 +143,15 @@ export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) =>
   }
 
   return csvData;
+};
+
+export const generateCardProps = (row: any): UserType => {
+
+  const { original } = row;
+  return {
+    userName: original.name,
+    userNumber: original.phone,
+    userMail: original.primary_email,
+    // avatar: original.avatarUrn
+  };
 };

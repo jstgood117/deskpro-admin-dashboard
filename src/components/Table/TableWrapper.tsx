@@ -5,11 +5,13 @@ import { ITableSetup, ITableColumn } from '../../resources/interfaces';
 import { KeyValue, ColumnOrder } from '../../types';
 import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
+import Card from './Card';
 import { SortType, ColumnMeta } from './types';
 
 interface IProps {
+  view: 'table' | 'list' | 'card';
   path: string; // TODO: Remove when db
-  dataType: string;
+  dataType: 'sync' | 'async';
   fetchData: () => void;
   totalPageCount: number;
   data:KeyValue[];
@@ -66,11 +68,12 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   tableDef,
   dataType,
   columnOrder,
-  sortBy
+  sortBy,
+  view
 }) => {
   return (
     <Fragment>
-      {dataType === 'sync' && (
+      {view === 'table' && (
         <Table
           path={path}
           data={data}
@@ -79,26 +82,32 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
             columnOrder,
             intl
           )}
-          tableType='sync'
-          sortBy={sortBy}
-        />
-      )}
-      {dataType === 'async' && (
-        <Table
-          path={path}
-          data={data}
-          columns={transformColumnData(
-            [...tableDef.columns],
-            columnOrder,
-            intl
-          )}
-          fetchData={fetchData}
+          fetchData={dataType === 'async' ? fetchData : undefined}
           loading={loading}
           pageCount={totalPageCount}
-          tableType='async'
+          tableType={dataType}
           sortBy={sortBy}
         />
-      )}
+        )
+      }
+      {
+        view === 'card' && (
+          <Card
+            path={path}
+            data={data}
+            columns={transformColumnData(
+              [...tableDef.columns],
+              columnOrder,
+              intl
+            )}
+            fetchData={dataType === 'async' ? fetchData : undefined}
+            loading={loading}
+            pageCount={totalPageCount}
+            tableType={dataType}
+            sortBy={sortBy}
+          />
+        )
+      }
     </Fragment>
   );
 };

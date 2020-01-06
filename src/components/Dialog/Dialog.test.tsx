@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
-import Dialog, { IProps } from './Dialog';
+import Dialog, { Props } from './Dialog';
 
 describe('Dialog', () => {
-  let props: IProps;
+  let props: Props;
   let mountedDialog: any;
 
   const wrapper = (bShallow: boolean) => {

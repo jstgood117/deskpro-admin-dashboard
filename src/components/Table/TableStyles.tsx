@@ -129,3 +129,9 @@ export const StyledTh = styled.div`
     padding-left: 10px;
   }
 `;
+
+export const CardGrid = styled.div`
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  grid-gap:20px;
+`;

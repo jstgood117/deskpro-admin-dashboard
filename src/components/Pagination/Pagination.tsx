@@ -181,7 +181,7 @@ const Pagination: React.FC<IProps> = ({
             classNamePrefix='select'
             placeholder={null}
             hideSelectedOptions={false}
-            defaultValue={pages[currentPage - 1]}
+            value={pages[currentPage - 1]}
             onChange={(option: any) => {
               onChangePage({
                 currentPage: option.page,

@@ -5,11 +5,6 @@ import SidebarSection, { IProps } from './SidebarSection';
 import Icon from '../../Icon';
 import { MemoryRouter } from 'react-router';
 
-const testTranslations = {
-  'test': 'Test',
-  'admin.sidebar.channels': 'Channels',
-};
-
 describe('SidebarSection', () => {
   let props: IProps;
   let mountedSidebarSection: any;
@@ -34,6 +29,7 @@ describe('SidebarSection', () => {
       key: 0,
       sectionName: 'test',
       navItems: undefined,
+      icon: null
     };
     mountedSidebarSection = undefined;
   });
@@ -41,7 +37,7 @@ describe('SidebarSection', () => {
   describe('always', () => {
     it('renders the label and an icon', () => {
       expect(wrapper(false).find(Icon).length).toBe(1);
-      expect(wrapper(false).text()).toContain('Test');
+      expect(wrapper(false).text()).toContain('test');
     });
   });
 

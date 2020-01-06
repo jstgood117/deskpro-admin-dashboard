@@ -4,5 +4,5 @@
         "titleBar.activeBackground": "#5D370F",
         "titleBar.activeForeground": "#FEFAF6"
     },
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "typescript.tsdk": "node_modules/typescript/lib",
 }

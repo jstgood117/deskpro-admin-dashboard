@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 
-type AppErrorType = {
+export type Props = {
   message: string;
 };
 
-const AppError: FC<AppErrorType> =  ({
+const AppError: FC<Props> =  ({
   message
 }) => {
 

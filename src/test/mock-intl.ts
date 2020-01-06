@@ -10,7 +10,7 @@ import {IntlProvider} from 'react-intl';
 import { mount, shallow } from 'enzyme';
 
 const defaultLocale = 'en';
-const locale = defaultLocale;
+const locale = 'en';
 const onError = () => {};
 
 export const mountWithIntl = (node: React.ReactElement) => {

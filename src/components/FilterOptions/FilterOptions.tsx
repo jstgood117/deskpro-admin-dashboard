@@ -120,8 +120,10 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   const [currentOperator, setCurrentOperator] = useState(filter.operatorName);
   const [containProperties, setProperties] = useState(options);
   const [containOptions, setOptions] = useState([]);
+  // eslint-disable-next-line
   const [containType, setType] = useState();
   const [filterValue, setFilterValue] = useState();
+  // eslint-disable-next-line
   const [uniqueValues, setUniqueValues] = useState<string[]>([]);
 
   const AutoSelectOption = (val: OperatorTypes) => {
@@ -360,7 +362,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
           </StyledAutoComplete>
         </div>
         <div>
-          {console.log(containType, uniqueValues)}
           <Input
             inputType='secondary'
             style={{ minWidth: 218 }}

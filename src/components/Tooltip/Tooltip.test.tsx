@@ -3,13 +3,13 @@ import Adapter from 'enzyme-adapter-react-16';
 import { configure, mount, shallow } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 
-import Tooltip, { IProps } from './Tooltip';
+import Tooltip, { Props } from './Tooltip';
 import { DeskproAdminTheme } from '../Theme';
 
 configure({ adapter: new Adapter() });
 
 describe('Tooltip', () => {
-  let props: IProps;
+  let props: Props;
   let mountedCheckbox: any;
 
   const wrapper = (bShallow: boolean) => {
@@ -36,7 +36,7 @@ describe('Tooltip', () => {
   beforeEach(() => {
     props = {
       content: '',
-    } as IProps;
+    } as Props;
   });
 
   it('always renders a <span>', () => {
