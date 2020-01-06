@@ -136,6 +136,7 @@ export const FieldElement = (props: any) => {
         id={props.id}
         name={props.id}
         value={props.formikProps.values[props.id]}
+        inputType='primary'
         onChange={(event => {
           props.formikProps.handleChange(event);
         })}
