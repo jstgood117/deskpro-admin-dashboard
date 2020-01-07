@@ -1,5 +1,5 @@
 import React, { SFC } from 'react';
-import Text from './ValueTypes/Text';
+// import Text from './ValueTypes/Text';
 import ChoiceFromData from './ValueTypes/ChoiceFromData';
 
 import { FilterProps } from '../../../resources/interfaces/filterMeta';
@@ -19,15 +19,16 @@ export type Props = {
 export const Values: SFC<Props> = ({ containType, ...props}) => {
 
   switch(containType) {
+    default:
     case 'CHOICE_FROM_DATA':
       return (
         <ChoiceFromData {...props} />
       );
-    default:
-    case 'TEXT':
-      return (
-        <Text {...props} />
-      );
+    // default:
+    // case 'TEXT':
+    //   return (
+    //     <Text {...props} />
+    //   );
   }
 
 };

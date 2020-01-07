@@ -21,13 +21,13 @@ describe('Run filters', () => {
       id:'FirstName-EQUAL',
       property:'FirstName',
       operator:mockOperator1,
-      value:'John',
+      value:['John'],
       operatorName:'EQUAL'
     }, {
       id:'LastName-EQUAL',
       property:'LastName',
       operator:mockOperator2,
-      value:'Doe',
+      value:['Doe'],
       operatorName:'EQUAL'
     }] as FilterType[];
 

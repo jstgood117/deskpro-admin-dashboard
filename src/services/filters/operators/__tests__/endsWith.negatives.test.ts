@@ -9,7 +9,7 @@ describe('Operators endsWith', () => {
     };
     const testString = 'ring';
 
-    const result = doesNotEndWith(row, 'prop1', testString);
+    const result = doesNotEndWith(row, 'prop1', [testString]);
 
     expect(result).toEqual(false);
   });
@@ -25,7 +25,7 @@ describe('Operators endsWith', () => {
     };
     const testString = 'tch?';
 
-    const result = doesNotEndWith(row, 'prop2.*.name', testString);
+    const result = doesNotEndWith(row, 'prop2.*.name', [testString]);
 
     expect(result).toEqual(false);
   });

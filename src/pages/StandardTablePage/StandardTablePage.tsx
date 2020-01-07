@@ -157,7 +157,7 @@ const StandardTablePage: FC<IProps> = ({
     const searchFilter = processFiltersToFilterTypes([{
       property: '*',
       operatorName: 'CONTAINS',
-      value:_value
+      value:[_value]
     }, ...internalFilters]);
     setFilters(searchFilter);
   };

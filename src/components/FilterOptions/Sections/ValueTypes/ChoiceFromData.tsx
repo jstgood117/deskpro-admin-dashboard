@@ -1,73 +1,51 @@
 import React, { SFC } from 'react';
-import Autocomplete from 'react-autocomplete';
-import { uniqueId } from 'lodash';
-
-import Icon from '../../../Icon';
-import { DeskproAdminTheme } from '../../../Theme';
-
-import {
-  AutoCompleteItemStyle,
-  MenuStyle
-} from '../../../AutoComplete/AutoComplete';
-
-import { StyledAutoComplete } from '../../FilterOptions';
+import MultiSelect from '../../../SelectComponents/MultiSelect';
+import { IOptions } from '../../../SelectComponents/interfaces';
 
 import { Props } from './types';
+
+const formatToIOptionsFormat = (uniqueValues: string[]): IOptions[] => {
+
+  if(!uniqueValues) {
+    return [] as IOptions[];
+  }
+
+  return uniqueValues.map((value: string) => ({
+    value,
+    label:value
+  }));
+
+};
+
+const formatFlatArrayFormat = (values: IOptions[]): string[] => {
+  return values.map(_val => _val.value);
+};
 
 export const ChoiceFromData: SFC<Props> = ({
   filter,
   filters,
-  filterValue,
   index,
+  filterValue,
   setFilterValue,
-  // setFilters,
-  placeholder,
   uniqueValues
 }) => {
   return (
-    <StyledAutoComplete name='value'>
-      <Autocomplete
-        getItemValue={(item: any) => item}
-        items={uniqueValues}
-        inputProps={{
-          autoComplete: 'off',
-          placeholder,
-          style: {
-            minWidth: 218
-          }
-        }}
-        renderItem={(item: any, isHighlighted: boolean) => {
-          const selected = false; // TODO
-          return (
-            <div
-              style={AutoCompleteItemStyle(
-                isHighlighted,
-                DeskproAdminTheme,
-                selected
-              )}
-              key={uniqueId()}
-            >
-              {item}
-              {selected && (
-                <span>
-                  <Icon name='check-2' />
-                </span>
-              )}
-            </div>
-          );
-        }}
-        value={filter && filter.value !== undefined ? filter.value : filterValue}
-        onChange={(e: any) => {}}
-        onSelect={(val: string) => {
-          filters[index].value = val;
-          setFilterValue(val);
-        }}
-        menuStyle={MenuStyle()}
-      />
-      <span>
-        <Icon name='downVector' />
-      </span>
-    </StyledAutoComplete>
+    <MultiSelect
+      type='autocomplete'
+      options={formatToIOptionsFormat(uniqueValues)}
+      selectOptions={(values: IOptions[]) => {
+        const flatVals = formatFlatArrayFormat(values);
+        filters[index].value = flatVals;
+        setFilterValue(flatVals);
+      }}
+      selectedOptions={
+        formatToIOptionsFormat(
+          filter && filter.value !== undefined
+            ? filter.value
+            : filterValue
+          )
+      }
+    />
   );
 };
 

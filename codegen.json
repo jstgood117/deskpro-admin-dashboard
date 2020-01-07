@@ -1,5 +1,5 @@
 {
-  "schema": "http://127.0.0.1:8000/admin-api/graphql",
+  "schema": "http://site42004.deskprodemo.com/admin-api/graphql",
   "overwrite": true,
   "generates": {
     "./src/codegen/types.d.ts": {

@@ -13,7 +13,7 @@ describe('Negative operators', () => {
       };
       const testString = 'does it match?';
 
-      const result = doesNotEqual(row, 'prop2.*.name', testString);
+      const result = doesNotEqual(row, 'prop2.*.name', [testString]);
 
       expect(result).toEqual(false);
     });
@@ -30,7 +30,7 @@ describe('Negative operators', () => {
     };
     const testString = 'does it match?';
 
-    const result = doesNotEqual(row, 'prop2.*.name', testString);
+    const result = doesNotEqual(row, 'prop2.*.name', [testString]);
 
     expect(result).toEqual(false);
   });

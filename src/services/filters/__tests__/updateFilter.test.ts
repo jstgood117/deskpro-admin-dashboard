@@ -11,16 +11,16 @@ describe('updateFilter', () => {
       id:'FirstName-EQUAL',
       property:'EQUAL',
       operator:equals,
-      value:'123'
+      value:['123']
     }] as FilterType[];
     const id = 'FirstName-EQUAL';
     const operatorName = 'CONTAINS';
-    const compareValue = 'abc';
+    const compareValue = ['abc'];
 
     const newFilters = updateFilter(filters, id, operatorName, compareValue);
 
     expect(newFilters[0].id).toEqual('FirstName-CONTAINS-1');
     expect(newFilters[0].property).toEqual('FirstName');
-    expect(newFilters[0].value).toEqual('abc');
+    expect(newFilters[0].value).toEqual(['abc']);
   });
 });

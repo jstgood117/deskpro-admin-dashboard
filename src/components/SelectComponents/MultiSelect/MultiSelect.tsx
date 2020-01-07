@@ -37,6 +37,7 @@ const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
             placeholder='Select value'
             styles={selectStyles}
             hideSelectedOptions={false}
+            onChange={onChange}
             components={{
               ClearIndicator: false,
               DropdownIndicator,

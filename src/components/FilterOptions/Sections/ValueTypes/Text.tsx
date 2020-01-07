@@ -59,13 +59,13 @@ export const Text: SFC<Props> = ({
             filter && filter.value !== undefined ? filter.value : filterValue
           }
           onClear={() => {
-            filters[index].value = '';
-            setFilterValue('');
+            filters[index].value = [''];
+            setFilterValue(['']);
           }}
           showClear={true}
           onChange={event => {
-            filters[index].value = event.target.value;
-            setFilterValue(event.target.value);
+            filters[index].value = [event.target.value];
+            setFilterValue([event.target.value]);
           }}
         />
       </div>
@@ -78,7 +78,7 @@ export const Text: SFC<Props> = ({
               filters.splice(currentIndex, 1);
             }
             if (filters.length === 0 && setFilters) {
-              setFilters([{ property: '', operatorName: '', value: '' }]);
+              setFilters([{ property: '', operatorName: '', value: [''] }]);
             } else if (setFilters) {
               setFilters([...filters]);
             }

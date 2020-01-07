@@ -6,7 +6,7 @@ import { testFilterMeta } from '../../fixtures/gql/StandardTablesPage/filterMeta
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: FilterProps[] = [
-  { property: '', operatorName: '', value: '' }
+  { property: '', operatorName: '', value: [''] }
 ];
 
 const FilterBoxComponent: React.FC = () => {

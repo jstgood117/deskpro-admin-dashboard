@@ -7,7 +7,7 @@ export const QUERY_INITIAL = gql`
 			message
 		}
 
-		user: auth_me {
+		user: authMe {
 			locale
 		}
 

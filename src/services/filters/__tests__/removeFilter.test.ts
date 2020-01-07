@@ -11,7 +11,7 @@ describe('Remove filter', () => {
       id:'FirstName-EQUAL',
       property:'FirstName',
       operator:mockOperator,
-      value:'123'
+      value:['123']
     }] as FilterType[];
     const id = 'FirstName-EQUAL';
 

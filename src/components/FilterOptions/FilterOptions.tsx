@@ -78,7 +78,7 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   const [containOptions, setOptions] = useState([]);
   // eslint-disable-next-line
   const [containType, setType] = useState();
-  const [filterValue, setFilterValue] = useState();
+  const [filterValue, setFilterValue] = useState<string[]>([]);
   // eslint-disable-next-line
   const [uniqueValues, setUniqueValues] = useState<string[]>([]);
 

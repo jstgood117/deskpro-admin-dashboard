@@ -74,6 +74,43 @@ export enum API_ApiKeyFlags {
   ApiV2 = 'API_V2'
 }
 
+/** AppInstance */
+export type API_AppInstance = {
+   __typename?: 'AppInstance',
+  id: Scalars['ID'],
+  title: Scalars['String'],
+  publisher?: Maybe<Scalars['String']>,
+  version?: Maybe<Scalars['String']>,
+};
+
+export type API_ApprovalApprover = {
+   __typename?: 'ApprovalApprover',
+  id: Scalars['ID'],
+  name: Scalars['String'],
+  avatarUrn?: Maybe<Scalars['String']>,
+  first_name: Scalars['String'],
+  last_name: Scalars['String'],
+};
+
+export type API_ApprovalTemplate = {
+   __typename?: 'ApprovalTemplate',
+  id: Scalars['ID'],
+  name: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
+  type: API_ApprovalType,
+  required_approvals: Scalars['Int'],
+  required_rejections: Scalars['Int'],
+  approvers: Array<API_ApprovalApprover>,
+};
+
+export type API_ApprovalType = {
+   __typename?: 'ApprovalType',
+  id: Scalars['ID'],
+  name: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
+  templates_count: Scalars['Int'],
+};
+
 export type API_AsyncPageDataView = {
    __typename?: 'AsyncPageDataView',
   /** Title of the table. Only used if more than 1 table on the page (tab title) */
@@ -128,6 +165,61 @@ export enum API_ChatQueueRoutingModel {
   Simulring = 'simulring'
 }
 
+/** Community forums */
+export type API_CommunityForum = {
+   __typename?: 'CommunityForum',
+  id: Scalars['ID'],
+  title: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
+  slug?: Maybe<Scalars['String']>,
+  usergroups?: Maybe<Array<API_CrmUserGroup>>,
+  statuses?: Maybe<Array<Maybe<API_CommunityTopicStatus>>>,
+  active_statuses?: Maybe<Array<Maybe<API_CommunityTopicStatus>>>,
+  closed_statuses?: Maybe<Array<Maybe<API_CommunityTopicStatus>>>,
+};
+
+/** Filter forums by brand */
+export type API_CommunityForumsFilter = {
+  brand: Scalars['Int'],
+};
+
+export type API_CommunityForumsOrderBy = {
+  field?: Maybe<API_CommunityForumsOrderFields>,
+  order?: Maybe<API_SortOrder>,
+};
+
+export enum API_CommunityForumsOrderFields {
+  Id = 'id',
+  Name = 'name',
+  /** Default order */
+  DisplayOrder = 'display_order'
+}
+
+/** Community topic status categories */
+export type API_CommunityTopicStatus = {
+   __typename?: 'CommunityTopicStatus',
+  id: Scalars['ID'],
+  status_type: Scalars['String'],
+  title: Scalars['String'],
+};
+
+export type API_CommunityTopicStatusesOrderBy = {
+  field?: Maybe<API_CommunityTopicStatusOrderFields>,
+  order?: Maybe<API_SortOrder>,
+};
+
+/** Filter statuses by brand */
+export type API_CommunityTopicStatusFilter = {
+  brand: Scalars['Int'],
+};
+
+export enum API_CommunityTopicStatusOrderFields {
+  Id = 'id',
+  Title = 'title',
+  /** Default order */
+  DisplayOrder = 'display_order'
+}
+
 export type API_CrmBannedEmail = {
    __typename?: 'CrmBannedEmail',
   id: Scalars['ID'],
@@ -162,6 +254,41 @@ export type API_CurrentUser = {
    __typename?: 'CurrentUser',
   locale: Scalars['String'],
 };
+
+export type API_CustomField = {
+   __typename?: 'CustomField',
+  id: Scalars['ID'],
+  title: Scalars['String'],
+  description: Scalars['String'],
+  is_agent_field: Scalars['Boolean'],
+  is_enabled: Scalars['Boolean'],
+  field_type: Scalars['String'],
+  alias?: Maybe<Scalars['String']>,
+};
+
+export type API_CustomFieldsOrderBy = {
+  field?: Maybe<API_CustomFieldsOrderFields>,
+  order?: Maybe<API_SortOrder>,
+};
+
+export enum API_CustomFieldsOrderFields {
+  Id = 'id',
+  Title = 'title',
+  /** Default sorting */
+  DisplayOrder = 'display_order'
+}
+
+export enum API_CustomFieldTypes {
+  Article = 'article',
+  Billing = 'billing',
+  Chat = 'chat',
+  CommunityTopic = 'community_topic',
+  Download = 'download',
+  Organization = 'organization',
+  Person = 'person',
+  Product = 'product',
+  Ticket = 'ticket'
+}
 
 
 
@@ -251,6 +378,26 @@ export enum API_LabelDefType {
   Articles = 'articles'
 }
 
+export type API_Language = {
+   __typename?: 'Language',
+  id: Scalars['ID'],
+  sys_name: Scalars['String'],
+  title: Scalars['String'],
+  locale: Scalars['String'],
+};
+
+export type API_LanguagesOrderBy = {
+  field?: Maybe<API_LanguagesOrderFields>,
+  order?: Maybe<API_SortOrder>,
+};
+
+export enum API_LanguagesOrderFields {
+  Id = 'id',
+  SysName = 'sys_name',
+  Title = 'title',
+  Locale = 'locale'
+}
+
 export enum API_Operator {
   In = 'IN',
   NotIn = 'NOT_IN',
@@ -278,7 +425,7 @@ export type API_PageDataFilters = {
   path: Scalars['String'],
   /** Type of filter */
   type: API_FilterType,
-  /** Coollection of operator types */
+  /** Collection of operator types */
   operators: Array<API_Operator>,
   /** Root of the data path, i.e. for agent_teams.*.name, value would be agent_teams */
   dataPath: Scalars['String'],
@@ -350,8 +497,12 @@ export type API_Query = {
   agents_teams_getTeams: Array<Maybe<API_AgentTeam>>,
   agents_groups_getGroups: Array<Maybe<API_AgentGroup>>,
   roundRobins: Array<Maybe<API_RoundRobin>>,
+  approvalsTypesList: Array<Maybe<API_ApprovalType>>,
+  approvalsTemplatesList: Array<Maybe<API_ApprovalTemplate>>,
   apiKeys: Array<Maybe<API_ApiKey>>,
-  auth_me: API_CurrentUser,
+  appInstancesList: Array<Maybe<API_AppInstance>>,
+  authMe: API_CurrentUser,
+  authUserSourcesList: Array<Maybe<API_UserSource>>,
   brands_getBrands: Array<Maybe<API_Brand>>,
   crmUserGroups: Array<Maybe<API_CrmUserGroup>>,
   crmUserRules: Array<Maybe<API_CrmUserRule>>,
@@ -359,7 +510,11 @@ export type API_Query = {
   crmBannedIps: Array<Maybe<API_CrmBannedIp>>,
   chatDepartments: Array<Maybe<API_ChatDepartment>>,
   chatQueues: Array<Maybe<API_ChatQueue>>,
+  communityForumsList: Array<Maybe<API_CommunityForum>>,
+  communityTopicStatusesList: Array<Maybe<API_CommunityTopicStatus>>,
+  customFieldsList: Array<Maybe<API_CustomField>>,
   email_accounts_getAccounts: Array<Maybe<API_EmailAccount>>,
+  languagesLanguagesList: Array<Maybe<API_Language>>,
   settings_email_getForm: API_Form,
   setupUi_interface_sidebar: Array<API_SidebarSection>,
   standardDataPage: API_StandardDataPage,
@@ -398,8 +553,26 @@ export type API_QueryRoundRobinsArgs = {
 };
 
 
+export type API_QueryApprovalsTypesListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>
+};
+
+
+export type API_QueryApprovalsTemplatesListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>,
+  types?: Maybe<Array<Scalars['ID']>>
+};
+
+
 export type API_QueryApiKeysArgs = {
   ids?: Maybe<Array<Maybe<Scalars['ID']>>>
+};
+
+
+export type API_QueryAuthUserSourcesListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>,
+  type: API_UserSourceType,
+  orderBy?: Maybe<API_UserSourcesOrderBy>
 };
 
 
@@ -428,8 +601,35 @@ export type API_QueryChatQueuesArgs = {
 };
 
 
+export type API_QueryCommunityForumsListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>,
+  filter?: Maybe<API_CommunityForumsFilter>,
+  orderBy?: Maybe<API_CommunityForumsOrderBy>
+};
+
+
+export type API_QueryCommunityTopicStatusesListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>,
+  filter?: Maybe<API_CommunityTopicStatusFilter>,
+  orderBy?: Maybe<API_CommunityTopicStatusesOrderBy>
+};
+
+
+export type API_QueryCustomFieldsListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>,
+  type: API_CustomFieldTypes,
+  orderBy?: Maybe<API_CustomFieldsOrderBy>
+};
+
+
 export type API_QueryEmail_Accounts_GetAccountsArgs = {
   ids?: Maybe<Array<Maybe<Scalars['ID']>>>
+};
+
+
+export type API_QueryLanguagesLanguagesListArgs = {
+  ids?: Maybe<Array<Scalars['ID']>>,
+  orderBy?: Maybe<API_LanguagesOrderBy>
 };
 
 
@@ -1043,4 +1243,31 @@ export enum API_Trashed {
   Only = 'ONLY',
   With = 'WITH',
   Without = 'WITHOUT'
+}
+
+/** UserSource */
+export type API_UserSource = {
+   __typename?: 'UserSource',
+  id: Scalars['ID'],
+  title: Scalars['String'],
+  is_enabled: Scalars['Boolean'],
+  publisher?: Maybe<Scalars['String']>,
+  version?: Maybe<Scalars['String']>,
+};
+
+export type API_UserSourcesOrderBy = {
+  field?: Maybe<API_UserSourcesOrderFields>,
+  order?: Maybe<API_SortOrder>,
+};
+
+export enum API_UserSourcesOrderFields {
+  Id = 'id',
+  Title = 'title',
+  /** Default sorting */
+  DisplayOrder = 'display_order'
+}
+
+export enum API_UserSourceType {
+  User = 'user',
+  Agent = 'agent'
 }

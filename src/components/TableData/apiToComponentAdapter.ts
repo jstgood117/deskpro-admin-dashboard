@@ -128,6 +128,9 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
     case 'TableColumnInteger':
       return { type: 'count', props: { values: [getPayloadValue(row, type.value)] } };
 
+    case 'TableColumnId':
+      return { type: 'string', props: { values: [getPayloadValue(row, type.value)] } };
+
     // case 'TableColumnTemplate':
     //   return { type: 'template', props: { template: '<p>{{testing}}</p>', data: {testing:123} } };
 
@@ -138,6 +141,6 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       }};
 
     default:
-      return { type: 'string', props: { values: ['Unknown column type: ' + type.__typename] } };
+      return { type: 'string', props: { values: ['Unknown column type'] } };
   }
 };

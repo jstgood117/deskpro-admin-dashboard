@@ -9,7 +9,7 @@ import { dpstyle } from '../Styled';
 
 export interface IProps {
   property: string;
-  value: string;
+  value: string[];
   operatorName: string;
   onRemove?: (e: any) => void;
 }

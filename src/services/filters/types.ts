@@ -5,5 +5,5 @@ export type FilterType = {
   property: string;
   operatorName: string;
   operator: IOperatorType;
-  value:any
+  value:string[];
 };
