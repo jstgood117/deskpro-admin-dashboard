@@ -10,7 +10,7 @@ import { SortType, ColumnMeta } from './types';
 
 interface IProps {
   view: 'table' | 'list' | 'card';
-  path: string; // TODO: Remove when db
+  path: string;
   dataType: 'sync' | 'async';
   fetchData: () => void;
   totalPageCount: number;

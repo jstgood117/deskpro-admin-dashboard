@@ -9,7 +9,7 @@ describe('Operators endsWith', () => {
     };
     const testString = 'ring';
 
-    const result = endsWith(row, 'prop1', testString);
+    const result = endsWith(row, 'prop1', [testString]);
 
     expect(result).toEqual(true);
   });
@@ -25,7 +25,7 @@ describe('Operators endsWith', () => {
     };
     const testString = 'tch?';
 
-    const result = endsWith(row, 'prop2.*.name', testString);
+    const result = endsWith(row, 'prop2.*.name', [testString]);
 
     expect(result).toEqual(true);
   });

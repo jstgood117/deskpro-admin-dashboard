@@ -7,7 +7,7 @@ import FilterOptions from './FilterOptions';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 
 const initialFilters: FilterProps[] = [
-  { property: '', operatorName: '', value: '' }
+  { property: '', operatorName: '', value: [''] }
 ];
 const FilterOptionsComponent: React.FC = () => {
   const [filters, setFilters] = useState(initialFilters);

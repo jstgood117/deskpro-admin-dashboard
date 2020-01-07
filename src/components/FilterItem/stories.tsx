@@ -7,7 +7,7 @@ import { FilterProps } from '../../resources/interfaces/filterMeta';
 const filter: FilterProps = {
   property: 'Team',
   operatorName: 'EQUAL',
-  value: 'Audit'
+  value: ['Audit']
 };
 
 storiesOf('FilterItem', module).add('default', () => (

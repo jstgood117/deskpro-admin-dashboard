@@ -11,7 +11,7 @@ describe('FilterOptions', () => {
   const filterData: FilterProps = {
     property: 'Team',
     operatorName: 'EQUAL',
-    value: 'Audit'
+    value: ['Audit']
   };
 
   const wrapper = (bShallow: boolean) => {

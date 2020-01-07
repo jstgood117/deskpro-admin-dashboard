@@ -9,7 +9,7 @@ describe('Operators includes', () => {
     };
     const testString = 'this';
 
-    const result = doesNotInclude(row, 'prop1', testString);
+    const result = doesNotInclude(row, 'prop1', [testString]);
 
     expect(result).toEqual(false);
   });
@@ -25,7 +25,7 @@ describe('Operators includes', () => {
     };
     const testString = 'match';
 
-    const result = doesNotInclude(row, 'prop2.*.name', testString);
+    const result = doesNotInclude(row, 'prop2.*.name', [testString]);
 
     expect(result).toEqual(false);
   });

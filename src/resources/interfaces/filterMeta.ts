@@ -45,7 +45,7 @@ export interface IRuleValue {
 export type FilterProps = {
   property: string;
   operatorName: string;
-  value: string;
+  value: string[];
   applied?: boolean;
   type?: string;
 };

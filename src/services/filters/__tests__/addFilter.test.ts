@@ -12,7 +12,7 @@ const equals = (a:any, b:any) => a === b;
     id:'FirstName-EQUAL',
     property:'FirstName',
     operator:equals,
-    value:'123'
+    value:['123']
   }
 ));
 
@@ -21,7 +21,7 @@ describe('addFilter', () => {
     const filters = [] as FilterType[];
     const property = 'FirstName';
     const operatorName = 'EQUAL';
-    const compareValue = '123';
+    const compareValue = ['123'];
 
     const newFilters = addFilter(filters, property, operatorName, compareValue);
 
@@ -29,7 +29,7 @@ describe('addFilter', () => {
       id:'FirstName-EQUAL',
       property:'FirstName',
       operator:equals,
-      value:'123'
+      value:['123']
     }]);
   });
 });

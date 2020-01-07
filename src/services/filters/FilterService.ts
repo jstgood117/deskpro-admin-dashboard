@@ -6,7 +6,7 @@ const generateFilterId = (property:string, operatorName:string, iterator: number
 };
 
 export const setupFilters = (property:string) => {
-  return addFilter([], property, 'CONTAINS', '');
+  return addFilter([], property, 'CONTAINS', ['']);
 };
 
 export const getFilter =  (filters:FilterType[], id:string)  => {
@@ -74,7 +74,7 @@ export const addFilter = (
   filters:FilterType[],
   property: string,
   operatorName: string,
-  compareValue: string
+  compareValue: string[]
 ): FilterType[] => {
 
   const existingIds = filters.map(filter => filter.id);
@@ -97,7 +97,7 @@ export const removeFilter = (filters: FilterType[], id: string): FilterType[] =>
   return filters.filter(_filter => _filter.id !== id);
 };
 
-export const updateFilter = (filters: FilterType[], id: string, operatorName:string, compareValue:string): FilterType[] => {
+export const updateFilter = (filters: FilterType[], id: string, operatorName:string, compareValue:string[]): FilterType[] => {
   const filtersRemoved = removeFilter(filters, id);
   const filterAdded = addFilter(filtersRemoved, id.split('-')[0], operatorName, compareValue);
   return filterAdded;

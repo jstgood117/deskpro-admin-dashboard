@@ -83,7 +83,7 @@ interface IFilterButton {
 }
 
 const initialFilter: FilterProps[] = [
-  { property: '', operatorName: '', value: '', applied: false }
+  { property: '', operatorName: '', value: [''], applied: false }
 ];
 
 const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
@@ -155,7 +155,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   useEffect(() => {
     setFilters([
-      { property: '', operatorName: '', value: '', applied: false }
+      { property: '', operatorName: '', value: [''], applied: false }
     ]);
   }, []);
 
@@ -222,7 +222,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
       {
         property: '',
         operatorName: '',
-        value: '',
+        value: [''],
         applied: false
       }
     ];
@@ -275,7 +275,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
       if (internalFilters.length === 0) {
         if(setFilters) {
           setFilters([
-            { property: '', operatorName: '', value: '', applied: false }
+            { property: '', operatorName: '', value: [''], applied: false }
           ]);
         }
       } else {

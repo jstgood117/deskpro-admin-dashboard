@@ -92,6 +92,21 @@ const testTableColumns3 = {
         'tableDef': {
           'columns': [
             {
+              'title': 'admin_common.col.id',
+              'sortField': 'ID',
+              'field': 'ID',
+              'data': [
+                {
+                  'propName': 'id',
+                  'path': 'id',
+                  'value': '',
+                  '__typename': 'TableColumnDataMap'
+                },
+              ],
+              'defaultShow': true,
+              '__typename': 'TableColumnDef'
+            },
+            {
               'title': 'col.sys_name',
               'field': 'TEXT',
               'sort': 'TEXT',

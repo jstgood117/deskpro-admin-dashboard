@@ -3,7 +3,7 @@ import { FilterType } from './types';
 import { prop } from '../../utils/prop';
 
 
-export const filterFactory = (id: string, property: string, operatorName: string, value: string): FilterType => {
+export const filterFactory = (id: string, property: string, operatorName: string, value: string[]): FilterType => {
 
   if(!operators.hasOwnProperty(operatorName.toString())) {
     return {

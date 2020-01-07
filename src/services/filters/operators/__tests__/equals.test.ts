@@ -9,7 +9,7 @@ describe('Operators equals', () => {
     };
     const testString = 'hello this is a string';
 
-    const result = equals(row, 'prop1', testString);
+    const result = equals(row, 'prop1', [testString]);
 
     expect(result).toEqual(true);
   });
@@ -25,7 +25,7 @@ describe('Operators equals', () => {
     };
     const testString = 'does it match?';
 
-    const result = equals(row, 'prop2.*.name', testString);
+    const result = equals(row, 'prop2.*.name', [testString]);
 
     expect(result).toEqual(true);
   });

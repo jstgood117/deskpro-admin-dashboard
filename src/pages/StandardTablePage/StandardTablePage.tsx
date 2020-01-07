@@ -157,7 +157,7 @@ const StandardTablePage: FC<IProps> = ({
     const searchFilter = processFiltersToFilterTypes([{
       property: '*',
       operatorName: 'CONTAINS',
-      value:_value
+      value:[_value]
     }, ...internalFilters]);
     setFilters(searchFilter);
   };
@@ -221,8 +221,6 @@ const StandardTablePage: FC<IProps> = ({
             </TableActionStyled>
             {views && views.length > 1 && (
               <TabBar
-                // Backend payload phrases are missing admin_common -
-                // should this be hard-coded like this?
                 tabItems={views.map((_view: IViewData) => {
                   return { messageId: _view.title };
                 })}
@@ -235,7 +233,7 @@ const StandardTablePage: FC<IProps> = ({
               <TableWrapper
                 {...views[tabIndex]}
                 view={view}
-                path={path} // TODO: When hooked up to live db, not required
+                path={path}
                 data={filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}

@@ -9,7 +9,7 @@ describe('Operators startsWith', () => {
     };
     const testString = 'hello';
 
-    const result = doesNotStartWith(row, 'prop1', testString);
+    const result = doesNotStartWith(row, 'prop1', [testString]);
 
     expect(result).toEqual(false);
   });
@@ -25,7 +25,7 @@ describe('Operators startsWith', () => {
     };
     const testString = 'does i';
 
-    const result = doesNotStartWith(row, 'prop2.*.name', testString);
+    const result = doesNotStartWith(row, 'prop2.*.name', [testString]);
 
     expect(result).toEqual(false);
   });

@@ -20,7 +20,7 @@ describe('Run filter', () => {
       property:'FirstName',
       operatorName:'EQUAL',
       operator:includesOperator,
-      value:'John'
+      value:['John']
     } as FilterType;
 
     const newData = runFilter(data, filter);
