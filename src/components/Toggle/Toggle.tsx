@@ -50,6 +50,8 @@ const LabelStyled = styled.label<{ size: SizeTypes }>`
 
 export interface IProps {
   checked: boolean;
+  id?: string;
+  name?: string;
   value?: any;
   className?: string;
   style?: CSSProperties;
@@ -61,6 +63,8 @@ export interface IProps {
 
 const Toggle: React.FC<IProps> = ({
   checked,
+  id,
+  name,
   value,
   className,
   style,
@@ -73,6 +77,8 @@ const Toggle: React.FC<IProps> = ({
     <LabelStyled style={style} className={className} size={size}>
       <InputStyled
         checked={checked}
+        id={id}
+        name={name}
         value={value}
         disabled={disabled}
         onChange={onChange}
