@@ -11,12 +11,12 @@ describe('processFiltersToFilterTypes', () => {
     const params = [{
       'property':'name',
       'operatorName':'CONTAINS',
-      'value':'jo',
+      'value':['jo'],
       'applied':true
     },{
       'property':'primary_email',
       'operatorName':'CONTAINS',
-      'value':'testing',
+      'value':['testing'],
       'applied':true
     }];
 
@@ -42,12 +42,12 @@ describe('processFiltersToFilterTypes', () => {
     const params = [{
       'property':'name',
       'operatorName':'CONTAINS',
-      'value':'jo',
+      'value':['jo'],
       'applied':true
     },{
       'property':'primary_email',
       'operatorName':'CONTAINS',
-      'value':'testing',
+      'value':['testing'],
       'applied':true
     }];
 
@@ -58,26 +58,26 @@ describe('processFiltersToFilterTypes', () => {
         property: 'name',
         operatorName: 'CONTAINS',
         operator: operators.CONTAINS,
-        value: 'jo'
+        value: ['jo']
       },
       {
         id: 'primary_email-CONTAINS-1',
         property: 'primary_email',
         operatorName: 'CONTAINS',
         operator: operators.CONTAINS,
-        value: 'testing'
+        value: ['testing']
       }
     ]);
   });test('skips filter if property or operactorName is not set', () => {
     const params = [{
       'property':'',
       'operatorName':'CONTAINS',
-      'value':'jo',
+      'value':['jo'],
       'applied':true
     },{
       'property':'primary_email',
       'operatorName':'',
-      'value':'testing',
+      'value':['testing'],
       'applied':true
     }];
 

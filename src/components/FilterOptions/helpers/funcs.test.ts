@@ -4,7 +4,6 @@ import {
   getIntlOperatorTitle,
   getOptionPropertyByPath,
   getPathByOptionProperty,
-  getOperatorByTitle,
   getCurrentOperators
 } from './funcs';
 
@@ -108,7 +107,7 @@ describe('FilterOptions',() => {
       const filter =  {
         property: 'db.col.doesntmatch',
         operatorName: 'CONTAINS',
-        value: 'test'
+        value: ['test']
       };
 
       const properties = [{
@@ -129,7 +128,7 @@ describe('FilterOptions',() => {
       const filter =  {
         property: 'db.col.pathname',
         operatorName: 'CONTAINS',
-        value: 'test'
+        value: ['test']
       };
 
       const properties = [{
@@ -150,7 +149,7 @@ describe('FilterOptions',() => {
       const filter =  {
         property: 'db.col.unmatching',
         operatorName: 'CONTAINS',
-        value: 'test'
+        value: ['test']
       };
 
       const properties = [{

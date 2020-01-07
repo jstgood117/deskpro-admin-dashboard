@@ -9,7 +9,7 @@ describe('FilterBox', () => {
   let mountedFilterBox: any;
 
   const initialFilters: FilterProps[] = [
-    { property: '', operatorName: '', value: '' }
+    { property: '', operatorName: '', value: [''] }
   ];
   const FilterBoxComponent: React.FC = () => {
     const [filters, setFilters] = useState(initialFilters);
