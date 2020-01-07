@@ -27,14 +27,14 @@ describe('processFiltersToFilterTypes', () => {
         property: 'name',
         operatorName: 'CONTAINS',
         operator: operators.CONTAINS,
-        value: 'jo'
+        value: ['jo']
       },
       {
         id: 'primary_email-CONTAINS-1',
         property: 'primary_email',
         operatorName: 'CONTAINS',
         operator: operators.CONTAINS,
-        value: 'testing'
+        value: ['testing']
       }
     ]);
   });
