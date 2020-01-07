@@ -175,7 +175,7 @@ const StandardTablePage: FC<IProps> = ({
   };
 
   const getUniqueValues = (columnName: string): string[] => {
-    return getColumnUniqueValues(filteredData, columnName);
+    return getColumnUniqueValues(tableData, columnName);
   };
 
   const contextValue:StandardTableContextValues = {

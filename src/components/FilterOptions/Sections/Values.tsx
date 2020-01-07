@@ -19,7 +19,6 @@ export type Props = {
 export const Values: SFC<Props> = ({ containType, ...props}) => {
 
   switch(containType) {
-
     case 'CHOICE_FROM_DATA':
       return (
         <ChoiceFromData {...props} />

@@ -56,7 +56,7 @@ const FilterItem: FC<IProps & WrappedComponentProps> = ({
     <StyledItem>
       <ItemText>
         {property}{' '}
-        {intl.formatMessage({ id: getIntlOperatorTitle(operatorName) })} {value}
+        {intl.formatMessage({ id: getIntlOperatorTitle(operatorName) })} {value.join(', ')}
       </ItemText>
       <div style={{ display: 'flex' }} onClick={onRemove}>
         <Icon name='close' />

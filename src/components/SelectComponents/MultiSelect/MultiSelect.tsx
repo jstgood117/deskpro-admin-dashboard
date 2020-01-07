@@ -19,12 +19,14 @@ export interface IProps {
   type: 'fixed' | 'autocomplete';
   selectOptions: (value: IOptions[]) => void;
   selectedOptions?: IOptions[];
+  defaultValue?: IOptions[];
 }
 
-const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
+const MultiSelect: FC<IProps> = ({ options, type, selectOptions, defaultValue }) => {
   const onChange = (selectedOptions: IOptions[]) => {
     selectOptions(selectedOptions);
   };
+
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       {type === 'autocomplete' && (
@@ -38,6 +40,7 @@ const MultiSelect: FC<IProps> = ({ options, type, selectOptions }) => {
             styles={selectStyles}
             hideSelectedOptions={false}
             onChange={onChange}
+            defaultValue={defaultValue && defaultValue.length > 0 ? defaultValue : undefined}
             components={{
               ClearIndicator: false,
               DropdownIndicator,
