@@ -60,7 +60,9 @@ const Property: SFC<WrappedComponentProps & Props> = ({
 }) => {
 
   useEffect(() => {
-    setUniqueValues(getUniqueValues(currentPath));
+    if(getUniqueValues) {
+      setUniqueValues(getUniqueValues(currentPath));
+    }
   }, [currentPath, setUniqueValues, getUniqueValues]);
 
   const AutoSelectOption = (val: OperatorTypes) => {
