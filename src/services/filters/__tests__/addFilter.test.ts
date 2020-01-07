@@ -12,7 +12,7 @@ const equals = (a:any, b:any) => a === b;
     id:'FirstName-EQUAL',
     property:'FirstName',
     operator:equals,
-    value:'123'
+    value:['123']
   }
 ));
 
