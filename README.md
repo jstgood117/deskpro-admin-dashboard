@@ -55,3 +55,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Builds storybook to `storybook-static`.
 
+### Testing requirements 
+
+Please see: [Testing requirements](https://www.notion.so/deskpro/Testing-fa89e0c7253b48e6b62ef24f017db491)

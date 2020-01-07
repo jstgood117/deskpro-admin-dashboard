@@ -135,7 +135,7 @@ const Property: SFC<WrappedComponentProps & Props> = ({
                 setType(_option.type);
 
                 getUniqueValues &&
-                _option.type === 'TEXT'
+                _option.type === 'CHOICE_FROM_DATA'
                   ? setUniqueValues(getUniqueValues(val))
                   : setUniqueValues([]);
 
