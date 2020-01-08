@@ -13,7 +13,14 @@ describe('Routes', () => {
       const routes = generatePageRoutes(siderbarLinks);
 
       expect(routes).toHaveLength(1);
-      expect(routes[0].props.path).toBe('/');
+      expect(routes[0].props.path).toEqual(['/']);
+    });
+
+    test('given an array of sidebar links and extra path, generates route that can render on 2 routes', () => {
+      const routes = generatePageRoutes(siderbarLinks, '/edit');
+
+      expect(routes).toHaveLength(1);
+      expect(routes[0].props.path).toEqual(['/', '//edit']);
     });
   });
 });

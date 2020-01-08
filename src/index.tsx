@@ -49,4 +49,4 @@ const AppWrap = () => {
   );
 };
 
-ReactDOM.render(<AppWrap />, document.getElementById('root'));
+ReactDOM.render(<AppWrap />, document.getElementById('app-root'));
