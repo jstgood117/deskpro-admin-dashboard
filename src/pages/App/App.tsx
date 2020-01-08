@@ -6,6 +6,7 @@ import { logError } from '../../components/Error/ErrorBoundary';
 import { testTranslations } from '../../resources/constants/translations/en';
 import { QueryService } from '../../services/query';
 import Sidebar from '../../components/Sidebar';
+import Drawer from '../../components/Drawer';
 
 import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
 
@@ -57,6 +58,7 @@ const App: FC = () => {
               <Route exact={true} path='/' render={onRouteRender} />
               {routes}
             </Switch>
+            <Route path='/:slug*/edit' component={Drawer} />
           </BodyContainer>
         </AppContainer>
       </IntlProvider>
