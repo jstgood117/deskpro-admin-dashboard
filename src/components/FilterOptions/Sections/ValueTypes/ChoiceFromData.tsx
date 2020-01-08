@@ -10,14 +10,20 @@ const formatToIOptionsFormat = (uniqueValues: string[]): IOptions[] => {
     return [] as IOptions[];
   }
 
-  return uniqueValues.map((value: string) => ({
-    value,
-    label:value
-  }));
-
+  return uniqueValues
+    .filter(_val => _val !== '')
+    .map((value: string) => {
+      return {
+        value,
+        label:value
+      };
+    });
 };
 
 const formatFlatArrayFormat = (values: IOptions[]): string[] => {
+
+  if(!values) return [];
+
   return values.map(_val => _val.value);
 };
 
@@ -29,22 +35,23 @@ export const ChoiceFromData: SFC<Props> = ({
   setFilterValue,
   uniqueValues
 }) => {
+  const values = formatToIOptionsFormat(
+    filter && filter.value !== undefined
+      ? filter.value
+      : filterValue
+    );
+
   return (
     <MultiSelect
       type='autocomplete'
       options={formatToIOptionsFormat(uniqueValues)}
-      selectOptions={(values: IOptions[]) => {
-        const flatVals = formatFlatArrayFormat(values);
+      selectOptions={(_vals: IOptions[]) => {
+        const flatVals = formatFlatArrayFormat(_vals);
         filters[index].value = flatVals;
         setFilterValue(flatVals);
       }}
-      selectedOptions={
-        formatToIOptionsFormat(
-          filter && filter.value !== undefined
-            ? filter.value
-            : filterValue
-          )
-      }
+      defaultValue={values}
+      selectedOptions={values}
     />
   );
 };

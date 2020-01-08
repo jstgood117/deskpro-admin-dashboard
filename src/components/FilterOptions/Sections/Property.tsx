@@ -1,4 +1,4 @@
-import React, { SFC, Dispatch, SetStateAction } from 'react';
+import React, { SFC, useEffect, Dispatch, SetStateAction } from 'react';
 import Autocomplete from 'react-autocomplete';
 
 import { StyledAutoComplete } from '../FilterOptions';
@@ -58,6 +58,12 @@ const Property: SFC<WrappedComponentProps & Props> = ({
   getUniqueValues,
   setUniqueValues
 }) => {
+
+  useEffect(() => {
+    if(getUniqueValues) {
+      setUniqueValues(getUniqueValues(currentPath));
+    }
+  }, [currentPath, setUniqueValues, getUniqueValues]);
 
   const AutoSelectOption = (val: OperatorTypes) => {
     setOption(
@@ -133,11 +139,6 @@ const Property: SFC<WrappedComponentProps & Props> = ({
               if (_option.path === val) {
                 setOptions(_option.operators);
                 setType(_option.type);
-
-                getUniqueValues &&
-                _option.type === 'CHOICE_FROM_DATA'
-                  ? setUniqueValues(getUniqueValues(val))
-                  : setUniqueValues([]);
 
                 AutoSelectOption(_option.operators[0]);
               }
