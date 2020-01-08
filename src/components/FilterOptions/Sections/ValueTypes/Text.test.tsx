@@ -38,7 +38,7 @@ describe('Text', () => {
       property: 'name',
       operatorName: 'CONTAINS',
       value: ['some value']
-    }
+    };
     const filters = [
       { ...filter }
     ];
@@ -55,7 +55,7 @@ describe('Text', () => {
     const clearButton = root.find('.close-icon');
     clearButton.at(0).simulate('click');
     expect(setFilterValue).toHaveBeenCalledTimes(1);
-    expect(filters[0].value).toEqual([""]);
+    expect(filters[0].value).toEqual(['']);
 
     root.unmount();
   });
