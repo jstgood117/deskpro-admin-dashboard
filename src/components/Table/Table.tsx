@@ -141,17 +141,21 @@ const Table: FC<Props> = ({
                 >
                   <th />
                   {headerGroup.headers.map(
-                    (column: KeyValue, indexInner: number) => (
-                      <th
+                    (column: KeyValue, indexInner: number) => {
+                      const isIdColumn = column.Header.toUpperCase() === 'ID' ? true : false;
+                      const isLastColumn = !(headerGroup.headers.length - indexInner - 1);
+
+                      return <th
                         key={indexInner}
                         {...column.getHeaderProps(
                           column.getSortByToggleProps()
                         )}
                         style={{
-                          border: column.isSorted && '1px solid #D3D6D7'
+                          border: column.isSorted && '1px solid #D3D6D7',
+                          width: isIdColumn && '1px',
                         }}
                       >
-                        <StyledTh>
+                        <StyledTh textAlign={isIdColumn && isLastColumn ? 'right' : 'left'}>
                           {column.render('Header')}
 
                           {column.isSorted &&
@@ -160,10 +164,10 @@ const Table: FC<Props> = ({
                                 <Icon name='ic-sort-up-active' />
                               </span>
                             ) : (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-down-active' />
-                              </span>
-                            ))}
+                                <span className='sort-icon'>
+                                  <Icon name='ic-sort-down-active' />
+                                </span>
+                              ))}
                           {column.isSorted && (
                             <span className='filter-icon'>
                               <Icon name='filter' />
@@ -171,7 +175,7 @@ const Table: FC<Props> = ({
                           )}
                         </StyledTh>
                       </th>
-                    )
+                    }
                   )}
                 </tr>
               ))}
@@ -204,20 +208,24 @@ const Table: FC<Props> = ({
                         onChange={handleCheckboxChange}
                       />
                     </td>
-                    {row.cells.map((cell: any, indexInner: number) => (
-                      <td key={indexInner} {...cell.getCellProps()}>
+                    {row.cells.map((cell: any, indexInner: number) => {
+                      const isIdColumn = cell.column.Header.toUpperCase() === 'ID' ? true : false;
+                      const isLastCell = !(row.cells.length - indexInner - 1);
+
+                      return <td key={indexInner} {...cell.getCellProps()}>
                         <span
                           style={{ display: 'flex' }}
                           {...cell.row.getExpandedToggleProps({
                             style: {
-                              paddingLeft: `${row.depth * 2}rem`
+                              paddingLeft: `${row.depth * 2}rem`,
+                              float: isIdColumn && isLastCell && 'right'
                             }
                           })}
                         >
                           <TableData {...generateComponentProps(cell)} />
                         </span>
                       </td>
-                    ))}
+                    })}
                   </tr>
                 );
               })}
