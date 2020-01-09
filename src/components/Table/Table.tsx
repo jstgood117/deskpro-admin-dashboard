@@ -155,7 +155,7 @@ const Table: FC<Props> = ({
                           width: isIdColumn && '1px',
                         }}
                       >
-                        <StyledTh textAlign={isIdColumn && isLastColumn ? 'right' : 'left'}>
+                        <StyledTh align={isIdColumn && isLastColumn ? 'right' : 'left'}>
                           {column.render('Header')}
 
                           {column.isSorted &&

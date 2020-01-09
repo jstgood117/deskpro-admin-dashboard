@@ -121,10 +121,10 @@ export const StyledPagination = styled(dpstyle.div)`
   padding-bottom: 10px;
 `;
 
-export const StyledTh = styled.div<{ textAlign: 'left' | 'right' }>`
+export const StyledTh = styled.div<{ align: 'left' | 'right' }>`
   display: flex;
   align-items: center;
-  justify-content: ${props => props.textAlign === 'left' ? 'flex-start' : 'flex-end'};
+  justify-content: ${props => props.align === 'left' ? 'flex-start' : 'flex-end'};
   .sort-icon {
     display: flex;
     padding-left: 10px;
