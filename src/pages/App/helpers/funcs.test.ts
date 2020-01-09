@@ -4,8 +4,25 @@ describe('Routes', () => {
   describe('generatePageRoutes', () => {
 
     const siderbarLinks = [
-      {'sectionName':'admin_nav.section.setup','icon':'setup','navItems':[
-        {'itemName':'admin_nav.item.dashboard','path':'/','pageType':'','metadataQuery':'','__typename':'SidebarItem'}
+      {
+        'sectionName':'admin_nav.section.setup',
+        'icon':'setup','navItems':[
+        {
+          'itemName':'admin_nav.item.dashboard',
+          'path':'/',
+          'pageType':'',
+          'metadataQuery':'',
+          '__typename':'SidebarItem',
+          'drawerItems': [
+            {
+              'itemName':'admin_sidebar.item.edit',
+              'path':'/edit',
+              'pageType':'EditAgentForm',
+              'metadataQuery':'',
+              '__typename':'SidebarItem',
+            }
+          ]
+        }
       ]
     }];
 
@@ -13,14 +30,8 @@ describe('Routes', () => {
       const routes = generatePageRoutes(siderbarLinks);
 
       expect(routes).toHaveLength(1);
-      expect(routes[0].props.path).toEqual(['/']);
-    });
-
-    test('given an array of sidebar links and extra path, generates route that can render on 2 routes', () => {
-      const routes = generatePageRoutes(siderbarLinks, '/edit');
-
-      expect(routes).toHaveLength(1);
       expect(routes[0].props.path).toEqual(['/', '//edit']);
     });
+
   });
 });

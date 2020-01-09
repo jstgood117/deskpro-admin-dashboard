@@ -52,7 +52,8 @@ export interface ISidebarItem {
   path?: string;
   pageType?: string;
   metadataQuery?: string;
-  navItems?: ISidebarItem[]; // having this array turns this SidebarItem into a SidebarSubSection
+  navItems?: ISidebarItem[];
+  drawerItems?: ISidebarItem[];
 }
 
 export interface ITableSetup {
