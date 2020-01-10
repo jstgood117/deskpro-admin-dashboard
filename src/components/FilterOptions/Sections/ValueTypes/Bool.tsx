@@ -16,6 +16,13 @@ const boolOptions: IOptions[] = [
   }
 ];
 
+const boolSelectStyles = {
+  control: (styles: React.CSSProperties) => ({
+    ...selectStyles.control(styles),
+    minWidth: '250px !important'
+  })
+};
+
 export const Bool: SFC<Props> = ({
   filter,
   filters,
@@ -39,12 +46,7 @@ export const Bool: SFC<Props> = ({
       selectedOption={boolOptions.find(
         option => option.value === String(value)
       )}
-      styles={{
-        control: styles => ({
-          ...selectStyles.control(styles),
-          minWidth: '250px !important'
-        })
-      }}
+      styles={boolSelectStyles}
       type='primary'
     />
   );
