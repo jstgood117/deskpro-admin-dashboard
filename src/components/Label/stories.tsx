@@ -75,7 +75,7 @@ storiesOf('Label', module)
       <Label
         label={label}
         avatar={avatar}
-        styleType="filled"
+        styleType='filled'
         styles={{ color: '#1C3E55', backgroundColor: '#E8EBEE' }}
       />
     );

@@ -254,17 +254,19 @@ storiesOf('Table Data', module)
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
     );
 
-    return <div style={{ width: 90 }}>
-      <TableData
-        type='label'
-        props={{
-          label: label,
-          avatar: avatar,
-          backgroundColor: '#3A8DDE',
-          color: '#fff'
-        }}
-      />
-    </div>
+    return (
+      <div style={{ width: 90 }}>
+        <TableData
+          type='label'
+          props={{
+            label,
+            avatar,
+            backgroundColor: '#3A8DDE',
+            color: '#fff'
+          }}
+        />
+      </div>
+    );
   })
   .add('Currency (currency)', () => (
     <Container>
