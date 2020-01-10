@@ -73,7 +73,7 @@ export const generateDrawerRoutes = (
     .filter((_section: ISidebarItem) => _section.path)
     .reduce((acc: JSX.Element[], _section: ISidebarItem) => {
 
-      if(_section.drawerItems) {
+      if(_section.drawerItems &&  _section.drawerItems.length > 0) {
         return acc.concat(_section.drawerItems.map(
           _drawItem => generateFunc(_drawItem)
         ));
@@ -84,9 +84,9 @@ export const generateDrawerRoutes = (
     }, ([] as JSX.Element[]));
 };
 
-const generateDrawerItemPaths = (_section: ISidebarItem): string[] => {
+export const generateDrawerItemPaths = (_section: ISidebarItem): string[] => {
 
-  if(_section.drawerItems) {
+  if(_section.drawerItems && _section.drawerItems.length > 0) {
     return _section.drawerItems.map(_item => _item.path);
   }
 
