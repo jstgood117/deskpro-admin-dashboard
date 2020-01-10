@@ -50,7 +50,6 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
   & img {
     width: 16px;
     height: 16px;
-    padding: 3px;
     margin-right: -8px;
     border-radius: 3px;
     object-fit: cover;
@@ -96,6 +95,7 @@ const Label: FC<IProps & IStyleProps> = ({
           <span
             style={{
               display: 'flex',
+              padding: '3px',
             }}
           >
             <img src={avatar} alt='avatar' />
