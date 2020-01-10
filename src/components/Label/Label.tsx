@@ -92,7 +92,15 @@ const Label: FC<IProps & IStyleProps> = ({
           </span>
         )}
 
-        {avatar && <img src={avatar} alt='avatar' />}
+        {avatar && (
+          <span
+            style={{
+              display: 'flex',
+            }}
+          >
+            <img src={avatar} alt='avatar' />
+          </span>
+        )}
 
         <TextLabel
           small={1}
