@@ -1,9 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, text } from '@storybook/addon-knobs';
 
 import Label from './Label';
 
 storiesOf('Label', module)
+  .addDecorator(withKnobs)
   .add('Filled', () => (
     <Label
       label='Sales'
@@ -61,4 +63,20 @@ storiesOf('Label', module)
       icon='clock'
       iconColor='#9384BD'
     />
-  ));
+  ))
+  .add('Label with avatar', () => {
+    const label = text('Label', 'Marketing');
+    const avatar = text(
+      'Avatar Url',
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+    );
+
+    return (
+      <Label
+        label={label}
+        avatar={avatar}
+        styleType="filled"
+        styles={{ color: '#1C3E55', backgroundColor: '#E8EBEE' }}
+      />
+    );
+  });
