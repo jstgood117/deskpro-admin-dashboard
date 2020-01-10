@@ -2638,7 +2638,7 @@
       {
         "kind": "OBJECT",
         "name": "AppInstance",
-        "description": "AppInstance",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -2705,7 +2705,7 @@
       {
         "kind": "OBJECT",
         "name": "CurrentUser",
-        "description": "Temporaty type for currently logged in admin user",
+        "description": "",
         "fields": [
           {
             "name": "locale",
@@ -2805,7 +2805,7 @@
           },
           {
             "name": "display_order",
-            "description": "Default sorting",
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -2815,7 +2815,7 @@
       {
         "kind": "OBJECT",
         "name": "UserSource",
-        "description": "UserSource",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -3484,7 +3484,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CommunityForumsFilter",
-        "description": "Filter forums by brand",
+        "description": "",
         "fields": null,
         "inputFields": [
           {
@@ -3559,7 +3559,7 @@
           },
           {
             "name": "display_order",
-            "description": "Default order",
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -3569,7 +3569,7 @@
       {
         "kind": "OBJECT",
         "name": "CommunityForum",
-        "description": "Community forums",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -3704,7 +3704,7 @@
       {
         "kind": "OBJECT",
         "name": "CommunityTopicStatus",
-        "description": "Community topic status categories",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -3763,7 +3763,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "CommunityTopicStatusFilter",
-        "description": "Filter statuses by brand",
+        "description": "",
         "fields": null,
         "inputFields": [
           {
@@ -3838,7 +3838,7 @@
           },
           {
             "name": "display_order",
-            "description": "Default order",
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -3963,7 +3963,7 @@
           },
           {
             "name": "display_order",
-            "description": "Default sorting",
+            "description": "",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -4614,7 +4614,7 @@
         "fields": [
           {
             "name": "title",
-            "description": "ID of title message",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4630,7 +4630,7 @@
           },
           {
             "name": "description",
-            "description": "ID if description message",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4646,7 +4646,7 @@
           },
           {
             "name": "illustration",
-            "description": "ID of illustration",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4662,7 +4662,7 @@
           },
           {
             "name": "headerLinks",
-            "description": "Other links to put under the description",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -4678,7 +4678,7 @@
           },
           {
             "name": "newLink",
-            "description": "Where to go when clicking the New button (or null to not have a new button)",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4690,7 +4690,7 @@
           },
           {
             "name": "views",
-            "description": "Collection of data views. If more than 1 table, then views are tabbed",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4780,7 +4780,7 @@
         "fields": [
           {
             "name": "title",
-            "description": "Title of the table. Only used if more than 1 table on the page (tab title)",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4792,7 +4792,7 @@
           },
           {
             "name": "dataQuery",
-            "description": "The query to send to get the data to display in the table",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4808,7 +4808,7 @@
           },
           {
             "name": "tableDef",
-            "description": "Definition of the table",
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -4820,7 +4820,7 @@
           },
           {
             "name": "filterDef",
-            "description": "Definition of the filters",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4886,7 +4886,7 @@
         "fields": [
           {
             "name": "title",
-            "description": "ID of the title message to use for the column",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4902,7 +4902,7 @@
           },
           {
             "name": "field",
-            "description": "The name of the field renderer",
+            "description": "",
             "args": [],
             "type": {
               "kind": "UNION",
@@ -4914,7 +4914,7 @@
           },
           {
             "name": "sortField",
-            "description": "If the column represents a sortable field (in case of async), then that field",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -4926,7 +4926,7 @@
           },
           {
             "name": "defaultShow",
-            "description": "True to show the column by default",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -5858,7 +5858,7 @@
         "fields": [
           {
             "name": "title",
-            "description": "i18n Title of the filter. ",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -5874,7 +5874,7 @@
           },
           {
             "name": "path",
-            "description": "The path to the value the data from the main data result",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -5890,7 +5890,7 @@
           },
           {
             "name": "type",
-            "description": "Type of filter",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -5906,7 +5906,7 @@
           },
           {
             "name": "operators",
-            "description": "Collection of operator types",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -5930,7 +5930,7 @@
           },
           {
             "name": "dataPath",
-            "description": "Root of the data path, i.e. for agent_teams.*.name, value would be agent_teams",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6059,11 +6059,11 @@
       {
         "kind": "OBJECT",
         "name": "StandardSettingsPage",
-        "description": "A settings page is made up of a UI schema describing how the form should be displayed to the user,\nand a jsonSchema defining basic validation rules for every setting on the page.",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "ID of the title / settings section",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6079,7 +6079,7 @@
           },
           {
             "name": "uiSchema",
-            "description": "Schema of the settings on the page",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6095,7 +6095,7 @@
           },
           {
             "name": "jsonSchema",
-            "description": "Validation schema of the settings on the page (https://json-schema.org/)",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6118,7 +6118,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUISchema",
-        "description": "Top-level type for the form itself.",
+        "description": "",
         "fields": [
           {
             "name": "elements",
@@ -6153,7 +6153,7 @@
       {
         "kind": "UNION",
         "name": "SettingsUIElement",
-        "description": "An element is any render-able thing on a settings form.",
+        "description": "",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6204,11 +6204,11 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUISectionElement",
-        "description": "A standard section with a title on the left and elements rendered in rows to the right.",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "Title of the section on the left",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6220,7 +6220,7 @@
           },
           {
             "name": "elements",
-            "description": "Fields in the section",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6249,11 +6249,11 @@
       {
         "kind": "INTERFACE",
         "name": "SettingsUISectionParentElement",
-        "description": "Represents any element that has sub-elements",
+        "description": "",
         "fields": [
           {
             "name": "elements",
-            "description": "Fields in the section",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6307,11 +6307,11 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFeatureSectionElement",
-        "description": "A full feature section has a big banner at the top with a toggle button, description, and illustration.",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "Main title of the feature",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6323,7 +6323,7 @@
           },
           {
             "name": "description",
-            "description": "Description text of the feature",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6335,7 +6335,7 @@
           },
           {
             "name": "illustration",
-            "description": "An illustration ID",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6347,7 +6347,7 @@
           },
           {
             "name": "toggleFieldId",
-            "description": "If the feature can be toggled off, then the ID of the setting",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6359,7 +6359,7 @@
           },
           {
             "name": "elements",
-            "description": "And all elements under it (typically one or more SettingsUISectionElement)",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6388,7 +6388,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIGroupElement",
-        "description": "A basic grouping implementation",
+        "description": "",
         "fields": [
           {
             "name": "title",
@@ -6462,11 +6462,11 @@
       {
         "kind": "INTERFACE",
         "name": "SettingsUIGroupInterface",
-        "description": "An arbitrary group of other elements",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "An optional title for the group. May be omitted if the grouping is just for logical grouping.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6478,7 +6478,7 @@
           },
           {
             "name": "description",
-            "description": "An optional description",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6490,7 +6490,7 @@
           },
           {
             "name": "elements",
-            "description": "The actual elements of the group",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6506,7 +6506,7 @@
           },
           {
             "name": "showOn",
-            "description": "If the group should show/hide based on the value of some other setting, that setting ID",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6541,7 +6541,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUISubGroupElement",
-        "description": "A sub-group that should appear indented in the browser. This is to show structure\nor hierarchy to the user.",
+        "description": "",
         "fields": [
           {
             "name": "title",
@@ -6615,7 +6615,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIHorizontalGroupElement",
-        "description": "A group where fields within are rendered horizontally: Label to the left, input to the right",
+        "description": "",
         "fields": [
           {
             "name": "title",
@@ -6689,7 +6689,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUITabElement",
-        "description": "A tabbed group (e.g. Brands) where groups of settings are split into different tabs.",
+        "description": "",
         "fields": [
           {
             "name": "title",
@@ -6705,7 +6705,7 @@
           },
           {
             "name": "tabs",
-            "description": "The tabs to show. Should be the same number of tabs as there are elements",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6721,7 +6721,7 @@
           },
           {
             "name": "elements",
-            "description": "The elements to show within the tab",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -6750,11 +6750,11 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUITabItem",
-        "description": "An actual tab in a tab element",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "Title of the tab",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6766,7 +6766,7 @@
           },
           {
             "name": "iconUrn",
-            "description": "An optional icon for the tab (e.g. brand logo or other icon)",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6785,11 +6785,11 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldElement",
-        "description": "A field element represents an actual form input control",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "The title/label for the field. Often rendered within a label tag.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6805,7 +6805,7 @@
           },
           {
             "name": "description",
-            "description": "A description to provide additional help or info about the setting.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6817,7 +6817,7 @@
           },
           {
             "name": "helpLink",
-            "description": "A link to an external resource that shows to the right of the field",
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -6829,7 +6829,7 @@
           },
           {
             "name": "helpText",
-            "description": "Help text to show with the field, typically displayed as a tooltip on a (?) icon",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6841,7 +6841,7 @@
           },
           {
             "name": "field",
-            "description": "The field itself",
+            "description": "",
             "args": [],
             "type": {
               "kind": "UNION",
@@ -6860,11 +6860,11 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIHelpLink",
-        "description": "A help link can be displayed to the right of a field to provide\nfurther information. Typically a link to a guide on our helpdes",
+        "description": "",
         "fields": [
           {
             "name": "title",
-            "description": "Title that shows to the user",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6880,7 +6880,7 @@
           },
           {
             "name": "url",
-            "description": "The URL that the user navigates to upon click",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6903,7 +6903,7 @@
       {
         "kind": "UNION",
         "name": "SettingsUIField",
-        "description": "A field is any form field we have defined",
+        "description": "",
         "fields": null,
         "inputFields": null,
         "interfaces": null,
@@ -6934,7 +6934,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldText",
-        "description": "A text input field",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -6967,11 +6967,11 @@
       {
         "kind": "INTERFACE",
         "name": "SettingsUIFieldInterface",
-        "description": "Basic properties for every form field",
+        "description": "",
         "fields": [
           {
             "name": "id",
-            "description": "The ID/name for the form field, the name by which its data gets stored under",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -7040,7 +7040,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldToggle",
-        "description": "A boolean field that renders as a toggle pill button",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -7073,7 +7073,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldCheckbox",
-        "description": "A boolean field that renders as a simple checkbox",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -7106,7 +7106,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldFilesize",
-        "description": "A field that represents a filesize in bytes, but renders to the user\nas a numeric input box and then a select box where they can select a unit. E.g. 10 MB",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -7139,7 +7139,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIDisplayElement",
-        "description": "Arbitrary display element. E.g. if you need to inject some arbitrary text into the form",
+        "description": "",
         "fields": [
           {
             "name": "title",
@@ -7174,11 +7174,11 @@
       {
         "kind": "OBJECT",
         "name": "Translation",
-        "description": "Translation type",
+        "description": "",
         "fields": [
           {
             "name": "id",
-            "description": "Tranlation ID",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -7194,7 +7194,7 @@
           },
           {
             "name": "message",
-            "description": "Translation text",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9190,7 +9190,7 @@
         "fields": [
           {
             "name": "title",
-            "description": "Title of the table. Only used if more than 1 table on the page (tab title)",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9202,7 +9202,7 @@
           },
           {
             "name": "filterType",
-            "description": "If there is a filter, the GraphQL type of the filter options",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9214,7 +9214,7 @@
           },
           {
             "name": "orderByType",
-            "description": "If there are ordering options, the GraphQL enum of possible values",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9226,7 +9226,7 @@
           },
           {
             "name": "groupByType",
-            "description": "If there are grouping options, the GraphQL enum of possible values",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9238,7 +9238,7 @@
           },
           {
             "name": "dataQuery",
-            "description": "The query to send to get the data to display in the table",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9254,7 +9254,7 @@
           },
           {
             "name": "tableDef",
-            "description": "Definition of the table",
+            "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
@@ -9266,7 +9266,7 @@
           },
           {
             "name": "filterDef",
-            "description": "Definition of the filters",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9356,7 +9356,7 @@
         "fields": [
           {
             "name": "hasNextPage",
-            "description": "When paginating forwards, are there more items?",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9372,7 +9372,7 @@
           },
           {
             "name": "hasPreviousPage",
-            "description": "When paginating backwards, are there more items?",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9388,7 +9388,7 @@
           },
           {
             "name": "startCursor",
-            "description": "When paginating backwards, the cursor to continue.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9400,7 +9400,7 @@
           },
           {
             "name": "endCursor",
-            "description": "When paginating forwards, the cursor to continue.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9412,7 +9412,7 @@
           },
           {
             "name": "total",
-            "description": "Total number of node in connection.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9424,7 +9424,7 @@
           },
           {
             "name": "count",
-            "description": "Count of nodes in current request.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9436,7 +9436,7 @@
           },
           {
             "name": "currentPage",
-            "description": "Current page of request.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9448,7 +9448,7 @@
           },
           {
             "name": "lastPage",
-            "description": "Last page in connection.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9471,7 +9471,7 @@
         "fields": [
           {
             "name": "count",
-            "description": "Total count of available items in the page.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9487,7 +9487,7 @@
           },
           {
             "name": "currentPage",
-            "description": "Current pagination page.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9503,7 +9503,7 @@
           },
           {
             "name": "firstItem",
-            "description": "Index of first item in the current page.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9515,7 +9515,7 @@
           },
           {
             "name": "hasMorePages",
-            "description": "If collection has more pages.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9531,7 +9531,7 @@
           },
           {
             "name": "lastItem",
-            "description": "Index of last item in the current page.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -9543,7 +9543,7 @@
           },
           {
             "name": "lastPage",
-            "description": "Last page number of the collection.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9559,7 +9559,7 @@
           },
           {
             "name": "perPage",
-            "description": "Number of items per page in the collection.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9575,7 +9575,7 @@
           },
           {
             "name": "total",
-            "description": "Total items available in the collection.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9602,7 +9602,7 @@
         "fields": [
           {
             "name": "title",
-            "description": "ID of title message",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9618,7 +9618,7 @@
           },
           {
             "name": "description",
-            "description": "ID if description message",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9641,7 +9641,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldNumeric",
-        "description": "An input field that accepts numbers",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -9674,7 +9674,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldOption",
-        "description": "An option for fields that work on options",
+        "description": "",
         "fields": [
           {
             "name": "label",
@@ -9729,7 +9729,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldRadio",
-        "description": "A single radio button. You might use a lone radio instead of a radio group\nif you needed to separate the elements for some reason. E.g\n [Radio 1]\n    [Group that only shows with Radio 1]\n [Radio 2]\n    [Group that only shows with Radio 2[\nTo achieve this kind of design, you'd need an 'elements' array with\nthat specific order: radio, group, radio, group.",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -9778,7 +9778,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldRadioGroup",
-        "description": "A group of radio buttons. Not commonly used; probably want to use a select box.",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -9831,7 +9831,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldReact",
-        "description": "Special escape-hatch. If you need a custom UI element in a form, you can create a standard Formik\ncomponent and then represent it in the schema as SettingsUIFieldReact.",
+        "description": "",
         "fields": [
           {
             "name": "id",
@@ -9851,7 +9851,7 @@
           },
           {
             "name": "reactComponent",
-            "description": "The react component to render. This must exist on the FE and be added to the custom field renderer.\nThis can be any string so long as the custom field renderer knows how to handle it. But by convention,\nit should be the actual name of the react component.",
+            "description": "",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9867,7 +9867,7 @@
           },
           {
             "name": "reactProps",
-            "description": "Additional props to send to the component",
+            "description": "",
             "args": [],
             "type": {
               "kind": "LIST",
@@ -9939,7 +9939,7 @@
       {
         "kind": "OBJECT",
         "name": "SettingsUIFieldSelect",
-        "description": "Select box",
+        "description": "",
         "fields": [
           {
             "name": "id",
