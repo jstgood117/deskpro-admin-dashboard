@@ -8,13 +8,13 @@ import DrawerType from '../../DrawerType';
 
 import { ISidebarSection, ISidebarItem } from '../../../resources/interfaces';
 
-export const genereatePageRoute = (section: ISidebarItem, postFixPaths?: string[] ): JSX.Element => (
+export const generatePageRoute = (section: ISidebarItem, postFixPaths?: string[] ): JSX.Element => (
   <Route
     key={`${section.path}`}
     exact={true}
     path={[
       `${section.path}`,
-      ...(postFixPaths ? postFixPaths.map(_path => `${section.path}${_path}`) : [])
+      ...(postFixPaths ? postFixPaths.map(_path => `${_path}`) : [])
     ]}
     render={() => (
       <PageType
@@ -26,8 +26,7 @@ export const genereatePageRoute = (section: ISidebarItem, postFixPaths?: string[
   />
 );
 
-
-export const genereateDrawerRoute = (section: ISidebarItem ): JSX.Element => (
+export const generateDrawerRoute = (section: ISidebarItem): JSX.Element => (
   <Route
     key={`${section.path}`}
     exact={true}
@@ -44,7 +43,10 @@ export const genereateDrawerRoute = (section: ISidebarItem ): JSX.Element => (
   />
 );
 
-export const generatePageRoutes = (links: ISidebarSection[]) => {
+export const generatePageRoutes = (
+  links: ISidebarSection[],
+  generateFunc: (section: ISidebarItem, postFixPaths?: string[]) => JSX.Element
+): JSX.Element[] => {
   return flatMap(
     links.map(section => section.navItems),
     sectionItem => flatMap(sectionItem, _item => _item.navItems || []).concat(sectionItem)
@@ -55,34 +57,40 @@ export const generatePageRoutes = (links: ISidebarSection[]) => {
       const postFixPaths = generateDrawerItemPaths(_section);
 
       return acc.concat([
-        genereatePageRoute(_section, postFixPaths)
+        generateFunc(_section, postFixPaths)
       ]);
     }, ([] as JSX.Element[]));
 };
 
+export const generateDrawerRoutes = (
+  links: ISidebarSection[],
+  generateFunc: (section: ISidebarItem) => JSX.Element
+): JSX.Element[] => {
+  return flatMap(
+    links.map(section => section.navItems),
+    sectionItem => flatMap(sectionItem, _item => _item.navItems || []).concat(sectionItem)
+  )
+    .filter((_section: ISidebarItem) => _section.path)
+    .reduce((acc: JSX.Element[], _section: ISidebarItem) => {
 
-export const generateDrawerRoutes = (links: ISidebarSection[]) => {
-  // TODO: When drawers come through the API
+      if(_section.drawerItems &&  _section.drawerItems.length > 0) {
+        return acc.concat(_section.drawerItems.map(
+          _drawItem => generateFunc(_drawItem)
+        ));
+      }
 
-  return [
-    genereateDrawerRoute({
-      itemName: 'test.drawer',
-      path: '/agents/edit',
-      pageType: 'EditAgentForm',
-      metadataQuery: ''
-    })
-  ];
+      return acc;
+
+    }, ([] as JSX.Element[]));
 };
 
-const generateDrawerItemPaths = (_section: ISidebarItem): string[] => {
+export const generateDrawerItemPaths = (_section: ISidebarItem): string[] => {
 
-  return ['/edit'];
-  // TODO: Uncomment when coming from database
-  // if(_section.drawerItems) {
-  //   return _section.drawerItems.map(_item => _item.path);
-  // }
+  if(_section.drawerItems && _section.drawerItems.length > 0) {
+    return _section.drawerItems.map(_item => _item.path);
+  }
 
-  // return [] as string[];
+  return [] as string[];
 };
 
 // Crudely add development translations

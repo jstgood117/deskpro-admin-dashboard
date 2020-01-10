@@ -19,6 +19,12 @@ export const QUERY_INITIAL = gql`
 				path
 				pageType
 				metadataQuery
+				drawerItems {
+					itemName
+					path
+					pageType
+					metadataQuery
+				}
 				navItems {
 					itemName
 					path
