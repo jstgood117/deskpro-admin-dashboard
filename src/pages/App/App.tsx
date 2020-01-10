@@ -10,9 +10,11 @@ import Sidebar from '../../components/Sidebar';
 import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
 
 import {
+  generatePageRoute,
+  generateDrawerRoute,
   generatePageRoutes,
   generateDrawerRoutes,
-  __mergeInDevI18Keys
+  __mergeInDevI18Keys,
 } from './helpers/funcs';
 
 const App: FC = () => {
@@ -42,8 +44,8 @@ const App: FC = () => {
 
   // TODO: Remove this, should be going directly to
   const onRouteRender = () => <Redirect to='/agents' />;
-  const routes = generatePageRoutes(data.sidebar);
-  const drawerRoutes = generateDrawerRoutes(data.sidebar);
+  const routes = generatePageRoutes(data.sidebar, generatePageRoute);
+  const drawerRoutes = generateDrawerRoutes(data.sidebar, generateDrawerRoute);
 
   return (
     <HashRouter>
