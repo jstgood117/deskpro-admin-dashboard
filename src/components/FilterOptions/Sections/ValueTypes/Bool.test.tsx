@@ -1,19 +1,10 @@
 import React from 'react';
 import { Props } from './types';
-import Select from 'react-select';
 
 import Bool from './Bool';
 
 import { mount, shallow } from '../../../../test/enzyme';
 import { WrapperType } from '../../../../test/types';
-
-const commonProps: Props = {
-  filterValue: ['some value'],
-  filters: [],
-  index: 0,
-  setFilterValue: jest.fn(),
-  uniqueValues: []
-};
 
 describe('Bool', () => {
 
@@ -26,8 +17,13 @@ describe('Bool', () => {
   };
 
   test('renders <input> tag at Bool', () => {
+    // There's only one test for now, so we don't need `commonProps` here
     const props: Props = {
-      ...commonProps
+      filterValue: ['some value'],
+      filters: [],
+      index: 0,
+      setFilterValue: jest.fn(),
+      uniqueValues: []
     };
 
     const root = wrapper(false, props);
