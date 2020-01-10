@@ -24,6 +24,9 @@ export interface IProps {
   type: 'withImage' | 'medium' | 'large' | 'primary';
   closeMenuOnSelect?: boolean;
   isSearchable?: boolean;
+  styles?: {
+    [style: string]: (styles: React.CSSProperties) => React.CSSProperties;
+  };
 }
 
 const SingleSelect: FC<IProps> = ({
@@ -33,11 +36,14 @@ const SingleSelect: FC<IProps> = ({
   type,
   closeMenuOnSelect,
   selectedOption,
-  isSearchable
+  isSearchable,
+  styles
 }) => {
   const onChange = (value: IOptions) => {
     selectOption(value);
   };
+  // This line forces rerender.
+  const appliedStyles = styles ? { ...selectStyles, ...styles } : selectStyles;
   const generateSelect = () => {
     return (
       <Select
@@ -48,7 +54,7 @@ const SingleSelect: FC<IProps> = ({
         classNamePrefix='select'
         className='basic-single-select'
         placeholder={placeholder ? placeholder : 'Select Item'}
-        styles={selectStyles}
+        styles={appliedStyles}
         hideSelectedOptions={false}
         onChange={onChange}
         defaultValue={selectedOption}
@@ -79,7 +85,7 @@ const SingleSelect: FC<IProps> = ({
             classNamePrefix='select'
             className='basic-single-select'
             placeholder={placeholder ? placeholder : 'Select Item'}
-            styles={selectStyles}
+            styles={appliedStyles}
             hideSelectedOptions={false}
             onChange={onChange}
             components={{
@@ -101,9 +107,10 @@ const SingleSelect: FC<IProps> = ({
             className='basic-multi-select'
             classNamePrefix='select'
             placeholder={placeholder ? placeholder : 'Select Item'}
-            styles={selectStyles}
+            styles={appliedStyles}
             hideSelectedOptions={false}
             defaultValue={selectedOption}
+            onChange={onChange}
             components={{
               ClearIndicator: false,
               DropdownIndicator,
