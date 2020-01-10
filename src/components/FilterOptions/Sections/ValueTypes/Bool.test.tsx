@@ -19,8 +19,8 @@ describe('Bool', () => {
   test('renders <input> tag at Bool', () => {
     // There's only one test for now, so we don't need `commonProps` here
     const props: Props = {
-      filterValue: ['some value'],
-      filters: [],
+      filterValue: ['no'],
+      filters: [{operatorName:'EQUAL', property: 'can_admin', value:['no']}],
       index: 0,
       setFilterValue: jest.fn(),
       uniqueValues: []
