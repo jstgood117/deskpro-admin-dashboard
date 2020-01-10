@@ -145,36 +145,38 @@ const Table: FC<Props> = ({
                       const isIdColumn = column.Header.toUpperCase() === 'ID' ? true : false;
                       const isLastColumn = !(headerGroup.headers.length - indexInner - 1);
 
-                      return <th
-                        key={indexInner}
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                        style={{
-                          border: column.isSorted && '1px solid #D3D6D7',
-                          width: isIdColumn && '1px',
-                        }}
-                      >
-                        <StyledTh align={isIdColumn && isLastColumn ? 'right' : 'left'}>
-                          {column.render('Header')}
-
-                          {column.isSorted &&
-                            (column.isSortedDesc ? (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-up-active' />
-                              </span>
-                            ) : (
-                                <span className='sort-icon'>
-                                  <Icon name='ic-sort-down-active' />
-                                </span>
-                              ))}
-                          {column.isSorted && (
-                            <span className='filter-icon'>
-                              <Icon name='filter' />
-                            </span>
+                      return (
+                        <th
+                          key={indexInner}
+                          {...column.getHeaderProps(
+                            column.getSortByToggleProps()
                           )}
-                        </StyledTh>
-                      </th>
+                          style={{
+                            border: column.isSorted && '1px solid #D3D6D7',
+                            width: isIdColumn && '1px',
+                          }}
+                        >
+                          <StyledTh align={isIdColumn && isLastColumn ? 'right' : 'left'}>
+                            {column.render('Header')}
+
+                            {column.isSorted &&
+                              (column.isSortedDesc ? (
+                                <span className='sort-icon'>
+                                  <Icon name='ic-sort-up-active' />
+                                </span>
+                              ) : (
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-down-active' />
+                                  </span>
+                                ))}
+                            {column.isSorted && (
+                              <span className='filter-icon'>
+                                <Icon name='filter' />
+                              </span>
+                            )}
+                          </StyledTh>
+                        </th>
+                      );
                     }
                   )}
                 </tr>
@@ -212,19 +214,21 @@ const Table: FC<Props> = ({
                       const isIdColumn = cell.column.Header.toUpperCase() === 'ID' ? true : false;
                       const isLastCell = !(row.cells.length - indexInner - 1);
 
-                      return <td key={indexInner} {...cell.getCellProps()}>
-                        <span
-                          style={{ display: 'flex' }}
-                          {...cell.row.getExpandedToggleProps({
-                            style: {
-                              paddingLeft: `${row.depth * 2}rem`,
-                              float: isIdColumn && isLastCell && 'right'
-                            }
-                          })}
-                        >
-                          <TableData {...generateComponentProps(cell)} />
-                        </span>
-                      </td>
+                      return (
+                        <td key={indexInner} {...cell.getCellProps()}>
+                          <span
+                            style={{ display: 'flex' }}
+                            {...cell.row.getExpandedToggleProps({
+                              style: {
+                                paddingLeft: `${row.depth * 2}rem`,
+                                float: isIdColumn && isLastCell && 'right'
+                              }
+                            })}
+                          >
+                            <TableData {...generateComponentProps(cell)} />
+                          </span>
+                        </td>
+                      );
                     })}
                   </tr>
                 );
