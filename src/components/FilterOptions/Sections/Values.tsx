@@ -63,15 +63,6 @@ export type Props = {
 
 export const getComponent = (containType: string, props: Props) => {
   // For some reason, containType becomes `undefined` on reopen or add filter
-
-  if (!containType) {
-    switch (props.filter && props.filter.operatorName) {
-      case 'YES_NO':
-        return <Bool {...props} />;
-
-      default:
-    }
-  }
   switch (containType) {
     case 'CHOICE_FROM_DATA':
       return <ChoiceFromData {...props} />;
