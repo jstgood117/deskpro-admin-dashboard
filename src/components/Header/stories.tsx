@@ -7,7 +7,7 @@ import Header from './Header';
 storiesOf('Header', module).add('with text', () => (
   <Header
     illustration='agents-header'
-    title='admin_agents.agents.title'
+    title='admin_agents_groups.groups.title'
     description='admin_agents.agents.description'
     defaulViewMode='table'
     showViewModeSwitcher={true}

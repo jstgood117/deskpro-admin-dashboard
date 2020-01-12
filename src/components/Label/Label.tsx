@@ -14,6 +14,7 @@ export interface IStyleProps {
 
 export interface IProps {
   label: string | any;
+  avatar?: string;
   styles?: CSSProperties;
   icon?: string;
   iconColor?: string;
@@ -21,7 +22,7 @@ export interface IProps {
   showBoxShadow?: boolean;
 }
 
-const LabelStyle = styled(dpstyle.div)<IStyleProps>`
+const LabelStyle = styled(dpstyle.div) <IStyleProps>`
   display: inline-flex;
   align-items: center;
   border-radius: 4px;
@@ -46,6 +47,13 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
     fill: ${props =>
     props.iconColor ? props.iconColor : props.theme.activeColour};
   }
+  & img {
+    width: 16px;
+    height: 16px;
+    margin-right: -8px;
+    border-radius: 3px;
+    object-fit: cover;
+  }
   ${props =>
     props.showBoxShadow &&
     css`
@@ -58,6 +66,7 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
 
 const Label: FC<IProps & IStyleProps> = ({
   label,
+  avatar,
   styleType,
   icon,
   styles,
@@ -82,6 +91,18 @@ const Label: FC<IProps & IStyleProps> = ({
             <Icon name={icon} />
           </span>
         )}
+
+        {avatar && (
+          <span
+            style={{
+              display: 'flex',
+              padding: '3px',
+            }}
+          >
+            <img src={avatar} alt='avatar' />
+          </span>
+        )}
+
         <TextLabel
           small={1}
           style={{

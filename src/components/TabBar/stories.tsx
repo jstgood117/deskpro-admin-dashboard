@@ -7,14 +7,14 @@ import { DeskproAdminTheme } from '../Theme';
 import { action } from '@storybook/addon-actions';
 
 const TabItems = [
-  { label: 'Property1' },
-  { label: 'Property2' },
-  { label: 'Property3' },
-  { label: 'Property4' },
-  { label: 'Property5' },
-  { label: 'Property6' },
-  { label: 'Property7' },
-  { label: 'Property8' },
+  { label: 'Property 1' },
+  { label: 'Property 2' },
+  { label: 'Property 3' },
+  { label: 'Property 4' },
+  { label: 'Property 5' },
+  { label: 'Property 6' },
+  { label: 'Property 7' },
+  { label: 'Property 8' },
 ];
 
 storiesOf('TabBar', module).add('Tab Bar', () => (

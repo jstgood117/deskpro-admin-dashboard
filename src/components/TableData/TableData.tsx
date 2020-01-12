@@ -175,6 +175,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
       return (
         <Label
           label={props.label}
+          avatar={props.avatar}
           styleType='filled'
           icon={props.icon}
           iconColor={props.iconColor}
