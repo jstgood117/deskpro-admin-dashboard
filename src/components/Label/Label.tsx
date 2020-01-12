@@ -77,6 +77,7 @@ const Label: FC<IProps & IStyleProps> = ({
               display: 'flex',
               padding: '5px 0px 5px 8px'
             }}
+            className='icon-label'
           >
             <Icon name={icon} />
           </span>
