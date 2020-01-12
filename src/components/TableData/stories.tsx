@@ -247,7 +247,19 @@ storiesOf('Table Data', module)
   .add('Timezone (timezone)', () => (
     <TableData type='timezone' props={{ timezone: 'UTC' }} />
   ))
-  .add('Label (label)', () => {
+  .add('Label (label)', () => (
+    <div style={{ width: 90 }}>
+      <TableData
+        type='label'
+        props={{
+          label: 'Subscription',
+          backgroundColor: '#3A8DDE',
+          color: '#fff'
+        }}
+      />
+    </div>
+  ))
+  .add('Label with avatar (label)', () => {
     const label = text('Label', 'Subscription');
     const avatar = text(
       'Avatar Url',
