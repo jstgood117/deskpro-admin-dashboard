@@ -1,6 +1,7 @@
 export const processSortParam = (a:any) => {
   a = typeof a === 'string' ? a.toLowerCase() : a;
 
+  // object
   if (
     a !== null &&
     typeof a === 'object' &&
@@ -12,6 +13,11 @@ export const processSortParam = (a:any) => {
           : typeof a.props.sortingvalue === 'string'
             ? a.props.sortingvalue.toLowerCase()
             : 0;
+  }
+
+  // number
+  if(a !== null && !isNaN(parseFloat(a))) {
+    a = parseFloat(a);
   }
 
   a = a === null || a === undefined ? '-' : a;
