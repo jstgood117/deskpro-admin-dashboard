@@ -54,12 +54,14 @@ const TabBar: FC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
           return null;
         })}
         {moreItems.length > 0 && (
-          <AdditonalTab
-            label='More'
-            tabItems={moreItems}
-            selectedTabValue={dropdownValue}
-            handle={handleMoreTab}
-          />
+          <div>
+            <AdditonalTab
+              label={'More('+moreItems.length+')'}
+              tabItems={moreItems}
+              selectedTabValue={dropdownValue}
+              handle={handleMoreTab}
+            />
+          </div>
         )}
       </TabBarStyled>
     </ThemeProvider>
