@@ -142,8 +142,8 @@ const Table: FC<Props> = ({
                   <th />
                   {headerGroup.headers.map(
                     (column: KeyValue, indexInner: number) => {
-                      const isIdColumn = column.Header.toUpperCase() === 'ID' ? true : false;
-                      const isLastColumn = !(headerGroup.headers.length - indexInner - 1);
+                      const isIdColumn = column.type.__typename === 'TableColumnId';
+                      const isLastColumn = headerGroup.headers.length === ++indexInner;
 
                       return (
                         <th
@@ -156,7 +156,7 @@ const Table: FC<Props> = ({
                             width: isIdColumn && '1px',
                           }}
                         >
-                          <StyledTh align={isIdColumn && isLastColumn ? 'right' : 'left'}>
+                          <StyledTh alignRight={isIdColumn && isLastColumn}>
                             {column.render('Header')}
 
                             {column.isSorted &&
@@ -210,26 +210,20 @@ const Table: FC<Props> = ({
                         onChange={handleCheckboxChange}
                       />
                     </td>
-                    {row.cells.map((cell: any, indexInner: number) => {
-                      const isIdColumn = cell.column.Header.toUpperCase() === 'ID' ? true : false;
-                      const isLastCell = !(row.cells.length - indexInner - 1);
-
-                      return (
-                        <td key={indexInner} {...cell.getCellProps()}>
-                          <span
-                            style={{ display: 'flex' }}
-                            {...cell.row.getExpandedToggleProps({
-                              style: {
-                                paddingLeft: `${row.depth * 2}rem`,
-                                float: isIdColumn && isLastCell && 'right'
-                              }
-                            })}
-                          >
-                            <TableData {...generateComponentProps(cell)} />
-                          </span>
-                        </td>
-                      );
-                    })}
+                    {row.cells.map((cell: any, indexInner: number) => (
+                      <td key={indexInner} {...cell.getCellProps()}>
+                        <span
+                          style={{ display: 'flex' }}
+                          {...cell.row.getExpandedToggleProps({
+                            style: {
+                              paddingLeft: `${row.depth * 2}rem`,
+                            }
+                          })}
+                        >
+                          <TableData {...generateComponentProps(cell)} />
+                        </span>
+                      </td>
+                    ))}
                   </tr>
                 );
               })}
