@@ -177,9 +177,12 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
           label={props.label}
           avatar={props.avatar}
           styleType='filled'
+          icon={props.icon}
+          iconColor={props.iconColor}
           styles={{
             backgroundColor: props.backgroundColor,
-            color: props.color
+            color: props.color,
+            borderColor: props.borderColor
           }}
         />
       );

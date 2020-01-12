@@ -40,4 +40,16 @@ describe('Label', () => {
       expect(wrapper(false).find('img').length).toBeGreaterThan(0);
     });
   });
+
+  describe('when icon is defined', () => {
+    beforeEach(() => {
+      props.label = 6;
+      props.icon = 'clock';
+      mountedLabel = undefined;
+    });
+
+    it('always renders a <svg>', () => {
+      expect(wrapper(false).find('.icon-label').length).toBeGreaterThan(0);
+    });
+  });
 });

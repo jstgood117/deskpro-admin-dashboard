@@ -22,7 +22,7 @@ export interface IProps {
   showBoxShadow?: boolean;
 }
 
-const LabelStyle = styled(dpstyle.div)<IStyleProps>`
+const LabelStyle = styled(dpstyle.div) <IStyleProps>`
   display: inline-flex;
   align-items: center;
   border-radius: 4px;
@@ -84,8 +84,9 @@ const Label: FC<IProps & IStyleProps> = ({
           <span
             style={{
               display: 'flex',
-              padding: '6px 0px 6px 10px'
+              padding: '5px 0px 5px 8px'
             }}
+            className='icon-label'
           >
             <Icon name={icon} />
           </span>
@@ -107,7 +108,7 @@ const Label: FC<IProps & IStyleProps> = ({
           style={{
             display: 'flex',
             alignItems: 'center',
-            padding: '0px 10px',
+            padding: icon ? '0px 8px' : '0px 10px',
             fontWeight: '600',
             width: '100%',
             textAlign: styles && styles.textAlign ? styles.textAlign : 'center'

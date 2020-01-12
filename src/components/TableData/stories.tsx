@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, number, color } from '@storybook/addon-knobs';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -275,6 +275,26 @@ storiesOf('Table Data', module)
             avatar,
             backgroundColor: '#3A8DDE',
             color: '#fff'
+          }}
+        />
+      </div>
+    );
+  })
+  .add('Label with icon (label)', () => {
+    const label = number('Label', 6);
+    const backgroundColor = color('background', '#EBE4F2');
+
+    return (
+      <div style={{ width: 90 }}>
+        <TableData
+          type='label'
+          props={{
+            label,
+            styleType: 'filled',
+            color: '#9384BD',
+            backgroundColor,
+            icon: 'clock',
+            iconColor: '#9384BD'
           }}
         />
       </div>
