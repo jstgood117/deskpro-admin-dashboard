@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withKnobs, number, color } from '@storybook/addon-knobs';
 import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 
@@ -29,6 +30,7 @@ const Container: React.FC = props => (
 );
 
 storiesOf('Table Data', module)
+  .addDecorator(withKnobs)
   .add('Avatar + text (avatar_text)', () => (
     <TableData type='avatar_text' props={testTableData[0]} />
   ))
@@ -257,6 +259,26 @@ storiesOf('Table Data', module)
       />
     </div>
   ))
+  .add('Label with icon (label)', () => {
+    const label = number('Label', 6);
+    const backgroundColor = color('background', '#EBE4F2');
+
+    return (
+      <div style={{ width: 90 }}>
+        <TableData
+          type='label'
+          props={{
+            label,
+            styleType: 'filled',
+            color: '#9384BD',
+            backgroundColor,
+            icon: 'clock',
+            iconColor: '#9384BD'
+          }}
+        />
+      </div>
+    );
+  })
   .add('Currency (currency)', () => (
     <Container>
       <TableData type='currency' props={{ currency: 'GBP', value: 15000 }} />
