@@ -44,7 +44,7 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
       : props.theme.black};
   path {
     fill: ${props =>
-      props.iconColor ? props.iconColor : props.theme.activeColour};
+    props.iconColor ? props.iconColor : props.theme.activeColour};
   }
   ${props =>
     props.showBoxShadow &&
@@ -64,39 +64,39 @@ const Label: FC<IProps & IStyleProps> = ({
   iconColor,
   ...props
 }) => (
-  <ThemeProvider theme={DeskproAdminTheme}>
-    <LabelStyle
-      styleType={styleType}
-      styles={styles}
-      iconColor={iconColor}
-      showBoxShadow={props.showBoxShadow}
-    >
-      {icon && (
-        <span
+    <ThemeProvider theme={DeskproAdminTheme}>
+      <LabelStyle
+        styleType={styleType}
+        styles={styles}
+        iconColor={iconColor}
+        showBoxShadow={props.showBoxShadow}
+      >
+        {icon && (
+          <span
+            style={{
+              display: 'flex',
+              padding: '5px 0px 5px 8px'
+            }}
+          >
+            <Icon name={icon} />
+          </span>
+        )}
+        <TextLabel
+          small={1}
           style={{
             display: 'flex',
-            padding: '6px 0px 6px 10px'
+            alignItems: 'center',
+            padding: icon ? '0px 8px' : '0px 10px',
+            fontWeight: '600',
+            width: '100%',
+            textAlign: styles && styles.textAlign ? styles.textAlign : 'center'
           }}
         >
-          <Icon name={icon} />
-        </span>
-      )}
-      <TextLabel
-        small={1}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          padding: '0px 10px',
-          fontWeight: '600',
-          width: '100%',
-          textAlign: styles && styles.textAlign ? styles.textAlign : 'center'
-        }}
-      >
-        {props.children}
-        {label}
-      </TextLabel>
-    </LabelStyle>
-  </ThemeProvider>
-);
+          {props.children}
+          {label}
+        </TextLabel>
+      </LabelStyle>
+    </ThemeProvider>
+  );
 
 export default Label;
