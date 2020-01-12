@@ -62,7 +62,18 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
           viewMode={props.viewMode}
           overflowStyle={{ marginLeft: 8 }}
           renderItem={(item, idx) => (
-            <P1 key={idx} className='text'>
+            <P1
+              key={idx}
+              className='text'
+              style={
+                props.alignRight
+                  ? {
+                    width: '100%',
+                    textAlign: 'right',
+                  }
+                  : {}
+              }
+            >
               <span> {idx !== 0 ? ', ' : ''}</span>
               {type === 'phrase' ? <FormattedMessage id={item} /> : item}
             </P1>
@@ -158,7 +169,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         />
       );
 
-      case 'count':
+    case 'count':
       return <P1 className='text'>{props.count}</P1>;
 
     case 'id':
