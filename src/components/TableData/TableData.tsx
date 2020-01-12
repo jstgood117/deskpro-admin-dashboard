@@ -158,7 +158,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         />
       );
 
-      case 'count':
+    case 'count':
       return <P1 className='text'>{props.count}</P1>;
 
     case 'id':
@@ -176,9 +176,12 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         <Label
           label={props.label}
           styleType='filled'
+          icon={props.icon}
+          iconColor={props.iconColor}
           styles={{
             backgroundColor: props.backgroundColor,
-            color: props.color
+            color: props.color,
+            borderColor: props.borderColor
           }}
         />
       );
