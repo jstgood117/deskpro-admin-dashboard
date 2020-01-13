@@ -143,7 +143,6 @@ const Table: FC<Props> = ({
                   {headerGroup.headers.map(
                     (column: KeyValue, indexInner: number) => {
                       const isIdColumn = column.type.__typename === 'TableColumnId';
-                      const isLastColumn = headerGroup.headers.length === ++indexInner;
 
                       return (
                         <th
@@ -156,7 +155,7 @@ const Table: FC<Props> = ({
                             width: isIdColumn && '1px',
                           }}
                         >
-                          <StyledTh alignRight={isIdColumn && isLastColumn}>
+                          <StyledTh alignRight={isIdColumn}>
                             {column.render('Header')}
 
                             {column.isSorted &&
@@ -210,20 +209,35 @@ const Table: FC<Props> = ({
                         onChange={handleCheckboxChange}
                       />
                     </td>
-                    {row.cells.map((cell: any, indexInner: number) => (
-                      <td key={indexInner} {...cell.getCellProps()}>
-                        <span
-                          style={{ display: 'flex' }}
-                          {...cell.row.getExpandedToggleProps({
-                            style: {
-                              paddingLeft: `${row.depth * 2}rem`,
-                            }
-                          })}
+                    {row.cells.map((cell: any, indexInner: number) => {
+                      const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+                      let style = {};
+                      if (isIdColumn) {
+                        style = {
+                          verticalAlign: 'bottom',
+                          paddingBottom: '5px',
+                          textAlign: 'right'
+                        };
+                      }
+                      return (
+                        <td
+                          key={indexInner}
+                          {...cell.getCellProps()}
+                          style={style}
                         >
-                          <TableData {...generateComponentProps(cell)} />
-                        </span>
-                      </td>
-                    ))}
+                          <span
+                            style={{ display: 'flex' }}
+                            {...cell.row.getExpandedToggleProps({
+                              style: {
+                                paddingLeft: `${row.depth * 2}rem`,
+                              }
+                            })}
+                          >
+                            <TableData {...generateComponentProps(cell)} />
+                          </span>
+                        </td>
+                      );
+                    })}
                   </tr>
                 );
               })}

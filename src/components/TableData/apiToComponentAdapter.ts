@@ -63,7 +63,6 @@ export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
 export const generateComponentProps = (cell: any): ITableDataProps => {
   const type = cell.column.type as API_TableColumnField;
   const row = cell.row.original;
-  const cells = cell.row.cells.length;
 
   switch (type.__typename) {
     case 'TableColumnNameAvatar':
@@ -130,13 +129,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'count', props: { values: [getPayloadValue(row, type.value)] } };
 
     case 'TableColumnId':
-      return {
-        type: 'string',
-        props: {
-          values: [getPayloadValue(row, type.value)],
-          alignRight: cells === cell.column.index + 1,
-        },
-      };
+      return { type: 'id', props: { id: [getPayloadValue(row, type.value)] } };
 
     // case 'TableColumnTemplate':
     //   return { type: 'template', props: { template: '<p>{{testing}}</p>', data: {testing:123} } };
