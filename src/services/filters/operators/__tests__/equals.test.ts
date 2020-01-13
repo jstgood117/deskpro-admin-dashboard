@@ -48,15 +48,11 @@ describe('Operators equals', () => {
   test('returns false when subject is true (boolean) equals not `yes` string', () =>{
 
     const row = {
-      prop1:true,
-      prop2:[{
-        name:'does it match?',
-        note:'will this match'
-      }],
+      prop:true ,
     };
     const testString = 'any another value';
 
-    const result = equals(row, 'prop1', [testString]);
+    const result = equals(row, 'prop', [testString]);
 
     expect(result).toEqual(false);
   });

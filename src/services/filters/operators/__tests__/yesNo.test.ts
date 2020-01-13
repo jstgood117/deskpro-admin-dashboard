@@ -16,11 +16,11 @@ describe('Operators yes/no', () => {
   test('returns false when prop is empty', () => {
 
     const row = {
-      prop1:'hello this is a string',
-      prop2: '',
+      prop1: '',
+      prop2: 'any value',
     };
 
-    const result = yesNo(row, 'prop2', []);
+    const result = yesNo(row, 'prop1', []);
 
     expect(result).toEqual(false);
   });
