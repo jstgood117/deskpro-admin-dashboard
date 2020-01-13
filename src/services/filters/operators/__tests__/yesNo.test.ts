@@ -4,8 +4,7 @@ describe('Operators yes/no', () => {
   test('returns true when subject is non empty', () => {
 
     const row = {
-      prop1:'hello this is a string',
-      prop2:'',
+      prop1:'hello this is a string'
     };
 
     const result = yesNo(row, 'prop1', []);
@@ -16,8 +15,7 @@ describe('Operators yes/no', () => {
   test('returns false when prop is empty', () => {
 
     const row = {
-      prop1: '',
-      prop2: 'any value',
+      prop1: ''
     };
 
     const result = yesNo(row, 'prop1', []);
