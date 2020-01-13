@@ -8,8 +8,6 @@ export const yesNo = (row: KeyValue, prop: string, value: string[]) => {
     const dataPoint = row[String(dataPath)];
 
     switch (typeof dataPoint) {
-      case 'boolean':
-        return dataPoint === (String(value) === 'yes');
       case 'string':
         return !!dataPoint;
       case 'object':
