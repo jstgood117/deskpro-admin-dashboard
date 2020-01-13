@@ -185,7 +185,11 @@ const Table: FC<Props> = ({
                         : ''
                     }
                   >
-                    <td style={{ paddingLeft: `${row.depth * 2}rem` }}>
+                    <td
+                      style={{
+                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+                      }}
+                    >
                       <Checkbox
                         value={(row.original as KeyValue).id}
                         checked={
@@ -204,7 +208,8 @@ const Table: FC<Props> = ({
                         {...cell.getCellProps()}
                         {...cell.row.getExpandedToggleProps({
                           style: {
-                            paddingLeft: `${row.depth * 2}rem`,
+                            paddingLeft: `${row.depth === 1 &&
+                              row.depth * 2}rem`,
                             cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
                           }
                         })}
