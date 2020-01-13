@@ -8,3 +8,9 @@ export type ColumnOrder = {
 };
 
 export type SizeTypes = 'small' | 'medium';
+
+export interface IOptions {
+  image?: string;
+  value: string;
+  label: string;
+}

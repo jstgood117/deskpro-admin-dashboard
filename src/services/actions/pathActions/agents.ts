@@ -11,6 +11,7 @@ const agents: ActionsType[] = [
   {
     icon:'trash',
     title:'action.agents.delete_action',
+    preAction: 'DELETE_MODAL',
     schema:DELETE_AGENTS,
     type:'action',
     actions: null

@@ -5,14 +5,12 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import Pagination from '../Pagination/Pagination';
 import { KeyValue } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
-import { testHandlingTeamList } from '../../resources/constants/constants';
 import { ActionFactory } from '../../services/actions/ActionFactory';
-
+import { IOptions } from '../../types';
+import Actions from '../Actions';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Icon from '../Icon';
-import Menu from '../Menu';
-import MultiSelect from '../SelectComponents/MultiSelect';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 import {
@@ -73,7 +71,7 @@ const Header: FC<Props & WrappedComponentProps> = ({
   const [opened, clickButton] = useState(false);
   const [menuValue, setMenuValue] = useState();
   const [deleteModal, showDeleteModal] = useState(false);
-  const [selectedOptions, selectOptions] = React.useState([]);
+  const [selectedOptions, selectOptions] = useState<IOptions[]>([]);
   const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
@@ -150,55 +148,13 @@ const Header: FC<Props & WrappedComponentProps> = ({
             )}
             {Object.keys(checked).length > 0 && (
               <div style={{ paddingLeft: 16, display: 'flex' }}>
-                <Menu
-                  value={menuValue}
-                  onSelect={val => setMenuValue(val)}
-                  label={
-                    menuValue ? menuValue['name'] : 'admin_common.table.action'
-                  }
+                <Actions
+                  menuValue={menuValue}
                   menuItems={menuItems}
-                  iconName='menu'
+                  setMenuValue={setMenuValue}
+                  selectOptions={selectOptions}
+                  selectedOptions={selectedOptions}
                 />
-                {menuValue && menuValue.name === 'Add Team' && (
-                  <div style={{ display: 'flex', paddingLeft: 15 }}>
-                    <MultiSelect
-                      options={testHandlingTeamList}
-                      type='fixed'
-                      selectOptions={selectOptions}
-                    />
-                  </div>
-                )}
-                {((menuValue &&
-                  menuValue.name === 'actions.agents.delete_agent') ||
-                  selectedOptions.length > 0) && (
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ paddingLeft: 16 }}>
-                      <Button
-                        styleType='primary'
-                        onClick={() => {
-                          if (
-                            menuValue.name === 'actions.agents.delete_agent'
-                          ) {
-                            showDeleteModal(true);
-                          }
-                        }}
-                      >
-                        Confirm
-                      </Button>
-                    </div>
-                    <div style={{ paddingLeft: 16 }}>
-                      <Button
-                        styleType='tertiary'
-                        onClick={() => {
-                          setMenuValue(undefined);
-                          selectOptions([]);
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                )}
               </div>
             )}
           </AllCheckStyle>

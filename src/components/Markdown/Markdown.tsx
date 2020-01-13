@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { dpstyle } from '../Styled';
 import SingleSelect from '../SelectComponents/SingleSelect';
-import { IOptions } from '../SelectComponents/interfaces';
+import { IOptions } from '../../types';
 
 export interface IProps {
   children?: ReactNode;

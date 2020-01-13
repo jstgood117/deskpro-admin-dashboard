@@ -11,7 +11,7 @@ import {
   DropdownIndicator,
   PaginationSelectButton
 } from '../SelectComponents/Helpers';
-import { IOptions } from '../SelectComponents/interfaces';
+import { IOptions } from '../../types';
 
 const Container = styled(FlowLayout)``;
 

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import MultiSelect from './MultiSelect';
 import SingleSelect from './SingleSelect';
-import { IOptions } from './interfaces';
+import { IOptions } from '../../types';
 
 const MultiSelectComponent: React.FC<{
   options: IOptions[];

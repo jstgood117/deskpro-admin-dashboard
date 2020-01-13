@@ -3,5 +3,6 @@ export type ActionsType = {
   icon?:string;
   title?:string;
   schema?:string;
+  preAction?: string;
   actions?: ActionsType[];
 };
