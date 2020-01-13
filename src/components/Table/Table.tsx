@@ -16,15 +16,8 @@ import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
-import {
-  onCheckboxChange,
-  generateTableParams,
-} from './helpers/functions';
-import {
-  TableStyled,
-  StyledPagination,
-  StyledTh
-} from './TableStyles';
+import { onCheckboxChange, generateTableParams } from './helpers/functions';
+import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 
 export type Props = {
   path: string;
@@ -47,7 +40,6 @@ const Table: FC<Props> = ({
   tableType,
   sortBy
 }) => {
-
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
@@ -133,48 +125,50 @@ const Table: FC<Props> = ({
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
-              {headerGroups.map((headerGroup: HeaderGroup, indexOuter: number) => (
-                <tr
-                  key={indexOuter}
-                  {...(headerGroup.getHeaderGroupProps &&
-                    headerGroup.getHeaderGroupProps())}
-                >
-                  <th />
-                  {headerGroup.headers.map(
-                    (column: KeyValue, indexInner: number) => (
-                      <th
-                        key={indexInner}
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                        style={{
-                          border: column.isSorted && '1px solid #D3D6D7'
-                        }}
-                      >
-                        <StyledTh>
-                          {column.render('Header')}
-
-                          {column.isSorted &&
-                            (column.isSortedDesc ? (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-up-active' />
-                              </span>
-                            ) : (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-down-active' />
-                              </span>
-                            ))}
-                          {column.isSorted && (
-                            <span className='filter-icon'>
-                              <Icon name='filter' />
-                            </span>
+              {headerGroups.map(
+                (headerGroup: HeaderGroup, indexOuter: number) => (
+                  <tr
+                    key={indexOuter}
+                    {...(headerGroup.getHeaderGroupProps &&
+                      headerGroup.getHeaderGroupProps())}
+                  >
+                    <th />
+                    {headerGroup.headers.map(
+                      (column: KeyValue, indexInner: number) => (
+                        <th
+                          key={indexInner}
+                          {...column.getHeaderProps(
+                            column.getSortByToggleProps()
                           )}
-                        </StyledTh>
-                      </th>
-                    )
-                  )}
-                </tr>
-              ))}
+                          style={{
+                            border: column.isSorted && '1px solid #D3D6D7'
+                          }}
+                        >
+                          <StyledTh>
+                            {column.render('Header')}
+
+                            {column.isSorted &&
+                              (column.isSortedDesc ? (
+                                <span className='sort-icon'>
+                                  <Icon name='ic-sort-up-active' />
+                                </span>
+                              ) : (
+                                <span className='sort-icon'>
+                                  <Icon name='ic-sort-down-active' />
+                                </span>
+                              ))}
+                            {column.isSorted && (
+                              <span className='filter-icon'>
+                                <Icon name='filter' />
+                              </span>
+                            )}
+                          </StyledTh>
+                        </th>
+                      )
+                    )}
+                  </tr>
+                )
+              )}
             </thead>
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
@@ -191,7 +185,7 @@ const Table: FC<Props> = ({
                         : ''
                     }
                   >
-                    <td>
+                    <td style={{ paddingLeft: `${row.depth * 2}rem` }}>
                       <Checkbox
                         value={(row.original as KeyValue).id}
                         checked={
@@ -205,17 +199,17 @@ const Table: FC<Props> = ({
                       />
                     </td>
                     {row.cells.map((cell: any, indexInner: number) => (
-                      <td key={indexInner} {...cell.getCellProps()}>
-                        <span
-                          style={{ display: 'flex' }}
-                          {...cell.row.getExpandedToggleProps({
-                            style: {
-                              paddingLeft: `${row.depth * 2}rem`
-                            }
-                          })}
-                        >
-                          <TableData {...generateComponentProps(cell)} />
-                        </span>
+                      <td
+                        key={indexInner}
+                        {...cell.getCellProps()}
+                        {...cell.row.getExpandedToggleProps({
+                          style: {
+                            paddingLeft: `${row.depth * 2}rem`,
+                            cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
+                          }
+                        })}
+                      >
+                        <TableData {...generateComponentProps(cell)} />
                       </td>
                     ))}
                   </tr>
