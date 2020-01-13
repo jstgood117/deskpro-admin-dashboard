@@ -17,7 +17,7 @@ describe('treeify',() => {
         'title':'Awaiting Agent',
         'display_order':-6,
         'effective_display_order':0,
-        'children':[]
+        'subRows':[]
       },
       {
         'id':'awaiting_user',
@@ -28,7 +28,7 @@ describe('treeify',() => {
         'title':'Awaiting User',
         'display_order':-5,
         'effective_display_order':1,
-        'children':[]
+        'subRows':[]
       },
       {
         'id':'pending',
@@ -39,7 +39,7 @@ describe('treeify',() => {
         'title':'Pending',
         'display_order':-4,
         'effective_display_order':2,
-        'children':[]
+        'subRows':[]
       },
       {
         'id':'resolved',
@@ -50,7 +50,7 @@ describe('treeify',() => {
         'title':'Resolved',
         'display_order':-3,
         'effective_display_order':3,
-        'children':[]
+        'subRows':[]
       },
       {
         'id':'archived',
@@ -61,7 +61,7 @@ describe('treeify',() => {
         'title':'Archived',
         'display_order':-2,
         'effective_display_order':4,
-        'children':[]
+        'subRows':[]
       },
       {
         'id':'hidden',
@@ -72,7 +72,7 @@ describe('treeify',() => {
         'title':'Hidden',
         'display_order':-1,
         'effective_display_order':5,
-        'children':[
+        'subRows':[
           {
             'id':'hidden.1',
             'sys_id':'deleted',
@@ -84,7 +84,7 @@ describe('treeify',() => {
             'title':'Deleted',
             'display_order':0,
             'effective_display_order':6,
-            'children':[]
+            'subRows':[]
           },
           {
             'id':'hidden.2',
@@ -97,14 +97,14 @@ describe('treeify',() => {
             'title':'Spam',
             'display_order':0,
             'effective_display_order':7,
-            'children':[]
+            'subRows':[]
           }
         ]
       }
     ]);
   });
 
-  test('if `id`, `custom_parent` and `custom_children`, use them to locate children and store in final structure.', () => {
+  test('if `id`, `custom_parent` and `custom_children`, use them to locate subRows and store in final structure.', () => {
 
     const result = treeify(testData2, 'id', 'custom_parent', 'custom_children');
 
