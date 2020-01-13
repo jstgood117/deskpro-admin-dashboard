@@ -84,7 +84,6 @@ const StandardTablePage: FC<IProps> = ({
       });
       const { results }: { results: KeyValue[]} = dataResponse.data;
       const treedResults = treeify(results);
-      console.log('treedResults', treedResults)
       setTableData(treedResults);
       setFilteredData(treedResults);
       setTotalPageCount(Math.ceil(results.length / pageSize));

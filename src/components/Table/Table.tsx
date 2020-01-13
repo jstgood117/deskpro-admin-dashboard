@@ -18,6 +18,7 @@ import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
+import Tooltip from '../Tooltip';
 
 export type Props = {
   path: string;
@@ -158,9 +159,15 @@ const Table: FC<Props> = ({
                                 </span>
                               ))}
                             {column.isSorted && (
-                              <span className='filter-icon'>
-                                <Icon name='filter' />
-                              </span>
+                              <Tooltip
+                                content='Filter'
+                                styleType='dark'
+                                placement='bottom'
+                              >
+                                <span className='filter-icon'>
+                                  <Icon name='filter' />
+                                </span>
+                              </Tooltip>
                             )}
                           </StyledTh>
                         </th>
