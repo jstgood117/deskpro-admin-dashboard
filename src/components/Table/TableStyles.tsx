@@ -41,6 +41,14 @@ export const TableStyled = styled(dpstyle.div)`
                     fill: ${props => props.theme.static2Colour};
                   }
                 }
+                &:hover {
+                  background: ${props => props.theme.hoverColour};
+                  svg {
+                    path {
+                      fill: ${props => props.theme.activeColour};
+                    }
+                  }
+                }
               }
               .sort-icon {
                 svg {
@@ -121,9 +129,10 @@ export const StyledPagination = styled(dpstyle.div)`
   padding-bottom: 10px;
 `;
 
-export const StyledTh = styled.div`
+export const StyledTh = styled.div<{ alignRight: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: ${props => props.alignRight ? 'flex-end' : 'flex-right'};
   .sort-icon {
     display: flex;
     padding-left: 10px;
@@ -131,7 +140,7 @@ export const StyledTh = styled.div`
 `;
 
 export const CardGrid = styled.div`
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
-  grid-gap:20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
 `;

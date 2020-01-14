@@ -129,7 +129,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'count', props: { values: [getPayloadValue(row, type.value)] } };
 
     case 'TableColumnId':
-      return { type: 'string', props: { values: [getPayloadValue(row, type.value)] } };
+      return { type: 'id', props: { id: [getPayloadValue(row, type.value)] } };
 
     // case 'TableColumnTemplate':
     //   return { type: 'template', props: { template: '<p>{{testing}}</p>', data: {testing:123} } };

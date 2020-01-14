@@ -16,15 +16,9 @@ import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
-import {
-  onCheckboxChange,
-  generateTableParams,
-} from './helpers/functions';
-import {
-  TableStyled,
-  StyledPagination,
-  StyledTh
-} from './TableStyles';
+import { onCheckboxChange, generateTableParams } from './helpers/functions';
+import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
+import Tooltip from '../Tooltip';
 
 export type Props = {
   path: string;
@@ -47,7 +41,6 @@ const Table: FC<Props> = ({
   tableType,
   sortBy
 }) => {
-
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
@@ -141,40 +134,52 @@ const Table: FC<Props> = ({
                 >
                   <th />
                   {headerGroup.headers.map(
-                    (column: KeyValue, indexInner: number) => (
-                      <th
-                        key={indexInner}
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
-                        style={{
-                          border: column.isSorted && '1px solid #D3D6D7'
-                        }}
-                      >
-                        <StyledTh>
-                          {column.render('Header')}
+                    (column: KeyValue, indexInner: number) => {
+                      const isIdColumn = column.type.__typename === 'TableColumnId';
 
-                          {column.isSorted &&
-                            (column.isSortedDesc ? (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-up-active' />
-                              </span>
-                            ) : (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-down-active' />
-                              </span>
-                            ))}
-                          {column.isSorted && (
-                            <span className='filter-icon'>
-                              <Icon name='filter' />
-                            </span>
+                      return (
+                        <th
+                          key={indexInner}
+                          {...column.getHeaderProps(
+                            column.getSortByToggleProps()
                           )}
-                        </StyledTh>
-                      </th>
-                    )
-                  )}
+                          style={{
+                            border: column.isSorted && '1px solid #D3D6D7',
+                            width: isIdColumn && '1px',
+                          }}
+                        >
+                          <StyledTh alignRight={isIdColumn}>
+                            {column.render('Header')}
+
+                            {column.isSorted &&
+                              (column.isSortedDesc ? (
+                                <span className='sort-icon'>
+                                  <Icon name='ic-sort-up-active' />
+                                </span>
+                              ) : (
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-down-active' />
+                                  </span>
+                                ))}
+                            {column.isSorted && (
+                              <Tooltip
+                                content='Filter'
+                                styleType='dark'
+                                placement='bottom'
+                              >
+                                <span className='filter-icon'>
+                                  <Icon name='filter' />
+                                </span>
+                              </Tooltip>
+                            )}
+                          </StyledTh>
+                        </th>
+                      );
+                    })
+                  }
                 </tr>
-              ))}
+              )
+              )}
             </thead>
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
@@ -191,7 +196,11 @@ const Table: FC<Props> = ({
                         : ''
                     }
                   >
-                    <td>
+                    <td
+                      style={{
+                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+                      }}
+                    >
                       <Checkbox
                         value={(row.original as KeyValue).id}
                         checked={
@@ -204,20 +213,37 @@ const Table: FC<Props> = ({
                         onChange={handleCheckboxChange}
                       />
                     </td>
-                    {row.cells.map((cell: any, indexInner: number) => (
-                      <td key={indexInner} {...cell.getCellProps()}>
-                        <span
-                          style={{ display: 'flex' }}
-                          {...cell.row.getExpandedToggleProps({
-                            style: {
-                              paddingLeft: `${row.depth * 2}rem`
-                            }
-                          })}
+                    {row.cells.map((cell: any, indexInner: number) => {
+                      const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+                      let style = {};
+                      if (isIdColumn) {
+                        style = {
+                          verticalAlign: 'bottom',
+                          paddingBottom: '5px',
+                          textAlign: 'right'
+                        };
+                      }
+                      return (
+                        <td
+                          key={indexInner}
+                          {...cell.getCellProps()}
+                          style={style}
                         >
-                          <TableData {...generateComponentProps(cell)} />
-                        </span>
-                      </td>
-                    ))}
+                          <span
+                            style={{ display: 'flex' }}
+                            {...cell.row.getExpandedToggleProps({
+                              style: {
+                                paddingLeft: `${row.depth === 1 &&
+                                  row.depth * 2}rem`,
+                                cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
+                              }
+                            })}
+                          >
+                            <TableData {...generateComponentProps(cell)} />
+                          </span>
+                        </td>
+                      );
+                    })}
                   </tr>
                 );
               })}
