@@ -126,26 +126,29 @@ const Table: FC<Props> = ({
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
-              {headerGroups.map(
-                (headerGroup: HeaderGroup, indexOuter: number) => (
-                  <tr
-                    key={indexOuter}
-                    {...(headerGroup.getHeaderGroupProps &&
-                      headerGroup.getHeaderGroupProps())}
-                  >
-                    <th />
-                    {headerGroup.headers.map(
-                      (column: KeyValue, indexInner: number) => (
+              {headerGroups.map((headerGroup: HeaderGroup, indexOuter: number) => (
+                <tr
+                  key={indexOuter}
+                  {...(headerGroup.getHeaderGroupProps &&
+                    headerGroup.getHeaderGroupProps())}
+                >
+                  <th />
+                  {headerGroup.headers.map(
+                    (column: KeyValue, indexInner: number) => {
+                      const isIdColumn = column.type.__typename === 'TableColumnId';
+
+                      return (
                         <th
                           key={indexInner}
                           {...column.getHeaderProps(
                             column.getSortByToggleProps()
                           )}
                           style={{
-                            border: column.isSorted && '1px solid #D3D6D7'
+                            border: column.isSorted && '1px solid #D3D6D7',
+                            width: isIdColumn && '1px',
                           }}
                         >
-                          <StyledTh>
+                          <StyledTh alignRight={isIdColumn}>
                             {column.render('Header')}
 
                             {column.isSorted &&
@@ -154,10 +157,10 @@ const Table: FC<Props> = ({
                                   <Icon name='ic-sort-up-active' />
                                 </span>
                               ) : (
-                                <span className='sort-icon'>
-                                  <Icon name='ic-sort-down-active' />
-                                </span>
-                              ))}
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-down-active' />
+                                  </span>
+                                ))}
                             {column.isSorted && (
                               <Tooltip
                                 content='Filter'
@@ -171,10 +174,11 @@ const Table: FC<Props> = ({
                             )}
                           </StyledTh>
                         </th>
-                      )
-                    )}
-                  </tr>
-                )
+                      );
+                    })
+                  }
+                </tr>
+              )
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
@@ -209,21 +213,37 @@ const Table: FC<Props> = ({
                         onChange={handleCheckboxChange}
                       />
                     </td>
-                    {row.cells.map((cell: any, indexInner: number) => (
-                      <td
-                        key={indexInner}
-                        {...cell.getCellProps()}
-                        {...cell.row.getExpandedToggleProps({
-                          style: {
-                            paddingLeft: `${row.depth === 1 &&
-                              row.depth * 2}rem`,
-                            cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
-                          }
-                        })}
-                      >
-                        <TableData {...generateComponentProps(cell)} />
-                      </td>
-                    ))}
+                    {row.cells.map((cell: any, indexInner: number) => {
+                      const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+                      let style = {};
+                      if (isIdColumn) {
+                        style = {
+                          verticalAlign: 'bottom',
+                          paddingBottom: '5px',
+                          textAlign: 'right'
+                        };
+                      }
+                      return (
+                        <td
+                          key={indexInner}
+                          {...cell.getCellProps()}
+                          style={style}
+                        >
+                          <span
+                            style={{ display: 'flex' }}
+                            {...cell.row.getExpandedToggleProps({
+                              style: {
+                                paddingLeft: `${row.depth === 1 &&
+                                  row.depth * 2}rem`,
+                                cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
+                              }
+                            })}
+                          >
+                            <TableData {...generateComponentProps(cell)} />
+                          </span>
+                        </td>
+                      );
+                    })}
                   </tr>
                 );
               })}

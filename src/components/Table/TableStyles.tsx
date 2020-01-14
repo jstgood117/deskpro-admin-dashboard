@@ -129,9 +129,10 @@ export const StyledPagination = styled(dpstyle.div)`
   padding-bottom: 10px;
 `;
 
-export const StyledTh = styled.div`
+export const StyledTh = styled.div<{ alignRight: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: ${props => props.alignRight ? 'flex-end' : 'flex-right'};
   .sort-icon {
     display: flex;
     padding-left: 10px;
