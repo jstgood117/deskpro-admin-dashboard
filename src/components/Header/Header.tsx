@@ -5,9 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
-import Drawer from '../Drawer';
 
-const HeaderStyled = styled(dpstyle.div) <IHeader>`
+const HeaderStyled = styled(dpstyle.div)<IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: 39px 30px 60px 30px;
   display: flex;
@@ -36,7 +35,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   background: ${props => props.theme.white};
 `;
 
-const ViewModeButton = styled(dpstyle.button) <{ active: boolean }>`
+const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -45,7 +44,7 @@ const ViewModeButton = styled(dpstyle.button) <{ active: boolean }>`
   width: 44px;
   path {
     fill: ${props =>
-    props.active ? props.theme.activeColour : props.theme.static2Colour};
+      props.active ? props.theme.activeColour : props.theme.static2Colour};
   }
   background-color: ${props => props.active && props.theme.hoverColour};
 `;
@@ -140,19 +139,10 @@ const Header: FC<IProps> = ({
   onNewClick
 }) => {
   const [state, setState] = useState(defaulViewMode);
-  const [open, setOpen] = useState(false);
 
   function changeView(viewMode: 'table' | 'list' | 'card') {
     setState(viewMode);
     onChangeView(viewMode);
-  }
-
-  function showDrawer() {
-    setOpen(true);
-  }
-
-  function onClose() {
-    setOpen(false);
   }
 
   return (
@@ -200,17 +190,12 @@ const Header: FC<IProps> = ({
                 )}
 
                 {showNewButton && onNewClick && (
-                  <div>
-                    <Drawer open={open} onClose={onClose}>
-                      Agents...
-                    </Drawer>
-                    <NewButton onClick={showDrawer}>
-                      <Icon name='plus' />
-                      <span>
-                        <FormattedMessage id='admin.page.new' />
-                      </span>
-                    </NewButton>
-                  </div>
+                  <NewButton onClick={onNewClick}>
+                    <Icon name='plus' />
+                    <span>
+                      <FormattedMessage id='admin.page.new' />
+                    </span>
+                  </NewButton>
                 )}
               </ActionContainer>
             </HeaderOptions>

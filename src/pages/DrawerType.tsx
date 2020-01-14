@@ -22,7 +22,7 @@ const getDrawerChildComponent = (pageType: string) => {
 const DrawerType: SFC<Props> = ({
   pageType
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const Content = getDrawerChildComponent(pageType);
 
   const onClose = () => {
