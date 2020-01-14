@@ -157,10 +157,10 @@ const Table: FC<Props> = ({
                                   <Icon name='ic-sort-up-active' />
                                 </span>
                               ) : (
-                                <span className='sort-icon'>
-                                  <Icon name='ic-sort-down-active' />
-                                </span>
-                              ))}
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-down-active' />
+                                  </span>
+                                ))}
                             {column.isSorted && (
                               <Tooltip
                                 content='Filter'
@@ -174,10 +174,11 @@ const Table: FC<Props> = ({
                             )}
                           </StyledTh>
                         </th>
-                      )
-                    )}
-                  </tr>
-                )
+                      );
+                    })
+                  }
+                </tr>
+              )
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
@@ -232,10 +233,10 @@ const Table: FC<Props> = ({
                             style={{ display: 'flex' }}
                             {...cell.row.getExpandedToggleProps({
                               style: {
-                            paddingLeft: `${row.depth === 1 &&
-                              row.depth * 2}rem`,
-                            cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
-                          }
+                                paddingLeft: `${row.depth === 1 &&
+                                  row.depth * 2}rem`,
+                                cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
+                              }
                             })}
                           >
                             <TableData {...generateComponentProps(cell)} />
