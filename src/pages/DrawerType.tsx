@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, useState } from 'react';
 import Drawer from '../components/Drawer';
 import EditAgentForm from '../components/Drawer/Forms/EditAgentForm';
 
@@ -10,7 +10,7 @@ type Props = {
 
 const getDrawerChildComponent = (pageType: string) => {
 
-  switch(pageType) {
+  switch (pageType) {
     case 'EditAgentForm':
     default:
       return (
@@ -22,9 +22,15 @@ const getDrawerChildComponent = (pageType: string) => {
 const DrawerType: SFC<Props> = ({
   pageType
 }) => {
+  const [open, setOpen] = useState(false);
   const Content = getDrawerChildComponent(pageType);
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Drawer>
+    <Drawer open={open} onClose={onClose}>
       {Content}
     </Drawer>
   );
