@@ -22,17 +22,8 @@ const DrawerStyled = styled.div`
 
 type Props = {};
 
-export const Drawer: FC<Props> = ({
-  ...props
-}) => {
-  return createPortal((
-    <div>
-      <OverlayStyled />
-      <DrawerStyled>
-        {props.children}
-      </DrawerStyled>
-    </div>
-  ), document.getElementById('app-settings'));
+
+  
 };
 
 export default Drawer;
