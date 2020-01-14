@@ -11,7 +11,7 @@ describe('Drawer', () => {
 
   test('renders a <div> root', () => {
 
-    const root = shallow(<Drawer />);
+    const root = shallow(<Drawer open={true} onClose={() => { }} />);
     expect(root.length).toEqual(1);
 
   });
