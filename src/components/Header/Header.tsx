@@ -149,11 +149,11 @@ const Header: FC<IProps> = ({
 
   function showDrawer() {
     setOpen(true);
-  };
+  }
 
   function onClose() {
     setOpen(false);
-  };
+  }
 
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
