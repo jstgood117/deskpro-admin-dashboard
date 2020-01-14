@@ -16,15 +16,9 @@ import TableData from '../TableData';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
-import {
-  onCheckboxChange,
-  generateTableParams,
-} from './helpers/functions';
-import {
-  TableStyled,
-  StyledPagination,
-  StyledTh
-} from './TableStyles';
+import { onCheckboxChange, generateTableParams } from './helpers/functions';
+import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
+import Tooltip from '../Tooltip';
 
 export type Props = {
   path: string;
@@ -47,7 +41,6 @@ const Table: FC<Props> = ({
   tableType,
   sortBy
 }) => {
-
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
@@ -164,22 +157,28 @@ const Table: FC<Props> = ({
                                   <Icon name='ic-sort-up-active' />
                                 </span>
                               ) : (
-                                  <span className='sort-icon'>
-                                    <Icon name='ic-sort-down-active' />
-                                  </span>
-                                ))}
+                                <span className='sort-icon'>
+                                  <Icon name='ic-sort-down-active' />
+                                </span>
+                              ))}
                             {column.isSorted && (
-                              <span className='filter-icon'>
-                                <Icon name='filter' />
-                              </span>
+                              <Tooltip
+                                content='Filter'
+                                styleType='dark'
+                                placement='bottom'
+                              >
+                                <span className='filter-icon'>
+                                  <Icon name='filter' />
+                                </span>
+                              </Tooltip>
                             )}
                           </StyledTh>
                         </th>
-                      );
-                    }
-                  )}
-                </tr>
-              ))}
+                      )
+                    )}
+                  </tr>
+                )
+              )}
             </thead>
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
@@ -196,7 +195,11 @@ const Table: FC<Props> = ({
                         : ''
                     }
                   >
-                    <td>
+                    <td
+                      style={{
+                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+                      }}
+                    >
                       <Checkbox
                         value={(row.original as KeyValue).id}
                         checked={
@@ -229,8 +232,10 @@ const Table: FC<Props> = ({
                             style={{ display: 'flex' }}
                             {...cell.row.getExpandedToggleProps({
                               style: {
-                                paddingLeft: `${row.depth * 2}rem`,
-                              }
+                            paddingLeft: `${row.depth === 1 &&
+                              row.depth * 2}rem`,
+                            cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
+                          }
                             })}
                           >
                             <TableData {...generateComponentProps(cell)} />

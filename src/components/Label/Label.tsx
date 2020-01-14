@@ -14,6 +14,7 @@ export interface IStyleProps {
 
 export interface IProps {
   label: string | any;
+  avatar?: string;
   styles?: CSSProperties;
   icon?: string;
   iconColor?: string;
@@ -21,7 +22,7 @@ export interface IProps {
   showBoxShadow?: boolean;
 }
 
-const LabelStyle = styled(dpstyle.div)<IStyleProps>`
+const LabelStyle = styled(dpstyle.div) <IStyleProps>`
   display: inline-flex;
   align-items: center;
   border-radius: 4px;
@@ -44,7 +45,14 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
       : props.theme.black};
   path {
     fill: ${props =>
-      props.iconColor ? props.iconColor : props.theme.activeColour};
+    props.iconColor ? props.iconColor : props.theme.activeColour};
+  }
+  & img {
+    width: 16px;
+    height: 16px;
+    margin-right: -8px;
+    border-radius: 3px;
+    object-fit: cover;
   }
   ${props =>
     props.showBoxShadow &&
@@ -58,45 +66,59 @@ const LabelStyle = styled(dpstyle.div)<IStyleProps>`
 
 const Label: FC<IProps & IStyleProps> = ({
   label,
+  avatar,
   styleType,
   icon,
   styles,
   iconColor,
   ...props
 }) => (
-  <ThemeProvider theme={DeskproAdminTheme}>
-    <LabelStyle
-      styleType={styleType}
-      styles={styles}
-      iconColor={iconColor}
-      showBoxShadow={props.showBoxShadow}
-    >
-      {icon && (
-        <span
+    <ThemeProvider theme={DeskproAdminTheme}>
+      <LabelStyle
+        styleType={styleType}
+        styles={styles}
+        iconColor={iconColor}
+        showBoxShadow={props.showBoxShadow}
+      >
+        {icon && (
+          <span
+            style={{
+              display: 'flex',
+              padding: '5px 0px 5px 8px'
+            }}
+            className='icon-label'
+          >
+            <Icon name={icon} />
+          </span>
+        )}
+
+        {avatar && (
+          <span
+            style={{
+              display: 'flex',
+              padding: '3px',
+            }}
+          >
+            <img src={avatar} alt='avatar' />
+          </span>
+        )}
+
+        <TextLabel
+          small={1}
           style={{
             display: 'flex',
-            padding: '6px 0px 6px 10px'
+            alignItems: 'center',
+            padding: icon ? '0px 8px' : '0px 10px',
+            fontWeight: '600',
+            width: '100%',
+            textAlign: styles && styles.textAlign ? styles.textAlign : 'center'
           }}
         >
-          <Icon name={icon} />
-        </span>
-      )}
-      <TextLabel
-        small={1}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          padding: '0px 10px',
-          fontWeight: '600',
-          width: '100%',
-          textAlign: styles && styles.textAlign ? styles.textAlign : 'center'
-        }}
-      >
-        {props.children}
-        {label}
-      </TextLabel>
-    </LabelStyle>
-  </ThemeProvider>
-);
+          {props.children}
+          {label}
+        </TextLabel>
+      </LabelStyle>
+    </ThemeProvider>
+  );
 
 export default Label;

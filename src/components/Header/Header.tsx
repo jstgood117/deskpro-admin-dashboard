@@ -12,8 +12,8 @@ const HeaderStyled = styled(dpstyle.div)<IHeader>`
   display: flex;
   background-image: url("${props =>
     props.illustration
-      ? require(`../../assets/svg/${props.illustration}.svg`)
-      : require(`../../assets/svg/agents-header.svg`)}");
+      ? require(`../../assets/svg/illustrations/${props.illustration}.svg`)
+      : require(`../../assets/svg/illustrations/agents-header.svg`)}");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 50%;

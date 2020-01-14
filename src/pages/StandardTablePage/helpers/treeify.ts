@@ -10,7 +10,7 @@ export const treeify = (
 ) => {
   if (!id) id = 'id';
   if (!parent) parent = 'parent';
-  if (!children) children = 'children';
+  if (!children) children = 'subRows';
 
   const treeList: any[] = [];
   const lookup: KeyValue = {};

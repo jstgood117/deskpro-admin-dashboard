@@ -1,4 +1,4 @@
-import React, { ReactNode, FC } from 'react';
+import React, { FC } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -20,18 +20,16 @@ const DrawerStyled = styled.div`
   background-color:#fff;
 `;
 
-type Props = {
-  drawerChildren?:ReactNode;
-};
+type Props = {};
 
 export const Drawer: FC<Props> = ({
-  drawerChildren
+  ...props
 }) => {
   return createPortal((
     <div>
       <OverlayStyled />
       <DrawerStyled>
-        {drawerChildren ? drawerChildren : null}
+        {props.children}
       </DrawerStyled>
     </div>
   ), document.getElementById('app-settings'));

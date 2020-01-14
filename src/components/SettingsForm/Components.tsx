@@ -33,6 +33,17 @@ export const PageSection = (props: any) => {
   );
 };
 
+export const ColumnSection = (props: any) => {
+  return (
+    <div className='col'>
+      <label>{props.title}</label>
+      <div className='form-ctrl'>
+        <ElementGroup {...props} />
+      </div>
+    </div>
+  );
+};
+
 export const StdElementRow = (props: any) => {
   if (props.type === 'field') {
     return (
@@ -91,14 +102,19 @@ export const VertElementGroup = (props: any) => {
   return (
     <Group className={classNames({ hidden: !enabled })}>
       <div className='horizontal-form'>
+        <div className='group-details'>
+          {props.title && <label>{props.title}</label>}
+          {props.description && <p>{props.description}</p>}
+        </div>
         {props.elements.map((element: any, i: number) => {
           if (element.type === 'field') {
             return (
               <div key={i}>
-                <div className='left-col'>
-                  <label>{element.title}</label>
+                <div className='element-details'>
+                  {element.title && <label>{element.title}</label>}
+                  {element.description && <p>{element.description}</p>}
                 </div>
-                <div className='right-col'>
+                <div className='element-context'>
                   <FieldElement
                     {...element.field}
                     formikProps={props.formikProps}
@@ -108,11 +124,15 @@ export const VertElementGroup = (props: any) => {
             );
           } else {
             return (
-              <MainElement
-                {...element}
-                formikProps={props.formikProps}
-              />
-            ) ;
+              <div key={i}>
+                {element.title && <label>{element.title}</label>}
+                {element.description && <p>{element.description}</p>}
+                <MainElement
+                  {...element}
+                  formikProps={props.formikProps}
+                />
+              </div>
+            );
           }
         })}
       </div>

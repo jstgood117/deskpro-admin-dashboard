@@ -5,10 +5,7 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { IMenuItemProps } from '../../resources/interfaces';
 import { KeyValue, ColumnOrder } from '../../types';
 
-import {
-  FilterProps,
-  FilterMeta
-} from '../../resources/interfaces/filterMeta';
+import { FilterProps, FilterMeta } from '../../resources/interfaces/filterMeta';
 
 import {
   StandardTableContext,
@@ -132,10 +129,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     initialColumnOrder
   } = context;
 
-  const {
-    columnsViewList,
-    checkedState
-  } = generateViewList(tableDef);
+  const { columnsViewList, checkedState } = generateViewList(tableDef);
 
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState('');
@@ -147,12 +141,15 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   const [internalFilters, setFilters] = useState(initialFilter);
   const [sortList, setList] = useState(columnsViewList);
   const [value, setValue] = useState();
-  const [sortMenuItems] = useState(generatSortMenuItems(tableDef, intl));
+  const [sortMenuItems, setSortMenuItems] = useState(
+    generatSortMenuItems(tableDef, intl)
+  );
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [initialChecked] = useState<KeyValue>(checkedState);
-  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
+  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(
+    initialColumnOrder
+  );
   const [resetColumnOrder] = useState<IMenuItemProps[]>(columnsViewList);
-
   useEffect(() => {
     setFilters([
       { property: '', operatorName: '', value: [''], applied: false }
@@ -160,27 +157,37 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   }, []);
 
   useEffect(() => {
-
     const _columnOrder: ColumnOrder[] = Array(sortList.length);
     sortList.forEach((_column: IMenuItemProps, index: number) => {
-
       _columnOrder[index] = {
-        column:_column.name,
+        column: _column.name,
         show: checked[_column.key]
       };
-
     });
 
     setColumnOrder(_columnOrder);
-
   }, [checked, sortList]);
 
   useEffect(() => {
     onOrderChange(columnOrder);
+    const showedColumns: string[] = [];
+    columnOrder.map(columnInfo => {
+      if (columnInfo.show) {
+        showedColumns.push(columnInfo.column);
+      }
+      return true;
+    });
+    const newSortMenuItems = generatSortMenuItems(tableDef, intl).filter(obj => {
+      return showedColumns.includes(obj.link);
+    });
+    setSortMenuItems(newSortMenuItems);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnOrder, onOrderChange]);
 
   const getFilterTitle = (path: string) => {
-    const match = filterDef.find((_filter: FilterMeta) => _filter.path === path);
+    const match = filterDef.find(
+      (_filter: FilterMeta) => _filter.path === path
+    );
     return match ? match.title : path;
   };
 
@@ -190,7 +197,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
         filter.applied = true;
       return true;
     });
-    if(setFilters) { setFilters(internalFilters); }
+    if (setFilters) {
+      setFilters(internalFilters);
+    }
 
     if (onFilterChange) {
       onFilterChange(internalFilters);
@@ -217,7 +226,6 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   };
 
   const resetFilters = () => {
-
     const initialFilters = [
       {
         property: '',
@@ -235,27 +243,24 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   };
 
   const _onSearchChange = (_value: string) => {
-
     if (onSearchChange) {
       onSearchChange(_value, internalFilters);
     }
   };
 
-  const handleSortChange = (val:any) => {
-
+  const handleSortChange = (val: any) => {
     const id = val.link;
 
-    onSortChange([{ id, desc:false }]);
+    onSortChange([{ id, desc: false }]);
     setSortValue({
       ...val,
-      link: intl.formatMessage({id}),
+      link: intl.formatMessage({ id })
     });
   };
 
-  const debounceOnSearchChange = useCallback(
-    debounce(_onSearchChange, 300),
-    [internalFilters]
-  );
+  const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), [
+    internalFilters
+  ]);
 
   const handleSearchChange = (
     event: React.SyntheticEvent<HTMLInputElement>
@@ -273,13 +278,15 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
         internalFilters.splice(currentIndex, 1);
       }
       if (internalFilters.length === 0) {
-        if(setFilters) {
+        if (setFilters) {
           setFilters([
             { property: '', operatorName: '', value: [''], applied: false }
           ]);
         }
       } else {
-        if(setFilters) { setFilters([...internalFilters]); }
+        if (setFilters) {
+          setFilters([...internalFilters]);
+        }
       }
 
       if (onFilterChange) {
@@ -319,7 +326,8 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                   Filter{' '}
                   {internalFilters[0].applied &&
                     `(${
-                      internalFilters.filter(filter => filter.applied === true).length
+                      internalFilters.filter(filter => filter.applied === true)
+                        .length
                     })`}
                 </Button>
                 {internalFilters[0].applied && (

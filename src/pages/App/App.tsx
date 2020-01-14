@@ -6,11 +6,16 @@ import { logError } from '../../components/Error/ErrorBoundary';
 import { testTranslations } from '../../resources/constants/translations/en';
 import { QueryService } from '../../services/query';
 import Sidebar from '../../components/Sidebar';
-import Drawer from '../../components/Drawer';
 
 import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
 
-import { generatePageRoutes, __mergeInDevI18Keys } from './helpers/funcs';
+import {
+  generatePageRoute,
+  generateDrawerRoute,
+  generatePageRoutes,
+  generateDrawerRoutes,
+  __mergeInDevI18Keys,
+} from './helpers/funcs';
 
 const App: FC = () => {
 
@@ -31,7 +36,6 @@ const App: FC = () => {
   const translations = __mergeInDevI18Keys(data.translations, testTranslations);
 
   const renderMessage = (translations as any[]).reduce((obj, item) => {
-    // turns [{id, msg}] array into {id: msg} map
     obj[item.id] = item.message;
     return obj;
   }, {});
@@ -40,7 +44,8 @@ const App: FC = () => {
 
   // TODO: Remove this, should be going directly to
   const onRouteRender = () => <Redirect to='/agents' />;
-  const routes = generatePageRoutes(data.sidebar);
+  const routes = generatePageRoutes(data.sidebar, generatePageRoute);
+  const drawerRoutes = generateDrawerRoutes(data.sidebar, generateDrawerRoute);
 
   return (
     <HashRouter>
@@ -58,7 +63,9 @@ const App: FC = () => {
               <Route exact={true} path='/' render={onRouteRender} />
               {routes}
             </Switch>
-            <Route path='/:slug*/edit' component={Drawer} />
+            <Switch>
+              {drawerRoutes}
+            </Switch>
           </BodyContainer>
         </AppContainer>
       </IntlProvider>
