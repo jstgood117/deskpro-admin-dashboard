@@ -9,21 +9,43 @@ const OverlayStyled = styled.div`
   bottom:0;
   left:0;
   right:0;
+  z-index: 9;
 `;
 
-const DrawerStyled = styled.div`
+const DrawerStyled = styled.div<{ width: number }> `
   position: absolute;
   top:0;
   bottom:0;
   right:0;
-  width:300px;
-  background-color:#fff;
+  width:${props => props.width}px;
+  z-index: 10;
+  background-color:#f0f0f0;
+  transition: width 0.3s ease-out;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
-type Props = {};
-
-
-  
+type Props = {
+  open: boolean;
+  drawerWidth?: number;
+  onClose: () => void;
 };
+
+export const Drawer: FC<Props> = ({ open, drawerWidth, children, onClose }) => {
+
+
+  return createPortal((
+    <div>
+      <OverlayStyled onClick={onClose} />
+      <DrawerStyled width={open ? drawerWidth : 0}>
+        {children}
+      </DrawerStyled>
+    </div>
+  ),
+    document.getElementById('app-settings')
+  );
+};
+
+Drawer.defaultProps = { drawerWidth: 300 };
 
 export default Drawer;
