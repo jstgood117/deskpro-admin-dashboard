@@ -8,6 +8,10 @@ storiesOf('Drawer', module)
   .add('pull right', () => {
     const [open, setOpen] = useState(false);
 
+    const showDrawer = () => {
+      setOpen(true);
+    };
+
     const onClose = () => {
       setOpen(false);
     };
@@ -20,7 +24,7 @@ storiesOf('Drawer', module)
 
         <Button
           styleType='secondary'
-          onClick={() => setOpen(true)}
+          onClick={showDrawer}
           size='medium'
         >
           Open
