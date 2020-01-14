@@ -15,7 +15,7 @@ storiesOf('Drawer', module)
     return (
       <div>
         <Drawer open={open} onClose={onClose}>
-          <div>Drawer</div>
+          <div>some contents...</div>
         </Drawer>
 
         <Button
