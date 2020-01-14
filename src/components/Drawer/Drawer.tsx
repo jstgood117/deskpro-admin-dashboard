@@ -12,7 +12,7 @@ const OverlayStyled = styled.div<{ open: boolean }>`
   bottom: 0;
   z-index: 9;
   background-color: #000;
-  opacity: ${props => props.open ? .1 : 0};
+  opacity: ${props => props.open ? .2 : 0};
   visibility: ${props => props.open ? 'visible' : 'hidden'};
   transition: opacity .3s ease-out, visibility .3s ease-out;
 `;
