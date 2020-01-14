@@ -75,6 +75,37 @@ export const TableStyled = styled(dpstyle.div)`
               }
             }
           }
+          &.hasSubRows {
+            background-image: linear-gradient(
+              90deg,
+              ${props => props.theme.greyLight} 1.5px,
+              transparent 0px
+            );
+            background-repeat: no-repeat;
+            background-position: 22px 22px;
+          }
+          &.subrow {
+            background-image: linear-gradient(
+                90deg,
+                ${props => props.theme.greyLight} 1.5px,
+                transparent 0px
+              ),
+              linear-gradient(${props => props.theme.greyLight} 1.5px, transparent 0px);
+            background-repeat: no-repeat;
+            background-position: 22px 0, 22px 24px;
+            background-size: auto, 22px;
+          }
+          &.isLastSubRow {
+            background-image: linear-gradient(
+                90deg,
+                ${props => props.theme.greyLight} 1.5px,
+                transparent 1px
+              ),
+              linear-gradient(${props => props.theme.greyLight} 1.5px, transparent 0px);
+            background-repeat: no-repeat;
+            background-position: 22px 1px, 22px 24px;
+            background-size: 2px 23px, 22px;
+          }
           border-bottom: 1px solid ${props => props.theme.greyLighter};
           & td {
             :first-child {

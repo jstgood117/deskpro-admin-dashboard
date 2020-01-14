@@ -178,6 +178,7 @@ const Table: FC<Props> = ({
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
+              {console.log(page)}
               {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return (
@@ -185,13 +186,21 @@ const Table: FC<Props> = ({
                     key={indexOuter}
                     {...row.getRowProps()}
                     className={
-                      checked.hasOwnProperty(
+                      (row.depth === 1
+                        ? page[indexOuter + 1] && page[indexOuter + 1].depth === 0
+                          ? 'isLastSubRow'
+                          : 'subrow '
+                        : row.subRows.length > 0 && row.isExpanded
+                        ? 'hasSubRows '
+                        : ' ') +
+                      (checked.hasOwnProperty(
                         (row.original as KeyValue).id.toString()
                       )
                         ? 'row--selected'
-                        : ''
+                        : '')
                     }
                   >
+                    {console.log(row)}
                     <td
                       style={{
                         paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
