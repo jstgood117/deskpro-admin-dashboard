@@ -194,7 +194,7 @@ const Table: FC<Props> = ({
                       (row.depth === 1
                         ? page[indexOuter + 1] &&
                           page[indexOuter + 1].depth === 0
-                          ? 'isLastSubRow'
+                          ? 'isLastSubRow '
                           : 'subrow '
                         : row.subRows.length > 0 && row.isExpanded
                         ? 'hasSubRows '
