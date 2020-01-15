@@ -138,12 +138,9 @@ const TabbedFieldGroup: React.FC<IProps> = props => {
   const [expanded, setExpanded] = React.useState(!!props.initialExpanded);
   const [values, setValues] = React.useState(props.initialValues || {});
 
-  const onExpandToggle = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setExpanded(e.target.checked);
-    },
-    []
-  );
+  const onExpandToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpanded(e.target.checked);
+  };
 
   // Ensure existance of tabs and form elements to display.
   if (!isPropsValid(props)) {
