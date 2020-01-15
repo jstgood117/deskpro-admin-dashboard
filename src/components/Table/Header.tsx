@@ -1,17 +1,20 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-
-import Pagination from '../Pagination/Pagination';
-import { KeyValue } from '../../types';
+import { runAction } from '../../services/actions/run';
+import { ActionsType } from '../../services/actions/types';
+import { KeyValue, IOptions } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
-import { ActionFactory } from '../../services/actions/ActionFactory';
-import { IOptions } from '../../types';
+
 import Actions from '../Actions';
+import ActionComponentFactory from '../Actions/helpers/ComponentFactory';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Icon from '../Icon';
-import ConfirmDialog from '../Dialog/ConfirmDialog';
+
+import Pagination from '../Pagination/Pagination';
 
 import {
   IPageChange,
@@ -27,7 +30,6 @@ import {
 import {
   onSelectEverything,
   onSelectAllChange,
-  convertActionsToMenuFormat,
   generateCSVData,
 } from './helpers/functions';
 
@@ -47,7 +49,10 @@ export type Props = {
   handleChangeRowsPerPage: (data: number) => void;
 };
 
-const Header: FC<Props & WrappedComponentProps> = ({
+export type PropsWithApollo = WithApolloClient<Props>;
+
+const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
+  client,
   intl,
   setChecked,
   pageSize,
@@ -70,23 +75,15 @@ const Header: FC<Props & WrappedComponentProps> = ({
 
   const [opened, clickButton] = useState(false);
   const [menuValue, setMenuValue] = useState();
-  const [deleteModal, showDeleteModal] = useState(false);
+  const [currentAction, setCurrentAction] = useState<ActionsType>();
   const [selectedOptions, selectOptions] = useState<IOptions[]>([]);
-  const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
   const [dropdownValue, setDropdownValue] = useState();
 
   useEffect(() => {
-    const _actions = ActionFactory(path);
-    const _menuItems = convertActionsToMenuFormat(_actions);
-    setMenuItems(_menuItems);
-  }, [path]);
-
-  useEffect(() => {
     const checkedLength = Object.keys(checked).length;
-    const indeterminate =
-      checkedLength !== 0 && checkedLength < page.length ? true : false;
+    const indeterminate = checkedLength !== 0 && checkedLength < page.length ? true : false;
     setIsIndeterminate(indeterminate);
     setIsAllChecked(
       indeterminate || checkedLength >= page.length ? true : false
@@ -120,8 +117,42 @@ const Header: FC<Props & WrappedComponentProps> = ({
     );
   };
 
+  const handleActionClick = (
+    menuItem?: IMenuItemProps,
+    action?: ActionsType,
+    variables?: object
+  ) => {
+    setMenuValue(menuItem);
+
+    setCurrentAction(action);
+
+    // If there is no pre-action, run the action
+    if(action && !action.preAction) {
+      handleRunAction(variables);
+    }
+  };
+
+  const handlePreAction = (action: ActionsType) => {
+    setCurrentAction(action);
+  };
+
+  const handleRunAction = async (variables?: object) => {
+    if(!currentAction) {
+      return false;
+    }
+
+    await runAction(client, currentAction, variables);
+
+    setCurrentAction(undefined);
+  };
+
+  const handleCancelAction = () => {
+    setCurrentAction(undefined);
+  };
+
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
+  const checkedIds = Object.keys(checked);
   return (
     <>
       <TableStyled>
@@ -149,9 +180,11 @@ const Header: FC<Props & WrappedComponentProps> = ({
             {Object.keys(checked).length > 0 && (
               <div style={{ paddingLeft: 16, display: 'flex' }}>
                 <Actions
+                  path={path}
                   menuValue={menuValue}
-                  menuItems={menuItems}
-                  setMenuValue={setMenuValue}
+                  ids={Object.keys(checked)}
+                  onChange={handleActionClick}
+                  handlePreAction={handlePreAction}
                   selectOptions={selectOptions}
                   selectedOptions={selectedOptions}
                 />
@@ -178,30 +211,21 @@ const Header: FC<Props & WrappedComponentProps> = ({
             onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         </TableHeader>
-        <ConfirmDialog
-          icon='trash'
-          isOpen={deleteModal}
-          variant='danger'
-          title='Delete agent?'
-          leftButtonText='Delete Agents'
-          rightButtonText='Keep Agents'
-          onLeftButtonClick={() => {
-            showDeleteModal(false);
-            setMenuValue(undefined);
-            setIsAllChecked(false);
-            setChecked({});
-          }}
-          onRightButtonClick={() => {
-            showDeleteModal(false);
-            setMenuValue(undefined);
-            setIsAllChecked(false);
-            setChecked({});
-          }}
-          text={`Deleting 304 agents will change their status to 'deleted'`}
-        />
       </TableStyled>
+      {currentAction?.preAction && (
+        <ActionComponentFactory
+          {...currentAction.preAction}
+          ids={checkedIds}
+          confirm={handleRunAction}
+          cancel={handleCancelAction}
+          messageParams={[String(checkedIds.length)]}
+        />
+      )}
     </>
   );
 };
 
-export default injectIntl(Header);
+const WithApollo = withApollo<PropsWithApollo & WrappedComponentProps>(Header);
+const WithInit = injectIntl(WithApollo);
+
+export default WithInit;

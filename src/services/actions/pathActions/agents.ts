@@ -11,9 +11,17 @@ const agents: ActionsType[] = [
   {
     icon:'trash',
     title:'action.agents.delete_action',
-    preAction: 'DELETE_MODAL',
+    preAction: {
+      type:'MODAL',
+      icon:'trash',
+      title: 'Delete agent?',
+      message:`Deleting %s agents will change their status to 'deleted'`,
+      variant: 'danger',
+      leftButtonText:'Delete Agents',
+      rightButtonText: 'Keep Agents',
+    },
     schema:DELETE_AGENTS,
-    type:'action',
+    type:'mutate',
     actions: null
   },
   {
@@ -27,19 +35,19 @@ const agents: ActionsType[] = [
       {
         title:'action.agents.add_team',
         schema:ADD_TEAM,
-        type:'action',
+        type:'mutate',
         actions: null
       },
       {
         title:'action.agents.remove_team',
         schema:REMOVE_TEAM,
-        type:'action',
+        type:'mutate',
         actions: null
       },
       {
         title:'action.agents.remove_all_teams',
         schema:REMOVE_ALL_TEAMS,
-        type:'action',
+        type:'mutate',
         actions: null
       }
     ]

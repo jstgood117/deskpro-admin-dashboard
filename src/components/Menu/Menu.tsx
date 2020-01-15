@@ -96,6 +96,7 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
   onSelect,
   menuItems
 }) => {
+  console.log(menuItems);
   return (
     <MenuListWrapper>
       <MenuList>

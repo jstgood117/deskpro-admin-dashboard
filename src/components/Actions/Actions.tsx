@@ -1,36 +1,62 @@
-import React, { SFC } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 
 import Button from '../Button';
 import Menu from '../Menu';
 import MultiSelect from '../SelectComponents/MultiSelect';
 
+import { ActionFactory } from '../../services/actions/ActionFactory';
+import { ActionsType } from '../../services/actions/types';
 import { testHandlingTeamList } from '../../resources/constants/constants';
 import { IMenuItemProps } from '../../resources/interfaces';
 import { IOptions } from '../../types';
 
+import {
+  convertActionsToMenuFormat,
+  getActionFromMenuItem
+} from './helpers/functions';
+
 type Props = {
-  menuItems: IMenuItemProps[];
+  path: string;
   menuValue: IMenuItemProps;
-  setMenuValue: (val: IMenuItemProps) => void;
+  onChange: (menuItem?: IMenuItemProps, action?: ActionsType, variables?: object) => void;
   selectOptions: (val: IOptions[]) => void;
   selectedOptions: IOptions[];
+  handlePreAction: (action: ActionsType) => void;
+  ids: string[];
 };
 
-const Actions: SFC<Props> = ({
-  menuItems,
+const Actions: FC<Props> = ({
+  ids,
+  path,
   menuValue,
-  setMenuValue,
+  onChange,
   selectOptions,
-  selectedOptions
+  selectedOptions,
+  handlePreAction,
 }) => {
 
-  const showDeleteModal = (val: boolean) => {};
+  const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
+  const [actions, setActions] = useState<ActionsType[]>([]);
+  const [currentAction, setCurrentAction] = useState<ActionsType>();
+
+  useEffect(() => {
+    const _actions = ActionFactory(path);
+    setActions(_actions);
+    const _menuItems = convertActionsToMenuFormat(_actions);
+    setMenuItems(_menuItems);
+  }, [path]);
+
+  const onSelect = (val: IMenuItemProps) => {
+    const action = getActionFromMenuItem(val, actions);
+    setCurrentAction(action);
+    onChange(val, action, { ids });
+  };
 
   return (
     <>
       <Menu
         value={menuValue}
-        onSelect={val => setMenuValue(val)}
+        onSelect={onSelect}
         label={
           menuValue ? menuValue['name'] : 'admin_common.table.action'
         }
@@ -46,18 +72,17 @@ const Actions: SFC<Props> = ({
           />
         </div>
       )}
-      {((menuValue &&
-        menuValue.name === 'actions.agents.delete_agent') ||
+      {((currentAction &&
+        currentAction.preAction) ||
         selectedOptions.length > 0) && (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ paddingLeft: 16 }}>
             <Button
               styleType='primary'
               onClick={() => {
-                if (
-                  menuValue.name === 'actions.agents.delete_agent'
-                ) {
-                  showDeleteModal(true);
+                if (currentAction.preAction) {
+                  handlePreAction(currentAction);
+                  setCurrentAction(undefined);
                 }
               }}
             >
@@ -68,8 +93,9 @@ const Actions: SFC<Props> = ({
             <Button
               styleType='tertiary'
               onClick={() => {
-                setMenuValue(undefined);
+                onChange(undefined, undefined, undefined);
                 selectOptions([]);
+                setCurrentAction(undefined);
               }}
             >
               Cancel
