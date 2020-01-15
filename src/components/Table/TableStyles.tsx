@@ -83,6 +83,9 @@ export const TableStyled = styled(dpstyle.div)`
             );
             background-repeat: no-repeat;
             background-position: 22px 22px;
+            .checkBox {
+              border-bottom: solid 1px ${props => props.theme.white};
+            }
           }
           &.subrow {
             background-image: linear-gradient(
@@ -94,6 +97,9 @@ export const TableStyled = styled(dpstyle.div)`
             background-repeat: no-repeat;
             background-position: 22px 0, 22px 24px;
             background-size: auto, 22px;
+            .checkBox {
+              border-bottom: solid 1px ${props => props.theme.white};
+            }
           }
           &.isLastSubRow {
             background-image: linear-gradient(

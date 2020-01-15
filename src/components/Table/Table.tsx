@@ -184,7 +184,6 @@ const Table: FC<Props> = ({
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {console.log(page)}
               {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return (
@@ -207,11 +206,11 @@ const Table: FC<Props> = ({
                         : '')
                     }
                   >
-                    {console.log(row)}
                     <td
                       style={{
                         paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
                       }}
+                      className='checkBox'
                     >
                       <Checkbox
                         value={(row.original as KeyValue).id}
@@ -243,7 +242,8 @@ const Table: FC<Props> = ({
                           style={style}
                           {...cell.row.getExpandedToggleProps({
                             style: {
-                              paddingLeft: `${row.depth === 1 &&
+                              paddingLeft: `${indexInner === 0 &&
+                                row.depth === 1 &&
                                 row.depth * 2}rem`,
                               cursor:
                                 row.subRows.length > 0 ? 'pointer' : 'auto'

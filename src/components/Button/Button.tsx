@@ -394,7 +394,6 @@ const Button: FC<Props> = ({
 }) => {
   const styles = getStyle(styleType, size, DeskproAdminTheme, imageBtnSelected);
   const selected = !isNil(dropdownValue) && dropdownValue !== '';
-  console.log(dropdownValue);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <ButtonWrapper
