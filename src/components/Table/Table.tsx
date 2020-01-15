@@ -227,21 +227,15 @@ const Table: FC<Props> = ({
                     {row.cells.map((cell: any, indexInner: number) => {
                       const isIdColumn =
                         cell.column.type.__typename === 'TableColumnId';
-                      let style = {};
-                      if (isIdColumn) {
-                        style = {
-                          verticalAlign: 'bottom',
-                          paddingBottom: '5px',
-                          textAlign: 'right'
-                        };
-                      }
                       return (
                         <td
                           key={indexInner}
                           {...cell.getCellProps()}
-                          style={style}
                           {...cell.row.getExpandedToggleProps({
                             style: {
+                              textAlign: isIdColumn && 'right',
+                              verticalAlign: isIdColumn && 'bottom',
+                              paddingBottom: isIdColumn && '5px',
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
