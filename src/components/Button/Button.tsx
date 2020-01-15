@@ -4,7 +4,6 @@ import { isNil } from 'lodash';
 
 import { DeskproAdminTheme } from '../Theme';
 import { dpstyle } from '../Styled';
-import { H6 } from '../Typography';
 import Icon from '../Icon';
 
 import { DeskproAdminThemeType } from '../../style/DeskproAdminTheme';
@@ -298,7 +297,12 @@ const DropdownContentPanel = styled(dpstyle.div)`
   z-index: 0;
 `;
 
-const DropdownContentLink = styled(H6)`
+const DropdownContentLink = styled.div`
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
   float: none;
   padding: 7px 15px;
   height: 31px;
@@ -311,6 +315,21 @@ const DropdownContentLink = styled(H6)`
     background-color: ${props => props.theme.textHover};
   }
   z-index: 1;
+  .sort-icon {
+    display: flex;
+    position: absolute;
+    right: 14px;
+    svg {
+      margin: auto;
+      .active {
+        fill: ${props => props.theme.activeColour};
+      }
+    }
+  }
+  .selected {
+    color: ${props => props.theme.activeColour};
+    font-weight: 500;
+  }
 `;
 
 const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
@@ -353,6 +372,7 @@ export type Props = {
   iconOnly?: boolean;
   className?: string;
   imageBtnSelected?: boolean;
+  name?: string;
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 const Button: FC<Props> = ({
@@ -369,7 +389,8 @@ const Button: FC<Props> = ({
   dropdownValue,
   iconOnly,
   className,
-  imageBtnSelected
+  imageBtnSelected,
+  name
 }) => {
   const styles = getStyle(styleType, size, DeskproAdminTheme, imageBtnSelected);
   const selected = !isNil(dropdownValue) && dropdownValue !== '';
@@ -399,7 +420,20 @@ const Button: FC<Props> = ({
                   key={index}
                   onClick={() => onSelect && onSelect(item)}
                 >
-                  {item.label ? item.label : item.link}
+                  <span
+                    className={`${
+                      name === 'sort' && dropdownValue.label === item.label
+                        ? 'selected'
+                        : ''
+                    }`}
+                  >
+                    {item.label ? item.label : item.link}
+                  </span>
+                  {name === 'sort' && dropdownValue.label === item.label && (
+                    <span className='sort-icon'>
+                      <Icon name='ic-sort-down-active' />
+                    </span>
+                  )}
                 </DropdownContentLink>
               );
             })}
@@ -426,5 +460,3 @@ const Button: FC<Props> = ({
 };
 
 export default Button;
-
-
