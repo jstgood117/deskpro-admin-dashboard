@@ -177,9 +177,11 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
       }
       return true;
     });
-    const newSortMenuItems = generatSortMenuItems(tableDef, intl).filter(obj => {
-      return showedColumns.includes(obj.link);
-    });
+    const newSortMenuItems = generatSortMenuItems(tableDef, intl).filter(
+      obj => {
+        return showedColumns.includes(obj.link);
+      }
+    );
     setSortMenuItems(newSortMenuItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnOrder, onOrderChange]);
@@ -408,9 +410,10 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                 items={sortMenuItems}
                 dropdownValue={Sort}
                 onSelect={(val: any) => handleSortChange(val)}
+                name='sort'
               >
                 <Icon name='sort' />
-                {Sort ? Sort.link : 'Sort'}
+                Sort
                 <Icon name='downVector' />
               </Button>
             </FlexStyled>

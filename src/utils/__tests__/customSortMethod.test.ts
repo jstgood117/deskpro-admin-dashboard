@@ -65,5 +65,33 @@ describe('sort.ts', () => {
 
       expect(result).toEqual(-1);
     });
+
+    test('if a.values["col"]="10" and b.values["col"]="2", return 1', () => {
+      const a = {values:{col:'10'}};
+      const b = {values:{col:'2'}};
+
+      const result = customSortMethod(a, b, 'col');
+
+      expect(result).toEqual(1);
+    });
+
+    test('if a.values["col"]="2" and b.values["col"]="10", return 1', () => {
+      const a = {values:{col:'2'}};
+      const b = {values:{col:'10'}};
+
+      const result = customSortMethod(a, b, 'col');
+
+      expect(result).toEqual(-1);
+    });
+
+    test('if a.values["col"]="10" and b.values["col"]="10", return 1', () => {
+      const a = {values:{col:'10'}};
+      const b = {values:{col:'10'}};
+
+      const result = customSortMethod(a, b, 'col');
+
+      expect(result).toEqual(-1);
+    });
+
   });
 });

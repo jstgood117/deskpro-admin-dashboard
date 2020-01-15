@@ -126,59 +126,61 @@ const Table: FC<Props> = ({
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
-              {headerGroups.map((headerGroup: HeaderGroup, indexOuter: number) => (
-                <tr
-                  key={indexOuter}
-                  {...(headerGroup.getHeaderGroupProps &&
-                    headerGroup.getHeaderGroupProps())}
-                >
-                  <th />
-                  {headerGroup.headers.map(
-                    (column: KeyValue, indexInner: number) => {
-                      const isIdColumn = column.type.__typename === 'TableColumnId';
+              {headerGroups.map(
+                (headerGroup: HeaderGroup, indexOuter: number) => (
+                  <tr
+                    key={indexOuter}
+                    {...(headerGroup.getHeaderGroupProps &&
+                      headerGroup.getHeaderGroupProps())}
+                  >
+                    <th />
+                    {headerGroup.headers.map(
+                      (column: KeyValue, indexInner: number) => {
+                        const isIdColumn =
+                          column.type.__typename === 'TableColumnId';
 
-                      return (
-                        <th
-                          key={indexInner}
-                          {...column.getHeaderProps(
-                            column.getSortByToggleProps()
-                          )}
-                          style={{
-                            border: column.isSorted && '1px solid #D3D6D7',
-                            width: isIdColumn && '1px',
-                          }}
-                        >
-                          <StyledTh alignRight={isIdColumn}>
-                            {column.render('Header')}
+                        return (
+                          <th
+                            key={indexInner}
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
+                            style={{
+                              border: column.isSorted && '1px solid #D3D6D7',
+                              width: isIdColumn && '1px'
+                            }}
+                          >
+                            <StyledTh alignRight={isIdColumn}>
+                              {column.render('Header')}
 
-                            {column.isSorted &&
-                              (column.isSortedDesc ? (
-                                <span className='sort-icon'>
-                                  <Icon name='ic-sort-up-active' />
-                                </span>
-                              ) : (
+                              {column.isSorted &&
+                                (column.isSortedDesc ? (
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-up-active' />
+                                  </span>
+                                ) : (
                                   <span className='sort-icon'>
                                     <Icon name='ic-sort-down-active' />
                                   </span>
                                 ))}
-                            {column.isSorted && (
-                              <Tooltip
-                                content='Filter'
-                                styleType='dark'
-                                placement='bottom'
-                              >
-                                <span className='filter-icon'>
-                                  <Icon name='filter' />
-                                </span>
-                              </Tooltip>
-                            )}
-                          </StyledTh>
-                        </th>
-                      );
-                    })
-                  }
-                </tr>
-              )
+                              {column.isSorted && (
+                                <Tooltip
+                                  content='Filter'
+                                  styleType='dark'
+                                  placement='bottom'
+                                >
+                                  <span className='filter-icon'>
+                                    <Icon name='filter' />
+                                  </span>
+                                </Tooltip>
+                              )}
+                            </StyledTh>
+                          </th>
+                        );
+                      }
+                    )}
+                  </tr>
+                )
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
@@ -189,17 +191,26 @@ const Table: FC<Props> = ({
                     key={indexOuter}
                     {...row.getRowProps()}
                     className={
-                      checked.hasOwnProperty(
+                      (row.depth === 1
+                        ? page[indexOuter + 1] &&
+                          page[indexOuter + 1].depth === 0
+                          ? 'isLastSubRow '
+                          : 'subrow '
+                        : row.subRows.length > 0 && row.isExpanded
+                        ? 'hasSubRows '
+                        : ' ') +
+                      (checked.hasOwnProperty(
                         (row.original as KeyValue).id.toString()
                       )
                         ? 'row--selected'
-                        : ''
+                        : '')
                     }
                   >
                     <td
                       style={{
                         paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
                       }}
+                      className='checkBox'
                     >
                       <Checkbox
                         value={(row.original as KeyValue).id}
@@ -214,33 +225,26 @@ const Table: FC<Props> = ({
                       />
                     </td>
                     {row.cells.map((cell: any, indexInner: number) => {
-                      const isIdColumn = cell.column.type.__typename === 'TableColumnId';
-                      let style = {};
-                      if (isIdColumn) {
-                        style = {
-                          verticalAlign: 'bottom',
-                          paddingBottom: '5px',
-                          textAlign: 'right'
-                        };
-                      }
+                      const isIdColumn =
+                        cell.column.type.__typename === 'TableColumnId';
                       return (
                         <td
                           key={indexInner}
                           {...cell.getCellProps()}
-                          style={style}
+                          {...cell.row.getExpandedToggleProps({
+                            style: {
+                              textAlign: isIdColumn && 'right',
+                              verticalAlign: isIdColumn && 'bottom',
+                              paddingBottom: isIdColumn && '5px',
+                              paddingLeft: `${indexInner === 0 &&
+                                row.depth === 1 &&
+                                row.depth * 2}rem`,
+                              cursor:
+                                row.subRows.length > 0 ? 'pointer' : 'auto'
+                            }
+                          })}
                         >
-                          <span
-                            style={{ display: 'flex' }}
-                            {...cell.row.getExpandedToggleProps({
-                              style: {
-                                paddingLeft: `${row.depth === 1 &&
-                                  row.depth * 2}rem`,
-                                cursor: row.subRows.length > 0 ? 'pointer' : 'auto'
-                              }
-                            })}
-                          >
-                            <TableData {...generateComponentProps(cell)} />
-                          </span>
+                          <TableData {...generateComponentProps(cell)} />
                         </td>
                       );
                     })}
