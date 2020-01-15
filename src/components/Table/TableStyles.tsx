@@ -84,7 +84,7 @@ export const TableStyled = styled(dpstyle.div)`
             background-repeat: no-repeat;
             background-position: 22px 22px;
             .checkBox {
-              border-bottom: solid 1px ${props => props.theme.white};
+              border-bottom: none;
             }
           }
           &.subrow {
@@ -93,12 +93,15 @@ export const TableStyled = styled(dpstyle.div)`
                 ${props => props.theme.greyLight} 1px,
                 transparent 0px
               ),
-              linear-gradient(${props => props.theme.greyLight} 1px, transparent 0px);
+              linear-gradient(
+                ${props => props.theme.greyLight} 1px,
+                transparent 0px
+              );
             background-repeat: no-repeat;
             background-position: 22px 0, 22px 24px;
             background-size: auto, 22px;
             .checkBox {
-              border-bottom: solid 1px ${props => props.theme.white};
+              border-bottom: none;
             }
           }
           &.isLastSubRow {
@@ -107,13 +110,17 @@ export const TableStyled = styled(dpstyle.div)`
                 ${props => props.theme.greyLight} 1px,
                 transparent 1px
               ),
-              linear-gradient(${props => props.theme.greyLight} 1px, transparent 0px);
+              linear-gradient(
+                ${props => props.theme.greyLight} 1px,
+                transparent 0px
+              );
             background-repeat: no-repeat;
-            background-position: 22px 1px, 22px 24px;
-            background-size: 2px 23px, 22px;
+            background-position: 22px 0px, 22px 24px;
+            background-size: 2px 24px, 22px;
           }
-          border-bottom: 1px solid ${props => props.theme.greyLighter};
           & td {
+            border-bottom: 1px solid ${props => props.theme.greyLighter};
+
             :first-child {
               width: 30px;
             }
@@ -169,7 +176,7 @@ export const StyledPagination = styled(dpstyle.div)`
 export const StyledTh = styled.div<{ alignRight: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: ${props => props.alignRight ? 'flex-end' : 'flex-right'};
+  justify-content: ${props => (props.alignRight ? 'flex-end' : 'flex-right')};
   .sort-icon {
     display: flex;
     padding-left: 10px;
