@@ -4,7 +4,7 @@ import {vsprintf} from 'sprintf-js';
 import ConfirmDialog from '../../../Dialog/ConfirmDialog';
 
 export type ModalActionType = {
-  type:'MODAL',
+  type:'CONFIRM_MODAL',
   icon: string;
   title: string;
   variant: 'default' | 'danger';

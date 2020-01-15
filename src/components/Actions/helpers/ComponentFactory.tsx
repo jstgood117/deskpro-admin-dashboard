@@ -6,7 +6,7 @@ type Props = ModalPropsType;
 const ComponentFactory: SFC<Props> = (props: Props) => {
 
   switch(props.type) {
-    case 'MODAL':
+    case 'CONFIRM_MODAL':
       return <Modal {...props} />;
     default:
       return null;

@@ -12,7 +12,7 @@ const agents: ActionsType[] = [
     icon:'trash',
     title:'action.agents.delete_action',
     preAction: {
-      type:'MODAL',
+      type:'CONFIRM_MODAL',
       icon:'trash',
       title: 'Delete agent?',
       message:`Deleting %s agents will change their status to 'deleted'`,
