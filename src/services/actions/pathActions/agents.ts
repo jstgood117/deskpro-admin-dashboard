@@ -36,7 +36,24 @@ const agents: ActionsType[] = [
         title:'action.agents.add_team',
         schema:ADD_TEAM,
         type:'mutate',
-        actions: null
+        actions: null,
+        selectOptions: [
+          { value: '1', label: 'Accounting' },
+          { value: '2', label: 'Business' },
+          { value: '3', label: 'Design' },
+          { value: '4', label: 'HR' },
+          { value: '5', label: 'Sales' },
+          { value: '6', label: 'Finance' }
+        ],
+        preAction: {
+          type:'CONFIRM_MODAL',
+          icon:'add',
+          title: 'Add Teamss?',
+          message:`Added teams to %s agents.`,
+          variant: 'default',
+          leftButtonText:'Add Teams',
+          rightButtonText: 'Cancel',
+        },
       },
       {
         title:'action.agents.remove_team',

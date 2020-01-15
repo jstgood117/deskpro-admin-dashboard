@@ -80,6 +80,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
   const [dropdownValue, setDropdownValue] = useState();
+  const [showActionComponent, setShowActionComponent] = useState(false);
 
   useEffect(() => {
     const checkedLength = Object.keys(checked).length;
@@ -126,14 +127,15 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     setCurrentAction(action);
 
-    // If there is no pre-action, run the action
-    if(action && !action.preAction) {
+    // If there is no pre-action or dropdown options, run the action
+    if(action && !action.preAction && !action.selectOptions) {
       handleRunAction(variables);
     }
   };
 
   const handlePreAction = (action: ActionsType) => {
     setCurrentAction(action);
+    setShowActionComponent(true);
   };
 
   const handleRunAction = async (variables?: object) => {
@@ -144,10 +146,12 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
     await runAction(client, currentAction, variables);
 
     setCurrentAction(undefined);
+    setShowActionComponent(false);
   };
 
   const handleCancelAction = () => {
     setCurrentAction(undefined);
+    setShowActionComponent(false);
   };
 
   const csvData = generateCSVData(page, columns);
@@ -212,7 +216,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
           />
         </TableHeader>
       </TableStyled>
-      {currentAction?.preAction && (
+      {showActionComponent && (
         <ActionComponentFactory
           {...currentAction.preAction}
           ids={checkedIds}

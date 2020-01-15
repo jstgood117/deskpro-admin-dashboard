@@ -30,13 +30,19 @@ export const convertActionsToMenuFormat = (
 };
 
 export const getActionFromMenuItem = (menuItem: IMenuItemProps, actions: ActionsType[]): ActionsType => {
-  return actions.find(action => {
-    if(action.title === menuItem.name) {
-      return action;
+
+  let action: ActionsType;
+  actions.forEach(_action => {
+    if(_action.title === menuItem.name) {
+      action = _action;
     }
 
-    return (action.actions && action.actions.length > 0)
-      ? getActionFromMenuItem(menuItem, action.actions)
-      : undefined;
+    if(!action) {
+      action = (_action.actions && _action.actions.length > 0)
+        ? getActionFromMenuItem(menuItem, _action.actions)
+        : undefined;
+    }
   });
+
+  return action;
 };

@@ -6,7 +6,6 @@ import MultiSelect from '../SelectComponents/MultiSelect';
 
 import { ActionFactory } from '../../services/actions/ActionFactory';
 import { ActionsType } from '../../services/actions/types';
-import { testHandlingTeamList } from '../../resources/constants/constants';
 import { IMenuItemProps } from '../../resources/interfaces';
 import { IOptions } from '../../types';
 
@@ -15,7 +14,7 @@ import {
   getActionFromMenuItem
 } from './helpers/functions';
 
-type Props = {
+export type Props = {
   path: string;
   menuValue: IMenuItemProps;
   onChange: (menuItem?: IMenuItemProps, action?: ActionsType, variables?: object) => void;
@@ -47,6 +46,7 @@ const Actions: FC<Props> = ({
   }, [path]);
 
   const onSelect = (val: IMenuItemProps) => {
+
     const action = getActionFromMenuItem(val, actions);
     setCurrentAction(action);
     onChange(val, action, { ids });
@@ -63,17 +63,16 @@ const Actions: FC<Props> = ({
         menuItems={menuItems}
         iconName='menu'
       />
-      {menuValue && menuValue.name === 'Add Team' && (
+      {currentAction && currentAction.selectOptions && (
         <div style={{ display: 'flex', paddingLeft: 15 }}>
           <MultiSelect
-            options={testHandlingTeamList}
+            options={currentAction.selectOptions}
             type='fixed'
             selectOptions={selectOptions}
           />
         </div>
       )}
-      {((currentAction &&
-        currentAction.preAction) ||
+      {((currentAction && currentAction.preAction) ||
         selectedOptions.length > 0) && (
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{ paddingLeft: 16 }}>
