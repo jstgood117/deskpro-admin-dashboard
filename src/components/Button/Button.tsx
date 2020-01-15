@@ -386,6 +386,7 @@ const Button: FC<Props> = ({
           onClick={onClick}
           hasClearButton={showClearButton && selected}
           iconOnly={iconOnly}
+          type='button'
         >
           {children}
         </ButtonStyled>

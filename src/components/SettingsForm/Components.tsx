@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import styled from 'styled-components';
 import Toggle from '../../components/Toggle';
 import Input from '../../components/Input';
+import TabbedFieldGroup from '../TabbedFieldGroup';
 
 const Group = styled.div`
   &.hidden {
@@ -13,6 +14,7 @@ const Group = styled.div`
 export const MainElement = (props: any) => {
 
   switch (props.type) {
+    case 'tabs_section': return <TabbedFieldGroup {...props} />;
     case 'feature_section': return <FeatureSection {...props} />;
     case 'page_section': return <PageSection {...props} />;
     case 'group': return <ElementGroup {...props} />;
@@ -141,11 +143,15 @@ export const VertElementGroup = (props: any) => {
 };
 
 export const FieldElement = (props: any) => {
-
+  const fieldSuffix = props.fieldSuffix || '';
+  let value = props.formikProps.values[props.id];
+  if (typeof value === 'object' && fieldSuffix){
+    value = value[fieldSuffix.slice(1)];
+  }
   switch (props.type) {
     case 'toggle': return (
       <Toggle
-        id={props.id}
+        id={props.id + fieldSuffix}
         size='medium'
         checked={props.formikProps.values[props.id]}
         onChange={props.formikProps.handleChange}
@@ -153,9 +159,9 @@ export const FieldElement = (props: any) => {
     );
     case 'input': return (
       <Input
-        id={props.id}
-        name={props.id}
-        value={props.formikProps.values[props.id]}
+        id={props.id + fieldSuffix}
+        name={props.id + fieldSuffix}
+        value={value}
         inputType='primary'
         onChange={(event => {
           props.formikProps.handleChange(event);
