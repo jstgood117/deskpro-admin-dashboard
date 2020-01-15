@@ -45,5 +45,11 @@ describe('sort.ts', () => {
 
       expect(result).toEqual(0);
     });
+
+    test('if param is number, return props.sortingvalue`s value as number', () => {
+      const result = processSortParam('10');
+
+      expect(result).toEqual(10);
+    });
   });
 });
