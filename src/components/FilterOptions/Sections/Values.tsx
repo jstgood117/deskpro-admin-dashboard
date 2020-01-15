@@ -9,6 +9,7 @@ import Text from './ValueTypes/Text';
 import ChoiceFromData from './ValueTypes/ChoiceFromData';
 
 import { FilterProps } from '../../../resources/interfaces/filterMeta';
+import Bool from './ValueTypes/Bool';
 
 const StyledFilterOptions = styled.div`
   display: flex;
@@ -24,7 +25,8 @@ const StyledFilterOptions = styled.div`
       height: 34px;
       cursor: default;
     }
-  },
+  }
+  ,
   .select__control {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -60,36 +62,26 @@ export type Props = {
 };
 
 export const getComponent = (containType: string, props: Props) => {
-
-  switch(containType) {
+  switch (containType) {
     case 'CHOICE_FROM_DATA':
-      return (
-        <ChoiceFromData {...props} />
-      );
+      return <ChoiceFromData {...props} />;
+    case 'BOOL':
+      return <Bool {...props} />;
     default:
     case 'TEXT':
-      return (
-        <Text {...props} />
-      );
+      return <Text {...props} />;
   }
 };
 
-export const Values: SFC<Props & { containType: string; }> = ({
+export const Values: SFC<Props & { containType: string }> = ({
   containType,
   ...props
 }) => {
-
-  const {
-    filters,
-    filter,
-    setFilters
-  } = props;
+  const { filters, filter, setFilters } = props;
 
   return (
     <StyledFilterOptions>
-      <div>
-        {getComponent(containType, props)}
-        </div>
+      <div>{getComponent(containType, props)}</div>
       <div style={{ paddingLeft: 10 }} className='remove-btn'>
         <Button
           styleType='tertiary'
@@ -112,7 +104,6 @@ export const Values: SFC<Props & { containType: string; }> = ({
       </div>
     </StyledFilterOptions>
   );
-
 };
 
 export default Values;
