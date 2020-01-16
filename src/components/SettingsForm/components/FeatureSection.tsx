@@ -19,6 +19,7 @@ const FeatureSectionStyled = styled.div`
     border-bottom: 1px solid #eff0f0;
     padding: 30px 0;
     padding-left: 285px;
+    /* margin-top: 16px; */
   }
 
   & > .form-row > label {
@@ -34,6 +35,10 @@ const FeatureSectionStyled = styled.div`
   & > .form-row > .form-ctrl > label {
     position: absolute;
     left: 300px;
+  }
+
+  & .element-details {
+    margin-top: 16px;
   }
 
   & .group-details > p,

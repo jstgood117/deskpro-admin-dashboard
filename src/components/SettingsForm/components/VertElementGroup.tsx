@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import classNames from 'classnames';
 
 import FieldElement from './FieldElement';
 import { GenericFormComponent } from '../GenericFormComponent';
@@ -13,48 +12,49 @@ const Group = styled.div`
   }
 `;
 
-const VertElementGroup = (props: any) => {
+const GroupDetails: React.FC = (props: any) => (
+  <div className='group-details'>
+    {props.title && <label>{props.title}</label>}
+    {props.description && <p>{props.description}</p>}
+  </div>
+);
+
+const FieldContainer: React.FC = (props: any) => (
+  <React.Fragment>
+    <div className='element-details'>
+      {props.title && <label>{props.title}</label>}
+      {props.description && <p>{props.description}</p>}
+    </div>
+    <div className='element-context'>
+      <FieldElement {...props.field} formikProps={props.formikProps} />
+    </div>
+  </React.Fragment>
+);
+
+const VertElementGroup: React.FC = (props: any) => {
   // If props doesn't exist or if it does, its set to true
   const enabled =
     !props.showOn || props.formikProps.values[props.showOn] === true;
 
   return (
     <Group>
-      <div className='horizontal-form'>
-        <div className='group-details'>
-          {props.title && <label>{props.title}</label>}
-          {props.description && <p>{props.description}</p>}
-        </div>
-        {props.elements.map((element: any, i: number) => {
-          if (element.type === 'field') {
-            return (
-              <div className={classNames({ hidden: !enabled })} key={i}>
-                <div className='element-details'>
-                  {element.title && <label>{element.title}</label>}
-                  {element.description && <p>{element.description}</p>}
-                </div>
-                <div className='element-context'>
-                  <FieldElement
-                    {...element.field}
-                    formikProps={props.formikProps}
-                  />
-                </div>
-              </div>
-            );
-          } else {
-            return (
-              <div className={classNames({ hidden: !enabled })} key={i}>
-                {element.title && <label>{element.title}</label>}
-                {element.description && <p>{element.description}</p>}
-                <GenericFormComponent
-                  {...element}
-                  formikProps={props.formikProps}
-                />
-              </div>
-            );
-          }
-        })}
-      </div>
+      <GroupDetails {...props} />
+      {enabled &&
+        props.elements.map((element: any, i: number) =>
+          element.type === 'field' ? (
+            <FieldContainer
+              {...element}
+              key={i}
+              formikProps={props.formikProps}
+            />
+          ) : (
+            <GenericFormComponent
+              {...element}
+              key={i}
+              formikProps={props.formikProps}
+            />
+          )
+        )}
     </Group>
   );
 };

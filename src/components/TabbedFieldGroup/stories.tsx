@@ -193,7 +193,7 @@ storiesOf('Tabbed Field Group', module)
       handleChange={action('changed')}
       initialValues={initialValues}
       tabs={tabsThreeOrLess}
-      title='Brand'
+      title="Brand"
     />
   ))
   .add('Initially expanded', () => (
@@ -204,7 +204,7 @@ storiesOf('Tabbed Field Group', module)
       handleChange={action('changed')}
       initialValues={initialValues}
       tabs={tabsThreeOrLess}
-      title='Brand'
+      title="Brand"
     />
   ))
   .add('More than three brands', () => (
@@ -214,7 +214,7 @@ storiesOf('Tabbed Field Group', module)
       handleChange={action('changed')}
       initialValues={initialValues}
       tabs={tabsMoreThanTree}
-      title='Brand'
+      title="Brand"
     />
   ))
   .add('Several settings fields', () => (
@@ -224,6 +224,6 @@ storiesOf('Tabbed Field Group', module)
       handleChange={action('changed')}
       initialValues={initialValues}
       tabs={tabsThreeOrLess}
-      title='Brand'
+      title="Brand"
     />
   ));

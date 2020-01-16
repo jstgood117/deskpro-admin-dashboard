@@ -20,6 +20,7 @@ const ExpandedPanel = styled.div`
     font-size: 14px;
     line-height: 150%;
     color: #4c4f50;
+    margin-top: 0;
   }
 `;
 

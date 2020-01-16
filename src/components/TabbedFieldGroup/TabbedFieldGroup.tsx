@@ -15,8 +15,7 @@ const FieldGroupStyled = styled.div`
 
 const FieldGroupTitle = styled.p`
   font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 14px;
   line-height: 150%;
   color: #4c4f50;
@@ -157,7 +156,7 @@ const TabbedFieldGroup: React.FC<IProps> = props => {
       {props.title && <FieldGroupTitle>{props.title}</FieldGroupTitle>}
       {allowExpanded && (
         <FieldGroupCollapse collapsed={!expanded}>
-          <Toggle checked={expanded} onChange={onExpandToggle} size='medium' />
+          <Toggle checked={expanded} onChange={onExpandToggle} size="medium" />
           <p>{expanded ? 'Collapse' : 'Expand'} Brands</p>
         </FieldGroupCollapse>
       )}

@@ -74,43 +74,38 @@ export const uiSchema = {
               showOn: 'admin_settings_security_enabled',
               elements: [
                 {
-                  type: 'group',
+                  type: 'field',
+                  field: {
+                    type: 'toggle',
+                    id: 'admin_settings_security_idle_timeout_enabled'
+                  }
+                },
+                {
+                  type: 'vertical_group',
+                  title: 'Idle Timeout',
+                  showOn: 'admin_settings_security_idle_timeout_enabled',
+                  description:
+                    'Log out admins who are inactive. Admins will be logged out when the admin idle timeout elapses.',
                   elements: [
                     {
                       type: 'field',
-                      field: {
-                        type: 'toggle',
-                        id: 'admin_settings_security_idle_timeout_enabled'
-                      }
-                    },
-                    {
-                      type: 'vertical_group',
-                      title: 'Idle Timeout',
-                      showOn: 'admin_settings_security_idle_timeout_enabled',
-                      description:
-                        'Log out admins who are inactive. Admins will be logged out when the admin idle timeout elapses.',
-                      elements: [
-                        {
-                          type: 'field',
-                          title: 'Admin Idle Timeout',
-                          field: {
-                            type: 'input',
-                            id: 'admin_settings_security_idle_timeout'
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      type: 'field',
-                      title: 'Admin IP Whitelisting',
-                      description:
-                        'When enabled, admins can only log in from trusted IP addresses.',
+                      title: 'Admin Idle Timeout',
                       field: {
                         type: 'input',
-                        id: 'admin_settings_security_whitelist'
+                        id: 'admin_settings_security_idle_timeout'
                       }
                     }
                   ]
+                },
+                {
+                  type: 'field',
+                  title: 'Admin IP Whitelisting',
+                  description:
+                    'When enabled, admins can only log in from trusted IP addresses.',
+                  field: {
+                    type: 'input',
+                    id: 'admin_settings_security_whitelist'
+                  }
                 }
               ]
             }
@@ -130,6 +125,7 @@ export const uiSchema = {
             {
               type: 'vertical_group',
               title: 'Email Subscriptons',
+              showOn: 'agent_notifications_enabled',
               description:
                 'Allow agents to subscribe to email notifications (the ones set in the Ticket Notifications and Other Notifications tabs in Agents, or in the agent’s preferences).',
               elements: [
@@ -140,17 +136,6 @@ export const uiSchema = {
                     type: 'profiles',
                     title: 'Agents',
                     max: 200,
-                    profiles: [
-                      { name: 'Arthur Curry' },
-                      { name: 'Bruce Wayne' },
-                      { name: 'Clark Kent' },
-                      { name: 'Diana Prince' },
-                      { name: 'Harleen Quinzel' },
-                      { name: 'Ignatius Ogilvy' },
-                      { name: 'Jason Todd' },
-                      { name: 'Pamela Lillian ' },
-                      { name: 'Selina Kyle' }
-                    ],
                     id: 'agent_email_subscriptions'
                   }
                 }
@@ -173,7 +158,19 @@ export const uiSchema = {
               type: 'vertical_group',
               title: 'Keyboard Shortcuts',
               description: 'Allow agent to use keyboard shortcuts. ',
-              elements: []
+              showOn: 'agent_keyboard_shortcuts_enabled',
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    editable: true,
+                    type: 'profiles',
+                    title: 'Agents',
+                    max: 200,
+                    id: 'agent_keyboard_shortcuts'
+                  }
+                }
+              ]
             }
           ]
         },
@@ -261,6 +258,24 @@ export const jsonSchema = {
   agent_notifications_enabled: true,
   agent_keyboard_shortcuts_enabled: true,
   forwards_out_of_helpdesk_enabled: true,
-  brand1_default_email_account: '',
+  agent_email_subscriptions: [
+    { name: 'Arthur Curry' },
+    { name: 'Bruce Wayne' },
+    { name: 'Clark Kent' },
+    { name: 'Diana Prince' },
+    { name: 'Harleen Quinzel' },
+    { name: 'Ignatius Ogilvy' },
+    { name: 'Jason Todd' },
+    { name: 'Pamela Lillian ' },
+    { name: 'Selina Kyle' }
+  ],
+  agent_keyboard_shortcuts: [
+    { name: 'Arthur Curry' },
+    { name: 'Bruce Wayne' },
+    { name: 'Clark Kent' },
+    { name: 'Diana Prince' },
+    { name: 'Harleen Quinzel' }
+  ],
+  brand1_default_email_account: 'support@brand1.deskpro.com',
   brand2_default_email_account: ''
 };
