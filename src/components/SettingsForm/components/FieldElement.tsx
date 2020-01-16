@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Toggle from '../../Toggle';
 import Input from '../../Input';
-// import Profiles from '../../Profiles';
+import Profiles from '../../Profiles';
 
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
@@ -26,14 +26,14 @@ const elementsSelector: {
         props.formikProps.handleChange(event);
       }}
     />
+  ),
+  profiles: props => (
+    <Profiles
+      {...props}
+      profiles={props.formikProps.values[props.id]}
+      onEditClick={() => ({})}
+    />
   )
-  // profiles: props => (
-  //   <Profiles
-  //     {...props}
-  //     profiles={props.formikProps.values[props.id]}
-  //     onEditClick={() => ({})}
-  //   />
-  // )
 };
 
 // Generates specific element by `props.type` field
