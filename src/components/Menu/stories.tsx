@@ -5,7 +5,8 @@ import Menu from './Menu';
 import {
   testDropdownItemsWithIcon,
   testDropdownItemsWithoutIcon,
-  testOrderableMenuItems
+  testOrderableMenuItems,
+  testGroupItems
 } from '../../resources/constants/constants';
 import { IMenuProps } from '../../resources/interfaces';
 import OrderableMenu from './OrderableMenu';
@@ -15,6 +16,7 @@ const MenuComponent: React.FC<IMenuProps> = props => {
 
   return (
     <Menu
+      name={props.name}
       menuItems={props.menuItems}
       iconName={props.iconName}
       value={value}
@@ -56,6 +58,14 @@ storiesOf('Menu', module)
     <MenuComponent
       label='admin_common.table.action'
       menuItems={testDropdownItemsWithoutIcon}
+    />
+  ))
+  .add('Group', () => (
+    <MenuComponent
+      name='group'
+      iconName='group'
+      label='admin_agents_groups.group'
+      menuItems={testGroupItems}
     />
   ))
   .add('OrderableMenu with dummy data and icon', () => (

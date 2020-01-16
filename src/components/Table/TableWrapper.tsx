@@ -67,10 +67,10 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   totalPageCount,
   tableDef,
   dataType,
-  columnOrder,
   sortBy,
   view
 }) => {
+  const columnOrder = [{column: "admin_common.col.title", show: true},{column: "admin_common.col.id", show: true}];
   return (
     <Fragment>
       {view === 'table' && (

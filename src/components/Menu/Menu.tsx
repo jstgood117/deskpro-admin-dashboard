@@ -19,15 +19,18 @@ import {
 } from './MenuStyles';
 
 const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
+  const selectedItem = props.value && props.value.name === props.item.name;
   return (
     <StyledMenuItem
       onItemChosen={(e: any) => {
-        if (props.onSelect) {
+        props.name === 'groupSub' ? e.stopPropagation() : e.preventDefault();
+        if (props.name !== 'groupSub' && props.onSelect) {
           props.onSelect(props.item);
         }
       }}
-      highlightedStyle={{ background: '#E8EBEE' }}
-      selected={props.selected}
+      highlightedStyle={{ background: 'E8EBEE' }}
+      selected={selectedItem}
+      name={props.name}
     >
       <TextLabel
         style={{
@@ -35,18 +38,12 @@ const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
           alignItems: 'center',
           paddingRight: 15
         }}
-        bold={props.selected}
+        bold={props.name === 'group' && selectedItem}
       >
         {props.children}
       </TextLabel>
-
-      {props.selected && (
-        <span
-          style={{
-            position: 'absolute',
-            right: 10
-          }}
-        >
+      {props.name === 'group' && selectedItem && (
+        <span style={{ position: 'absolute', right: 10 }}>
           <Icon name='check-2' />
         </span>
       )}
@@ -58,12 +55,23 @@ export const SingleSubMenuItem = injectIntl(singleSubMenuItem);
 export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({
   intl,
   item,
-  onSelect
+  onSelect,
+  name
 }) => {
   return (
     <StyledSubMenuItem
       highlightedStyle={{ background: '#E8EBEE' }}
-      menu={<MenuSub menuItems={item.subItems} onSelect={onSelect} />}
+      menu={
+        name === 'group' ? (
+          <MenuSub
+            menuItems={item.subItems}
+            onSelect={onSelect}
+            name={name + 'Sub'}
+          />
+        ) : (
+          <MenuSub menuItems={item.subItems} onSelect={onSelect} />
+        )
+      }
       positionOptions={{
         position: 'right',
         vAlign: 'top',
@@ -94,7 +102,9 @@ export const MultiSubMenuItem = injectIntl(multiSubMenuItem);
 const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
   intl,
   onSelect,
-  menuItems
+  menuItems,
+  value,
+  name
 }) => {
   return (
     <MenuListWrapper>
@@ -104,15 +114,26 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
             return (
               <div key={index}>
                 {item.name && !item.subItems && (
-                  <SingleSubMenuItem onSelect={onSelect} item={item}>
+                  <SingleSubMenuItem
+                    onSelect={onSelect}
+                    item={item}
+                    value={value}
+                    name={name}
+                  >
                     <IconWrapper>
                       {item.icon && <Icon name={item.icon} />}
                     </IconWrapper>
                     {intl.formatMessage({ id: item.name })}
+                    {name === 'groupSub' && (
+                      <span onClick={()=>{alert()}}>
+                        <Icon name='chat' />
+                      </span>
+                    )}
                   </SingleSubMenuItem>
                 )}
                 {item.name && item.subItems && (
                   <MultiSubMenuItem
+                    name={name}
                     item={item}
                     onSelect={onSelect}
                     menuItems={item.subItems}
@@ -134,7 +155,8 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
   label,
   value,
   onSelect,
-  menuItems
+  menuItems,
+  ...props
 }) => {
   const selected = !isNil(value) && value !== '';
   return (
@@ -143,8 +165,15 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
           openedClassName='selected'
-          openedStyle={{background: '#D2D8DD'}}
-          menu={<MenuSub menuItems={menuItems} onSelect={onSelect} />}
+          openedStyle={{ background: '#D2D8DD' }}
+          menu={
+            <MenuSub
+              menuItems={menuItems}
+              onSelect={onSelect}
+              value={value}
+              name={props.name}
+            />
+          }
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',

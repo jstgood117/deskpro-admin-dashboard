@@ -72,7 +72,8 @@ export const StyledIcon = styled.span`
 `;
 export const StyledMenuItem = styled(props => <MenuItem {...props} />)`
   cursor: pointer;
-  padding: 6.2px 30px 7.09px 15px;
+  padding: 6.2px 30px 7.09px
+    ${props => (props.name === 'group' && !props.selected ? 10 : 15)}px;
   user-select: none;
   position: relative;
   display: flex;
