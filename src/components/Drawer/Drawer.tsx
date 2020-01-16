@@ -20,18 +20,18 @@ const OverlayStyled = styled.div<{ open: boolean }>`
   will-change: opacity;
 `;
 
-const DrawerStyled = styled.div<{ open: boolean, width: number }> `
+const DrawerStyled = styled.div<{ open: boolean }> `
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 10;
-  width: ${props => props.width}px;
+  width: 440px;
   background-color: ${props => props.theme.white};
   box-shadow: -5px 0px 8px rgba(0, 0, 0, 0.05);
   border-radius: 8px 0px 0px 8px;
   transition: .3s;
-  transform: translateX(${props => props.open ? 0 : props.width}px);
+  transform: translateX(${props => props.open ? 0 : 440}px);
   will-change: transform;
   overflow-y: auto;
   overflow-x: hidden;
@@ -86,20 +86,18 @@ const DrawerFooter = styled.div`
 
 type Props = {
   open: boolean;
-  drawerWidth?: number;
   onClose: () => void;
 };
 
 export const Drawer: FC<Props> = ({
   open,
-  drawerWidth,
   onClose,
   children
 }) => {
   return createPortal((
     <div>
       <OverlayStyled open={open} onClick={onClose} />
-      <DrawerStyled open={open} width={drawerWidth}>
+      <DrawerStyled open={open}>
         <DrawerHeader>
           <H2>Header</H2>
           <div onClick={onClose} className='caret-right'>
@@ -128,7 +126,5 @@ export const Drawer: FC<Props> = ({
     document.getElementById('app-settings')
   );
 };
-
-Drawer.defaultProps = { drawerWidth: 440 };
 
 export default Drawer;
