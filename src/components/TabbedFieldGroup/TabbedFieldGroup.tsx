@@ -156,7 +156,7 @@ const TabbedFieldGroup: React.FC<IProps> = props => {
       {props.title && <FieldGroupTitle>{props.title}</FieldGroupTitle>}
       {allowExpanded && (
         <FieldGroupCollapse collapsed={!expanded}>
-          <Toggle checked={expanded} onChange={onExpandToggle} size="medium" />
+          <Toggle checked={expanded} onChange={onExpandToggle} size='medium' />
           <p>{expanded ? 'Collapse' : 'Expand'} Brands</p>
         </FieldGroupCollapse>
       )}
