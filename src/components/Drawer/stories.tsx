@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
+import EditAgentForm from  './Forms/EditAgentForm';
 import Button from '../Button';
 import Drawer from './Drawer';
 
@@ -12,14 +13,14 @@ storiesOf('Drawer', module)
       setOpen(true);
     };
 
-    const onClose = () => {
+    const closeDrawer = () => {
       setOpen(false);
     };
 
     return (
       <div>
-        <Drawer open={open} onClose={onClose}>
-          <div>some contents...</div>
+        <Drawer open={open} onClose={closeDrawer}>
+          <EditAgentForm />
         </Drawer>
 
         <Button
