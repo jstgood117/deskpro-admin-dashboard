@@ -1,56 +1,96 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { P2, P3 } from '../../Typography';
+import { DrawerHeader, DrawerBody, DrawerFooter } from '../DrawerStyles';
 import Input from '../../Input';
 import Icon from '../../Icon';
 import NameAndAvatar from '../../Avatar/NameAndAvatar';
+import Button from '../../Button';
+import SingleSelect from '../../SelectComponents/SingleSelect';
+import { dpstyle } from '../../Styled';
+
+import { IOptions } from '../../SelectComponents/interfaces';
+
+const StyledLabel = styled(dpstyle.div1)`
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+`;
 
 const FormContainer = styled.div`
   width: 100%;
   height: 100%;
 
-  .name .label {
-    margin-bottom: 4px;
-  }
-
-  .agents {
+  .agents-section {
     margin-top: 24px;
+
     .label-button {
       display: flex;
       justify-content: space-between;
-      .button-group {
-        display: flex;
-        align-items: center;
-        margin-right: 4px;
+
+      .text-only>button {
+        border: none;
+        background: none;
+        font-size: 13px;
+        padding: 0px;
+        svg {
+          width: 9px;
+          height: 9px;
+          padding-right: 4px;
+        }
       }
     }
+
     .avatar-list {
       margin: 12px 0px 0px 11px;
+      .name-avatar {
+        height: 34px;
+        margin-bottom: 6px;
+        img {
+          width: 18px;
+          height: 18px;
+        }
+        div {
+          font-weight: 600;
+          font-size: 15px;
+        }
+      }
     }
   }
 
-  .links {
-    margin-top: 16px;
+  .links-section {
+    margin-top: 24px;
+    &>div,
+    .basic-single-select,
+    .select__control {
+      width: 100%;
+    }
+    .select__control {
+      border: none;
+      border-radius: 0px;
+      border-bottom: 1px solid ${props => props.theme.greyLight};
+      margin-bottom: 8px;
+      :hover,
+      :focus-within {
+        border: none;
+        border-radius: 0px;
+        border-bottom: 1px solid ${props => props.theme.greyLight};
+      }
+    }
   }
-  .id {
+  .id-section {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 150%;
+    color: #8B9293;
     margin-top: 16px;
-  }
-`;
-
-const StyledLink = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 33px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-bottom: 1px solid ${props => props.theme.greyLight};
-  .icon-label {
-    display: flex;
-    align-items: center;
-    .label {
-      margin-left: 8px;
+    .title {
+      font-size: 13px;
+      margin-right: 16px;
+    }
+    .id {
+      font-size: 15px;
     }
   }
 `;
@@ -68,103 +108,118 @@ const HelpButton = styled.button`
   cursor: pointer;
 `;
 
-const InputComponent: React.FC<{
-  hasError?: boolean;
-  showClear?: boolean;
-  errorMessage?: string;
-  inputType: 'primary' | 'secondary';
-}> = ({ hasError, errorMessage, showClear, inputType }) => {
-  const [value, setValue] = useState('Support UK');
-
-  return (
-    <Input
-      value={value}
-      errorMessage={errorMessage}
-      hasError={hasError}
-      onClear={() => setValue('')}
-      showClear={showClear}
-      inputType={inputType}
-      onChange={(event: any) => setValue(event.target.value)}
-    />
-  );
-};
-
 const agents = [
   {
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
+    avatar:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
     name: 'Aaron Wood'
   },
   {
-    avatar: 'https://images.unsplash.com/photo-1513732822839-24f03a92f633?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
+    avatar:
+      'https://images.unsplash.com/photo-1513732822839-24f03a92f633?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
     name: 'Anthony Martin'
   },
   {
-    avatar: 'https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=4000&q=80',
+    avatar:
+      'https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=4000&q=80',
     name: 'Braydon Jackson'
   },
   {
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
+    avatar:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80',
     name: 'Cynthia Clarke'
   },
   {
-    avatar: 'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80',
+    avatar:
+      'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80',
     name: 'Ewald Rolfson'
   },
 ];
 
-const links = [
-  { image: 'clock', label: 'Triggers (10)' },
-  { image: 'brand2', label: 'Auto attendants (4)' },
-  { image: 'info', label: 'SLAs (8)' }
+const links: IOptions[] = [
+  { image: 'brand1', value: 'triggers', label: 'Triggers (10)' },
+  { image: 'brand1', value: 'attendants', label: 'Auto attendants (4)' },
+  { image: 'brand1', value: 'slas', label: 'SLAs (8)' }
 ];
 
 const EditAgentForm = () => {
+  const title = 'Support UK';
+  const [value, setValue] = useState(title);
+  const [selectedOption, selectOptions] = useState();
+
   return (
-    <FormContainer>
-      <div className='name'>
-        <P2 className='label'>Name</P2>
-        <InputComponent inputType='primary' />
-      </div>
-      <div className='agents'>
-        <div className='label-button'>
-          <P2 className='label'>Agents</P2>
-          <div className='button-group'>
-            <Icon name='plus' />
-            <P3>Add</P3>
-          </div>
-        </div>
-        <div className='avatar-list'>
-          {agents.map((agent, key) => (
-            <NameAndAvatar
-              key={key}
-              avatar={agent.avatar}
-              name={agent.name}
-              containerStyle={{ marginBottom: '8px' }}
+    <div>
+      <DrawerHeader>
+        {title}
+      </DrawerHeader>
+      <DrawerBody>
+        <FormContainer>
+          <div className='name-section'>
+            <StyledLabel>Name</StyledLabel>
+            <Input
+              value={value}
+              onClear={() => setValue('')}
+              inputType={'primary'}
+              onChange={(event: any) => setValue(event.target.value)}
             />
-          ))}
-        </div>
-        <div className='links'>
-          <P2 className='label'>Links</P2>
-          {links.map((link, key) => (
-            <StyledLink key={key}>
-              <div className='icon-label'>
-                <Icon name={link.image} />
-                <P2 className='label'>{link.label}</P2>
-              </div>
-              <Icon name='down' />
-            </StyledLink>
-          ))}
-        </div>
-
-        <div className='id'>
-          <P3>ID 384728</P3>
-        </div>
-      </div>
-      <HelpButton>
-        <Icon name='question' />
-      </HelpButton>
-
-    </FormContainer>
+          </div>
+          <div className='agents-section'>
+            <div className='label-button'>
+              <StyledLabel>Agents</StyledLabel>
+              <Button
+                styleType='secondary'
+                size='small'
+                className='text-only'
+              >
+                <Icon name='plus' />
+                Add
+              </Button>
+            </div>
+            <div className='avatar-list'>
+              {agents.map((agent, key) => (
+                <NameAndAvatar
+                  key={key}
+                  avatar={agent.avatar}
+                  name={agent.name}
+                  containerClassName={'name-avatar'}
+                />
+              ))}
+            </div>
+          </div>
+          <div className='links-section'>
+            <StyledLabel>Links</StyledLabel>
+            {links.map((link, index) => (
+              <SingleSelect
+                key={index}
+                options={links}
+                type='withImage'
+                selectOption={selectOptions}
+                selectedOption={selectedOption}
+                placeholder='Select Item'
+              />
+            ))}
+          </div>
+          <div className='id-section'>
+            <span className='title'>ID</span>
+            <span className='id'>384728</span>
+          </div>
+          <HelpButton>
+            <Icon name='question' />
+          </HelpButton>
+        </FormContainer>
+      </DrawerBody>
+      <DrawerFooter>
+        <Button styleType='primary' size='medium'>
+          Save
+        </Button>
+        <Button styleType='secondary' size='medium'>
+          Duplicate
+        </Button>
+        <Button styleType='secondary' size='medium'>
+          Delete
+        </Button>
+      </DrawerFooter>
+    </div >
   );
 };
 
