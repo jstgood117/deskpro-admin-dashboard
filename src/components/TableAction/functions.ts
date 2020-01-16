@@ -4,9 +4,7 @@ import {
   IMenuItemProps
 } from '../../resources/interfaces';
 
-import {
-  KeyValue,
-} from '../../types';
+import { KeyValue } from '../../types';
 
 import { IntlShape } from 'react-intl';
 
@@ -19,41 +17,60 @@ type SortMenuItem = {
   link: string;
 };
 
-export const generatSortMenuItems = (tableDef: ITableSetup, intl: IntlShape): SortMenuItem[] => {
-
-  if(!tableDef || !tableDef.columns) {
+export const generatSortMenuItems = (
+  tableDef: ITableSetup,
+  intl: IntlShape
+): SortMenuItem[] => {
+  if (!tableDef || !tableDef.columns) {
     return [];
   }
 
-  const columnsViewList: SortMenuItem[] = tableDef.columns.map((column: ITableColumn, index: number) => {
-    return {
-      label: intl.formatMessage({id: column.title}),
-      link: column.title
-    };
-  });
+  const columnsViewList: SortMenuItem[] = tableDef.columns.map(
+    (column: ITableColumn, index: number) => {
+      return {
+        label: intl.formatMessage({ id: column.title }),
+        link: column.title
+      };
+    }
+  );
 
   return columnsViewList;
 };
 
 export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
-
-  if(!tableDef || !tableDef.columns) {
+  if (!tableDef || !tableDef.columns) {
     return {
-      checkedState:{},
-      columnsViewList:[]
+      checkedState: {},
+      columnsViewList: []
     };
   }
 
+  let hasIdColumn = false;
   const checkedState: KeyValue = {};
-  const columnsViewList: IMenuItemProps[] = tableDef.columns.map((column: ITableColumn, index: number) => {
+  const columnsViewList: IMenuItemProps[] = tableDef.columns
+    .filter((column: ITableColumn) => {
+      if (column.title === 'admin_common.col.id') {
+        hasIdColumn = true;
+        return false;
+      }
+      return true;
+    })
+    .map((column: ITableColumn, index: number) => {
+      checkedState[String(index)] = true;
 
-    checkedState[String(index)] = true;
+      return {
+        key: index,
+        name: column.title
+      };
+    });
 
-    return {
-      key:index,
-      name:column.title
-    };
-  });
+  if (hasIdColumn) {
+    checkedState[String(columnsViewList.length)] = true;
+    columnsViewList.push({
+      key: columnsViewList.length,
+      name: 'admin_common.col.id'
+    });
+  }
 
   return {
     checkedState,
