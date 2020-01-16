@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { uniqueId } from 'lodash';
+import { uniqueId, cloneDeep } from 'lodash';
 import { MenuList, MenuButton } from 'react-menu-list';
-import { FormattedMessage  } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Icon from '../../Icon';
 import { MenuLabel, TextLabel } from '../../Styled';
 import { DeskproAdminTheme } from '../../Theme';
@@ -15,6 +15,7 @@ import {
   StyledIcon,
   IconWrapper,
   HR,
+  FixedItemWrapper,
   ResetWrapper,
   SettingIcon
 } from '../MenuStyles';
@@ -58,7 +59,7 @@ const MultiMenuComponent: FC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          if(onSelect) {
+          if (onSelect) {
             onSelect(item);
           }
         }}
@@ -71,8 +72,8 @@ const MultiMenuComponent: FC<IMenuProps> = ({
               value={value}
             />
           ) : (
-            <div />
-          )
+              <div />
+            )
         }
         positionOptions={{
           position: 'left',
@@ -113,7 +114,15 @@ const Menu: FC<IMenuProps> = ({
   initialChecked
 }) => {
 
-  const itemList = menuItems.map((item, index: number) => {
+  const itemsLength = menuItems.length - 1;
+  let idColumn: IMenuItemProps;
+  const clonedItems = cloneDeep(menuItems);
+  if (menuItems[itemsLength].name === 'admin_common.col.id') {
+    idColumn = clonedItems[itemsLength];
+    clonedItems.pop();
+  }
+
+  const itemList = clonedItems.map((item, index: number) => {
     return (
       <div
         key={uniqueId()}
@@ -155,6 +164,7 @@ const Menu: FC<IMenuProps> = ({
       </div>
     );
   });
+
   return (
     <MenuListWrapper>
       <MenuList>
@@ -166,17 +176,48 @@ const Menu: FC<IMenuProps> = ({
                 OrderedList.push(menuItems[index]);
                 return true;
               });
-              if(order) { order(OrderedList); }
+              if (idColumn) {
+                OrderedList.push(menuItems[idColumn.key]);
+              }
+              if (order) { order(OrderedList); }
             }}
             children={itemList}
           />
         )}
+
+        {idColumn && (
+          <FixedItemWrapper>
+            <IconWrapper>
+              <Icon name='drag-and-drop' />
+            </IconWrapper>
+            <TextLabel
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: 13
+              }}
+            >
+              <FormattedMessage id={idColumn.name} />
+            </TextLabel>
+            <span style={{ position: 'absolute', right: 15, display: 'flex' }}>
+              <Toggle
+                checked={checked[idColumn.key]}
+                value='checked'
+                onChange={event =>
+                  setChecked({ ...checked, [idColumn.key]: event.target.checked })
+                }
+                size='small'
+              />
+            </span>
+          </FixedItemWrapper>
+        )}
+
         <HR />
         <ResetWrapper
           onClick={e => {
             e.preventDefault();
-            if(order) { order(initialList); }
-            if(initialChecked) { setChecked(initialChecked); }
+            if (order) { order(initialList); }
+            if (initialChecked) { setChecked(initialChecked); }
           }}
         >
           <IconWrapper>
@@ -216,7 +257,7 @@ const OrderableMenu: FC<IMenuProps> = ({
           className={`menu-btn`}
           menuZIndex={2}
           openedClassName='selected'
-          openedStyle={{background: '#D2D8DD'}}
+          openedStyle={{ background: '#D2D8DD' }}
           menu={(
             <Menu
               onSelect={onSelect}

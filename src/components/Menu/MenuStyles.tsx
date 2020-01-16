@@ -92,6 +92,14 @@ export const IconWrapper = styled.span`
   padding-right: 13px;
 `;
 
+export const FixedItemWrapper = styled.div`
+  padding: 6.2px 30px 7.09px 15px;
+  user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
 export const ResetWrapper = styled.div`
   cursor: pointer;
   padding: 6.2px 30px 7.09px 15px;
