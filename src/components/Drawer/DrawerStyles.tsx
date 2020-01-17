@@ -28,8 +28,7 @@ export const DrawerStyled = styled.div<{ open: boolean }> `
   transition: .3s;
   transform: translateX(${props => props.open ? 0 : 440}px);
   will-change: transform;
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden;
 `;
 
 export const DrawerHeader = styled(dpstyle.div1)`
@@ -44,6 +43,9 @@ export const DrawerHeader = styled(dpstyle.div1)`
 `;
 
 export const StyledClose = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 33px;
   right: 32px;
@@ -53,7 +55,9 @@ export const StyledClose = styled.div`
   svg {
     width: 6.98px;
     height: 12px;
-    color: ${props => props.theme.static2Colour};
+    path {
+      fill: ${props => props.theme.static2Colour};
+    }
   }
 `;
 
