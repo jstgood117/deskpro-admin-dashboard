@@ -23,3 +23,7 @@ addDecorator(story => (
 ));
 
 configure(loadStories, module);
+
+const settingsRoot = document.createElement('div');
+settingsRoot.setAttribute('id', 'app-settings');
+document.body.append(settingsRoot);
