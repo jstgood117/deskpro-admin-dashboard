@@ -57,7 +57,8 @@ export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({
   intl,
   item,
   onSelect,
-  name
+  name,
+  subMenuDirection
 }) => {
   return (
     <StyledSubMenuItem
@@ -74,7 +75,7 @@ export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({
         )
       }
       positionOptions={{
-        position: 'right',
+        position: subMenuDirection ? subMenuDirection : 'left',
         vAlign: 'top',
         hAlign: 'left',
         forceVAlign: true,
@@ -105,7 +106,8 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
   onSelect,
   menuItems,
   value,
-  name
+  name,
+  subMenuDirection
 }) => {
   return (
     <MenuListWrapper>
@@ -143,6 +145,7 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
                     item={item}
                     onSelect={onSelect}
                     menuItems={item.subItems}
+                    subMenuDirection={subMenuDirection}
                   />
                 )}
                 {!item.name && <HR />}
@@ -162,12 +165,13 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
   value,
   onSelect,
   menuItems,
+  subMenuDirection,
   ...props
 }) => {
   const selected = !isNil(value) && value !== '';
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-      <MenuWrapper>
+      <MenuWrapper size={props.size}>
         <MenuButton
           className={`menu-btn ${selected ? 'selected' : ''}`}
           openedClassName='selected'
@@ -178,6 +182,7 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
               onSelect={onSelect}
               value={value}
               name={props.name}
+              subMenuDirection={subMenuDirection}
             />
           }
           positionOptions={{

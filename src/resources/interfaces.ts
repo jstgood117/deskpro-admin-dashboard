@@ -82,6 +82,7 @@ export interface IMenuProps {
   item?: IMenuItemProps;
   selected? : boolean;
   size?: SizeTypes;
+  subMenuDirection?: string;
 }
 
 export interface IMenuItemProps {
