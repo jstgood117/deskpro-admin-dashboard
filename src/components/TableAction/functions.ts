@@ -49,7 +49,7 @@ export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
   const checkedState: KeyValue = {};
   const columnsViewList: IMenuItemProps[] = tableDef.columns
     .filter((column: ITableColumn) => {
-      if (column.title === 'admin_common.col.id') {
+      if (column.field.__typename === 'TableColumnId') {
         hasIdColumn = true;
         return false;
       }
