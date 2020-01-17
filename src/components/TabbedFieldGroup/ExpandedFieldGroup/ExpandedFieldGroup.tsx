@@ -60,7 +60,7 @@ export const ExpandedFieldGroup: React.FC<IFieldGroupProps> = ({
       {tabs.map((tab, index) => (
         <BrandRow key={index}>
           <BrandName>
-            <Button styleType="imageButton" size="medium">
+            <Button styleType='imageButton' size='medium'>
               <img alt={`${tab.title} icon`} src={tab.iconUrn} />
               <p>{tab.title}</p>
             </Button>
