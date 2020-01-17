@@ -28,7 +28,7 @@ export const DrawerStyled = styled.div<{ open: boolean }> `
   transition: .3s;
   transform: translateX(${props => props.open ? 0 : 440}px);
   will-change: transform;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
 `;
 
@@ -60,6 +60,9 @@ export const StyledClose = styled.div`
 export const DrawerBody = styled.div`
   display: flex;
   padding: 19px 32px;
+  height: calc(100vh - 151px);
+  box-sizing: border-box;
+  overflow-y: auto;
 `;
 
 export const DrawerFooter = styled.div`
@@ -71,6 +74,7 @@ export const DrawerFooter = styled.div`
   bottom: 0;
   height: 68px;
   padding: 16px 32px 18px 32px;
+  background-color: ${props => props.theme.white};
   border-top: 1px solid ${props => props.theme.greyLighter};
   box-sizing: border-box;
   button {
