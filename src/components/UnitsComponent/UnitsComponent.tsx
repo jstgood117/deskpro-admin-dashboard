@@ -16,21 +16,21 @@ const UnitsContainer = styled.div`
   }
 `;
 
-interface IProps {
+export interface IProps {
   inputValue?: number;
   options: IOptions[];
-  selectedIndex?: number;
+  option?: IOptions;
   onChange: (value: object) => void;
 }
 
 const UnitsComponent: React.FC<IProps> = ({
   inputValue,
   options,
-  selectedIndex,
+  option,
   onChange
 }) => {
   const [value, setValue] = useState(inputValue);
-  const [selectedOption, setSelectOptions] = useState(options[selectedIndex]);
+  const [selectedOption, setSelectOptions] = useState(option);
 
   function handleInputChange(event: any) {
     setValue(event.target.value);
@@ -40,11 +40,11 @@ const UnitsComponent: React.FC<IProps> = ({
     });
   }
 
-  function handleSelectChange(option: IOptions) {
-    setSelectOptions(option);
+  function handleSelectChange(opt: IOptions) {
+    setSelectOptions(opt);
     onChange({
       inputValue: value,
-      selectValue: option
+      selectValue: opt
     });
   }
 
@@ -53,7 +53,7 @@ const UnitsComponent: React.FC<IProps> = ({
       <div className='textbox'>
         <Input
           value={value}
-          inputType={'primary'}
+          inputType='primary'
           onChange={handleInputChange}
         />
       </div>
@@ -63,7 +63,7 @@ const UnitsComponent: React.FC<IProps> = ({
           selectOption={handleSelectChange}
           selectedOption={selectedOption}
           placeholder='Select Item'
-          type={'primary'}
+          type='primary'
         />
       </div>
     </UnitsContainer>

@@ -20,7 +20,7 @@ storiesOf('UnitsComponent', module)
       <UnitsComponent
         inputValue={10}
         options={options}
-        selectedIndex={1}
+        option={options[1]}
         onChange={(value: object) => {
           handleChange(value);
         }}
