@@ -43,7 +43,7 @@ const transformColumnData = (
   const newCols: ColumnMeta[] = [];
   columnOrder.forEach((_order: ColumnOrder) => {
     const column = columns.find(_col => _order.column === _col.title);
-    if (_order.show) {
+    if (column && _order.show) {
       newCols.push({
         columnProps: column.field,
         id: column.title,
@@ -67,10 +67,10 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   totalPageCount,
   tableDef,
   dataType,
+  columnOrder,
   sortBy,
   view
 }) => {
-  const columnOrder = [{column: "admin_common.col.title", show: true},{column: "admin_common.col.id", show: true}];
   return (
     <Fragment>
       {view === 'table' && (

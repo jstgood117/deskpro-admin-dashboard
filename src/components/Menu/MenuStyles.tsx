@@ -129,3 +129,25 @@ export const SettingIcon = styled.div`
     margin: auto;
   }
 `;
+export const GrouppingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 6px;
+  span {
+    padding-right: 6px;
+    cursor: default;
+    display: flex;
+    &:hover {
+      svg {
+        path {
+          fill: ${props => props.theme.activeColour};
+        }
+        rect {
+          stroke: ${props => props.theme.activeColour};
+          fill: ${props => props.theme.hoverColour};
+        }
+      }
+    }
+  }
+`;

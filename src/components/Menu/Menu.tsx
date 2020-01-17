@@ -15,7 +15,8 @@ import {
   MenuListWrapper,
   StyledSubMenuItem,
   HR,
-  StyledIcon
+  StyledIcon,
+  GrouppingWrapper
 } from './MenuStyles';
 
 const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
@@ -28,7 +29,7 @@ const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
           props.onSelect(props.item);
         }
       }}
-      highlightedStyle={{ background: 'E8EBEE' }}
+      highlightedStyle={{ background: '#E8EBEE' }}
       selected={selectedItem}
       name={props.name}
     >
@@ -125,9 +126,14 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
                     </IconWrapper>
                     {intl.formatMessage({ id: item.name })}
                     {name === 'groupSub' && (
-                      <span onClick={()=>{alert()}}>
-                        <Icon name='chat' />
-                      </span>
+                      <GrouppingWrapper>
+                        <span style={{ display: 'flex' }} onClick={() => {}}>
+                          <Icon name='ic-grouping-up' />
+                        </span>
+                        <span style={{ display: 'flex' }} onClick={() => {}}>
+                          <Icon name='ic-grouping-down' />
+                        </span>
+                      </GrouppingWrapper>
                     )}
                   </SingleSubMenuItem>
                 )}
