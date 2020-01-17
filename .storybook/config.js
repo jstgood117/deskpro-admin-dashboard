@@ -1,7 +1,8 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { ThemeProvider } from 'styled-components';
-import { MockIntlProvider } from '../__mocks__/mock-react-intl';
+import { IntlProvider } from 'react-intl';
+import { testTranslations } from '../src/resources/constants/constants';
 
 import { DeskproAdminTheme } from '../src/components/Theme';
 import '../src/style/text-antialiased.css';
@@ -14,12 +15,16 @@ function loadStories() {
 }
 
 addDecorator(story => (
-  <MockIntlProvider>
+  <IntlProvider locale='en' messages={testTranslations}>
     <ThemeProvider theme={DeskproAdminTheme}>
       <GlobalStyles />
       {story()}
     </ThemeProvider>
-  </MockIntlProvider>
+  </IntlProvider>
 ));
 
 configure(loadStories, module);
+
+const settingsRoot = document.createElement('div');
+settingsRoot.setAttribute('id', 'app-settings');
+document.body.append(settingsRoot);
