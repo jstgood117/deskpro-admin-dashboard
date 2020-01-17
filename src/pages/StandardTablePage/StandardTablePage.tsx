@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useQuery, withApollo } from 'react-apollo';
 import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
-
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
@@ -35,6 +35,8 @@ export interface IProps {
   client: ApolloClient<any>;
 }
 
+type CombinedProps = IProps & RouteComponentProps<any>;
+
 const TableActionStyled = styled(dpstyle.div)`
   margin-top:-30px;
   margin-bottom:24px;
@@ -44,9 +46,11 @@ const BodyMargin = styled(dpstyle.div)`
   margin:0 34px 34px 34px;
 `;
 
-const StandardTablePage: FC<IProps> = ({
+const StandardTablePage: FC<CombinedProps> = ({
   path,
-  client
+  client,
+  history,
+  location
 }) => {
 
   const [gqlError, setGqlError] = useState<boolean>(false);
@@ -64,8 +68,7 @@ const StandardTablePage: FC<IProps> = ({
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
 
-  useQuery(query, {
-    errorPolicy: 'all', variables: { path },
+  useQuery(query, { errorPolicy: 'all', variables: { path },
     onCompleted: (_response: ResponseData) => {
       setPageResponse(_response);
     },
@@ -83,13 +86,13 @@ const StandardTablePage: FC<IProps> = ({
         query: gql`${dataQuery}`,
         errorPolicy: 'all'
       });
-      const { results }: { results: KeyValue[] } = dataResponse.data;
+      const { results }: { results: KeyValue[]} = dataResponse.data;
       const treedResults = treeify(results);
       setTableData(treedResults);
       setFilteredData(treedResults);
       setTotalPageCount(Math.ceil(results.length / pageSize));
 
-    } catch (err) {
+    } catch(err) {
       console.debug('sError for query: ' + dataQuery);
       console.error(err);
       logError(err);
@@ -116,7 +119,7 @@ const StandardTablePage: FC<IProps> = ({
   }, [pageResponse, getTableData]);
 
   useEffect(() => {
-    if (tableData) {
+    if(tableData) {
       setFilteredData(runFilters(tableData, filters));
     }
   }, [filters, tableData]);
@@ -141,12 +144,10 @@ const StandardTablePage: FC<IProps> = ({
   const tableDef = views[tabIndex].tableDef;
   const filterDef = views[tabIndex].filterDef;
 
-  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map(
-    (_column: ITableColumn) => ({
-      column: _column.title,
-      show: true,
-    })
-  );
+  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map((_column: ITableColumn) => ({
+    column:_column.title,
+    show: true
+  }));
 
   const onFilterChange = (internalFilters: FilterProps[]) => {
 
@@ -160,7 +161,7 @@ const StandardTablePage: FC<IProps> = ({
     const searchFilter = processFiltersToFilterTypes([{
       property: '*',
       operatorName: 'CONTAINS',
-      value: [_value]
+      value:[_value]
     }, ...internalFilters]);
     setFilters(searchFilter);
   };
@@ -181,7 +182,11 @@ const StandardTablePage: FC<IProps> = ({
     return getColumnUniqueValues(tableData, columnName);
   };
 
-  const contextValue: StandardTableContextValues = {
+  const onNewClick = () => {
+    history.push(`${location.pathname}/new`);
+  };
+
+  const contextValue:StandardTableContextValues = {
     path,
     filters,
     onFilterChange,
@@ -205,7 +210,7 @@ const StandardTablePage: FC<IProps> = ({
               showViewModeSwitcher={true}
               showNewButton={true}
               showHelpButton={true}
-              onNewClick={() => null}
+              onNewClick={onNewClick}
               onChangeView={val => setView(val)}
             />
           )}
@@ -252,4 +257,5 @@ const StandardTablePage: FC<IProps> = ({
   );
 };
 
-export default withApollo<IProps>(StandardTablePage);
+const WithRouter = withRouter(StandardTablePage);
+export default withApollo<IProps>(WithRouter);
