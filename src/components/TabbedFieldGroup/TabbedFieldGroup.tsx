@@ -18,7 +18,7 @@ const FieldGroupTitle = styled.p`
   font-weight: 500;
   font-size: 14px;
   line-height: 150%;
-  color: #4c4f50;
+  color: ${props => props.theme.staticColour};
 `;
 
 // Container for `Expand/Collapse` Brands toggle
@@ -35,14 +35,14 @@ const FieldGroupCollapse = styled.div<{ collapsed: boolean }>`
     font-weight: 500;
     font-size: 14px;
     line-height: 150%;
-    color: #4c4f50;
+    color: ${props => props.theme.staticColour};
     display: inline-block;
   }
 `;
 
 export const FormContainer = styled.div<{ collapsed?: boolean }>`
   padding-left: 36px;
-  border-bottom: 1px solid #e8ebee;
+  /* border-bottom: 1px solid #e8ebee; */
   padding-bottom: 24px;
   max-width: ${({ collapsed }) => (collapsed ? 'calc(100% - 170px)' : '100%')};
   & label {
@@ -51,7 +51,7 @@ export const FormContainer = styled.div<{ collapsed?: boolean }>`
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
-    color: #4c4f50;
+    color: ${props => props.theme.staticColour};
     margin-bottom: 5px;
   }
 `;

@@ -19,7 +19,7 @@ const ExpandedPanel = styled.div`
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
-    color: #4c4f50;
+    color: ${props => props.theme.staticColour};
     margin-top: 0;
   }
 `;
@@ -60,7 +60,7 @@ export const ExpandedFieldGroup: React.FC<IFieldGroupProps> = ({
       {tabs.map((tab, index) => (
         <BrandRow key={index}>
           <BrandName>
-            <Button styleType='imageButton' size='medium'>
+            <Button styleType="imageButton" size="medium">
               <img alt={`${tab.title} icon`} src={tab.iconUrn} />
               <p>{tab.title}</p>
             </Button>
