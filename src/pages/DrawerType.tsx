@@ -12,10 +12,11 @@ const getDrawerChildComponent = (pageType: string) => {
 
   switch (pageType) {
     case 'EditAgentForm':
-    default:
       return (
         <EditAgentForm />
       );
+    default:
+      return null;
   }
 };
 
