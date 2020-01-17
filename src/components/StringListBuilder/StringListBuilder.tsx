@@ -17,8 +17,8 @@ const StringListContainer = styled.div`
     line-height: 150%;
     display: flex;
     align-items: center;
-    color: #4c4f50;
-    border-bottom: 1px solid #eff0f0;
+    color: ${props => props.theme.staticColour};
+    border-bottom: ${props => `1px solid ${props.theme.greyLighter}`};
     padding-bottom: 8px;
     margin-bottom: 8px;
   }
@@ -33,7 +33,7 @@ const StringListContainer = styled.div`
     font-size: 13px;
     display: flex;
     justify-content: flex-end;
-    color: #a9b0b0;
+    color: ${props => props.theme.static2Colour};
   }
   & .string-row {
     position: relative;
@@ -47,16 +47,16 @@ const StringListContainer = styled.div`
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: #4c4f50;
+    color: ${props => props.theme.staticColour};
     padding: 0 8px;
   }
   & .string-row:hover {
-    background: #e8ebee99;
+    background: ${props => `${props.theme.textHover}99`};
   }
 
   & .string-row.capped:hover {
     background: ${props => props.theme.white};
-    border: 1px solid #e1eefb;
+    border: ${props => `1px solid ${props.theme.pageHeader}`};
     box-sizing: border-box;
     box-shadow: 0px 3px 8px ${props => props.theme.brandPrimary + '66'};
     border-radius: 6px;
@@ -73,7 +73,7 @@ const StringListContainer = styled.div`
     position: absolute;
     padding: 4px;
     background: ${props => props.theme.white};
-    border: 1px solid #d3d6d7;
+    border: ${props => `1px solid ${props.theme.greyLight}`};
     border-radius: 3px;
     right: 8px;
     top: 4px;
