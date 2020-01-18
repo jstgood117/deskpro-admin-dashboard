@@ -6,7 +6,7 @@ import { SettingsFormFactory } from '../../SettingsForm/SettingsFormFactory';
 import { IFieldGroupProps, FormContainer } from '../TabbedFieldGroup';
 
 const TabsContainer = styled.div`
-  border-bottom: 1px solid #e8ebee;
+  /* border-bottom: 1px solid #e8ebee; */
   margin-bottom: 24px;
   & .selected-image-btn {
     border-bottom-left-radius: 0;

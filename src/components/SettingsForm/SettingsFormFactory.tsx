@@ -1,15 +1,13 @@
 import React from 'react';
 
-import {
-  MainElement,
-} from './Components';
+import { GenericFormComponent } from './GenericFormComponent';
 
 export const SettingsFormFactory = (uiSchema: any, formikProps: any) => {
-
-  return uiSchema &&
+  return (
+    uiSchema &&
     uiSchema.elements &&
-    uiSchema.elements.map(
-      (props: any, i: number) =>
-        <MainElement key={i} {...props} formikProps={formikProps} />
-    );
+    uiSchema.elements.map((props: any, i: number) => (
+      <GenericFormComponent key={i} {...props} formikProps={formikProps} />
+    ))
+  );
 };
