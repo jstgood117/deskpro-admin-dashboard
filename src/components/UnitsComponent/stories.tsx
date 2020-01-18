@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { IOptions } from '../SelectComponents/interfaces';
 
-import UnitsComponent from './UnitsComponent';
+import UnitsComponent, { UnitsValuesType } from './UnitsComponent';
 
 const options: IOptions[] = [
   { value: 'minutes', label: 'minutes' },
@@ -12,16 +12,16 @@ const options: IOptions[] = [
 
 storiesOf('UnitsComponent', module)
   .add('default', () => {
-    const handleChange = (value: object) => {
+    const handleChange = (value: UnitsValuesType) => {
       console.log(value);
     };
 
     return (
       <UnitsComponent
-        inputValue={10}
+        inputValue='10'
         options={options}
         option={options[1]}
-        onChange={(value: object) => {
+        onChange={(value: UnitsValuesType) => {
           handleChange(value);
         }}
       />

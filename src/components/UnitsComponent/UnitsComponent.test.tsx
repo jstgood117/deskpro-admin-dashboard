@@ -1,14 +1,14 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import UnitsComponent, { IProps } from './UnitsComponent';
+import UnitsComponent, { IProps, UnitsValuesType } from './UnitsComponent';
 
 describe('UnitsComponent', () => {
   const props: IProps = {
-    inputValue: 10,
+    inputValue: '10',
     options: [{ value: 'minutes', label: 'minutes' }],
     option: { value: 'minutes', label: 'minutes' },
-    onChange: (val: object) => {
+    onChange: (val: UnitsValuesType) => {
       return true;
     }
   };

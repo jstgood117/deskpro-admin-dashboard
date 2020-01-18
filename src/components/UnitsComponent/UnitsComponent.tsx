@@ -17,11 +17,16 @@ const UnitsContainer = styled.div`
 `;
 
 export interface IProps {
-  inputValue?: number;
+  inputValue?: string;
   options: IOptions[];
   option?: IOptions;
-  onChange: (value: object) => void;
+  onChange: (value: UnitsValuesType) => void;
 }
+
+export type UnitsValuesType = {
+  inputValue: string;
+  selectValue: IOptions;
+};
 
 const UnitsComponent: React.FC<IProps> = ({
   inputValue,
