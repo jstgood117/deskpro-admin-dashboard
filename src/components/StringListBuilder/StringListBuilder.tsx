@@ -5,6 +5,7 @@ import Button from '../Button';
 import Icon from '../Icon';
 import { StringRow } from './components/StringRow';
 import { FieldArray } from 'formik';
+import Input from '../Input';
 // import Tooltip from '../Tooltip';
 
 const StringListContainer = styled.div`
@@ -105,6 +106,21 @@ const StringListBuilder: React.FC<IProps> = ({
   title,
   values
 }) => {
+  // Flag that mentioned that new item was added but not saved yet
+  const [inAdd, setInAdd] = React.useState(false);
+  const [newItemValue, setNewItemValue] = React.useState('');
+
+  const onAddClick = React.useCallback(() => {
+    setInAdd(true);
+    setNewItemValue('');
+  }, []);
+  const onChangeNewItem = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setNewItemValue(e.target.value);
+    },
+    []
+  );
+
   return (
     <StringListContainer>
       <div className='title-container'>
@@ -127,16 +143,26 @@ const StringListBuilder: React.FC<IProps> = ({
                 value={value}
               />
             ))}
+            {inAdd && (
+              <Input
+                autoFocus={true}
+                value={newItemValue}
+                onChange={onChangeNewItem}
+                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                  if (e.key === 'Enter') {
+                    arrayHelpers.push(newItemValue);
+                    setInAdd(false);
+                    setNewItemValue('');
+                  }
+                }}
+                inputType='secondary'
+              />
+            )}
             <Button
-              disabled={!!max && max === values.length}
+              disabled={inAdd || (!!max && max === values.length)}
               className='add-button'
-              onClick={() => {
-                // Temporary solution. Keep plain string
-                const value = prompt('Enter new value');
-                if (value) {
-                  arrayHelpers.push(value);
-                }
-              }}
+              onClick={onAddClick}
+              buttonType='button'
               styleType='secondary'
             >
               <Icon name='plus' />

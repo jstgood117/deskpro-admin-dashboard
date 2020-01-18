@@ -11,16 +11,25 @@ describe('StringListBuilder', () => {
     if (bShallow) {
       return shallow(
         <Formik {...props.formikProps}>
-          {() => <StringListBuilder {...props.builderProps} />}
+          {formikProps => (
+            <StringListBuilder
+              {...props.builderProps}
+              values={formikProps.values[props.builderProps.id]}
+            />
+          )}
         </Formik>
       );
     }
 
     return mount(
-      <Formik
-        {...props.formikProps}
-        render={() => <StringListBuilder {...props.builderProps} />}
-      />
+      <Formik {...props.formikProps}>
+        {formikProps => (
+          <StringListBuilder
+            {...props.builderProps}
+            values={formikProps.values[props.builderProps.id]}
+          />
+        )}
+      </Formik>
     );
   };
 
@@ -35,8 +44,7 @@ describe('StringListBuilder', () => {
       builderProps: {
         addTitle: 'test',
         id: 'test',
-        name: 'test',
-        values: initialValues.test
+        name: 'test'
       }
     });
     expect(root.find('.string-row').length).toEqual(2);
