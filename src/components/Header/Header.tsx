@@ -35,7 +35,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   background: ${props => props.theme.white};
 `;
 
-const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
+export const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@ const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
     (props.active && props.theme.hoverColour) || props.theme.white};
 `;
 
-const NewButton = styled(dpstyle.button)`
+export const NewButton = styled(dpstyle.button)`
   background-color: ${props => props.theme.activeColour};
   height: 34px;
   width: 78px;
