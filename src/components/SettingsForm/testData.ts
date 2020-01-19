@@ -31,7 +31,21 @@ export const uiSchema = {
                   field: {
                     type: 'input',
                     id: 'agent_settings_security_idle_timeout'
-                  }
+                  },
+                  info: [
+                    {
+                      type: 'button',
+                      title: 'Idle timeout',
+                      url: 'http://www.test.com',
+                      icon: 'menu'
+                    },
+                    {
+                      type: 'button',
+                      title: 'Stay logged in when browser closed',
+                      url: 'http://www.test.com',
+                      icon: 'view'
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -49,7 +63,15 @@ export const uiSchema = {
                   field: {
                     type: 'input',
                     id: 'agent_settings_security_whitelist'
-                  }
+                  },
+                  info: [
+                    {
+                      type: 'button',
+                      title: 'IP Whitelisting',
+                      url: 'http://www.test.com',
+                      icon: 'chat'
+                    }
+                  ]
                 }
               ]
             }
