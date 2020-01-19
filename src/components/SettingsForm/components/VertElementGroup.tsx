@@ -14,23 +14,23 @@ const Group = styled.div`
 `;
 
 const GroupDetails: React.FC = (props: any) => (
-  <div className="group-details">
+  <div className='group-details'>
     {props.title && <label>{props.title}</label>}
     {props.description && <p>{props.description}</p>}
   </div>
 );
 
 const FieldContainer: React.FC = (props: any) => (
-  <div className="field-container">
-    <div className="element-details">
+  <div className='field-container'>
+    <div className='element-details'>
       {props.title && <label>{props.title}</label>}
       {props.description && <p>{props.description}</p>}
     </div>
-    <div className="element-context">
+    <div className='element-context'>
       <FieldElement {...props.field} formikProps={props.formikProps} />
     </div>
     {Array.isArray(props.info) && (
-      <div className="element-info">
+      <div className='element-info'>
         {props.info.map((info: any, index: number) => (
           <Link href={info.url} icon={info.icon} key={index}>
             {info.title}
