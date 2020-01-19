@@ -88,6 +88,7 @@ export interface IMenuItemProps {
   name?: string;
   subItems?: IMenuItemProps[];
   icon?: string;
+  sortable?: boolean;
 }
 
 export interface ITableColor {

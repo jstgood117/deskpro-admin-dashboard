@@ -60,7 +60,8 @@ export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
 
       return {
         key: index,
-        name: column.title
+        name: column.title,
+        sortable: true
       };
     });
 
@@ -68,7 +69,8 @@ export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
     checkedState[String(columnsViewList.length)] = true;
     columnsViewList.push({
       key: columnsViewList.length,
-      name: 'admin_common.col.id'
+      name: 'admin_common.col.id',
+      sortable: false
     });
   }
 
