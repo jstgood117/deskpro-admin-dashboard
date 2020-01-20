@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useQuery, withApollo } from 'react-apollo';
 import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
-
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
@@ -35,6 +35,8 @@ export interface IProps {
   client: ApolloClient<any>;
 }
 
+type CombinedProps = IProps & RouteComponentProps<any>;
+
 const TableActionStyled = styled(dpstyle.div)`
   margin-top:-30px;
   margin-bottom:24px;
@@ -44,9 +46,11 @@ const BodyMargin = styled(dpstyle.div)`
   margin:0 34px 34px 34px;
 `;
 
-const StandardTablePage: FC<IProps> = ({
+const StandardTablePage: FC<CombinedProps> = ({
   path,
-  client
+  client,
+  history,
+  location
 }) => {
 
   const [gqlError, setGqlError] = useState<boolean>(false);
@@ -75,7 +79,10 @@ const StandardTablePage: FC<IProps> = ({
 
   const getTableData = useCallback(async (_response: ResponseData) => {
 
-    const dataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+    const unchangedDataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+
+    // FIX: removes ticket_department from gql
+    const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
 
     try {
       const dataResponse = await client.query({
@@ -178,6 +185,10 @@ const StandardTablePage: FC<IProps> = ({
     return getColumnUniqueValues(tableData, columnName);
   };
 
+  const onNewClick = () => {
+    history.push(`${location.pathname}/new`);
+  };
+
   const contextValue:StandardTableContextValues = {
     path,
     filters,
@@ -202,7 +213,7 @@ const StandardTablePage: FC<IProps> = ({
               showViewModeSwitcher={true}
               showNewButton={true}
               showHelpButton={true}
-              onNewClick={() => null}
+              onNewClick={onNewClick}
               onChangeView={val => setView(val)}
             />
           )}
@@ -249,4 +260,5 @@ const StandardTablePage: FC<IProps> = ({
   );
 };
 
-export default withApollo<IProps>(StandardTablePage);
+const WithRouter = withRouter(StandardTablePage);
+export default withApollo<IProps>(WithRouter);

@@ -136,6 +136,13 @@ export const TableStyled = styled(dpstyle.div)`
               vertical-align: middle;
               margin-right: 15px;
             }
+            & * {
+              max-width: 400px;
+              flex-wrap: nowrap;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
         }
       }
