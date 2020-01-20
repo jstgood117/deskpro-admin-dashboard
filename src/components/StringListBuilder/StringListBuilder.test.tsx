@@ -47,11 +47,30 @@ describe('StringListBuilder', () => {
         name: 'test'
       }
     });
-    expect(root.find('.string-row').length).toEqual(2);
+    expect(root.find('.string-row span').length).toEqual(2);
     root
-      .find('.string-row')
+      .find('.string-row span')
       .first()
       .simulate('click');
     expect(mockValidate).toBeCalled();
+  });
+
+  it('should generate input on row click', () => {
+    const initialValues = { test: ['1st string'] };
+    const mockValidate = jest.fn();
+    const root = wrapper(false, {
+      formikProps: {
+        initialValues,
+        validate: mockValidate
+      },
+      builderProps: {
+        addTitle: 'test',
+        id: 'test',
+        name: 'test'
+      }
+    });
+    root.find('.string-row').simulate('click');
+    expect(root.find('input').length).toEqual(1);
+    expect((root.find('input').instance() as any).value).toEqual('1st string');
   });
 });
