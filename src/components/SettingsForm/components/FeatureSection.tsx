@@ -37,6 +37,10 @@ const FeatureSectionStyled = styled.div`
     left: 300px;
   }
 
+  & .field-container {
+    position: relative;
+  }
+
   & .element-details {
     margin-top: 16px;
   }
@@ -52,6 +56,27 @@ const FeatureSectionStyled = styled.div`
     mix-blend-mode: normal;
     white-space: pre-wrap;
   }
+
+  & .element-info {
+    position: absolute;
+    top: 0;
+    left: 720px;
+  }
+
+  & .element-info a {
+    white-space: nowrap;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  & .element-info a > div {
+    height: 34px;
+  }
+
+  & .element-info a svg path {
+    fill: ${props => props.theme.brandPrimary};
+  }
+
   & .form-toggle {
     position: absolute;
     transform: translateY(2px);
