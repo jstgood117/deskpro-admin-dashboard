@@ -196,7 +196,7 @@ const Menu: FC<IMenuProps> = ({
             >
               <FormattedMessage id={idColumn.name} />
             </TextLabel>
-            <span style={{ position: 'absolute', right: 15, display: 'flex' }}>
+            <span className='orderable-menu-toggle'>
               <Toggle
                 checked={checked[idColumn.key]}
                 value='checked'
