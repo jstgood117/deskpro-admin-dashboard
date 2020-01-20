@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Button from '../Button';
 import Icon from '../Icon';
 import { StringRow } from './components/StringRow';
-import { FieldArray } from 'formik';
+import { FieldArray, ArrayHelpers } from 'formik';
 import Input from '../Input';
 // import Tooltip from '../Tooltip';
 
@@ -97,6 +97,26 @@ interface IProps {
   values: string[];
 }
 
+const handleAddItem = (
+  arrayHelpers: ArrayHelpers,
+  newValue: string,
+  setEditIndex: (index: number) => void,
+  setValue: (value: string) => void,
+  setInAdd: (value: boolean) => void,
+  index?: number
+) => {
+  if (newValue) {
+    if (index === undefined) {
+      arrayHelpers.push(newValue);
+    } else {
+      arrayHelpers.replace(index, newValue);
+    }
+  }
+  setEditIndex(-1);
+  setValue('');
+  setInAdd(false);
+};
+
 const StringListBuilder: React.FC<IProps> = ({
   addTitle,
   id,
@@ -108,6 +128,7 @@ const StringListBuilder: React.FC<IProps> = ({
 }) => {
   // Flag that mentioned that new item was added but not saved yet
   const [inAdd, setInAdd] = React.useState(false);
+  const [editIndex, setEditIndex] = React.useState(-1);
   const [newItemValue, setNewItemValue] = React.useState('');
 
   const onAddClick = React.useCallback(() => {
@@ -134,32 +155,77 @@ const StringListBuilder: React.FC<IProps> = ({
         name={name || id || ''}
         render={arrayHelpers => (
           <div>
-            {values.map((value, index) => (
-              <StringRow
-                className={max ? 'capped' : ''}
-                index={index}
-                key={index}
-                onRemove={() => arrayHelpers.remove(index)}
-                value={value}
-              />
-            ))}
+            {values.map((value, index) =>
+              index === editIndex ? (
+                <Input
+                  autoFocus={true}
+                  value={newItemValue || value}
+                  onChange={onChangeNewItem}
+                  onBlur={() =>
+                    handleAddItem(
+                      arrayHelpers,
+                      newItemValue.trim(),
+                      setEditIndex,
+                      setNewItemValue,
+                      setInAdd,
+                      editIndex
+                    )
+                  }
+                  onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                    if (e.key === 'Enter') {
+                      handleAddItem(
+                        arrayHelpers,
+                        newItemValue.trim(),
+                        setEditIndex,
+                        setNewItemValue,
+                        setInAdd,
+                        editIndex
+                      );
+                    }
+                  }}
+                  inputType='secondary'
+                />
+              ) : (
+                <StringRow
+                  className={max ? 'capped' : ''}
+                  index={index}
+                  key={index}
+                  onEdit={() => setEditIndex(index)}
+                  onRemove={() => arrayHelpers.remove(index)}
+                  value={value}
+                />
+              )
+            )}
             {inAdd && (
               <Input
                 autoFocus={true}
                 value={newItemValue}
+                onBlur={() => {
+                  handleAddItem(
+                    arrayHelpers,
+                    newItemValue.trim(),
+                    setEditIndex,
+                    setNewItemValue,
+                    setInAdd
+                  );
+                }}
                 onChange={onChangeNewItem}
                 onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
                   if (e.key === 'Enter') {
-                    arrayHelpers.push(newItemValue);
-                    setInAdd(false);
-                    setNewItemValue('');
+                    handleAddItem(
+                      arrayHelpers,
+                      newItemValue.trim(),
+                      setEditIndex,
+                      setNewItemValue,
+                      setInAdd
+                    );
                   }
                 }}
                 inputType='secondary'
               />
             )}
             <Button
-              disabled={inAdd || (!!max && max === values.length)}
+              disabled={!!inAdd || (!!max && max === values.length)}
               className='add-button'
               onClick={onAddClick}
               buttonType='button'

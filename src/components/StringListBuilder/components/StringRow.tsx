@@ -4,6 +4,7 @@ import Icon from '../../Icon';
 interface IProps {
   className?: string;
   index: number;
+  onEdit: (index: number) => void;
   onRemove: (index: number) => void;
   value: string;
 }
@@ -11,15 +12,22 @@ interface IProps {
 export const StringRow: React.FC<IProps> = ({
   className = '',
   index,
+  onEdit,
   onRemove,
   value
 }) => {
-  const onClick = React.useCallback(() => onRemove(index), [index, onRemove]);
+  const onEditClick = React.useCallback(() => onEdit(index), [index, onEdit]);
+  const onRemoveClick = React.useCallback(() => onRemove(index), [
+    index,
+    onRemove
+  ]);
 
   return (
-    <div className={className + ' string-row'} onClick={onClick}>
+    <div className={className + ' string-row'} onClick={onEditClick}>
       {value}
-      <Icon name='trash' />
+      <span onClick={onRemoveClick}>
+        <Icon name='trash' />
+      </span>
     </div>
   );
 };
