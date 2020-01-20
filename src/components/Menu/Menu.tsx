@@ -39,7 +39,7 @@ const singleSubMenuItem: FC<IMenuProps & WrappedComponentProps> = props => {
           alignItems: 'center',
           paddingRight: 15
         }}
-        bold={props.name === 'group' && selectedItem}
+        bold={props.name === 'group' && selectedItem ? 1 : 0}
       >
         {props.children}
       </TextLabel>
