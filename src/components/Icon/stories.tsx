@@ -70,4 +70,6 @@ storiesOf('Icon', module)
   .add('down', () => <Icon name='down' />)
   .add('ic-dollar-sign', () => <Icon name='ic-dollar-sign' />)
   .add('ic-help-center', () => <Icon name='ic-help-center' />)
-  .add('ic-arrow-right', () => <Icon name='ic-arrow-right' />);
+  .add('ic-arrow-right', () => <Icon name='ic-arrow-right' />)
+  .add('ic-grouping-up', () => <Icon name='ic-grouping-up' />)
+  .add('ic-grouping-down', () => <Icon name='ic-grouping-down' />);

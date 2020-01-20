@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Profiles from './Profiles';
+import Profiles from './index';
 
 import { mount, shallow } from '../../test/enzyme';
 import { WrapperType } from '../../test/types';

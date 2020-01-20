@@ -44,3 +44,19 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
     name: 'Set Language'
   }
 ];
+export const testGroupItems: IMenuItemProps[] = [
+  { name: 'Access' },
+  { name: 'Team' },
+  { name: 'Permission Group' },
+  { name: 'Assigned tickets' },
+  {},
+  {
+    name: 'Sort group',
+    subItems: [
+      { name: 'Name' },
+      { name: 'Date created' },
+      { name: 'Number of agents' },
+      { name: 'Number of tickets' }
+    ],
+  }
+];

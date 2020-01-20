@@ -35,7 +35,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   background: ${props => props.theme.white};
 `;
 
-const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
+export const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -46,17 +46,19 @@ const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
     fill: ${props =>
       props.active ? props.theme.activeColour : props.theme.static2Colour};
   }
-  background-color: ${props => props.active && props.theme.hoverColour};
+  background-color: ${props =>
+    (props.active && props.theme.hoverColour) || props.theme.white};
 `;
 
-const NewButton = styled(dpstyle.button)`
+export const NewButton = styled(dpstyle.button)`
   background-color: ${props => props.theme.activeColour};
   height: 34px;
+  width: 78px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${props => props.theme.white};
-  margin-left: 20px;
+  margin-left: 16px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   & span {
     margin-left: 8px;
@@ -74,11 +76,11 @@ const HelpButton = styled.button`
   width: 45px;
   height: 45px;
   position: absolute;
-  right: 27px;
   right: ${props => props.theme.pagePadding};
   top: 31px;
-  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: ${props => `0 5px 5px ${props.theme.black}2`};
   outline: none;
+  border: 0;
   cursor: pointer;
 `;
 
