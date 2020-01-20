@@ -49,6 +49,15 @@ const VertElementGroup: React.FC = (props: any) => {
   return (
     <Group>
       <GroupDetails {...props} />
+      {Array.isArray(props.info) && (
+        <div className='group-info'>
+          {props.info.map((info: any, index: number) => (
+            <Link href={info.url} icon={info.icon} key={index}>
+              {info.title}
+            </Link>
+          ))}
+        </div>
+      )}
       {enabled &&
         props.elements.map((element: any, i: number) =>
           element.type === 'field' ? (
