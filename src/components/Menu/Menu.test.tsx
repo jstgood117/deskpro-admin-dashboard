@@ -28,7 +28,8 @@ describe('Menu', () => {
     props = {
       label: 'admin_common.table.action',
       iconName: 'menu',
-      menuItems: testDropdownItemsWithIcon
+      menuItems: testDropdownItemsWithIcon,
+      name: 'groupSub'
     };
     mountedMenu = undefined;
   });
