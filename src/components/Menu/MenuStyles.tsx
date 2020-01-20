@@ -98,7 +98,7 @@ export const FixedItemWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  
+
   .orderable-menu-toggle {
     position: absolute;
     display: flex;
