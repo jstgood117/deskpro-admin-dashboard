@@ -37,10 +37,7 @@ const elementsSelector: {
 };
 
 // Generates specific element by `props.type` field
-const FieldElement = (props: any) => {
-  return elementsSelector[props.type]
-    ? elementsSelector[props.type](props)
-    : null;
-};
+const FieldElement = (props: any) =>
+  elementsSelector[props.type] && elementsSelector[props.type](props);
 
 export default FieldElement;
