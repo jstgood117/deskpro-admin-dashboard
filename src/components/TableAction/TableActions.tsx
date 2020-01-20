@@ -19,10 +19,10 @@ import Icon from '../Icon';
 import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
 import OrderableMenu from '../Menu/OrderableMenu';
+import Menu from '../Menu';
 import { generateViewList, generatSortMenuItems } from './functions';
 import { SortType } from '../Table/types';
-
-const GroupItems = [{ link: 'Group1' }, { link: 'Group2' }, { link: 'Group3' }];
+import { testGroupItems } from '../../resources/constants/constants';
 
 const StyledTableAction = styled(dpstyle.div)`
   z-index: 1;
@@ -133,18 +133,16 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const { columnsViewList, checkedState } = generateViewList(tableDef);
 
-  const [Group, setGroupValue] = useState('');
-  const [Sort, setSortValue] = useState<
-    { link: string; label: string; desc?: boolean } | string
-  >('');
+  const [Sort, setSortValue] = useState<{ link: string; label: string; desc?: boolean } | string>('');
   const [searchValue, setSearchValue] = useState('');
   const [openedSort, clickButtonSort] = useState(false);
-  const [openedGroup, clickButtonGroup] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
   const [applied, apply] = useState(false);
   const [internalFilters, setFilters] = useState(initialFilter);
   const [sortList, setList] = useState(columnsViewList);
   const [value, setValue] = useState();
+  const [groupValue, setGroupValue] = useState();
+
   const [sortMenuItems, setSortMenuItems] = useState(
     generatSortMenuItems(tableDef, intl)
   );
@@ -396,21 +394,16 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
           )}
           {props.groupMenu && (
             <FlexStyled style={{ paddingRight: 10 }}>
-              <Button
-                styleType='secondary'
-                onClick={() => {
-                  clickButtonGroup(!openedGroup);
-                }}
+              <Menu
+                name='group'
+                menuItems={testGroupItems}
+                iconName='group'
+                value={groupValue}
                 size='medium'
-                opened={openedGroup}
-                items={GroupItems}
-                dropdownValue={Group}
-                onSelect={(val: any) => setGroupValue(val)}
-              >
-                <Icon name='group' />
-                {Group ? Group.link : 'Group'}
-                <Icon name='downVector' />
-              </Button>
+                subMenuDirection='left'
+                label='admin_agents_groups.group'
+                onSelect={val => setGroupValue(val)}
+              />
             </FlexStyled>
           )}
           {props.sortMenu && (

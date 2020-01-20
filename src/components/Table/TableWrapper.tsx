@@ -44,7 +44,7 @@ const transformColumnData = (
   const newCols: ColumnMeta[] = [];
   columnOrder.forEach((_order: ColumnOrder) => {
     const column = columns.find(_col => _order.column === _col.title);
-    if (_order.show) {
+    if (column && _order.show) {
       newCols.push({
         columnProps: column.field,
         id: column.title,

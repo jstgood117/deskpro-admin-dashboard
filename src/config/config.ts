@@ -3,7 +3,7 @@ export type ConfigType = {
 };
 
 const generateConfig = (): ConfigType => ({
-  apiUrl:process.env.REACT_APP_API_URL || undefined
+  apiUrl: (window as any).DP_GRAPHQL_ENDPOINT || process.env.REACT_APP_API_URL || undefined
 });
 
 export default generateConfig;

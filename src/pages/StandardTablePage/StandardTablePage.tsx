@@ -79,7 +79,10 @@ const StandardTablePage: FC<CombinedProps> = ({
 
   const getTableData = useCallback(async (_response: ResponseData) => {
 
-    const dataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+    const unchangedDataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+
+    // FIX: removes ticket_department from gql
+    const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
 
     try {
       const dataResponse = await client.query({

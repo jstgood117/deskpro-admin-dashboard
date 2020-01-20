@@ -19,7 +19,8 @@ const ExpandedPanel = styled.div`
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
-    color: #4c4f50;
+    color: ${props => props.theme.staticColour};
+    margin-top: 0;
   }
 `;
 

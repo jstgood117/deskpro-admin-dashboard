@@ -1,39 +1,50 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import Menu from './Menu';
+import Menu, { MenuSub } from './Menu';
 import { testDropdownItemsWithIcon } from '../../resources/constants/constants';
 import { IMenuProps } from '../../resources/interfaces';
+import { WrapperType } from '../../test/types';
+
+const setState = jest.fn();
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: (init: any) => [init, setState]
+}));
 
 describe('Menu', () => {
-  let props: IMenuProps = {};
-  let mountedMenu: any;
-
-  const MenuComponent: React.FC<IMenuProps> = _props => {
-    const [value, setValue] = useState();
-
-    return <Menu {..._props} value={value} onSelect={val => setValue(val)} />;
+  const wrapper = (bShallow: boolean, props: IMenuProps): WrapperType => {
+    return bShallow ? shallow(<Menu {...props} />) : mount(<Menu {...props} />);
+  };
+  const wrapperSub = (bShallow: boolean, props: IMenuProps): WrapperType => {
+    return bShallow ? shallow(<MenuSub {...props} />) : mount(<MenuSub {...props} />);
   };
 
-  const wrapper = (bShallow: boolean) => {
-    if (!mountedMenu) {
-      mountedMenu = bShallow
-        ? shallow(<MenuComponent {...props} />)
-        : mount(<MenuComponent {...props} />);
-    }
-    return mountedMenu;
-  };
-
-  beforeEach(() => {
-    props = {
+  test('always renders a <div> in Menu', () => {
+    const props: IMenuProps = {
       label: 'admin_common.table.action',
       iconName: 'menu',
-      menuItems: testDropdownItemsWithIcon
+      menuItems: testDropdownItemsWithIcon,
+      name: 'group'
     };
-    mountedMenu = undefined;
-  });
-  it('always renders a <div>', () => {
-    const elts = wrapper(false).find('div');
+
+    const root = wrapper(false, props);
+    const elts = root.find('div');
     expect(elts.length).toBeGreaterThan(0);
+    root.unmount();
+  });
+  test('always renders a <div> in MenuSub', () => {
+    const props: IMenuProps = {
+      label: 'admin_common.table.action',
+      iconName: 'menu',
+      menuItems: testDropdownItemsWithIcon,
+      name: 'groupSub'
+    };
+
+    const root = wrapperSub(false, props);
+    const elts = root.find('div');
+    expect(elts.length).toBeGreaterThan(0);
+    root.unmount();
   });
 });
