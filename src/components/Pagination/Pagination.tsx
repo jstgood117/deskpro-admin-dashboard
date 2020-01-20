@@ -149,6 +149,7 @@ const Pagination: React.FC<IProps> = ({
       <Label>Rows per page:</Label>
       <PaginationSelectButton minWidth={64}>
         <Select
+          menuPlacement='auto'
           isSearchable={false}
           closeMenuOnSelect={true}
           isMulti={false}
@@ -174,6 +175,7 @@ const Pagination: React.FC<IProps> = ({
         {pages.length > 0 && currentPage && (
           <Select
             isSearchable={false}
+            menuPlacement='auto'
             closeMenuOnSelect={true}
             isMulti={false}
             options={pages}
