@@ -14,12 +14,13 @@ interface IProps {
   dataType: 'sync' | 'async';
   fetchData: () => void;
   totalPageCount: number;
-  data:KeyValue[];
+  data: KeyValue[];
   dataQuery: string;
   loading: boolean;
   tableDef: ITableSetup;
   columnOrder: ColumnOrder[];
   sortBy?: SortType[];
+  onSortChange?: (sortBy: SortType[]) => void;
 }
 
 const generateSortType = (sortType: string) => {
@@ -68,6 +69,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   tableDef,
   dataType,
   columnOrder,
+  onSortChange,
   sortBy,
   view
 }) => {
@@ -86,28 +88,26 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           loading={loading}
           pageCount={totalPageCount}
           tableType={dataType}
+          onSortChange={onSortChange}
           sortBy={sortBy}
         />
-        )
-      }
-      {
-        view === 'card' && (
-          <Card
-            path={path}
-            data={data}
-            columns={transformColumnData(
-              [...tableDef.columns],
-              columnOrder,
-              intl
-            )}
-            fetchData={dataType === 'async' ? fetchData : undefined}
-            loading={loading}
-            pageCount={totalPageCount}
-            tableType={dataType}
-            sortBy={sortBy}
-          />
-        )
-      }
+      )}
+      {view === 'card' && (
+        <Card
+          path={path}
+          data={data}
+          columns={transformColumnData(
+            [...tableDef.columns],
+            columnOrder,
+            intl
+          )}
+          fetchData={dataType === 'async' ? fetchData : undefined}
+          loading={loading}
+          pageCount={totalPageCount}
+          tableType={dataType}
+          sortBy={sortBy}
+        />
+      )}
     </Fragment>
   );
 };

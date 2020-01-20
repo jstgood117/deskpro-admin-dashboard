@@ -20,6 +20,20 @@ import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 
+// Returns `true` on equal sorts
+const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
+  let result = sort1.length === sort2.length;
+
+  if (result) {
+    sort1.forEach((item1, index) => {
+      const item2 = sort2[index];
+      result = result && item1.id === item2.id && !!item1.desc === !!item2.desc;
+      return result;
+    });
+  }
+  return result;
+};
+
 export type Props = {
   path: string;
   data: KeyValue[];
@@ -29,6 +43,7 @@ export type Props = {
   pageCount?: number;
   tableType: TableType;
   sortBy: SortType[];
+  onSortChange?: (sortBy: SortType[]) => void;
 };
 
 const Table: FC<Props> = ({
@@ -37,6 +52,7 @@ const Table: FC<Props> = ({
   columns,
   fetchData,
   loading,
+  onSortChange,
   pageCount: controlledPageCount,
   tableType,
   sortBy
@@ -57,7 +73,7 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
-    state: { pageIndex, pageSize }
+    state: { pageIndex, pageSize, sortBy: sortByInfo }
   } = useTable(
     tableParams,
     useExpanded,
@@ -66,18 +82,27 @@ const Table: FC<Props> = ({
     useRowSelect
   ) as any;
 
+  // Process internal sort change
+  useEffect(() => {
+    if (!compareSorts(sortBy, sortByInfo)) {
+      onSortChange(sortByInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortByInfo]);
+
+  // Handle incoming sort rules
+  useEffect(() => {
+    if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
+      toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy]);
+
   useEffect(() => {
     if (fetchData) {
       fetchData();
     }
   }, [fetchData, pageIndex, pageSize]);
-
-  useEffect(() => {
-    if (sortBy.length) {
-      toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy]);
 
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);

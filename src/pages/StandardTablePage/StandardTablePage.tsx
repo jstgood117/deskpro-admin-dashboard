@@ -224,6 +224,7 @@ const StandardTablePage: FC<CombinedProps> = ({
                 viewMenu={true}
                 onOrderChange={onOrderChange}
                 onSortChange={onSortChange}
+                sortBy={sortItems}
                 getUniqueValues={getUniqueValues}
               />
             </TableActionStyled>
@@ -248,6 +249,7 @@ const StandardTablePage: FC<CombinedProps> = ({
                 dataType={dataType || 'sync'}
                 columnOrder={columnOrder}
                 sortBy={sortItems}
+                onSortChange={onSortChange}
               />
             )}
           </BodyMargin>

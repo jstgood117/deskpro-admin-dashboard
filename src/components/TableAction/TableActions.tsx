@@ -69,6 +69,7 @@ export interface IProps {
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
+  sortBy?: SortType[];
   onOrderChange: (columnOrder: ColumnOrder[]) => void;
   onSortChange: (sortItems: SortType[]) => void;
   getUniqueValues?: (columnName: string) => string[];
@@ -117,6 +118,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   intl,
   onOrderChange,
   onSortChange,
+  sortBy,
   getUniqueValues,
   ...props
 }) => {
@@ -132,7 +134,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   const { columnsViewList, checkedState } = generateViewList(tableDef);
 
   const [Group, setGroupValue] = useState('');
-  const [Sort, setSortValue] = useState('');
+  const [Sort, setSortValue] = useState<
+    { link: string; label: string } | string
+  >('');
   const [searchValue, setSearchValue] = useState('');
   const [openedSort, clickButtonSort] = useState(false);
   const [openedGroup, clickButtonGroup] = useState(false);
@@ -185,6 +189,14 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     setSortMenuItems(newSortMenuItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnOrder, onOrderChange]);
+
+  useEffect(() => {
+    let link = '';
+    if (sortBy.length) {
+      link = intl.formatMessage({ id: sortBy[0].id });
+    }
+    setSortValue(link ? { link, label: link } : link);
+  }, [intl, sortBy]);
 
   const getFilterTitle = (path: string) => {
     const match = filterDef.find(
@@ -254,6 +266,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     const id = val.link;
 
     onSortChange([{ id, desc: false }]);
+
     setSortValue({
       ...val,
       link: intl.formatMessage({ id })
