@@ -72,7 +72,8 @@ export const StyledIcon = styled.span`
 `;
 export const StyledMenuItem = styled(props => <MenuItem {...props} />)`
   cursor: pointer;
-  padding: 6.2px 30px 7.09px 15px;
+  padding: 6.2px 30px 7.09px
+    ${props => (props.name === 'group' && !props.selected ? 10 : 15)}px;
   user-select: none;
   position: relative;
   display: flex;
@@ -140,5 +141,27 @@ export const SettingIcon = styled.div`
   .ic-settings {
     display: none;
     margin: auto;
+  }
+`;
+export const GrouppingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 6px;
+  span {
+    padding-right: 6px;
+    cursor: default;
+    display: flex;
+    &:hover {
+      svg {
+        path {
+          fill: ${props => props.theme.activeColour};
+        }
+        rect {
+          stroke: ${props => props.theme.activeColour};
+          fill: ${props => props.theme.hoverColour};
+        }
+      }
+    }
   }
 `;

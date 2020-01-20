@@ -70,6 +70,7 @@ export interface IMenuProps {
   iconName?: string;
   containerStyle?: CSSProperties;
   label?: string;
+  name?: string;
   menuItems?: IMenuItemProps[];
   initialList?: IMenuItemProps[];
   value?: IMenuItemProps;
@@ -81,6 +82,7 @@ export interface IMenuProps {
   item?: IMenuItemProps;
   selected? : boolean;
   size?: SizeTypes;
+  subMenuDirection?: string;
 }
 
 export interface IMenuItemProps {

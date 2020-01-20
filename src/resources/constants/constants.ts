@@ -2,7 +2,7 @@ import { testTranslations } from './translations/en';
 import { testSidebarData } from './sidebar';
 import { testTableColumns } from '../../fixtures/gql/StandardTablesPage/columns1';
 import { testDropdownItemsWithIcon, testHandlingTeamList } from '../../fixtures/dropdownItemsWithIcon';
-import { testDropdownItemsWithoutIcon } from '../../fixtures/dropdownItemsWithoutIcon';
+import { testDropdownItemsWithoutIcon, testGroupItems } from '../../fixtures/dropdownItemsWithoutIcon';
 import { testOrderableMenuItems } from '../../fixtures/orderableMenuItems';
 import { testNavData } from '../../fixtures/navData';
 import { testTableData } from '../../fixtures/gql/StandardTablesPage/tableData1';
@@ -18,6 +18,7 @@ export {
   testDropdownItemsWithIcon,
   testHandlingTeamList,
   testDropdownItemsWithoutIcon,
+  testGroupItems,
   testNavData,
   testOrderableMenuItems,
   testTableData,

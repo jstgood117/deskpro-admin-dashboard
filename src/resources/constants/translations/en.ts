@@ -56,6 +56,7 @@ export const testTranslations = {
   'admin_agents_teams.teams.description':
     'The Agents Teams section allow you to configure settings related to all agents teams in the system, whether or not they are using the helpdesk.',
 
+  'admin_agents_groups.group': 'Group',
   'admin_agents_groups.groups.title': 'Agent Groups',
   'admin_agents_groups.groups.agents-header': 'illustration',
   'admin_agents_groups.groups.description':
@@ -78,8 +79,7 @@ export const testTranslations = {
   'admin_common.filter_operator.starts_with': 'Starts with',
   'admin_common.filter_operator.ends_with': 'Ends with',
   'admin_common.filter_operator.contains': 'Contains',
-  'admin_common.filter_operator.not_contains':
-    'Not contains',
+  'admin_common.filter_operator.not_contains': 'Not contains',
   'admin_common.filter_operator.yes_no': 'Yes / No',
 
   'action.agents.delete_action': 'Delete Agent',
@@ -112,5 +112,5 @@ export const testTranslations = {
   'apikeys.api_flag.api_v1': 'Legacy API',
   'apikeys.api_flag.api_v2': 'API',
   'apikeys.api_flag.admin': 'Admin',
-  'apikeys.api_flag.super': 'Super',
+  'apikeys.api_flag.super': 'Super'
 };
