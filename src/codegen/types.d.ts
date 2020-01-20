@@ -16,17 +16,22 @@ export type API_Agent = {
    __typename?: 'Agent',
   id: Scalars['ID'],
   name: Scalars['String'],
+  alias?: Maybe<Scalars['String']>,
   avatarUrn?: Maybe<Scalars['String']>,
   first_name: Scalars['String'],
   last_name: Scalars['String'],
   primary_email: Scalars['String'],
   emails: Array<Scalars['String']>,
   can_admin: Scalars['Boolean'],
-  can_agent: Scalars['Boolean'],
+  can_reports: Scalars['Boolean'],
   agent_teams: Array<Maybe<API_AgentTeam>>,
   agent_groups: Array<Maybe<API_AgentGroup>>,
+  timezone?: Maybe<Scalars['String']>,
+  language?: Maybe<API_Language>,
   date_last_login?: Maybe<Scalars['DateTime']>,
-  ticket_departments: Array<Maybe<API_TicketDepartment>>,
+  date_created: Scalars['DateTime'],
+  departments: Array<Maybe<API_TicketDepartment>>,
+  tickets?: Maybe<Scalars['Int']>,
 };
 
 export type API_AgentGroup = {
@@ -36,6 +41,16 @@ export type API_AgentGroup = {
   title: Scalars['String'],
   note?: Maybe<Scalars['String']>,
   members: Array<Maybe<API_Agent>>,
+};
+
+export type API_AgentMassActionsInput = {
+  addGroups?: Maybe<Array<Scalars['ID']>>,
+  removeGroups?: Maybe<Array<Scalars['ID']>>,
+  addTeams?: Maybe<Array<Scalars['ID']>>,
+  removeTeams?: Maybe<Array<Scalars['ID']>>,
+  setAdmin?: Maybe<Scalars['Boolean']>,
+  setReportsAdmin?: Maybe<Scalars['Boolean']>,
+  setDeleted?: Maybe<Scalars['Boolean']>,
 };
 
 export enum API_AgentOrderFields {
@@ -374,6 +389,17 @@ export enum API_LanguagesOrderFields {
   Locale = 'locale'
 }
 
+export type API_Mutation = {
+   __typename?: 'Mutation',
+  agents_massActions: Array<Maybe<API_Agent>>,
+};
+
+
+export type API_MutationAgents_MassActionsArgs = {
+  ids: Array<Scalars['ID']>,
+  actions: API_AgentMassActionsInput
+};
+
 export enum API_Operator {
   In = 'IN',
   NotIn = 'NOT_IN',
@@ -405,6 +431,9 @@ export type API_PageDataFilters = {
 export type API_PageDataTable = {
    __typename?: 'PageDataTable',
   columns: Array<API_TableColumnDef>,
+  defaultSort?: Maybe<Scalars['String']>,
+  defaultGrouping?: Maybe<Scalars['String']>,
+  massActions?: Maybe<Array<Maybe<API_PageLink>>>,
 };
 
 export type API_PageInfo = {
@@ -825,6 +854,7 @@ export type API_SidebarItem = {
   navItems?: Maybe<Array<Maybe<API_SidebarItem>>>,
   pageType?: Maybe<Scalars['String']>,
   metadataQuery?: Maybe<Scalars['String']>,
+  drawerItems?: Maybe<Array<Maybe<API_SidebarItem>>>,
 };
 
 export type API_SidebarSection = {
@@ -885,15 +915,21 @@ export type API_TableColumnBoolYesNo = API_TableColumnValueField & {
   value: API_TablePayloadValue,
 };
 
+export type API_TableColumnDateTime = API_TableColumnValueField & {
+   __typename?: 'TableColumnDateTime',
+  value: API_TablePayloadValue,
+};
+
 export type API_TableColumnDef = {
    __typename?: 'TableColumnDef',
   title: Scalars['String'],
   field?: Maybe<API_TableColumnField>,
   sortField?: Maybe<Scalars['String']>,
+  groupable?: Maybe<Scalars['Boolean']>,
   defaultShow?: Maybe<Scalars['Boolean']>,
 };
 
-export type API_TableColumnField = API_TableColumnId | API_TableColumnBoolYesNo | API_TableColumnBoolOnOff | API_TableColumnText | API_TableColumnTextCommaSep | API_TableColumnTextPhrase | API_TableColumnTextPhraseCommaSep | API_TableColumnNameAvatar | API_TableColumnInteger | API_TableColumnMoney | API_TableColumnTimeAgo | API_TableColumnAgentTeamList | API_TableColumnAgentGroupList | API_TableColumnAgentList;
+export type API_TableColumnField = API_TableColumnId | API_TableColumnBoolYesNo | API_TableColumnBoolOnOff | API_TableColumnText | API_TableColumnTextCommaSep | API_TableColumnTextPhrase | API_TableColumnTextPhraseCommaSep | API_TableColumnNameAvatar | API_TableColumnInteger | API_TableColumnMoney | API_TableColumnTimeAgo | API_TableColumnDateTime | API_TableColumnAgentTeamList | API_TableColumnAgentGroupList | API_TableColumnAgentList | API_TableColumnTicketDepartmentList;
 
 export type API_TableColumnId = API_TableColumnValueField & {
    __typename?: 'TableColumnId',
@@ -950,6 +986,11 @@ export type API_TableColumnTextPhraseCommaSep = API_TableColumnArrayValueField &
   valuesArray: API_TablePayloadValue,
   phraseMap: Array<API_TableColumnPhraseMapItem>,
   defaultPhraseId?: Maybe<Scalars['String']>,
+};
+
+export type API_TableColumnTicketDepartmentList = API_TableColumnArrayValueField & {
+   __typename?: 'TableColumnTicketDepartmentList',
+  valuesArray: API_TablePayloadValue,
 };
 
 export type API_TableColumnTimeAgo = API_TableColumnValueField & {
