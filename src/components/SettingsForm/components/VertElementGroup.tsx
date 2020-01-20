@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 import FieldElement from './FieldElement';
 import { GenericFormComponent } from '../GenericFormComponent';
+import Link from '../../Link';
 
 const Group = styled.div`
-  /* position: relative; */
+  position: relative;
   padding-left: 45px;
   & .hidden {
     display: none;
@@ -20,7 +21,7 @@ const GroupDetails: React.FC = (props: any) => (
 );
 
 const FieldContainer: React.FC = (props: any) => (
-  <React.Fragment>
+  <div className='field-container'>
     <div className='element-details'>
       {props.title && <label>{props.title}</label>}
       {props.description && <p>{props.description}</p>}
@@ -28,7 +29,16 @@ const FieldContainer: React.FC = (props: any) => (
     <div className='element-context'>
       <FieldElement {...props.field} formikProps={props.formikProps} />
     </div>
-  </React.Fragment>
+    {Array.isArray(props.info) && (
+      <div className='element-info'>
+        {props.info.map((info: any, index: number) => (
+          <Link href={info.url} icon={info.icon} key={index}>
+            {info.title}
+          </Link>
+        ))}
+      </div>
+    )}
+  </div>
 );
 
 const VertElementGroup: React.FC = (props: any) => {

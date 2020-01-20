@@ -7,6 +7,7 @@ import Icon from '../Icon';
 export interface IProps {
   children?: ReactNode;
   href: string;
+  icon?: string;
 }
 
 const StyledLink = styled(dpstyle.div1)`
@@ -35,7 +36,7 @@ const Link: FC<IProps> = props => {
     >
       <StyledLink>
         <div style={{ paddingRight: 12, display: 'flex' }}>
-          <Icon name='ic-help-center' />
+          <Icon name={props.icon || 'ic-help-center'} />
         </div>
         {props.children}
       </StyledLink>
