@@ -93,7 +93,7 @@ export const IconWrapper = styled.span`
 `;
 
 export const FixedItemWrapper = styled.div`
-  padding: 6.2px 30px 7.09px 15px;
+  padding: 6.2px 30px 7.09px 38px;
   user-select: none;
   position: relative;
   display: flex;

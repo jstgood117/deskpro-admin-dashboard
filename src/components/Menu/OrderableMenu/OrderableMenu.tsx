@@ -187,9 +187,6 @@ const Menu: FC<IMenuProps> = ({
 
         {idColumn && (
           <FixedItemWrapper>
-            <IconWrapper>
-              <Icon name='drag-and-drop' />
-            </IconWrapper>
             <TextLabel
               style={{
                 display: 'flex',
