@@ -435,6 +435,11 @@ const Button: FC<Props> = ({
                       <Icon name='ic-sort-down-active' />
                     </span>
                   )}
+                  {name === 'sort-desc' && dropdownValue.label === item.label && (
+                    <span className='sort-icon'>
+                      <Icon name='ic-sort-up-active' />
+                    </span>
+                  )}
                 </DropdownContentLink>
               );
             })}

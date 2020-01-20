@@ -135,7 +135,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const [Group, setGroupValue] = useState('');
   const [Sort, setSortValue] = useState<
-    { link: string; label: string } | string
+    { link: string; label: string; desc?: boolean } | string
   >('');
   const [searchValue, setSearchValue] = useState('');
   const [openedSort, clickButtonSort] = useState(false);
@@ -192,10 +192,12 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   useEffect(() => {
     let link = '';
+    let desc = false;
     if (sortBy.length) {
       link = intl.formatMessage({ id: sortBy[0].id });
+      desc = sortBy[0].desc;
     }
-    setSortValue(link ? { link, label: link } : link);
+    setSortValue(link ? { link, label: link, desc } : link);
   }, [intl, sortBy]);
 
   const getFilterTitle = (path: string) => {
@@ -423,7 +425,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                 items={sortMenuItems}
                 dropdownValue={Sort}
                 onSelect={(val: any) => handleSortChange(val)}
-                name='sort'
+                name={
+                  typeof Sort !== 'string' && Sort.desc ? 'sort-desc' : 'sort'
+                }
               >
                 <Icon name='sort' />
                 Sort
