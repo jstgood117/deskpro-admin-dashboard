@@ -111,7 +111,7 @@ export const TextString = ({
  */
 interface ITextLabel {
   messageId?: string;
-  bold?: boolean;
+  bold: boolean;
   small?: boolean;
   color?: string;
   underline?: boolean;
