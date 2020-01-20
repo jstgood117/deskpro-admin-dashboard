@@ -193,7 +193,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   useEffect(() => {
     let link = '';
     let desc = false;
-    if (Array.isArray(sortBy)) {
+    if (Array.isArray(sortBy) && sortBy.length) {
       link = intl.formatMessage({ id: sortBy[0].id });
       desc = sortBy[0].desc;
     }
