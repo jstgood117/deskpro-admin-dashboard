@@ -65,15 +65,13 @@ const MultiMenuComponent: FC<IMenuProps> = ({
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
-          clickedGear ? (
+          clickedGear && (
             <MenuSub
               onSelect={onSelect}
               menuItems={item.subItems}
               value={value}
             />
-          ) : (
-              <div />
-            )
+          )
         }
         positionOptions={{
           position: 'left',
