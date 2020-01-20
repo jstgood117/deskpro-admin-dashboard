@@ -84,7 +84,7 @@ const Table: FC<Props> = ({
 
   // Process internal sort change
   useEffect(() => {
-    if (!compareSorts(sortBy, sortByInfo)) {
+    if (onSortChange && !compareSorts(sortBy, sortByInfo)) {
       onSortChange(sortByInfo);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
