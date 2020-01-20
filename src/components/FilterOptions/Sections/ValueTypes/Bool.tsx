@@ -1,8 +1,8 @@
 import React, { SFC } from 'react';
 
 import { Props } from './types';
+import { IOptions } from '../../../../types';
 import SingleSelect from '../../../SelectComponents/SingleSelect';
-import { IOptions } from '../../../SelectComponents/interfaces';
 import { selectStyles } from '../../../SelectComponents/Helpers';
 
 const boolOptions: IOptions[] = [
