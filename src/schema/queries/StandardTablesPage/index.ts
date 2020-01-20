@@ -12,6 +12,7 @@ query StandardDataPage($path: String!) {
     }
     newLink
     views {
+      title
       dataQuery
       tableDef {
         columns {
