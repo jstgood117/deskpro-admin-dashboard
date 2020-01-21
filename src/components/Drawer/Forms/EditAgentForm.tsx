@@ -9,7 +9,7 @@ import Button from '../../Button';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import { dpstyle } from '../../Styled';
 
-import { IOptions } from '../../SelectComponents/interfaces';
+import { IOptions } from '../../../types';
 
 const StyledLabel = styled(dpstyle.div1)`
   font-size: 14px;

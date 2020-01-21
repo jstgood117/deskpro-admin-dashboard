@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import { IMenuItemProps } from '../../../resources/interfaces';
 import { KeyValue } from '../../../types';
-import { ActionsType } from '../../../services/actions/types';
+
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
 import {
   objectUseState,
@@ -86,34 +85,6 @@ export const generateTableParams = (
           pageSize: 100,
         }
       };
-};
-
-const generateMenuItem = (item: ActionsType) => {
-  switch (item.type) {
-    case 'action':
-      return {
-        name: item.title,
-        ...(item.icon && { icon: item.icon })
-      };
-    case 'separator':
-      return {};
-    case 'folder':
-      return {
-        name: item.title,
-        icon: item.icon,
-        subItems: convertActionsToMenuFormat(item.actions)
-      };
-  }
-};
-
-export const convertActionsToMenuFormat = (
-  actions: ActionsType[]
-): IMenuItemProps[] => {
-  if (!actions) {
-    return [];
-  }
-
-  return actions.map(_item => generateMenuItem(_item));
 };
 
 export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) => {

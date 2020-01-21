@@ -122,6 +122,7 @@ const Table: FC<Props> = ({
           currentPage={currentPage}
           handleChangeCurrentPage={handleChangeCurrentPage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
+          refreshData={fetchData}
         />
         <div className='overflow'>
           <table {...getTableProps()}>

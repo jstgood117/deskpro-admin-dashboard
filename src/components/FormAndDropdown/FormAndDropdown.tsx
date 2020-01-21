@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import Input from '../Input';
 import SingleSelect from '../SelectComponents/SingleSelect';
-import { IOptions } from '../SelectComponents/interfaces';
+import { IOptions } from '../../types';
 import styled from 'styled-components';
 
 export interface IProps {
