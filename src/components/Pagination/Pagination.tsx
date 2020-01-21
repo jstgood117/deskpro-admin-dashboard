@@ -11,7 +11,7 @@ import {
   DropdownIndicator,
   PaginationSelectButton
 } from '../SelectComponents/Helpers';
-import { IOptions } from '../SelectComponents/interfaces';
+import { IOptions } from '../../types';
 
 const Container = styled(FlowLayout)``;
 
@@ -147,12 +147,17 @@ const Pagination: React.FC<IProps> = ({
   return (
     <Container style={containerStyle} className={containerClassName}>
       <Label>Rows per page:</Label>
-      <PaginationSelectButton minWidth={64}>
+      <PaginationSelectButton
+        minWidth={64}
+        disabled={rowsPerPageOptions.length < 2 ? true : false}
+      >
         <Select
+          menuPlacement='auto'
           isSearchable={false}
           closeMenuOnSelect={true}
           isMulti={false}
           options={rowsPerPageOptions}
+          isDisabled={rowsPerPageOptions.length < 2 ? true : false}
           styles={selectStyles}
           classNamePrefix='select'
           placeholder={null}
@@ -160,6 +165,7 @@ const Pagination: React.FC<IProps> = ({
           onChange={(option: IOptions) => {
             onChangeRowsPerPage(Number(option.value));
           }}
+          value={{ value: rowsPerPage, label: rowsPerPage }}
           defaultValue={{ value: rowsPerPage, label: rowsPerPage }}
           components={{
             ClearIndicator: false,
@@ -170,10 +176,14 @@ const Pagination: React.FC<IProps> = ({
         />
       </PaginationSelectButton>
       <Divider />
-      <PaginationSelectButton minWidth={94}>
+      <PaginationSelectButton
+        minWidth={94}
+        disabled={pages.length < 2 ? true : false}
+      >
         {pages.length > 0 && currentPage && (
           <Select
             isSearchable={false}
+            menuPlacement='auto'
             closeMenuOnSelect={true}
             isMulti={false}
             options={pages}
@@ -182,6 +192,7 @@ const Pagination: React.FC<IProps> = ({
             placeholder={null}
             hideSelectedOptions={false}
             value={pages[currentPage - 1]}
+            isDisabled={pages.length < 2 ? true : false}
             onChange={(option: any) => {
               onChangePage({
                 currentPage: option.page,

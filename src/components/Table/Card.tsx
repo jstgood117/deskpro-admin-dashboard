@@ -34,7 +34,7 @@ export type Props = {
   sortBy: SortType[];
 };
 
-const Table: FC<Props> = ({
+const Card: FC<Props> = ({
   path,
   data,
   columns,
@@ -119,6 +119,7 @@ const Table: FC<Props> = ({
           currentPage={currentPage}
           handleChangeCurrentPage={handleChangeCurrentPage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
+          refreshData={fetchData}
         />
 
         <CardGrid>
@@ -147,4 +148,4 @@ const Table: FC<Props> = ({
   );
 };
 
-export default Table;
+export default Card;

@@ -84,7 +84,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
             columnOrder,
             intl
           )}
-          fetchData={dataType === 'async' ? fetchData : undefined}
+          fetchData={fetchData}
           loading={loading}
           pageCount={totalPageCount}
           tableType={dataType}
@@ -101,7 +101,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
             columnOrder,
             intl
           )}
-          fetchData={dataType === 'async' ? fetchData : undefined}
+          fetchData={fetchData}
           loading={loading}
           pageCount={totalPageCount}
           tableType={dataType}

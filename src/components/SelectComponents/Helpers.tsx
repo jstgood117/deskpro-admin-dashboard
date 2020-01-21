@@ -156,7 +156,10 @@ export const SecondarySelectButton = styled(dpstyle.div)`
     }
   }
 `;
-export const PaginationSelectButton = styled(dpstyle.div)<{ minWidth: number }>`
+export const PaginationSelectButton = styled(dpstyle.div)<{
+  minWidth: number;
+  disabled: boolean;
+}>`
   display: inline-flex;
   .select__menu {
     border-radius: 4px;
@@ -190,12 +193,18 @@ export const PaginationSelectButton = styled(dpstyle.div)<{ minWidth: number }>`
   .select__control {
     min-width: ${props => props.minWidth}px;
     border-radius: 3px;
-    border-color: #d3d6d7;
-    color: #8b9293;
+    border-color: ${props =>
+      props.disabled ? props.theme.greyLighter : props.theme.greyLight};
+    color: ${props => props.theme.greyDark};
     min-height: 28px;
     .select__indicators {
       padding-right: 12px;
       cursor: default;
+      svg {
+        path {
+          fill: ${props => props.disabled && props.theme.greyLighter};
+        }
+      }
     }
     .select__multi-value {
       display: none;

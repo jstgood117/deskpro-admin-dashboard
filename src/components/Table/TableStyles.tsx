@@ -178,6 +178,20 @@ export const StyledPagination = styled(dpstyle.div)`
   justify-content: flex-end;
   padding-top: 24px;
   padding-bottom: 10px;
+  .select__control {
+    min-width: auto;
+    .select__single-value {
+      margin-right: 4px;
+    }
+  }
+`;
+export const StyledHeaderPagination = styled(dpstyle.div)`
+  .select__control {
+    min-width: auto;
+    .select__single-value {
+      margin-right: 4px;
+    }
+  }
 `;
 
 export const StyledTh = styled.div<{ alignRight: boolean }>`

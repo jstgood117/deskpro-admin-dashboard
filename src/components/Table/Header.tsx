@@ -1,36 +1,34 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-
-import Pagination from '../Pagination/Pagination';
-import { KeyValue } from '../../types';
+import { runAction } from '../../services/actions/run';
+import { ActionsType } from '../../services/actions/types';
+import { KeyValue, IOptions } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
-import { testHandlingTeamList } from '../../resources/constants/constants';
-import { ActionFactory } from '../../services/actions/ActionFactory';
 
+import Actions from '../Actions';
+import ActionComponentFactory from '../Actions/helpers/ComponentFactory';
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Icon from '../Icon';
-import Menu from '../Menu';
-import MultiSelect from '../SelectComponents/MultiSelect';
-import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-import {
-  IPageChange,
-  objectUseState
-} from './types';
+import Pagination from '../Pagination/Pagination';
+
+import { IPageChange, objectUseState } from './types';
 
 import {
   TableStyled,
   TableHeader,
   AllCheckStyle,
+  StyledHeaderPagination
 } from './TableStyles';
 
 import {
   onSelectEverything,
   onSelectAllChange,
-  convertActionsToMenuFormat,
-  generateCSVData,
+  generateCSVData
 } from './helpers/functions';
 
 export type Props = {
@@ -47,9 +45,13 @@ export type Props = {
   currentPage: number;
   handleChangeCurrentPage: (data: IPageChange) => void;
   handleChangeRowsPerPage: (data: number) => void;
+  refreshData: () => void;
 };
 
-const Header: FC<Props & WrappedComponentProps> = ({
+export type PropsWithApollo = WithApolloClient<Props>;
+
+const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
+  client,
   intl,
   setChecked,
   pageSize,
@@ -64,26 +66,20 @@ const Header: FC<Props & WrappedComponentProps> = ({
   currentPage,
   handleChangeCurrentPage,
   handleChangeRowsPerPage,
+  refreshData
 }) => {
-
   const headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
 
   const [opened, clickButton] = useState(false);
   const [menuValue, setMenuValue] = useState();
-  const [deleteModal, showDeleteModal] = useState(false);
-  const [selectedOptions, selectOptions] = React.useState([]);
-  const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
+  const [currentAction, setCurrentAction] = useState<ActionsType>();
+  const [selectedOptions, selectOptions] = useState<IOptions[]>([]);
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
   const [dropdownValue, setDropdownValue] = useState();
-
-  useEffect(() => {
-    const _actions = ActionFactory(path);
-    const _menuItems = convertActionsToMenuFormat(_actions);
-    setMenuItems(_menuItems);
-  }, [path]);
+  const [showActionComponent, setShowActionComponent] = useState(false);
 
   useEffect(() => {
     const checkedLength = Object.keys(checked).length;
@@ -108,7 +104,6 @@ const Header: FC<Props & WrappedComponentProps> = ({
     setDropdownValue(undefined);
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
 
-
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
     _pageIndex: number
@@ -122,8 +117,47 @@ const Header: FC<Props & WrappedComponentProps> = ({
     );
   };
 
+  const handleActionClick = (
+    menuItem?: IMenuItemProps,
+    action?: ActionsType,
+    variables?: object
+  ) => {
+    setMenuValue(menuItem);
+
+    setCurrentAction(action);
+
+    // If there is no pre-action or dropdown options, run the action
+    if (action && !action.preAction && !action.selectOptions) {
+      handleRunAction(variables);
+    }
+  };
+
+  const handlePreAction = (action: ActionsType) => {
+    setCurrentAction(action);
+    setShowActionComponent(true);
+  };
+
+  const handleRunAction = async (variables?: object) => {
+    if (!currentAction) {
+      return false;
+    }
+
+    await runAction(client, currentAction, variables);
+
+    refreshData();
+
+    setCurrentAction(undefined);
+    setShowActionComponent(false);
+  };
+
+  const handleCancelAction = () => {
+    setCurrentAction(undefined);
+    setShowActionComponent(false);
+  };
+
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
+  const checkedIds = Object.keys(checked);
   return (
     <>
       <TableStyled>
@@ -150,102 +184,59 @@ const Header: FC<Props & WrappedComponentProps> = ({
             )}
             {Object.keys(checked).length > 0 && (
               <div style={{ paddingLeft: 16, display: 'flex' }}>
-                <Menu
-                  value={menuValue}
-                  onSelect={val => setMenuValue(val)}
-                  label={
-                    menuValue ? menuValue['name'] : 'admin_common.table.action'
-                  }
-                  menuItems={menuItems}
-                  iconName='menu'
+                <Actions
+                  path={path}
+                  menuValue={menuValue}
+                  ids={Object.keys(checked)}
+                  onChange={handleActionClick}
+                  handlePreAction={handlePreAction}
+                  selectOptions={selectOptions}
+                  selectedOptions={selectedOptions}
                 />
-                {menuValue && menuValue.name === 'Add Team' && (
-                  <div style={{ display: 'flex', paddingLeft: 15 }}>
-                    <MultiSelect
-                      options={testHandlingTeamList}
-                      type='fixed'
-                      selectOptions={selectOptions}
-                    />
-                  </div>
-                )}
-                {((menuValue &&
-                  menuValue.name === 'actions.agents.delete_agent') ||
-                  selectedOptions.length > 0) && (
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ paddingLeft: 16 }}>
-                      <Button
-                        styleType='primary'
-                        onClick={() => {
-                          if (
-                            menuValue.name === 'actions.agents.delete_agent'
-                          ) {
-                            showDeleteModal(true);
-                          }
-                        }}
-                      >
-                        Confirm
-                      </Button>
-                    </div>
-                    <div style={{ paddingLeft: 16 }}>
-                      <Button
-                        styleType='tertiary'
-                        onClick={() => {
-                          setMenuValue(undefined);
-                          selectOptions([]);
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                )}
               </div>
             )}
           </AllCheckStyle>
-          <div style={{ paddingRight: 24 }}>
-            <CSVLink
-              data={csvData}
-              filename={'export.csv'}
-              headers={headers}
-              target='_blank'
-            >
-              <Button styleType='tertiary' size='small' iconOnly={true}>
-                <Icon name='export' />
-              </Button>
-            </CSVLink>
-          </div>
-          <Pagination
-            totalRecords={totalRecords}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onChangePage={handleChangeCurrentPage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          {page.length > 0 && (
+            <div style={{ paddingRight: 24 }}>
+              <CSVLink
+                data={csvData}
+                filename={'export.csv'}
+                headers={headers}
+                target='_blank'
+              >
+                <Button styleType='tertiary' size='small' iconOnly={true}>
+                  <Icon name='export' />
+                </Button>
+              </CSVLink>
+            </div>
+          )}
+          {page.length > 0 && (
+            <StyledHeaderPagination>
+              <Pagination
+                totalRecords={totalRecords}
+                rowsPerPage={rowsPerPage}
+                currentPage={currentPage}
+                onChangePage={handleChangeCurrentPage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            </StyledHeaderPagination>
+          )}
         </TableHeader>
-        <ConfirmDialog
-          icon='trash'
-          isOpen={deleteModal}
-          variant='danger'
-          title='Delete agent?'
-          leftButtonText='Delete Agents'
-          rightButtonText='Keep Agents'
-          onLeftButtonClick={() => {
-            showDeleteModal(false);
-            setMenuValue(undefined);
-            setIsAllChecked(false);
-            setChecked({});
-          }}
-          onRightButtonClick={() => {
-            showDeleteModal(false);
-            setMenuValue(undefined);
-            setIsAllChecked(false);
-            setChecked({});
-          }}
-          text={`Deleting 304 agents will change their status to 'deleted'`}
-        />
       </TableStyled>
+      {showActionComponent && currentAction && (
+        <ActionComponentFactory
+          {...currentAction.preAction}
+          ids={checkedIds}
+          confirm={handleRunAction}
+          cancel={handleCancelAction}
+          messageParams={[String(checkedIds.length)]}
+        />
+      )}
     </>
   );
 };
 
-export default injectIntl(Header);
+const WithApollo = withApollo<PropsWithApollo & WrappedComponentProps>(Header);
+const WithInit = injectIntl(WithApollo);
+
+export default WithInit;

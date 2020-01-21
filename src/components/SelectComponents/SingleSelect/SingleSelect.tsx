@@ -14,7 +14,7 @@ import {
   StyledSelect,
   DropdownIndicator
 } from '../Helpers';
-import { IOptions } from '../interfaces';
+import { IOptions } from '../../../types';
 
 export interface IProps {
   options: IOptions[];

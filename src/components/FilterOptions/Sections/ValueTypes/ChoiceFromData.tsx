@@ -1,6 +1,6 @@
 import React, { SFC } from 'react';
 import MultiSelect from '../../../SelectComponents/MultiSelect';
-import { IOptions } from '../../../SelectComponents/interfaces';
+import { IOptions } from '../../../../types';
 
 import { Props } from './types';
 
