@@ -17,7 +17,7 @@ import ConfirmDialog from '../Dialog/ConfirmDialog';
 
 import { IPageChange, objectUseState } from './types';
 
-import { TableStyled, TableHeader, AllCheckStyle } from './TableStyles';
+import { TableStyled, TableHeader, AllCheckStyle, StyledPagination } from './TableStyles';
 
 import {
   onSelectEverything,
@@ -208,13 +208,15 @@ const Header: FC<Props & WrappedComponentProps> = ({
             </div>
           )}
           {page.length > 0 && (
-            <Pagination
-              totalRecords={totalRecords}
-              rowsPerPage={rowsPerPage}
-              currentPage={currentPage}
-              onChangePage={handleChangeCurrentPage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+            <StyledPagination>
+              <Pagination
+                totalRecords={totalRecords}
+                rowsPerPage={rowsPerPage}
+                currentPage={currentPage}
+                onChangePage={handleChangeCurrentPage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            </StyledPagination>
           )}
         </TableHeader>
         <ConfirmDialog
