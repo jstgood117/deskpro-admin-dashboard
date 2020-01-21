@@ -93,6 +93,20 @@ export const IconWrapper = styled.span`
   padding-right: 13px;
 `;
 
+export const FixedItemWrapper = styled.div`
+  padding: 6.2px 30px 7.09px 38px;
+  user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .orderable-menu-toggle {
+    position: absolute;
+    display: flex;
+    right: 15px;
+  }
+`;
+
 export const ResetWrapper = styled.div`
   cursor: pointer;
   padding: 6.2px 30px 7.09px 15px;
