@@ -1,4 +1,5 @@
-import React, { SFC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Drawer from '../components/Drawer';
 import EditAgentForm from '../components/Drawer/Forms/EditAgentForm';
 
@@ -7,6 +8,8 @@ type Props = {
   pageType: string;
   metadataQuery: string;
 };
+
+type CombinedProps = Props & RouteComponentProps<any>;
 
 const getDrawerChildComponent = (pageType: string) => {
 
@@ -20,21 +23,29 @@ const getDrawerChildComponent = (pageType: string) => {
   }
 };
 
-const DrawerType: SFC<Props> = ({
-  pageType
+const DrawerType: FC<CombinedProps> = ({
+  pageType,
+  history
 }) => {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+  }, []);
+
   const [open, setOpen] = useState(true);
   const Content = getDrawerChildComponent(pageType);
 
   const onClose = () => {
     setOpen(false);
+    history.goBack();
   };
 
   return (
-    <Drawer open={open} onClose={onClose}>
+    <Drawer open={open && loading} onClose={onClose}>
       {Content}
     </Drawer>
   );
 };
 
-export default DrawerType;
+export default withRouter(DrawerType);
