@@ -59,21 +59,30 @@ const FeatureSectionStyled = styled.div`
 
   & .element-info {
     position: absolute;
-    top: 0;
+    top: 21px;
     left: 720px;
   }
 
-  & .element-info a {
+  & .group-info {
+    position: absolute;
+    top: 0;
+    left: 765px;
+  }
+
+  & .element-info a,
+  & .group-info a {
     white-space: nowrap;
     margin-bottom: 16px;
     display: block;
   }
 
-  & .element-info a > div {
+  & .element-info a > div,
+  & .group-info a > div {
     height: 34px;
   }
 
-  & .element-info a svg path {
+  & .element-info a svg path,
+  & .group-info a svg path {
     fill: ${props => props.theme.brandPrimary};
   }
 

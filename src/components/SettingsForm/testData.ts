@@ -24,6 +24,20 @@ export const uiSchema = {
               showOn: 'agent_settings_security_enabled',
               description:
                 'Enable this to log out agents who are idle. Otherwise, sessions will be kept alive if Deskpro is open in a browser window, even if the agent is not doing anything.',
+              info: [
+                {
+                  type: 'button',
+                  title: 'Idle timeout',
+                  url: 'http://www.test.com',
+                  icon: 'menu'
+                },
+                {
+                  type: 'button',
+                  title: 'Stay logged in when browser closed',
+                  url: 'http://www.test.com',
+                  icon: 'view'
+                }
+              ],
               elements: [
                 {
                   type: 'field',
