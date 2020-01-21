@@ -133,7 +133,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const { columnsViewList, checkedState } = generateViewList(tableDef);
 
-  const [Sort, setSortValue] = useState<{ link: string; label: string; desc?: boolean } | string>('');
+  const [Sort, setSortValue] = useState<
+    { link: string; label: string; desc?: boolean } | string
+  >('');
   const [searchValue, setSearchValue] = useState('');
   const [openedSort, clickButtonSort] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
@@ -264,12 +266,19 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const handleSortChange = (val: any) => {
     const id = val.link;
+    const link = intl.formatMessage({ id });
+    let desc = false;
 
-    onSortChange([{ id, desc: false }]);
+    if (typeof Sort !== 'string' && Sort.link === link) {
+      desc = !Sort.desc;
+    }
+
+    onSortChange([{ id, desc }]);
 
     setSortValue({
       ...val,
-      link: intl.formatMessage({ id })
+      link,
+      desc
     });
   };
 
