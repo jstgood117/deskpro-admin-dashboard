@@ -119,6 +119,7 @@ const Card: FC<Props> = ({
           currentPage={currentPage}
           handleChangeCurrentPage={handleChangeCurrentPage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
+          refreshData={fetchData}
         />
 
         <CardGrid>

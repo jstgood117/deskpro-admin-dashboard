@@ -47,6 +47,7 @@ export type Props = {
   currentPage: number;
   handleChangeCurrentPage: (data: IPageChange) => void;
   handleChangeRowsPerPage: (data: number) => void;
+  refreshData: () => void;
 };
 
 export type PropsWithApollo = WithApolloClient<Props>;
@@ -67,6 +68,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   currentPage,
   handleChangeCurrentPage,
   handleChangeRowsPerPage,
+  refreshData
 }) => {
 
   const headers = columns.map(column => {
@@ -145,6 +147,8 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     await runAction(client, currentAction, variables);
 
+    refreshData();
+
     setCurrentAction(undefined);
     setShowActionComponent(false);
   };
@@ -216,7 +220,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
           />
         </TableHeader>
       </TableStyled>
-      {showActionComponent && (
+      {showActionComponent && currentAction && (
         <ActionComponentFactory
           {...currentAction.preAction}
           ids={checkedIds}

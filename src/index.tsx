@@ -39,7 +39,17 @@ const AppWrap = () => {
     cache: new InMemoryCache({
       fragmentMatcher
     }),
-    link
+    link,
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+      },
+    }
   });
 
   return (
