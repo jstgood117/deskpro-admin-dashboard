@@ -85,10 +85,12 @@ const StandardTablePage: FC<CombinedProps> = ({
     const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
 
     try {
+
       const dataResponse = await client.query({
         query: gql`${dataQuery}`,
         errorPolicy: 'all'
       });
+
       const { results }: { results: KeyValue[]} = dataResponse.data;
       const treedResults = treeify(results);
       setTableData(treedResults);

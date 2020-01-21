@@ -1,8 +1,13 @@
 import { gql } from 'apollo-boost';
 export const DELETE_AGENTS = gql`
-  mutation DeleteAgent ($ids: [Int!]!) {
-    delete_agent(ids: $ids)
+mutation DeleteAgent ($ids: [ID!]!) {
+  agents_massActions(ids: $ids, actions:{
+    setDeleted: true
+  }) {
+    id,
+    name
   }
+}
 `;
 
 export const UPDATE_AGENTS = gql`

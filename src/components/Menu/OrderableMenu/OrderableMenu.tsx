@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
 import { MenuList, MenuButton } from 'react-menu-list';
-import { FormattedMessage  } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Icon from '../../Icon';
 import { MenuLabel, TextLabel } from '../../Styled';
 import { DeskproAdminTheme } from '../../Theme';
@@ -15,6 +15,7 @@ import {
   StyledIcon,
   IconWrapper,
   HR,
+  FixedItemWrapper,
   ResetWrapper,
   SettingIcon
 } from '../MenuStyles';
@@ -58,20 +59,18 @@ const MultiMenuComponent: FC<IMenuProps> = ({
     >
       <StyledSubMenuItem
         onItemChosen={() => {
-          if(onSelect) {
+          if (onSelect) {
             onSelect(item);
           }
         }}
         highlightedStyle={{ background: '#E8EBEE' }}
         menu={
-          clickedGear ? (
+          clickedGear && (
             <MenuSub
               onSelect={onSelect}
               menuItems={item.subItems}
               value={value}
             />
-          ) : (
-            <div />
           )
         }
         positionOptions={{
@@ -113,48 +112,59 @@ const Menu: FC<IMenuProps> = ({
   initialChecked
 }) => {
 
-  const itemList = menuItems.map((item, index: number) => {
-    return (
-      <div
-        key={uniqueId()}
-        data-id={index}
-        style={{ display: 'flex', position: 'relative', alignItems: 'center' }}
-      >
-        <div style={{ flex: 12 }}>
-          {item.name && !item.subItems && (
-            <SingleSubMenuItem onSelect={onSelect} item={item}>
-              <IconWrapper>
-                <Icon name='drag-and-drop' />
-              </IconWrapper>
-              <IconWrapper>
-                {item.icon && <Icon name={item.icon} />}
-              </IconWrapper>
-              <FormattedMessage id={item.name} />
-            </SingleSubMenuItem>
-          )}
-          {item.name && item.subItems && (
-            <MultiMenuComponent
-              item={item}
-              onSelect={onSelect}
-              value={value}
-            />
+  let idColumn: IMenuItemProps;
+
+  const itemList = menuItems
+    .filter((item: IMenuItemProps) => {
+      if (!item.sortable) {
+        idColumn = item;
+        return false;
+      }
+      return true;
+    })
+    .map((item, index: number) => {
+      return (
+        <div
+          key={uniqueId()}
+          data-id={index}
+          style={{ display: 'flex', position: 'relative', alignItems: 'center' }}
+        >
+          <div style={{ flex: 12 }}>
+            {item.name && !item.subItems && (
+              <SingleSubMenuItem onSelect={onSelect} item={item}>
+                <IconWrapper>
+                  <Icon name='drag-and-drop' />
+                </IconWrapper>
+                <IconWrapper>
+                  {item.icon && <Icon name={item.icon} />}
+                </IconWrapper>
+                <FormattedMessage id={item.name} />
+              </SingleSubMenuItem>
+            )}
+            {item.name && item.subItems && (
+              <MultiMenuComponent
+                item={item}
+                onSelect={onSelect}
+                value={value}
+              />
+            )}
+          </div>
+          {item.name && (
+            <span style={{ position: 'absolute', right: 15, display: 'flex' }}>
+              <Toggle
+                checked={checked[item.key]}
+                value='checked'
+                onChange={event =>
+                  setChecked({ ...checked, [item.key]: event.target.checked })
+                }
+                size='small'
+              />
+            </span>
           )}
         </div>
-        {item.name && (
-          <span style={{ position: 'absolute', right: 15, display: 'flex' }}>
-            <Toggle
-              checked={checked[item.key]}
-              value='checked'
-              onChange={event =>
-                setChecked({ ...checked, [item.key]: event.target.checked })
-              }
-              size='small'
-            />
-          </span>
-        )}
-      </div>
-    );
-  });
+      );
+    });
+
   return (
     <MenuListWrapper>
       <MenuList>
@@ -166,17 +176,45 @@ const Menu: FC<IMenuProps> = ({
                 OrderedList.push(menuItems[index]);
                 return true;
               });
-              if(order) { order(OrderedList); }
+              if (idColumn) {
+                OrderedList.push(idColumn);
+              }
+              if (order) { order(OrderedList); }
             }}
             children={itemList}
           />
         )}
+
+        {idColumn && (
+          <FixedItemWrapper>
+            <TextLabel
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                paddingLeft: 13
+              }}
+            >
+              <FormattedMessage id={idColumn.name} />
+            </TextLabel>
+            <span className='orderable-menu-toggle'>
+              <Toggle
+                checked={checked[idColumn.key]}
+                value='checked'
+                onChange={event =>
+                  setChecked({ ...checked, [idColumn.key]: event.target.checked })
+                }
+                size='small'
+              />
+            </span>
+          </FixedItemWrapper>
+        )}
+
         <HR />
         <ResetWrapper
           onClick={e => {
             e.preventDefault();
-            if(order) { order(initialList); }
-            if(initialChecked) { setChecked(initialChecked); }
+            if (order) { order(initialList); }
+            if (initialChecked) { setChecked(initialChecked); }
           }}
         >
           <IconWrapper>
@@ -216,7 +254,7 @@ const OrderableMenu: FC<IMenuProps> = ({
           className={`menu-btn`}
           menuZIndex={2}
           openedClassName='selected'
-          openedStyle={{background: '#D2D8DD'}}
+          openedStyle={{ background: '#D2D8DD' }}
           menu={(
             <Menu
               onSelect={onSelect}

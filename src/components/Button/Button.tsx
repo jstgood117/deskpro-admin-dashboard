@@ -358,6 +358,9 @@ const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
 `;
 
 export type Props = {
+  disabled?: boolean;
+  // `type` attribute for button behavior on forms
+  buttonType?: 'submit' | 'button';
   children?: ReactNode;
   styleType: ButtonStyleType;
   size?: SizeTypes;
@@ -376,6 +379,8 @@ export type Props = {
 } & React.HTMLAttributes<HTMLButtonElement>;
 
 const Button: FC<Props> = ({
+  buttonType,
+  disabled,
   styleType,
   size,
   showClearButton,
@@ -401,13 +406,14 @@ const Button: FC<Props> = ({
         className={`${className ? className : ''}`}
       >
         <ButtonStyled
+          disabled={!!disabled}
           styles={styles}
           className={`${selected ? 'selected' : ''} ${imageBtnSelected &&
             'selected-image-btn'}`}
           onClick={onClick}
           hasClearButton={showClearButton && selected}
           iconOnly={iconOnly}
-          type='button'
+          type={buttonType || 'button'}
         >
           {children}
         </ButtonStyled>
