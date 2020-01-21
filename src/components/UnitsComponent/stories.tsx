@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { IOptions } from '../SelectComponents/interfaces';
+import { IOptions } from '../../types';
 
 import UnitsComponent, { UnitsValuesType } from './UnitsComponent';
 

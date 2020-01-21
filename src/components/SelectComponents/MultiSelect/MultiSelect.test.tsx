@@ -2,7 +2,7 @@ import React from 'react';
 import { mount, shallow } from '../../../test/enzyme';
 
 import MultiSelect from './MultiSelect';
-import { IOptions } from '../interfaces';
+import { IOptions } from '../../../types';
 
 describe('MultiSelect', () => {
   let props: {

@@ -12,7 +12,7 @@ import {
   MultiSelectValueContainer,
   MultiSelectValueContainer2
 } from '../Helpers';
-import { IOptions } from '../interfaces';
+import { IOptions } from '../../../types';
 
 export interface IProps {
   options: IOptions[];

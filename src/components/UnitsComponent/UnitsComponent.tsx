@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { IOptions } from '../../types';
+
 import Input from '../Input';
 import SingleSelect from '../SelectComponents/SingleSelect';
 
-import { IOptions } from '../SelectComponents/interfaces';
+
 
 const UnitsContainer = styled.div`
   display: flex;
