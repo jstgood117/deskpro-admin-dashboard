@@ -20,7 +20,35 @@ describe('SettingsForm', () => {
     expect(root.find('h1').text()).toEqual('Test settings');
   });
 
-  it('should generate info link', () => {
+  it('should generate group info link', () => {
+    const root = wrapper({
+      elements: [
+        {
+          title: 'Test settings',
+          type: 'vertical_group',
+          info: [
+            {
+              url: '/test',
+              icon: 'test',
+              title: 'test'
+            }
+          ],
+          elements: [
+            {
+              type: 'field',
+              field: {
+                type: 'input',
+                id: 'test-input'
+              }
+            }
+          ]
+        }
+      ]
+    });
+    expect(root.find('a').length).toEqual(1);
+  });
+
+  it('should generate field info link', () => {
     const root = wrapper({
       elements: [
         {

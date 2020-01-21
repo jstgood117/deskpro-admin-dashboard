@@ -10,7 +10,7 @@ describe('OrderableMenu', () => {
   let mountedOrderableMenu: any;
 
   const OrderableMenuComponent: React.FC<IMenuProps> = _props => {
-    const [SortList, SetList] = useState(testOrderableMenuItems);
+    const [SortList, SetList] = useState(_props.initialList);
     const [value, setValue] = useState();
     const checkedState: { [key: string]: boolean } = {};
     const [checked, setChecked] = useState(checkedState);
@@ -44,8 +44,22 @@ describe('OrderableMenu', () => {
     };
     mountedOrderableMenu = undefined;
   });
+
   it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
+  });
+
+  describe('if there is sort-disabled item', () => {
+    beforeEach(() => {
+      testOrderableMenuItems.push({ key: 13, name: 'ID', sortable: false });
+      props.initialList = testOrderableMenuItems;
+      mountedOrderableMenu = undefined;
+    });
+
+    it('always renders a <div>', () => {
+      const elts = wrapper(false).find('div');
+      expect(elts.length).toBeGreaterThan(0);
+    });
   });
 });
