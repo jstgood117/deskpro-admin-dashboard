@@ -67,10 +67,10 @@ const Table: FC<Props> = ({
   ) as any;
 
   useEffect(() => {
-    if (fetchData) {
+    if (fetchData && tableType === 'async') {
       fetchData();
     }
-  }, [fetchData, pageIndex, pageSize]);
+  }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
     if (sortBy.length) {
