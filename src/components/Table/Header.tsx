@@ -16,21 +16,19 @@ import Icon from '../Icon';
 
 import Pagination from '../Pagination/Pagination';
 
-import {
-  IPageChange,
-  objectUseState
-} from './types';
+import { IPageChange, objectUseState } from './types';
 
 import {
   TableStyled,
   TableHeader,
   AllCheckStyle,
+  StyledHeaderPagination
 } from './TableStyles';
 
 import {
   onSelectEverything,
   onSelectAllChange,
-  generateCSVData,
+  generateCSVData
 } from './helpers/functions';
 
 export type Props = {
@@ -70,7 +68,6 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   handleChangeRowsPerPage,
   refreshData
 }) => {
-
   const headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
@@ -86,7 +83,8 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
   useEffect(() => {
     const checkedLength = Object.keys(checked).length;
-    const indeterminate = checkedLength !== 0 && checkedLength < page.length ? true : false;
+    const indeterminate =
+      checkedLength !== 0 && checkedLength < page.length ? true : false;
     setIsIndeterminate(indeterminate);
     setIsAllChecked(
       indeterminate || checkedLength >= page.length ? true : false
@@ -105,7 +103,6 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     setDropdownValue(undefined);
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
-
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -130,7 +127,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
     setCurrentAction(action);
 
     // If there is no pre-action or dropdown options, run the action
-    if(action && !action.preAction && !action.selectOptions) {
+    if (action && !action.preAction && !action.selectOptions) {
       handleRunAction(variables);
     }
   };
@@ -141,7 +138,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   };
 
   const handleRunAction = async (variables?: object) => {
-    if(!currentAction) {
+    if (!currentAction) {
       return false;
     }
 
@@ -199,25 +196,31 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
               </div>
             )}
           </AllCheckStyle>
-          <div style={{ paddingRight: 24 }}>
-            <CSVLink
-              data={csvData}
-              filename={'export.csv'}
-              headers={headers}
-              target='_blank'
-            >
-              <Button styleType='tertiary' size='small' iconOnly={true}>
-                <Icon name='export' />
-              </Button>
-            </CSVLink>
-          </div>
-          <Pagination
-            totalRecords={totalRecords}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onChangePage={handleChangeCurrentPage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          {page.length > 0 && (
+            <div style={{ paddingRight: 24 }}>
+              <CSVLink
+                data={csvData}
+                filename={'export.csv'}
+                headers={headers}
+                target='_blank'
+              >
+                <Button styleType='tertiary' size='small' iconOnly={true}>
+                  <Icon name='export' />
+                </Button>
+              </CSVLink>
+            </div>
+          )}
+          {page.length > 0 && (
+            <StyledHeaderPagination>
+              <Pagination
+                totalRecords={totalRecords}
+                rowsPerPage={rowsPerPage}
+                currentPage={currentPage}
+                onChangePage={handleChangeCurrentPage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+              />
+            </StyledHeaderPagination>
+          )}
         </TableHeader>
       </TableStyled>
       {showActionComponent && currentAction && (
