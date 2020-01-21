@@ -185,6 +185,14 @@ export const StyledPagination = styled(dpstyle.div)`
     }
   }
 `;
+export const StyledHeaderPagination = styled(dpstyle.div)`
+  .select__control {
+    min-width: auto;
+    .select__single-value {
+      margin-right: 4px;
+    }
+  }
+`;
 
 export const StyledTh = styled.div<{ alignRight: boolean }>`
   display: flex;

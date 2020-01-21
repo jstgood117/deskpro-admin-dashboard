@@ -22,7 +22,7 @@ import {
   TableStyled,
   TableHeader,
   AllCheckStyle,
-  StyledPagination
+  StyledHeaderPagination
 } from './TableStyles';
 
 import {
@@ -211,7 +211,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
             </div>
           )}
           {page.length > 0 && (
-            <StyledPagination>
+            <StyledHeaderPagination>
               <Pagination
                 totalRecords={totalRecords}
                 rowsPerPage={rowsPerPage}
@@ -219,7 +219,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
                 onChangePage={handleChangeCurrentPage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
               />
-            </StyledPagination>
+            </StyledHeaderPagination>
           )}
         </TableHeader>
       </TableStyled>
