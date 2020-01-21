@@ -254,7 +254,7 @@ const Table: FC<Props> = ({
             </tbody>
           </table>
         </div>
-        {!loading && (
+        {!loading && page.length > 0 && (
           <StyledPagination>
             <Pagination
               totalRecords={totalRecords}

@@ -15,22 +15,15 @@ import Menu from '../Menu';
 import MultiSelect from '../SelectComponents/MultiSelect';
 import ConfirmDialog from '../Dialog/ConfirmDialog';
 
-import {
-  IPageChange,
-  objectUseState
-} from './types';
+import { IPageChange, objectUseState } from './types';
 
-import {
-  TableStyled,
-  TableHeader,
-  AllCheckStyle,
-} from './TableStyles';
+import { TableStyled, TableHeader, AllCheckStyle } from './TableStyles';
 
 import {
   onSelectEverything,
   onSelectAllChange,
   convertActionsToMenuFormat,
-  generateCSVData,
+  generateCSVData
 } from './helpers/functions';
 
 export type Props = {
@@ -63,9 +56,8 @@ const Header: FC<Props & WrappedComponentProps> = ({
   rowsPerPage,
   currentPage,
   handleChangeCurrentPage,
-  handleChangeRowsPerPage,
+  handleChangeRowsPerPage
 }) => {
-
   const headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
@@ -107,7 +99,6 @@ const Header: FC<Props & WrappedComponentProps> = ({
 
     setDropdownValue(undefined);
   }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
-
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
@@ -202,25 +193,29 @@ const Header: FC<Props & WrappedComponentProps> = ({
               </div>
             )}
           </AllCheckStyle>
-          <div style={{ paddingRight: 24 }}>
-            <CSVLink
-              data={csvData}
-              filename={'export.csv'}
-              headers={headers}
-              target='_blank'
-            >
-              <Button styleType='tertiary' size='small' iconOnly={true}>
-                <Icon name='export' />
-              </Button>
-            </CSVLink>
-          </div>
-          <Pagination
-            totalRecords={totalRecords}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onChangePage={handleChangeCurrentPage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          {page.length > 0 && (
+            <div style={{ paddingRight: 24 }}>
+              <CSVLink
+                data={csvData}
+                filename={'export.csv'}
+                headers={headers}
+                target='_blank'
+              >
+                <Button styleType='tertiary' size='small' iconOnly={true}>
+                  <Icon name='export' />
+                </Button>
+              </CSVLink>
+            </div>
+          )}
+          {page.length > 0 && (
+            <Pagination
+              totalRecords={totalRecords}
+              rowsPerPage={rowsPerPage}
+              currentPage={currentPage}
+              onChangePage={handleChangeCurrentPage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          )}
         </TableHeader>
         <ConfirmDialog
           icon='trash'
