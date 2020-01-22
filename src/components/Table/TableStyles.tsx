@@ -67,6 +67,7 @@ export const TableStyled = styled(dpstyle.div)`
       }
       & tbody {
         & tr {
+          height: 44px;
           &.row--selected {
             background-color: ${props => props.theme.greyLight};
             td {
@@ -126,7 +127,6 @@ export const TableStyled = styled(dpstyle.div)`
             }
             padding: 4px 16px 4px 10px;
             text-align: left;
-            line-height: 44px;
             color: ${props => props.theme.staticColour};
             vertical-align: middle;
             & img {
