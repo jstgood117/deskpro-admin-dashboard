@@ -24,6 +24,7 @@ export interface ITableDataProps {
     | 'color'
     | 'input'
     | 'phrase'
-    | 'template';
+    | 'template'
+    | 'action_buttons';
   props: KeyValue;
 }

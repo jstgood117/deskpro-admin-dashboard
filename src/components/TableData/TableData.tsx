@@ -21,6 +21,7 @@ import Toogle from '../Toggle';
 import Input from '../Input';
 import Label from '../Label';
 import Handlebars from '../Handlebars';
+import ActionButtons from '../Button/ActionButtons';
 
 const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
   switch (type) {
@@ -207,6 +208,15 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
 
     case 'template':
       return <Handlebars template={props.template} data={props.data} />;
+
+    case 'action_buttons':
+      return (
+        <ActionButtons
+          onPencilClick={props.onPencilClick}
+          onDuplicateClick={props.onDuplicateClick}
+          onTrashClick={props.onTrashClick}
+        />
+      );
 
     default:
       return null;

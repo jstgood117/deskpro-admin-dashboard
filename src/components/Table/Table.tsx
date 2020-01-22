@@ -19,7 +19,6 @@ import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
-import ActionButtons from '../Button/ActionButtons';
 
 export type Props = {
   path: string;
@@ -255,10 +254,13 @@ const Table: FC<Props> = ({
                     })}
                     <td>
                       <span className='action-buttons'>
-                        <ActionButtons
-                          onPencilClick={() => { }}
-                          onDuplicateClick={() => { }}
-                          onTrashClick={() => { }}
+                        <TableData
+                          type='action_buttons'
+                          props={{
+                            onPencilClick: () => {},
+                            onDuplicateClick: () => {},
+                            onTrashClick: () => {},
+                          }}
                         />
                       </span>
                     </td>
