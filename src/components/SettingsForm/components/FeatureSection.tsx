@@ -45,7 +45,11 @@ const FeatureSectionStyled = styled.div`
     margin-top: 16px;
   }
 
-  & .group-details > p,
+  & .group-details {
+    display: flex;
+  }
+
+  & .group-details > div > p,
   & .element-details > p {
     font-family: Rubik;
     font-size: 13px;
@@ -55,6 +59,55 @@ const FeatureSectionStyled = styled.div`
     margin-top: 0;
     mix-blend-mode: normal;
     white-space: pre-wrap;
+  }
+
+  & .group-details > div.group-articles {
+    font-family: Rubik;
+    min-width: 280px;
+    border-radius: 6px;
+    border: ${props => `1px solid ${props.theme.hoverColour}`};
+    font-size: 12px;
+    padding: 15px 10px 5px 10px;
+    margin-left: 30px;
+    box-shadow: ${props => `0 3px 6px ${props.theme.greyLighter}`};
+    margin-bottom: 30px;
+  }
+
+  & .group-details > div.group-articles > p {
+    color: ${props => props.theme.staticColour};
+    padding-bottom: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: ${props => `1px solid ${props.theme.greyLighter}`};
+    margin-bottom: 6px;
+  }
+
+  .group-details > div.group-articles ol {
+    padding: 0;
+    margin: 0;
+  }
+
+  & .group-details > div.group-articles li {
+    list-style: none;
+  }
+
+  & .group-details > div.group-articles li a {
+    text-decoration: none;
+    color: ${props => props.theme.staticColour};
+  }
+
+  & .group-details > div.group-articles li::before {
+    content: attr(data-index);
+    border-radius: 100%;
+    padding: 2px;
+    margin: 8px 5px 0 0;
+    color: ${props => props.theme.brandPrimary};
+    background: ${props => `${props.theme.lightBlue}22`};
+    display: inline-flex;
+    height: 18px;
+    width: 18px;
+    align-items: center;
+    justify-content: center;
   }
 
   & .element-info {

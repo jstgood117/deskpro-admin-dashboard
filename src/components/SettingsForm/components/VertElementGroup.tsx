@@ -15,8 +15,22 @@ const Group = styled.div`
 
 const GroupDetails: React.FC = (props: any) => (
   <div className='group-details'>
-    {props.title && <label>{props.title}</label>}
-    {props.description && <p>{props.description}</p>}
+    <div>
+      {props.title && <label>{props.title}</label>}
+      {props.description && <p>{props.description}</p>}
+    </div>
+    {Array.isArray(props.articles) && (
+      <div className='group-articles'>
+        <p>Featured articles</p>
+        <ol>
+          {props.articles.map((article: any, index: number) => (
+            <li data-index={index + 1} key={index}>
+              <a href={article.link}>{article.title}</a>
+            </li>
+          ))}
+        </ol>
+      </div>
+    )}
   </div>
 );
 

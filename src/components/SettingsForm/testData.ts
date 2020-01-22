@@ -1,7 +1,10 @@
 import brand1 from '../../assets/brands/brand1.png';
 import brand2 from '../../assets/brands/brand2.png';
+import { API_SettingsUiElement } from '../../codegen/types';
 
-export const uiSchema = {
+export const uiSchema: {
+  elements: API_SettingsUiElement & { type: string }[];
+} = {
   elements: [
     {
       title: 'Agent Settings',
@@ -276,6 +279,128 @@ export const uiSchema = {
               ]
             }
           ]
+        },
+        {
+          title: 'Help Center',
+          type: 'page_section',
+          elements: [
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_knowledgebase'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'Knowledgebase',
+              showOn: 'agent_settings_help_center_knowledgebase',
+              description:
+                'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
+              elements: [],
+              articles: [
+                {
+                  title: 'I\'m having troube with an error',
+                  link: '//example.com'
+                },
+                {
+                  title: 'How do I create a file for troubleshooting?',
+                  link: '//www.wikihow.com/Create-a-Computer-File'
+                },
+                {
+                  title: 'Custom SSL certificate on custom domain.',
+                  link: '//letsencrypt.org/'
+                }
+              ]
+            },
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_news'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'News',
+              showOn: 'agent_settings_help_center_news',
+              description:
+                'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
+              elements: [],
+              articles: [
+                {
+                  title: 'I\'m having troube with an error',
+                  link: '//example.com'
+                },
+                {
+                  title: 'How do I create a file for troubleshooting?',
+                  link: '//www.wikihow.com/Create-a-Computer-File'
+                },
+                {
+                  title: 'Custom SSL certificate on custom domain.',
+                  link: '//letsencrypt.org/'
+                }
+              ]
+            },
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_downloads'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'Downloads',
+              showOn: 'agent_settings_help_center_downloads',
+              description:
+                'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
+              elements: [],
+              articles: [
+                {
+                  title: 'I\'m having troube with an error',
+                  link: '//example.com'
+                },
+                {
+                  title: 'How do I create a file for troubleshooting?',
+                  link: '//www.wikihow.com/Create-a-Computer-File'
+                },
+                {
+                  title: 'Custom SSL certificate on custom domain.',
+                  link: '//letsencrypt.org/'
+                }
+              ]
+            },
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_community'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'Community',
+              showOn: 'agent_settings_help_center_community',
+              description:
+                'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
+              elements: [],
+              articles: [
+                {
+                  title: 'I\'m having troube with an error',
+                  link: '//example.com'
+                },
+                {
+                  title: 'How do I create a file for troubleshooting?',
+                  link: '//www.wikihow.com/Create-a-Computer-File'
+                },
+                {
+                  title: 'Custom SSL certificate on custom domain.',
+                  link: '//letsencrypt.org/'
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -313,5 +438,9 @@ export const jsonSchema = {
     { name: 'Harleen Quinzel' }
   ],
   brand1_default_email_account: 'support@brand1.deskpro.com',
-  brand2_default_email_account: ''
+  brand2_default_email_account: '',
+  agent_settings_help_center_knowledgebase: true,
+  agent_settings_help_center_news: true,
+  agent_settings_help_center_downloads: true,
+  agent_settings_help_center_community: true
 };
