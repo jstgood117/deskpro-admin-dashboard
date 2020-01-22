@@ -19,6 +19,7 @@ import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
+import { API_ChatDepartment } from '../../codegen/types';
 
 export type Props = {
   path: string;
@@ -85,8 +86,11 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
 
-  const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
-    onCheckboxChange(event.currentTarget.value, checked, setChecked);
+  const handleCheckboxChange = async (
+    event: SyntheticEvent<HTMLInputElement>,
+    subRows: API_ChatDepartment[]
+  ) => {
+    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows);
   };
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
@@ -228,7 +232,9 @@ const Table: FC<Props> = ({
                             ? true
                             : false
                         }
-                        onChange={handleCheckboxChange}
+                        onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                          handleCheckboxChange(e, row.original.subRows);
+                        }}
                       />
                     </td>
                     {row.cells.map((cell: any, indexInner: number) => {
@@ -247,7 +253,7 @@ const Table: FC<Props> = ({
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
-                              cursor: 'pointer'
+                              cursor: 'default'
                             }
                           })}
                         >

@@ -2,30 +2,49 @@ import _ from 'lodash';
 import { KeyValue } from '../../../types';
 
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
-import {
-  objectUseState,
-  TableParams,
-  TableType,
-  ColumnMeta
-} from '../types';
+import { objectUseState, TableParams, TableType, ColumnMeta } from '../types';
+import { API_ChatDepartment } from '../../../codegen/types';
 
 export const onCheckboxChange = (
   value: string,
   checked: object,
-  setChecked: objectUseState
+  setChecked: objectUseState,
+  subRows: API_ChatDepartment[]
 ) => {
   const keys = Object.keys(checked);
-
-  if (keys.includes(value)) {
-    const newIds = keys
-      .filter(_id => _id !== value)
-      .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
-    setChecked(newIds);
+  if (subRows.length > 0) {
+    if (keys.includes(value)) {
+      const ids: string[] = [];
+      ids.push(value);
+      subRows.map((_subRow: { id: any }) => {
+        ids.push(_subRow.id);
+        return true;
+      });
+      const newIds = keys
+        .filter(_id => !ids.includes(_id))
+        .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
+      setChecked(newIds);
+    } else {
+      const ids = [];
+      ids.push({ [value]: true });
+      subRows.map((_subRow: { id: any }) => {
+        ids.push({ ...checked, ...{ [_subRow.id]: true } });
+        return true;
+      });
+      setChecked(Object.assign({}, ...ids));
+    }
   } else {
-    setChecked({
-      ...checked,
-      [value]: true
-    });
+    if (keys.includes(value)) {
+      const newIds = keys
+        .filter(_id => _id !== value)
+        .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
+      setChecked(newIds);
+    } else {
+      setChecked({
+        ...checked,
+        [value]: true
+      });
+    }
   }
 };
 
@@ -34,7 +53,7 @@ export const onSelectAllChange = (
   setChecked: objectUseState,
   currentPage: number,
   pageSize: number,
-  data: object[]
+  data: any[]
 ) => {
   if (!isChecked) {
     setChecked({});
@@ -46,17 +65,34 @@ export const onSelectAllChange = (
     const ids = showingRows.map((_row: KeyValue) => ({
       [_row.id]: true
     }));
+    showingRows.map(row => {
+      if (row.subRows.length > 0) {
+        row.subRows.map((_row: KeyValue) =>
+          ids.push({
+            [_row.id]: true
+          })
+        );
+      }
+      return true;
+    });
     setChecked(Object.assign({}, ...ids));
   }
 };
 
-export const onSelectEverything = (
-  data: object[],
-  setChecked: objectUseState
-) => {
+export const onSelectEverything = (data: any[], setChecked: objectUseState) => {
   const ids = data.map((_row: KeyValue) => ({
     [_row.id]: true
   }));
+  data.map(row => {
+    if (row.subRows.length > 0) {
+      row.subRows.map((_row: KeyValue) =>
+        ids.push({
+          [_row.id]: true
+        })
+      );
+    }
+    return true;
+  });
   setChecked(Object.assign({}, ...ids));
 };
 
@@ -64,7 +100,7 @@ export const generateTableParams = (
   tableType: TableType,
   columns: any[],
   data: KeyValue[],
-  controlledPageCount: number,
+  controlledPageCount: number
 ): TableParams => {
   return tableType === 'async'
     ? {
@@ -72,23 +108,25 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100,
+          pageSize: 100
         },
         manualPagination: true,
-        pageCount: controlledPageCount,
+        pageCount: controlledPageCount
       }
     : {
         columns,
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100,
+          pageSize: 100
         }
       };
 };
 
-export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any): string => {
-
+export const getCSVCellFormatOnType = (
+  columnProps: KeyValue,
+  values: any
+): string => {
   switch (columnProps.__typename) {
     case 'TableColumnNameAvatar':
       return values[columnProps.name.dataPath];
@@ -99,8 +137,7 @@ export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any): stri
     case 'TableColumnDateTime':
       return values[columnProps.value.dataPath];
     case 'TableColumnTextCommaSep':
-      return values[columnProps.valuesArray.dataPath]
-        .join(', ');
+      return values[columnProps.valuesArray.dataPath].join(', ');
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
@@ -108,7 +145,7 @@ export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any): stri
         .map((item: any) => item.title)
         .join(', ');
     case 'TableColumnBoolYesNo':
-      if(values.hasOwnProperty(columnProps.value.dataPath)) {
+      if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
       }
       return '';
@@ -117,7 +154,10 @@ export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any): stri
   }
 };
 
-export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) => {
+export const generateCSVData = (
+  table: KeyValue[],
+  columnsMeta: ColumnMeta[]
+) => {
   const csvData: KeyValue[] = [];
 
   // The table values have already been reduced to
@@ -128,8 +168,10 @@ export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) =>
     table.map((row: KeyValue) => {
       const temp = Object.assign({}, row.values);
       columnsMeta.map((columnMeta: ColumnMeta) => {
-
-        temp[columnMeta.id] = getCSVCellFormatOnType(columnMeta.columnProps, row.original);
+        temp[columnMeta.id] = getCSVCellFormatOnType(
+          columnMeta.columnProps,
+          row.original
+        );
 
         return true;
       });
@@ -143,12 +185,11 @@ export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) =>
 };
 
 export const generateCardProps = (row: any): UserType => {
-
   const { original } = row;
   return {
     userName: original.name,
     userNumber: original.phone,
-    userMail: original.primary_email,
+    userMail: original.primary_email
     // avatar: original.avatarUrn
   };
 };
