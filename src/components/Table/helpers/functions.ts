@@ -23,6 +23,7 @@ export const onCheckboxChange = (
         .filter(_id => !ids.includes(_id))
         .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
       setChecked(newIds);
+      return true;
     } else {
       const ids = [];
       ids.push({ [value]: true });
@@ -31,8 +32,8 @@ export const onCheckboxChange = (
         return true;
       });
       setChecked(Object.assign({}, ...ids));
+      return true;
     }
-    return true;
   } else {
     if (keys.includes(value)) {
       const newIds = keys
@@ -58,6 +59,7 @@ export const onSelectAllChange = (
 ) => {
   if (!isChecked) {
     setChecked({});
+    return true;
   } else {
     const startPos = Math.max(currentPage * pageSize, 0);
     const endPos = Math.min(startPos + pageSize, data.length);
@@ -77,6 +79,7 @@ export const onSelectAllChange = (
       return true;
     });
     setChecked(Object.assign({}, ...ids));
+    return true;
   }
 };
 
@@ -95,6 +98,7 @@ export const onSelectEverything = (data: any[], setChecked: objectUseState) => {
     return true;
   });
   setChecked(Object.assign({}, ...ids));
+  return true;
 };
 
 export const generateTableParams = (
