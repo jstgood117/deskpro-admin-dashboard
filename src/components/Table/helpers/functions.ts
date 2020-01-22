@@ -3,13 +3,12 @@ import { KeyValue } from '../../../types';
 
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
 import { objectUseState, TableParams, TableType, ColumnMeta } from '../types';
-import { API_ChatDepartment } from '../../../codegen/types';
 
 export const onCheckboxChange = (
   value: string,
   checked: object,
   setChecked: objectUseState,
-  subRows: API_ChatDepartment[]
+  subRows: any[]
 ) => {
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
@@ -33,6 +32,7 @@ export const onCheckboxChange = (
       });
       setChecked(Object.assign({}, ...ids));
     }
+    return true;
   } else {
     if (keys.includes(value)) {
       const newIds = keys
@@ -45,6 +45,7 @@ export const onCheckboxChange = (
         [value]: true
       });
     }
+    return true;
   }
 };
 
