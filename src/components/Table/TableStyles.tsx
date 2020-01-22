@@ -69,7 +69,7 @@ export const TableStyled = styled(dpstyle.div)`
         & tr {
           height: 44px;
           &.row--selected {
-            background-color: ${props => props.theme.greyLight};
+            background-color: ${props => props.theme.hoverColour};
             td {
               .text {
                 color: ${props => props.theme.activeColour} !important;
