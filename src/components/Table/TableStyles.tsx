@@ -21,7 +21,7 @@ export const TableStyled = styled(dpstyle.div)`
             cursor: pointer;
             white-space: nowrap;
             padding: 4px 16px 4px 10px;
-            font-weight: 600;
+            font-weight: normal;
             font-size: 14px;
             line-height: 150%;
             color: ${props => props.theme.greyDark};
