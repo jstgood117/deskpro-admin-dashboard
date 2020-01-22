@@ -198,8 +198,9 @@ const Table: FC<Props> = ({
                     {...row.getRowProps()}
                     className={
                       (row.depth === 1
-                        ? page[indexOuter + 1] &&
-                          page[indexOuter + 1].depth === 0
+                        ? (page[indexOuter + 1] &&
+                            page[indexOuter + 1].depth === 0) ||
+                          indexOuter === page.length - 1
                           ? 'isLastSubRow '
                           : 'subrow '
                         : row.subRows.length > 0 && row.isExpanded
