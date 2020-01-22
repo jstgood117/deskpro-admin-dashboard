@@ -19,6 +19,7 @@ import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
+import ActionButtons from '../Button/ActionButtons';
 
 export type Props = {
   path: string;
@@ -180,6 +181,9 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
+                    <th
+                      style={{ width: '1px' }}
+                    />
                   </tr>
                 )
               )}
@@ -249,6 +253,15 @@ const Table: FC<Props> = ({
                         </td>
                       );
                     })}
+                    <td>
+                      <span className='action-buttons'>
+                        <ActionButtons
+                          onPencilClick={() => { }}
+                          onDuplicateClick={() => { }}
+                          onTrashClick={() => { }}
+                        />
+                      </span>
+                    </td>
                   </tr>
                 );
               })}

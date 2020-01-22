@@ -144,6 +144,15 @@ export const TableStyled = styled(dpstyle.div)`
               text-overflow: ellipsis;
             }
           }
+          .action-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            visibility: hidden;
+          }
+          &:hover .action-buttons {
+            visibility: visible;
+          }
         }
       }
     }
