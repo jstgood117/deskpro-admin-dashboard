@@ -57,6 +57,7 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
+    toggleExpanded,
     state: { pageIndex, pageSize }
   } = useTable(
     tableParams,
@@ -99,11 +100,15 @@ const Table: FC<Props> = ({
     setCurrentPage(1);
     gotoPage(0);
   };
-
   useEffect(() => {
+    page.map((row: { canExpand: any; id: any }) => {
+      if (row.canExpand) toggleExpanded(row.id, true);
+      return true;
+    });
     setChecked({});
     setTotalRecords(data.length);
-  }, [pageIndex, data]);
+    // eslint-disable-next-line
+  }, [pageIndex, data, page]);
 
   return (
     <>
@@ -236,6 +241,7 @@ const Table: FC<Props> = ({
                           key={indexInner}
                           {...cell.getCellProps()}
                           {...cell.row.getExpandedToggleProps({
+                            onClick: () => {},
                             style: {
                               textAlign: isIdColumn && 'right',
                               verticalAlign: isIdColumn && 'bottom',
@@ -243,8 +249,7 @@ const Table: FC<Props> = ({
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
-                              cursor:
-                                row.subRows.length > 0 ? 'pointer' : 'auto'
+                              cursor: 'pointer'
                             }
                           })}
                         >
