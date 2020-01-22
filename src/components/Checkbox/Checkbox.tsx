@@ -62,7 +62,6 @@ const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean }>`
   align-items: center;
   height: fit-content;
   background: ${props => props.opened && props.theme.hoverColour};
-  padding-left: 5px;
   position: relative;
   border-radius: 4px;
 `;
