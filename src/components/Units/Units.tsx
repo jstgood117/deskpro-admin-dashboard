@@ -30,7 +30,7 @@ export type UnitsValuesType = {
   selectValue: IOptions;
 };
 
-const UnitsComponent: React.FC<IProps> = ({
+const Units: React.FC<IProps> = ({
   inputValue,
   options,
   option,
@@ -77,4 +77,4 @@ const UnitsComponent: React.FC<IProps> = ({
   );
 };
 
-export default UnitsComponent;
+export default Units;

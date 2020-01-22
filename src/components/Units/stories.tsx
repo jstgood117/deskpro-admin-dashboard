@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { IOptions } from '../../types';
 
-import UnitsComponent, { UnitsValuesType } from './UnitsComponent';
+import Units, { UnitsValuesType } from './Units';
 
 const options: IOptions[] = [
   { value: 'minutes', label: 'minutes' },
@@ -10,14 +10,14 @@ const options: IOptions[] = [
   { value: 'seconds', label: 'seconds' },
 ];
 
-storiesOf('UnitsComponent', module)
+storiesOf('Units', module)
   .add('default', () => {
     const handleChange = (value: UnitsValuesType) => {
       console.log(value);
     };
 
     return (
-      <UnitsComponent
+      <Units
         inputValue='10'
         options={options}
         option={options[1]}

@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import UnitsComponent, { IProps, UnitsValuesType } from './UnitsComponent';
+import Units, { IProps, UnitsValuesType } from './Units';
 
-describe('UnitsComponent', () => {
+describe('Units', () => {
   const props: IProps = {
     inputValue: '10',
     options: [{ value: 'minutes', label: 'minutes' }],
@@ -13,15 +13,15 @@ describe('UnitsComponent', () => {
     }
   };
 
-  let mountedUnitsComponent: any;
+  let mountedUnits: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedUnitsComponent) {
-      mountedUnitsComponent = bShallow
-        ? shallow(<UnitsComponent {...props} />)
-        : mount(<UnitsComponent {...props} />);
+    if (!mountedUnits) {
+      mountedUnits = bShallow
+        ? shallow(<Units {...props} />)
+        : mount(<Units {...props} />);
     }
-    return mountedUnitsComponent;
+    return mountedUnits;
   };
 
   it('always renders a <div>', () => {
