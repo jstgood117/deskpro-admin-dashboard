@@ -21,7 +21,7 @@ const UnitsContainer = styled.div`
 export interface IProps {
   inputValue?: string;
   options: IOptions[];
-  option?: IOptions;
+  option?: string;
   onChange: (value: UnitsValuesType) => void;
 }
 
@@ -37,7 +37,8 @@ const Units: React.FC<IProps> = ({
   onChange
 }) => {
   const [value, setValue] = useState(inputValue);
-  const [selectedOption, setSelectOptions] = useState(option);
+  const defaultOption = options.find(item => item.value === option);
+  const [selectedOption, setSelectOptions] = useState(defaultOption);
 
   function handleInputChange(event: any) {
     setValue(event.target.value);

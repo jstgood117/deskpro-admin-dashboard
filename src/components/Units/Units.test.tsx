@@ -7,7 +7,7 @@ describe('Units', () => {
   const props: IProps = {
     inputValue: '10',
     options: [{ value: 'minutes', label: 'minutes' }],
-    option: { value: 'minutes', label: 'minutes' },
+    option: 'minutes',
     onChange: (val: UnitsValuesType) => {
       return true;
     }

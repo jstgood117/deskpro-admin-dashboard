@@ -20,7 +20,7 @@ storiesOf('Units', module)
       <Units
         inputValue='10'
         options={options}
-        option={options[1]}
+        option='hours'
         onChange={(value: UnitsValuesType) => {
           handleChange(value);
         }}
