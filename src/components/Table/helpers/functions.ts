@@ -104,7 +104,7 @@ export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any): stri
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return values[columnProps.valuesArray.dataPath]
+      return values[columnProps.valuesArray.dataPath] && values[columnProps.valuesArray.dataPath]
         .map((item: any) => item.title)
         .join(', ');
     case 'TableColumnBoolYesNo':
