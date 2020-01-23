@@ -19,6 +19,7 @@ import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
+import { API_ChatDepartment } from '../../codegen/types';
 
 export type Props = {
   path: string;
@@ -57,6 +58,7 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
+    toggleExpanded,
     state: { pageIndex, pageSize }
   } = useTable(
     tableParams,
@@ -67,10 +69,10 @@ const Table: FC<Props> = ({
   ) as any;
 
   useEffect(() => {
-    if (fetchData) {
+    if (fetchData && tableType === 'async') {
       fetchData();
     }
-  }, [fetchData, pageIndex, pageSize]);
+  }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
     if (sortBy.length) {
@@ -84,8 +86,11 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
 
-  const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
-    onCheckboxChange(event.currentTarget.value, checked, setChecked);
+  const handleCheckboxChange = async (
+    event: SyntheticEvent<HTMLInputElement>,
+    subRows: API_ChatDepartment[]
+  ) => {
+    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows);
   };
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
@@ -99,11 +104,15 @@ const Table: FC<Props> = ({
     setCurrentPage(1);
     gotoPage(0);
   };
-
   useEffect(() => {
+    page.map((row: { canExpand: any; id: any }) => {
+      if (row.canExpand) toggleExpanded(row.id, true);
+      return true;
+    });
     setChecked({});
     setTotalRecords(data.length);
-  }, [pageIndex, data]);
+    // eslint-disable-next-line
+  }, [pageIndex, data, page]);
 
   return (
     <>
@@ -193,8 +202,9 @@ const Table: FC<Props> = ({
                     {...row.getRowProps()}
                     className={
                       (row.depth === 1
-                        ? page[indexOuter + 1] &&
-                          page[indexOuter + 1].depth === 0
+                        ? (page[indexOuter + 1] &&
+                            page[indexOuter + 1].depth === 0) ||
+                          indexOuter === page.length - 1
                           ? 'isLastSubRow '
                           : 'subrow '
                         : row.subRows.length > 0 && row.isExpanded
@@ -222,7 +232,9 @@ const Table: FC<Props> = ({
                             ? true
                             : false
                         }
-                        onChange={handleCheckboxChange}
+                        onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                          handleCheckboxChange(e, row.original.subRows);
+                        }}
                       />
                     </td>
                     {row.cells.map((cell: any, indexInner: number) => {
@@ -233,6 +245,7 @@ const Table: FC<Props> = ({
                           key={indexInner}
                           {...cell.getCellProps()}
                           {...cell.row.getExpandedToggleProps({
+                            onClick: () => {},
                             style: {
                               textAlign: isIdColumn && 'right',
                               verticalAlign: isIdColumn && 'bottom',
@@ -240,8 +253,7 @@ const Table: FC<Props> = ({
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
-                              cursor:
-                                row.subRows.length > 0 ? 'pointer' : 'auto'
+                              cursor: 'default'
                             }
                           })}
                         >

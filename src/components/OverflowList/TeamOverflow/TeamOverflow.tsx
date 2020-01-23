@@ -17,7 +17,7 @@ const containerStyle = {
 const BadeImage = styled.img`
   width: 16px;
   height: 16px;
-  margin-left: -5px;
+  margin-left: -7px;
   margin-right: 5px;
   border-radius: 3px;
   object-fit: cover;
