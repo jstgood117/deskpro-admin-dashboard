@@ -67,13 +67,11 @@ const Actions: FC<Props> = ({
       )}
       {currentAction && currentAction.selectOptions && (
         <div style={{ display: 'flex', paddingLeft: 15 }}>
-          {!selectOptions && (
-            <MultiSelect
-              options={currentAction.selectOptions}
-              type='fixed'
-              selectOptions={selectOptions}
-            />
-          )}
+          <MultiSelect
+            options={currentAction.selectOptions}
+            type='fixed'
+            selectOptions={selectOptions}
+          />
         </div>
       )}
       {((currentAction && currentAction.preAction) ||
