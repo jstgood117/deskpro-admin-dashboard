@@ -15,9 +15,6 @@ export const TableStyled = styled(dpstyle.div)`
           border-top: 1px solid ${props => props.theme.greyLight};
           border-bottom: 1px solid ${props => props.theme.greyLight};
           & th {
-            :first-child {
-              width: 30px;
-            }
             cursor: pointer;
             white-space: nowrap;
             padding: 4px 16px 4px 10px;
@@ -121,10 +118,6 @@ export const TableStyled = styled(dpstyle.div)`
           }
           & td {
             border-bottom: 1px solid ${props => props.theme.greyLighter};
-
-            :first-child {
-              width: 30px;
-            }
             padding: 4px 16px 4px 10px;
             text-align: left;
             color: ${props => props.theme.staticColour};
