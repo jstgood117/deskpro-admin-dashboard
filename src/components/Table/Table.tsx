@@ -19,6 +19,8 @@ import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
+import { API_ChatDepartment } from '../../codegen/types';
+import { ActionFactory } from '../../services/actions/ActionFactory';
 
 export type Props = {
   path: string;
@@ -84,9 +86,13 @@ const Table: FC<Props> = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
+  const actions = ActionFactory(path);
 
-  const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
-    onCheckboxChange(event.currentTarget.value, checked, setChecked);
+  const handleCheckboxChange = async (
+    event: SyntheticEvent<HTMLInputElement>,
+    subRows: API_ChatDepartment[]
+  ) => {
+    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows);
   };
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
@@ -139,7 +145,7 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    <th />
+                    {actions && actions.length > 0 && <th style={{ width: '30px' }} />}
                     {headerGroup.headers.map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
@@ -213,24 +219,29 @@ const Table: FC<Props> = ({
                         : '')
                     }
                   >
-                    <td
-                      style={{
-                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
-                      }}
-                      className='checkBox'
-                    >
-                      <Checkbox
-                        value={(row.original as KeyValue).id}
-                        checked={
-                          checked.hasOwnProperty(
-                            (row.original as KeyValue).id.toString()
-                          )
-                            ? true
-                            : false
-                        }
-                        onChange={handleCheckboxChange}
-                      />
-                    </td>
+                    {actions && actions.length > 0 && (
+                      <td
+                        style={{
+                          width: '30px',
+                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+                        }}
+                        className='checkBox'
+                      >
+                        <Checkbox
+                          value={(row.original as KeyValue).id}
+                          checked={
+                            checked.hasOwnProperty(
+                              (row.original as KeyValue).id.toString()
+                            )
+                              ? true
+                              : false
+                          }
+                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            handleCheckboxChange(e, row.original.subRows);
+                          }}
+                        />
+                      </td>
+                    )}
                     {row.cells.map((cell: any, indexInner: number) => {
                       const isIdColumn =
                         cell.column.type.__typename === 'TableColumnId';
@@ -247,7 +258,7 @@ const Table: FC<Props> = ({
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
-                              cursor: 'pointer'
+                              cursor: 'default'
                             }
                           })}
                         >

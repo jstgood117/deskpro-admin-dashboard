@@ -7,6 +7,7 @@ import Icon from '../Icon';
 import Label from '../Label';
 
 const OverflowStyled = styled.span`
+  line-height: 150%;
   ${S1} {
     color: ${props => props.theme.greyDark};
     display: inline-block;
@@ -49,8 +50,8 @@ const OverflowList: React.FC<IProps> = ({
 
   const list = expand ? items : items.slice(0, max);
   const OverflowText =
-    viewMode !== 'text' ? (
-      <S1 style={textStyle}>+{Math.abs(max - items.length)}</S1>
+    viewMode === 'text' ? (
+      <S1 style={textStyle}>+ {Math.abs(max - items.length)}</S1>
     ) : (
       <Label
         label={`+${String(Math.abs(max - items.length))}`}
