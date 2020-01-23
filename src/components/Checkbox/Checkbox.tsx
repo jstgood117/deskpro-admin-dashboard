@@ -57,14 +57,14 @@ const ArrowButton = styled.span<{ checked: boolean; opened?: boolean }>`
   }
 `;
 
-const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean }>`
+const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean, showArrow?:boolean }>`
   display: inline-flex;
   align-items: center;
   height: fit-content;
   background: ${props => props.opened && props.theme.hoverColour};
+  padding-left: ${props => (props.showArrow ? 5 : 0)}px;
   position: relative;
   border-radius: 4px;
-  padding-left: 5px;
 `;
 const CheckboxContainer = styled.label<{ size: number }>`
   width: ${props => props.size}px;
@@ -115,7 +115,7 @@ const Checkbox: FC<IProps> = ({
   items,
   setDropdownValue
 }) => (
-  <CheckboxWrapper opened={opened}>
+  <CheckboxWrapper opened={opened} showArrow={showArrow}>
     <CheckboxContainer
       size={size}
       style={containerStyle}
