@@ -106,6 +106,17 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       };
       return { type: 'multiple_agents', props: agentsProps };
 
+    case 'TableColumnTicketDepartmentList':
+      return {
+        type: 'string',
+        props: {
+          values: getPayloadValue(row, type.valuesArray).map(
+            (department:any) => ((department && department.title) ||'')
+          ),
+          max: 1
+        }
+      };
+
     case 'TableColumnTextCommaSep':
       return {
         type: 'string',
