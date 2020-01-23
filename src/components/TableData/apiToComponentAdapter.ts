@@ -79,6 +79,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
     case 'TableColumnBoolOnOff':
       return { type: 'yes_no', props: { checked: getPayloadValue(row, type.value) } };
 
+    case 'TableColumnDateTime':
     case 'TableColumnTimeAgo':
       return {
         type: 'date_time',
