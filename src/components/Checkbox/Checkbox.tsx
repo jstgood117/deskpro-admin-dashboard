@@ -64,6 +64,7 @@ const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean }>`
   background: ${props => props.opened && props.theme.hoverColour};
   position: relative;
   border-radius: 4px;
+  padding-left: 5px;
 `;
 const CheckboxContainer = styled.label<{ size: number }>`
   width: ${props => props.size}px;

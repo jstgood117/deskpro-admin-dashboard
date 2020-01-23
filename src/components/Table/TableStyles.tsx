@@ -154,7 +154,7 @@ export const AllCheckStyle = styled(dpstyle.div)`
   display: flex;
   align-items: center;
   flex: 1;
-  padding-left: 10px;
+  padding-left: 5px;
   .selected-text {
     padding-left: 15px;
     font-style: normal;
