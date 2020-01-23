@@ -163,7 +163,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
 
     case 'id':
       return (
-        <S2 style={{ opacity: 0.3, position: 'absolute', bottom: 0, right: 0 }}>
+        <S2 style={{ opacity: 0.3 }}>
           {props.id}
         </S2>
       );
