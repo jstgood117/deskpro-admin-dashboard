@@ -1,10 +1,7 @@
 import { onSelectEverything } from '../functions';
 
 const setChecked = jest.fn();
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: (init: any) => [init, setChecked]
-}));
+
 describe('onSelectEverything', () => {
   test('onSelectEverything select all', () => {
     const subRows = [
@@ -45,8 +42,8 @@ describe('onSelectEverything', () => {
         subRows
       }
     ];
-    const result = onSelectEverything(data, setChecked);
-    expect(result).toEqual(true);
+    onSelectEverything(data, setChecked);
+    expect(setChecked).toHaveBeenCalledWith({'1': true, '2': true, '7': true, '8': true});
   });
   test('onSelectEverything unselect all', () => {
     const subRows = [
@@ -87,7 +84,7 @@ describe('onSelectEverything', () => {
         subRows
       }
     ];
-    const result = onSelectEverything(data, setChecked);
-    expect(result).toEqual(true);
+    onSelectEverything(data, setChecked);
+    expect(setChecked).toHaveBeenCalledWith({'1': true, '2': true, '7': true, '8': true});
   });
 });

@@ -1,10 +1,6 @@
 import { onSelectAllChange } from '../functions';
 
 const setChecked = jest.fn();
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: (init: any) => [init, setChecked]
-}));
 describe('onSelectAllChange', () => {
   test('select all', () => {
     const subRows = [
@@ -45,8 +41,8 @@ describe('onSelectAllChange', () => {
         subRows
       }
     ];
-    const result = onSelectAllChange(true, setChecked, 0, 100, data);
-    expect(result).toEqual(true);
+    onSelectAllChange(true, setChecked, 0, 100, data);
+    expect(setChecked).toHaveBeenCalledWith({'1': true, '2': true, '7': true, '8': true});
   });
   test('unselect all', () => {
     const subRows = [
@@ -87,7 +83,7 @@ describe('onSelectAllChange', () => {
         subRows
       }
     ];
-    const result = onSelectAllChange(false, setChecked, 0, 100, data);
-    expect(result).toEqual(true);
+    onSelectAllChange(false, setChecked, 0, 100, data);
+    expect(setChecked).toHaveBeenCalledWith({'1': true, '2': true, '7': true, '8': true});
   });
 });
