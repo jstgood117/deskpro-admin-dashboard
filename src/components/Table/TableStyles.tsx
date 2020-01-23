@@ -83,7 +83,7 @@ export const TableStyled = styled(dpstyle.div)`
               transparent 0px
             );
             background-repeat: no-repeat;
-            background-position: 22px 22px;
+            background-position: 18px 22px;
             .checkBox {
               border-bottom: none;
             }
@@ -99,7 +99,7 @@ export const TableStyled = styled(dpstyle.div)`
                 transparent 0px
               );
             background-repeat: no-repeat;
-            background-position: 22px 0, 22px 24px;
+            background-position: 18px 0,18px 20px;
             background-size: auto, 22px;
             .checkBox {
               border-bottom: none;
@@ -116,8 +116,8 @@ export const TableStyled = styled(dpstyle.div)`
                 transparent 0px
               );
             background-repeat: no-repeat;
-            background-position: 22px 0px, 22px 24px;
-            background-size: 2px 24px, 22px;
+            background-position: 18px 0,18px 20px;
+            background-size: 2px 20px, 22px;
           }
           & td {
             border-bottom: 1px solid ${props => props.theme.greyLighter};
