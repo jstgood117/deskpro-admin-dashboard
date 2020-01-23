@@ -17,7 +17,11 @@ import {
 export type Props = {
   path: string;
   menuValue: IMenuItemProps;
-  onChange: (menuItem?: IMenuItemProps, action?: ActionsType, variables?: object) => void;
+  onChange: (
+    menuItem?: IMenuItemProps,
+    action?: ActionsType,
+    variables?: object
+  ) => void;
   selectOptions: (val: IOptions[]) => void;
   selectedOptions: IOptions[];
   handlePreAction: (action: ActionsType) => void;
@@ -31,9 +35,8 @@ const Actions: FC<Props> = ({
   onChange,
   selectOptions,
   selectedOptions,
-  handlePreAction,
+  handlePreAction
 }) => {
-
   const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
   const [actions, setActions] = useState<ActionsType[]>([]);
   const [currentAction, setCurrentAction] = useState<ActionsType>();
@@ -46,7 +49,6 @@ const Actions: FC<Props> = ({
   }, [path]);
 
   const onSelect = (val: IMenuItemProps) => {
-
     const action = getActionFromMenuItem(val, actions);
     setCurrentAction(action);
     onChange(val, action, { ids });
@@ -54,22 +56,24 @@ const Actions: FC<Props> = ({
 
   return (
     <>
-      <Menu
-        value={menuValue}
-        onSelect={onSelect}
-        label={
-          menuValue ? menuValue['name'] : 'admin_common.table.action'
-        }
-        menuItems={menuItems}
-        iconName='menu'
-      />
+      {!menuValue && (
+        <Menu
+          value={menuValue}
+          onSelect={onSelect}
+          label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
+          menuItems={menuItems}
+          iconName='menu'
+        />
+      )}
       {currentAction && currentAction.selectOptions && (
         <div style={{ display: 'flex', paddingLeft: 15 }}>
-          <MultiSelect
-            options={currentAction.selectOptions}
-            type='fixed'
-            selectOptions={selectOptions}
-          />
+          {!selectOptions && (
+            <MultiSelect
+              options={currentAction.selectOptions}
+              type='fixed'
+              selectOptions={selectOptions}
+            />
+          )}
         </div>
       )}
       {((currentAction && currentAction.preAction) ||
