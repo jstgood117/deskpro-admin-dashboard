@@ -22,6 +22,7 @@ export interface ITableDataProps {
     | 'currency'
     | 'code'
     | 'color'
+    | 'color_swatch'
     | 'input'
     | 'phrase'
     | 'template';

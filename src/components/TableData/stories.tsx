@@ -271,4 +271,7 @@ storiesOf('Table Data', module)
     <Container>
       <TableData type='color' props={{ color: '#2EA4B5', label: 'Cyan' }} />
     </Container>
+  ))
+  .add('Colour Swatch', () => (
+    <TableData type='color_swatch' props={{ color: '#2EA4B5', label: 'Cyan' }} />
   ));
