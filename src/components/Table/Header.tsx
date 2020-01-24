@@ -72,7 +72,6 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
-
   const [opened, clickButton] = useState(false);
   const [menuValue, setMenuValue] = useState();
   const [currentAction, setCurrentAction] = useState<ActionsType>();
@@ -167,7 +166,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
       <TableStyled>
         <TableHeader>
           <AllCheckStyle>
-            {actions && actions.length > 0 && (
+            {actions && actions.length > 0 && data.length > 0 && (
               <Checkbox
                 checked={isAllChecked}
                 opened={opened}
