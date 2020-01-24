@@ -281,18 +281,7 @@ const OrderableMenu: FC<IMenuProps> = ({
           menuZIndex={2}
           openedClassName='selected'
           openedStyle={{ background: '#D2D8DD' }}
-          menu={
-            <Menu
-              onSelect={onSelect}
-              order={order}
-              menuItems={menuItems}
-              initialList={initialList}
-              setChecked={setChecked}
-              checked={checked}
-              initialChecked={initialChecked}
-              value={value}
-            />
-          }
+          menu={<Menu onSelect={onSelect} order={order} menuItems={menuItems} initialList={initialList} setChecked={setChecked} checked={checked} initialChecked={initialChecked} value={value}/>}
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
