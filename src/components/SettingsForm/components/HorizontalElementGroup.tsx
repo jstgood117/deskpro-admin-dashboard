@@ -2,9 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { GenericFormComponent } from '../GenericFormComponent';
-import FieldElement from './FieldElement';
-import { generateElementInfo } from './helpers/generateElementInfo';
-import { generateTitleAndDescription } from './helpers/generateTitleAndDescription';
+import FieldContainer from './FieldContainer';
 
 const HozizontalGroup = styled.div`
 margin-bottom:8px;
@@ -24,16 +22,6 @@ const HozizontalGroupCol = styled.div`
   display: none;
 }
 `;
-
-const FieldContainer: React.FC = (props: any) => (
-  <div className='field-container'>
-    {generateTitleAndDescription('element-details', props)}
-    <div className='element-context'>
-      <FieldElement {...props.field} formikProps={props.formikProps} />
-    </div>
-    {generateElementInfo(props)}
-  </div>
-);
 
 const HorizontalElementGroup: React.FC = (props: any) => {
 
