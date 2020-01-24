@@ -21,6 +21,8 @@ export const uiSchema = {
             {
               type: 'vertical_group',
               title: 'Idle Timeout',
+              tooltip:
+                'Enable this to log out agents who are idle. Otherwise, sessions will be kept alive if Deskpro is open in a browser window, even if the agent is not doing anything.',
               showOn: 'agent_settings_security_enabled',
               description:
                 'Enable this to log out agents who are idle. Otherwise, sessions will be kept alive if Deskpro is open in a browser window, even if the agent is not doing anything.',
@@ -42,6 +44,7 @@ export const uiSchema = {
                 {
                   type: 'field',
                   title: 'Agent Timeout',
+                  tooltip: 'Agent Timeout',
                   field: {
                     type: 'input',
                     id: 'agent_settings_security_idle_timeout'
@@ -64,6 +67,7 @@ export const uiSchema = {
                 {
                   type: 'field',
                   title: 'Send idle agent who have been timed out to ',
+                  tooltip: 'Send idle agent who have been timed out to ',
                   field: {
                     type: 'input',
                     id: 'agent_settings_security_idle_timeout_action'
@@ -72,6 +76,7 @@ export const uiSchema = {
                 {
                   type: 'field',
                   title: 'Agent IP Whitelisting',
+                  tooltip: 'Agent IP Whitelisting',
                   description:
                     'When enabled, agents can only log in from IP addresses that have been marked as trusted. Specify the IP addresses manually or allow agent to authenticate IP address using email. ',
                   field: {
@@ -105,6 +110,7 @@ export const uiSchema = {
             {
               type: 'vertical_group',
               title: 'Admin authentication',
+              tooltip: 'Admin authentication',
               description:
                 'Administrators will be required to authenticate themselves when accessing the admin area of Deskpro.',
               showOn: 'admin_settings_security_enabled',
@@ -119,6 +125,7 @@ export const uiSchema = {
                 {
                   type: 'vertical_group',
                   title: 'Idle Timeout',
+                  tooltip: 'Idle Timeout',
                   showOn: 'admin_settings_security_idle_timeout_enabled',
                   description:
                     'Log out admins who are inactive. Admins will be logged out when the admin idle timeout elapses.',
@@ -126,6 +133,7 @@ export const uiSchema = {
                     {
                       type: 'field',
                       title: 'Admin Idle Timeout',
+                      tooltip: 'Admin Idle Timeout',
                       field: {
                         type: 'input',
                         id: 'admin_settings_security_idle_timeout'
@@ -136,6 +144,7 @@ export const uiSchema = {
                 {
                   type: 'field',
                   title: 'Admin IP Whitelisting',
+                  tooltip: 'Admin IP Whitelisting',
                   description:
                     'When enabled, admins can only log in from trusted IP addresses.',
                   field: {
