@@ -7,7 +7,6 @@ import { P1 } from '../../Typography';
 
 const Name = styled(P1)`
   margin-left: 8px;
-  line-height: 1;
 `;
 
 export interface IProps {
