@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { GenericFormComponent } from '../GenericFormComponent';
 import FieldElement from './FieldElement';
 import { generateElementInfo } from './helpers/generateElementInfo';
+import { generateTitleAndDescription } from './helpers/generateTitleAndDescription';
 
 const HozizontalGroup = styled.div`
 margin-bottom:8px;
@@ -26,12 +27,7 @@ const HozizontalGroupCol = styled.div`
 
 const FieldContainer: React.FC = (props: any) => (
   <div className='field-container'>
-    { (props.title || props.description) && (
-      <div className='element-details'>
-        {props.title && <label>{props.title}</label>}
-        {props.description && <p>{props.description}</p>}
-      </div>
-    )}
+    {generateTitleAndDescription('element-details', props)}
     <div className='element-context'>
       <FieldElement {...props.field} formikProps={props.formikProps} />
     </div>

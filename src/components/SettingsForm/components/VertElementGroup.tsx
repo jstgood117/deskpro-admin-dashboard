@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import FieldElement from './FieldElement';
 import { GenericFormComponent } from '../GenericFormComponent';
 import { generateElementInfo } from './helpers/generateElementInfo';
+import { generateTitleAndDescription } from './helpers/generateTitleAndDescription';
 
 const Group = styled.div`
   position: relative;
@@ -13,19 +14,9 @@ const Group = styled.div`
   }
 `;
 
-const GroupDetails: React.FC = (props: any) => (
-  <div className='group-details'>
-    {props.title && <label>{props.title}</label>}
-    {props.description && <p>{props.description}</p>}
-  </div>
-);
-
 const FieldContainer: React.FC = (props: any) => (
   <div className='field-container'>
-    <div className='element-details'>
-      {props.title && <label>{props.title}</label>}
-      {props.description && <p>{props.description}</p>}
-    </div>
+    {generateTitleAndDescription('element-details', props)}
     <div className='element-context'>
       <FieldElement {...props.field} formikProps={props.formikProps} />
     </div>
@@ -40,7 +31,7 @@ const VertElementGroup: React.FC = (props: any) => {
 
   return (
     <Group>
-      <GroupDetails {...props} />
+      {generateTitleAndDescription('group-details', props)}
       {generateElementInfo(props)}
       {enabled &&
         props.elements.map((element: any, i: number) =>
