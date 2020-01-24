@@ -113,7 +113,7 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
   return (
     <MenuListWrapper>
       <Scrollbars
-        style={{ height: 34 * menuItems.length, zIndex: 1, maxHeight: 190 }}
+        style={{ height: 35 * menuItems.length, zIndex: 1, maxHeight: 190 }}
         renderTrackVertical={({ style }) => (
           <div
             style={{

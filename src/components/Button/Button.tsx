@@ -421,7 +421,7 @@ const Button: FC<Props> = ({
         {items && items.length > 0 && opened && (
           <DropdownContent onClick={onClick} className='dropdownContent'>
             <Scrollbars
-              style={{ height: 34 * items.length, zIndex: 1, maxHeight: 190 }}
+              style={{ height: 45 * items.length, zIndex: 1, maxHeight: 190 }}
               renderTrackVertical={({ style }) => (
                 <div
                   style={{
