@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-import FieldElement from './FieldElement';
 import { GenericFormComponent } from '../GenericFormComponent';
-import Link from '../../Link';
+import FieldElement from './FieldElement';
+import { generateElementInfo } from './helpers/generateElementInfo';
 
 const HozizontalGroup = styled.div`
 margin-bottom:8px;
@@ -35,18 +35,9 @@ const FieldContainer: React.FC = (props: any) => (
     <div className='element-context'>
       <FieldElement {...props.field} formikProps={props.formikProps} />
     </div>
-    {Array.isArray(props.info) && (
-      <div className='element-info'>
-        {props.info.map((info: any, index: number) => (
-          <Link href={info.url} icon={info.icon} key={index}>
-            {info.title}
-          </Link>
-        ))}
-      </div>
-    )}
+    {generateElementInfo(props)}
   </div>
 );
-
 
 const HorizontalElementGroup: React.FC = (props: any) => {
 

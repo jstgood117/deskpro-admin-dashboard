@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import FieldElement from './FieldElement';
 import { GenericFormComponent } from '../GenericFormComponent';
-import Link from '../../Link';
+import { generateElementInfo } from './helpers/generateElementInfo';
 
 const Group = styled.div`
   position: relative;
@@ -29,15 +29,7 @@ const FieldContainer: React.FC = (props: any) => (
     <div className='element-context'>
       <FieldElement {...props.field} formikProps={props.formikProps} />
     </div>
-    {Array.isArray(props.info) && (
-      <div className='element-info'>
-        {props.info.map((info: any, index: number) => (
-          <Link href={info.url} icon={info.icon} key={index}>
-            {info.title}
-          </Link>
-        ))}
-      </div>
-    )}
+    {generateElementInfo(props)}
   </div>
 );
 
@@ -49,15 +41,7 @@ const VertElementGroup: React.FC = (props: any) => {
   return (
     <Group>
       <GroupDetails {...props} />
-      {Array.isArray(props.info) && (
-        <div className='group-info'>
-          {props.info.map((info: any, index: number) => (
-            <Link href={info.url} icon={info.icon} key={index}>
-              {info.title}
-            </Link>
-          ))}
-        </div>
-      )}
+      {generateElementInfo(props)}
       {enabled &&
         props.elements.map((element: any, i: number) =>
           element.type === 'field' ? (
