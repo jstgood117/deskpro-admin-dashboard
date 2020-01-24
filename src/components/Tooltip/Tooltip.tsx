@@ -16,7 +16,7 @@ const getStyle = (styleType: 'dark' | 'light' | 'lightBox', theme: DeskproAdminT
       backgroundColor: '#fff',
       color: theme.staticColour,
       border: 'none',
-      boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.15)'
+      boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.1)'
     },
     lightBox: {
       backgroundColor: '#fff',
@@ -45,7 +45,7 @@ const Tooltip: FC<Props> = styled(
     color: ${props => getStyle(props.styleType, props.theme).color};
     box-shadow: ${props => getStyle(props.styleType, props.theme).boxShadow};
     border: ${props => getStyle(props.styleType, props.theme).border};
-    border-radius: 4px;
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
