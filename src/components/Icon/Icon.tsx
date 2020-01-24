@@ -71,19 +71,17 @@ import { ReactComponent as IconQuestionText } from '../../assets/svg/ic-question
 import { ReactComponent as IconDown } from '../../assets/svg/ic-down.svg';
 import { ReactComponent as IconDollarSign } from '../../assets/svg/ic-dollar-sign.svg';
 import { ReactComponent as IconHelpCenter } from '../../assets/svg/ic-helpCenter.svg';
-import { ReactComponent as IconArrowRight} from '../../assets/svg/ic-arrow-right.svg';
-import { ReactComponent as IconSortDownActive} from '../../assets/svg/ic-sort-down-active.svg';
-import { ReactComponent as IconSortUpActive} from '../../assets/svg/ic-sort-up-active.svg';
-import { ReactComponent as IconGroupingUp} from '../../assets/svg/ic-grouping-up.svg';
-import { ReactComponent as IconGroupingDown} from '../../assets/svg/ic-grouping-down.svg';
+import { ReactComponent as IconArrowRight } from '../../assets/svg/ic-arrow-right.svg';
+import { ReactComponent as IconSortDownActive } from '../../assets/svg/ic-sort-down-active.svg';
+import { ReactComponent as IconSortUpActive } from '../../assets/svg/ic-sort-up-active.svg';
+import { ReactComponent as IconGroupingUp } from '../../assets/svg/ic-grouping-up.svg';
+import { ReactComponent as IconGroupingDown } from '../../assets/svg/ic-grouping-down.svg';
 
 export interface IProps {
   name: string;
 }
 const StyledIcon = styled.span`
-  display: flex;
-  align-items: center;
-    &:hover {
+  &:hover {
     path {
       fill: ${props => props.theme.activeColour};
     }
@@ -245,11 +243,9 @@ const Icon: FC<IProps> = props => {
       );
     case 'info-question-text':
       return (
-        <Tooltip content='Question text' styleType='light' placement='bottom'>
-          <StyledIcon>
-            <IconQuestionText />
-          </StyledIcon>
-        </Tooltip>
+        <StyledIcon>
+          <IconQuestionText />
+        </StyledIcon>
       );
     default:
       return <IconSetup />;
