@@ -191,6 +191,9 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
+                    <th
+                      style={{ width: '1px' }}
+                    />
                   </tr>
                 )
               )}
@@ -266,6 +269,21 @@ const Table: FC<Props> = ({
                         </td>
                       );
                     })}
+                    <td>
+                      <span className='action-buttons'>
+                        {!checked.hasOwnProperty(
+                          (row.original as KeyValue).id.toString()) && (
+                            <TableData
+                              type='action_buttons'
+                              props={{
+                                onPencilClick: () => {},
+                                onDuplicateClick: () => {},
+                                onTrashClick: () => {},
+                              }}
+                            />
+                          )}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
