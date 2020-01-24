@@ -271,14 +271,17 @@ const Table: FC<Props> = ({
                     })}
                     <td>
                       <span className='action-buttons'>
-                        <TableData
-                          type='action_buttons'
-                          props={{
-                            onPencilClick: () => {},
-                            onDuplicateClick: () => {},
-                            onTrashClick: () => {},
-                          }}
-                        />
+                        {!checked.hasOwnProperty(
+                          (row.original as KeyValue).id.toString()) && (
+                            <TableData
+                              type='action_buttons'
+                              props={{
+                                onPencilClick: () => {},
+                                onDuplicateClick: () => {},
+                                onTrashClick: () => {},
+                              }}
+                            />
+                          )}
                       </span>
                     </td>
                   </tr>
