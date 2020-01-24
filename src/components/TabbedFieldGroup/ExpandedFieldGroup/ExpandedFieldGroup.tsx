@@ -13,7 +13,7 @@ const ExpandedPanel = styled.div`
   & > div:first-child .element-details {
     display: block;
     position: absolute;
-    top: 0;
+    top: -34px;
     font-family: Rubik;
     font-style: normal;
     font-weight: normal;

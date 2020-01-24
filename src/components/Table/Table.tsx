@@ -20,6 +20,21 @@ import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
+import { ActionFactory } from '../../services/actions/ActionFactory';
+
+// Returns `true` on equal sorts
+const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
+  let result = sort1.length === sort2.length;
+
+  if (result) {
+    sort1.forEach((item1, index) => {
+      const item2 = sort2[index];
+      result = result && item1.id === item2.id && !!item1.desc === !!item2.desc;
+      return result;
+    });
+  }
+  return result;
+};
 
 export type Props = {
   path: string;
@@ -30,6 +45,7 @@ export type Props = {
   pageCount?: number;
   tableType: TableType;
   sortBy: SortType[];
+  onSortChange?: (sortBy: SortType[]) => void;
 };
 
 const Table: FC<Props> = ({
@@ -38,6 +54,7 @@ const Table: FC<Props> = ({
   columns,
   fetchData,
   loading,
+  onSortChange,
   pageCount: controlledPageCount,
   tableType,
   sortBy
@@ -59,7 +76,7 @@ const Table: FC<Props> = ({
     setPageSize,
     gotoPage,
     toggleExpanded,
-    state: { pageIndex, pageSize }
+    state: { pageIndex, pageSize, sortBy: sortByInfo }
   } = useTable(
     tableParams,
     useExpanded,
@@ -68,23 +85,39 @@ const Table: FC<Props> = ({
     useRowSelect
   ) as any;
 
+  // Process internal sort change
+  useEffect(() => {
+    if (onSortChange && !compareSorts(sortBy, sortByInfo)) {
+      onSortChange(sortByInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortByInfo]);
+
   useEffect(() => {
     if (fetchData && tableType === 'async') {
       fetchData();
     }
   }, [fetchData, pageIndex, pageSize, tableType]);
 
+  // Handle incoming sort rules
   useEffect(() => {
-    if (sortBy.length) {
+    if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
       toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
 
+  useEffect(() => {
+    if (fetchData) {
+      fetchData();
+    }
+  }, [fetchData, pageIndex, pageSize]);
+
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
+  const actions = ActionFactory(path);
 
   const handleCheckboxChange = async (
     event: SyntheticEvent<HTMLInputElement>,
@@ -143,7 +176,7 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    <th />
+                    {actions && actions.length > 0 && <th style={{ width: '30px' }} />}
                     {headerGroup.headers.map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
@@ -189,6 +222,9 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
+                    <th
+                      style={{ width: '1px' }}
+                    />
                   </tr>
                 )
               )}
@@ -217,26 +253,29 @@ const Table: FC<Props> = ({
                         : '')
                     }
                   >
-                    <td
-                      style={{
-                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
-                      }}
-                      className='checkBox'
-                    >
-                      <Checkbox
-                        value={(row.original as KeyValue).id}
-                        checked={
-                          checked.hasOwnProperty(
-                            (row.original as KeyValue).id.toString()
-                          )
-                            ? true
-                            : false
-                        }
-                        onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                          handleCheckboxChange(e, row.original.subRows);
+                    {actions && actions.length > 0 && (
+                      <td
+                        style={{
+                          width: '30px',
+                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
                         }}
-                      />
-                    </td>
+                        className='checkBox'
+                      >
+                        <Checkbox
+                          value={(row.original as KeyValue).id}
+                          checked={
+                            checked.hasOwnProperty(
+                              (row.original as KeyValue).id.toString()
+                            )
+                              ? true
+                              : false
+                          }
+                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            handleCheckboxChange(e, row.original.subRows);
+                          }}
+                        />
+                      </td>
+                    )}
                     {row.cells.map((cell: any, indexInner: number) => {
                       const isIdColumn =
                         cell.column.type.__typename === 'TableColumnId';
@@ -261,6 +300,21 @@ const Table: FC<Props> = ({
                         </td>
                       );
                     })}
+                    <td>
+                      <span className='action-buttons'>
+                        {!checked.hasOwnProperty(
+                          (row.original as KeyValue).id.toString()) && (
+                            <TableData
+                              type='action_buttons'
+                              props={{
+                                onPencilClick: () => {},
+                                onDuplicateClick: () => {},
+                                onTrashClick: () => {},
+                              }}
+                            />
+                          )}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
