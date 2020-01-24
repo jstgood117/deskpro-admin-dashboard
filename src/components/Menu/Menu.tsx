@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import isNil from 'lodash/isNil';
 import { MenuList, MenuButton } from 'react-menu-list';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import Icon from '../Icon';
 import { MenuLabel, TextLabel } from '../Styled';
@@ -111,48 +112,65 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
 }) => {
   return (
     <MenuListWrapper>
-      <MenuList>
-        {menuItems.length > 0 &&
-          menuItems.map((item, index: number) => {
-            return (
-              <div key={index}>
-                {item.name && !item.subItems && (
-                  <SingleSubMenuItem
-                    onSelect={onSelect}
-                    item={item}
-                    value={value}
-                    name={name}
-                  >
-                    <IconWrapper>
-                      {item.icon && <Icon name={item.icon} />}
-                    </IconWrapper>
-                    {intl.formatMessage({ id: item.name })}
-                    {name === 'groupSub' && (
-                      <GrouppingWrapper>
-                        <span style={{ display: 'flex' }} onClick={() => {}}>
-                          <Icon name='ic-grouping-up' />
-                        </span>
-                        <span style={{ display: 'flex' }} onClick={() => {}}>
-                          <Icon name='ic-grouping-down' />
-                        </span>
-                      </GrouppingWrapper>
-                    )}
-                  </SingleSubMenuItem>
-                )}
-                {item.name && item.subItems && (
-                  <MultiSubMenuItem
-                    name={name}
-                    item={item}
-                    onSelect={onSelect}
-                    menuItems={item.subItems}
-                    subMenuDirection={subMenuDirection}
-                  />
-                )}
-                {!item.name && <HR />}
-              </div>
-            );
-          })}
-      </MenuList>
+      <Scrollbars
+        style={{ height: 34 * menuItems.length, zIndex: 1, maxHeight: 190 }}
+        renderTrackVertical={({ style }) => (
+          <div
+            style={{
+              background: '#ccc',
+              position: 'absolute',
+              width: 6,
+              right: 0,
+              bottom: 0,
+              top: 0,
+              borderRadius: 3
+            }}
+          />
+        )}
+      >
+        <MenuList>
+          {menuItems.length > 0 &&
+            menuItems.map((item, index: number) => {
+              return (
+                <div key={index}>
+                  {item.name && !item.subItems && (
+                    <SingleSubMenuItem
+                      onSelect={onSelect}
+                      item={item}
+                      value={value}
+                      name={name}
+                    >
+                      <IconWrapper>
+                        {item.icon && <Icon name={item.icon} />}
+                      </IconWrapper>
+                      {intl.formatMessage({ id: item.name })}
+                      {name === 'groupSub' && (
+                        <GrouppingWrapper>
+                          <span style={{ display: 'flex' }} onClick={() => {}}>
+                            <Icon name='ic-grouping-up' />
+                          </span>
+                          <span style={{ display: 'flex' }} onClick={() => {}}>
+                            <Icon name='ic-grouping-down' />
+                          </span>
+                        </GrouppingWrapper>
+                      )}
+                    </SingleSubMenuItem>
+                  )}
+                  {item.name && item.subItems && (
+                    <MultiSubMenuItem
+                      name={name}
+                      item={item}
+                      onSelect={onSelect}
+                      menuItems={item.subItems}
+                      subMenuDirection={subMenuDirection}
+                    />
+                  )}
+                  {!item.name && <HR />}
+                </div>
+              );
+            })}
+        </MenuList>
+      </Scrollbars>
     </MenuListWrapper>
   );
 };
@@ -176,7 +194,15 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
           className={`menu-btn ${selected ? 'selected' : ''}`}
           openedClassName='selected'
           openedStyle={{ background: '#D2D8DD' }}
-          menu={<MenuSub menuItems={menuItems} onSelect={onSelect} value={value} name={props.name} subMenuDirection={subMenuDirection}/>}
+          menu={
+            <MenuSub
+              menuItems={menuItems}
+              onSelect={onSelect}
+              value={value}
+              name={props.name}
+              subMenuDirection={subMenuDirection}
+            />
+          }
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
