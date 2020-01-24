@@ -6,6 +6,7 @@ import Button from './Button';
 import Icon from '../Icon';
 import WithDropdownButton from './WithDropdownButton';
 import DropdownButton, { IItemProps } from './DropdownButton';
+import ActionButtons from './ActionButtons';
 
 import brand1 from '../../assets/brands/brand1.png';
 import brand2 from '../../assets/brands/brand2.png';
@@ -270,4 +271,11 @@ storiesOf('Button', module)
   ))
   .add('button/medium/withImage/BrandButtonGroup', () => (
     <BrandButtonGroupComponent size='medium' />
+  ))
+  .add('button/ActionButtons', () => (
+    <ActionButtons
+      onPencilClick={() => {}}
+      onDuplicateClick={() => {}}
+      onTrashClick={() => {}}
+    />
   ));
