@@ -15,13 +15,10 @@ export const TableStyled = styled(dpstyle.div)`
           border-top: 1px solid ${props => props.theme.greyLight};
           border-bottom: 1px solid ${props => props.theme.greyLight};
           & th {
-            :first-child {
-              width: 30px;
-            }
             cursor: pointer;
             white-space: nowrap;
             padding: 4px 16px 4px 10px;
-            font-weight: 600;
+            font-weight: normal;
             font-size: 14px;
             line-height: 150%;
             color: ${props => props.theme.greyDark};
@@ -67,8 +64,9 @@ export const TableStyled = styled(dpstyle.div)`
       }
       & tbody {
         & tr {
+          height: 44px;
           &.row--selected {
-            background-color: ${props => props.theme.greyLight};
+            background-color: ${props => props.theme.hoverColour};
             td {
               .text {
                 color: ${props => props.theme.activeColour} !important;
@@ -82,7 +80,7 @@ export const TableStyled = styled(dpstyle.div)`
               transparent 0px
             );
             background-repeat: no-repeat;
-            background-position: 22px 22px;
+            background-position: 18px 22px;
             .checkBox {
               border-bottom: none;
             }
@@ -98,7 +96,7 @@ export const TableStyled = styled(dpstyle.div)`
                 transparent 0px
               );
             background-repeat: no-repeat;
-            background-position: 22px 0, 22px 24px;
+            background-position: 18px 0,18px 20px;
             background-size: auto, 22px;
             .checkBox {
               border-bottom: none;
@@ -115,18 +113,13 @@ export const TableStyled = styled(dpstyle.div)`
                 transparent 0px
               );
             background-repeat: no-repeat;
-            background-position: 22px 0px, 22px 24px;
-            background-size: 2px 24px, 22px;
+            background-position: 18px 0,18px 20px;
+            background-size: 2px 20px, 22px;
           }
           & td {
             border-bottom: 1px solid ${props => props.theme.greyLighter};
-
-            :first-child {
-              width: 30px;
-            }
             padding: 4px 16px 4px 10px;
             text-align: left;
-            line-height: 44px;
             color: ${props => props.theme.staticColour};
             vertical-align: middle;
             & img {
@@ -170,6 +163,7 @@ export const AllCheckStyle = styled(dpstyle.div)`
   display: flex;
   align-items: center;
   flex: 1;
+  padding-left: 5px;
   .selected-text {
     padding-left: 15px;
     font-style: normal;

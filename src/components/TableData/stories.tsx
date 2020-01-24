@@ -281,4 +281,7 @@ storiesOf('Table Data', module)
         onTrashClick: () => {},
       }}
     />
+  ))
+  .add('Colour Swatch', () => (
+    <TableData type='color_swatch' props={{ color: '#2EA4B5', label: 'Cyan' }} />
   ));
