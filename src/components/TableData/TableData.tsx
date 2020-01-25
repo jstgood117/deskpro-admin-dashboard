@@ -21,6 +21,8 @@ import Toogle from '../Toggle';
 import Input from '../Input';
 import Label from '../Label';
 import Handlebars from '../Handlebars';
+import ActionButtons from '../Button/ActionButtons';
+import ColorSwatch from '../ColorSwatch';
 
 const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
   switch (type) {
@@ -140,6 +142,9 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
     case 'locale':
       return <Locale code={props.code} />;
 
+    case 'color_swatch':
+      return <ColorSwatch color={props.color}>{props.label}</ColorSwatch>;
+
     case 'team':
       return (
         <Tooltip content={props.name} styleType='lightBox'>
@@ -158,12 +163,12 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         />
       );
 
-      case 'count':
+    case 'count':
       return <P1 className='text'>{props.count}</P1>;
 
     case 'id':
       return (
-        <S2 style={{ opacity: 0.3, position: 'absolute', bottom: 0, right: 0 }}>
+        <S2 style={{ opacity: 0.3 }}>
           {props.id}
         </S2>
       );
@@ -203,6 +208,15 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
 
     case 'template':
       return <Handlebars template={props.template} data={props.data} />;
+
+    case 'action_buttons':
+      return (
+        <ActionButtons
+          onPencilClick={props.onPencilClick}
+          onDuplicateClick={props.onDuplicateClick}
+          onTrashClick={props.onTrashClick}
+        />
+      );
 
     default:
       return null;

@@ -271,4 +271,17 @@ storiesOf('Table Data', module)
     <Container>
       <TableData type='color' props={{ color: '#2EA4B5', label: 'Cyan' }} />
     </Container>
+  ))
+  .add('ActionButtons (action_buttons)', () => (
+    <TableData
+      type='action_buttons'
+      props={{
+        onPencilClick: () => {},
+        onDuplicateClick: () => {},
+        onTrashClick: () => {},
+      }}
+    />
+  ))
+  .add('Colour Swatch', () => (
+    <TableData type='color_swatch' props={{ color: '#2EA4B5', label: 'Cyan' }} />
   ));

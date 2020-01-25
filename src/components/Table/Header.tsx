@@ -4,6 +4,7 @@ import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { runAction } from '../../services/actions/run';
+import { ActionFactory } from '../../services/actions/ActionFactory';
 import { ActionsType } from '../../services/actions/types';
 import { KeyValue, IOptions } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
@@ -71,7 +72,6 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
-
   const [opened, clickButton] = useState(false);
   const [menuValue, setMenuValue] = useState();
   const [currentAction, setCurrentAction] = useState<ActionsType>();
@@ -158,25 +158,28 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
   const checkedIds = Object.keys(checked);
+  const actions = ActionFactory(path);
   return (
     <>
       <TableStyled>
         <TableHeader>
           <AllCheckStyle>
-            <Checkbox
-              checked={isAllChecked}
-              opened={opened}
-              clickButton={clickButton}
-              setDropdownValue={setDropdownValue}
-              dropdownValue={dropdownValue}
-              items={items}
-              value='checked'
-              indeterminate={isIndeterminate}
-              showArrow={true}
-              onChange={(event: SyntheticEvent<HTMLInputElement>) =>
-                handleSelectAllClick(event, pageIndex)
-              }
-            />
+            {actions && actions.length > 0 && data.length > 0 && (
+              <Checkbox
+                checked={isAllChecked}
+                opened={opened}
+                clickButton={clickButton}
+                setDropdownValue={setDropdownValue}
+                dropdownValue={dropdownValue}
+                items={items}
+                value='checked'
+                indeterminate={isIndeterminate}
+                showArrow={true}
+                onChange={(event: SyntheticEvent<HTMLInputElement>) =>
+                  handleSelectAllClick(event, pageIndex)
+                }
+              />
+            )}
             {Object.keys(checked).length > 0 && (
               <span className='selected-text'>
                 {Object.keys(checked).length} Selected
