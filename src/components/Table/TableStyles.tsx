@@ -137,6 +137,15 @@ export const TableStyled = styled(dpstyle.div)`
               text-overflow: ellipsis;
             }
           }
+          .action-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            visibility: hidden;
+          }
+          &:hover .action-buttons {
+            visibility: visible;
+          }
         }
       }
     }
@@ -154,7 +163,7 @@ export const AllCheckStyle = styled(dpstyle.div)`
   display: flex;
   align-items: center;
   flex: 1;
-  padding-left: 10px;
+  padding-left: 5px;
   .selected-text {
     padding-left: 15px;
     font-style: normal;
