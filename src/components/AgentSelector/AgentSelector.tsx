@@ -90,12 +90,12 @@ const AgentSelectorActions = styled.div`
 `;
 
 interface Props {
-  agents: {
+  agents?: {
     id: string;
     name: string;
     avatar?: string;
   }[];
-  selected: {
+  selected?: {
     [id: string]: boolean;
   };
   onSelect: (selected: { [id: string]: boolean }) => void;
@@ -110,7 +110,7 @@ const AgentSelector: React.FC<Props> = ({
   selected: initialSelected,
   title
 }) => {
-  const [selected, setSelected] = React.useState(initialSelected);
+  const [selected, setSelected] = React.useState(initialSelected || {});
   const onAgentSelect = React.useCallback(
     (id: string) => {
       setSelected({ ...selected, [id]: !selected[id] });
@@ -119,7 +119,7 @@ const AgentSelector: React.FC<Props> = ({
   );
   const onSelectAllClick = () =>
     setSelected(
-      Object.assign({}, ...agents.map(agent => ({ [agent.id]: true })))
+      Object.assign({}, ...(agents || []).map(agent => ({ [agent.id]: true })))
     );
   const onCancelClick = () => setSelected(initialSelected);
   const onSaveClick = () => onSelect(selected);
@@ -145,7 +145,7 @@ const AgentSelector: React.FC<Props> = ({
       </AgentSelectorInfo>
       <Input inputType='primary' placeholder='Search' showClear={true} />
       <AgentSelectorList>
-        {agents.map(agent => (
+        {(agents || []).map(agent => (
           <AgentSelectorRow
             agent={agent}
             key={agent.id}

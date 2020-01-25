@@ -39,9 +39,13 @@ interface Props {
 
 export const AgentSelectorRow: React.FC<Props> = React.memo(
   ({ agent, onSelect, selected }) => {
+    const onCheck = React.useCallback(() => onSelect(agent.id), [
+      agent.id,
+      onSelect
+    ]);
     return (
       <AgentSelectorRowStyled key={agent.id}>
-        <Checkbox checked={!!selected} onChange={() => onSelect(agent.id)} />
+        <Checkbox checked={!!selected} onChange={onCheck} />
         <NameAndAvatar avatar={agent.avatar} name={agent.name} />
       </AgentSelectorRowStyled>
     );
