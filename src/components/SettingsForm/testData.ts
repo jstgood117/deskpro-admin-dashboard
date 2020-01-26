@@ -298,20 +298,7 @@ export const uiSchema: {
               description:
                 'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
               elements: [],
-              articles: [
-                {
-                  title: 'I\'m having troube with an error',
-                  link: '//example.com'
-                },
-                {
-                  title: 'How do I create a file for troubleshooting?',
-                  link: '//www.wikihow.com/Create-a-Computer-File'
-                },
-                {
-                  title: 'Custom SSL certificate on custom domain.',
-                  link: '//letsencrypt.org/'
-                }
-              ]
+              articles: 'featuredArticles'
             },
             {
               type: 'field',
@@ -327,20 +314,7 @@ export const uiSchema: {
               description:
                 'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
               elements: [],
-              articles: [
-                {
-                  title: 'I\'m having troube with an error',
-                  link: '//example.com'
-                },
-                {
-                  title: 'How do I create a file for troubleshooting?',
-                  link: '//www.wikihow.com/Create-a-Computer-File'
-                },
-                {
-                  title: 'Custom SSL certificate on custom domain.',
-                  link: '//letsencrypt.org/'
-                }
-              ]
+              articles: 'featuredArticles'
             },
             {
               type: 'field',
@@ -356,20 +330,7 @@ export const uiSchema: {
               description:
                 'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
               elements: [],
-              articles: [
-                {
-                  title: 'I\'m having troube with an error',
-                  link: '//example.com'
-                },
-                {
-                  title: 'How do I create a file for troubleshooting?',
-                  link: '//www.wikihow.com/Create-a-Computer-File'
-                },
-                {
-                  title: 'Custom SSL certificate on custom domain.',
-                  link: '//letsencrypt.org/'
-                }
-              ]
+              articles: 'featuredArticles'
             },
             {
               type: 'field',
@@ -385,20 +346,7 @@ export const uiSchema: {
               description:
                 'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
               elements: [],
-              articles: [
-                {
-                  title: 'I\'m having troube with an error',
-                  link: '//example.com'
-                },
-                {
-                  title: 'How do I create a file for troubleshooting?',
-                  link: '//www.wikihow.com/Create-a-Computer-File'
-                },
-                {
-                  title: 'Custom SSL certificate on custom domain.',
-                  link: '//letsencrypt.org/'
-                }
-              ]
+              articles: 'featuredArticles'
             }
           ]
         }

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import FieldElement from './FieldElement';
 import { GenericFormComponent } from '../GenericFormComponent';
 import Link from '../../Link';
+import settingsImages from '../../SettingsImages/SettingsImages';
 
 const Group = styled.div`
   position: relative;
@@ -19,16 +20,12 @@ const GroupDetails: React.FC = (props: any) => (
       {props.title && <label>{props.title}</label>}
       {props.description && <p>{props.description}</p>}
     </div>
-    {Array.isArray(props.articles) && (
+    {props.articles && (
       <div className='group-articles'>
-        <p>Featured articles</p>
-        <ol>
-          {props.articles.map((article: any, index: number) => (
-            <li data-index={index + 1} key={index}>
-              <a href={article.link}>{article.title}</a>
-            </li>
-          ))}
-        </ol>
+        <img
+          alt='Featured articles example'
+          src={settingsImages[props.articles]}
+        />
       </div>
     )}
   </div>

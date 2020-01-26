@@ -64,12 +64,8 @@ const FeatureSectionStyled = styled.div`
   & .group-details > div.group-articles {
     font-family: Rubik;
     min-width: 280px;
-    border-radius: 6px;
-    border: ${props => `1px solid ${props.theme.hoverColour}`};
     font-size: 12px;
-    padding: 15px 10px 5px 10px;
     margin-left: 30px;
-    box-shadow: ${props => `0 3px 6px ${props.theme.greyLighter}`};
     margin-bottom: 30px;
   }
 
@@ -80,6 +76,11 @@ const FeatureSectionStyled = styled.div`
     font-weight: 500;
     border-bottom: ${props => `1px solid ${props.theme.greyLighter}`};
     margin-bottom: 6px;
+  }
+
+  & .group-details > div.group-articles > img {
+    width: 300px;
+    height: 140px;
   }
 
   .group-details > div.group-articles ol {
