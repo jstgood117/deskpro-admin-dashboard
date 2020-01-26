@@ -56,7 +56,7 @@ export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
       return true;
     })
     .map((column: ITableColumn, index: number) => {
-      checkedState[String(index)] = true;
+      checkedState[String(index)] = column.defaultShow;
 
       return {
         key: index,

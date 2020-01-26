@@ -19,6 +19,22 @@ import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
+import { API_ChatDepartment } from '../../codegen/types';
+import { ActionFactory } from '../../services/actions/ActionFactory';
+
+// Returns `true` on equal sorts
+const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
+  let result = sort1.length === sort2.length;
+
+  if (result) {
+    sort1.forEach((item1, index) => {
+      const item2 = sort2[index];
+      result = result && item1.id === item2.id && !!item1.desc === !!item2.desc;
+      return result;
+    });
+  }
+  return result;
+};
 
 export type Props = {
   path: string;
@@ -29,6 +45,7 @@ export type Props = {
   pageCount?: number;
   tableType: TableType;
   sortBy: SortType[];
+  onSortChange?: (sortBy: SortType[]) => void;
 };
 
 const Table: FC<Props> = ({
@@ -37,6 +54,7 @@ const Table: FC<Props> = ({
   columns,
   fetchData,
   loading,
+  onSortChange,
   pageCount: controlledPageCount,
   tableType,
   sortBy
@@ -57,7 +75,8 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
-    state: { pageIndex, pageSize }
+    toggleExpanded,
+    state: { pageIndex, pageSize, sortBy: sortByInfo }
   } = useTable(
     tableParams,
     useExpanded,
@@ -66,26 +85,45 @@ const Table: FC<Props> = ({
     useRowSelect
   ) as any;
 
+  // Process internal sort change
+  useEffect(() => {
+    if (onSortChange && !compareSorts(sortBy, sortByInfo)) {
+      onSortChange(sortByInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortByInfo]);
+
+  useEffect(() => {
+    if (fetchData && tableType === 'async') {
+      fetchData();
+    }
+  }, [fetchData, pageIndex, pageSize, tableType]);
+
+  // Handle incoming sort rules
+  useEffect(() => {
+    if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
+      toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy]);
+
   useEffect(() => {
     if (fetchData) {
       fetchData();
     }
   }, [fetchData, pageIndex, pageSize]);
 
-  useEffect(() => {
-    if (sortBy.length) {
-      toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy]);
-
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
+  const actions = ActionFactory(path);
 
-  const handleCheckboxChange = (event: SyntheticEvent<HTMLInputElement>) => {
-    onCheckboxChange(event.currentTarget.value, checked, setChecked);
+  const handleCheckboxChange = async (
+    event: SyntheticEvent<HTMLInputElement>,
+    subRows: API_ChatDepartment[]
+  ) => {
+    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows);
   };
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
@@ -99,11 +137,15 @@ const Table: FC<Props> = ({
     setCurrentPage(1);
     gotoPage(0);
   };
-
   useEffect(() => {
+    page.map((row: { canExpand: any; id: any }) => {
+      if (row.canExpand) toggleExpanded(row.id, true);
+      return true;
+    });
     setChecked({});
     setTotalRecords(data.length);
-  }, [pageIndex, data]);
+    // eslint-disable-next-line
+  }, [pageIndex, data, page]);
 
   return (
     <>
@@ -134,7 +176,7 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    <th />
+                    {actions && actions.length > 0 && <th style={{ width: '30px' }} />}
                     {headerGroup.headers.map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
@@ -180,6 +222,9 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
+                    <th
+                      style={{ width: '1px' }}
+                    />
                   </tr>
                 )
               )}
@@ -193,8 +238,9 @@ const Table: FC<Props> = ({
                     {...row.getRowProps()}
                     className={
                       (row.depth === 1
-                        ? page[indexOuter + 1] &&
-                          page[indexOuter + 1].depth === 0
+                        ? (page[indexOuter + 1] &&
+                            page[indexOuter + 1].depth === 0) ||
+                          indexOuter === page.length - 1
                           ? 'isLastSubRow '
                           : 'subrow '
                         : row.subRows.length > 0 && row.isExpanded
@@ -207,24 +253,29 @@ const Table: FC<Props> = ({
                         : '')
                     }
                   >
-                    <td
-                      style={{
-                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
-                      }}
-                      className='checkBox'
-                    >
-                      <Checkbox
-                        value={(row.original as KeyValue).id}
-                        checked={
-                          checked.hasOwnProperty(
-                            (row.original as KeyValue).id.toString()
-                          )
-                            ? true
-                            : false
-                        }
-                        onChange={handleCheckboxChange}
-                      />
-                    </td>
+                    {actions && actions.length > 0 && (
+                      <td
+                        style={{
+                          width: '30px',
+                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+                        }}
+                        className='checkBox'
+                      >
+                        <Checkbox
+                          value={(row.original as KeyValue).id}
+                          checked={
+                            checked.hasOwnProperty(
+                              (row.original as KeyValue).id.toString()
+                            )
+                              ? true
+                              : false
+                          }
+                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            handleCheckboxChange(e, row.original.subRows);
+                          }}
+                        />
+                      </td>
+                    )}
                     {row.cells.map((cell: any, indexInner: number) => {
                       const isIdColumn =
                         cell.column.type.__typename === 'TableColumnId';
@@ -233,6 +284,7 @@ const Table: FC<Props> = ({
                           key={indexInner}
                           {...cell.getCellProps()}
                           {...cell.row.getExpandedToggleProps({
+                            onClick: () => {},
                             style: {
                               textAlign: isIdColumn && 'right',
                               verticalAlign: isIdColumn && 'bottom',
@@ -240,8 +292,7 @@ const Table: FC<Props> = ({
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
-                              cursor:
-                                row.subRows.length > 0 ? 'pointer' : 'auto'
+                              cursor: 'default'
                             }
                           })}
                         >
@@ -249,6 +300,21 @@ const Table: FC<Props> = ({
                         </td>
                       );
                     })}
+                    <td>
+                      <span className='action-buttons'>
+                        {!checked.hasOwnProperty(
+                          (row.original as KeyValue).id.toString()) && (
+                            <TableData
+                              type='action_buttons'
+                              props={{
+                                onPencilClick: () => {},
+                                onDuplicateClick: () => {},
+                                onTrashClick: () => {},
+                              }}
+                            />
+                          )}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}
