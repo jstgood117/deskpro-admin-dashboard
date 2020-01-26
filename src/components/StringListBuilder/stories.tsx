@@ -16,7 +16,6 @@ storiesOf('String List Builder', module)
         <StringListBuilder
           addTitle='Add IP'
           id='test'
-          showTitle={true}
           title='Whitelisted IPs'
           values={props.values.test}
         />
@@ -44,8 +43,24 @@ storiesOf('String List Builder', module)
           addTitle='Add Usergroup'
           id='test'
           max={8}
-          showTitle={true}
           title='Usergroups'
+          values={props.values.test}
+        />
+      )}
+    </Formik>
+  ))
+  .add('List builder no title and items', () => (
+    <Formik
+      initialValues={{
+        test: []
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {props => (
+        <StringListBuilder
+          addTitle='Add'
+          id='test'
           values={props.values.test}
         />
       )}
