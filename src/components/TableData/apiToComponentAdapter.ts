@@ -114,7 +114,6 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'multiple_agents', props: agentsProps };
 
     case 'TableColumnTicketDepartmentList':
-      console.log(cell);
       return {
         type: 'string',
         props: {
