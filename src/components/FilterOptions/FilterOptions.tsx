@@ -69,7 +69,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   getUniqueValues,
   ...props
 }) => {
-
   const [currentProperty, setProperty] = useState();
   const [currentOption, setOption] = useState();
   const [currentPath, setCurrentPath] = useState(filter.property);
@@ -81,7 +80,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
   const [filterValue, setFilterValue] = useState<string[]>([]);
   // eslint-disable-next-line
   const [uniqueValues, setUniqueValues] = useState<string[]>([]);
-
 
   useEffect(() => {
     if (currentOperator) {
@@ -111,6 +109,14 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
     containOptions,
     containProperties
   ]);
+
+  // Keep current type based on filted
+  useEffect(() => {
+    const option = options.find(item => item.dataPath === filter.property);
+    if (option) {
+      setType(option.type);
+    }
+  }, [filter, options]);
 
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
@@ -155,7 +161,6 @@ const FilterOptions: FC<IProps & WrappedComponentProps> = ({
         setFilters={setFilters}
         uniqueValues={uniqueValues}
       />
-
     </ThemeProvider>
   );
 };
