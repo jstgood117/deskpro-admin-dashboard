@@ -74,16 +74,16 @@ const Actions: FC<Props> = ({
 
   return (
     <>
-{!menuValue && (
-<Menu
-        value={menuValue}
-        onSelect={onSelect}
-        label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
-        menuItems={menuItems}
-        iconName='menu'
-      />
-)}
-      
+      {!menuValue && (
+        <Menu
+          value={menuValue}
+          onSelect={onSelect}
+          label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
+          menuItems={menuItems}
+          iconName='menu'
+        />
+      )}
+
       {Array.isArray(options) && (
         <div style={{ display: 'flex', paddingLeft: 15 }}>
           <MultiSelect
