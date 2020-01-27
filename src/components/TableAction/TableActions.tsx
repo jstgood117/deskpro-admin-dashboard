@@ -20,7 +20,11 @@ import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
 import OrderableMenu from '../Menu/OrderableMenu';
 import Menu from '../Menu';
-import { generateViewList, generatSortMenuItems } from './functions';
+import {
+  generateViewList,
+  generatSortMenuItems,
+  generatFilterOptions,
+} from './functions';
 import { SortType } from '../Table/types';
 import { testGroupItems } from '../../resources/constants/constants';
 
@@ -69,6 +73,7 @@ export interface IProps {
   sortMenu: boolean;
   groupMenu: boolean;
   viewMenu: boolean;
+  sortBy?: SortType[];
   onOrderChange: (columnOrder: ColumnOrder[]) => void;
   onSortChange: (sortItems: SortType[]) => void;
   getUniqueValues?: (columnName: string) => string[];
@@ -117,6 +122,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   intl,
   onOrderChange,
   onSortChange,
+  sortBy,
   getUniqueValues,
   ...props
 }) => {
@@ -131,7 +137,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const { columnsViewList, checkedState } = generateViewList(tableDef);
 
-  const [Sort, setSortValue] = useState('');
+  const [Sort, setSortValue] = useState<
+    { link: string; label: string; desc?: boolean } | string
+  >('');
   const [searchValue, setSearchValue] = useState('');
   const [openedSort, clickButtonSort] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
@@ -185,6 +193,16 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     setSortMenuItems(newSortMenuItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnOrder, onOrderChange]);
+
+  useEffect(() => {
+    let link = '';
+    let desc = false;
+    if (Array.isArray(sortBy) && sortBy.length) {
+      link = intl.formatMessage({ id: sortBy[0].id });
+      desc = sortBy[0].desc;
+    }
+    setSortValue(link ? { link, label: link, desc } : link);
+  }, [intl, sortBy]);
 
   const getFilterTitle = (path: string) => {
     const match = filterDef.find(
@@ -252,11 +270,19 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const handleSortChange = (val: any) => {
     const id = val.link;
+    const link = intl.formatMessage({ id });
+    let desc = false;
 
-    onSortChange([{ id, desc: false }]);
+    if (typeof Sort !== 'string' && Sort.link === link) {
+      desc = !Sort.desc;
+    }
+
+    onSortChange([{ id, desc }]);
+
     setSortValue({
       ...val,
-      link: intl.formatMessage({ id })
+      link,
+      desc
     });
   };
 
@@ -351,7 +377,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                   <FilterBox
                     filters={internalFilters}
                     setFilters={setFilters}
-                    options={filterDef}
+                    options={generatFilterOptions(filterDef, intl)}
                     cancel={cancelFilter}
                     apply={applyFilter}
                     getUniqueValues={getUniqueValues}
@@ -405,7 +431,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                 items={sortMenuItems}
                 dropdownValue={Sort}
                 onSelect={(val: any) => handleSortChange(val)}
-                name='sort'
+                name={
+                  typeof Sort !== 'string' && Sort.desc ? 'sort-desc' : 'sort'
+                }
               >
                 <Icon name='sort' />
                 Sort

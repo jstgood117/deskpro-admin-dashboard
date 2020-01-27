@@ -3,7 +3,8 @@ import { withApollo } from '@apollo/react-hoc';
 import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
-import { runAction } from '../../services/actions/run';
+import { runAction, querySelectOptions } from '../../services/actions/run';
+import { ActionFactory } from '../../services/actions/ActionFactory';
 import { ActionsType } from '../../services/actions/types';
 import { KeyValue, IOptions } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
@@ -71,11 +72,13 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const headers = columns.map(column => {
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
-
   const [opened, clickButton] = useState(false);
   const [menuValue, setMenuValue] = useState();
   const [currentAction, setCurrentAction] = useState<ActionsType>();
   const [selectedOptions, selectOptions] = useState<IOptions[]>([]);
+
+  // Options to use once `action.selectOptions` is DocumentNode
+  const [fetchedOptions, setFetchedOptions] = useState<IOptions[]>();
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
   const [dropdownValue, setDropdownValue] = useState();
@@ -117,7 +120,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
     );
   };
 
-  const handleActionClick = (
+  const handleActionClick = async (
     menuItem?: IMenuItemProps,
     action?: ActionsType,
     variables?: object
@@ -126,8 +129,20 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     setCurrentAction(action);
 
+    // If action canceled then stop it
+    if (!action) {
+      return;
+    }
+
+    // If action.selectOptions is DocumentNode then fetch values
+    if (action.selectOptions && !Array.isArray(action.selectOptions)) {
+      setFetchedOptions([]);
+      const options = await querySelectOptions(client, action.selectOptions);
+      setFetchedOptions(options || []);
+    }
+
     // If there is no pre-action or dropdown options, run the action
-    if (action && !action.preAction && !action.selectOptions) {
+    if (!(action.preAction || action.selectOptions)) {
       handleRunAction(variables);
     }
   };
@@ -153,30 +168,35 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const handleCancelAction = () => {
     setCurrentAction(undefined);
     setShowActionComponent(false);
+    selectOptions([]);
+    handleActionClick(undefined, undefined, undefined);
   };
 
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
   const checkedIds = Object.keys(checked);
+  const actions = ActionFactory(path);
   return (
     <>
       <TableStyled>
         <TableHeader>
           <AllCheckStyle>
-            <Checkbox
-              checked={isAllChecked}
-              opened={opened}
-              clickButton={clickButton}
-              setDropdownValue={setDropdownValue}
-              dropdownValue={dropdownValue}
-              items={items}
-              value='checked'
-              indeterminate={isIndeterminate}
-              showArrow={true}
-              onChange={(event: SyntheticEvent<HTMLInputElement>) =>
-                handleSelectAllClick(event, pageIndex)
-              }
-            />
+            {actions && actions.length > 0 && data.length > 0 && (
+              <Checkbox
+                checked={isAllChecked}
+                opened={opened}
+                clickButton={clickButton}
+                setDropdownValue={setDropdownValue}
+                dropdownValue={dropdownValue}
+                items={items}
+                value='checked'
+                indeterminate={isIndeterminate}
+                showArrow={true}
+                onChange={(event: SyntheticEvent<HTMLInputElement>) =>
+                  handleSelectAllClick(event, pageIndex)
+                }
+              />
+            )}
             {Object.keys(checked).length > 0 && (
               <span className='selected-text'>
                 {Object.keys(checked).length} Selected
@@ -192,6 +212,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
                   handlePreAction={handlePreAction}
                   selectOptions={selectOptions}
                   selectedOptions={selectedOptions}
+                  fetchedOptions={fetchedOptions}
                 />
               </div>
             )}

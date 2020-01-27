@@ -17,7 +17,15 @@ import {
 export type Props = {
   path: string;
   menuValue: IMenuItemProps;
-  onChange: (menuItem?: IMenuItemProps, action?: ActionsType, variables?: object) => void;
+
+  // List of fetched from GraphQL options.
+  // Should be provided once `action.selectedOptions` is DocumentNode
+  fetchedOptions?: IOptions[];
+  onChange: (
+    menuItem?: IMenuItemProps,
+    action?: ActionsType,
+    variables?: object
+  ) => void;
   selectOptions: (val: IOptions[]) => void;
   selectedOptions: IOptions[];
   handlePreAction: (action: ActionsType) => void;
@@ -28,12 +36,12 @@ const Actions: FC<Props> = ({
   ids,
   path,
   menuValue,
+  fetchedOptions,
   onChange,
   selectOptions,
   selectedOptions,
-  handlePreAction,
+  handlePreAction
 }) => {
-
   const [menuItems, setMenuItems] = useState<IMenuItemProps[]>([]);
   const [actions, setActions] = useState<ActionsType[]>([]);
   const [currentAction, setCurrentAction] = useState<ActionsType>();
@@ -46,27 +54,40 @@ const Actions: FC<Props> = ({
   }, [path]);
 
   const onSelect = (val: IMenuItemProps) => {
-
     const action = getActionFromMenuItem(val, actions);
     setCurrentAction(action);
     onChange(val, action, { ids });
   };
 
+  // Get actual options
+  let options: IOptions[];
+
+  // If action's selectOptions isn't DocumentNode and exists then use it
+  if (currentAction && Array.isArray(currentAction.selectOptions)) {
+    options = currentAction.selectOptions;
+  }
+
+  // Once we have `fetchedOptions` then override options
+  if (currentAction && Array.isArray(fetchedOptions)) {
+    options = fetchedOptions;
+  }
+
   return (
     <>
-      <Menu
-        value={menuValue}
-        onSelect={onSelect}
-        label={
-          menuValue ? menuValue['name'] : 'admin_common.table.action'
-        }
-        menuItems={menuItems}
-        iconName='menu'
-      />
-      {currentAction && currentAction.selectOptions && (
+      {!menuValue && (
+        <Menu
+          value={menuValue}
+          onSelect={onSelect}
+          label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
+          menuItems={menuItems}
+          iconName='menu'
+        />
+      )}
+
+      {Array.isArray(options) && (
         <div style={{ display: 'flex', paddingLeft: 15 }}>
           <MultiSelect
-            options={currentAction.selectOptions}
+            options={options}
             type='fixed'
             selectOptions={selectOptions}
           />

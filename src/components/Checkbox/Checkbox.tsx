@@ -57,12 +57,12 @@ const ArrowButton = styled.span<{ checked: boolean; opened?: boolean }>`
   }
 `;
 
-const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean }>`
+const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean, showArrow?:boolean }>`
   display: inline-flex;
   align-items: center;
   height: fit-content;
   background: ${props => props.opened && props.theme.hoverColour};
-  padding-left: 5px;
+  padding-left: ${props => (props.showArrow ? 5 : 0)}px;
   position: relative;
   border-radius: 4px;
 `;
@@ -80,8 +80,10 @@ const CheckboxContainer = styled.label<{ size: number }>`
 `;
 
 export interface IProps {
-  size?: number;
   checked: boolean;
+  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
+  id?: string;
+  size?: number;
   value?: string;
   containerClassName?: string;
   containerStyle?: CSSProperties;
@@ -89,16 +91,17 @@ export interface IProps {
   inputProps?: object;
   indeterminate?: boolean;
   showArrow?: boolean;
-  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void;
   onArrowClick?: (event: MouseEvent) => void;
   opened?: boolean;
   clickButton?: (e: boolean) => void;
   dropdownValue?: any;
   setDropdownValue?: (e: boolean) => void;
   items?: IItemProps[];
+  className?: string;
 }
 
 const Checkbox: FC<IProps> = ({
+  id,
   size = 16,
   checked,
   value,
@@ -113,15 +116,17 @@ const Checkbox: FC<IProps> = ({
   clickButton,
   opened,
   items,
-  setDropdownValue
+  setDropdownValue,
+  className
 }) => (
-  <CheckboxWrapper opened={opened}>
+  <CheckboxWrapper className={className} opened={opened} showArrow={showArrow}>
     <CheckboxContainer
       size={size}
       style={containerStyle}
       className={containerClassName}
     >
       <HiddenCheckbox
+        id={id}
         checked={checked}
         value={value}
         disabled={disabled}

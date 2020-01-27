@@ -8,6 +8,7 @@ import {
   API_TablePayloadValue,
   API_TableColumnPhraseMapItem
 } from '../../codegen/types';
+import moment from 'moment';
 
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
@@ -84,6 +85,15 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
         props: { checked: getPayloadValue(row, type.value) }
       };
 
+    case 'TableColumnDateTime':
+      const value = getPayloadValue(row, type.value);
+      const parsedValue = moment(value);
+      return {
+        type: 'date_time',
+        props: {
+          date_time: parsedValue.isValid() ? parsedValue.format('MMM DD, YYYY') : value
+        }
+      };
     case 'TableColumnTimeAgo':
       return {
         type: 'date_time',

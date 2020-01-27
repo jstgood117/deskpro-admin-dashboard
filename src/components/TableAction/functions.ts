@@ -3,6 +3,7 @@ import {
   ITableColumn,
   IMenuItemProps
 } from '../../resources/interfaces';
+import { FilterMeta } from '../../resources/interfaces/filterMeta';
 
 import { KeyValue } from '../../types';
 
@@ -56,7 +57,7 @@ export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
       return true;
     })
     .map((column: ITableColumn, index: number) => {
-      checkedState[String(index)] = true;
+      checkedState[String(index)] = column.defaultShow;
 
       return {
         key: index,
@@ -78,4 +79,22 @@ export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {
     checkedState,
     columnsViewList
   };
+};
+
+export const generatFilterOptions = (
+  filterDef: FilterMeta[],
+  intl: IntlShape
+): FilterMeta[] => {
+  if (!filterDef) {
+    return [];
+  }
+
+  const filterOptions: FilterMeta[] = filterDef.map(
+    (option: FilterMeta, index: number) => {
+      option.title = intl.formatMessage({ id: option.title });
+      return option;
+    }
+  );
+
+  return filterOptions;
 };
