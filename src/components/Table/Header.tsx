@@ -129,6 +129,11 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     setCurrentAction(action);
 
+    // If action canceled then stop it
+    if (!action) {
+      return;
+    }
+
     // If action.selectOptions is DocumentNode then fetch values
     if (action.selectOptions && !Array.isArray(action.selectOptions)) {
       setFetchedOptions([]);
@@ -137,7 +142,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
     }
 
     // If there is no pre-action or dropdown options, run the action
-    if (action && !action.preAction && !action.selectOptions) {
+    if (!(action.preAction || action.selectOptions)) {
       handleRunAction(variables);
     }
   };
