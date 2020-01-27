@@ -167,7 +167,6 @@ const Menu: FC<IMenuProps> = ({
 
   return (
     <MenuListWrapper>
-      {console.log(menuItems.length)}
       <Scrollbars
         style={{ height: 35 * (menuItems.length +1) + 14, zIndex: 1, maxHeight: 190 }}
         renderTrackVertical={({ style }) => (
