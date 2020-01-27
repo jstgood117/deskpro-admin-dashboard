@@ -91,7 +91,9 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'date_time',
         props: {
-          date_time: parsedValue.isValid() ? parsedValue.format('MMM DD, YYYY') : value
+          date_time: parsedValue.isValid()
+            ? parsedValue.format('MMM DD, YYYY')
+            : value
         }
       };
     case 'TableColumnTimeAgo':
@@ -142,7 +144,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
               };
             }
           ),
-          max: 10
+          max: 3
         }
       };
 

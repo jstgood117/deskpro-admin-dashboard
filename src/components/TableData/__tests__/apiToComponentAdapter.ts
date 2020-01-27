@@ -19,7 +19,7 @@ describe('apiToComponentAdapater tests', () => {
         })
       ).toEqual({
         props: {
-          max: 10,
+          max: 3,
           agents: [
             {
               avatar: undefined,
