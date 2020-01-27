@@ -91,7 +91,9 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'date_time',
         props: {
-          date_time: parsedValue.isValid() ? parsedValue.format('MMM DD, YYYY') : value
+          date_time: parsedValue.isValid()
+            ? parsedValue.format('MMM DD, YYYY')
+            : value
         }
       };
     case 'TableColumnTimeAgo':
@@ -122,6 +124,29 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
         agents: getPayloadValue(row, type.valuesArray).map(generateAgentAvatar)
       };
       return { type: 'multiple_agents', props: agentsProps };
+
+    case 'TableColumnTicketDepartmentList':
+      return {
+        type: 'multiple_agents',
+        props: {
+          viewModel: 'label',
+          agents: getPayloadValue(row, type.valuesArray).map(
+            (department: any) => {
+              const colors = getColorByChar(department.title.charAt(0));
+
+              return {
+                name: department.title,
+                avatar: department.avatar,
+                avatarProps: {
+                  textBackgroundColor: colors.background,
+                  textColor: colors.textColor
+                }
+              };
+            }
+          ),
+          max: 3
+        }
+      };
 
     case 'TableColumnTextCommaSep':
       return {
