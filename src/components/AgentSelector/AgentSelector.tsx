@@ -168,15 +168,15 @@ const AgentSelector: React.FC<Props> = ({
           {selectedCount} of {agents.length}
         </p>
         <Button
-          buttonType="button"
+          buttonType='button'
           onClick={onSelectAllClick}
-          styleType="secondary"
+          styleType='secondary'
         >
           {intl.formatMessage({ id: 'admin.agentselector.select-all' })}
         </Button>
       </AgentSelectorInfo>
       <Input
-        inputType="primary"
+        inputType='primary'
         onChange={onChangeFilter}
         onClear={onClearFilter}
         placeholder={intl.formatMessage({ id: 'admin.agentselector.search' })}
@@ -223,10 +223,10 @@ const AgentSelector: React.FC<Props> = ({
         </AgentSelectorList>
       </Scrollbars>
       <AgentSelectorActions>
-        <Button onClick={onSave} styleType="primary">
+        <Button onClick={onSave} styleType='primary'>
           {intl.formatMessage({ id: 'admin.agentselector.save' })}
         </Button>
-        <Button onClick={onCancel} styleType="secondary">
+        <Button onClick={onCancel} styleType='secondary'>
           {intl.formatMessage({ id: 'admin.agentselector.cancel' })}
         </Button>
       </AgentSelectorActions>
