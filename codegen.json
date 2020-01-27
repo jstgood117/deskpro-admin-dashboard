@@ -1,5 +1,5 @@
 {
-  "schema": "http://site42142.deskprodemo.com/admin-api/graphql",
+  "schema": "http://site42227.deskprodemo.com/admin-api/graphql",
   "overwrite": true,
   "generates": {
     "./src/codegen/types.d.ts": {
