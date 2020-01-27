@@ -1,10 +1,12 @@
 import React from 'react';
 
 // Form related components
+import Label from './components/Label';
 import FeatureSection from './components/FeatureSection';
 import PageSection from './components/PageSection';
 import ElementGroup from './components/ElementGroup';
 import VertElementGroup from './components/VertElementGroup';
+import HorizontalElementGroup from './components/HorizontalElementGroup';
 
 // Common components
 import TabbedFieldGroup from '../TabbedFieldGroup';
@@ -21,6 +23,10 @@ export const GenericFormComponent = (props: any) => {
       return <ElementGroup {...props} />;
     case 'vertical_group':
       return <VertElementGroup {...props} />;
+    case 'horizontal_group':
+      return <HorizontalElementGroup {...props} />;
+    case 'label':
+      return <Label {...props} />;
     case 'field':
       throw Error('Fields must be in a container');
     default:
