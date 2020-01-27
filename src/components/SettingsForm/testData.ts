@@ -285,6 +285,83 @@ export const uiSchema = {
               ]
             }
           ]
+        },
+        {
+          type: 'page_section',
+          title: 'Testing',
+          elements: [{
+            type: 'field',
+            title: 'List of strings',
+            field: {
+              type: 'stringlist',
+              id: 'test_list_of_strings'
+            }
+          },
+          {
+            type: 'field',
+            title: 'Unit option',
+            field: {
+              type: 'units',
+              id: 'test_unit_value',
+              optionId: 'test_unit_option',
+              options: [
+                { value: 'minutes', label: 'minutes' },
+                { value: 'hours', label: 'hours' },
+                { value: 'seconds', label: 'seconds' },
+              ]
+            }
+          }]
+        },
+        {
+          type: 'page_section',
+          title: 'Checking the checkbox',
+          elements: [{
+            type: 'group',
+            elements:[{
+              type: 'field',
+              field: {
+                type: 'checkbox',
+                id: 'test_unit_checkbox_1',
+                value: 'admin'
+              }
+            }, {
+              type: 'horizontal_group',
+              elements:[{
+                type: 'label',
+                label: 'Testing this out'
+              },
+              {
+                type: 'field',
+                field: {
+                  type: 'input',
+                  id: 'test_unit_another_input_1'
+                }
+              }]
+            }]
+          }, {
+            type: 'group',
+            elements:[{
+              type: 'field',
+              field: {
+                type: 'checkbox',
+                id: 'test_unit_checkbox_2',
+                value: 'stuff'
+              }
+            }, {
+              type: 'horizontal_group',
+              elements:[{
+                type: 'label',
+                label: 'Testing this out'
+              },
+              {
+                type: 'field',
+                field: {
+                  type: 'input',
+                  id: 'test_unit_another_input_2'
+                }
+              }]
+            }]
+          }]
         }
       ]
     }
@@ -322,5 +399,12 @@ export const jsonSchema = {
     { name: 'Harleen Quinzel' }
   ],
   brand1_default_email_account: 'support@brand1.deskpro.com',
-  brand2_default_email_account: ''
+  brand2_default_email_account: '',
+  test_list_of_strings: [] as string[],
+  test_unit_value: '',
+  test_unit_option: 'minutes',
+  test_unit_checkbox_1: ['admin'],
+  test_unit_another_input_1: 'another',
+  test_unit_checkbox_2: ['stuff'],
+  test_unit_another_input_2: 'hello'
 };
