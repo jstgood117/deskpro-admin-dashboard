@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import Checkbox from '../Checkbox';
 import NameAndAvatar from '../Avatar/NameAndAvatar';
 import Tooltip from '../Tooltip';
 import { FlowLayout } from '../Styled';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 const AgentSelectorRowStyled = styled.div`
   font-family: Rubik;
