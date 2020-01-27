@@ -45,6 +45,12 @@ const FeatureSectionStyled = styled.div`
     margin-top: 16px;
   }
 
+  & .group-details > .title,
+  & .element-details > .title {
+    display: flex;
+    align-items: center;
+  }
+
   & .group-details > p,
   & .element-details > p {
     font-family: Rubik;
