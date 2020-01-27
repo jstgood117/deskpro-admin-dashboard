@@ -4,6 +4,7 @@ import {
   REMOVE_TEAM,
   REMOVE_ALL_TEAMS
 } from '../../../schema/mutations/Agents';
+import { GET_TEAMS } from '../../../schema/queries/Agents';
 
 import { ActionsType } from '../types';
 
@@ -37,14 +38,7 @@ const agents: ActionsType[] = [
         schema:ADD_TEAM,
         type:'mutate',
         actions: null,
-        selectOptions: [
-          { value: '1', label: 'Accounting' },
-          { value: '2', label: 'Business' },
-          { value: '3', label: 'Design' },
-          { value: '4', label: 'HR' },
-          { value: '5', label: 'Sales' },
-          { value: '6', label: 'Finance' }
-        ],
+        selectOptions: GET_TEAMS,
         preAction: {
           type:'CONFIRM_MODAL',
           icon:'add',
