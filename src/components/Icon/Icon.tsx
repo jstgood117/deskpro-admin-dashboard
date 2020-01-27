@@ -82,6 +82,8 @@ export interface IProps {
   name: string;
 }
 const StyledIcon = styled.span`
+  display: inline-flex;
+
   &:hover {
     path {
       fill: ${props => props.theme.activeColour};

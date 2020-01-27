@@ -22,7 +22,13 @@ const StyledTooltip: React.FC = (props: any) => (
     placement='bottom-start'
     distance={0}
   >
-    <span style={{ paddingLeft: '4px' }}>
+    <span
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        paddingLeft: '4px'
+      }}
+    >
       <Icon name='info-question-text' />
     </span>
   </Tooltip>
@@ -30,8 +36,10 @@ const StyledTooltip: React.FC = (props: any) => (
 
 const GroupDetails: React.FC = (props: any) => (
   <div className='group-details'>
-    {props.title && <label>{props.title}</label>}
-    {props.tooltip && <StyledTooltip {...props} />}
+    <div className='title'>
+      {props.title && <label>{props.title}</label>}
+      {props.tooltip && <StyledTooltip {...props} />}
+    </div>
     {props.description && <p>{props.description}</p>}
   </div>
 );
@@ -39,8 +47,10 @@ const GroupDetails: React.FC = (props: any) => (
 const FieldContainer: React.FC = (props: any) => (
   <div className='field-container'>
     <div className='element-details'>
-      {props.title && <label>{props.title}</label>}
-      {props.tooltip && <StyledTooltip {...props} />}
+      <div className='title'>
+        {props.title && <label>{props.title}</label>}
+        {props.tooltip && <StyledTooltip {...props} />}
+      </div>
       {props.description && <p>{props.description}</p>}
     </div>
     <div className='element-context'>
