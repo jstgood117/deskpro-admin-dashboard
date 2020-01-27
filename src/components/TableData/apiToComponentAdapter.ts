@@ -8,6 +8,7 @@ import {
   API_TablePayloadValue,
   API_TableColumnPhraseMapItem
 } from '../../codegen/types';
+import moment from 'moment';
 
 const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
@@ -31,7 +32,10 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-const convertPhrases = (values:string[], phraseMap: API_TableColumnPhraseMapItem[]) => {
+const convertPhrases = (
+  values: string[],
+  phraseMap: API_TableColumnPhraseMapItem[]
+) => {
   return values.map(value => {
     const match = phraseMap.find(_map => _map.value === value);
     return match ? match.phraseId : value;
@@ -39,8 +43,7 @@ const convertPhrases = (values:string[], phraseMap: API_TableColumnPhraseMapItem
 };
 
 export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
-
-  switch(true)  {
+  switch (true) {
     case value.dataPath && value.dataPath.charAt(0) === '$':
       return jp.query(row, value.dataPath);
     case !!value.dataPath:
@@ -77,8 +80,20 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
 
     case 'TableColumnBoolYesNo':
     case 'TableColumnBoolOnOff':
-      return { type: 'yes_no', props: { checked: getPayloadValue(row, type.value) } };
+      return {
+        type: 'yes_no',
+        props: { checked: getPayloadValue(row, type.value) }
+      };
 
+    case 'TableColumnDateTime':
+      const value = getPayloadValue(row, type.value);
+      const parsedValue = moment(value);
+      return {
+        type: 'date_time',
+        props: {
+          date_time: parsedValue.isValid() ? parsedValue.format('MMM DD, YYYY') : value
+        }
+      };
     case 'TableColumnTimeAgo':
       return {
         type: 'date_time',
@@ -93,7 +108,9 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'multiple_teams', props: agentTeamProps };
 
     case 'TableColumnAgentGroupList':
-      const agentGroupList = [getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title)];
+      const agentGroupList = [
+        getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title)
+      ];
       return {
         type: 'string',
         props: { values: agentGroupList }
@@ -120,13 +137,22 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       };
 
     case 'TableColumnTextPhrase':
-      return { type: 'string', props: { values: convertPhrases(values, type.phraseMap) } };
+      return {
+        type: 'string',
+        props: { values: convertPhrases(values, type.phraseMap) }
+      };
 
     case 'TableColumnText':
-      return { type: 'string', props: { values: [getPayloadValue(row, type.value)] } };
+      return {
+        type: 'string',
+        props: { values: [getPayloadValue(row, type.value)] }
+      };
 
     case 'TableColumnInteger':
-      return { type: 'count', props: { values: [getPayloadValue(row, type.value)] } };
+      return {
+        type: 'count',
+        props: { values: [getPayloadValue(row, type.value)] }
+      };
 
     case 'TableColumnId':
       return { type: 'id', props: { id: [getPayloadValue(row, type.value)] } };
@@ -135,10 +161,13 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
     //   return { type: 'template', props: { template: '<p>{{testing}}</p>', data: {testing:123} } };
 
     case 'TableColumnMoney':
-      return { type: 'currency', props: {
-        amount: getPayloadValue(row, type.amount),
-        currency: getPayloadValue(row, type.currency)
-      }};
+      return {
+        type: 'currency',
+        props: {
+          amount: getPayloadValue(row, type.amount),
+          currency: getPayloadValue(row, type.currency)
+        }
+      };
 
     default:
       return { type: 'string', props: { values: ['Unknown column type'] } };

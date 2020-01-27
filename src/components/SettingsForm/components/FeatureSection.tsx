@@ -61,7 +61,7 @@ const FeatureSectionStyled = styled.div`
     white-space: pre-wrap;
   }
 
-  & .group-details > div.group-articles {
+  & div.group-articles {
     font-family: Rubik;
     min-width: 280px;
     font-size: 12px;
@@ -69,7 +69,7 @@ const FeatureSectionStyled = styled.div`
     margin-bottom: 30px;
   }
 
-  & .group-details > div.group-articles > p {
+  & div.group-articles > p {
     color: ${props => props.theme.staticColour};
     padding-bottom: 4px;
     font-size: 13px;
@@ -77,13 +77,12 @@ const FeatureSectionStyled = styled.div`
     border-bottom: ${props => `1px solid ${props.theme.greyLighter}`};
     margin-bottom: 6px;
   }
-
-  & .group-details > div.group-articles > img {
+  & .group-articles > img {
     width: 300px;
     height: 140px;
   }
 
-  .group-details > div.group-articles ol {
+  & .group-details > div.group-articles ol {
     padding: 0;
     margin: 0;
   }
