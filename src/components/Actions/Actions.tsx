@@ -17,6 +17,10 @@ import {
 export type Props = {
   path: string;
   menuValue: IMenuItemProps;
+
+  // List of fetched from GraphQL options.
+  // Should be provided once `action.selectedOptions` is DocumentNode
+  fetchedOptions?: IOptions[];
   onChange: (
     menuItem?: IMenuItemProps,
     action?: ActionsType,
@@ -32,6 +36,7 @@ const Actions: FC<Props> = ({
   ids,
   path,
   menuValue,
+  fetchedOptions,
   onChange,
   selectOptions,
   selectedOptions,
@@ -54,21 +59,35 @@ const Actions: FC<Props> = ({
     onChange(val, action, { ids });
   };
 
+  // Get actual options
+  let options: IOptions[];
+
+  // If action's selectOptions isn't DocumentNode and exists then use it
+  if (currentAction && Array.isArray(currentAction.selectOptions)) {
+    options = currentAction.selectOptions;
+  }
+
+  // Once we have `fetchedOptions` then override options
+  if (currentAction && Array.isArray(fetchedOptions)) {
+    options = fetchedOptions;
+  }
+
   return (
     <>
-      {!menuValue && (
-        <Menu
-          value={menuValue}
-          onSelect={onSelect}
-          label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
-          menuItems={menuItems}
-          iconName='menu'
-        />
-      )}
-      {currentAction && currentAction.selectOptions && (
+{!menuValue && (
+<Menu
+        value={menuValue}
+        onSelect={onSelect}
+        label={menuValue ? menuValue['name'] : 'admin_common.table.action'}
+        menuItems={menuItems}
+        iconName='menu'
+      />
+)}
+      
+      {Array.isArray(options) && (
         <div style={{ display: 'flex', paddingLeft: 15 }}>
           <MultiSelect
-            options={currentAction.selectOptions}
+            options={options}
             type='fixed'
             selectOptions={selectOptions}
           />
