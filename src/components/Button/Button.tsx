@@ -1,6 +1,7 @@
 import React, { ReactNode, FC } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { isNil } from 'lodash';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import { DeskproAdminTheme } from '../Theme';
 import { dpstyle } from '../Styled';
@@ -419,36 +420,56 @@ const Button: FC<Props> = ({
         </ButtonStyled>
         {items && items.length > 0 && opened && (
           <DropdownContent onClick={onClick} className='dropdownContent'>
-            {items.map((item: IItemProps, index: number) => {
-              return renderItem ? (
-                renderItem(item, index)
-              ) : (
-                <DropdownContentLink
-                  key={index}
-                  onClick={() => onSelect && onSelect(item)}
-                >
-                  <span
-                    className={`${
-                      name === 'sort' && dropdownValue.label === item.label
-                        ? 'selected'
-                        : ''
-                    }`}
+            <Scrollbars
+              style={{ height: 45 * items.length, zIndex: 1, maxHeight: 190 }}
+              renderTrackVertical={({ style }) => (
+                <div
+                  style={{
+                    background: '#ccc',
+                    position: 'absolute',
+                    width: 6,
+                    right: 0,
+                    bottom: 0,
+                    top: 0,
+                    borderRadius: 3
+                  }}
+                />
+              )}
+            >
+              {items.map((item: IItemProps, index: number) => {
+                return renderItem ? (
+                  renderItem(item, index)
+                ) : (
+                  <DropdownContentLink
+                    key={index}
+                    onClick={() => onSelect && onSelect(item)}
                   >
-                    {item.label ? item.label : item.link}
-                  </span>
-                  {name === 'sort' && dropdownValue.label === item.label && (
-                    <span className='sort-icon'>
-                      <Icon name='ic-sort-down-active' />
+                    <span
+                      className={`${
+                        name === 'sort' && dropdownValue.label === item.label
+                          ? 'selected'
+                          : ''
+                      }`}
+                    >
+                      {item.label ? item.label : item.link}
                     </span>
-                  )}
-                  {name === 'sort-desc' && dropdownValue.label === item.label && (
-                    <span className='sort-icon'>
-                      <Icon name='ic-sort-up-active' />
-                    </span>
-                  )}
-                </DropdownContentLink>
-              );
-            })}
+
+                    {name === 'sort' && dropdownValue.label === item.label && (
+                      <span className='sort-icon'>
+                        <Icon name='ic-sort-down-active' />
+                      </span>
+                    )}
+                    {name === 'sort-desc' &&
+                      dropdownValue.label === item.label && (
+                        <span className='sort-icon'>
+                          <Icon name='ic-sort-up-active' />
+                        </span>
+                      )}
+                  </DropdownContentLink>
+                );
+              })}
+            </Scrollbars>
+
             <DropdownContentPanel />
           </DropdownContent>
         )}

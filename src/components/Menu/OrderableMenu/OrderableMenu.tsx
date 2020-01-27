@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
+import { Scrollbars } from 'react-custom-scrollbars';
 import { MenuList, MenuButton } from 'react-menu-list';
 import { FormattedMessage } from 'react-intl';
 import Icon from '../../Icon';
@@ -45,11 +46,7 @@ const MenuSub: FC<IMenuProps> = ({ onSelect, menuItems, value }) => (
     </MenuList>
   </MenuListWrapper>
 );
-const MultiMenuComponent: FC<IMenuProps> = ({
-  item,
-  onSelect,
-  value
-}) => {
+const MultiMenuComponent: FC<IMenuProps> = ({ item, onSelect, value }) => {
   const [clickedGear, clickGear] = useState(false);
   return (
     <div
@@ -111,7 +108,6 @@ const Menu: FC<IMenuProps> = ({
   value,
   initialChecked
 }) => {
-
   let idColumn: IMenuItemProps;
 
   const itemList = menuItems
@@ -127,7 +123,11 @@ const Menu: FC<IMenuProps> = ({
         <div
           key={uniqueId()}
           data-id={index}
-          style={{ display: 'flex', position: 'relative', alignItems: 'center' }}
+          style={{
+            display: 'flex',
+            position: 'relative',
+            alignItems: 'center'
+          }}
         >
           <div style={{ flex: 12 }}>
             {item.name && !item.subItems && (
@@ -167,26 +167,84 @@ const Menu: FC<IMenuProps> = ({
 
   return (
     <MenuListWrapper>
-      <MenuList>
-        {menuItems.length > 0 && (
-          <SortableList
-            onChange={items => {
-              const OrderedList: IMenuItemProps[] = [];
-              items.map((index: number) => {
-                OrderedList.push(menuItems[index]);
-                return true;
-              });
-              if (idColumn) {
-                OrderedList.push(idColumn);
-              }
-              if (order) { order(OrderedList); }
+      <Scrollbars
+        style={{ height: 35 * (menuItems.length +1) + 14, zIndex: 1, maxHeight: 190 }}
+        renderTrackVertical={({ style }) => (
+          <div
+            style={{
+              background: '#ccc',
+              position: 'absolute',
+              width: 6,
+              right: 0,
+              bottom: 0,
+              top: 0,
+              borderRadius: 3
             }}
-            children={itemList}
           />
         )}
+      >
+        <MenuList>
+          {menuItems.length > 0 && (
+            <SortableList
+              onChange={items => {
+                const OrderedList: IMenuItemProps[] = [];
+                items.map((index: number) => {
+                  OrderedList.push(menuItems[index]);
+                  return true;
+                });
+                if (idColumn) {
+                  OrderedList.push(idColumn);
+                }
+                if (order) {
+                  order(OrderedList);
+                }
+              }}
+              children={itemList}
+            />
+          )}
 
-        {idColumn && (
-          <FixedItemWrapper>
+          {idColumn && (
+            <FixedItemWrapper>
+              <TextLabel
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  paddingLeft: 13
+                }}
+              >
+                <FormattedMessage id={idColumn.name} />
+              </TextLabel>
+              <span className='orderable-menu-toggle'>
+                <Toggle
+                  checked={checked[idColumn.key]}
+                  value='checked'
+                  onChange={event =>
+                    setChecked({
+                      ...checked,
+                      [idColumn.key]: event.target.checked
+                    })
+                  }
+                  size='small'
+                />
+              </span>
+            </FixedItemWrapper>
+          )}
+
+          <HR />
+          <ResetWrapper
+            onClick={e => {
+              e.preventDefault();
+              if (order) {
+                order(initialList);
+              }
+              if (initialChecked) {
+                setChecked(initialChecked);
+              }
+            }}
+          >
+            <IconWrapper>
+              <Icon name='refresh' />
+            </IconWrapper>
             <TextLabel
               style={{
                 display: 'flex',
@@ -194,43 +252,11 @@ const Menu: FC<IMenuProps> = ({
                 paddingLeft: 13
               }}
             >
-              <FormattedMessage id={idColumn.name} />
+              Reset to Default
             </TextLabel>
-            <span className='orderable-menu-toggle'>
-              <Toggle
-                checked={checked[idColumn.key]}
-                value='checked'
-                onChange={event =>
-                  setChecked({ ...checked, [idColumn.key]: event.target.checked })
-                }
-                size='small'
-              />
-            </span>
-          </FixedItemWrapper>
-        )}
-
-        <HR />
-        <ResetWrapper
-          onClick={e => {
-            e.preventDefault();
-            if (order) { order(initialList); }
-            if (initialChecked) { setChecked(initialChecked); }
-          }}
-        >
-          <IconWrapper>
-            <Icon name='refresh' />
-          </IconWrapper>
-          <TextLabel
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              paddingLeft: 13
-            }}
-          >
-            Reset to Default
-          </TextLabel>
-        </ResetWrapper>
-      </MenuList>
+          </ResetWrapper>
+        </MenuList>
+      </Scrollbars>
     </MenuListWrapper>
   );
 };
@@ -255,18 +281,7 @@ const OrderableMenu: FC<IMenuProps> = ({
           menuZIndex={2}
           openedClassName='selected'
           openedStyle={{ background: '#D2D8DD' }}
-          menu={(
-            <Menu
-              onSelect={onSelect}
-              order={order}
-              menuItems={menuItems}
-              initialList={initialList}
-              setChecked={setChecked}
-              checked={checked}
-              initialChecked={initialChecked}
-              value={value}
-            />
-          )}
+          menu={<Menu onSelect={onSelect} order={order} menuItems={menuItems} initialList={initialList} setChecked={setChecked} checked={checked} initialChecked={initialChecked} value={value}/>}
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
