@@ -3,18 +3,54 @@ import styled from 'styled-components';
 
 import Checkbox from '../Checkbox';
 import NameAndAvatar from '../Avatar/NameAndAvatar';
+import Tooltip from '../Tooltip';
+import { FlowLayout } from '../Styled';
+import { IntlShape } from 'react-intl';
 
 const AgentSelectorRowStyled = styled.div`
+  font-family: Rubik;
   display: flex;
   align-items: center;
   height: 34px;
 
   &:hover {
     background: ${props => props.theme.textHover};
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: ${props => props.theme.brandPrimary};
   }
 
   & > div:first-child {
-    margin: 0 12px 0 4px;
+    margin: 0 12px 0 10px;
+  }
+
+  & .disabled label span {
+    background: ${props => props.theme.greyLight};
+  }
+  & .disabled label span svg path {
+    fill: ${props => props.theme.white};
+  }
+
+  & > div:nth-child(2) .text {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    /* or 21px */
+
+    display: flex;
+    align-items: center;
+
+    /* Static */
+
+    color: ${props => props.theme.staticColour};
+  }
+
+  &:hover > div:nth-child(2) .text {
+    font-weight: 500;
+    color: ${props => props.theme.brandPrimary};
   }
 
   & > div:last-child {
@@ -23,7 +59,6 @@ const AgentSelectorRowStyled = styled.div`
 
   & img {
     margin-left: 1px;
-    transform: translateY(2px);
   }
 `;
 
@@ -33,19 +68,36 @@ interface Props {
     name: string;
     avatar?: string;
   };
+  intl: IntlShape;
   onSelect: (id: string) => void;
+  restricted?: boolean;
   selected: boolean;
 }
 
 export const AgentSelectorRow: React.FC<Props> = React.memo(
-  ({ agent, onSelect, selected }) => {
+  ({ agent, intl, onSelect, restricted, selected }) => {
     const onCheck = React.useCallback(() => onSelect(agent.id), [
       agent.id,
       onSelect
     ]);
+    const doNothing = React.useCallback(() => ({}), []);
     return (
       <AgentSelectorRowStyled key={agent.id}>
-        <Checkbox checked={!!selected} onChange={onCheck} />
+        {restricted ? (
+          <Tooltip
+            content={intl.formatMessage({
+              id: 'admin.agentselector.restricted'
+            })}
+            styleType='lightBox'
+            placement='bottom'
+          >
+            <FlowLayout className='disabled'>
+              <Checkbox checked={true} disabled={true} onChange={doNothing} />
+            </FlowLayout>
+          </Tooltip>
+        ) : (
+          <Checkbox checked={!!selected} onChange={onCheck} />
+        )}
         <NameAndAvatar avatar={agent.avatar} name={agent.name} />
       </AgentSelectorRowStyled>
     );
