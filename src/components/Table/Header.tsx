@@ -168,6 +168,8 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const handleCancelAction = () => {
     setCurrentAction(undefined);
     setShowActionComponent(false);
+    selectOptions([]);
+    handleActionClick(undefined, undefined, undefined);
   };
 
   const csvData = generateCSVData(page, columns);
