@@ -5,7 +5,7 @@ import Checkbox from '../Checkbox';
 import NameAndAvatar from '../Avatar/NameAndAvatar';
 import Tooltip from '../Tooltip';
 import { FlowLayout } from '../Styled';
-import { IntlShape } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 const AgentSelectorRowStyled = styled.div`
   font-family: Rubik;
@@ -68,13 +68,12 @@ interface Props {
     name: string;
     avatar?: string;
   };
-  intl: IntlShape;
   onSelect: (id: string) => void;
   restricted?: boolean;
   selected: boolean;
 }
 
-export const AgentSelectorRow: React.FC<Props> = React.memo(
+const AgentSelectorRow: React.FC<Props & WrappedComponentProps> = React.memo(
   ({ agent, intl, onSelect, restricted, selected }) => {
     const onCheck = React.useCallback(() => onSelect(agent.id), [
       agent.id,
@@ -105,3 +104,6 @@ export const AgentSelectorRow: React.FC<Props> = React.memo(
 );
 
 AgentSelectorRow.displayName = 'AgentSelectorRow';
+
+export default injectIntl(AgentSelectorRow);
+

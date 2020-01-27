@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 import Button from '../Button';
 import Input from '../Input';
-import { AgentSelectorRow } from './AgentSelectorRow';
-import { IntlShape } from 'react-intl';
+import AgentSelectorRow from './AgentSelectorRow';
 
 const AgentSelectorContainer = styled.div`
   background: ${props => props.theme.white};
@@ -104,7 +104,6 @@ interface Props {
   restricted?: {
     [id: string]: true;
   };
-  intl: IntlShape;
   onSelect: (selected: { [id: string]: boolean }) => void;
   onSave?: () => void;
   onCancel?: () => void;
@@ -114,7 +113,7 @@ interface Props {
   title: string;
 }
 
-const AgentSelector: React.FC<Props> = ({
+const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
   agents,
   description,
   intl,
@@ -213,7 +212,6 @@ const AgentSelector: React.FC<Props> = ({
           {filteredAgents.map(agent => (
             <AgentSelectorRow
               agent={agent}
-              intl={intl}
               key={agent.id}
               onSelect={onAgentSelect}
               restricted={restricted && restricted[agent.id]}
@@ -234,4 +232,4 @@ const AgentSelector: React.FC<Props> = ({
   );
 };
 
-export default AgentSelector;
+export default injectIntl(AgentSelector);
