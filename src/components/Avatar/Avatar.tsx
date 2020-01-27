@@ -11,6 +11,8 @@ interface ImageProps {
   showBoxShadow?: boolean;
 }
 const AvatarContainer = styled.div<ImageProps>`
+  display: flex;
+  align-items: center;
   img,
   svg {
     width: ${props => props.size}px;
