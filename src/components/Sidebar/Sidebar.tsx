@@ -35,7 +35,7 @@ const Sidebar: FC<IProps> = ({ data }) => {
           bottom: 0,
           left: 0
         }}
-        renderTrackVertical={({ style, ...props }) => (
+        renderTrackVertical={({ style }) => (
           <div
             style={{
               background: '#ccc',
