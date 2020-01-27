@@ -20,7 +20,11 @@ import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
 import OrderableMenu from '../Menu/OrderableMenu';
 import Menu from '../Menu';
-import { generateViewList, generatSortMenuItems } from './functions';
+import {
+  generateViewList,
+  generatSortMenuItems,
+  generatFilterOptions,
+} from './functions';
 import { SortType } from '../Table/types';
 import { testGroupItems } from '../../resources/constants/constants';
 
@@ -373,7 +377,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                   <FilterBox
                     filters={internalFilters}
                     setFilters={setFilters}
-                    options={filterDef}
+                    options={generatFilterOptions(filterDef, intl)}
                     cancel={cancelFilter}
                     apply={applyFilter}
                     getUniqueValues={getUniqueValues}
