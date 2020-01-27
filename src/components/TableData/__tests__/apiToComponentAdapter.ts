@@ -13,6 +13,6 @@ describe('apiToComponentAdapater tests', () => {
           },
           row: { original: { date_created: '2019-06-25 19:24:04' } }
         })
-      ).toEqual({ props: { date_time: 'June 25, 2019' }, type: 'date_time' }));
+      ).toEqual({ props: { date_time: 'Jun 25, 2019' }, type: 'date_time' }));
   });
 });

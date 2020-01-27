@@ -91,7 +91,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return {
         type: 'date_time',
         props: {
-          date_time: parsedValue.isValid() ? parsedValue.format('LL') : value
+          date_time: parsedValue.isValid() ? parsedValue.format('MMM DD, YYYY') : value
         }
       };
     case 'TableColumnTimeAgo':
