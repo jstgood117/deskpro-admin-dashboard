@@ -49,7 +49,6 @@ const ActiveAvatar: React.FC<IProps> = ({
   containerStyle,
   containerClassName
 }) => {
-  console.log(avatarProps, avatar);
   return (
     <Tooltip content={name} styleType='lightBox'>
       <Container style={containerStyle} className={containerClassName}>
