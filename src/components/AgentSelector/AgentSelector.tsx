@@ -71,7 +71,7 @@ const AgentSelectorList = styled.div`
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   padding-top: 4px;
-  max-height: 860px;
+  max-height: '100%';
 `;
 
 const AgentSelectorActions = styled.div`
@@ -102,7 +102,7 @@ interface Props {
   }[];
   description?: string;
   restricted?: {
-    [id: string]: boolean;
+    [id: string]: true;
   };
   intl: IntlShape;
   onSelect: (selected: { [id: string]: boolean }) => void;
@@ -132,21 +132,29 @@ const AgentSelector: React.FC<Props> = ({
     },
     [onSelect, selected]
   );
-  const onSelectAllClick = () =>
-    onSelect(
-      Object.assign(
-        {},
-        ...(agents || [])
-          .filter(agent =>
-            filter ? agent.name.toLowerCase().includes(filter) : agent
-          )
-          .map(agent => ({ [agent.id]: true }))
-      )
-    );
+  // Select agents by provided filter
+  let filteredAgents = filter
+    ? (agents || []).filter(agent => agent.name.toLowerCase().includes(filter))
+    : agents;
+  // Ensure that `filteredAgents` is array since `agents` props is nullable
+  filteredAgents = filteredAgents || [];
+
   const onChangeFilter = React.useCallback(
     e => setFilter(e.target.value.toLowerCase()),
     []
   );
+  const onClearFilter = React.useCallback(e => setFilter(''), []);
+
+  // Get selected count - list of `true` selected fields
+  const selectedCount =
+    Object.values(selected).filter(value => value).length +
+    // And restricted keys
+    Object.keys(restricted || {}).filter(key => !selected[key]).length;
+
+  const onSelectAllClick = () =>
+    onSelect(
+      Object.assign({}, ...filteredAgents.map(agent => ({ [agent.id]: true })))
+    );
 
   return (
     <AgentSelectorContainer>
@@ -157,22 +165,23 @@ const AgentSelector: React.FC<Props> = ({
       <AgentSelectorInfo>
         <p>
           {intl.formatMessage({ id: 'admin.agentselector.selected' })}:{' '}
-          {Object.values(selected).filter(value => value).length} of{' '}
-          {agents.length}
+          {selectedCount} of {agents.length}
         </p>
         <Button
-          buttonType='button'
+          buttonType="button"
           onClick={onSelectAllClick}
-          styleType='secondary'
+          styleType="secondary"
         >
           {intl.formatMessage({ id: 'admin.agentselector.select-all' })}
         </Button>
       </AgentSelectorInfo>
       <Input
-        inputType='primary'
+        inputType="primary"
         onChange={onChangeFilter}
-        placeholder='Search'
+        onClear={onClearFilter}
+        placeholder={intl.formatMessage({ id: 'admin.agentselector.search' })}
         showClear={true}
+        value={filter}
       />
       <Scrollbars
         style={{
@@ -181,9 +190,10 @@ const AgentSelector: React.FC<Props> = ({
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
           paddingTop: 4,
-          minHeight: 400,
+          height: 34 * filteredAgents.length + 1,
+          zIndex: 1,
           width: '100%',
-          maxHeight: 860
+          maxHeight: '100%'
         }}
         renderTrackVertical={({ style }) => (
           <div
@@ -200,27 +210,23 @@ const AgentSelector: React.FC<Props> = ({
         )}
       >
         <AgentSelectorList>
-          {(agents || [])
-            .filter(agent =>
-              filter ? agent.name.toLowerCase().includes(filter) : true
-            )
-            .map(agent => (
-              <AgentSelectorRow
-                agent={agent}
-                intl={intl}
-                key={agent.id}
-                onSelect={onAgentSelect}
-                restricted={restricted && restricted[agent.id]}
-                selected={selected[agent.id]}
-              />
-            ))}
+          {filteredAgents.map(agent => (
+            <AgentSelectorRow
+              agent={agent}
+              intl={intl}
+              key={agent.id}
+              onSelect={onAgentSelect}
+              restricted={restricted && restricted[agent.id]}
+              selected={selected[agent.id]}
+            />
+          ))}
         </AgentSelectorList>
       </Scrollbars>
       <AgentSelectorActions>
-        <Button onClick={onSave} styleType='primary'>
+        <Button onClick={onSave} styleType="primary">
           {intl.formatMessage({ id: 'admin.agentselector.save' })}
         </Button>
-        <Button onClick={onCancel} styleType='secondary'>
+        <Button onClick={onCancel} styleType="secondary">
           {intl.formatMessage({ id: 'admin.agentselector.cancel' })}
         </Button>
       </AgentSelectorActions>

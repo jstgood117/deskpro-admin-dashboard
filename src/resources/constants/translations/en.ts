@@ -47,6 +47,7 @@ export const testTranslations = {
   'admin.agentselector.cancel': 'Cancel',
   'admin.agentselector.select-all': 'Select all',
   'admin.agentselector.selected': 'Selected',
+  'admin.agentselector.search': 'Search',
   'admin.agentselector.restricted':
     'You cannot remove this agent as they belong to a selected permission group',
 
