@@ -47,7 +47,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
               avatar={item.avatar}
               activeColor={props.activeColor}
               position={props.position}
-              avatarProps={props.avatarProps}
+              avatarProps={item.avatarProps || props.avatarProps}
             />
           )}
           items={props.agents}
@@ -158,7 +158,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         />
       );
 
-      case 'count':
+    case 'count':
       return <P1 className='text'>{props.count}</P1>;
 
     case 'id':

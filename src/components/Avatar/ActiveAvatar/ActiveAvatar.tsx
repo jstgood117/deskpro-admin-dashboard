@@ -48,17 +48,20 @@ const ActiveAvatar: React.FC<IProps> = ({
   avatarProps,
   containerStyle,
   containerClassName
-}) => (
-  <Tooltip content={name} styleType='lightBox'>
-    <Container style={containerStyle} className={containerClassName}>
-      <Avatar
-        type={avatar ? 'image' : 'text'}
-        content={avatar ? avatar : name}
-        {...avatarProps}
-      />
-      {active && <Dot position={position} color={activeColor} />}
-    </Container>
-  </Tooltip>
-);
+}) => {
+  console.log(avatarProps, avatar);
+  return (
+    <Tooltip content={name} styleType='lightBox'>
+      <Container style={containerStyle} className={containerClassName}>
+        <Avatar
+          type={avatar ? 'image' : 'text'}
+          content={avatar ? avatar : name}
+          {...avatarProps}
+        />
+        {active && <Dot position={position} color={activeColor} />}
+      </Container>
+    </Tooltip>
+  );
+};
 
 export default ActiveAvatar;

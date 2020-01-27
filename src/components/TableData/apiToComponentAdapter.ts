@@ -115,12 +115,24 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
 
     case 'TableColumnTicketDepartmentList':
       return {
-        type: 'string',
+        type: 'multiple_agents',
         props: {
-          values: getPayloadValue(row, type.valuesArray).map(
-            (department: any) => (department && department.title) || ''
+          viewModel: 'label',
+          agents: getPayloadValue(row, type.valuesArray).map(
+            (department: any) => {
+              const colors = getColorByChar(department.title.charAt(0));
+
+              return {
+                name: department.title,
+                avatar: department.avatar,
+                avatarProps: {
+                  textBackgroundColor: colors.background,
+                  textColor: colors.textColor
+                }
+              };
+            }
           ),
-          max: 1
+          max: 10
         }
       };
 
