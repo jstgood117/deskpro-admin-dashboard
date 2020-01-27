@@ -18,8 +18,29 @@ describe('apiToComponentAdapater tests', () => {
           }
         })
       ).toEqual({
-        props: { max: 1, values: ['test 1', 'test 2'] },
-        type: 'string'
+        props: {
+          max: 10,
+          agents: [
+            {
+              avatar: undefined,
+              avatarProps: {
+                textBackgroundColor: '#FAE8F0',
+                textColor: '#DF5E9C'
+              },
+              name: 'test 1'
+            },
+            {
+              avatar: undefined,
+              avatarProps: {
+                textBackgroundColor: '#FAE8F0',
+                textColor: '#DF5E9C'
+              },
+              name: 'test 2'
+            }
+          ],
+          viewModel: 'label'
+        },
+        type: 'multiple_agents'
       }));
   });
 });
