@@ -63,6 +63,55 @@ const FeatureSectionStyled = styled.div`
     white-space: pre-wrap;
   }
 
+  & div.group-articles {
+    font-family: Rubik;
+    min-width: 280px;
+    font-size: 12px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+  }
+
+  & div.group-articles > p {
+    color: ${props => props.theme.staticColour};
+    padding-bottom: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: ${props => `1px solid ${props.theme.greyLighter}`};
+    margin-bottom: 6px;
+  }
+  & .group-articles > img {
+    width: 300px;
+    height: 140px;
+  }
+
+  & .group-details > div.group-articles ol {
+    padding: 0;
+    margin: 0;
+  }
+
+  & .group-details > div.group-articles li {
+    list-style: none;
+  }
+
+  & .group-details > div.group-articles li a {
+    text-decoration: none;
+    color: ${props => props.theme.staticColour};
+  }
+
+  & .group-details > div.group-articles li::before {
+    content: attr(data-index);
+    border-radius: 100%;
+    padding: 2px;
+    margin: 8px 5px 0 0;
+    color: ${props => props.theme.brandPrimary};
+    background: ${props => `${props.theme.lightBlue}22`};
+    display: inline-flex;
+    height: 18px;
+    width: 18px;
+    align-items: center;
+    justify-content: center;
+  }
+
   & .element-info {
     position: absolute;
     top: 21px;
