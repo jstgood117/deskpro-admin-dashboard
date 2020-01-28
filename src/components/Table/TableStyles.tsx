@@ -88,6 +88,9 @@ export const TableStyled = styled(dpstyle.div)`
               background-position: 30px 42px;
             }
           }
+          &.hasSubRows.non-checkboxes {
+            background-position: 22px 22px;
+          }
           &.subrow {
             background-image: linear-gradient(
                 90deg,
@@ -108,6 +111,10 @@ export const TableStyled = styled(dpstyle.div)`
               background-position: 30px 42px;
             }
           }
+          &.subrow.non-checkboxes {
+            background-position: 22px 0, 22px 22px;
+            background-size: auto, 22px;
+          }
           &.isLastSubRow {
             background-image: linear-gradient(
                 90deg,
@@ -121,6 +128,10 @@ export const TableStyled = styled(dpstyle.div)`
             background-repeat: no-repeat;
             background-position: 18px 0, 18px 20px;
             background-size: 2px 20px, 22px;
+          }
+          &.isLastSubRow.non-checkboxes {
+            background-position: 22px 0, 22px 22px;
+            background-size: 2px 22px, 22px;
           }
           & td {
             background-image: linear-gradient(#eff0f0 1px, transparent 0);

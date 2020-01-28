@@ -249,7 +249,12 @@ const Table: FC<Props> = ({
                       (checked.hasOwnProperty(
                         (row.original as KeyValue).id.toString()
                       )
-                        ? 'row--selected'
+                        ? 'row--selected '
+                        : ' ') +
+                      (row.depth === 1 || row.subRows.length > 0
+                        ? actions && actions.length > 0
+                          ? 'has-checkboxes'
+                          : 'non-checkboxes'
                         : '')
                     }
                   >
