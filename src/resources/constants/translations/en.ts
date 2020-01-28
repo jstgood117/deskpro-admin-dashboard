@@ -43,6 +43,14 @@ export const testTranslations = {
   'admin.sidebar.help.downloads': 'Downloads',
   'admin.sidebar.help.community': 'Community',
 
+  'admin.agentselector.save': 'Save',
+  'admin.agentselector.cancel': 'Cancel',
+  'admin.agentselector.select-all': 'Select all',
+  'admin.agentselector.selected': 'Selected',
+  'admin.agentselector.search': 'Search',
+  'admin.agentselector.restricted':
+    'You cannot remove this agent as they belong to a selected permission group',
+
   'admin.page.error': 'Something has gone wrong',
   'admin.page.loading': 'Loading',
   'admin.page.new': 'New',
