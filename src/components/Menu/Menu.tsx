@@ -113,6 +113,7 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
   let height = 0;
   menuItems.map(item => {
     item.name ? (height += 34) : (height += 14);
+    return true;
   });
   return (
     <MenuListWrapper>
