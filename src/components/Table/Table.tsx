@@ -279,9 +279,6 @@ const Table: FC<Props> = ({
                     {row.cells.map((cell: any, indexInner: number) => {
                       const isIdColumn =
                         cell.column.type.__typename === 'TableColumnId';
-                      {
-                        console.log(indexInner);
-                      }
                       return (
                         <td
                           className={
