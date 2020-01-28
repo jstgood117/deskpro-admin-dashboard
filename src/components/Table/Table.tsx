@@ -184,7 +184,6 @@ const Table: FC<Props> = ({
                       >
                         <StyledTh alignRight={isIdColumn}>
                           {column.render('Header')}
-
                           {column.isSorted &&
                             (column.isSortedDesc ? (
                               <span className='sort-icon'>
@@ -224,17 +223,15 @@ const Table: FC<Props> = ({
                     key={indexOuter}
                     {...row.getRowProps()}
                     className={
-                      (row.depth === 1
-                        ? (page[indexOuter + 1] && page[indexOuter + 1].depth === 0) ||
-                          indexOuter === page.length - 1
-                          ? 'isLastSubRow '
-                          : 'subrow '
-                        : row.subRows.length > 0 && row.isExpanded
-                        ? 'hasSubRows '
+                      (row.original && checked.hasOwnProperty(
+                        (row.original as KeyValue).id.toString()
+                      )
+                        ? 'row--selected '
                         : ' ') +
-                      (row.original &&
-                      checked.hasOwnProperty((row.original as KeyValue).id.toString())
-                        ? 'row--selected'
+                      (row.depth === 1 || row.subRows.length > 0
+                        ? actions && actions.length > 0
+                          ? 'has-checkboxes'
+                          : 'non-checkboxes'
                         : '')
                     }
                   >
@@ -263,6 +260,12 @@ const Table: FC<Props> = ({
                       const isIdColumn = cell.column.type.__typename === 'TableColumnId';
                       return (
                         <td
+                          className={
+                            (!actions || actions.length === 0) &&
+                            indexInner === 0
+                              ? 'firstColumn'
+                              : ''
+                          }
                           key={indexInner}
                           {...cell.getCellProps()}
                           {...cell.row.getExpandedToggleProps({

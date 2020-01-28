@@ -1,4 +1,6 @@
 import React from 'react';
+import settingsImages from '../../../SettingsImages/SettingsImages';
+
 import Tooltip from '../../../Tooltip';
 import Icon from '../../../Icon';
 
@@ -9,8 +11,8 @@ export const generateTitleAndDescription = (className: string, props: any) => {
   }
 
   return (
-    <div className='element-details'>
-      <div className='title'>
+    <div className={className}>
+      <div className='element-details'>
         {props.title && <label>{props.title}</label>}
         {props.tooltip && (
           <Tooltip
@@ -21,17 +23,26 @@ export const generateTitleAndDescription = (className: string, props: any) => {
           >
             <span
               style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
-                paddingLeft: '4px'
+                paddingLeft: '4px',
+                transform: 'translateY(2px)'
               }}
             >
               <Icon name='info-question-text' />
             </span>
           </Tooltip>
         )}
+        {props.description && <p>{props.description}</p>}
       </div>
-      {props.description && <p>{props.description}</p>}
+      {props.articles && (
+        <div className='group-articles'>
+          <img
+            alt='Featured articles example'
+            src={settingsImages[props.articles]}
+          />
+        </div>
+      )}
     </div>
   );
 };

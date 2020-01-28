@@ -1,7 +1,10 @@
 import brand1 from '../../assets/brands/brand1.png';
 import brand2 from '../../assets/brands/brand2.png';
+import { API_SettingsUiElement } from '../../codegen/types';
 
-export const uiSchema = {
+export const uiSchema: {
+  elements: API_SettingsUiElement & { type: string }[];
+} = {
   elements: [
     {
       title: 'Agent Settings',
@@ -287,81 +290,166 @@ export const uiSchema = {
           ]
         },
         {
+          title: 'Help Center',
+          type: 'page_section',
+          elements: [
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_knowledgebase'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'Knowledgebase',
+              showOn: 'agent_settings_help_center_knowledgebase',
+              description:
+                'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
+              elements: [],
+              articles: 'featuredArticles'
+            },
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_news'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'News',
+              showOn: 'agent_settings_help_center_news',
+              description:
+                'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
+              elements: [],
+              articles: 'featuredArticles'
+            },
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_downloads'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'Downloads',
+              showOn: 'agent_settings_help_center_downloads',
+              description:
+                'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
+              elements: [],
+              articles: 'featuredArticles'
+            },
+            {
+              type: 'field',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_community'
+              }
+            },
+            {
+              type: 'vertical_group',
+              title: 'Community',
+              showOn: 'agent_settings_help_center_community',
+              description:
+                'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
+              elements: [],
+              articles: 'featuredArticles'
+            }
+          ]
+        },
+        {
           type: 'page_section',
           title: 'Testing',
-          elements: [{
-            type: 'field',
-            title: 'List of strings',
-            field: {
-              type: 'stringlist',
-              id: 'test_list_of_strings'
+          elements: [
+            {
+              type: 'field',
+              title: 'List of strings',
+              field: {
+                type: 'stringlist',
+                id: 'test_list_of_strings'
+              }
+            },
+            {
+              type: 'field',
+              title: 'Unit option',
+              field: {
+                type: 'units',
+                id: 'test_unit_value',
+                optionId: 'test_unit_option',
+                options: [
+                  { value: 'minutes', label: 'minutes' },
+                  { value: 'hours', label: 'hours' },
+                  { value: 'seconds', label: 'seconds' }
+                ]
+              }
             }
-          },
-          {
-            type: 'field',
-            title: 'Unit option',
-            field: {
-              type: 'units',
-              id: 'test_unit_value',
-              optionId: 'test_unit_option',
-              options: [
-                { value: 'minutes', label: 'minutes' },
-                { value: 'hours', label: 'hours' },
-                { value: 'seconds', label: 'seconds' },
-              ]
-            }
-          }]
+          ]
         },
         {
           type: 'page_section',
           title: 'Checking the checkbox',
-          elements: [{
-            type: 'group',
-            elements:[{
-              type: 'field',
-              field: {
-                type: 'checkbox',
-                id: 'test_unit_checkbox_1',
-                value: 'admin'
-              }
-            }, {
-              type: 'horizontal_group',
-              elements:[{
-                type: 'label',
-                label: 'Testing this out'
-              },
-              {
-                type: 'field',
-                field: {
-                  type: 'input',
-                  id: 'test_unit_another_input_1'
+          elements: [
+            {
+              type: 'group',
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    type: 'checkbox',
+                    id: 'test_unit_checkbox_1',
+                    value: 'admin'
+                  }
+                },
+                {
+                  type: 'horizontal_group',
+                  elements: [
+                    {
+                      type: 'label',
+                      label: 'Testing this out'
+                    },
+                    {
+                      type: 'field',
+                      field: {
+                        type: 'input',
+                        id: 'test_unit_another_input_1'
+                      }
+                    }
+                  ]
                 }
-              }]
-            }]
-          }, {
-            type: 'group',
-            elements:[{
-              type: 'field',
-              field: {
-                type: 'checkbox',
-                id: 'test_unit_checkbox_2',
-                value: 'stuff'
-              }
-            }, {
-              type: 'horizontal_group',
-              elements:[{
-                type: 'label',
-                label: 'Testing this out'
-              },
-              {
-                type: 'field',
-                field: {
-                  type: 'input',
-                  id: 'test_unit_another_input_2'
+              ]
+            },
+            {
+              type: 'group',
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    type: 'checkbox',
+                    id: 'test_unit_checkbox_2',
+                    value: 'stuff'
+                  }
+                },
+                {
+                  type: 'horizontal_group',
+                  elements: [
+                    {
+                      type: 'label',
+                      label: 'Testing this out'
+                    },
+                    {
+                      type: 'field',
+                      field: {
+                        type: 'input',
+                        id: 'test_unit_another_input_2'
+                      }
+                    }
+                  ]
                 }
-              }]
-            }]
-          }]
+              ]
+            }
+          ]
         }
       ]
     }
@@ -400,6 +488,10 @@ export const jsonSchema = {
   ],
   brand1_default_email_account: 'support@brand1.deskpro.com',
   brand2_default_email_account: '',
+  agent_settings_help_center_knowledgebase: true,
+  agent_settings_help_center_news: true,
+  agent_settings_help_center_downloads: true,
+  agent_settings_help_center_community: true,
   test_list_of_strings: [] as string[],
   test_unit_value: '',
   test_unit_option: 'minutes',
