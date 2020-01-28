@@ -222,10 +222,10 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
       </Scrollbars>
       <AgentSelectorActions>
         <Button onClick={onSave} styleType='primary'>
-          {intl.formatMessage({ id: 'admin.agentselector.save' })}
+          {intl.formatMessage({ id: 'admin.common.save' })}
         </Button>
         <Button onClick={onCancel} styleType='secondary'>
-          {intl.formatMessage({ id: 'admin.agentselector.cancel' })}
+          {intl.formatMessage({ id: 'admin.common.cancel' })}
         </Button>
       </AgentSelectorActions>
     </AgentSelectorContainer>
