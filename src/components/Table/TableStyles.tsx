@@ -82,8 +82,14 @@ export const TableStyled = styled(dpstyle.div)`
             background-repeat: no-repeat;
             background-position: 18px 22px;
             .checkBox {
-              border-bottom: none;
+              background-position: 30px 42px;
             }
+            .firstColumn {
+              background-position: 30px 42px;
+            }
+          }
+          &.hasSubRows.non-checkboxes {
+            background-position: 22px 22px;
           }
           &.subrow {
             background-image: linear-gradient(
@@ -96,11 +102,18 @@ export const TableStyled = styled(dpstyle.div)`
                 transparent 0px
               );
             background-repeat: no-repeat;
-            background-position: 18px 0,18px 20px;
+            background-position: 18px 0, 18px 20px;
             background-size: auto, 22px;
             .checkBox {
-              border-bottom: none;
+              background-position: 30px 42px;
             }
+            .firstColumn {
+              background-position: 30px 42px;
+            }
+          }
+          &.subrow.non-checkboxes {
+            background-position: 22px 0, 22px 22px;
+            background-size: auto, 22px;
           }
           &.isLastSubRow {
             background-image: linear-gradient(
@@ -113,11 +126,17 @@ export const TableStyled = styled(dpstyle.div)`
                 transparent 0px
               );
             background-repeat: no-repeat;
-            background-position: 18px 0,18px 20px;
+            background-position: 18px 0, 18px 20px;
             background-size: 2px 20px, 22px;
           }
+          &.isLastSubRow.non-checkboxes {
+            background-position: 22px 0, 22px 22px;
+            background-size: 2px 22px, 22px;
+          }
           & td {
-            border-bottom: 1px solid ${props => props.theme.greyLighter};
+            background-image: linear-gradient(#eff0f0 1px, transparent 0);
+            background-repeat: no-repeat;
+            background-position: 0px 42px;
             padding: 4px 16px 4px 10px;
             text-align: left;
             color: ${props => props.theme.staticColour};

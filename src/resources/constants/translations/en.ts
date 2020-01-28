@@ -4,6 +4,8 @@ export const testTranslations = {
   'admin_common.page.link.login_log': 'Login',
   'admin_common.table.action': 'Action',
   'admin_common.table.view': 'View',
+  'admin.common.save': 'Save',
+  'admin.common.cancel': 'Cancel',
 
   'admin.sidebar.setup': 'Setup',
   'admin.sidebar.setup.dashboard': 'Dashboard',
@@ -43,8 +45,6 @@ export const testTranslations = {
   'admin.sidebar.help.downloads': 'Downloads',
   'admin.sidebar.help.community': 'Community',
 
-  'admin.agentselector.save': 'Save',
-  'admin.agentselector.cancel': 'Cancel',
   'admin.agentselector.select-all': 'Select all',
   'admin.agentselector.selected': 'Selected',
   'admin.agentselector.search': 'Search',
@@ -113,6 +113,9 @@ export const testTranslations = {
   'admin.settings.inlineEdit.emailsWith': 'emails with',
   'admin.settings.inlineEdit.minutes': 'minutes',
   'admin.settings.inlineEdit.rejectMessagesFor': 'reject messages for',
+
+  'admin.filter.addFilter': 'Add Filter',
+  'admin.filter.selectProperty': 'Select Property',
 
   'group.active': 'Active',
   'group.deleted': 'Deleted',

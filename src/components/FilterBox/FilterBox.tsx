@@ -1,6 +1,11 @@
 import React, { FC, useCallback } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { uniqueId } from 'lodash';
+import {
+  FormattedMessage,
+  injectIntl,
+  WrappedComponentProps
+} from 'react-intl';
 
 import Icon from '../Icon';
 import Button from '../Button';
@@ -33,22 +38,24 @@ const StyledBox = styled(dpstyle.div)`
   }
 `;
 
-const FilterBox: FC<Props> = ({
+const FilterBox: FC<Props & WrappedComponentProps> = ({
   filters,
   setFilters,
   options,
   cancel,
   apply,
-  getUniqueValues
+  getUniqueValues,
+  intl
 }) => {
-
   const onAdd = useCallback(() => {
     const lastIndex = filters.length - 1;
-    if(filters[lastIndex].value &&
+    if (
+      filters[lastIndex].value &&
       filters[lastIndex].operatorName &&
-      filters[lastIndex].property) {
-        setFilters([...filters, { property: '', operatorName: '', value: '' }]);
-      }
+      filters[lastIndex].property
+    ) {
+      setFilters([...filters, { property: '', operatorName: '', value: '' }]);
+    }
   }, [filters, setFilters]);
 
   return (
@@ -66,7 +73,7 @@ const FilterBox: FC<Props> = ({
                 key={uniqueId()}
               >
                 <FilterOptions
-                  placeholder='Select Property'
+                  placeholder={intl.formatMessage({ id: 'admin.filter.selectProperty' })}
                   setFilters={setFilters}
                   filters={filters}
                   index={index}
@@ -80,7 +87,7 @@ const FilterBox: FC<Props> = ({
         <div style={{ paddingTop: 2 }} className='add-filter'>
           <Button styleType='tertiary' onClick={onAdd} size='small'>
             <Icon name='plus' />
-            Add Filter
+            <FormattedMessage id={'admin.filter.addFilter'} />
           </Button>
         </div>
         <div style={{ paddingTop: 44, display: 'flex' }}>
@@ -92,7 +99,7 @@ const FilterBox: FC<Props> = ({
               }}
               size='medium'
             >
-              Apply Filter
+              <FormattedMessage id={'admin.filter.addFilter'} />
             </Button>
           </div>
           <div>
@@ -103,7 +110,7 @@ const FilterBox: FC<Props> = ({
               }}
               size='medium'
             >
-              Cancel
+              <FormattedMessage id={'admin.common.cancel'} />
             </Button>
           </div>
         </div>
@@ -112,4 +119,4 @@ const FilterBox: FC<Props> = ({
   );
 };
 
-export default FilterBox;
+export default injectIntl(FilterBox);
