@@ -23,7 +23,7 @@ import Menu from '../Menu';
 import {
   generateViewList,
   generatSortMenuItems,
-  generatFilterOptions,
+  generatFilterOptions
 } from './functions';
 import { SortType } from '../Table/types';
 import { testGroupItems } from '../../resources/constants/constants';
@@ -333,7 +333,10 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
               placeholder='Search Box'
               value={searchValue}
               onChange={handleSearchChange}
-              onClear={() => setSearchValue('')}
+              onClear={() => {
+                setSearchValue('');
+                debounceOnSearchChange('');
+              }}
             />
           </FlexStyled>
           {props.filterMenu && (

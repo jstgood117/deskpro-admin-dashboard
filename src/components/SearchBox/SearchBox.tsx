@@ -127,7 +127,7 @@ const SearchBox: FC<Props> = ({
       />
 
       {(hasValue || hasFocus) && (
-        <ButtonClear onClick={onClear}>
+        <ButtonClear onClick={onClear} className='clear-btn'>
           <Icon name='close' />
         </ButtonClear>
       )}
