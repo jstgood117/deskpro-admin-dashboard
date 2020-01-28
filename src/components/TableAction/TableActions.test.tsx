@@ -5,11 +5,22 @@ import TableActions, { IProps } from './TableActions';
 
 import { ColumnOrder } from '../../types';
 import { SortType } from '../Table/types';
+import { WrapperType } from '../../test/types';
+
+const setSearchValue = jest.fn();
+const debounceOnSearchChange = jest.fn();
 
 describe('TableActions', () => {
   let props: IProps;
   let mountedTableActions: any;
 
+  const simulateClick = (root: WrapperType) => {
+    const input = root.find('input');
+    input.simulate('focus');
+    root.update();
+    const clearBtn = root.find('.clear-btn');
+    clearBtn.first().simulate('click');
+  };
   const wrapper = (bShallow: boolean) => {
     if (!mountedTableActions) {
       mountedTableActions = bShallow
@@ -39,5 +50,12 @@ describe('TableActions', () => {
   it('always renders a <div>', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
+  });
+  test('Test click event', () => {
+    const root = wrapper(false);
+    simulateClick(root);
+    expect(debounceOnSearchChange).toBeCalledTimes(0);
+    expect(setSearchValue).toBeCalledTimes(0);
+    root.unmount();
   });
 });
