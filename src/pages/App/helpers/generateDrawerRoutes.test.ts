@@ -33,7 +33,7 @@ describe('App helper functions', () => {
   describe('generateDrawerRoutes', () => {
 
     test('calls IoC param function with array of drawerItem paths ', () => {
-      const mockGenerateFunc = jest.fn(() => []);
+      const mockGenerateFunc = jest.fn();
 
       generateDrawerRoutes(siderbarLinks, mockGenerateFunc);
 
@@ -42,7 +42,7 @@ describe('App helper functions', () => {
     });
 
     test('returns empty array if no drawer items', () => {
-      const mockGenerateFunc = jest.fn(() => []);
+      const mockGenerateFunc = jest.fn();
       const clonedSiderbarLinks: ISidebarSection[] = [{
         ...siderbarLinks[0],
         navItems: [{
