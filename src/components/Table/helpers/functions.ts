@@ -43,7 +43,7 @@ export const onCheckboxChange = (
     } else {
       setChecked({
         ...checked,
-        [value]: true
+        [value]: true,
       });
     }
     return true;
@@ -66,13 +66,13 @@ export const onSelectAllChange = (
 
     const showingRows = _.slice(data, startPos, endPos);
     const ids = showingRows.map((_row: KeyValue) => ({
-      [_row.id]: true
+      [_row.id]: true,
     }));
     showingRows.map(row => {
       if (row.subRows.length > 0) {
         row.subRows.map((_row: KeyValue) =>
           ids.push({
-            [_row.id]: true
+            [_row.id]: true,
           })
         );
       }
@@ -85,13 +85,13 @@ export const onSelectAllChange = (
 
 export const onSelectEverything = (data: any[], setChecked: objectUseState) => {
   const ids = data.map((_row: KeyValue) => ({
-    [_row.id]: true
+    [_row.id]: true,
   }));
   data.map(row => {
     if (row.subRows.length > 0) {
       row.subRows.map((_row: KeyValue) =>
         ids.push({
-          [_row.id]: true
+          [_row.id]: true,
         })
       );
     }
@@ -113,45 +113,44 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100
+          pageSize: 100,
         },
         manualPagination: true,
-        pageCount: controlledPageCount
+        pageCount: controlledPageCount,
       }
     : {
         columns,
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100
-        }
+          pageSize: 100,
+        },
       };
 };
 
-export const getCSVCellFormatOnType = (
-  columnProps: KeyValue,
-  values: any
-): string => {
-  switch (columnProps.__typename) {
+export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any = {}): string => {
+  const { __typename, name = {}, value = {}, valuesArray = {} } = columnProps || {};
+  switch (__typename) {
     case 'TableColumnNameAvatar':
-      return values[columnProps.name.dataPath];
+      return values[name.dataPath];
     case 'TableColumnId':
     case 'TableColumnTimeAgo':
     case 'TableColumnText':
     case 'TableColumnInteger':
     case 'TableColumnDateTime':
-      return values[columnProps.value.dataPath];
+      return values[value.dataPath];
     case 'TableColumnTextCommaSep':
-      return values[columnProps.valuesArray.dataPath].join(', ');
+      return values[valuesArray.dataPath].join(', ');
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return values[columnProps.valuesArray.dataPath] && values[columnProps.valuesArray.dataPath]
-        .map((item: any) => item.title)
-        .join(', ');
+      return (
+        values[valuesArray.dataPath] &&
+        values[valuesArray.dataPath].map((item: any) => item.title).join(', ')
+      );
     case 'TableColumnBoolYesNo':
-      if (values.hasOwnProperty(columnProps.value.dataPath)) {
-        return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
+      if (values.hasOwnProperty(value.dataPath)) {
+        return values[value.dataPath] === true ? 'Yes' : 'No';
       }
       return '';
     default:
@@ -159,10 +158,7 @@ export const getCSVCellFormatOnType = (
   }
 };
 
-export const generateCSVData = (
-  table: KeyValue[],
-  columnsMeta: ColumnMeta[]
-) => {
+export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) => {
   const csvData: KeyValue[] = [];
 
   // The table values have already been reduced to
@@ -173,14 +169,9 @@ export const generateCSVData = (
     table.map((row: KeyValue) => {
       const temp = Object.assign({}, row.values);
       columnsMeta.map((columnMeta: ColumnMeta) => {
-        temp[columnMeta.id] = getCSVCellFormatOnType(
-          columnMeta.columnProps,
-          row.original
-        );
-
+        temp[columnMeta.id] = getCSVCellFormatOnType(columnMeta.columnProps, row.original);
         return true;
       });
-
       csvData.push(temp);
       return true;
     });
@@ -194,7 +185,7 @@ export const generateCardProps = (row: any): UserType => {
   return {
     userName: original.name,
     userNumber: original.phone,
-    userMail: original.primary_email
+    userMail: original.primary_email,
     // avatar: original.avatarUrn
   };
 };
