@@ -8,30 +8,43 @@ import DrawerType from '../../DrawerType';
 
 import { ISidebarSection, ISidebarItem } from '../../../resources/interfaces';
 
-export const generateSinglePageRoute = (path: string, section: ISidebarItem, postFixPaths?: string[]): JSX.Element => (
+export const generateSinglePageRoute = (path: string, paths: string[], section: ISidebarItem, postFixPaths?: string[]): JSX.Element => {
 
-  <Route
-    key={`${path}`}
-    exact={true}
-    path={[
-      `${path}`,
-      ...(postFixPaths ? postFixPaths.map(_path => `${_path}`) : [])
-    ]}
-    render={() => (
-      <PageType
-        path={path}
-        pageType={section.pageType}
-        metadataQuery={section.metadataQuery}
-      />
-    )}
-  />
-);
+  // path is null if paths is set, so grab
+  // the primaryPath for the key
+  const primaryPath = (Array.isArray(section.paths) && section.paths.length > 1)
+  ? section.paths[0]
+  : section.path;
 
-export const generatePageRoute = (section: ISidebarItem, postFixPaths?: string[] ): JSX.Element[] => {
+  // Use the paths array to populate the
+  // path attribute on the Route. This
+  // covers tabbed data urls (prevents
+  // page reloading.)
+  return (
+    <Route
+      key={`${primaryPath}`}
+      exact={true}
+      path={[
+        ...paths,
+        ...(postFixPaths ? postFixPaths.map(_path => `${_path}`) : [])
+      ]}
+      render={() => (
+        <PageType
+          path={path}
+          paths={section.paths}
+          pageType={section.pageType}
+          metadataQuery={section.metadataQuery}
+        />
+      )}
+    />
+  );
+};
+
+export const generatePageRoute = (section: ISidebarItem, postFixPaths?: string[] ): JSX.Element => {
 
   return Array.isArray(section.paths)
-    ? section.paths.map(_path => generateSinglePageRoute(_path, section, postFixPaths))
-    : [generateSinglePageRoute(section.path, section, postFixPaths)];
+    ? generateSinglePageRoute(section.path, section.paths, section, postFixPaths)
+    : generateSinglePageRoute(section.path, [section.path], section, postFixPaths);
 
 };
 
@@ -41,13 +54,16 @@ export const generateDrawerRoute = (section: ISidebarItem): JSX.Element[] => {
     ? section.paths[0]
     : section.path;
 
+  const paths = Array.isArray(section.paths)
+    ? section.paths
+    : [section.path];
+
+
   return [(
     <Route
       key={`${primaryPath}`}
       exact={true}
-      path={[
-        `${primaryPath}`
-      ]}
+      path={paths}
       render={() => (
         <DrawerType
           path={primaryPath}
@@ -61,7 +77,7 @@ export const generateDrawerRoute = (section: ISidebarItem): JSX.Element[] => {
 
 export const generatePageRoutes = (
   links: ISidebarSection[],
-  generateFunc: (section: ISidebarItem, postFixPaths?: string[]) => JSX.Element[]
+  generateFunc: (section: ISidebarItem, postFixPaths?: string[]) => JSX.Element
 ): JSX.Element[] => {
   return flatMap(
     links.map(section => section.navItems),
@@ -73,7 +89,7 @@ export const generatePageRoutes = (
       const postFixPaths = generateDrawerItemPaths(_section);
 
       return acc.concat([
-        ...generateFunc(_section, postFixPaths)
+        generateFunc(_section, postFixPaths)
       ]);
     }, ([] as JSX.Element[]));
 };

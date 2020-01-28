@@ -49,7 +49,7 @@ describe('App helper functions', () => {
   describe('generateDrawerRoutes', () => {
 
     test('calls IoC param function with array of drawerItem paths ', () => {
-      const mockGenerateFunc = jest.fn();
+      const mockGenerateFunc = jest.fn(() => []);
 
       generateDrawerRoutes(siderbarLinks, mockGenerateFunc);
 
@@ -58,7 +58,7 @@ describe('App helper functions', () => {
     });
 
     test('returns empty array if no drawer items', () => {
-      const mockGenerateFunc = jest.fn();
+      const mockGenerateFunc = jest.fn(() => []);
       const clonedSiderbarLinks: ISidebarSection[] = [{
         ...siderbarLinks[0],
         navItems: [{
@@ -76,15 +76,15 @@ describe('App helper functions', () => {
   describe('generatePageRoute', () => {
 
     test('given an array of sidebar links, generates page routes', () => {
-      const route = generatePageRoute(navItem);
-      expect(route.props.path).toEqual(['/']);
+      const routes = generatePageRoute(navItem);
+      expect(routes.props.path).toEqual(['/']);
     });
 
     test('given an array of sidebar links, generates page routes and extends path with drawerItem paths', () => {
 
       const postFixPaths = ['/edit', '/test'];
-      const routeWithPostFixPaths = generatePageRoute(navItem, postFixPaths);
-      expect(routeWithPostFixPaths.props.path).toEqual(['/', '/edit', '/test']);
+      const routesWithPostFixPaths = generatePageRoute(navItem, postFixPaths);
+      expect(routesWithPostFixPaths.props.path).toEqual(['/', '/edit', '/test']);
     });
 
   });
@@ -92,8 +92,8 @@ describe('App helper functions', () => {
   describe('generateDrawerRoute', () => {
 
     test('given an array of sidebar links, generates drawer routes', () => {
-      const route = generateDrawerRoute(navItem);
-      expect(route.props.path).toEqual(['/']);
+      const routes = generateDrawerRoute(navItem);
+      expect(routes[0].props.path).toEqual(['/']);
     });
   });
 

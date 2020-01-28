@@ -18,10 +18,11 @@ export interface IProps {
   tabItems: ITabsProps[];
   handleClick?: (index: number) => void;
   sharedTabsCount?: number;
+  focusedIndex?: number;
 }
 
-const TabBar: FC<IProps> = ({ tabItems, handleClick, sharedTabsCount }) => {
-  const [tabIndex, setTabState] = useState(0);
+const TabBar: FC<IProps> = ({ tabItems, focusedIndex, handleClick, sharedTabsCount }) => {
+  const [tabIndex, setTabState] = useState(focusedIndex || 0);
   const [dropdownValue, setDropdownValue] = useState();
   const moreItems = tabItems.slice(sharedTabsCount);
   function changeTab(index: number) {

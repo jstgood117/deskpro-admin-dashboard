@@ -8,10 +8,11 @@ import StandardSettingsPage from './StandardSettingsPage';
 import { IProps, PageContextValuesType } from './types';
 
 export const getPageComponent = (props: IProps) => {
-  const { path, pageType } = props;
+  const { path, paths, pageType } = props;
+
   switch (pageType) {
     case 'StandardDataPage':
-      return <StandardTablePage path={path} />;
+      return <StandardTablePage path={path} paths={paths} />;
     case 'StandardSettingsPage':
       return <StandardSettingsPage />;
     default:
