@@ -9,11 +9,12 @@ import Sidebar from '../../components/Sidebar';
 
 import { SidebarContainer, AppContainer, BodyContainer } from '../AdminInterface';
 
+import { generatePageRoute } from './helpers/generatePageRoute';
+import { generateDrawerRoute } from './helpers/generateDrawerRoute';
+import { generatePageRoutes } from './helpers/generatePageRoutes';
+import { generateDrawerRoutes } from './helpers/generateDrawerRoutes';
+
 import {
-  generatePageRoute,
-  generateDrawerRoute,
-  generatePageRoutes,
-  generateDrawerRoutes,
   __mergeInDevI18Keys,
 } from './helpers/funcs';
 
