@@ -43,7 +43,7 @@ export const onCheckboxChange = (
     } else {
       setChecked({
         ...checked,
-        [value]: true,
+        [value]: true
       });
     }
     return true;
@@ -66,13 +66,13 @@ export const onSelectAllChange = (
 
     const showingRows = _.slice(data, startPos, endPos);
     const ids = showingRows.map((_row: KeyValue) => ({
-      [_row.id]: true,
+      [_row.id]: true
     }));
     showingRows.map(row => {
       if (row.subRows.length > 0) {
         row.subRows.map((_row: KeyValue) =>
           ids.push({
-            [_row.id]: true,
+            [_row.id]: true
           })
         );
       }
@@ -85,13 +85,13 @@ export const onSelectAllChange = (
 
 export const onSelectEverything = (data: any[], setChecked: objectUseState) => {
   const ids = data.map((_row: KeyValue) => ({
-    [_row.id]: true,
+    [_row.id]: true
   }));
   data.map(row => {
     if (row.subRows.length > 0) {
       row.subRows.map((_row: KeyValue) =>
         ids.push({
-          [_row.id]: true,
+          [_row.id]: true
         })
       );
     }
@@ -113,18 +113,18 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100,
+          pageSize: 100
         },
         manualPagination: true,
-        pageCount: controlledPageCount,
+        pageCount: controlledPageCount
       }
     : {
         columns,
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100,
-        },
+          pageSize: 100
+        }
       };
 };
 
@@ -185,7 +185,7 @@ export const generateCardProps = (row: any): UserType => {
   return {
     userName: original.name,
     userNumber: original.phone,
-    userMail: original.primary_email,
+    userMail: original.primary_email
     // avatar: original.avatarUrn
   };
 };
