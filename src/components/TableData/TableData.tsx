@@ -49,7 +49,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
               avatar={item.avatar}
               activeColor={props.activeColor}
               position={props.position}
-              avatarProps={props.avatarProps}
+              avatarProps={item.avatarProps || props.avatarProps}
             />
           )}
           items={props.agents}

@@ -16,6 +16,7 @@ const StringListContainer = styled.div`
     font-weight: 500;
     font-size: 14px;
     line-height: 150%;
+    min-height: 21px;
     display: flex;
     align-items: center;
     color: ${props => props.theme.staticColour};
@@ -92,7 +93,6 @@ interface IProps {
   id?: string;
   name?: string;
   max?: number;
-  showTitle?: boolean;
   title?: string;
   values: string[];
 }
@@ -122,7 +122,6 @@ const StringListBuilder: React.FC<IProps> = ({
   id,
   max,
   name,
-  showTitle,
   title,
   values
 }) => {
@@ -145,8 +144,8 @@ const StringListBuilder: React.FC<IProps> = ({
   return (
     <StringListContainer>
       <div className='title-container'>
-        {title}
-        <span className={'string-list-count' + (showTitle ? '' : ' untitled')}>
+        {title || ' '}
+        <span className='string-list-count'>
           {values.length}
           {!!values.length && !!max && ` of ${max}`}
         </span>
@@ -160,6 +159,7 @@ const StringListBuilder: React.FC<IProps> = ({
                 <Input
                   autoFocus={true}
                   value={newItemValue || value}
+                  key={index}
                   onChange={onChangeNewItem}
                   onBlur={() =>
                     handleAddItem(

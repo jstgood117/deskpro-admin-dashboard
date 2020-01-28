@@ -73,7 +73,7 @@ const Property: SFC<WrappedComponentProps & Props> = ({
   };
 
   return (
-    <div style={{ minWidth: 160 }}>
+    <div style={{ width: 160 }}>
       <StyledAutoComplete name='property'>
         <Autocomplete
           getItemValue={(item: any) => item.path}

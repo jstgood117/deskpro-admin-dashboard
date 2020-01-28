@@ -176,7 +176,9 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    {actions && actions.length > 0 && <th style={{ width: '30px' }} />}
+                    {actions && actions.length > 0 && (
+                      <th style={{ width: '30px' }} />
+                    )}
                     {headerGroup.headers.map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
@@ -222,9 +224,7 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
-                    <th
-                      style={{ width: '1px' }}
-                    />
+                    <th style={{ width: '1px' }} />
                   </tr>
                 )
               )}
@@ -249,7 +249,12 @@ const Table: FC<Props> = ({
                       (checked.hasOwnProperty(
                         (row.original as KeyValue).id.toString()
                       )
-                        ? 'row--selected'
+                        ? 'row--selected '
+                        : ' ') +
+                      (row.depth === 1 || row.subRows.length > 0
+                        ? actions && actions.length > 0
+                          ? 'has-checkboxes'
+                          : 'non-checkboxes'
                         : '')
                     }
                   >
@@ -281,6 +286,12 @@ const Table: FC<Props> = ({
                         cell.column.type.__typename === 'TableColumnId';
                       return (
                         <td
+                          className={
+                            (!actions || actions.length === 0) &&
+                            indexInner === 0
+                              ? 'firstColumn'
+                              : ''
+                          }
                           key={indexInner}
                           {...cell.getCellProps()}
                           {...cell.row.getExpandedToggleProps({
@@ -303,16 +314,17 @@ const Table: FC<Props> = ({
                     <td>
                       <span className='action-buttons'>
                         {!checked.hasOwnProperty(
-                          (row.original as KeyValue).id.toString()) && (
-                            <TableData
-                              type='action_buttons'
-                              props={{
-                                onPencilClick: () => {},
-                                onDuplicateClick: () => {},
-                                onTrashClick: () => {},
-                              }}
-                            />
-                          )}
+                          (row.original as KeyValue).id.toString()
+                        ) && (
+                          <TableData
+                            type='action_buttons'
+                            props={{
+                              onPencilClick: () => {},
+                              onDuplicateClick: () => {},
+                              onTrashClick: () => {}
+                            }}
+                          />
+                        )}
                       </span>
                     </td>
                   </tr>
