@@ -309,7 +309,10 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
               placeholder='Search Box'
               value={searchValue}
               onChange={handleSearchChange}
-              onClear={() => setSearchValue('')}
+              onClear={() => {
+                setSearchValue('');
+                debounceOnSearchChange('');
+              }}
             />
           </FlexStyled>
           {props.filterMenu && (
