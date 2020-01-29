@@ -29,6 +29,21 @@ describe('App helper functions', () => {
       expect(result).toEqual(['/edit']);
     });
 
+    test('returns array of string paths if `paths` prop is set', () => {
+      const clonedNavItem = {
+        ...navItem,
+        drawerItems: [{
+          ...drawerItem,
+          paths: ['/different']
+        }]
+      } as ISidebarItem;
+
+      const result = generateDrawerItemPaths(clonedNavItem);
+
+      expect(result).toEqual(['/different']);
+    });
+
+
     test('returns empty array if no drawerItems', () => {
 
       const clonedNavItem = {

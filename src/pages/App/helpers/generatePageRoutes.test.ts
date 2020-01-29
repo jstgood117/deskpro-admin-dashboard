@@ -21,15 +21,15 @@ describe('App helper functions', () => {
     'drawerItems': [drawerItem]
   };
 
-  const siderbarLinks: ISidebarSection[] = [
-    {
-      'sectionName':'admin_nav.section.setup',
-      'icon':'setup',
-      'navItems':[
-        navItem
-      ]
-  }];
+  const sidebarLink: ISidebarSection = {
+    'sectionName':'admin_nav.section.setup',
+    'icon':'setup',
+    'navItems':[
+      navItem
+    ]
+  };
 
+  const siderbarLinks: ISidebarSection[] = [sidebarLink];
 
   describe('generatePageRoutes', () => {
 
@@ -40,6 +40,23 @@ describe('App helper functions', () => {
       expect(mockGenerateFunc).toHaveBeenCalledTimes(1);
       expect(mockGenerateFunc).toHaveBeenCalledWith(navItem, ['/edit']);
     });
+  });
+
+
+  test('doesn`t run if no `path` or `paths`', () => {
+
+    const mockGenerateFunc = jest.fn();
+
+    generatePageRoutes([{
+      ...sidebarLink,
+      navItems:[{
+        ...navItem,
+        path: null,
+        paths:null
+      }]
+    }], mockGenerateFunc);
+
+    expect(mockGenerateFunc).toHaveBeenCalledTimes(0);
   });
 
 });

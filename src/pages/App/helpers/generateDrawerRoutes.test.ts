@@ -21,39 +21,75 @@ describe('App helper functions', () => {
     'drawerItems': [drawerItem]
   };
 
-  const siderbarLinks: ISidebarSection[] = [
-    {
-      'sectionName':'admin_nav.section.setup',
-      'icon':'setup',
-      'navItems':[
-        navItem
-      ]
-  }];
+  const sidebarLink: ISidebarSection = {
+    'sectionName':'admin_nav.section.setup',
+    'icon':'setup',
+    'navItems':[
+      navItem
+    ]
+  };
+
+  const sidebarLinks: ISidebarSection[] = [
+    sidebarLink
+  ];
 
   describe('generateDrawerRoutes', () => {
 
     test('calls IoC param function with array of drawerItem paths ', () => {
       const mockGenerateFunc = jest.fn();
 
-      generateDrawerRoutes(siderbarLinks, mockGenerateFunc);
+      generateDrawerRoutes(sidebarLinks, mockGenerateFunc);
 
       expect(mockGenerateFunc).toHaveBeenCalledTimes(1);
       expect(mockGenerateFunc).toHaveBeenCalledWith(drawerItem);
     });
 
+    test('works with navItem paths being set', () => {
+      const mockGenerateFunc = jest.fn();
+
+      generateDrawerRoutes([{
+        ...sidebarLink,
+        navItems:[{
+          ...navItem,
+          path: null,
+          paths:['/agents', '/agents/new']
+        }]
+      }], mockGenerateFunc);
+
+      expect(mockGenerateFunc).toHaveBeenCalledTimes(1);
+      expect(mockGenerateFunc).toHaveBeenCalledWith(drawerItem);
+    });
+
+    test('doesn`t run if no `path` or `paths`', () => {
+      const mockGenerateFunc = jest.fn();
+
+      generateDrawerRoutes([{
+        ...sidebarLink,
+        navItems:[{
+          ...navItem,
+          path: null,
+          paths:null
+        }]
+      }], mockGenerateFunc);
+
+      expect(mockGenerateFunc).toHaveBeenCalledTimes(0);
+    });
+
     test('returns empty array if no drawer items', () => {
       const mockGenerateFunc = jest.fn();
-      const clonedSiderbarLinks: ISidebarSection[] = [{
-        ...siderbarLinks[0],
+      const clondSiderbarLinks: ISidebarSection[] = [{
+        ...sidebarLinks[0],
         navItems: [{
           ...navItem,
           drawerItems:[] as ISidebarItem[]
         }]
       }];
-      const routes = generateDrawerRoutes(clonedSiderbarLinks, mockGenerateFunc);
+
+      const routes = generateDrawerRoutes(clondSiderbarLinks, mockGenerateFunc);
 
       expect(routes.length).toEqual(0);
       expect(mockGenerateFunc).toHaveBeenCalledTimes(0);
     });
+
   });
 });

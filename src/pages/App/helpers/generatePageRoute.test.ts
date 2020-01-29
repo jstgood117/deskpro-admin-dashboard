@@ -35,5 +35,18 @@ describe('App helper functions', () => {
       expect(routesWithPostFixPaths.props.path).toEqual(['/', '/edit', '/test']);
     });
 
+    test('Generates page routes and extends paths array with drawerItem paths using first in array as primaryPath', () => {
+
+      const cloneNavItem: ISidebarItem = {
+        ...navItem,
+        path: null,
+        paths: ['/agents', '/agents/deleted']
+      };
+
+      const postFixPaths = ['/agents/edit', '/agents/test'];
+      const routesWithPostFixPaths = generatePageRoute(cloneNavItem, postFixPaths);
+      expect(routesWithPostFixPaths.props.path).toEqual(['/agents', '/agents/deleted', '/agents/edit', '/agents/test']);
+    });
+
   });
 });
