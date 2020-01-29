@@ -251,7 +251,7 @@ const Table: FC<Props> = ({
                     <td colSpan={row.cells.length + 2}>
                       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Checkbox value={row.groupById} checked={false} onChange={e => e} />
-                        <span style={{ marginLeft: 10, color: '#1C3E55', fontWeight: 500, fontSize: 15 }}>{row.groupByVal}</span>
+                        <span style={{ marginLeft: 10, color: '#1C3E55', fontWeight: 500, fontSize: 15 }}>{row.groupByVal} ({row.subRows.length})</span>
                         <span style={{ marginLeft: 10 }}>
                           {row.isExpanded ? (
                             <Icon name='downVector' />
