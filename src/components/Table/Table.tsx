@@ -226,12 +226,15 @@ const Table: FC<Props> = ({
                               </span>
                             </Tooltip>
                           )}
-                          {/*column.canGroupBy ? (
+                          {column.canGroupBy ? (
                             // If the column can be grouped, let's add a toggle
-                            <span {...column.getGroupByToggleProps()}>
+                            <span
+                              {...column.getGroupByToggleProps()}
+                              style={{ display: 'flex', marginLeft: 5 }}
+                            >
                               {column.isGrouped ? <Icon name='group' /> : <Icon name='group' />}
                             </span>
-                          ) : null*/}
+                          ) : null}
                         </StyledTh>
                       </th>
                     );
@@ -246,10 +249,17 @@ const Table: FC<Props> = ({
                 return row.isGrouped ? (
                   <tr {...row.getRowProps()} {...row.getExpandedToggleProps()}>
                     <td colSpan={row.cells.length + 2}>
-                      {row.groupByVal}{' '}
-                      <span>
-                        {row.isExpanded ? <Icon name='downVector' /> : <Icon name='rightVector' />}
-                      </span>
+                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Checkbox value={row.groupById} checked={false} onChange={e => e} />
+                        <span style={{ marginLeft: 10, color: '#1C3E55', fontWeight: 500, fontSize: 15 }}>{row.groupByVal}</span>
+                        <span style={{ marginLeft: 10 }}>
+                          {row.isExpanded ? (
+                            <Icon name='downVector' />
+                          ) : (
+                            <Icon name='rightVector' />
+                          )}
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 ) : (
