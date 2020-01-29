@@ -5,8 +5,9 @@ import {
   usePagination,
   useRowSelect,
   useExpanded,
-  useGroupBy,
+  useGroupBy
 } from 'react-table';
+import { difference } from 'lodash';
 
 import { KeyValue } from '../../types';
 
@@ -37,6 +38,10 @@ const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
   return result;
 };
 
+const compareGroups = (group1: string[], group2: string[]) => {
+  return group1.length === group2.length && difference(group1, group2).length === 0;
+};
+
 export type Props = {
   path: string;
   data: KeyValue[];
@@ -47,6 +52,8 @@ export type Props = {
   tableType: TableType;
   sortBy: SortType[];
   onSortChange?: (sortBy: SortType[]) => void;
+  groupBy?: string[];
+  onGroupByChange?: (columnNames: string[]) => void;
 };
 
 const Table: FC<Props> = ({
@@ -56,9 +63,11 @@ const Table: FC<Props> = ({
   fetchData,
   loading,
   onSortChange,
+  onGroupByChange,
   pageCount: controlledPageCount,
   tableType,
   sortBy,
+  groupBy
 }) => {
   const tableParams: TableParams = generateTableParams(
     tableType,
@@ -69,6 +78,7 @@ const Table: FC<Props> = ({
 
   const {
     toggleSortBy,
+    toggleGroupBy,
     getTableProps,
     getTableBodyProps,
     headerGroups,
@@ -77,7 +87,7 @@ const Table: FC<Props> = ({
     setPageSize,
     gotoPage,
     toggleExpanded,
-    state: { pageIndex, pageSize, sortBy: sortByInfo }, // groupBy, expanded
+    state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
   } = useTable(tableParams, useGroupBy, useExpanded, useSortBy, usePagination, useRowSelect) as any;
 
   // Process internal sort change
@@ -88,12 +98,6 @@ const Table: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortByInfo]);
 
-  useEffect(() => {
-    if (fetchData && tableType === 'async') {
-      fetchData();
-    }
-  }, [fetchData, pageIndex, pageSize, tableType]);
-
   // Handle incoming sort rules
   useEffect(() => {
     if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
@@ -101,6 +105,27 @@ const Table: FC<Props> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
+
+  useEffect(() => {
+    if (onGroupByChange && !compareGroups(groupBy, groupByInfo)) {
+      onGroupByChange(groupByInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groupByInfo]);
+
+  useEffect(() => {
+    if (groupBy.length && !compareGroups(groupBy, groupByInfo)) {
+      groupByInfo.map((column: any) => toggleGroupBy(column, false));
+      groupBy.map(column => toggleGroupBy(column, true));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groupBy]);
+
+  useEffect(() => {
+    if (fetchData && tableType === 'async') {
+      fetchData();
+    }
+  }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
     if (fetchData) {
@@ -179,7 +204,7 @@ const Table: FC<Props> = ({
                         {...column.getHeaderProps(column.getSortByToggleProps())}
                         style={{
                           border: column.isSorted && '1px solid #D3D6D7',
-                          width: isIdColumn && '1px',
+                          width: isIdColumn && '1px'
                         }}
                       >
                         <StyledTh alignRight={isIdColumn}>
@@ -201,12 +226,12 @@ const Table: FC<Props> = ({
                               </span>
                             </Tooltip>
                           )}
-                          {column.isSorted && column.canGroupBy ? (
+                          {/*column.canGroupBy ? (
                             // If the column can be grouped, let's add a toggle
                             <span {...column.getGroupByToggleProps()}>
-                              {column.isGrouped ? <Icon name='close' /> : <Icon name='group' />}
+                              {column.isGrouped ? <Icon name='group' /> : <Icon name='group' />}
                             </span>
-                          ) : null}
+                          ) : null*/}
                         </StyledTh>
                       </th>
                     );
@@ -218,14 +243,21 @@ const Table: FC<Props> = ({
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
-                return (
+                return row.isGrouped ? (
+                  <tr {...row.getRowProps()} {...row.getExpandedToggleProps()}>
+                    <td colSpan={row.cells.length + 2}>
+                      {row.groupByVal}{' '}
+                      <span>
+                        {row.isExpanded ? <Icon name='downVector' /> : <Icon name='rightVector' />}
+                      </span>
+                    </td>
+                  </tr>
+                ) : (
                   <tr
                     key={indexOuter}
                     {...row.getRowProps()}
                     className={
-                      (row.original && checked.hasOwnProperty(
-                        (row.original as KeyValue).id.toString()
-                      )
+                      (checked.hasOwnProperty((row.original as KeyValue).id.toString())
                         ? 'row--selected '
                         : ' ') +
                       (row.depth === 1 || row.subRows.length > 0
@@ -235,11 +267,11 @@ const Table: FC<Props> = ({
                         : '')
                     }
                   >
-                    {actions && actions.length > 0 && row.original && (
+                    {actions && actions.length > 0 && (
                       <td
                         style={{
                           width: '30px',
-                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`,
+                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
                         }}
                         className='checkBox'
                       >
@@ -261,8 +293,7 @@ const Table: FC<Props> = ({
                       return (
                         <td
                           className={
-                            (!actions || actions.length === 0) &&
-                            indexInner === 0
+                            (!actions || actions.length === 0) && indexInner === 0
                               ? 'firstColumn'
                               : ''
                           }
@@ -277,49 +308,28 @@ const Table: FC<Props> = ({
                               paddingLeft: `${indexInner === 0 &&
                                 row.depth === 1 &&
                                 row.depth * 2}rem`,
-                              cursor: 'default',
-                            },
+                              cursor: 'default'
+                            }
                           })}
                         >
-                          {cell.isGrouped ? (
-                            // If it's a grouped cell, add an expander and row count
-                            <>
-                              <span {...row.getExpandedToggleProps()}>
-                                {row.isExpanded ? (
-                                  <Icon name='downVector' />
-                                ) : (
-                                  <Icon name='rightVector' />
-                                )}
-                              </span>{' '}
-                              {cell.render('Cell')} ({row.subRows.length})
-                            </>
-                          ) : cell.isAggregated ? (
-                            // If the cell is aggregated, use the Aggregated
-                            // renderer for cell
-                            cell.render('Aggregated')
-                          ) : cell.isRepeatedValue ? null : ( // For cells with repeated values, render null
-                            // Otherwise, just render the regular cell
-                            <TableData {...generateComponentProps(cell)} />
-                          )}
+                          <TableData {...generateComponentProps(cell)} />
                         </td>
                       );
                     })}
-                    {row.original && (
-                      <td>
-                        <span className='action-buttons'>
-                          {!checked.hasOwnProperty((row.original as KeyValue).id.toString()) && (
-                            <TableData
-                              type='action_buttons'
-                              props={{
-                                onPencilClick: () => {},
-                                onDuplicateClick: () => {},
-                                onTrashClick: () => {},
-                              }}
-                            />
-                          )}
-                        </span>
-                      </td>
-                    )}
+                    <td>
+                      <span className='action-buttons'>
+                        {!checked.hasOwnProperty((row.original as KeyValue).id.toString()) && (
+                          <TableData
+                            type='action_buttons'
+                            props={{
+                              onPencilClick: () => {},
+                              onDuplicateClick: () => {},
+                              onTrashClick: () => {}
+                            }}
+                          />
+                        )}
+                      </span>
+                    </td>
                   </tr>
                 );
               })}

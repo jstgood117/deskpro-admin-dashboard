@@ -88,6 +88,7 @@ export interface IMenuProps {
 export interface IMenuItemProps {
   key?: number;
   name?: string;
+  column?: string;
   subItems?: IMenuItemProps[];
   icon?: string;
   sortable?: boolean;

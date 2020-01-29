@@ -129,28 +129,27 @@ export const generateTableParams = (
 };
 
 export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any = {}): string => {
-  const { __typename, name = {}, value = {}, valuesArray = {} } = columnProps || {};
-  switch (__typename) {
+  switch (columnProps.__typename) {
     case 'TableColumnNameAvatar':
-      return values[name.dataPath];
+      return values[columnProps.name.dataPath];
     case 'TableColumnId':
     case 'TableColumnTimeAgo':
     case 'TableColumnText':
     case 'TableColumnInteger':
     case 'TableColumnDateTime':
-      return values[value.dataPath];
+      return values[columnProps.value.dataPath];
     case 'TableColumnTextCommaSep':
-      return values[valuesArray.dataPath].join(', ');
+      return values[columnProps.valuesArray.dataPath].join(', ');
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
       return (
-        values[valuesArray.dataPath] &&
-        values[valuesArray.dataPath].map((item: any) => item.title).join(', ')
+        values[columnProps.valuesArray.dataPath] &&
+        values[columnProps.valuesArray.dataPath].map((item: any) => item.title).join(', ')
       );
     case 'TableColumnBoolYesNo':
-      if (values.hasOwnProperty(value.dataPath)) {
-        return values[value.dataPath] === true ? 'Yes' : 'No';
+      if (values.hasOwnProperty(columnProps.value.dataPath)) {
+        return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
       }
       return '';
     default:

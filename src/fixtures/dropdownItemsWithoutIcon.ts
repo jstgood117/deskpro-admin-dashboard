@@ -45,10 +45,9 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
   }
 ];
 export const testGroupItems: IMenuItemProps[] = [
-  { name: 'Access' },
-  { name: 'Team' },
-  { name: 'Permission Group' },
-  { name: 'Assigned tickets' },
+  { name: 'Teams', column: 'admin_common.col.teams' },
+  { name: 'Groups', column: 'admin_common.col.groups' },
+  { name: 'Departments', column: 'admin_common.col.departments' },
   {},
   {
     name: 'Sort group',

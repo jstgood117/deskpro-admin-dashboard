@@ -38,26 +38,21 @@ export interface IProps {
 type CombinedProps = IProps & RouteComponentProps<any>;
 
 const TableActionStyled = styled(dpstyle.div)`
-  margin-top:-30px;
-  margin-bottom:24px;
+  margin-top: -30px;
+  margin-bottom: 24px;
 `;
 
 const BodyMargin = styled(dpstyle.div)`
-  margin:0 34px 34px 34px;
+  margin: 0 34px 34px 34px;
 `;
 
-const StandardTablePage: FC<CombinedProps> = ({
-  path,
-  client,
-  history,
-  location
-}) => {
-
+const StandardTablePage: FC<CombinedProps> = ({ path, client, history, location }) => {
   const [gqlError, setGqlError] = useState<boolean>(false);
   const [tabIndex, setTabState] = useState<number>(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>([]);
   const [sortItems, setSortItems] = useState<SortType[]>([]);
+  const [groupBy, setGroupBy] = useState<string[]>([]);
   const [pageResponse, setPageResponse] = useState<any>();
   const [tableData, setTableData] = useState<KeyValue[]>();
   const [filteredData, setFilteredData] = useState<KeyValue[]>([]);
@@ -68,7 +63,9 @@ const StandardTablePage: FC<CombinedProps> = ({
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
 
-  useQuery(query, { errorPolicy: 'all', variables: { path },
+  useQuery(query, {
+    errorPolicy: 'all',
+    variables: { path },
     onCompleted: (_response: ResponseData) => {
       setPageResponse(_response);
     },
@@ -77,54 +74,53 @@ const StandardTablePage: FC<CombinedProps> = ({
     }
   });
 
-  const getTableData = useCallback(async (_response: ResponseData) => {
+  const getTableData = useCallback(
+    async (_response: ResponseData) => {
+      const unchangedDataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
 
-    const unchangedDataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+      // FIX: removes ticket_department from gql
+      const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
 
-    // FIX: removes ticket_department from gql
-    const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
+      try {
+        const dataResponse = await client.query({
+          query: gql`
+            ${dataQuery}
+          `,
+          errorPolicy: 'all'
+        });
 
-    try {
-
-      const dataResponse = await client.query({
-        query: gql`${dataQuery}`,
-        errorPolicy: 'all'
-      });
-
-      const { results }: { results: KeyValue[]} = dataResponse.data;
-      const treedResults = treeify(results);
-      setTableData(treedResults);
-      setFilteredData(treedResults);
-      setTotalPageCount(Math.ceil(results.length / pageSize));
-
-    } catch(err) {
-      console.debug('sError for query: ' + dataQuery);
-      console.error(err);
-      logError(err);
-    }
-  }, [client, pageSize, tabIndex]);
+        const { results }: { results: KeyValue[] } = dataResponse.data;
+        const treedResults = treeify(results);
+        setTableData(treedResults);
+        setFilteredData(treedResults);
+        setTotalPageCount(Math.ceil(results.length / pageSize));
+      } catch (err) {
+        console.debug('sError for query: ' + dataQuery);
+        console.error(err);
+        logError(err);
+      }
+    },
+    [client, pageSize, tabIndex]
+  );
 
   useEffect(() => {
     setFilters(setupFilters('*'));
   }, [path]);
 
   const fetchData = useCallback(() => {
-
     if (pageResponse) {
       getTableData(pageResponse);
     }
   }, [pageResponse, getTableData]);
 
   useEffect(() => {
-
     if (pageResponse) {
       getTableData(pageResponse);
     }
-
   }, [pageResponse, getTableData]);
 
   useEffect(() => {
-    if(tableData) {
+    if (tableData) {
       setFilteredData(runFilters(tableData, filters));
     }
   }, [filters, tableData]);
@@ -137,50 +133,46 @@ const StandardTablePage: FC<CombinedProps> = ({
     return <Error />;
   }
 
-  const {
-    title,
-    description,
-    headerLinks,
-    views,
-    dataType,
-    illustration
-  } = (pageResponse as any)['standardDataPage'];
+  const { title, description, headerLinks, views, dataType, illustration } = (pageResponse as any)[
+    'standardDataPage'
+  ];
 
   const tableDef = views[tabIndex].tableDef;
   const filterDef = views[tabIndex].filterDef;
 
   const initialColumnOrder: ColumnOrder[] = tableDef.columns.map((_column: ITableColumn) => ({
-    column:_column.title,
+    column: _column.title,
     show: true
   }));
 
   const onFilterChange = (internalFilters: FilterProps[]) => {
-
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
     const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
-
     setFilters([searchFilter, ...serviceFilters]);
   };
 
   const onSearchChange = (_value: string, internalFilters: FilterProps[]) => {
-    const searchFilter = processFiltersToFilterTypes([{
-      property: '*',
-      operatorName: 'CONTAINS',
-      value:[_value]
-    }, ...internalFilters]);
+    const searchFilter = processFiltersToFilterTypes([
+      {
+        property: '*',
+        operatorName: 'CONTAINS',
+        value: [_value]
+      },
+      ...internalFilters
+    ]);
     setFilters(searchFilter);
   };
 
-  const onOrderChange = (
-    _columnOrder: ColumnOrder[]
-  ) => {
+  const onOrderChange = (_columnOrder: ColumnOrder[]) => {
     setColumnOrder(_columnOrder);
   };
 
-  const onSortChange = (
-    _sortItems: SortType[]
-  ) => {
+  const onSortChange = (_sortItems: SortType[]) => {
     setSortItems(_sortItems);
+  };
+
+  const onGroupByChange = (columnNames: string[]) => {
+    setGroupBy(columnNames);
   };
 
   const getUniqueValues = (columnName: string): string[] => {
@@ -191,7 +183,7 @@ const StandardTablePage: FC<CombinedProps> = ({
     history.push(`${location.pathname}/new`);
   };
 
-  const contextValue:StandardTableContextValues = {
+  const contextValue: StandardTableContextValues = {
     path,
     filters,
     onFilterChange,
@@ -229,6 +221,7 @@ const StandardTablePage: FC<CombinedProps> = ({
                 viewMenu={true}
                 onOrderChange={onOrderChange}
                 onSortChange={onSortChange}
+                onGroupByChange={onGroupByChange}
                 sortBy={sortItems}
                 getUniqueValues={getUniqueValues}
               />
@@ -255,6 +248,8 @@ const StandardTablePage: FC<CombinedProps> = ({
                 columnOrder={columnOrder}
                 sortBy={sortItems}
                 onSortChange={onSortChange}
+                groupBy={groupBy}
+                onGroupByChange={onGroupByChange}
               />
             )}
           </BodyMargin>
