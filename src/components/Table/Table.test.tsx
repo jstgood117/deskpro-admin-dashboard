@@ -70,7 +70,7 @@ describe('Table', () => {
         id: 'name',
         desc: false
       }],
-
+      groupBy: []
     };
     mountedTable = undefined;
   });
