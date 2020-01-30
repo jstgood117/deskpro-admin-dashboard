@@ -8,6 +8,14 @@ const FeatureSectionStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 
+  .element-details-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+  }
+
   label {
     font-family: Rubik;
     font-style: normal;
@@ -142,6 +150,9 @@ const FeatureSectionStyled = styled.div`
 
   & .field-container {
     .element-details {
+      .element-details-label {
+        margin-bottom: 4px;
+      }
       label {
         font-family: Rubik;
         font-style: normal;

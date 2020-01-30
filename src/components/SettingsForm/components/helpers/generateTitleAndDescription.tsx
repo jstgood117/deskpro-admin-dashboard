@@ -19,15 +19,7 @@ export const generateTitleAndDescription = (className: string, props: any) => {
   return (
     <div className={className}>
       <div className='element-details'>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            marginBottom: 5
-          }}
-        >
+        <div className='element-details-label'>
           {props.title && <label htmlFor={htmlFor}>{props.title}</label>}
           {props.tooltip && (
             <Tooltip
