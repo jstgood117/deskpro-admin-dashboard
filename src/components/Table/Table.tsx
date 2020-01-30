@@ -248,15 +248,27 @@ const Table: FC<Props> = ({
                 prepareRow(row);
                 return row.isGrouped ? (
                   <tr {...row.getRowProps()} {...row.getExpandedToggleProps()}>
-                    <td colSpan={row.cells.length + 2}>
+                    <td
+                      colSpan={row.cells.length + 2}
+                      style={{ backgroundImage: 'linear-gradient(#b0bbc3 1px,transparent 0)' }}
+                    >
                       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Checkbox value={row.groupById} checked={false} onChange={e => e} />
-                        <span style={{ marginLeft: 10, color: '#1C3E55', fontWeight: 500, fontSize: 15 }}>{row.groupByVal} ({row.subRows.length})</span>
+                        <span
+                          style={{
+                            marginLeft: 15,
+                            color: '#1C3E55',
+                            fontWeight: 500,
+                            fontSize: 15
+                          }}
+                        >
+                          {row.groupByVal} ({row.subRows.length})
+                        </span>
                         <span style={{ marginLeft: 10 }}>
                           {row.isExpanded ? (
-                            <Icon name='downVector' />
+                            <Icon name='arrow-drop-up' />
                           ) : (
-                            <Icon name='rightVector' />
+                            <Icon name='ic-down' />
                           )}
                         </span>
                       </div>
