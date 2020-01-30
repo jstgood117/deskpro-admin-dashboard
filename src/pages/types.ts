@@ -2,6 +2,7 @@ import { DocumentNode } from 'graphql';
 
 export interface IProps {
   path: string;
+  paths: string[];
   pageType: string;
   metadataQuery?: string;
 }

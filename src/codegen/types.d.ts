@@ -342,6 +342,7 @@ export type API_GetTicketTriggersFilter = {
 export type API_InMemoryPageDataView = {
    __typename?: 'InMemoryPageDataView',
   title?: Maybe<Scalars['String']>,
+  path?: Maybe<Scalars['String']>,
   dataQuery: Scalars['String'],
   tableDef?: Maybe<API_PageDataTable>,
   filterDef: Array<Maybe<API_PageDataFilters>>,
@@ -850,6 +851,7 @@ export type API_SidebarItem = {
    __typename?: 'SidebarItem',
   itemName: Scalars['String'],
   path?: Maybe<Scalars['String']>,
+  paths?: Maybe<Array<Scalars['String']>>,
   url?: Maybe<Scalars['String']>,
   navItems?: Maybe<Array<Maybe<API_SidebarItem>>>,
   pageType?: Maybe<Scalars['String']>,

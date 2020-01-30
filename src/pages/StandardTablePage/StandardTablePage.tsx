@@ -32,8 +32,14 @@ import { processFiltersToFilterTypes } from './helpers/processFiltersToFilterTyp
 
 export interface IProps {
   path: string;
+  paths: string[];
   client: ApolloClient<any>;
 }
+
+export  type ViewDataType = {
+  view: any;
+  index: number;
+};
 
 type CombinedProps = IProps & RouteComponentProps<any>;
 
@@ -48,9 +54,9 @@ const BodyMargin = styled(dpstyle.div)`
 
 const StandardTablePage: FC<CombinedProps> = ({
   path,
+  paths,
   client,
-  history,
-  location
+  history
 }) => {
 
   const [gqlError, setGqlError] = useState<boolean>(false);
@@ -63,14 +69,50 @@ const StandardTablePage: FC<CombinedProps> = ({
   const [filteredData, setFilteredData] = useState<KeyValue[]>([]);
   const [totalPageCount, setTotalPageCount] = useState<number>(1);
   const [view, setView] = useState<'table' | 'list' | 'card'>('table');
+  const [currentView, setCurrentView] = useState<any>();
   const [pageSize] = useState<number>(10);
 
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
 
-  useQuery(query, { errorPolicy: 'all', variables: { path },
+  // If paths is array, assumes first
+  // path at index 0 is primary path
+  const primaryPath = Array.isArray(paths) ? paths[0] : path;
+
+  const getCurrentView = (_views: any, _path: string) => {
+
+    const results = {
+      view: undefined,
+      index: undefined
+    } as ViewDataType;
+
+    _views.forEach((_view: any, index: number) => {
+      // If path matches current path OR if path is
+      // null, assume 1 view in _views and set it to
+      // the return value.
+      if(_view.path === _path || _view.path === null) {
+        results.view = _view;
+        results.index = index;
+      }
+    });
+
+    return results;
+  };
+
+  useQuery(query, { errorPolicy: 'all', variables: { path: primaryPath },
     onCompleted: (_response: ResponseData) => {
+
       setPageResponse(_response);
+      // If the response isn't formatted in a way that
+      // expected, just return
+      if(!_response || !_response.hasOwnProperty('standardDataPage')) {
+        return false;
+      }
+
+      const viewData: ViewDataType = getCurrentView(_response['standardDataPage'].views, primaryPath);
+
+      setCurrentView(viewData.view);
+      setTabState(viewData.index);
     },
     onError: (error: ApolloError) => {
       setGqlError(true);
@@ -79,7 +121,11 @@ const StandardTablePage: FC<CombinedProps> = ({
 
   const getTableData = useCallback(async (_response: ResponseData) => {
 
-    const unchangedDataQuery = _response['standardDataPage'].views[tabIndex].dataQuery;
+    if(!currentView || !currentView.dataQuery) {
+      return undefined;
+    }
+
+    const unchangedDataQuery = currentView.dataQuery;
 
     // FIX: removes ticket_department from gql
     const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
@@ -102,7 +148,7 @@ const StandardTablePage: FC<CombinedProps> = ({
       console.error(err);
       logError(err);
     }
-  }, [client, pageSize, tabIndex]);
+  }, [client, pageSize, currentView]);
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -129,7 +175,7 @@ const StandardTablePage: FC<CombinedProps> = ({
     }
   }, [filters, tableData]);
 
-  if (!tableData) {
+  if (!tableData || !currentView || !pageResponse) {
     return <Loading />;
   }
 
@@ -146,8 +192,8 @@ const StandardTablePage: FC<CombinedProps> = ({
     illustration
   } = (pageResponse as any)['standardDataPage'];
 
-  const tableDef = views[tabIndex].tableDef;
-  const filterDef = views[tabIndex].filterDef;
+  const tableDef = currentView.tableDef;
+  const filterDef = currentView.filterDef;
 
   const initialColumnOrder: ColumnOrder[] = tableDef.columns.map((_column: ITableColumn) => ({
     column:_column.title,
@@ -187,8 +233,10 @@ const StandardTablePage: FC<CombinedProps> = ({
     return getColumnUniqueValues(tableData, columnName);
   };
 
-  const onNewClick = () => {
-    history.push(`${location.pathname}/new`);
+  const onNewClick = (_primaryPath: string) => {
+
+    history.push(`${_primaryPath}/new`);
+
   };
 
   const contextValue:StandardTableContextValues = {
@@ -205,7 +253,7 @@ const StandardTablePage: FC<CombinedProps> = ({
     tableData && (
       <StandardTableProvider value={contextValue}>
         <>
-          {views && views[tabIndex] && (
+          {views && currentView && (
             <Header
               title={title}
               description={description}
@@ -215,7 +263,7 @@ const StandardTablePage: FC<CombinedProps> = ({
               showViewModeSwitcher={true}
               showNewButton={true}
               showHelpButton={true}
-              onNewClick={onNewClick}
+              onNewClick={() => onNewClick(primaryPath)}
               onChangeView={val => setView(val)}
             />
           )}
@@ -235,17 +283,20 @@ const StandardTablePage: FC<CombinedProps> = ({
             </TableActionStyled>
             {views && views.length > 1 && (
               <TabBar
+                focusedIndex={tabIndex}
                 tabItems={views.map((_view: IViewData) => {
                   return { messageId: _view.title };
                 })}
                 handleClick={index => {
-                  setTabState(index);
+                  const _view = views[index];
+                  setCurrentView(_view);
+                  history.push(`${_view.path}`);
                 }}
               />
             )}
-            {views && views[tabIndex] && (
+            {views && currentView && (
               <TableWrapper
-                {...views[tabIndex]}
+                {...currentView}
                 view={view}
                 path={path}
                 data={filteredData}
