@@ -29,7 +29,7 @@ export const generateTitleAndDescription = (className: string, props: any) => {
             </span>
           </Tooltip>
         )}
-        {props.description && <p>{props.description}</p>}
+        {props.description && <p className='description'>{props.description}</p>}
       </div>
       {props.articles && (
         <div className='group-articles'>

@@ -3,7 +3,32 @@ import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 
 const FeatureSectionStyled = styled.div`
-  width: 974px;
+  padding: 0px 0px 0px 55px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  label {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 150%;
+    color: #4C4F50;
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  .description {
+    color: #8B9293;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+    padding: 0;
+    margin: 0;
+  }
 
   & > h1 {
     font-family: Rubik;
@@ -12,55 +37,55 @@ const FeatureSectionStyled = styled.div`
     line-height: 150%;
     color: #4c4f50;
     border-bottom: 1px solid #eff0f0;
-    padding-bottom: 15px;
+    padding: 15px 0;
+    margin: 0;
+    max-width: 974px;
   }
 
   & > .form-row {
-    border-bottom: 1px solid #eff0f0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
     padding: 30px 0;
-    padding-left: 285px;
-    /* margin-top: 16px; */
   }
 
   & > .form-row > label {
-    position: absolute;
-    font-family: Rubik;
+    min-width: 246px;
+    text-align: left;
     font-weight: 500;
     font-size: 15px;
     line-height: 150%;
     color: #4c4f50;
-    left: 55px;
   }
 
-  & > .form-row > .form-ctrl > label {
-    position: absolute;
-    left: 300px;
+  & > .form-row > .form-ctrl {
+    flex-grow: 1;
   }
 
-  & .field-container {
-    position: relative;
-  }
-
-  & .element-details {
-    margin-top: 16px;
-  }
-
-  & .group-details > .title,
-  & .element-details > .title {
+  .element-info {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    & > a {
+      display: block;
+      margin-bottom: 16px;
+    }
   }
 
-  & .group-details > p,
-  & .element-details > p {
-    font-family: Rubik;
-    font-size: 13px;
-    line-height: 150%;
-    /* Grey-dark */
-    color: #8b9293;
-    margin-top: 0;
-    mix-blend-mode: normal;
-    white-space: pre-wrap;
+  .form-item {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+    .group-details {
+      width: 100%;
+      max-width: 685px;
+    }
+    .element-info {
+      margin-left: 20px;
+      .element-info-link {
+
+      }
+    }
   }
 
   & div.group-articles {
@@ -80,8 +105,28 @@ const FeatureSectionStyled = styled.div`
     margin-bottom: 6px;
   }
   & .group-articles > img {
-    width: 300px;
-    height: 140px;
+    min-width: 300px;
+    min-height: 140px;
+  }
+
+  /*
+  & > .form-row > .form-ctrl > label {
+    position: absolute;
+    left: 300px;
+  }
+
+  & .field-container {
+    position: relative;
+  }
+
+  & .element-details {
+    margin-top: 16px;
+  }
+
+  & .group-details > .title,
+  & .element-details > .title {
+    display: flex;
+    align-items: center;
   }
 
   & .group-details > div.group-articles ol {
@@ -154,6 +199,7 @@ const FeatureSectionStyled = styled.div`
     line-height: 150%;
     color: #4c4f50;
   }
+  */
 `;
 
 interface Props {

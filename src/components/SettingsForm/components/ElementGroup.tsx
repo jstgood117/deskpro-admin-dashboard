@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 
 const Group = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: row;
 `;
 
 const ElementGroup = (props: any) => {
   // If props doesn't exist or if it does, its set to true
+  console.log(props)
   return (
     <Group>
       {props.elements.map((element: any, i: number) => (

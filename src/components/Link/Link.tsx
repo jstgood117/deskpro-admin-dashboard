@@ -8,6 +8,7 @@ export interface IProps {
   children?: ReactNode;
   href: string;
   icon?: string;
+  className?: string;
 }
 
 const StyledLink = styled(dpstyle.div1)`
@@ -23,12 +24,12 @@ const StyledLink = styled(dpstyle.div1)`
   box-sizing: border-box;
   align-items: center;
   cursor: pointer;
-  text-decloratoin
 `;
 
 const Link: FC<IProps> = props => {
   return (
     <a
+      className={props.className}
       href={props.href}
       style={{ textDecoration: 'none' }}
       target='_blank'
