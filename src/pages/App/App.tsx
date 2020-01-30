@@ -27,14 +27,14 @@ const App: FC = () => {
 
   const { loading, error, data } = useQuery(query, { errorPolicy: 'all', variables: { locale } });
   if (loading) {
-    return <p>Loading</p>;
+    return <p id='app-loading'>Loading</p>;
   }
 
   if (error) {
-    return <p>Error</p>;
+    return <p id='app-error'>Error</p>;
   }
 
-  const translations = __mergeInDevI18Keys(data.translations, testTranslations);
+  const translations = __mergeInDevI18Keys((data.translations || []), testTranslations);
 
   const renderMessage = (translations as any[]).reduce((obj, item) => {
     obj[item.id] = item.message;
@@ -45,32 +45,34 @@ const App: FC = () => {
 
   // TODO: Remove this, should be going directly to
   const onRouteRender = () => <Redirect to='/agents' />;
-  const routes = generatePageRoutes(data.sidebar, generatePageRoute);
-  const drawerRoutes = generateDrawerRoutes(data.sidebar, generateDrawerRoute);
+  const routes = generatePageRoutes(data.sidebar || [], generatePageRoute);
+  const drawerRoutes = generateDrawerRoutes(data.sidebar || [], generateDrawerRoute);
 
   return (
-    <HashRouter>
-      <IntlProvider
-        locale={data.user.locale}
-        messages={renderMessage}
-        onError={onError}
-      >
-        <AppContainer>
-          <SidebarContainer>
-            <Sidebar data={data.sidebar} />
-          </SidebarContainer>
-          <BodyContainer>
-            <Switch>
-              <Route exact={true} path='/' render={onRouteRender} />
-              {routes}
-            </Switch>
-            <Switch>
-              {drawerRoutes}
-            </Switch>
-          </BodyContainer>
-        </AppContainer>
-      </IntlProvider>
-    </HashRouter>
+    <div id='app-container'>
+      <HashRouter>
+        <IntlProvider
+          locale={data?.user?.locale || 'en'}
+          messages={renderMessage}
+          onError={onError}
+        >
+          <AppContainer>
+            <SidebarContainer>
+              <Sidebar data={data.sidebar || []} />
+            </SidebarContainer>
+            <BodyContainer>
+              <Switch>
+                <Route exact={true} path='/' render={onRouteRender} />
+                {routes}
+              </Switch>
+              <Switch>
+                {drawerRoutes}
+              </Switch>
+            </BodyContainer>
+          </AppContainer>
+        </IntlProvider>
+      </HashRouter>
+    </div>
   );
 };
 
