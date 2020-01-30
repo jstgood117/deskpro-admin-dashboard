@@ -113,6 +113,14 @@ const FeatureSectionStyled = styled.div`
     }
   }
 
+  & .field-container {
+    .element-details {
+      label {
+        font-weight: normal;
+      }
+    }
+  }
+
   & div.group-articles {
     font-family: Rubik;
     min-width: 280px;
