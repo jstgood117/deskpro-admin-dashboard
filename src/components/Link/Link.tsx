@@ -19,7 +19,7 @@ const StyledLink = styled(dpstyle.div1)`
   font-size: 13px;
   font-weight: 500;
   display: inline-flex;
-  height: 28px;
+  height: 34px;
   padding: 9px 16px;
   box-sizing: border-box;
   align-items: center;

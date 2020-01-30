@@ -48,6 +48,7 @@ const FeatureSectionStyled = styled.div`
     align-items: flex-start;
     padding: 30px 0;
     position: relative;
+    min-width: 1280px;
     &::after {
       position: absolute;
       background-color: #eff0f0;
