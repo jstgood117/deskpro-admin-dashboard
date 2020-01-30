@@ -9,31 +9,53 @@ export const generateTitleAndDescription = (className: string, props: any) => {
     return null;
   }
 
+  let htmlFor = '';
+  if (className === 'group-details') {
+    htmlFor = props.showOn;
+  } else if (className === 'element-details') {
+    htmlFor = props.field.id;
+  }
+
   return (
     <div className={className}>
       <div className='element-details'>
-        {props.title && (
-          <label htmlFor={(props.field && props.field.id) || props.showOn}>{props.title}</label>
-        )}
-        {props.tooltip && (
-          <Tooltip content={props.tooltip} styleType='light' placement='bottom-start' distance={0}>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                paddingLeft: '4px',
-                transform: 'translateY(2px)'
-              }}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            marginBottom: 5
+          }}
+        >
+          {props.title && <label htmlFor={htmlFor}>{props.title}</label>}
+          {props.tooltip && (
+            <Tooltip
+              content={props.tooltip}
+              styleType='light'
+              placement='bottom-start'
+              distance={0}
             >
-              <Icon name='info-question-text' />
-            </span>
-          </Tooltip>
+              <span
+                style={{
+                  paddingLeft: 4
+                }}
+              >
+                <Icon name='info-question-text' />
+              </span>
+            </Tooltip>
+          )}
+        </div>
+        {props.description && (
+          <p className='description'>{props.description}</p>
         )}
-        {props.description && <p className='description'>{props.description}</p>}
       </div>
       {props.articles && (
         <div className='group-articles'>
-          <img alt='Featured articles example' src={settingsImages[props.articles]} />
+          <img
+            alt='Featured articles example'
+            src={settingsImages[props.articles]}
+          />
         </div>
       )}
     </div>

@@ -16,7 +16,6 @@ const FeatureSectionStyled = styled.div`
     line-height: 150%;
     color: #4C4F50;
     text-align: left;
-    margin-bottom: 5px;
   }
 
   .description {
