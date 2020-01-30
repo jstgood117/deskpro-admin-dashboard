@@ -29,14 +29,14 @@ const FeatureSectionStyled = styled.div`
     margin: 0 0 10px 0;
   }
 
-  & > h1 {
+  .feature-section-title {
     font-family: Rubik;
     font-weight: 500;
     font-size: 28px;
     line-height: 150%;
     color: #4c4f50;
     border-bottom: 1px solid #eff0f0;
-    padding: 15px 0;
+    padding: 39px 0 22px 0;
     margin: 0;
     max-width: 974px;
   }
@@ -46,7 +46,7 @@ const FeatureSectionStyled = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
-    padding: 30px 0;
+    padding: 34px 0 16px 0;
     position: relative;
     min-width: 1280px;
     &::after {
@@ -113,7 +113,14 @@ const FeatureSectionStyled = styled.div`
   }
 
   .group-elements .vert-element-group .vert-element-group {
+    max-width: 685px;
     margin-top: 10px;
+    .group-details {
+      max-width: 100%;
+    }
+    > .form-item {
+      margin-bottom: 0;
+    }
   }
 
   .form-item {
@@ -126,6 +133,7 @@ const FeatureSectionStyled = styled.div`
     }
     .element-info {
       margin-left: 12px;
+      margin-top: -6px;
       .element-info-link {
 
       }
@@ -266,7 +274,7 @@ interface Props {
 
 const FeatureSection: React.FC<Props> = ({ elements, formikProps, title }) => (
   <FeatureSectionStyled>
-    <h1>{title}</h1>
+    <h1 className='feature-section-title'>{title}</h1>
     {elements.map((element: any, i: number) => (
       <StdElementRow key={i} {...element} formikProps={formikProps} />
     ))}
