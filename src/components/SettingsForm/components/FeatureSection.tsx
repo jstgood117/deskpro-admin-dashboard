@@ -48,6 +48,17 @@ const FeatureSectionStyled = styled.div`
     justify-content: space-around;
     align-items: flex-start;
     padding: 30px 0;
+    position: relative;
+    &::after {
+      position: absolute;
+      background-color: #eff0f0;
+      content: " ";
+      display: inline-block;
+      width: 974px;
+      height: 1px;
+      bottom: 0;
+      left: 0;
+    }
   }
 
   & > .form-row > label {
@@ -70,6 +81,21 @@ const FeatureSectionStyled = styled.div`
       display: block;
       margin-bottom: 16px;
     }
+  }
+
+  .group-elements {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .column-groups {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vert-element-group {
+    padding-left: 15px;
+    width: 100%;
   }
 
   .form-item {
@@ -105,8 +131,8 @@ const FeatureSectionStyled = styled.div`
     margin-bottom: 6px;
   }
   & .group-articles > img {
-    min-width: 300px;
-    min-height: 140px;
+    max-width: 300px;
+    max-height: 140px;
   }
 
   /*

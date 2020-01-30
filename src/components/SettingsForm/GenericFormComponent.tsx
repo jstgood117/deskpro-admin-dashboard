@@ -14,7 +14,11 @@ import TabbedFieldGroup from '../TabbedFieldGroup';
 export const GenericFormComponent = (props: any) => {
   switch (props.type) {
     case 'tabs_section':
-      return <TabbedFieldGroup {...props} />;
+      return (
+        <div style={{ position: 'relative', maxWidth: 685 }}>
+          <TabbedFieldGroup {...props} />
+        </div>
+      );
     case 'feature_section':
       return <FeatureSection {...props} />;
     case 'page_section':
