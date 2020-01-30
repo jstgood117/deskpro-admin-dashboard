@@ -34,7 +34,7 @@ const FeatureSectionStyled = styled.div`
     font-size: 13px;
     line-height: 150%;
     padding: 0;
-    margin: 0 0 10px 0;
+    margin: 0 0 16px 0;
   }
 
   .feature-section-title {
@@ -122,7 +122,6 @@ const FeatureSectionStyled = styled.div`
 
   .group-elements .vert-element-group .vert-element-group {
     max-width: 685px;
-    margin-top: 10px;
     .group-details {
       max-width: 100%;
     }
@@ -159,6 +158,9 @@ const FeatureSectionStyled = styled.div`
         font-weight: normal;
         font-size: 14px;
         line-height: 150%;
+      }
+      .description {
+        margin-bottom: 8px;
       }
     }
   }
