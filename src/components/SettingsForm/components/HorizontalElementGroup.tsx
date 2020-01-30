@@ -8,10 +8,9 @@ const HozizontalGroup = styled.div`
 margin-bottom:8px;
 position: relative;
 padding-left: 45px;
-display:grid;
-grid-auto-flow: column;
+display: flex;
 align-items: center;
-grid-gap:8px;
+justify-content: flex-start;
 & .hidden {
   display: none;
 }

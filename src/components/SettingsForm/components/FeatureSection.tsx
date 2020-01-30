@@ -94,7 +94,6 @@ const FeatureSectionStyled = styled.div`
   }
 
   .vert-element-group {
-    padding-left: 15px;
     width: 100%;
   }
 

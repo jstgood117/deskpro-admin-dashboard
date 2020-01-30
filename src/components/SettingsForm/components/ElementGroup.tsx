@@ -1,15 +1,38 @@
 import React from 'react';
-import _ from 'lodash';
 import classNames from 'classnames';
 
 import { StdElementRow } from './StdElementRow';
 
 const ElementGroup = (props: any) => {
+  const hasGroups =
+    props.elements.filter((d: any) => d.type === 'group').length > 0;
+
+  return (
+    <div
+      className={classNames('group-elements', { 'column-groups': hasGroups })}
+    >
+      {props.elements.map((element: any, i: number) => (
+        <StdElementRow {...element} key={i} formikProps={props.formikProps} />
+      ))}
+    </div>
+  );
+};
+
+export default ElementGroup;
+
+/*
+  let groups = [];
+
+  Array.from(props.elements || []).forEach((el: any) => {
+    //console.log(el.type, el);
+  });
+
   const countVertGroups = props.elements.filter(
     (d: any) => d.type === 'vertical_group'
   ).length;
 
   if (countVertGroups > 1) {
+    console.log(countVertGroups)
     const elements = _.range(0, countVertGroups * 2, 2).map(index =>
       props.elements.slice(index, index + 2)
     );
@@ -26,18 +49,4 @@ const ElementGroup = (props: any) => {
       </div>
     );
   }
-  const hasGroups =
-    props.elements.filter((d: any) => d.type === 'group').length > 0;
-
-  return (
-    <div
-      className={classNames('group-elements', { 'column-groups': hasGroups })}
-    >
-      {props.elements.map((element: any, i: number) => (
-        <StdElementRow {...element} key={i} formikProps={props.formikProps} />
-      ))}
-    </div>
-  );
-};
-
-export default ElementGroup;
+*/
