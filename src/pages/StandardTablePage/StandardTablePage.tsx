@@ -23,6 +23,10 @@ import {
 } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
+import {
+  tableTestData,
+  tableTestColumns
+} from '../../components/Table/testData';
 
 import { ResponseData } from './types';
 
@@ -36,7 +40,7 @@ export interface IProps {
   client: ApolloClient<any>;
 }
 
-export  type ViewDataType = {
+export type ViewDataType = {
   view: any;
   index: number;
 };
@@ -58,7 +62,6 @@ const StandardTablePage: FC<CombinedProps> = ({
   client,
   history
 }) => {
-
   const [gqlError, setGqlError] = useState<boolean>(false);
   const [tabIndex, setTabState] = useState<number>(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
@@ -81,7 +84,6 @@ const StandardTablePage: FC<CombinedProps> = ({
   const primaryPath = Array.isArray(paths) ? paths[0] : path;
 
   const getCurrentView = (_views: any, _path: string) => {
-
     const results = {
       view: undefined,
       index: undefined
@@ -91,7 +93,7 @@ const StandardTablePage: FC<CombinedProps> = ({
       // If path matches current path OR if path is
       // null, assume 1 view in _views and set it to
       // the return value.
-      if(_view.path === _path || _view.path === null) {
+      if (_view.path === _path || _view.path === null) {
         results.view = _view;
         results.index = index;
       }
@@ -100,17 +102,21 @@ const StandardTablePage: FC<CombinedProps> = ({
     return results;
   };
 
-  useQuery(query, { errorPolicy: 'all', variables: { path: primaryPath },
+  useQuery(query, {
+    errorPolicy: 'all',
+    variables: { path: primaryPath },
     onCompleted: (_response: ResponseData) => {
-
       setPageResponse(_response);
       // If the response isn't formatted in a way that
       // expected, just return
-      if(!_response || !_response.hasOwnProperty('standardDataPage')) {
+      if (!_response || !_response.hasOwnProperty('standardDataPage')) {
         return false;
       }
 
-      const viewData: ViewDataType = getCurrentView(_response['standardDataPage'].views, primaryPath);
+      const viewData: ViewDataType = getCurrentView(
+        _response['standardDataPage'].views,
+        primaryPath
+      );
 
       setCurrentView(viewData.view);
       setTabState(viewData.index);
@@ -120,36 +126,41 @@ const StandardTablePage: FC<CombinedProps> = ({
     }
   });
 
-  const getTableData = useCallback(async (_response: ResponseData) => {
+  const getTableData = useCallback(
+    async (_response: ResponseData) => {
+      if (!currentView || !currentView.dataQuery) {
+        return undefined;
+      }
 
-    if(!currentView || !currentView.dataQuery) {
-      return undefined;
-    }
+      const unchangedDataQuery = currentView.dataQuery;
 
-    const unchangedDataQuery = currentView.dataQuery;
+      // FIX: removes ticket_department from gql
+      const dataQuery = unchangedDataQuery.replace(
+        'ticket_departments',
+        'departments'
+      );
 
-    // FIX: removes ticket_department from gql
-    const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
+      try {
+        const dataResponse = await client.query({
+          query: gql`
+            ${dataQuery}
+          `,
+          errorPolicy: 'all'
+        });
 
-    try {
-
-      const dataResponse = await client.query({
-        query: gql`${dataQuery}`,
-        errorPolicy: 'all'
-      });
-
-      const { results }: { results: KeyValue[]} = dataResponse.data;
-      const treedResults = treeify(results);
-      setTableData(treedResults);
-      setFilteredData(treedResults);
-      setTotalPageCount(Math.ceil(results.length / pageSize));
-
-    } catch(err) {
-      console.debug('sError for query: ' + dataQuery);
-      console.error(err);
-      logError(err);
-    }
-  }, [client, pageSize, currentView]);
+        const { results }: { results: KeyValue[] } = dataResponse.data;
+        const treedResults = treeify(results);
+        setTableData(treedResults);
+        setFilteredData(treedResults);
+        setTotalPageCount(Math.ceil(results.length / pageSize));
+      } catch (err) {
+        console.debug('sError for query: ' + dataQuery);
+        console.error(err);
+        logError(err);
+      }
+    },
+    [client, pageSize, currentView]
+  );
 
   useEffect(() => {
     setFilters(setupFilters('*'));
@@ -181,17 +192,24 @@ const StandardTablePage: FC<CombinedProps> = ({
     return <Error />;
   }
 
-  const { title, description, headerLinks, views, dataType, illustration } = (pageResponse as any)[
-    'standardDataPage'
-  ];
+  const {
+    title,
+    description,
+    headerLinks,
+    views,
+    dataType,
+    illustration
+  } = (pageResponse as any)['standardDataPage'];
 
   const tableDef = currentView.tableDef;
   const filterDef = currentView.filterDef;
 
-  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map((_column: ITableColumn) => ({
-    column: _column.title,
-    show: true
-  }));
+  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map(
+    (_column: ITableColumn) => ({
+      column: _column.title,
+      show: true
+    })
+  );
 
   const onFilterChange = (internalFilters: FilterProps[]) => {
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
@@ -228,9 +246,7 @@ const StandardTablePage: FC<CombinedProps> = ({
   };
 
   const onNewClick = (_primaryPath: string) => {
-
     history.push(`${_primaryPath}/new`);
-
   };
 
   const contextValue: StandardTableContextValues = {
@@ -291,10 +307,10 @@ const StandardTablePage: FC<CombinedProps> = ({
             )}
             {views && currentView && (
               <TableWrapper
-                {...currentView}
+                {...(paths[0] === '/agents' ? tableTestColumns : currentView)}
                 view={view}
                 path={path}
-                data={filteredData}
+                data={paths[0] === '/agents' ? tableTestData : filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}

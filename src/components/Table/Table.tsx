@@ -39,7 +39,9 @@ const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
 };
 
 const compareGroups = (group1: string[], group2: string[]) => {
-  return group1.length === group2.length && difference(group1, group2).length === 0;
+  return (
+    group1.length === group2.length && difference(group1, group2).length === 0
+  );
 };
 
 export type Props = {
@@ -88,7 +90,14 @@ const Table: FC<Props> = ({
     gotoPage,
     toggleExpanded,
     state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
-  } = useTable(tableParams, useGroupBy, useExpanded, useSortBy, usePagination, useRowSelect) as any;
+  } = useTable(
+    tableParams,
+    useGroupBy,
+    useExpanded,
+    useSortBy,
+    usePagination,
+    useRowSelect
+  ) as any;
 
   // Process internal sort change
   useEffect(() => {
@@ -189,97 +198,144 @@ const Table: FC<Props> = ({
         <div className='overflow'>
           <table {...getTableProps()}>
             <thead>
-              {headerGroups.map((headerGroup: HeaderGroup, indexOuter: number) => (
-                <tr
-                  key={indexOuter}
-                  {...(headerGroup.getHeaderGroupProps && headerGroup.getHeaderGroupProps())}
-                >
-                  {actions && actions.length > 0 && <th style={{ width: '30px' }} />}
-                  {headerGroup.headers.map((column: KeyValue, indexInner: number) => {
-                    const isIdColumn = column.type.__typename === 'TableColumnId';
+              {headerGroups.map(
+                (headerGroup: HeaderGroup, indexOuter: number) => (
+                  <tr
+                    key={indexOuter}
+                    {...(headerGroup.getHeaderGroupProps &&
+                      headerGroup.getHeaderGroupProps())}
+                  >
+                    {actions && actions.length > 0 && (
+                      <th style={{ width: '30px' }} />
+                    )}
+                    {headerGroup.headers.map(
+                      (column: KeyValue, indexInner: number) => {
+                        const isIdColumn =
+                          column.type.__typename === 'TableColumnId';
 
-                    return (
-                      <th
-                        key={indexInner}
-                        {...column.getHeaderProps(column.getSortByToggleProps())}
-                        style={{
-                          border: column.isSorted && '1px solid #D3D6D7',
-                          width: isIdColumn && '1px'
-                        }}
-                      >
-                        <StyledTh alignRight={isIdColumn}>
-                          {column.render('Header')}
-                          {column.isSorted &&
-                            (column.isSortedDesc ? (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-up-active' />
-                              </span>
-                            ) : (
-                              <span className='sort-icon'>
-                                <Icon name='ic-sort-down-active' />
-                              </span>
-                            ))}
-                          {column.isSorted && (
-                            <Tooltip content='Filter' styleType='dark' placement='bottom'>
-                              <span className='filter-icon'>
-                                <Icon name='filter' />
-                              </span>
-                            </Tooltip>
-                          )}
-                          {column.canGroupBy ? (
-                            // If the column can be grouped, let's add a toggle
-                            <span
-                              {...column.getGroupByToggleProps()}
-                              style={{ display: 'flex', marginLeft: 5 }}
-                            >
-                              {column.isGrouped ? <Icon name='group' /> : <Icon name='group' />}
-                            </span>
-                          ) : null}
-                        </StyledTh>
-                      </th>
-                    );
-                  })}
-                  <th style={{ width: '1px' }} />
-                </tr>
-              ))}
+                        return (
+                          <th
+                            key={indexInner}
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
+                            style={{
+                              border: column.isSorted && '1px solid #D3D6D7',
+                              width: isIdColumn && '1px'
+                            }}
+                          >
+                            <StyledTh alignRight={isIdColumn}>
+                              {column.render('Header')}
+                              {column.isSorted &&
+                                (column.isSortedDesc ? (
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-up-active' />
+                                  </span>
+                                ) : (
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-down-active' />
+                                  </span>
+                                ))}
+                              {column.isSorted && (
+                                <Tooltip
+                                  content='Filter'
+                                  styleType='dark'
+                                  placement='bottom'
+                                >
+                                  <span className='filter-icon'>
+                                    <Icon name='filter' />
+                                  </span>
+                                </Tooltip>
+                              )}
+                              {column.canGroupBy ? (
+                                // If the column can be grouped, let's add a toggle
+                                <span
+                                  {...column.getGroupByToggleProps()}
+                                  style={{ display: 'flex', marginLeft: 5 }}
+                                >
+                                  {column.isGrouped ? (
+                                    <Icon name='group' />
+                                  ) : (
+                                    <Icon name='group' />
+                                  )}
+                                </span>
+                              ) : null}
+                            </StyledTh>
+                          </th>
+                        );
+                      }
+                    )}
+                    <th style={{ width: '1px' }} />
+                  </tr>
+                )
+              )}
             </thead>
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return row.isGrouped ? (
-                  <tr {...row.getRowProps()} {...row.getExpandedToggleProps()}>
+                  <tr
+                    {...row.getRowProps()}
+                    {...row.getExpandedToggleProps()}
+                    style={{
+                      borderBottom: '1px solid #b0bbc3'
+                    }}
+                  >
                     <td
-                      colSpan={row.cells.length + 2}
-                      style={{ backgroundImage: 'linear-gradient(#b0bbc3 1px,transparent 0)' }}
+                      colSpan={1}
+                      style={{
+                        backgroundImage: 'none',
+                        padding: '4px 0px 4px 10px'
+                      }}
                     >
-                      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <Checkbox value={row.groupById} checked={false} onChange={e => e} />
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          maxWidth: 310
+                        }}
+                      >
+                        <Checkbox
+                          value={row.groupById}
+                          checked={false}
+                          onChange={e => e}
+                        />
                         <span
                           style={{
-                            marginLeft: 15,
+                            margin: '0 auto 0 16px',
                             color: '#1C3E55',
+                            fontFamily: 'Rubik',
                             fontWeight: 500,
-                            fontSize: 15
+                            fontSize: 15,
+                            lineHeight: '150%'
                           }}
                         >
                           {row.groupByVal} ({row.subRows.length})
                         </span>
                         <span style={{ marginLeft: 10 }}>
                           {row.isExpanded ? (
-                            <Icon name='arrow-drop-up' />
+                            <Icon name='up' />
                           ) : (
-                            <Icon name='ic-down' />
+                            <Icon name='down' />
                           )}
                         </span>
                       </div>
                     </td>
+                    <td
+                      colSpan={row.cells.length + 1}
+                      style={{ backgroundImage: 'none' }}
+                    />
                   </tr>
                 ) : (
                   <tr
                     key={indexOuter}
                     {...row.getRowProps()}
                     className={
-                      (checked.hasOwnProperty((row.original as KeyValue).id.toString())
+                      (checked.hasOwnProperty(
+                        (row.original as KeyValue).id.toString()
+                      )
                         ? 'row--selected '
                         : ' ') +
                       (row.depth === 1 || row.subRows.length > 0
@@ -300,7 +356,9 @@ const Table: FC<Props> = ({
                         <Checkbox
                           value={(row.original as KeyValue).id}
                           checked={
-                            checked.hasOwnProperty((row.original as KeyValue).id.toString())
+                            checked.hasOwnProperty(
+                              (row.original as KeyValue).id.toString()
+                            )
                               ? true
                               : false
                           }
@@ -311,11 +369,13 @@ const Table: FC<Props> = ({
                       </td>
                     )}
                     {row.cells.map((cell: any, indexInner: number) => {
-                      const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+                      const isIdColumn =
+                        cell.column.type.__typename === 'TableColumnId';
                       return (
                         <td
                           className={
-                            (!actions || actions.length === 0) && indexInner === 0
+                            (!actions || actions.length === 0) &&
+                            indexInner === 0
                               ? 'firstColumn'
                               : ''
                           }
@@ -340,7 +400,9 @@ const Table: FC<Props> = ({
                     })}
                     <td>
                       <span className='action-buttons'>
-                        {!checked.hasOwnProperty((row.original as KeyValue).id.toString()) && (
+                        {!checked.hasOwnProperty(
+                          (row.original as KeyValue).id.toString()
+                        ) && (
                           <TableData
                             type='action_buttons'
                             props={{
