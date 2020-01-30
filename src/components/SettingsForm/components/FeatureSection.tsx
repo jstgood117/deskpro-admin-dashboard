@@ -174,15 +174,6 @@ const FeatureSectionStyled = styled.div`
   }
 
   /*
-  & > .form-row > .form-ctrl > label {
-    position: absolute;
-    left: 300px;
-  }
-
-  & .field-container {
-    position: relative;
-  }
-
   & .element-details {
     margin-top: 16px;
   }
@@ -221,47 +212,9 @@ const FeatureSectionStyled = styled.div`
     justify-content: center;
   }
 
-  & .element-info {
-    position: absolute;
-    top: 21px;
-    left: 720px;
-  }
-
-  & .group-info {
-    position: absolute;
-    top: 0;
-    left: 765px;
-  }
-
-  & .element-info a,
-  & .group-info a {
-    white-space: nowrap;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  & .element-info a > div,
-  & .group-info a > div {
-    height: 34px;
-  }
-
   & .element-info a svg path,
   & .group-info a svg path {
     fill: ${props => props.theme.brandPrimary};
-  }
-
-  & .form-toggle {
-    position: absolute;
-    transform: translateY(2px);
-    z-index: 1;
-  }
-
-  & label {
-    font-family: Rubik;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 150%;
-    color: #4c4f50;
   }
   */
 `;
