@@ -5,7 +5,9 @@ import classNames from 'classnames';
 import { StdElementRow } from './StdElementRow';
 
 const ElementGroup = (props: any) => {
-  const countVertGroups = props.elements.filter((d: any) => d.type === 'vertical_group').length;
+  const countVertGroups = props.elements.filter(
+    (d: any) => d.type === 'vertical_group'
+  ).length;
 
   if (countVertGroups > 1) {
     const elements = _.range(0, countVertGroups * 2, 2).map(index =>
@@ -24,10 +26,13 @@ const ElementGroup = (props: any) => {
       </div>
     );
   }
-  const hasGroups = props.elements.filter((d: any) => d.type === 'group').length > 0;
+  const hasGroups =
+    props.elements.filter((d: any) => d.type === 'group').length > 0;
 
   return (
-    <div className={classNames('group-elements', { 'column-groups': hasGroups })}>
+    <div
+      className={classNames('group-elements', { 'column-groups': hasGroups })}
+    >
       {props.elements.map((element: any, i: number) => (
         <StdElementRow {...element} key={i} formikProps={props.formikProps} />
       ))}
