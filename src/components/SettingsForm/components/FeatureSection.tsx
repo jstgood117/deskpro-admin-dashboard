@@ -26,7 +26,7 @@ const FeatureSectionStyled = styled.div`
     font-size: 13px;
     line-height: 150%;
     padding: 0;
-    margin: 0;
+    margin: 0 0 10px 0;
   }
 
   & > h1 {
@@ -80,6 +80,9 @@ const FeatureSectionStyled = styled.div`
     & > a {
       display: block;
       margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -97,10 +100,26 @@ const FeatureSectionStyled = styled.div`
     width: 100%;
   }
 
+  .vert-element-field {
+    margin-right: 20px;
+  }
+
+  .vert-elements {
+    padding-left: 45px;
+  }
+
+  .vert-elements .form-item {
+    margin-bottom: 16px;
+  }
+
+  .group-elements .vert-element-group .vert-element-group {
+    margin-top: 10px;
+  }
+
   .form-item {
     display: flex;
     flex-direction: row;
-    margin-bottom: 15px;
+    /*margin-bottom: 15px;*/
     .group-details {
       width: 100%;
       max-width: 685px;
@@ -116,7 +135,11 @@ const FeatureSectionStyled = styled.div`
   & .field-container {
     .element-details {
       label {
+        font-family: Rubik;
+        font-style: normal;
         font-weight: normal;
+        font-size: 14px;
+        line-height: 150%;
       }
     }
   }

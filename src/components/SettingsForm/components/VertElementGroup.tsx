@@ -15,14 +15,14 @@ const VertElementGroup: React.FC = (props: any) => {
     <div className='vert-element-group'>
       <div className='form-item'>
         {props.field && (
-          <div style={{ marginRight: 20 }}>
+          <div className='vert-element-field'>
             <FieldElement {...props.field} formikProps={props.formikProps} />
           </div>
         )}
         {generateTitleAndDescription('group-details', props)}
         {generateElementInfo(props)}
       </div>
-      <div style={{ paddingLeft: 45 }}>
+      <div className='vert-elements'>
         {enabled &&
           props.elements.map((element: any, i: number) =>
             element.type === 'field' ? (
