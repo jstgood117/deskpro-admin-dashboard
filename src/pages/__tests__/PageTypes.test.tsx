@@ -14,12 +14,13 @@ describe('PageType', () => {
     test('returns page component of StandardTablePage if type `StandardTablePage`', () => {
       const props: IProps = {
         path: '/test',
+        paths: null,
         pageType: 'StandardDataPage'
       };
 
       const Component = getPageComponent(props);
 
-      expect(Component).toEqual(<StandardTablePage path='/test' />);
+      expect(Component).toEqual(<StandardTablePage path='/test' paths={null} />);
     });
 
     // test('returns value of prop if found on RouteToPage', () => {
@@ -35,6 +36,7 @@ describe('PageType', () => {
     test('returns 404 if path not found in RouteToPage', () => {
       const props: IProps = {
         path: '/test',
+        paths: [],
         pageType: null
       };
 
