@@ -85,7 +85,7 @@ const FeatureSectionStyled = styled.div`
 
   .group-elements {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .column-groups {
@@ -106,7 +106,7 @@ const FeatureSectionStyled = styled.div`
       max-width: 685px;
     }
     .element-info {
-      margin-left: 20px;
+      margin-left: 12px;
       .element-info-link {
 
       }

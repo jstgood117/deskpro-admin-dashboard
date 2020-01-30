@@ -1,16 +1,10 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import { StdElementRow } from './StdElementRow';
 
 const ElementGroup = (props: any) => {
-  const hasGroups =
-    props.elements.filter((d: any) => d.type === 'group').length > 0;
-
   return (
-    <div
-      className={classNames('group-elements', { 'column-groups': hasGroups })}
-    >
+    <div className='group-elements'>
       {props.elements.map((element: any, i: number) => (
         <StdElementRow {...element} key={i} formikProps={props.formikProps} />
       ))}

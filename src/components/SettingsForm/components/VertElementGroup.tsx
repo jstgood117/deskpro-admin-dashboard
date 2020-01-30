@@ -11,18 +11,18 @@ const VertElementGroup: React.FC = (props: any) => {
   const enabled =
     !props.showOn || props.formikProps.values[props.showOn] === true;
 
-  console.log(props);
-
   return (
     <div className='vert-element-group'>
       <div className='form-item'>
         {props.field && (
-          <FieldElement {...props.field} formikProps={props.formikProps} />
+          <div style={{ marginRight: 20 }}>
+            <FieldElement {...props.field} formikProps={props.formikProps} />
+          </div>
         )}
         {generateTitleAndDescription('group-details', props)}
         {generateElementInfo(props)}
       </div>
-      <div style={{ paddingLeft: 30 }}>
+      <div style={{ paddingLeft: 45 }}>
         {enabled &&
           props.elements.map((element: any, i: number) =>
             element.type === 'field' ? (
