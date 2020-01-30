@@ -50,6 +50,7 @@ export interface ISidebarSection {
 export interface ISidebarItem {
   itemName: string;
   path?: string;
+  paths?: string[];
   pageType?: string;
   metadataQuery?: string;
   navItems?: ISidebarItem[];
