@@ -10,15 +10,22 @@ export type TableParams = {
   initialState: {
     pageIndex: number;
     pageSize: number;
-    sortBy?:SortType[];
+    sortBy?: SortType[];
   };
   manualPagination?: boolean;
   pageCount?: number;
   autoResetSortBy?: boolean;
-  defaultCanSort?:boolean;
+  defaultCanSort?: boolean;
+  defaultColumn?: DefaultColumnType;
 };
 
-export type CustomSortFn = (a:any, b:any, col:string) => number;
+export type DefaultColumnType = {
+  minWidth?: number;
+  width?: number;
+  maxWidth?: number;
+};
+
+export type CustomSortFn = (a: any, b: any, col: string) => number;
 
 export type ColumnMeta = {
   columnProps: KeyValue;
