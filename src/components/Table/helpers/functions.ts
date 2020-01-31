@@ -67,38 +67,14 @@ export const onSelectAllChange = (
     const endPos = Math.min(startPos + pageSize, data.length);
 
     const showingRows = _.slice(data, startPos, endPos);
-    const ids = showingRows.map((_row: KeyValue) => ({
-      [_row.id]: true
-    }));
-    showingRows.map(row => {
-      if (row.subRows.length > 0) {
-        row.subRows.map((_row: KeyValue) =>
-          ids.push({
-            [_row.id]: true
-          })
-        );
-      }
-      return true;
-    });
+    const ids = getIdsFromData(showingRows);
     setChecked(Object.assign({}, ...ids));
     return true;
   }
 };
 
 export const onSelectEverything = (data: any[], setChecked: objectUseState) => {
-  const ids = data.map((_row: KeyValue) => ({
-    [_row.id]: true
-  }));
-  data.map(row => {
-    if (row.subRows.length > 0) {
-      row.subRows.map((_row: KeyValue) =>
-        ids.push({
-          [_row.id]: true
-        })
-      );
-    }
-    return true;
-  });
+  const ids = getIdsFromData(data);
   setChecked(Object.assign({}, ...ids));
   return true;
 };
@@ -200,4 +176,24 @@ export const generateCardProps = (row: any): UserType => {
     userMail: original.primary_email
     // avatar: original.avatarUrn
   };
+};
+
+export const getIdsFromData = (data: any) => {
+  const ids = data.map((_row: KeyValue) => {
+    const id = (_row.original && _row.original.id) || _row.id;
+    return {
+      [id]: true
+    };
+  });
+  data.forEach((row: KeyValue) => {
+    if (row.subRows.length > 0) {
+      row.subRows.forEach((_row: KeyValue) => {
+        const id = (_row.original && _row.original.id) || _row.id;
+        ids.push({
+          [id]: true
+        });
+      });
+    }
+  });
+  return ids;
 };

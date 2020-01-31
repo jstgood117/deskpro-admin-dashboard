@@ -74,6 +74,7 @@ const Table: FC<Props> = ({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
+  const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
   const actions = ActionFactory(path);
   // always show checkboxes
   const hasActions = true; // actions && actions.length > 0;
@@ -92,9 +93,11 @@ const Table: FC<Props> = ({
     getTableBodyProps,
     headerGroups,
     prepareRow,
+    rows,
     page,
     setPageSize,
     gotoPage,
+    dispatch,
     state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
   } = useTable(
     tableParams,
@@ -124,8 +127,9 @@ const Table: FC<Props> = ({
   // Handle incoming group by
   useEffect(() => {
     if (!compareGroups(groupBy, groupByInfo)) {
-      groupByInfo.map((column: any) => toggleGroupBy(column, false));
-      groupBy.map(column => toggleGroupBy(column, true));
+      setFirstGrouped(true);
+      dispatch({ type: 'resetGroupBy' });
+      toggleGroupBy(groupBy[0], true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupBy]);
@@ -137,11 +141,15 @@ const Table: FC<Props> = ({
   }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
-    // disable auto expaned
-    // page.map((row: { canExpand: any; id: any }) => {
-    //   if (row.canExpand) toggleExpanded(row.id, true);
-    //   return true;
-    // });
+    let countExpanded = 0;
+    if (firstGrouped) {
+      countExpanded = page
+        .filter((r: any) => r.canExpand && r.isExpanded === undefined)
+        .map((r: any) => r.toggleExpanded()).length;
+      if (countExpanded > 0) {
+        setFirstGrouped(false);
+      }
+    }
     // setChecked({});
     setTotalRecords(data.length);
     // eslint-disable-next-line
@@ -176,6 +184,7 @@ const Table: FC<Props> = ({
           data={data}
           checked={checked}
           path={path}
+          rows={rows}
           page={page}
           columns={columns}
           totalRecords={totalRecords}
@@ -264,13 +273,15 @@ const Table: FC<Props> = ({
                 return row.isGrouped ? (
                   <tr
                     {...row.getRowProps()}
-                    {...row.getExpandedToggleProps()}
                     style={{
                       borderBottom: '1px solid #b0bbc3'
                     }}
                   >
                     {hasActions && (
-                      <td className='checkBox'>
+                      <td
+                        className='checkBox'
+                        style={{ backgroundImage: 'none' }}
+                      >
                         <Checkbox
                           value={row.id}
                           checked={checked.hasOwnProperty(row.id)}
@@ -297,6 +308,7 @@ const Table: FC<Props> = ({
                         }}
                       >
                         <span
+                          {...row.getExpandedToggleProps()}
                           style={{
                             marginRight: 'auto',
                             marginLeft: 0, // hasActions ? 16 : 0,
@@ -304,7 +316,8 @@ const Table: FC<Props> = ({
                             fontFamily: 'Rubik',
                             fontWeight: 500,
                             fontSize: 15,
-                            lineHeight: '150%'
+                            lineHeight: '150%',
+                            cursor: 'pointer'
                           }}
                         >
                           {row.groupByVal} ({row.subRows.length})
@@ -389,7 +402,35 @@ const Table: FC<Props> = ({
                               }
                             })}
                           >
-                            <TableData {...generateComponentProps(cell)} />
+                            {cell.column.id === 'admin_common.col.teams' ? (
+                              <TableData
+                                {...generateComponentProps({
+                                  ...cell,
+                                  column: {
+                                    ...cell.column,
+                                    type: {
+                                      __typename:
+                                        'TableColumnTicketDepartmentList',
+                                      valuesArray: {
+                                        dataPath: 'agent_teams'
+                                      }
+                                    }
+                                  },
+                                  row: {
+                                    ...cell.row,
+                                    original: {
+                                      ...cell.row.original,
+                                      agent_teams: [
+                                        { id: cell.value, title: cell.value }
+                                      ]
+                                    }
+                                  },
+                                  value: [{ id: cell.value, title: cell.value }]
+                                })}
+                              />
+                            ) : (
+                              <TableData {...generateComponentProps(cell)} />
+                            )}
                           </td>
                         );
                       }
