@@ -1,5 +1,12 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, FormikProps } from 'formik';
+import {
+  ErrorMessage,
+  Field,
+  Form,
+  FormikProps,
+  FieldProps
+} from 'formik';
+import Input from '../../../components/Input';
 
 interface ILoginFormValues {
   email: string;
@@ -15,28 +22,16 @@ const ImporterForm = (props: FormikProps<ILoginFormValues>) => {
         </div>
         <Field
           name='email'
-          value={props.values['email']}
-          type='email'
-          className='form-input'
+          render={({ field, form }: FieldProps) => (
+            <Input
+              disabled={form.isSubmitting}
+              inputType='primary'
+              {...field}
+            />
+          )}
         />
         <ErrorMessage name='email'>
           {() => <div className='error-message'>{props.errors['email']}</div>}
-        </ErrorMessage>
-      </div>
-      <div className='form-field'>
-        <div className='form-label'>
-          <label>password</label>
-        </div>
-        <Field
-          name='password'
-          value={props.values['password']}
-          type='password'
-          className='form-input'
-        />
-        <ErrorMessage name='password'>
-          {() => (
-            <div className='error-message'>{props.errors['password']}</div>
-          )}
         </ErrorMessage>
       </div>
       <div className='form-button'>
