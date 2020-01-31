@@ -64,9 +64,9 @@ const Table: FC<Props> = ({
 }) => {
   const defaultColumn = useMemo(
     () => ({
-      minWidth: 30,
-      width: 250,
-      maxWidth: 400,
+      // minWidth: 30,
+      // width: 250,
+      // maxWidth: 400,
     }),
     []
   );
@@ -201,18 +201,11 @@ const Table: FC<Props> = ({
                       return (
                         <th
                           key={indexInner}
-                          {...column.getHeaderProps(
-                            column.getSortByToggleProps()
-                          )}
+                          {...column.getHeaderProps()}
                           className={`${column.isSorted ? 'sorted' : ''} ${isIdColumn ? 'id-column' : ''}`}
                         >
-                          <StyledTh alignRight={isIdColumn}>
+                          <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
                             {column.render('Header')}
-                            <div
-                              {...column.getResizerProps()}
-                              className='resizer'
-                              style={{ cursor: 'col-resize' }}
-                            />
                             {column.isSorted &&
                               (column.isSortedDesc ? (
                                 <span className='sort-icon'>
@@ -235,6 +228,11 @@ const Table: FC<Props> = ({
                               </Tooltip>
                             )}
                           </StyledTh>
+                          <div
+                            {...column.getResizerProps()}
+                            className='resizer'
+                            style={{ cursor: 'col-resize' }}
+                          />
                         </th>
                       );
                     }
@@ -308,18 +306,18 @@ const Table: FC<Props> = ({
                             ? 'firstColumn'
                             : ''
                         }
-                      {...cell.row.getExpandedToggleProps({
-                        onClick: () => {},
-                        style: {
-                          textAlign: isIdColumn && 'right',
-                          verticalAlign: isIdColumn && 'bottom',
-                          paddingBottom: isIdColumn && '5px',
-                          paddingLeft: `${indexInner === 0 &&
-                            row.depth === 1 &&
-                            row.depth * 2}rem`,
-                          cursor: 'default'
-                        }
-                      })}
+                      // {...cell.row.getExpandedToggleProps({
+                      //   onClick: () => { },
+                      //   style: {
+                      //     textAlign: isIdColumn && 'right',
+                      //     verticalAlign: isIdColumn && 'bottom',
+                      //     paddingBottom: isIdColumn && '5px',
+                      //     paddingLeft: `${indexInner === 0 &&
+                      //       row.depth === 1 &&
+                      //       row.depth * 2}rem`,
+                      //     cursor: 'default'
+                      //   }
+                      // })}
                       >
                         <TableData {...generateComponentProps(cell)} />
                       </td>

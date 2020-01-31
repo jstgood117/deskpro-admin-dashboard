@@ -66,6 +66,34 @@ export const TableStyled = styled(dpstyle.div)`
             .filter-icon {
               display: none;
             }
+
+            /* position: relative; */
+
+            /* :last-child {
+              border-right: 0;
+            } */
+
+            .resizer {
+              display: inline-block;
+              background: ${props => props.theme.lightBlue};
+              width: 6px;
+              height: 100%;
+              position: absolute;
+              right: 0;
+              top: 0;
+              transform: translateX(50%);
+              z-index: 1;
+              /* prevents from scrolling while dragging on touch devices */
+              touch-action: none;
+              opacity: 0;
+
+              :hover {
+                opacity: 1;
+              }
+              /* &.isResizing {
+                opacity: 1;
+              } */
+            }
           }
         }
       }
@@ -230,33 +258,7 @@ export const StyledTh = styled.div<{ alignRight: boolean }>`
   display: flex;
   align-items: center;
   justify-content: ${props => (props.alignRight ? 'flex-end' : 'flex-right')};
-  /* position: relative; */
-
-  /* :last-child {
-    border-right: 0;
-  } */
-
-  .resizer {
-    display: inline-block;
-    background: ${props => props.theme.lightBlue};
-    width: 6px;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transform: translateX(50%);
-    z-index: 1;
-    /* prevents from scrolling while dragging on touch devices */
-    touch-action: none;
-    opacity: 0;
-
-    :hover {
-      opacity: 1;
-    }
-    /* &.isResizing {
-      opacity: 1;
-    } */
-  }
+  width: 100%;
 
   .sort-icon {
     display: flex;
