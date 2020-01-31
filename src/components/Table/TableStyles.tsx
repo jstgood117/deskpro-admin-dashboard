@@ -56,6 +56,13 @@ export const TableStyled = styled(dpstyle.div)`
                 }
               }
             }
+            &.sorted {
+              border-left: 1px solid #D3D6D7;
+              border-right: 1px solid #D3D6D7;
+            }
+            &.id-column {
+              width: 1px;
+            }
             .filter-icon {
               display: none;
             }
@@ -157,15 +164,18 @@ export const TableStyled = styled(dpstyle.div)`
             }
           }
           .action-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
             visibility: hidden;
           }
           &:hover .action-buttons {
             visibility: visible;
           }
         }
+      }
+      & th, td {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        /* border: 1px solid #000; */
       }
     }
   }
@@ -220,6 +230,34 @@ export const StyledTh = styled.div<{ alignRight: boolean }>`
   display: flex;
   align-items: center;
   justify-content: ${props => (props.alignRight ? 'flex-end' : 'flex-right')};
+  /* position: relative; */
+
+  /* :last-child {
+    border-right: 0;
+  } */
+
+  .resizer {
+    display: inline-block;
+    background: ${props => props.theme.lightBlue};
+    width: 6px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(50%);
+    z-index: 1;
+    /* prevents from scrolling while dragging on touch devices */
+    touch-action: none;
+    opacity: 0;
+
+    :hover {
+      opacity: 1;
+    }
+    /* &.isResizing {
+      opacity: 1;
+    } */
+  }
+
   .sort-icon {
     display: flex;
     padding-left: 10px;
