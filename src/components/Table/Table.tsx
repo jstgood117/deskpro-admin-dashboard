@@ -75,7 +75,8 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const actions = ActionFactory(path);
-  const hasActions = actions && actions.length > 0;
+  // always show checkboxes
+  const hasActions = true; // actions && actions.length > 0;
 
   const tableParams: TableParams = generateTableParams(
     tableType,
