@@ -59,6 +59,10 @@ export const TableStyled = styled(dpstyle.div)`
             .filter-icon {
               display: none;
             }
+            &.th-action-buttons {
+              min-width: 100px;
+              width: 100px;
+            }
           }
         }
       }
@@ -146,19 +150,19 @@ export const TableStyled = styled(dpstyle.div)`
               padding-left: 10px;
               width: 16px;
             }
-            & img {
-              width: 25px;
-              height: 25px;
-              border-radius: 12px;
-              vertical-align: middle;
-              margin-right: 15px;
-            }
             & * {
               max-width: 400px;
               flex-wrap: nowrap;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+            }
+            & img {
+              width: 25px;
+              height: 25px;
+              border-radius: 12px;
+              vertical-align: middle;
+              margin-right: 15px;
             }
           }
           .action-buttons {

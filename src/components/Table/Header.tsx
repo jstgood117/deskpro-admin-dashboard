@@ -116,7 +116,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
       setChecked,
       _pageIndex,
       pageSize,
-      data
+      data.concat(page.filter((row: any) => row.isGrouped))
     );
   };
 

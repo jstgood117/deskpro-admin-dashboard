@@ -12,11 +12,13 @@ export const onCheckboxChange = (
 ) => {
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
+    console.log(value, subRows);
     if (keys.includes(value)) {
       const ids: string[] = [];
       ids.push(value);
-      subRows.map((_subRow: { id: any }) => {
-        ids.push(_subRow.id);
+      subRows.map((_subRow: any) => {
+        const id = (_subRow.original && _subRow.original.id) || _subRow.id;
+        ids.push(id);
         return true;
       });
       const newIds = keys
@@ -27,8 +29,9 @@ export const onCheckboxChange = (
     } else {
       const ids = [];
       ids.push({ [value]: true });
-      subRows.map((_subRow: { id: any }) => {
-        ids.push({ ...checked, ...{ [_subRow.id]: true } });
+      subRows.map((_subRow: any) => {
+        const id = (_subRow.original && _subRow.original.id) || _subRow.id;
+        ids.push({ ...checked, ...{ [id]: true } });
         return true;
       });
       setChecked(Object.assign({}, ...ids));
@@ -57,6 +60,7 @@ export const onSelectAllChange = (
   pageSize: number,
   data: any[]
 ) => {
+  console.log(data)
   if (!isChecked) {
     setChecked({});
     return true;
@@ -128,7 +132,10 @@ export const generateTableParams = (
       };
 };
 
-export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any = {}): string => {
+export const getCSVCellFormatOnType = (
+  columnProps: KeyValue,
+  values: any = {}
+): string => {
   switch (columnProps.__typename) {
     case 'TableColumnNameAvatar':
       return values[columnProps.name.dataPath];
@@ -145,7 +152,9 @@ export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any = {}):
     case 'TableColumnAgentTeamList':
       return (
         values[columnProps.valuesArray.dataPath] &&
-        values[columnProps.valuesArray.dataPath].map((item: any) => item.title).join(', ')
+        values[columnProps.valuesArray.dataPath]
+          .map((item: any) => item.title)
+          .join(', ')
       );
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
@@ -157,7 +166,10 @@ export const getCSVCellFormatOnType = (columnProps: KeyValue, values: any = {}):
   }
 };
 
-export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) => {
+export const generateCSVData = (
+  table: KeyValue[],
+  columnsMeta: ColumnMeta[]
+) => {
   const csvData: KeyValue[] = [];
 
   // The table values have already been reduced to
@@ -168,7 +180,10 @@ export const generateCSVData = (table: KeyValue[], columnsMeta: ColumnMeta[]) =>
     table.map((row: KeyValue) => {
       const temp = Object.assign({}, row.values);
       columnsMeta.map((columnMeta: ColumnMeta) => {
-        temp[columnMeta.id] = getCSVCellFormatOnType(columnMeta.columnProps, row.original);
+        temp[columnMeta.id] = getCSVCellFormatOnType(
+          columnMeta.columnProps,
+          row.original
+        );
         return true;
       });
       csvData.push(temp);

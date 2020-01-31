@@ -142,7 +142,7 @@ const Table: FC<Props> = ({
     //   if (row.canExpand) toggleExpanded(row.id, true);
     //   return true;
     // });
-    setChecked({});
+    // setChecked({});
     setTotalRecords(data.length);
     // eslint-disable-next-line
   }, [pageIndex, data, page]);
@@ -209,7 +209,7 @@ const Table: FC<Props> = ({
                             )}
                             style={{
                               border: column.isSorted && '1px solid #D3D6D7',
-                              width: isIdColumn && '1px'
+                              width: isIdColumn ? 1 : column.width || 'auto'
                             }}
                           >
                             <StyledTh alignRight={isIdColumn}>
@@ -253,16 +253,14 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
-                    <th style={{ width: '1px' }} />
+                    <th className='th-action-buttons' />
                   </tr>
                 )
               )}
             </thead>
-            {console.log(groupBy)}
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
-                console.log(row.getToggleRowSelectedProps());
                 return row.isGrouped ? (
                   <tr
                     {...row.getRowProps()}
@@ -273,7 +271,13 @@ const Table: FC<Props> = ({
                   >
                     {hasActions && (
                       <td className='checkBox'>
-                        <Checkbox {...row.getToggleRowSelectedProps()} />
+                        <Checkbox
+                          value={row.id}
+                          checked={checked.hasOwnProperty(row.id)}
+                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            handleCheckboxChange(e, row.subRows);
+                          }}
+                        />
                       </td>
                     )}
                     <td
@@ -295,7 +299,7 @@ const Table: FC<Props> = ({
                         <span
                           style={{
                             marginRight: 'auto',
-                            marginLeft: hasActions ? 16 : 0,
+                            marginLeft: 0, // hasActions ? 16 : 0,
                             color: '#1C3E55',
                             fontFamily: 'Rubik',
                             fontWeight: 500,
@@ -353,6 +357,7 @@ const Table: FC<Props> = ({
                               : false
                           }
                           onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            console.log(e);
                             handleCheckboxChange(e, row.original.subRows);
                           }}
                         />
@@ -390,7 +395,7 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
-                    <td>
+                    <td className='td-action-buttons'>
                       <span className='action-buttons'>
                         {!checked.hasOwnProperty(
                           (row.original as KeyValue).id.toString()
