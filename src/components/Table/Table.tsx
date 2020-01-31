@@ -195,15 +195,7 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    {hasActions && (
-                      <th>
-                        <Checkbox
-                          checked={false}
-                          value={'all'}
-                          onChange={e => e}
-                        />
-                      </th>
-                    )}
+                    {hasActions && <th />}
                     {_.sortBy(headerGroup.headers, 'index').map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
