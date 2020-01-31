@@ -65,7 +65,6 @@ const Table: FC<Props> = ({
   fetchData,
   loading,
   onSortChange,
-  onGroupByChange,
   pageCount: controlledPageCount,
   tableType,
   sortBy,
@@ -115,15 +114,17 @@ const Table: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
 
+  /*
   useEffect(() => {
     if (onGroupByChange && !compareGroups(groupBy, groupByInfo)) {
       onGroupByChange(groupByInfo);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupByInfo]);
+  */
 
   useEffect(() => {
-    if (groupBy.length && !compareGroups(groupBy, groupByInfo)) {
+    if (!compareGroups(groupBy, groupByInfo)) {
       groupByInfo.map((column: any) => toggleGroupBy(column, false));
       groupBy.map(column => toggleGroupBy(column, true));
     }
@@ -246,7 +247,7 @@ const Table: FC<Props> = ({
                                   </span>
                                 </Tooltip>
                               )}
-                              {column.canGroupBy ? (
+                              {/*column.canGroupBy ? (
                                 // If the column can be grouped, let's add a toggle
                                 <span
                                   {...column.getGroupByToggleProps()}
@@ -258,7 +259,7 @@ const Table: FC<Props> = ({
                                     <Icon name='group' />
                                   )}
                                 </span>
-                              ) : null}
+                                  ) : null*/}
                             </StyledTh>
                           </th>
                         );
