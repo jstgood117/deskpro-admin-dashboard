@@ -21,7 +21,12 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  .field-container {
+  & .form-row:last-child {
+    border-bottom-width: 0;
+    padding-bottom: 0;
+  }
+
+  & .field-container {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
@@ -60,7 +65,7 @@ const Container = styled.div`
     }
   }
 
-  .alert-section {
+  & .alert-section {
     margin-left: -25px;
     margin-top: 16px;
     margin-bottom: 16px;
