@@ -147,6 +147,7 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const actions = ActionFactory(path);
+  const hasActions = actions && actions.length > 0;
 
   const handleCheckboxChange = async (
     event: SyntheticEvent<HTMLInputElement>,
@@ -205,9 +206,7 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    {actions && actions.length > 0 && (
-                      <th style={{ width: '30px' }} />
-                    )}
+                    {hasActions && <th style={{ width: '30px' }} />}
                     {headerGroup.headers.map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
@@ -297,14 +296,17 @@ const Table: FC<Props> = ({
                           maxWidth: 310
                         }}
                       >
-                        <Checkbox
-                          value={row.groupById}
-                          checked={false}
-                          onChange={e => e}
-                        />
+                        {hasActions && (
+                          <Checkbox
+                            value={row.groupById}
+                            checked={false}
+                            onChange={e => e}
+                          />
+                        )}
                         <span
                           style={{
-                            margin: '0 auto 0 16px',
+                            marginRight: 'auto',
+                            marginLeft: hasActions ? 16 : 0,
                             color: '#1C3E55',
                             fontFamily: 'Rubik',
                             fontWeight: 500,
@@ -339,13 +341,13 @@ const Table: FC<Props> = ({
                         ? 'row--selected '
                         : ' ') +
                       (row.depth === 1 || row.subRows.length > 0
-                        ? actions && actions.length > 0
+                        ? hasActions
                           ? 'has-checkboxes'
                           : 'non-checkboxes'
                         : '')
                     }
                   >
-                    {actions && actions.length > 0 && (
+                    {hasActions && (
                       <td
                         style={{
                           width: '30px',
