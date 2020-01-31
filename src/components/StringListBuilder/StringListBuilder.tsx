@@ -10,7 +10,7 @@ import Input from '../Input';
 
 const StringListContainer = styled.div`
   position: relative;
-  width: 240px;
+  width: 300px;
   & > div.title-container {
     font-family: Rubik;
     font-weight: 500;
@@ -81,7 +81,13 @@ const StringListContainer = styled.div`
     top: 4px;
   }
   & .add-button {
-    margin-top: 8px;
+    justify-content: center;
+    .text {
+      margin-left: 8px;
+    }
+    svg {
+      padding-right: 0;
+    }
   }
   & .add-button > button[disabled] {
     opacity: 0.5;
@@ -154,25 +160,15 @@ const StringListBuilder: React.FC<IProps> = ({
         name={name || id || ''}
         render={arrayHelpers => (
           <div>
-            {values.map((value, index) =>
-              index === editIndex ? (
-                <Input
-                  autoFocus={true}
-                  value={newItemValue || value}
-                  key={index}
-                  onChange={onChangeNewItem}
-                  onBlur={() =>
-                    handleAddItem(
-                      arrayHelpers,
-                      newItemValue.trim(),
-                      setEditIndex,
-                      setNewItemValue,
-                      setInAdd,
-                      editIndex
-                    )
-                  }
-                  onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                    if (e.key === 'Enter') {
+            <div style={{ marginBottom: 8 }}>
+              {values.map((value, index) =>
+                index === editIndex ? (
+                  <Input
+                    autoFocus={true}
+                    value={newItemValue || value}
+                    key={index}
+                    onChange={onChangeNewItem}
+                    onBlur={() =>
                       handleAddItem(
                         arrayHelpers,
                         newItemValue.trim(),
@@ -180,38 +176,38 @@ const StringListBuilder: React.FC<IProps> = ({
                         setNewItemValue,
                         setInAdd,
                         editIndex
-                      );
+                      )
                     }
-                  }}
-                  inputType='secondary'
-                />
-              ) : (
-                <StringRow
-                  className={max ? 'capped' : ''}
-                  index={index}
-                  key={index}
-                  onEdit={() => setEditIndex(index)}
-                  onRemove={() => arrayHelpers.remove(index)}
-                  value={value}
-                />
-              )
-            )}
-            {inAdd && (
-              <Input
-                autoFocus={true}
-                value={newItemValue}
-                onBlur={() => {
-                  handleAddItem(
-                    arrayHelpers,
-                    newItemValue.trim(),
-                    setEditIndex,
-                    setNewItemValue,
-                    setInAdd
-                  );
-                }}
-                onChange={onChangeNewItem}
-                onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                  if (e.key === 'Enter') {
+                    onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                      if (e.key === 'Enter') {
+                        handleAddItem(
+                          arrayHelpers,
+                          newItemValue.trim(),
+                          setEditIndex,
+                          setNewItemValue,
+                          setInAdd,
+                          editIndex
+                        );
+                      }
+                    }}
+                    inputType='secondary'
+                  />
+                ) : (
+                  <StringRow
+                    className={max ? 'capped' : ''}
+                    index={index}
+                    key={index}
+                    onEdit={() => setEditIndex(index)}
+                    onRemove={() => arrayHelpers.remove(index)}
+                    value={value}
+                  />
+                )
+              )}
+              {inAdd && (
+                <Input
+                  autoFocus={true}
+                  value={newItemValue}
+                  onBlur={() => {
                     handleAddItem(
                       arrayHelpers,
                       newItemValue.trim(),
@@ -219,11 +215,23 @@ const StringListBuilder: React.FC<IProps> = ({
                       setNewItemValue,
                       setInAdd
                     );
-                  }
-                }}
-                inputType='secondary'
-              />
-            )}
+                  }}
+                  onChange={onChangeNewItem}
+                  onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                    if (e.key === 'Enter') {
+                      handleAddItem(
+                        arrayHelpers,
+                        newItemValue.trim(),
+                        setEditIndex,
+                        setNewItemValue,
+                        setInAdd
+                      );
+                    }
+                  }}
+                  inputType='secondary'
+                />
+              )}
+            </div>
             <Button
               disabled={!!inAdd || (!!max && max === values.length)}
               className='add-button'
@@ -232,7 +240,7 @@ const StringListBuilder: React.FC<IProps> = ({
               styleType='secondary'
             >
               <Icon name='plus' />
-              {addTitle}
+              {addTitle && <span className='text'>{addTitle}</span>}
             </Button>
           </div>
         )}

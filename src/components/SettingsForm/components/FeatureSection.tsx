@@ -169,8 +169,7 @@ const FeatureSectionStyled = styled.div`
     font-family: Rubik;
     min-width: 280px;
     font-size: 12px;
-    margin-left: 30px;
-    margin-bottom: 30px;
+    transform: translate(-8px,-15px);
   }
 
   & div.group-articles > p {

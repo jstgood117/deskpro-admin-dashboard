@@ -32,7 +32,9 @@ const elementsSelector: {
     <StyledCheckbox
       className='form-checkbox'
       id={props.id}
-      checked={props.formikProps.values[props.id].includes(props.value) ? true : false}
+      checked={
+        props.formikProps.values[props.id].includes(props.value) ? true : false
+      }
       value={props.value}
       onChange={event => {
         console.log(props.formikProps);
@@ -59,10 +61,12 @@ const elementsSelector: {
     />
   ),
   stringlist: props => (
-    <StringListBuilder
-      {...props}
-      values={props.formikProps.values[props.id]}
-    />
+    <div style={{ marginBottom: 16 }}>
+      <StringListBuilder
+        {...props}
+        values={props.formikProps.values[props.id]}
+      />
+    </div>
   ),
   units: props => {
     return (

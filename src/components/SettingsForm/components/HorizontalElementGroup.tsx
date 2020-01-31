@@ -5,25 +5,27 @@ import { GenericFormComponent } from '../GenericFormComponent';
 import FieldContainer from './FieldContainer';
 
 const HozizontalGroup = styled.div`
-margin-bottom:8px;
-position: relative;
-padding-left: 45px;
-display: flex;
-align-items: center;
-justify-content: flex-start;
-& .hidden {
-  display: none;
-}
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  & .hidden {
+    display: none;
+  }
 `;
 
 const HozizontalGroupCol = styled.div`
-& .hidden {
-  display: none;
-}
+  & .field-container {
+    margin-right: 8px;
+  }
+  & .hidden {
+    display: none;
+  }
 `;
 
 const HorizontalElementGroup: React.FC = (props: any) => {
-
   const enabled =
     !props.showOn || props.formikProps.values[props.showOn] === true;
 
@@ -32,11 +34,8 @@ const HorizontalElementGroup: React.FC = (props: any) => {
       {enabled &&
         props.elements.map((element: any, i: number) => (
           <HozizontalGroupCol key={i}>
-            { element.type === 'field' ? (
-              <FieldContainer
-                {...element}
-                formikProps={props.formikProps}
-              />
+            {element.type === 'field' ? (
+              <FieldContainer {...element} formikProps={props.formikProps} />
             ) : (
               <GenericFormComponent
                 {...element}
