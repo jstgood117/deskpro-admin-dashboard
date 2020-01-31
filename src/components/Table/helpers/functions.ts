@@ -12,7 +12,6 @@ export const onCheckboxChange = (
 ) => {
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
-    console.log(value, subRows);
     if (keys.includes(value)) {
       const ids: string[] = [];
       ids.push(value);
@@ -60,7 +59,6 @@ export const onSelectAllChange = (
   pageSize: number,
   data: any[]
 ) => {
-  console.log(data)
   if (!isChecked) {
     setChecked({});
     return true;

@@ -357,7 +357,6 @@ const Table: FC<Props> = ({
                               : false
                           }
                           onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                            console.log(e);
                             handleCheckboxChange(e, row.original.subRows);
                           }}
                         />
