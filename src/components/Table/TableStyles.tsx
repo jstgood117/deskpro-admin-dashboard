@@ -141,6 +141,11 @@ export const TableStyled = styled(dpstyle.div)`
             text-align: left;
             color: ${props => props.theme.staticColour};
             vertical-align: middle;
+            &.checkBox {
+              padding-right: 6px;
+              padding-left: 10px;
+              width: 16px;
+            }
             & img {
               width: 25px;
               height: 25px;

@@ -7,7 +7,7 @@ import {
   useExpanded,
   useGroupBy
 } from 'react-table';
-import { difference } from 'lodash';
+import _ from 'lodash';
 
 import { KeyValue } from '../../types';
 
@@ -40,7 +40,7 @@ const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
 
 const compareGroups = (group1: string[], group2: string[]) => {
   return (
-    group1.length === group2.length && difference(group1, group2).length === 0
+    group1.length === group2.length && _.difference(group1, group2).length === 0
   );
 };
 
@@ -195,8 +195,8 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    {hasActions && <th style={{ width: '30px' }} />}
-                    {headerGroup.headers.map(
+                    {hasActions && <th />}
+                    {_.sortBy(headerGroup.headers, 'index').map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
                           column.type.__typename === 'TableColumnId';
@@ -269,6 +269,17 @@ const Table: FC<Props> = ({
                       borderBottom: '1px solid #b0bbc3'
                     }}
                   >
+                    {hasActions && (
+                      <td className='checkBox'>
+                        <Checkbox
+                          value={row.groupByVal}
+                          checked={checked.hasOwnProperty(row.groupByVal)}
+                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            handleCheckboxChange(e, row.groupByVal);
+                          }}
+                        />
+                      </td>
+                    )}
                     <td
                       colSpan={1}
                       style={{
@@ -285,13 +296,6 @@ const Table: FC<Props> = ({
                           maxWidth: 310
                         }}
                       >
-                        {hasActions && (
-                          <Checkbox
-                            value={row.groupById}
-                            checked={false}
-                            onChange={e => e}
-                          />
-                        )}
                         <span
                           style={{
                             marginRight: 'auto',
@@ -315,7 +319,7 @@ const Table: FC<Props> = ({
                       </div>
                     </td>
                     <td
-                      colSpan={row.cells.length + 1}
+                      colSpan={row.cells.length}
                       style={{ backgroundImage: 'none' }}
                     />
                   </tr>
@@ -339,7 +343,6 @@ const Table: FC<Props> = ({
                     {hasActions && (
                       <td
                         style={{
-                          width: '30px',
                           paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
                         }}
                         className='checkBox'
@@ -359,36 +362,38 @@ const Table: FC<Props> = ({
                         />
                       </td>
                     )}
-                    {row.cells.map((cell: any, indexInner: number) => {
-                      const isIdColumn =
-                        cell.column.type.__typename === 'TableColumnId';
-                      return (
-                        <td
-                          className={
-                            (!actions || actions.length === 0) &&
-                            indexInner === 0
-                              ? 'firstColumn'
-                              : ''
-                          }
-                          key={indexInner}
-                          {...cell.getCellProps()}
-                          {...cell.row.getExpandedToggleProps({
-                            onClick: () => {},
-                            style: {
-                              textAlign: isIdColumn && 'right',
-                              verticalAlign: isIdColumn && 'bottom',
-                              paddingBottom: isIdColumn && '5px',
-                              paddingLeft: `${indexInner === 0 &&
-                                row.depth === 1 &&
-                                row.depth * 2}rem`,
-                              cursor: 'default'
+                    {_.sortBy(row.cells, 'column.index').map(
+                      (cell: any, indexInner: number) => {
+                        const isIdColumn =
+                          cell.column.type.__typename === 'TableColumnId';
+                        return (
+                          <td
+                            className={
+                              (!actions || actions.length === 0) &&
+                              indexInner === 0
+                                ? 'firstColumn'
+                                : ''
                             }
-                          })}
-                        >
-                          <TableData {...generateComponentProps(cell)} />
-                        </td>
-                      );
-                    })}
+                            key={indexInner}
+                            {...cell.getCellProps()}
+                            {...cell.row.getExpandedToggleProps({
+                              onClick: () => {},
+                              style: {
+                                textAlign: isIdColumn && 'right',
+                                verticalAlign: isIdColumn && 'bottom',
+                                paddingBottom: isIdColumn && '5px',
+                                paddingLeft: `${indexInner === 0 &&
+                                  row.depth === 1 &&
+                                  row.depth * 2}rem`,
+                                cursor: 'default'
+                              }
+                            })}
+                          >
+                            <TableData {...generateComponentProps(cell)} />
+                          </td>
+                        );
+                      }
+                    )}
                     <td>
                       <span className='action-buttons'>
                         {!checked.hasOwnProperty(
