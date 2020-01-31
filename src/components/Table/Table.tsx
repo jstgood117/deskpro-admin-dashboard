@@ -195,7 +195,15 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    {hasActions && <th />}
+                    {hasActions && (
+                      <th>
+                        <Checkbox
+                          checked={false}
+                          value={'all'}
+                          onChange={e => e}
+                        />
+                      </th>
+                    )}
                     {_.sortBy(headerGroup.headers, 'index').map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
@@ -258,9 +266,11 @@ const Table: FC<Props> = ({
                 )
               )}
             </thead>
+            {console.log(groupBy)}
             <tbody {...getTableBodyProps()}>
               {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
+                console.log(row.getToggleRowSelectedProps());
                 return row.isGrouped ? (
                   <tr
                     {...row.getRowProps()}
@@ -271,13 +281,7 @@ const Table: FC<Props> = ({
                   >
                     {hasActions && (
                       <td className='checkBox'>
-                        <Checkbox
-                          value={row.groupByVal}
-                          checked={checked.hasOwnProperty(row.groupByVal)}
-                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                            handleCheckboxChange(e, row.groupByVal);
-                          }}
-                        />
+                        <Checkbox {...row.getToggleRowSelectedProps()} />
                       </td>
                     )}
                     <td

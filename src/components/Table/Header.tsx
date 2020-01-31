@@ -176,12 +176,15 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const items = [{ link: 'All on the page' }, { link: 'All' }];
   const checkedIds = Object.keys(checked);
   const actions = ActionFactory(path);
+  // always show
+  const hasActions = true; // actions && actions.length > 0
+
   return (
     <>
       <TableStyled>
         <TableHeader>
           <AllCheckStyle>
-            {actions && actions.length > 0 && data.length > 0 && (
+            {hasActions && data.length > 0 && (
               <Checkbox
                 checked={isAllChecked}
                 opened={opened}
