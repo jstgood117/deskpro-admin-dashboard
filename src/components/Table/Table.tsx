@@ -70,6 +70,13 @@ const Table: FC<Props> = ({
   sortBy,
   groupBy
 }) => {
+  const [checked, setChecked] = useState<object>({});
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(100);
+  const [totalRecords, setTotalRecords] = useState<number>(0);
+  const actions = ActionFactory(path);
+  const hasActions = actions && actions.length > 0;
+
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
@@ -87,7 +94,6 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
-    toggleExpanded,
     state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
   } = useTable(
     tableParams,
@@ -114,15 +120,7 @@ const Table: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
 
-  /*
-  useEffect(() => {
-    if (onGroupByChange && !compareGroups(groupBy, groupByInfo)) {
-      onGroupByChange(groupByInfo);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [groupByInfo]);
-  */
-
+  // Handle incoming group by
   useEffect(() => {
     if (!compareGroups(groupBy, groupByInfo)) {
       groupByInfo.map((column: any) => toggleGroupBy(column, false));
@@ -138,17 +136,15 @@ const Table: FC<Props> = ({
   }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
-    if (fetchData) {
-      fetchData();
-    }
-  }, [fetchData, pageIndex, pageSize]);
-
-  const [checked, setChecked] = useState<object>({});
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(100);
-  const [totalRecords, setTotalRecords] = useState<number>(0);
-  const actions = ActionFactory(path);
-  const hasActions = actions && actions.length > 0;
+    // disable auto expaned
+    // page.map((row: { canExpand: any; id: any }) => {
+    //   if (row.canExpand) toggleExpanded(row.id, true);
+    //   return true;
+    // });
+    setChecked({});
+    setTotalRecords(data.length);
+    // eslint-disable-next-line
+  }, [pageIndex, data, page]);
 
   const handleCheckboxChange = async (
     event: SyntheticEvent<HTMLInputElement>,
@@ -168,15 +164,6 @@ const Table: FC<Props> = ({
     setCurrentPage(1);
     gotoPage(0);
   };
-  useEffect(() => {
-    page.map((row: { canExpand: any; id: any }) => {
-      if (row.canExpand) toggleExpanded(row.id, true);
-      return true;
-    });
-    setChecked({});
-    setTotalRecords(data.length);
-    // eslint-disable-next-line
-  }, [pageIndex, data, page]);
 
   return (
     <>
@@ -440,3 +427,12 @@ const Table: FC<Props> = ({
 };
 
 export default Table;
+
+/*
+  useEffect(() => {
+    if (onGroupByChange && !compareGroups(groupBy, groupByInfo)) {
+      onGroupByChange(groupByInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groupByInfo]);
+  */
