@@ -62,12 +62,21 @@ const Table: FC<Props> = ({
   tableType,
   sortBy
 }) => {
+  const defaultColumn = useMemo(
+    () => ({
+      minWidth: 30,
+      width: 250,
+      maxWidth: 400,
+    }),
+    []
+  );
 
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
     data,
     controlledPageCount,
+    defaultColumn
   );
 
   const {

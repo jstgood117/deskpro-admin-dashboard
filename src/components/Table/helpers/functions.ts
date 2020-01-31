@@ -2,7 +2,13 @@ import _ from 'lodash';
 import { KeyValue } from '../../../types';
 
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
-import { objectUseState, TableParams, TableType, ColumnMeta } from '../types';
+import {
+  objectUseState,
+  TableParams,
+  TableType,
+  ColumnMeta,
+  DefaultColumnType
+} from '../types';
 
 export const onCheckboxChange = (
   value: string,
@@ -105,8 +111,10 @@ export const generateTableParams = (
   tableType: TableType,
   columns: any[],
   data: KeyValue[],
-  controlledPageCount: number
+  controlledPageCount: number,
+  column?: DefaultColumnType
 ): TableParams => {
+  const defaultColumn = column? column : {};
   return tableType === 'async'
     ? {
         columns,
@@ -116,7 +124,8 @@ export const generateTableParams = (
           pageSize: 100
         },
         manualPagination: true,
-        pageCount: controlledPageCount
+        pageCount: controlledPageCount,
+        defaultColumn
       }
     : {
         columns,
@@ -124,7 +133,8 @@ export const generateTableParams = (
         initialState: {
           pageIndex: 0,
           pageSize: 100
-        }
+        },
+        defaultColumn
       };
 };
 
@@ -146,9 +156,12 @@ export const getCSVCellFormatOnType = (
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return values[columnProps.valuesArray.dataPath] && values[columnProps.valuesArray.dataPath]
-        .map((item: any) => item.title)
-        .join(', ');
+      return (
+        values[columnProps.valuesArray.dataPath] &&
+        values[columnProps.valuesArray.dataPath]
+          .map((item: any) => item.title)
+          .join(', ')
+      );
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
