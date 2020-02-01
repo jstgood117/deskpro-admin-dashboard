@@ -190,7 +190,7 @@ const Table: FC<Props> = ({
                   {...(headerGroup.getHeaderGroupProps &&
                     headerGroup.getHeaderGroupProps())}
                 >
-                  {1 && (
+                  {actions && actions.length > 0 && (
                     <th style={{ width: '44px' }} />
                   )}
                   {headerGroup.headers.map(
@@ -270,7 +270,7 @@ const Table: FC<Props> = ({
                       : '')
                   }
                 >
-                  {1 && (
+                  {actions && actions.length > 0 && (
                     <td
                       style={{
                         width: '44px',
