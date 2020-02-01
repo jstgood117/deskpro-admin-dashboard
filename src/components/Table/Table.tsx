@@ -64,9 +64,9 @@ const Table: FC<Props> = ({
 }) => {
   const defaultColumn = useMemo(
     () => ({
-      // minWidth: 30,
-      // width: 250,
-      // maxWidth: 400,
+      minWidth: 30,
+      width: 150,
+      maxWidth: 400,
     }),
     []
   );
