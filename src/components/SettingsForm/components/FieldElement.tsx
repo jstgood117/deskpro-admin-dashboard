@@ -35,7 +35,6 @@ const elementsSelector: {
       checked={props.formikProps.values[props.id].includes(props.value) ? true : false}
       value={props.value}
       onChange={event => {
-        console.log(props.formikProps);
         props.formikProps.handleChange(event);
       }}
     />
@@ -45,6 +44,7 @@ const elementsSelector: {
       id={props.id}
       name={props.id}
       value={props.formikProps.values[props.id]}
+      placeholder={props.id}
       inputType='primary'
       onChange={event => {
         props.formikProps.handleChange(event);

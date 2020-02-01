@@ -20,8 +20,7 @@ describe('HelpDesk', () => {
   beforeEach(() => {
     props = {
       logo: Kayako,
-      title: 'title',
-      description: 'description'
+      title: 'title'
     };
   });
 

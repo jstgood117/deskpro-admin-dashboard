@@ -76,6 +76,7 @@ import { ReactComponent as IconSortDownActive } from '../../assets/svg/icons/ic-
 import { ReactComponent as IconSortUpActive } from '../../assets/svg/icons/ic-sort-up-active.svg';
 import { ReactComponent as IconGroupingUp } from '../../assets/svg/icons/ic-grouping-up.svg';
 import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-grouping-down.svg';
+import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
 
 export interface IProps {
   name: string;
@@ -235,6 +236,8 @@ const Icon: FC<IProps> = props => {
       return <IconGroupingUp />;
     case 'ic-grouping-down':
       return <IconGroupingDown />;
+    case 'ic-save':
+      return <IconSave />;
     case 'info-text':
       return (
         <Tooltip content='Info text' styleType='light' placement='bottom'>
