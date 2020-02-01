@@ -9,10 +9,10 @@ export const onCheckboxChange = (
   checked: object,
   setChecked: objectUseState,
   subRows: any[],
-  options?: any
+  options: any = {}
 ) => {
   let selected: any[] = [];
-  let { isGrouped, groupedRows } = options;
+  let { isGrouped = false, groupedRows } = options;
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
     if (keys.includes(value)) {
