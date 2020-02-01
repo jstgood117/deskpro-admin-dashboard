@@ -8,8 +8,11 @@ export const onCheckboxChange = (
   value: string,
   checked: object,
   setChecked: objectUseState,
-  subRows: any[]
+  subRows: any[],
+  options?: any
 ) => {
+  let selected: any[] = [];
+  let { isGrouped, groupedRows } = options;
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
     if (keys.includes(value)) {
@@ -37,17 +40,39 @@ export const onCheckboxChange = (
       return true;
     }
   } else {
+    let newIds: KeyValue = {};
     if (keys.includes(value)) {
-      const newIds = keys
+      newIds = keys
         .filter(_id => _id !== value)
         .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
-      setChecked(newIds);
     } else {
-      setChecked({
+      newIds = {
         ...checked,
         [value]: true
+      };
+    }
+    if (isGrouped) {
+      selected = Object.keys(newIds);
+      groupedRows = groupedRows.reduce(
+        (o: any, group: any) => ({
+          ...o,
+          [group.id]: group.subRows.map((r: any) => r.original.id)
+        }),
+        {}
+      );
+      Object.keys(groupedRows).forEach((groupId: string) => {
+        const group = groupedRows[groupId];
+        if (_.difference(group, selected).length === 0) {
+          newIds = {
+            ...newIds,
+            [groupId]: true
+          };
+        } else {
+          delete newIds[groupId];
+        }
       });
     }
+    setChecked(newIds);
     return true;
   }
 };

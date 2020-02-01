@@ -12,17 +12,16 @@ import _ from 'lodash';
 import { KeyValue } from '../../types';
 
 import Pagination, { IPageChange } from '../Pagination/Pagination';
-import Checkbox from '../Checkbox';
 import Icon from '../Icon';
-import TableData from '../TableData';
-import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
-import { ActionFactory } from '../../services/actions/ActionFactory';
+// import { ActionFactory } from '../../services/actions/ActionFactory';
+import TableTr from './TableTr';
+import TableTrGroup from './TableTrGroup';
 
 // Returns `true` on equal sorts
 const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
@@ -75,7 +74,7 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
-  const actions = ActionFactory(path);
+  // const actions = ActionFactory(path);
   // always show checkboxes
   const hasActions = true; // actions && actions.length > 0;
 
@@ -93,6 +92,7 @@ const Table: FC<Props> = ({
     getTableBodyProps,
     headerGroups,
     prepareRow,
+    groupedRows,
     rows,
     page,
     setPageSize,
@@ -107,13 +107,6 @@ const Table: FC<Props> = ({
     usePagination,
     useRowSelect
   ) as any;
-
-  /*
-  console.log('sortByInfo', sortByInfo);
-  console.log('page', page);
-  console.log('rows', rows);
-  console.log('rest', rest);
-  */
 
   // Process internal sort change
   useEffect(() => {
@@ -166,7 +159,10 @@ const Table: FC<Props> = ({
     event: SyntheticEvent<HTMLInputElement>,
     subRows: API_ChatDepartment[]
   ) => {
-    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows);
+    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows, {
+      isGrouped: groupBy && groupBy.length > 0,
+      groupedRows
+    });
   };
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
@@ -174,9 +170,9 @@ const Table: FC<Props> = ({
     gotoPage(datas.currentPage - 1);
   };
 
-  const handleChangeRowsPerPage = (rows: number) => {
-    setPageSize(rows);
-    setRowsPerPage(rows);
+  const handleChangeRowsPerPage = (_rows: number) => {
+    setPageSize(_rows);
+    setRowsPerPage(_rows);
     setCurrentPage(1);
     gotoPage(0);
   };
@@ -251,19 +247,6 @@ const Table: FC<Props> = ({
                                   </span>
                                 </Tooltip>
                               )}
-                              {/*column.canGroupBy ? (
-                                // If the column can be grouped, let's add a toggle
-                                <span
-                                  {...column.getGroupByToggleProps()}
-                                  style={{ display: 'flex', marginLeft: 5 }}
-                                >
-                                  {column.isGrouped ? (
-                                    <Icon name='group' />
-                                  ) : (
-                                    <Icon name='group' />
-                                  )}
-                                </span>
-                                  ) : null*/}
                             </StyledTh>
                           </th>
                         );
@@ -275,190 +258,30 @@ const Table: FC<Props> = ({
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map((row: KeyValue, indexOuter: number) => {
+              {_.sortBy(
+                groupBy && groupBy.length
+                  ? groupedRows.filter((r: any) => r.isGrouped)
+                  : page,
+                'index'
+              ).map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return row.isGrouped ? (
-                  <tr
-                    {...row.getRowProps()}
-                    style={{
-                      borderBottom: '1px solid #b0bbc3'
-                    }}
-                  >
-                    {hasActions && (
-                      <td
-                        className='checkBox'
-                        style={{ backgroundImage: 'none' }}
-                      >
-                        <Checkbox
-                          value={row.id}
-                          checked={checked.hasOwnProperty(row.id)}
-                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                            handleCheckboxChange(e, row.subRows);
-                          }}
-                        />
-                      </td>
-                    )}
-                    <td
-                      colSpan={1}
-                      style={{
-                        backgroundImage: 'none',
-                        padding: '4px 0px 4px 10px'
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          maxWidth: 310
-                        }}
-                      >
-                        <span
-                          {...row.getExpandedToggleProps()}
-                          style={{
-                            marginRight: 'auto',
-                            marginLeft: 0, // hasActions ? 16 : 0,
-                            color: '#1C3E55',
-                            fontFamily: 'Rubik',
-                            fontWeight: 500,
-                            fontSize: 15,
-                            lineHeight: '150%',
-                            cursor: 'pointer'
-                          }}
-                        >
-                          {row.groupByVal} ({row.subRows.length})
-                        </span>
-                        <span style={{ marginLeft: 10 }}>
-                          {row.isExpanded ? (
-                            <Icon name='up' />
-                          ) : (
-                            <Icon name='down' />
-                          )}
-                        </span>
-                      </div>
-                    </td>
-                    <td
-                      colSpan={row.cells.length}
-                      style={{ backgroundImage: 'none' }}
-                    />
-                  </tr>
-                ) : (
-                  <tr
+                  <TableTrGroup
                     key={indexOuter}
-                    {...row.getRowProps()}
-                    className={
-                      (checked.hasOwnProperty(
-                        (row.original as KeyValue).id.toString()
-                      )
-                        ? 'row--selected '
-                        : ' ') +
-                      (row.depth === 1 || row.subRows.length > 0
-                        ? hasActions
-                          ? 'has-checkboxes'
-                          : 'non-checkboxes'
-                        : '')
-                    }
-                  >
-                    {hasActions && (
-                      <td
-                        style={{
-                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
-                        }}
-                        className='checkBox'
-                      >
-                        <Checkbox
-                          value={(row.original as KeyValue).id}
-                          checked={
-                            checked.hasOwnProperty(
-                              (row.original as KeyValue).id.toString()
-                            )
-                              ? true
-                              : false
-                          }
-                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                            handleCheckboxChange(e, row.original.subRows);
-                          }}
-                        />
-                      </td>
-                    )}
-                    {_.sortBy(row.cells, 'column.index').map(
-                      (cell: any, indexInner: number) => {
-                        const isIdColumn =
-                          cell.column.type.__typename === 'TableColumnId';
-                        return (
-                          <td
-                            className={
-                              (!actions || actions.length === 0) &&
-                              indexInner === 0
-                                ? 'firstColumn'
-                                : ''
-                            }
-                            key={indexInner}
-                            {...cell.getCellProps()}
-                            {...cell.row.getExpandedToggleProps({
-                              onClick: () => {},
-                              style: {
-                                textAlign: isIdColumn && 'right',
-                                verticalAlign: isIdColumn && 'bottom',
-                                paddingBottom: isIdColumn && '5px',
-                                paddingLeft: `${indexInner === 0 &&
-                                  row.depth === 1 &&
-                                  row.depth * 2}rem`,
-                                cursor: 'default'
-                              }
-                            })}
-                          >
-                            {cell.column.id === 'admin_common.col.teams' ? (
-                              <TableData
-                                {...generateComponentProps({
-                                  ...cell,
-                                  column: {
-                                    ...cell.column,
-                                    type: {
-                                      __typename:
-                                        'TableColumnTicketDepartmentList',
-                                      valuesArray: {
-                                        dataPath: 'agent_teams'
-                                      }
-                                    }
-                                  },
-                                  row: {
-                                    ...cell.row,
-                                    original: {
-                                      ...cell.row.original,
-                                      agent_teams: [
-                                        { id: cell.value, title: cell.value }
-                                      ]
-                                    }
-                                  },
-                                  value: [{ id: cell.value, title: cell.value }]
-                                })}
-                              />
-                            ) : (
-                              <TableData {...generateComponentProps(cell)} />
-                            )}
-                          </td>
-                        );
-                      }
-                    )}
-                    <td className='td-action-buttons'>
-                      <span className='action-buttons'>
-                        {!checked.hasOwnProperty(
-                          (row.original as KeyValue).id.toString()
-                        ) && (
-                          <TableData
-                            type='action_buttons'
-                            props={{
-                              onPencilClick: () => {},
-                              onDuplicateClick: () => {},
-                              onTrashClick: () => {}
-                            }}
-                          />
-                        )}
-                      </span>
-                    </td>
-                  </tr>
+                    row={row}
+                    checked={checked}
+                    hasActions={hasActions}
+                    prepareRow={prepareRow}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                ) : (
+                  <TableTr
+                    key={indexOuter}
+                    row={row}
+                    checked={checked}
+                    hasActions={hasActions}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
                 );
               })}
             </tbody>
