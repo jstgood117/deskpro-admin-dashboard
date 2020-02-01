@@ -108,6 +108,13 @@ const Table: FC<Props> = ({
     useRowSelect
   ) as any;
 
+  /*
+  console.log('sortByInfo', sortByInfo);
+  console.log('page', page);
+  console.log('rows', rows);
+  console.log('rest', rest);
+  */
+
   // Process internal sort change
   useEffect(() => {
     if (onSortChange && !compareSorts(sortBy, sortByInfo)) {

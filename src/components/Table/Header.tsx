@@ -2,6 +2,7 @@ import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { withApollo } from '@apollo/react-hoc';
 import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
+import { without } from 'lodash';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { runAction, querySelectOptions } from '../../services/actions/run';
 // import { ActionFactory } from '../../services/actions/ActionFactory';
@@ -178,6 +179,9 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
   const checkedIds = Object.keys(checked);
+  const groupIds = rows
+    .filter((row: any) => row.isGrouped)
+    .map((row: any) => row.id);
   // const actions = ActionFactory(path);
   // always show
   const hasActions = true; // actions && actions.length > 0
@@ -205,7 +209,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
             )}
             {Object.keys(checked).length > 0 && (
               <span className='selected-text'>
-                {Object.keys(checked).length} Selected
+                {without(Object.keys(checked), ...groupIds).length} Selected
               </span>
             )}
             {Object.keys(checked).length > 0 && (
