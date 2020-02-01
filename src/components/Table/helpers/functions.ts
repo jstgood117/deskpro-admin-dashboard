@@ -12,7 +12,8 @@ export const onCheckboxChange = (
   options: any = {}
 ) => {
   let selected: any[] = [];
-  let { isGrouped = false, groupedRows } = options;
+  let { groupedRows } = options;
+  const isGrouped = !!options.isGrouped;
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
     if (keys.includes(value)) {

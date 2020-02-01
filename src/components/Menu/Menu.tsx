@@ -205,7 +205,7 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
           className={`menu-btn ${selected ? 'selected' : ''}`}
           openedClassName='selected'
           openedStyle={{ background: '#D2D8DD' }}
-          menu={
+          menu={(
             <MenuSub
               menuItems={menuItems}
               onSelect={onSelect}
@@ -213,7 +213,7 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
               name={props.name}
               subMenuDirection={subMenuDirection}
             />
-          }
+          )}
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
