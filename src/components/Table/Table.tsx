@@ -177,6 +177,8 @@ const Table: FC<Props> = ({
     gotoPage(0);
   };
 
+  console.log(page);
+
   return (
     <>
       <TableStyled>
@@ -258,11 +260,13 @@ const Table: FC<Props> = ({
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {_.sortBy(
+              {Array.from(
                 groupBy && groupBy.length
-                  ? groupedRows.filter((r: any) => r.isGrouped)
-                  : page,
-                'index'
+                  ? _.sortBy(
+                      groupedRows.filter((r: any) => r.isGrouped),
+                      'index'
+                    )
+                  : page
               ).map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return row.isGrouped ? (
