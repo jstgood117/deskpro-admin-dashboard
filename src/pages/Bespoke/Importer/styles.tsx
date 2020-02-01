@@ -65,6 +65,9 @@ export const Container = styled.div`
     padding-left: 45px;
     padding-bottom: 20px;
   }
+  .import-btn {
+    padding-left: 100px;
+  }
   .footer {
     border-top: 1px solid ${props => props.theme.hoverColour};
     position: absolute;
