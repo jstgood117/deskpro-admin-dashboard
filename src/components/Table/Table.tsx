@@ -177,8 +177,6 @@ const Table: FC<Props> = ({
     gotoPage(0);
   };
 
-  console.log(page);
-
   return (
     <>
       <TableStyled>

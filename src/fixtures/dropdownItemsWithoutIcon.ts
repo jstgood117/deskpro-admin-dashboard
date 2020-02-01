@@ -52,10 +52,22 @@ export const testGroupItems: IMenuItemProps[] = [
   {
     name: 'Sort group',
     subItems: [
-      { name: 'Name' },
-      { name: 'Date created' },
-      { name: 'Number of agents' },
-      { name: 'Number of tickets' }
-    ],
+      { name: 'Name', column: 'admin_common.col.name', sortable: true },
+      {
+        name: 'Date created',
+        column: 'admin_common.col.date_created',
+        sortable: true
+      },
+      {
+        name: 'Number of agents',
+        column: 'admin_common.col.agents',
+        sortable: true
+      },
+      {
+        name: 'Number of tickets',
+        column: 'admin_common.col.tickets',
+        sortable: true
+      }
+    ]
   }
 ];

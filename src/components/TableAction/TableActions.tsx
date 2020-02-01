@@ -20,7 +20,11 @@ import FilterBox from '../FilterBox';
 import FilterItem from '../FilterItem';
 import OrderableMenu from '../Menu/OrderableMenu';
 import Menu from '../Menu';
-import { generateViewList, generatSortMenuItems, generatFilterOptions } from './functions';
+import {
+  generateViewList,
+  generatSortMenuItems,
+  generatFilterOptions
+} from './functions';
 import { SortType } from '../Table/types';
 import { testGroupItems } from '../../resources/constants/constants';
 
@@ -88,12 +92,17 @@ const initialFilter: FilterProps[] = [
 const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
   display: flex;
   button {
-    color: ${props => (props.active || props.existing) && props.theme.activeColour};
+    color: ${props =>
+      (props.active || props.existing) && props.theme.activeColour};
     path {
-      fill: ${props => (props.active || props.existing) && props.theme.activeColour};
+      fill: ${props =>
+        (props.active || props.existing) && props.theme.activeColour};
     }
-    border: ${props => (props.active || props.existing) && `1px solid ${props.theme.activeColour}`};
-    background: ${props => (props.active || props.existing) && props.theme.hoverColour};
+    border: ${props =>
+      (props.active || props.existing) &&
+      `1px solid ${props.theme.activeColour}`};
+    background: ${props =>
+      (props.active || props.existing) && props.theme.hoverColour};
   }
   .add-btn {
     button {
@@ -120,13 +129,19 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   ...props
 }) => {
   const context: StandardTableContextValues = useContext(StandardTableContext);
-  const { onFilterChange, onSearchChange, filterDef, tableDef, initialColumnOrder } = context;
+  const {
+    onFilterChange,
+    onSearchChange,
+    filterDef,
+    tableDef,
+    initialColumnOrder
+  } = context;
 
   const { columnsViewList, checkedState } = generateViewList(tableDef);
 
-  const [Sort, setSortValue] = useState<{ link: string; label: string; desc?: boolean } | string>(
-    ''
-  );
+  const [Sort, setSortValue] = useState<
+    { link: string; label: string; desc?: boolean } | string
+  >('');
   const [searchValue, setSearchValue] = useState('');
   const [openedSort, clickButtonSort] = useState(false);
   const [openedFilter, clickOpenFilter] = useState(false);
@@ -136,13 +151,19 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   const [value, setValue] = useState();
   const [groupValue, setGroupValue] = useState();
 
-  const [sortMenuItems, setSortMenuItems] = useState(generatSortMenuItems(tableDef, intl));
+  const [sortMenuItems, setSortMenuItems] = useState(
+    generatSortMenuItems(tableDef, intl)
+  );
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [initialChecked] = useState<KeyValue>(checkedState);
-  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(initialColumnOrder);
+  const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>(
+    initialColumnOrder
+  );
   const [resetColumnOrder] = useState<IMenuItemProps[]>(columnsViewList);
   useEffect(() => {
-    setFilters([{ property: '', operatorName: '', value: [''], applied: false }]);
+    setFilters([
+      { property: '', operatorName: '', value: [''], applied: false }
+    ]);
   }, []);
 
   useEffect(() => {
@@ -166,9 +187,11 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
       }
       return true;
     });
-    const newSortMenuItems = generatSortMenuItems(tableDef, intl).filter(obj => {
-      return showedColumns.includes(obj.link);
-    });
+    const newSortMenuItems = generatSortMenuItems(tableDef, intl).filter(
+      obj => {
+        return showedColumns.includes(obj.link);
+      }
+    );
     setSortMenuItems(newSortMenuItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [columnOrder, onOrderChange]);
@@ -184,13 +207,16 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   }, [intl, sortBy]);
 
   const getFilterTitle = (path: string) => {
-    const match = filterDef.find((_filter: FilterMeta) => _filter.path === path);
+    const match = filterDef.find(
+      (_filter: FilterMeta) => _filter.path === path
+    );
     return match ? match.title : path;
   };
 
   const applyFilter = () => {
     internalFilters.map(filter => {
-      if (filter.operatorName && filter.property && filter.value) filter.applied = true;
+      if (filter.operatorName && filter.property && filter.value)
+        filter.applied = true;
       return true;
     });
     if (setFilters) {
@@ -263,14 +289,22 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   };
 
   const handleGroupChange = (val: any) => {
+    if (val.sortable) {
+      const { name: label, column: link } = val;
+      return handleSortChange({ link, label });
+    }
     const { column } = val;
     onGroupByChange([column]);
     setGroupValue(val);
   };
 
-  const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), [internalFilters]);
+  const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), [
+    internalFilters
+  ]);
 
-  const handleSearchChange = (event: React.SyntheticEvent<HTMLInputElement>) => {
+  const handleSearchChange = (
+    event: React.SyntheticEvent<HTMLInputElement>
+  ) => {
     const searchInputValue = event.currentTarget.value;
     setSearchValue(searchInputValue);
 
@@ -285,7 +319,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
       }
       if (internalFilters.length === 0) {
         if (setFilters) {
-          setFilters([{ property: '', operatorName: '', value: [''], applied: false }]);
+          setFilters([
+            { property: '', operatorName: '', value: [''], applied: false }
+          ]);
         }
       } else {
         if (setFilters) {
@@ -317,7 +353,10 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
           </FlexStyled>
           {props.filterMenu && (
             <FlexStyled style={{ paddingLeft: 10, position: 'relative' }}>
-              <StyledFilterButton active={openedFilter} existing={internalFilters[0].applied}>
+              <StyledFilterButton
+                active={openedFilter}
+                existing={internalFilters[0].applied}
+              >
                 <Button
                   className='add-btn'
                   styleType='secondary'
@@ -329,7 +368,10 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                   <Icon name='filter' />
                   Filter{' '}
                   {internalFilters[0].applied &&
-                    `(${internalFilters.filter(filter => filter.applied === true).length})`}
+                    `(${
+                      internalFilters.filter(filter => filter.applied === true)
+                        .length
+                    })`}
                 </Button>
                 {internalFilters[0].applied && (
                   <Button
@@ -404,7 +446,9 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                 items={sortMenuItems}
                 dropdownValue={Sort}
                 onSelect={handleSortChange}
-                name={typeof Sort !== 'string' && Sort.desc ? 'sort-desc' : 'sort'}
+                name={
+                  typeof Sort !== 'string' && Sort.desc ? 'sort-desc' : 'sort'
+                }
               >
                 <Icon name='sort' />
                 Sort

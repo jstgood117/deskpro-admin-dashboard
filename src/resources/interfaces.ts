@@ -93,6 +93,7 @@ export interface IMenuItemProps {
   subItems?: IMenuItemProps[];
   icon?: string;
   sortable?: boolean;
+  sort?: 'asc' | 'desc';
 }
 
 export interface ITableColor {

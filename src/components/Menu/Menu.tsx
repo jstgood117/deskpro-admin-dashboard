@@ -151,10 +151,16 @@ const menuSub: FC<IMenuProps & WrappedComponentProps> = ({
                       {intl.formatMessage({ id: item.name })}
                       {name === 'groupSub' && (
                         <GrouppingWrapper>
-                          <span style={{ display: 'flex' }} onClick={() => {}}>
+                          <span
+                            style={{ display: 'flex' }}
+                            onClick={() => onSelect({ ...item, sort: 'desc' })}
+                          >
                             <Icon name='ic-grouping-up' />
                           </span>
-                          <span style={{ display: 'flex' }} onClick={() => {}}>
+                          <span
+                            style={{ display: 'flex' }}
+                            onClick={() => onSelect({ ...item, sort: 'asc' })}
+                          >
                             <Icon name='ic-grouping-down' />
                           </span>
                         </GrouppingWrapper>
@@ -199,7 +205,15 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
           className={`menu-btn ${selected ? 'selected' : ''}`}
           openedClassName='selected'
           openedStyle={{ background: '#D2D8DD' }}
-          menu={<MenuSub menuItems={menuItems} onSelect={onSelect} value={value} name={props.name} subMenuDirection={subMenuDirection}/>}
+          menu={
+            <MenuSub
+              menuItems={menuItems}
+              onSelect={onSelect}
+              value={value}
+              name={props.name}
+              subMenuDirection={subMenuDirection}
+            />
+          }
           positionOptions={{
             position: 'bottom',
             vAlign: 'top',
