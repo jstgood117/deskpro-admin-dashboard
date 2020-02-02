@@ -57741,7 +57741,6 @@ export default [
         __typename: 'AgentSub',
         subRows: []
       },
-
       {
         id: '6446',
         depth: 1,
@@ -134306,4 +134305,4 @@ export default [
       }
     ]
   }
-];
+] as any[];

@@ -1,6 +1,6 @@
 export const orderByFn = (
   data: any[],
-  sortFunction: ((a: any, b: any) => number)[],
+  sortFunction: ((a: any, b: any, col?: string) => number)[],
   isDesc: boolean[]
 ) => {
 
