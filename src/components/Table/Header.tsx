@@ -5,7 +5,7 @@ import { CSVLink } from 'react-csv';
 import { without } from 'lodash';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { runAction, querySelectOptions } from '../../services/actions/run';
-// import { ActionFactory } from '../../services/actions/ActionFactory';
+import { ActionFactory } from '../../services/actions/ActionFactory';
 import { ActionsType } from '../../services/actions/types';
 import { KeyValue, IOptions } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
@@ -182,9 +182,8 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const groupIds = rows
     .filter((row: any) => row.isGrouped)
     .map((row: any) => row.id);
-  // const actions = ActionFactory(path);
-  // always show
-  const hasActions = true; // actions && actions.length > 0
+  const actions = ActionFactory(path);
+  const hasActions = actions && actions.length > 0;
 
   return (
     <>
