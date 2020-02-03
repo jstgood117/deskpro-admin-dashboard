@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 
-const FeatureSectionStyled = styled.div`
+export const FeatureSectionStyled = styled.div`
   width: 974px;
 
   & > h1 {

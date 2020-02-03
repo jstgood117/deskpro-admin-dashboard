@@ -26,6 +26,7 @@ export type Props = {
   errorMessage?: string;
   showClear?: boolean;
   inputType: InputStyleType;
+  placeholder?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Input: FC<Props> = ({
@@ -35,6 +36,7 @@ const Input: FC<Props> = ({
   hasError,
   errorMessage,
   inputType,
+  placeholder,
   ...props
 }) => {
   const [hasValue, setHasValue] = useState(false);
@@ -70,6 +72,7 @@ const Input: FC<Props> = ({
             }}
             {...props}
             inputType={inputType}
+            placeholder={placeholder}
           />
           {props.showClear && (hasValue || hasFocus) && (
             <ButtonClear onClick={onClear} className='close-icon'>
@@ -101,6 +104,7 @@ const Input: FC<Props> = ({
             }}
             {...props}
             inputType={inputType}
+            placeholder={placeholder}
           />
           {props.showClear && (hasValue || hasFocus) && (
             <ButtonClear onClick={onClear} className='close-icon'>
