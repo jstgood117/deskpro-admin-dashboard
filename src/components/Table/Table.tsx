@@ -1,29 +1,26 @@
-import React, { FC, SyntheticEvent, useState, useEffect, useMemo } from 'react';
+import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import {
   useTable,
   useSortBy,
   usePagination,
   useRowSelect,
-  useExpanded,
-  useFlexLayout,
-  useResizeColumns
+  useExpanded
 } from 'react-table';
 
-import Icon from '../Icon';
-import Header from './Header';
-import Checkbox from '../Checkbox';
-import Tooltip from '../Tooltip';
-import TableData from '../TableData';
-import Pagination, { IPageChange } from '../Pagination/Pagination';
-import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
-
-import { ActionFactory } from '../../services/actions/ActionFactory';
-import { generateComponentProps } from '../TableData/apiToComponentAdapter';
-import { onCheckboxChange, generateTableParams } from './helpers/functions';
-
 import { KeyValue } from '../../types';
-import { API_ChatDepartment } from '../../codegen/types';
+
+import Pagination, { IPageChange } from '../Pagination/Pagination';
+import Checkbox from '../Checkbox';
+import Icon from '../Icon';
+import TableData from '../TableData';
+import { generateComponentProps } from '../TableData/apiToComponentAdapter';
+import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
+import { onCheckboxChange, generateTableParams, resizableTable } from './helpers/functions';
+import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
+import Tooltip from '../Tooltip';
+import { API_ChatDepartment } from '../../codegen/types';
+import { ActionFactory } from '../../services/actions/ActionFactory';
 
 // Returns `true` on equal sorts
 const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
@@ -62,21 +59,11 @@ const Table: FC<Props> = ({
   tableType,
   sortBy
 }) => {
-  const defaultColumn = useMemo(
-    () => ({
-      minWidth: 30,
-      width: 150,
-      maxWidth: 400,
-    }),
-    []
-  );
-
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
     data,
-    controlledPageCount,
-    defaultColumn
+    controlledPageCount
   );
 
   const {
@@ -95,9 +82,7 @@ const Table: FC<Props> = ({
     useExpanded,
     useSortBy,
     usePagination,
-    useRowSelect,
-    useFlexLayout,
-    useResizeColumns
+    useRowSelect
   ) as any;
 
   // Process internal sort change
@@ -127,6 +112,10 @@ const Table: FC<Props> = ({
       fetchData();
     }
   }, [fetchData, pageIndex, pageSize]);
+
+  useEffect(() => {
+    resizableTable();
+  });
 
   const [checked, setChecked] = useState<object>({});
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -163,200 +152,202 @@ const Table: FC<Props> = ({
   }, [pageIndex, data, page]);
 
   return (
-    <TableStyled>
-      <Header
-        setChecked={setChecked}
-        pageSize={pageSize}
-        pageIndex={pageIndex}
-        data={data}
-        checked={checked}
-        path={path}
-        page={page}
-        columns={columns}
-        totalRecords={totalRecords}
-        rowsPerPage={rowsPerPage}
-        currentPage={currentPage}
-        handleChangeCurrentPage={handleChangeCurrentPage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
-        refreshData={fetchData}
-      />
-      <div className='overflow'>
-        <table {...getTableProps()}>
-          <thead>
-            {headerGroups.map(
-              (headerGroup: HeaderGroup, indexOuter: number) => (
-                <tr
-                  key={indexOuter}
-                  {...(headerGroup.getHeaderGroupProps &&
-                    headerGroup.getHeaderGroupProps())}
-                >
-                  {actions && actions.length > 0 && (
-                    <th style={{ width: '44px' }} />
-                  )}
-                  {headerGroup.headers.map(
-                    (column: KeyValue, indexInner: number) => {
-                      const isIdColumn =
-                        column.type.__typename === 'TableColumnId';
+    <>
+      <TableStyled>
+        <Header
+          setChecked={setChecked}
+          pageSize={pageSize}
+          pageIndex={pageIndex}
+          data={data}
+          checked={checked}
+          path={path}
+          page={page}
+          columns={columns}
+          totalRecords={totalRecords}
+          rowsPerPage={rowsPerPage}
+          currentPage={currentPage}
+          handleChangeCurrentPage={handleChangeCurrentPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          refreshData={fetchData}
+        />
+        <div className='overflow'>
+          <table {...getTableProps()}>
+            <thead>
+              {headerGroups.map(
+                (headerGroup: HeaderGroup, indexOuter: number) => (
+                  <tr
+                    key={indexOuter}
+                    {...(headerGroup.getHeaderGroupProps &&
+                      headerGroup.getHeaderGroupProps())}
+                  >
+                    {actions && actions.length > 0 && (
+                      <th style={{ width: '30px' }} />
+                    )}
+                    {headerGroup.headers.map(
+                      (column: KeyValue, indexInner: number) => {
+                        const isIdColumn =
+                          column.type.__typename === 'TableColumnId';
 
-                      return (
-                        <th
-                          key={indexInner}
-                          {...column.getHeaderProps()}
-                          className={`${column.isSorted ? 'sorted' : ''} ${isIdColumn ? 'id-column' : ''}`}
-                        >
-                          <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
-                            {column.render('Header')}
-                            {column.isSorted &&
-                              (column.isSortedDesc ? (
-                                <span className='sort-icon'>
-                                  <Icon name='ic-sort-up-active' />
-                                </span>
-                              ) : (
-                                  <span className='sort-icon'>
-                                    <Icon name='ic-sort-down-active' />
-                                  </span>
-                                ))}
-                            {column.isSorted && (
-                              <Tooltip
-                                content='Filter'
-                                styleType='dark'
-                                placement='bottom'
-                              >
-                                <span className='filter-icon'>
-                                  <Icon name='filter' />
-                                </span>
-                              </Tooltip>
-                            )}
-                          </StyledTh>
-                          <div
-                            {...column.getResizerProps()}
-                            className='resizer'
-                            style={{ cursor: 'col-resize' }}
-                          />
-                        </th>
-                      );
-                    }
-                  )}
-                  <th style={{ width: '126px' }} />
-                </tr>
-              ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {page.map((row: KeyValue, indexOuter: number) => {
-              prepareRow(row);
-              return (
-                <tr
-                  key={indexOuter}
-                  {...row.getRowProps()}
-                  className={
-                    (row.depth === 1
-                      ? (page[indexOuter + 1] &&
-                        page[indexOuter + 1].depth === 0) ||
-                        indexOuter === page.length - 1
-                        ? 'isLastSubRow '
-                        : 'subrow '
-                      : row.subRows.length > 0 && row.isExpanded
-                        ? 'hasSubRows '
-                        : ' ') +
-                    (checked.hasOwnProperty(
-                      (row.original as KeyValue).id.toString()
-                    )
-                      ? 'row--selected '
-                      : ' ') +
-                    (row.depth === 1 || row.subRows.length > 0
-                      ? actions && actions.length > 0
-                        ? 'has-checkboxes'
-                        : 'non-checkboxes'
-                      : '')
-                  }
-                >
-                  {actions && actions.length > 0 && (
-                    <td
-                      style={{
-                        width: '44px',
-                        paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
-                      }}
-                      className='checkBox'
-                    >
-                      <Checkbox
-                        value={(row.original as KeyValue).id}
-                        checked={
-                          checked.hasOwnProperty(
-                            (row.original as KeyValue).id.toString()
-                          )
-                            ? true
-                            : false
-                        }
-                        onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                          handleCheckboxChange(e, row.original.subRows);
-                        }}
-                      />
-                    </td>
-                  )}
-                  {row.cells.map((cell: any, indexInner: number) => {
-                    const isIdColumn =
-                      cell.column.type.__typename === 'TableColumnId';
-                    return (
-                      <td
-                        key={indexInner}
-                        {...cell.getCellProps()}
-                        className={
-                          (!actions || actions.length === 0) &&
-                            indexInner === 0
-                            ? 'firstColumn'
-                            : ''
-                        }
-                      // {...cell.row.getExpandedToggleProps({
-                      //   onClick: () => { },
-                      //   style: {
-                      //     textAlign: isIdColumn && 'right',
-                      //     verticalAlign: isIdColumn && 'bottom',
-                      //     paddingBottom: isIdColumn && '5px',
-                      //     paddingLeft: `${indexInner === 0 &&
-                      //       row.depth === 1 &&
-                      //       row.depth * 2}rem`,
-                      //     cursor: 'default'
-                      //   }
-                      // })}
-                      >
-                        <TableData {...generateComponentProps(cell)} />
-                      </td>
-                    );
-                  })}
-                  <td style={{ width: '126px' }}>
-                    <span className='action-buttons'>
-                      {!checked.hasOwnProperty(
-                        (row.original as KeyValue).id.toString()
-                      ) && (
-                          <TableData
-                            type='action_buttons'
-                            props={{
-                              onPencilClick: () => { },
-                              onDuplicateClick: () => { },
-                              onTrashClick: () => { }
+                        return (
+                          <th
+                            key={indexInner}
+                            {...column.getHeaderProps()}
+                            style={{
+                              border: column.isSorted && '1px solid #D3D6D7',
+                              width: isIdColumn && '1px'
                             }}
-                          />
-                        )}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      {!loading && page.length > 0 && (
-        <StyledPagination>
-          <Pagination
-            totalRecords={totalRecords}
-            rowsPerPage={rowsPerPage}
-            currentPage={currentPage}
-            onChangePage={handleChangeCurrentPage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </StyledPagination>
-      )}
-    </TableStyled>
+                          >
+                            <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
+                              {column.render('Header')}
+                              {column.isSorted &&
+                                (column.isSortedDesc ? (
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-up-active' />
+                                  </span>
+                                ) : (
+                                    <span className='sort-icon'>
+                                      <Icon name='ic-sort-down-active' />
+                                    </span>
+                                  ))}
+                              {column.isSorted && (
+                                <Tooltip
+                                  content='Filter'
+                                  styleType='dark'
+                                  placement='bottom'
+                                >
+                                  <span className='filter-icon'>
+                                    <Icon name='filter' />
+                                  </span>
+                                </Tooltip>
+                              )}
+                            </StyledTh>
+                            <div className='resizer' />
+                          </th>
+                        );
+                      }
+                    )}
+                    <th style={{ width: '1px' }} />
+                  </tr>
+                )
+              )}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {page.map((row: KeyValue, indexOuter: number) => {
+                prepareRow(row);
+                return (
+                  <tr
+                    key={indexOuter}
+                    {...row.getRowProps()}
+                    className={
+                      (row.depth === 1
+                        ? (page[indexOuter + 1] &&
+                          page[indexOuter + 1].depth === 0) ||
+                          indexOuter === page.length - 1
+                          ? 'isLastSubRow '
+                          : 'subrow '
+                        : row.subRows.length > 0 && row.isExpanded
+                          ? 'hasSubRows '
+                          : ' ') +
+                      (checked.hasOwnProperty(
+                        (row.original as KeyValue).id.toString()
+                      )
+                        ? 'row--selected '
+                        : ' ') +
+                      (row.depth === 1 || row.subRows.length > 0
+                        ? actions && actions.length > 0
+                          ? 'has-checkboxes'
+                          : 'non-checkboxes'
+                        : '')
+                    }
+                  >
+                    {actions && actions.length > 0 && (
+                      <td
+                        style={{
+                          width: '30px',
+                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+                        }}
+                        className='checkBox'
+                      >
+                        <Checkbox
+                          value={(row.original as KeyValue).id}
+                          checked={
+                            checked.hasOwnProperty(
+                              (row.original as KeyValue).id.toString()
+                            )
+                              ? true
+                              : false
+                          }
+                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
+                            handleCheckboxChange(e, row.original.subRows);
+                          }}
+                        />
+                      </td>
+                    )}
+                    {row.cells.map((cell: any, indexInner: number) => {
+                      const isIdColumn =
+                        cell.column.type.__typename === 'TableColumnId';
+                      return (
+                        <td
+                          className={
+                            (!actions || actions.length === 0) &&
+                              indexInner === 0
+                              ? 'firstColumn'
+                              : ''
+                          }
+                          key={indexInner}
+                          {...cell.getCellProps()}
+                          {...cell.row.getExpandedToggleProps({
+                            onClick: () => { },
+                            style: {
+                              textAlign: isIdColumn && 'right',
+                              verticalAlign: isIdColumn && 'bottom',
+                              paddingBottom: isIdColumn && '5px',
+                              paddingLeft: `${indexInner === 0 &&
+                                row.depth === 1 &&
+                                row.depth * 2}rem`,
+                              cursor: 'default'
+                            }
+                          })}
+                        >
+                          <TableData {...generateComponentProps(cell)} />
+                        </td>
+                      );
+                    })}
+                    <td>
+                      <span className='action-buttons'>
+                        {!checked.hasOwnProperty(
+                          (row.original as KeyValue).id.toString()
+                        ) && (
+                            <TableData
+                              type='action_buttons'
+                              props={{
+                                onPencilClick: () => { },
+                                onDuplicateClick: () => { },
+                                onTrashClick: () => { }
+                              }}
+                            />
+                          )}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {!loading && page.length > 0 && (
+          <StyledPagination>
+            <Pagination
+              totalRecords={totalRecords}
+              rowsPerPage={rowsPerPage}
+              currentPage={currentPage}
+              onChangePage={handleChangeCurrentPage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </StyledPagination>
+        )}
+      </TableStyled>
+    </>
   );
 };
 

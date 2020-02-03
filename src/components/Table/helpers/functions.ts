@@ -2,13 +2,7 @@ import _ from 'lodash';
 import { KeyValue } from '../../../types';
 
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
-import {
-  objectUseState,
-  TableParams,
-  TableType,
-  ColumnMeta,
-  DefaultColumnType
-} from '../types';
+import { objectUseState, TableParams, TableType, ColumnMeta } from '../types';
 
 export const onCheckboxChange = (
   value: string,
@@ -111,10 +105,8 @@ export const generateTableParams = (
   tableType: TableType,
   columns: any[],
   data: KeyValue[],
-  controlledPageCount: number,
-  column?: DefaultColumnType
+  controlledPageCount: number
 ): TableParams => {
-  const defaultColumn = column? column : {};
   return tableType === 'async'
     ? {
         columns,
@@ -124,8 +116,7 @@ export const generateTableParams = (
           pageSize: 100
         },
         manualPagination: true,
-        pageCount: controlledPageCount,
-        defaultColumn
+        pageCount: controlledPageCount
       }
     : {
         columns,
@@ -133,8 +124,7 @@ export const generateTableParams = (
         initialState: {
           pageIndex: 0,
           pageSize: 100
-        },
-        defaultColumn
+        }
       };
 };
 
@@ -156,12 +146,9 @@ export const getCSVCellFormatOnType = (
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return (
-        values[columnProps.valuesArray.dataPath] &&
-        values[columnProps.valuesArray.dataPath]
-          .map((item: any) => item.title)
-          .join(', ')
-      );
+      return values[columnProps.valuesArray.dataPath] && values[columnProps.valuesArray.dataPath]
+        .map((item: any) => item.title)
+        .join(', ');
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
@@ -211,3 +198,48 @@ export const generateCardProps = (row: any): UserType => {
     // avatar: original.avatarUrn
   };
 };
+
+export const resizableTable = () => {
+  const divs = document.getElementsByClassName('resizer');
+  if (!divs.length)
+    return;
+
+  for (const div of divs) {
+    setListeners(div);
+  }
+};
+
+function setListeners(div: any) {
+  let pageX: number;
+  let curCol: any;
+  let nxtCol: any;
+  let curColWidth: number;
+  let nxtColWidth: number;
+  div.addEventListener('mousedown', (e: any) => {
+    curCol = e.target.parentElement;
+    nxtCol = curCol.nextElementSibling;
+    pageX = e.pageX;
+    curColWidth = curCol.offsetWidth;
+    if (nxtCol)
+      nxtColWidth = nxtCol.offsetWidth;
+  });
+
+  document.addEventListener('mousemove', (e: any) => {
+    if (curCol) {
+      const diffX = e.pageX - pageX;
+
+      if (nxtCol)
+        nxtCol.style.width = (nxtColWidth - (diffX)) + 'px';
+
+      curCol.style.width = (curColWidth + diffX) + 'px';
+    }
+  });
+
+  document.addEventListener('mouseup', (e: any) => {
+    curCol = undefined;
+    nxtCol = undefined;
+    pageX = undefined;
+    nxtColWidth = undefined;
+    curColWidth = undefined;
+  });
+}
