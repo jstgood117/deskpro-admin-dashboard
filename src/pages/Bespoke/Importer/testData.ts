@@ -127,7 +127,7 @@ export const initialKayakoValues = {
   bespoke_port: '',
   bespoke_username: '',
   bespoke_password: '',
-  bespoke_database: 'aa'
+  bespoke_database: ''
 };
 export const initialZendeskValues = {
   bespoke_zendesk_domain: '',

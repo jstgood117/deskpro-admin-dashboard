@@ -8,7 +8,7 @@ import { generateTitleAndDescription } from './helpers/generateTitleAndDescripti
 const SubText = styled.span`
   position: absolute;
   left: 50%;
-  bottom: 16px;
+  top: 35px;
   padding-left: 6px;
   padding-bottom: 4px;
 `;
