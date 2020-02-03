@@ -311,7 +311,7 @@ const StandardTablePage: FC<CombinedProps> = ({
                   ? tableTestColumns
                   : currentView)}
                 view={view}
-                path={path}
+                path={path || (paths && paths[0])}
                 data={
                   paths && paths[0] === '/agents' ? tableTestData : filteredData
                 }

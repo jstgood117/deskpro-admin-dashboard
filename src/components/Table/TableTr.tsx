@@ -8,6 +8,8 @@ import TableData from '../TableData';
 import { KeyValue } from '../../types';
 
 export type Props = {
+  indexOuter: number;
+  page: any;
   row: any;
   checked: any;
   hasActions: boolean;
@@ -18,6 +20,8 @@ export type Props = {
 };
 
 const TableTr: FC<Props> = ({
+  page,
+  indexOuter,
   row,
   checked,
   hasActions,
@@ -29,7 +33,17 @@ const TableTr: FC<Props> = ({
     <tr
       {...row.getRowProps()}
       className={
-        (isChecked ? 'row--selected ' : ' ') +
+        (row.depth === 1
+          ? (page[indexOuter + 1] && page[indexOuter + 1].depth === 0) ||
+            indexOuter === page.length - 1
+            ? 'isLastSubRow '
+            : 'subrow '
+          : row.subRows.length > 0 && row.isExpanded
+          ? 'hasSubRows '
+          : ' ') +
+        (checked.hasOwnProperty((row.original as KeyValue).id.toString())
+          ? 'row--selected '
+          : ' ') +
         (row.depth === 1 || row.subRows.length > 0
           ? hasActions
             ? 'has-checkboxes'

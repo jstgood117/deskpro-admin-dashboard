@@ -19,7 +19,7 @@ import { onCheckboxChange, generateTableParams } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
-// import { ActionFactory } from '../../services/actions/ActionFactory';
+import { ActionFactory } from '../../services/actions/ActionFactory';
 import TableTr from './TableTr';
 import TableTrGroup from './TableTrGroup';
 
@@ -74,9 +74,8 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
-  // const actions = ActionFactory(path);
-  // always show checkboxes
-  const hasActions = true; // actions && actions.length > 0;
+  const actions = ActionFactory(path);
+  const hasActions = actions && actions.length > 0;
 
   const tableParams: TableParams = generateTableParams(
     tableType,
@@ -97,6 +96,7 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
+    toggleExpanded,
     dispatch,
     state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
   } = useTable(
@@ -141,19 +141,26 @@ const Table: FC<Props> = ({
   }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
-    let countExpanded = 0;
-    if (firstGrouped) {
-      countExpanded = page
-        .filter((r: any) => r.canExpand && r.isExpanded === undefined)
-        .map((r: any) => r.toggleExpanded()).length;
-      if (countExpanded > 0) {
-        setFirstGrouped(false);
+    if (groupBy && groupBy.length) {
+      let countExpanded = 0;
+      if (firstGrouped) {
+        countExpanded = page
+          .filter((r: any) => r.canExpand && r.isExpanded === undefined)
+          .map((r: any) => r.toggleExpanded()).length;
+        if (countExpanded > 0) {
+          setFirstGrouped(false);
+        }
       }
+    } else {
+      page.map((row: { canExpand: any; id: any }) => {
+        if (row.canExpand) toggleExpanded(row.id, true);
+        return true;
+      });
+      setChecked({});
     }
-    // setChecked({});
     setTotalRecords(data.length);
     // eslint-disable-next-line
-  }, [pageIndex, data, page]);
+  }, [pageIndex, data, page, groupBy]);
 
   const handleCheckboxChange = async (
     event: SyntheticEvent<HTMLInputElement>,
@@ -269,6 +276,8 @@ const Table: FC<Props> = ({
                 prepareRow(row);
                 return row.isGrouped ? (
                   <TableTrGroup
+                    indexOuter={indexOuter}
+                    page={page}
                     key={indexOuter}
                     row={row}
                     checked={checked}
@@ -278,6 +287,8 @@ const Table: FC<Props> = ({
                   />
                 ) : (
                   <TableTr
+                    indexOuter={indexOuter}
+                    page={page}
                     key={indexOuter}
                     row={row}
                     checked={checked}
@@ -306,12 +317,3 @@ const Table: FC<Props> = ({
 };
 
 export default Table;
-
-/*
-  useEffect(() => {
-    if (onGroupByChange && !compareGroups(groupBy, groupByInfo)) {
-      onGroupByChange(groupByInfo);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [groupByInfo]);
-  */

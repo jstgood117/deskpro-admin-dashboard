@@ -6,6 +6,8 @@ import Icon from '../Icon';
 import TableTr from './TableTr';
 
 export type Props = {
+  indexOuter: number;
+  page: any;
   row: any;
   checked: any;
   hasActions: boolean;
@@ -24,6 +26,8 @@ const GroupCaret = styled.span`
 `;
 
 const TableTrGroup: FC<Props> = ({
+  indexOuter,
+  page,
   row,
   checked,
   hasActions,
@@ -93,6 +97,8 @@ const TableTrGroup: FC<Props> = ({
             prepareRow(subRow);
             return (
               <TableTr
+                indexOuter={indexOuter}
+                page={page}
                 key={innerIndex}
                 row={subRow}
                 checked={checked}
