@@ -59,6 +59,25 @@ export const TableStyled = styled(dpstyle.div)`
             .filter-icon {
               display: none;
             }
+
+            position: relative;
+            .resizer {
+              top: 0;
+              right: 0;
+              width: 6px;
+              position: absolute;
+              cursor: col-resize;
+              background-color: #9FCCF3;
+              user-select: none;
+              height: 100%;
+              transform: translateX(50%);
+              z-index: 1;
+              opacity: 0;
+
+              :hover, :focus, :active {
+                opacity: 1;
+              }
+            }
           }
         }
       }
