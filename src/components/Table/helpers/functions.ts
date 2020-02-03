@@ -146,9 +146,12 @@ export const getCSVCellFormatOnType = (
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return values[columnProps.valuesArray.dataPath] && values[columnProps.valuesArray.dataPath]
-        .map((item: any) => item.title)
-        .join(', ');
+      return (
+        values[columnProps.valuesArray.dataPath] &&
+        values[columnProps.valuesArray.dataPath]
+          .map((item: any) => item.title)
+          .join(', ')
+      );
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
@@ -201,8 +204,7 @@ export const generateCardProps = (row: any): UserType => {
 
 export const resizableTable = () => {
   const divs = document.getElementsByClassName('resizer');
-  if (!divs.length)
-    return;
+  if (!divs.length) return;
 
   for (const div of divs) {
     setListeners(div);
@@ -220,18 +222,24 @@ function setListeners(div: any) {
     nxtCol = curCol.nextElementSibling;
     pageX = e.pageX;
     curColWidth = curCol.offsetWidth;
-    if (nxtCol)
-      nxtColWidth = nxtCol.offsetWidth;
+    if (nxtCol) nxtColWidth = nxtCol.offsetWidth;
   });
 
   document.addEventListener('mousemove', (e: any) => {
+
     if (curCol) {
       const diffX = e.pageX - pageX;
 
-      if (nxtCol)
-        nxtCol.style.width = (nxtColWidth - (diffX)) + 'px';
+      if (nxtCol) nxtCol.style.width = nxtColWidth - diffX + 'px';
 
-      curCol.style.width = (curColWidth + diffX) + 'px';
+      const colIndex = curCol.getAttribute('data-colindex');
+      const colTds = document.getElementsByClassName(`td-${colIndex}`);
+      const newWidth = curColWidth + diffX + 'px';
+      curCol.style.width = newWidth;
+
+      for (const tdEl of colTds) {
+        setTdWidth(tdEl, newWidth);
+      }
     }
   });
 
@@ -242,4 +250,8 @@ function setListeners(div: any) {
     nxtColWidth = undefined;
     curColWidth = undefined;
   });
+}
+
+function setTdWidth(tdEl: any, width: string) {
+  tdEl.style.minWidth = width;
 }

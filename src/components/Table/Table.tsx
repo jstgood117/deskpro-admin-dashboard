@@ -196,6 +196,7 @@ const Table: FC<Props> = ({
                               border: column.isSorted && '1px solid #D3D6D7',
                               width: isIdColumn && '1px'
                             }}
+                            data-colindex={indexInner}
                           >
                             <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
                               {column.render('Header')}
@@ -291,8 +292,8 @@ const Table: FC<Props> = ({
                           className={
                             (!actions || actions.length === 0) &&
                               indexInner === 0
-                              ? 'firstColumn'
-                              : ''
+                              ? `td-${indexInner} firstColumn`
+                              : `td-${indexInner}`
                           }
                           key={indexInner}
                           {...cell.getCellProps()}
