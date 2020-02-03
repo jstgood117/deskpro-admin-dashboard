@@ -23,10 +23,10 @@ import Menu from '../Menu';
 import {
   generateViewList,
   generatSortMenuItems,
+  generateGroupMenuItems,
   generatFilterOptions
 } from './functions';
 import { SortType } from '../Table/types';
-import { testGroupItems } from '../../resources/constants/constants';
 
 const StyledTableAction = styled(dpstyle.div)`
   z-index: 1;
@@ -153,6 +153,14 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const [sortMenuItems, setSortMenuItems] = useState(
     generatSortMenuItems(tableDef, intl)
+  );
+  // eslint-disable-next-line
+  const [groupMenuItems, setGroupMenuItems] = useState(
+    generateGroupMenuItems({
+      tableDef,
+      sortMenuItems,
+      intl
+    })
   );
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [initialChecked] = useState<KeyValue>(checkedState);
@@ -424,7 +432,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
             <FlexStyled style={{ paddingRight: 10 }}>
               <Menu
                 name='group'
-                menuItems={testGroupItems}
+                menuItems={groupMenuItems}
                 iconName='group'
                 value={groupValue}
                 size='medium'

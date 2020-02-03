@@ -1,4 +1,5 @@
 import React, { FC, SyntheticEvent } from 'react';
+import styled from 'styled-components';
 
 import Checkbox from '../Checkbox';
 import Icon from '../Icon';
@@ -14,6 +15,13 @@ export type Props = {
     rows: any
   ) => void;
 };
+
+const GroupCaret = styled.span`
+  margin-left: 10px;
+  & path {
+    fill: #4c4f50;
+  }
+`;
 
 const TableTrGroup: FC<Props> = ({
   row,
@@ -49,16 +57,17 @@ const TableTrGroup: FC<Props> = ({
           }}
         >
           <div
+            {...row.getExpandedToggleProps()}
             style={{
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'space-between',
-              maxWidth: 310
+              maxWidth: 310,
+              cursor: 'pointer'
             }}
           >
             <span
-              {...row.getExpandedToggleProps()}
               style={{
                 marginRight: 'auto',
                 marginLeft: 0, // hasActions ? 16 : 0,
@@ -66,15 +75,14 @@ const TableTrGroup: FC<Props> = ({
                 fontFamily: 'Rubik',
                 fontWeight: 500,
                 fontSize: 15,
-                lineHeight: '150%',
-                cursor: 'pointer'
+                lineHeight: '150%'
               }}
             >
               {row.groupByVal} ({row.subRows.length})
             </span>
-            <span style={{ marginLeft: 10 }}>
+            <GroupCaret>
               {row.isExpanded ? <Icon name='up' /> : <Icon name='down' />}
-            </span>
+            </GroupCaret>
           </div>
         </td>
         <td colSpan={row.cells.length} style={{ backgroundImage: 'none' }} />

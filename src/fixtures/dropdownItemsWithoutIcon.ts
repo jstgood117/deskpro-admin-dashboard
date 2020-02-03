@@ -53,6 +53,7 @@ export const testGroupItems: IMenuItemProps[] = [
     name: 'Sort group',
     subItems: [
       { name: 'Name', column: 'admin_common.col.name', sortable: true },
+      /*
       {
         name: 'Date created',
         column: 'admin_common.col.date_created',
@@ -68,6 +69,7 @@ export const testGroupItems: IMenuItemProps[] = [
         column: 'admin_common.col.tickets',
         sortable: true
       }
+      */
     ]
   }
 ];
