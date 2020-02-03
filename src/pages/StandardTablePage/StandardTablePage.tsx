@@ -2,7 +2,11 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useQuery, withApollo } from 'react-apollo';
 import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  useRouteMatch
+} from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
@@ -75,6 +79,8 @@ const StandardTablePage: FC<CombinedProps> = ({
   const [view, setView] = useState<'table' | 'list' | 'card'>('table');
   const [currentView, setCurrentView] = useState<any>();
   const [pageSize] = useState<number>(10);
+
+  const match = useRouteMatch();
 
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
@@ -307,12 +313,10 @@ const StandardTablePage: FC<CombinedProps> = ({
             )}
             {views && currentView && (
               <TableWrapper
-                {...(primaryPath === '/agents'
-                  ? tableTestColumns
-                  : currentView)}
+                {...(match.url === '/agents' ? tableTestColumns : currentView)}
                 view={view}
                 path={path || primaryPath}
-                data={primaryPath === '/agents' ? tableTestData : filteredData}
+                data={match.url === '/agents' ? tableTestData : filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}

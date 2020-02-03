@@ -1,4 +1,5 @@
 import React, { FC, SyntheticEvent } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import _ from 'lodash';
 
 import Checkbox from '../Checkbox';
@@ -28,6 +29,7 @@ const TableTr: FC<Props> = ({
   handleCheckboxChange
 }) => {
   const isChecked = checked.hasOwnProperty(row.original.id);
+  const match = useRouteMatch();
 
   return (
     <tr
@@ -88,7 +90,8 @@ const TableTr: FC<Props> = ({
               })}
               key={indexInner}
             >
-              {cell.column.id === 'admin_common.col.teams' ? (
+              {cell.column.id === 'admin_common.col.teams' &&
+              match.url === '/agents' ? (
                 <TableData
                   {...generateComponentProps({
                     ...cell,
