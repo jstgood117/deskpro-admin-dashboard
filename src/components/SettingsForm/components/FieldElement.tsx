@@ -1,5 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { Field } from 'formik';
+import { FormattedMessage } from 'react-intl';
+
 import Toggle from '../../Toggle';
 import Input from '../../Input';
 import Profiles from '../../Profiles';
@@ -14,6 +17,12 @@ const StyledCheckbox = styled(Checkbox)`
     transform: translateY(9px);
     z-index: 1;
   }
+`;
+const ErrorMessage = styled.div`
+  padding-top: 4px;
+  padding-left: 4px;
+  font-size: 14px;
+  color: red;
 `;
 
 const elementsSelector: {
@@ -32,24 +41,34 @@ const elementsSelector: {
     <StyledCheckbox
       className='form-checkbox'
       id={props.id}
-      checked={props.formikProps.values[props.id].includes(props.value) ? true : false}
+      checked={
+        props.formikProps.values[props.id].includes(props.value) ? true : false
+      }
       value={props.value}
       onChange={event => {
-        console.log(props.formikProps);
         props.formikProps.handleChange(event);
       }}
     />
   ),
   input: props => (
-    <Input
-      id={props.id}
-      name={props.id}
-      value={props.formikProps.values[props.id]}
-      inputType='primary'
-      onChange={event => {
-        props.formikProps.handleChange(event);
-      }}
-    />
+    <Field name={props.id}>
+      {({ field, meta }: any) => (
+        <div>
+          <Input
+            id={props.id}
+            placeholder={props.placeholder}
+            inputType='primary'
+            type={props.input_type || 'text'}
+            {...field}
+          />
+          {meta.touched && meta.error && (
+            <ErrorMessage className='error'>
+              <FormattedMessage id={meta.error} />
+            </ErrorMessage>
+          )}
+        </div>
+      )}
+    </Field>
   ),
   profiles: props => (
     <Profiles
@@ -59,10 +78,7 @@ const elementsSelector: {
     />
   ),
   stringlist: props => (
-    <StringListBuilder
-      {...props}
-      values={props.formikProps.values[props.id]}
-    />
+    <StringListBuilder {...props} values={props.formikProps.values[props.id]} />
   ),
   units: props => {
     return (

@@ -123,5 +123,10 @@ export const testTranslations = {
   'apikeys.api_flag.api_v1': 'Legacy API',
   'apikeys.api_flag.api_v2': 'API',
   'apikeys.api_flag.admin': 'Admin',
-  'apikeys.api_flag.super': 'Super'
+  'apikeys.api_flag.super': 'Super',
+
+  'validation.required': 'This field is required.',
+  'validation.emailNotValid': 'Email is not valid.',
+  'validation.tooShortPassword': 'Password is too short - should be 8 chars minimum.',
+  'validation.passwordLetter': 'Password can only contain Latin letters.',
 };
