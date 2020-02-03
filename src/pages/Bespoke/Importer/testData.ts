@@ -40,7 +40,8 @@ export const uiKayakoSchema: {
               title: 'Password',
               field: {
                 type: 'input',
-                id: 'bespoke_password'
+                id: 'bespoke_password',
+                input_type: 'password'
               }
             },
             {
@@ -74,7 +75,8 @@ export const uiZendeskSchema: {
               field: {
                 type: 'input',
                 id: 'bespoke_zendesk_domain',
-                placeholder: 'yoursubdomain'
+                placeholder: 'yoursubdomain',
+                subText: '.zendesk.com'
               }
             },
             {
@@ -118,4 +120,19 @@ export const uiZendeskSchema: {
       ]
     }
   ]
+};
+
+export const initialKayakoValues = {
+  bespoke_host: '',
+  bespoke_port: '',
+  bespoke_username: '',
+  bespoke_password: '',
+  bespoke_database: 'aa'
+};
+export const initialZendeskValues = {
+  bespoke_zendesk_domain: '',
+  bespoke_zendesk_username: '',
+  bespoke_zendesk_token: '',
+  bespoke_zendesk_time: '',
+  bespoke_zendesk_brand: ''
 };

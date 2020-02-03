@@ -13,6 +13,7 @@ import { generateTitleAndDescription } from '../../../components/SettingsForm/co
 import Link from '../../../components/Link/Link';
 import { Container, Group } from './styles';
 import Button from '../../../components/Button';
+import { initialKayakoValues, initialZendeskValues } from './testData';
 interface IProps {
   path: string;
 }
@@ -59,10 +60,7 @@ const ImporterPage: FC<IProps> = () => {
               <Formik
                 onSubmit={submit}
                 validationSchema={ValidationSchema()}
-                initialValues={{
-                  email: 'a',
-                  password: 'b'
-                }}
+                initialValues={initialKayakoValues}
               >
                 {KayakoForm}
               </Formik>
@@ -101,10 +99,7 @@ const ImporterPage: FC<IProps> = () => {
               <Formik
                 onSubmit={submit}
                 validationSchema={ValidationSchema()}
-                initialValues={{
-                  email: 'a',
-                  password: 'b'
-                }}
+                initialValues={initialZendeskValues}
               >
                 {ZendeskForm}
               </Formik>
