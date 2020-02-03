@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: flex-start;
   padding: 0 0 0px 55px;
-  width: 100%;
   height: 100%;
+  position: relative;
   .form-row {
     border-bottom: none;
   }
@@ -66,10 +66,11 @@ export const Container = styled.div`
     padding-bottom: 20px;
   }
   .import-btn {
-    padding-left: 100px;
+    padding-left: 385px;
   }
   .footer {
     border-top: 1px solid ${props => props.theme.hoverColour};
+    background: ${props => props.theme.white};
     position: absolute;
     width: 100%;
     left: 0;
@@ -77,7 +78,6 @@ export const Container = styled.div`
     height: 70px;
     display: flex;
     align-items: center;
-    padding-left: 285px;
   }
 `;
 
