@@ -307,14 +307,12 @@ const StandardTablePage: FC<CombinedProps> = ({
             )}
             {views && currentView && (
               <TableWrapper
-                {...(paths && paths[0] === '/agents'
+                {...(primaryPath === '/agents'
                   ? tableTestColumns
                   : currentView)}
                 view={view}
-                path={path || (paths && paths[0])}
-                data={
-                  paths && paths[0] === '/agents' ? tableTestData : filteredData
-                }
+                path={path || primaryPath}
+                data={primaryPath === '/agents' ? tableTestData : filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}
