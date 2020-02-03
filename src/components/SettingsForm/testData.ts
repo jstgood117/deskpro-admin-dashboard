@@ -49,7 +49,6 @@ export const uiSchema: {
                     type: 'input',
                     id: 'agent_settings_security_idle_timeout'
                   },
-                  /*
                   info: [
                     {
                       type: 'button',
@@ -64,7 +63,6 @@ export const uiSchema: {
                       icon: 'view'
                     }
                   ]
-                  */
                 },
                 {
                   type: 'field',

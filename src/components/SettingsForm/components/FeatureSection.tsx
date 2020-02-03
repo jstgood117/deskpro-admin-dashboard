@@ -141,10 +141,15 @@ const FeatureSectionStyled = styled.div`
     .element-info {
       margin-left: 12px;
       margin-top: -6px;
+      margin-bottom: 0;
       .element-info-link {
 
       }
     }
+  }
+
+  .vert-element-group > .form-item > .element-info {
+    margin-bottom: 24px;
   }
 
   & .field-container {
