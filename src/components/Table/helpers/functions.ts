@@ -217,12 +217,18 @@ function setListeners(div: any) {
   let nxtCol: any;
   let curColWidth: number;
   let nxtColWidth: number;
+  let curColIndex: number;
   div.addEventListener('mousedown', (e: any) => {
     curCol = e.target.parentElement;
     nxtCol = curCol.nextElementSibling;
+    curColIndex = curCol.getAttribute('data-colindex');
     pageX = e.pageX;
     curColWidth = curCol.offsetWidth;
     if (nxtCol) nxtColWidth = nxtCol.offsetWidth;
+  });
+
+  div.addEventListener('dblclick', (e: any) => {
+    setTdsWidth(curColIndex, 1);
   });
 
   document.addEventListener('mousemove', (e: any) => {
@@ -232,14 +238,9 @@ function setListeners(div: any) {
 
       if (nxtCol) nxtCol.style.width = nxtColWidth - diffX + 'px';
 
-      const colIndex = curCol.getAttribute('data-colindex');
-      const colTds = document.getElementsByClassName(`td-${colIndex}`);
-      const newWidth = curColWidth + diffX + 'px';
-      curCol.style.width = newWidth;
+      curCol.style.width = curColWidth + diffX + 'px';
 
-      for (const tdEl of colTds) {
-        setTdWidth(tdEl, newWidth);
-      }
+      setTdsWidth(curColIndex, curColWidth + diffX);
     }
   });
 
@@ -252,6 +253,10 @@ function setListeners(div: any) {
   });
 }
 
-function setTdWidth(tdEl: any, width: string) {
-  tdEl.style.minWidth = width;
+function setTdsWidth(colIndex: number, width: number) {
+  const colTds = document.getElementsByClassName(`td-${colIndex}`);
+
+  for (const tdEl of colTds) {
+    (tdEl as HTMLElement).style.minWidth = width + 'px';
+  }
 }
