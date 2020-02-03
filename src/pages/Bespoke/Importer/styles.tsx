@@ -82,6 +82,5 @@ export const Container = styled.div`
 `;
 
 export const Group = styled.div`
-  flexdirection: column;
   position: relative;
 `;
