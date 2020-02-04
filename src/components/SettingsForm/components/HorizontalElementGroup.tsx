@@ -19,6 +19,7 @@ const HozizontalGroup = styled.div`
 const HozizontalGroupCol = styled.div`
   & .field-container {
     margin-right: 8px;
+    min-width: 223px;
   }
   & .hidden {
     display: none;
