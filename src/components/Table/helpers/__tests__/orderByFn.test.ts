@@ -10,7 +10,12 @@ describe('orderByFn', () => {
     orderByFn(data, [customSortMethod], [false]);
     const t1 = performance.now();
 
+    const t2 = performance.now();
+    orderByFn(data, [customSortMethod], [true]);
+    const t3 = performance.now();
+
     expect(t1-t0).toBeLessThan(200);
+    expect(t3-t2).toBeLessThan(200);
   });
 
 });
