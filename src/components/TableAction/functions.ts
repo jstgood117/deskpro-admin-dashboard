@@ -4,6 +4,7 @@ import {
   IMenuItemProps
 } from '../../resources/interfaces';
 import { FilterMeta } from '../../resources/interfaces/filterMeta';
+import { testGroupItems } from '../../resources/constants/constants';
 
 import { KeyValue } from '../../types';
 
@@ -36,6 +37,22 @@ export const generatSortMenuItems = (
   );
 
   return columnsViewList;
+};
+
+export const generateGroupMenuItems = (options: {
+  tableDef: ITableSetup;
+  intl: IntlShape;
+  sortMenuItems: any;
+}) => {
+  const { sortMenuItems } = options;
+
+  testGroupItems[4]['subItems'] = sortMenuItems.map((item: any) => ({
+    sortable: true,
+    name: item.label,
+    column: item.link
+  }));
+
+  return testGroupItems;
 };
 
 export const generateViewList = (tableDef: ITableSetup): GenerateResultType => {

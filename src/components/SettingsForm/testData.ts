@@ -15,13 +15,6 @@ export const uiSchema: {
           type: 'page_section',
           elements: [
             {
-              type: 'field',
-              field: {
-                type: 'toggle',
-                id: 'agent_settings_security_enabled'
-              }
-            },
-            {
               type: 'vertical_group',
               title: 'Idle Timeout',
               tooltip:
@@ -29,6 +22,10 @@ export const uiSchema: {
               showOn: 'agent_settings_security_enabled',
               description:
                 'Enable this to log out agents who are idle. Otherwise, sessions will be kept alive if Deskpro is open in a browser window, even if the agent is not doing anything.',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_security_enabled'
+              },
               info: [
                 {
                   type: 'button',
@@ -104,27 +101,17 @@ export const uiSchema: {
           title: 'Admin Security Settings',
           elements: [
             {
-              type: 'field',
-              field: {
-                type: 'toggle',
-                id: 'admin_settings_security_enabled'
-              }
-            },
-            {
               type: 'vertical_group',
               title: 'Admin authentication',
               tooltip: 'Admin authentication',
               description:
                 'Administrators will be required to authenticate themselves when accessing the admin area of Deskpro.',
               showOn: 'admin_settings_security_enabled',
+              field: {
+                type: 'toggle',
+                id: 'admin_settings_security_enabled'
+              },
               elements: [
-                {
-                  type: 'field',
-                  field: {
-                    type: 'toggle',
-                    id: 'admin_settings_security_idle_timeout_enabled'
-                  }
-                },
                 {
                   type: 'vertical_group',
                   title: 'Idle Timeout',
@@ -132,6 +119,10 @@ export const uiSchema: {
                   showOn: 'admin_settings_security_idle_timeout_enabled',
                   description:
                     'Log out admins who are inactive. Admins will be logged out when the admin idle timeout elapses.',
+                  field: {
+                    type: 'toggle',
+                    id: 'admin_settings_security_idle_timeout_enabled'
+                  },
                   elements: [
                     {
                       type: 'field',
@@ -164,18 +155,15 @@ export const uiSchema: {
           title: 'Agent Notifications',
           elements: [
             {
-              type: 'field',
-              field: {
-                type: 'toggle',
-                id: 'agent_notifications_enabled'
-              }
-            },
-            {
               type: 'vertical_group',
               title: 'Email Subscriptons',
               showOn: 'agent_notifications_enabled',
               description:
                 'Allow agents to subscribe to email notifications (the ones set in the Ticket Notifications and Other Notifications tabs in Agents, or in the agent’s preferences).',
+              field: {
+                type: 'toggle',
+                id: 'agent_notifications_enabled'
+              },
               elements: [
                 {
                   type: 'field',
@@ -196,17 +184,14 @@ export const uiSchema: {
           title: 'Keyboard Shortcuts',
           elements: [
             {
-              type: 'field',
-              field: {
-                type: 'toggle',
-                id: 'agent_keyboard_shortcuts_enabled'
-              }
-            },
-            {
               type: 'vertical_group',
               title: 'Keyboard Shortcuts',
               description: 'Allow agent to use keyboard shortcuts. ',
               showOn: 'agent_keyboard_shortcuts_enabled',
+              field: {
+                type: 'toggle',
+                id: 'agent_keyboard_shortcuts_enabled'
+              },
               elements: [
                 {
                   type: 'field',
@@ -227,18 +212,15 @@ export const uiSchema: {
           title: 'Forwards out of Helpdesk',
           elements: [
             {
-              type: 'field',
-              field: {
-                type: 'toggle',
-                id: 'forwards_out_of_helpdesk_enabled'
-              }
-            },
-            {
               type: 'vertical_group',
               title: 'Default email account',
               showOn: 'forwards_out_of_helpdesk_enabled',
               description:
                 'Deskpro sends a number of non-ticket related emails such as password reset links, welcome emails, or login alerts. This option defines which email account to use for these types of emails.\n\nSince these emails are not directly related to communication between users and agents, some helpdesks may wish to configure a no-reply address instead.',
+              field: {
+                type: 'toggle',
+                id: 'forwards_out_of_helpdesk_enabled'
+              },
               elements: [
                 {
                   type: 'tabs_section',
@@ -294,27 +276,17 @@ export const uiSchema: {
           type: 'page_section',
           elements: [
             {
-              type: 'field',
-              field: {
-                type: 'toggle',
-                id: 'agent_settings_help_center_knowledgebase'
-              }
-            },
-            {
               type: 'vertical_group',
               title: 'Knowledgebase',
               showOn: 'agent_settings_help_center_knowledgebase',
               description:
                 'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
-              elements: [],
-              articles: 'featuredArticles'
-            },
-            {
-              type: 'field',
               field: {
                 type: 'toggle',
-                id: 'agent_settings_help_center_news'
-              }
+                id: 'agent_settings_help_center_knowledgebase'
+              },
+              elements: [],
+              articles: 'featuredArticles'
             },
             {
               type: 'vertical_group',
@@ -322,15 +294,12 @@ export const uiSchema: {
               showOn: 'agent_settings_help_center_news',
               description:
                 'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
-              elements: [],
-              articles: 'featuredArticles'
-            },
-            {
-              type: 'field',
               field: {
                 type: 'toggle',
-                id: 'agent_settings_help_center_downloads'
-              }
+                id: 'agent_settings_help_center_news'
+              },
+              elements: [],
+              articles: 'featuredArticles'
             },
             {
               type: 'vertical_group',
@@ -338,15 +307,12 @@ export const uiSchema: {
               showOn: 'agent_settings_help_center_downloads',
               description:
                 'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
-              elements: [],
-              articles: 'featuredArticles'
-            },
-            {
-              type: 'field',
               field: {
                 type: 'toggle',
-                id: 'agent_settings_help_center_community'
-              }
+                id: 'agent_settings_help_center_downloads'
+              },
+              elements: [],
+              articles: 'featuredArticles'
             },
             {
               type: 'vertical_group',
@@ -354,6 +320,10 @@ export const uiSchema: {
               showOn: 'agent_settings_help_center_community',
               description:
                 'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
+              field: {
+                type: 'toggle',
+                id: 'agent_settings_help_center_community'
+              },
               elements: [],
               articles: 'featuredArticles'
             }

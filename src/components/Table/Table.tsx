@@ -4,16 +4,15 @@ import {
   useSortBy,
   usePagination,
   useRowSelect,
-  useExpanded
+  useExpanded,
+  useGroupBy
 } from 'react-table';
+import _ from 'lodash';
 
 import { KeyValue } from '../../types';
 
 import Pagination, { IPageChange } from '../Pagination/Pagination';
-import Checkbox from '../Checkbox';
 import Icon from '../Icon';
-import TableData from '../TableData';
-import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
 import { onCheckboxChange, generateTableParams, resizableTable } from './helpers/functions';
@@ -21,6 +20,8 @@ import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
 import { ActionFactory } from '../../services/actions/ActionFactory';
+import TableTr from './TableTr';
+import TableTrGroup from './TableTrGroup';
 
 // Returns `true` on equal sorts
 const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
@@ -36,6 +37,12 @@ const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
   return result;
 };
 
+const compareGroups = (group1: string[], group2: string[]) => {
+  return (
+    group1.length === group2.length && _.difference(group1, group2).length === 0
+  );
+};
+
 export type Props = {
   path: string;
   data: KeyValue[];
@@ -46,6 +53,8 @@ export type Props = {
   tableType: TableType;
   sortBy: SortType[];
   onSortChange?: (sortBy: SortType[]) => void;
+  groupBy?: string[];
+  onGroupByChange?: (columnNames: string[]) => void;
 };
 
 const Table: FC<Props> = ({
@@ -57,8 +66,17 @@ const Table: FC<Props> = ({
   onSortChange,
   pageCount: controlledPageCount,
   tableType,
-  sortBy
+  sortBy,
+  groupBy
 }) => {
+  const [checked, setChecked] = useState<object>({});
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(100);
+  const [totalRecords, setTotalRecords] = useState<number>(0);
+  const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
+  const actions = ActionFactory(path);
+  const hasActions = actions && actions.length > 0;
+
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
@@ -68,17 +86,22 @@ const Table: FC<Props> = ({
 
   const {
     toggleSortBy,
+    toggleGroupBy,
     getTableProps,
     getTableBodyProps,
     headerGroups,
     prepareRow,
+    groupedRows,
+    rows,
     page,
     setPageSize,
     gotoPage,
     toggleExpanded,
-    state: { pageIndex, pageSize, sortBy: sortByInfo }
+    dispatch,
+    state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
   } = useTable(
     tableParams,
+    useGroupBy,
     useExpanded,
     useSortBy,
     usePagination,
@@ -93,12 +116,6 @@ const Table: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortByInfo]);
 
-  useEffect(() => {
-    if (fetchData && tableType === 'async') {
-      fetchData();
-    }
-  }, [fetchData, pageIndex, pageSize, tableType]);
-
   // Handle incoming sort rules
   useEffect(() => {
     if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
@@ -107,27 +124,56 @@ const Table: FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortBy]);
 
+  // Handle incoming group by
   useEffect(() => {
-    if (fetchData) {
+    if (!compareGroups(groupBy, groupByInfo)) {
+      setFirstGrouped(true);
+      dispatch({ type: 'resetGroupBy' });
+      toggleGroupBy(groupBy[0], true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [groupBy]);
+
+  useEffect(() => {
+    if (fetchData && tableType === 'async') {
       fetchData();
     }
-  }, [fetchData, pageIndex, pageSize]);
+  }, [fetchData, pageIndex, pageSize, tableType]);
+
+  useEffect(() => {
+    if (groupBy && groupBy.length) {
+      let countExpanded = 0;
+      if (firstGrouped) {
+        countExpanded = page
+          .filter((r: any) => r.canExpand && r.isExpanded === undefined)
+          .map((r: any) => r.toggleExpanded()).length;
+        if (countExpanded > 0) {
+          setFirstGrouped(false);
+        }
+      }
+    } else {
+      page.map((row: { canExpand: any; id: any }) => {
+        if (row.canExpand) toggleExpanded(row.id, true);
+        return true;
+      });
+      setChecked({});
+    }
+    setTotalRecords(data.length);
+    // eslint-disable-next-line
+  }, [pageIndex, data, page, groupBy]);
 
   useEffect(() => {
     resizableTable();
   });
 
-  const [checked, setChecked] = useState<object>({});
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(100);
-  const [totalRecords, setTotalRecords] = useState<number>(0);
-  const actions = ActionFactory(path);
-
   const handleCheckboxChange = async (
     event: SyntheticEvent<HTMLInputElement>,
     subRows: API_ChatDepartment[]
   ) => {
-    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows);
+    onCheckboxChange(event.currentTarget.value, checked, setChecked, subRows, {
+      isGrouped: groupBy && groupBy.length > 0,
+      groupedRows
+    });
   };
 
   const handleChangeCurrentPage = (datas: IPageChange) => {
@@ -135,21 +181,12 @@ const Table: FC<Props> = ({
     gotoPage(datas.currentPage - 1);
   };
 
-  const handleChangeRowsPerPage = (rows: number) => {
-    setPageSize(rows);
-    setRowsPerPage(rows);
+  const handleChangeRowsPerPage = (_rows: number) => {
+    setPageSize(_rows);
+    setRowsPerPage(_rows);
     setCurrentPage(1);
     gotoPage(0);
   };
-  useEffect(() => {
-    page.map((row: { canExpand: any; id: any }) => {
-      if (row.canExpand) toggleExpanded(row.id, true);
-      return true;
-    });
-    setChecked({});
-    setTotalRecords(data.length);
-    // eslint-disable-next-line
-  }, [pageIndex, data, page]);
 
   return (
     <>
@@ -161,6 +198,7 @@ const Table: FC<Props> = ({
           data={data}
           checked={checked}
           path={path}
+          rows={rows}
           page={page}
           columns={columns}
           totalRecords={totalRecords}
@@ -180,10 +218,8 @@ const Table: FC<Props> = ({
                     {...(headerGroup.getHeaderGroupProps &&
                       headerGroup.getHeaderGroupProps())}
                   >
-                    {actions && actions.length > 0 && (
-                      <th style={{ width: '30px' }} />
-                    )}
-                    {headerGroup.headers.map(
+                    {hasActions && <th />}
+                    {_.sortBy(headerGroup.headers, 'index').map(
                       (column: KeyValue, indexInner: number) => {
                         const isIdColumn =
                           column.type.__typename === 'TableColumnId';
@@ -191,14 +227,16 @@ const Table: FC<Props> = ({
                         return (
                           <th
                             key={indexInner}
-                            {...column.getHeaderProps()}
+                            {...column.getHeaderProps(
+                              column.getSortByToggleProps()
+                            )}
                             style={{
                               border: column.isSorted && '1px solid #D3D6D7',
-                              width: isIdColumn && '1px'
+                              width: isIdColumn ? 1 : column.width || 'auto'
                             }}
                             data-colindex={indexInner}
                           >
-                            <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
+                            <StyledTh alignRight={isIdColumn}>
                               {column.render('Header')}
                               {column.isSorted &&
                                 (column.isSortedDesc ? (
@@ -206,10 +244,10 @@ const Table: FC<Props> = ({
                                     <Icon name='ic-sort-up-active' />
                                   </span>
                                 ) : (
-                                    <span className='sort-icon'>
-                                      <Icon name='ic-sort-down-active' />
-                                    </span>
-                                  ))}
+                                  <span className='sort-icon'>
+                                    <Icon name='ic-sort-down-active' />
+                                  </span>
+                                ))}
                               {column.isSorted && (
                                 <Tooltip
                                   content='Filter'
@@ -227,110 +265,42 @@ const Table: FC<Props> = ({
                         );
                       }
                     )}
-                    <th style={{ width: '1px' }} />
+                    <th className='th-action-buttons' />
                   </tr>
                 )
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map((row: KeyValue, indexOuter: number) => {
+              {Array.from(
+                groupBy && groupBy.length
+                  ? _.sortBy(
+                      groupedRows.filter((r: any) => r.isGrouped),
+                      'index'
+                    )
+                  : page
+              ).map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
-                return (
-                  <tr
+                return row.isGrouped ? (
+                  <TableTrGroup
+                    indexOuter={indexOuter}
+                    page={page}
                     key={indexOuter}
-                    {...row.getRowProps()}
-                    className={
-                      (row.depth === 1
-                        ? (page[indexOuter + 1] &&
-                          page[indexOuter + 1].depth === 0) ||
-                          indexOuter === page.length - 1
-                          ? 'isLastSubRow '
-                          : 'subrow '
-                        : row.subRows.length > 0 && row.isExpanded
-                          ? 'hasSubRows '
-                          : ' ') +
-                      (checked.hasOwnProperty(
-                        (row.original as KeyValue).id.toString()
-                      )
-                        ? 'row--selected '
-                        : ' ') +
-                      (row.depth === 1 || row.subRows.length > 0
-                        ? actions && actions.length > 0
-                          ? 'has-checkboxes'
-                          : 'non-checkboxes'
-                        : '')
-                    }
-                  >
-                    {actions && actions.length > 0 && (
-                      <td
-                        style={{
-                          width: '30px',
-                          paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
-                        }}
-                        className='checkBox'
-                      >
-                        <Checkbox
-                          value={(row.original as KeyValue).id}
-                          checked={
-                            checked.hasOwnProperty(
-                              (row.original as KeyValue).id.toString()
-                            )
-                              ? true
-                              : false
-                          }
-                          onChange={(e: SyntheticEvent<HTMLInputElement>) => {
-                            handleCheckboxChange(e, row.original.subRows);
-                          }}
-                        />
-                      </td>
-                    )}
-                    {row.cells.map((cell: any, indexInner: number) => {
-                      const isIdColumn =
-                        cell.column.type.__typename === 'TableColumnId';
-                      return (
-                        <td
-                          className={
-                            (!actions || actions.length === 0) &&
-                              indexInner === 0
-                              ? `td-${indexInner} firstColumn`
-                              : `td-${indexInner}`
-                          }
-                          key={indexInner}
-                          {...cell.getCellProps()}
-                          {...cell.row.getExpandedToggleProps({
-                            onClick: () => { },
-                            style: {
-                              textAlign: isIdColumn && 'right',
-                              verticalAlign: isIdColumn && 'bottom',
-                              paddingBottom: isIdColumn && '5px',
-                              paddingLeft: `${indexInner === 0 &&
-                                row.depth === 1 &&
-                                row.depth * 2}rem`,
-                              cursor: 'default'
-                            }
-                          })}
-                        >
-                          <TableData {...generateComponentProps(cell)} />
-                        </td>
-                      );
-                    })}
-                    <td>
-                      <span className='action-buttons'>
-                        {!checked.hasOwnProperty(
-                          (row.original as KeyValue).id.toString()
-                        ) && (
-                            <TableData
-                              type='action_buttons'
-                              props={{
-                                onPencilClick: () => { },
-                                onDuplicateClick: () => { },
-                                onTrashClick: () => { }
-                              }}
-                            />
-                          )}
-                      </span>
-                    </td>
-                  </tr>
+                    row={row}
+                    checked={checked}
+                    hasActions={hasActions}
+                    prepareRow={prepareRow}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                ) : (
+                  <TableTr
+                    indexOuter={indexOuter}
+                    page={page}
+                    key={indexOuter}
+                    row={row}
+                    checked={checked}
+                    hasActions={hasActions}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
                 );
               })}
             </tbody>

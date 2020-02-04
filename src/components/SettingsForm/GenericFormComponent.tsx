@@ -7,6 +7,7 @@ import PageSection from './components/PageSection';
 import ElementGroup from './components/ElementGroup';
 import VertElementGroup from './components/VertElementGroup';
 import HorizontalElementGroup from './components/HorizontalElementGroup';
+import AlertSection from './components/AlertSection';
 
 // Common components
 import TabbedFieldGroup from '../TabbedFieldGroup';
@@ -14,7 +15,11 @@ import TabbedFieldGroup from '../TabbedFieldGroup';
 export const GenericFormComponent = (props: any) => {
   switch (props.type) {
     case 'tabs_section':
-      return <TabbedFieldGroup {...props} />;
+      return (
+        <div style={{ position: 'relative', maxWidth: 685 }}>
+          <TabbedFieldGroup {...props} />
+        </div>
+      );
     case 'feature_section':
       return <FeatureSection {...props} />;
     case 'page_section':
@@ -27,6 +32,8 @@ export const GenericFormComponent = (props: any) => {
       return <HorizontalElementGroup {...props} />;
     case 'label':
       return <Label {...props} />;
+    case 'alert':
+      return <AlertSection {...props} />;
     case 'field':
       throw Error('Fields must be in a container');
     default:

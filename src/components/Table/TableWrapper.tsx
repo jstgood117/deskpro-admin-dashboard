@@ -21,6 +21,8 @@ interface IProps {
   columnOrder: ColumnOrder[];
   sortBy?: SortType[];
   onSortChange?: (sortBy: SortType[]) => void;
+  groupBy?: string[];
+  onGroupByChange?: (columnNames: string[]) => void;
 }
 
 const generateSortType = (sortType: string) => {
@@ -71,6 +73,8 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   columnOrder,
   onSortChange,
   sortBy,
+  groupBy,
+  onGroupByChange,
   view
 }) => {
   return (
@@ -90,6 +94,8 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           tableType={dataType}
           onSortChange={onSortChange}
           sortBy={sortBy}
+          groupBy={groupBy}
+          onGroupByChange={onGroupByChange}
         />
       )}
       {view === 'card' && (

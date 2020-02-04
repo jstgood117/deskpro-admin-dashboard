@@ -71,7 +71,7 @@ describe('Table', () => {
         id: 'name',
         desc: false
       }],
-
+      groupBy: ['agents']
     };
     mountedTable = undefined;
   });

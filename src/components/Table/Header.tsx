@@ -2,6 +2,7 @@ import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
 import { withApollo } from '@apollo/react-hoc';
 import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
+import { without } from 'lodash';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { runAction, querySelectOptions } from '../../services/actions/run';
 import { ActionFactory } from '../../services/actions/ActionFactory';
@@ -40,6 +41,7 @@ export type Props = {
   checked: object;
   path: string;
   page: any;
+  rows: any;
   columns: any[];
   totalRecords: number;
   rowsPerPage: number;
@@ -61,6 +63,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   checked,
   path,
   page,
+  rows,
   columns,
   totalRecords,
   rowsPerPage,
@@ -97,26 +100,27 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   useEffect(() => {
     if (dropdownValue) {
       if (dropdownValue.link === 'All') {
-        onSelectEverything(data, setChecked);
+        onSelectEverything(rows, setChecked);
       }
       if (dropdownValue.link === 'All on the page') {
-        onSelectAllChange(true, setChecked, pageIndex, pageSize, data);
+        onSelectAllChange(true, setChecked, pageIndex, pageSize, page);
       }
     }
 
     setDropdownValue(undefined);
-  }, [dropdownValue, data, setChecked, pageIndex, pageSize]);
+  }, [dropdownValue, rows, setChecked, page, pageIndex, pageSize]);
 
   const handleSelectAllClick = (
     event: SyntheticEvent<HTMLInputElement>,
     _pageIndex: number
   ) => {
+    // const finalData = data.concat(page.filter((row: any) => row.isGrouped));
     onSelectAllChange(
       event.currentTarget.checked,
       setChecked,
       _pageIndex,
       pageSize,
-      data
+      page
     );
   };
 
@@ -175,13 +179,18 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const csvData = generateCSVData(page, columns);
   const items = [{ link: 'All on the page' }, { link: 'All' }];
   const checkedIds = Object.keys(checked);
+  const groupIds = rows
+    .filter((row: any) => row.isGrouped)
+    .map((row: any) => row.id);
   const actions = ActionFactory(path);
+  const hasActions = actions && actions.length > 0;
+
   return (
     <>
       <TableStyled>
         <TableHeader>
           <AllCheckStyle>
-            {actions && actions.length > 0 && data.length > 0 && (
+            {hasActions && data.length > 0 && (
               <Checkbox
                 checked={isAllChecked}
                 opened={opened}
@@ -199,7 +208,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
             )}
             {Object.keys(checked).length > 0 && (
               <span className='selected-text'>
-                {Object.keys(checked).length} Selected
+                {without(Object.keys(checked), ...groupIds).length} Selected
               </span>
             )}
             {Object.keys(checked).length > 0 && (
