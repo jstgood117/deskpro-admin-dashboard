@@ -1,4 +1,5 @@
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { Formik } from 'formik';
 
 import { mount, shallow } from '../../test/enzyme';
@@ -33,7 +34,7 @@ describe('StringListBuilder', () => {
     );
   };
 
-  it('should generate remove row on click', () => {
+  it('should generate remove row on click', async () => {
     const initialValues = { test: ['1st string', '2nd string'] };
     const mockValidate = jest.fn();
     const root = wrapper(false, {
@@ -48,10 +49,12 @@ describe('StringListBuilder', () => {
       }
     });
     expect(root.find('.string-row span').length).toEqual(2);
-    root
+    await act(async () => {
+      root
       .find('.string-row span')
       .first()
       .simulate('click');
+    });
     expect(mockValidate).toBeCalled();
   });
 
