@@ -25,85 +25,87 @@ const ImporterPage: FC<IProps> = () => {
   return (
     <Container>
       <FeatureSectionStyled>
-        <h1>Importer</h1>
-        <div className='form-row'>
+        <h1 className='feature-section-title'>Importer</h1>
+        <div className='form-row' style={{ justifyContent: 'flex-start' }}>
           <label>Data Importer</label>
-          {generateTitleAndDescription('field-container', {
-            description:
-              'The importer allows you to import data from other sources into Deskpro. To begin select a data source.'
-          })}
-          <div className='form-ctrl'>
-            <Group>
-              <div style={{ display: 'flex' }}>
-                <Radio
-                  setOption={(val: any) => {
-                    setOption(val);
-                  }}
-                  option={option}
-                  value='kayako'
-                  id='kayako'
-                />
-                <HelpDesk title='Kayako' className='helpdesk' logo={Kayako} />
-              </div>
-              <div className='form-row'>
-                {generateTitleAndDescription('field-container', {
-                  description: 'Import from your on-premise Kayako helpdesk.'
-                })}
-              </div>
-              <div className='info-link'>
-                <Link href='http://www.test.com' icon='ic-save'>
-                  Kayako Importer
-                </Link>
-              </div>
-            </Group>
-            {option === 'kayako' && (
-              <Formik
-                onSubmit={submit}
-                validationSchema={ValidationSchema()}
-                initialValues={initialKayakoValues}
-              >
-                {KayakoForm}
-              </Formik>
-            )}
-          </div>
-          <div className='form-ctrl'>
-            <Group>
-              <div style={{ display: 'flex' }}>
-                <Radio
-                  setOption={(val: any) => {
-                    setOption(val);
-                  }}
-                  option={option}
-                  value='zendesk'
-                  id='zendesk'
-                />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {generateTitleAndDescription('field-container', {
+              description:
+                'The importer allows you to import data from other sources into Deskpro. To begin select a data source.'
+            })}
+            <div className='form-ctrl'>
+              <Group>
+                <div style={{ display: 'flex' }}>
+                  <Radio
+                    setOption={(val: any) => {
+                      setOption(val);
+                    }}
+                    option={option}
+                    value='kayako'
+                    id='kayako'
+                  />
+                  <HelpDesk title='Kayako' className='helpdesk' logo={Kayako} />
+                </div>
+                <div className='form-row'>
+                  {generateTitleAndDescription('field-container', {
+                    description: 'Import from your on-premise Kayako helpdesk.'
+                  })}
+                </div>
+                <div className='info-link'>
+                  <Link href='http://www.test.com' icon='ic-save'>
+                    Kayako Importer
+                  </Link>
+                </div>
+              </Group>
+              {option === 'kayako' && (
+                <Formik
+                  onSubmit={submit}
+                  validationSchema={ValidationSchema()}
+                  initialValues={initialKayakoValues}
+                >
+                  {KayakoForm}
+                </Formik>
+              )}
+            </div>
+            <div className='form-ctrl'>
+              <Group>
+                <div style={{ display: 'flex' }}>
+                  <Radio
+                    setOption={(val: any) => {
+                      setOption(val);
+                    }}
+                    option={option}
+                    value='zendesk'
+                    id='zendesk'
+                  />
 
-                <HelpDesk
-                  title='Zendesk'
-                  logo={Zenddesk}
-                  className='helpdesk'
-                />
-              </div>
-              <div className='form-row'>
-                {generateTitleAndDescription('field-container', {
-                  description: 'Import from a Zendesk helpdesk.'
-                })}
-              </div>
-              <div className='info-link'>
-                <Link href='http://www.test.com' icon='ic-save'>
-                  Zendesk Importer
-                </Link>
-              </div>
-            </Group>
-            {option === 'zendesk' && (
-              <Formik
-                onSubmit={submit}
-                validationSchema={ValidationSchema()}
-                initialValues={initialZendeskValues}
-              >
-                {ZendeskForm}
-              </Formik>
-            )}
+                  <HelpDesk
+                    title='Zendesk'
+                    logo={Zenddesk}
+                    className='helpdesk'
+                  />
+                </div>
+                <div className='form-row'>
+                  {generateTitleAndDescription('field-container', {
+                    description: 'Import from a Zendesk helpdesk.'
+                  })}
+                </div>
+                <div className='info-link'>
+                  <Link href='http://www.test.com' icon='ic-save'>
+                    Zendesk Importer
+                  </Link>
+                </div>
+              </Group>
+              {option === 'zendesk' && (
+                <Formik
+                  onSubmit={submit}
+                  validationSchema={ValidationSchema()}
+                  initialValues={initialZendeskValues}
+                >
+                  {ZendeskForm}
+                </Formik>
+              )}
+            </div>
           </div>
         </div>
       </FeatureSectionStyled>
