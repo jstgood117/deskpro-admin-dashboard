@@ -11,13 +11,26 @@ export const StyledBinaryButton = styled.div<{ selected: boolean }>`
     display: flex;
     font-weight: normal;
     align-items: center;
-    .icon-text {
-      margin: auto;
+    .yes-icon-text, .no-icon-text {
       display: flex;
       align-items: center;
       svg {
         margin: unset !important;
         padding-right: 16px !important;
+      }
+    }
+    .yes-icon-text {
+      padding-left: 46px;
+      svg {
+        width: 13px;
+        height: 9px;
+      }
+    }
+    .no-icon-text {
+      padding-left: 50px;
+      svg {
+        width: 9px;
+        height: 9px;
       }
     }
   }

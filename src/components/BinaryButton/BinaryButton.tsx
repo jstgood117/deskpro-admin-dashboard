@@ -18,7 +18,7 @@ export const BinaryButton: React.FC<IProps> = ({ select, selected }) => (
       size='medium'
       className={'yes-btn ' + (selected === true ? 'selected' : 'un-selected')}
     >
-      <span className='icon-text'>
+      <span className='yes-icon-text'>
         <Icon name='check-2' />
         Yes
       </span>
@@ -31,7 +31,7 @@ export const BinaryButton: React.FC<IProps> = ({ select, selected }) => (
       size='medium'
       className={'no-btn ' + (selected === false ? 'selected' : 'un-selected')}
     >
-      <span className='icon-text'>
+      <span className='no-icon-text'>
         <Icon name='close' />
         No
       </span>
