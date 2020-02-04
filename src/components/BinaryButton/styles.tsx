@@ -20,14 +20,14 @@ export const StyledBinaryButton = styled.div<{ selected: boolean }>`
       }
     }
     .yes-icon-text {
-      padding-left: 46px;
+      padding-left: 47px;
       svg {
         width: 13px;
         height: 9px;
       }
     }
     .no-icon-text {
-      padding-left: 50px;
+      padding-left: 53px;
       svg {
         width: 9px;
         height: 9px;
