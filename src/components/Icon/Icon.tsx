@@ -77,6 +77,7 @@ import { ReactComponent as IconSortUpActive } from '../../assets/svg/icons/ic-so
 import { ReactComponent as IconGroupingUp } from '../../assets/svg/icons/ic-grouping-up.svg';
 import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-grouping-down.svg';
 import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
+import { ReactComponent as IconUp } from '../../assets/svg/ic-up.svg';
 
 export interface IProps {
   name: string;
@@ -222,6 +223,8 @@ const Icon: FC<IProps> = props => {
       return <IconUpload />;
     case 'down':
       return <IconDown />;
+    case 'up':
+      return <IconUp />;
     case 'ic-dollar-sign':
       return <IconDollarSign />;
     case 'ic-help-center':

@@ -8,15 +8,20 @@ export const onCheckboxChange = (
   value: string,
   checked: object,
   setChecked: objectUseState,
-  subRows: any[]
+  subRows: any[],
+  options: any = {}
 ) => {
+  let selected: any[] = [];
+  let { groupedRows } = options;
+  const isGrouped = !!options.isGrouped;
   const keys = Object.keys(checked);
   if (subRows.length > 0) {
     if (keys.includes(value)) {
       const ids: string[] = [];
       ids.push(value);
-      subRows.map((_subRow: { id: any }) => {
-        ids.push(_subRow.id);
+      subRows.map((_subRow: any) => {
+        const id = (_subRow.original && _subRow.original.id) || _subRow.id;
+        ids.push(id);
         return true;
       });
       const newIds = keys
@@ -27,25 +32,48 @@ export const onCheckboxChange = (
     } else {
       const ids = [];
       ids.push({ [value]: true });
-      subRows.map((_subRow: { id: any }) => {
-        ids.push({ ...checked, ...{ [_subRow.id]: true } });
+      subRows.map((_subRow: any) => {
+        const id = (_subRow.original && _subRow.original.id) || _subRow.id;
+        ids.push({ ...checked, ...{ [id]: true } });
         return true;
       });
       setChecked(Object.assign({}, ...ids));
       return true;
     }
   } else {
+    let newIds: KeyValue = {};
     if (keys.includes(value)) {
-      const newIds = keys
+      newIds = keys
         .filter(_id => _id !== value)
         .reduce((_obj, _id) => Object.assign(_obj, { [_id]: true }), {});
-      setChecked(newIds);
     } else {
-      setChecked({
+      newIds = {
         ...checked,
         [value]: true
+      };
+    }
+    if (isGrouped) {
+      selected = Object.keys(newIds);
+      groupedRows = groupedRows.reduce(
+        (o: any, group: any) => ({
+          ...o,
+          [group.id]: group.subRows.map((r: any) => r.original.id)
+        }),
+        {}
+      );
+      Object.keys(groupedRows).forEach((groupId: string) => {
+        const group = groupedRows[groupId];
+        if (_.difference(group, selected).length === 0) {
+          newIds = {
+            ...newIds,
+            [groupId]: true
+          };
+        } else {
+          delete newIds[groupId];
+        }
       });
     }
+    setChecked(newIds);
     return true;
   }
 };
@@ -65,38 +93,14 @@ export const onSelectAllChange = (
     const endPos = Math.min(startPos + pageSize, data.length);
 
     const showingRows = _.slice(data, startPos, endPos);
-    const ids = showingRows.map((_row: KeyValue) => ({
-      [_row.id]: true
-    }));
-    showingRows.map(row => {
-      if (row.subRows.length > 0) {
-        row.subRows.map((_row: KeyValue) =>
-          ids.push({
-            [_row.id]: true
-          })
-        );
-      }
-      return true;
-    });
+    const ids = getIdsFromData(showingRows);
     setChecked(Object.assign({}, ...ids));
     return true;
   }
 };
 
 export const onSelectEverything = (data: any[], setChecked: objectUseState) => {
-  const ids = data.map((_row: KeyValue) => ({
-    [_row.id]: true
-  }));
-  data.map(row => {
-    if (row.subRows.length > 0) {
-      row.subRows.map((_row: KeyValue) =>
-        ids.push({
-          [_row.id]: true
-        })
-      );
-    }
-    return true;
-  });
+  const ids = getIdsFromData(data);
   setChecked(Object.assign({}, ...ids));
   return true;
 };
@@ -130,7 +134,7 @@ export const generateTableParams = (
 
 export const getCSVCellFormatOnType = (
   columnProps: KeyValue,
-  values: any
+  values: any = {}
 ): string => {
   switch (columnProps.__typename) {
     case 'TableColumnNameAvatar':
@@ -146,9 +150,12 @@ export const getCSVCellFormatOnType = (
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return values[columnProps.valuesArray.dataPath] && values[columnProps.valuesArray.dataPath]
-        .map((item: any) => item.title)
-        .join(', ');
+      return (
+        values[columnProps.valuesArray.dataPath] &&
+        values[columnProps.valuesArray.dataPath]
+          .map((item: any) => item.title)
+          .join(', ')
+      );
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
@@ -177,10 +184,8 @@ export const generateCSVData = (
           columnMeta.columnProps,
           row.original
         );
-
         return true;
       });
-
       csvData.push(temp);
       return true;
     });
@@ -197,4 +202,24 @@ export const generateCardProps = (row: any): UserType => {
     userMail: original.primary_email
     // avatar: original.avatarUrn
   };
+};
+
+export const getIdsFromData = (data: any) => {
+  const ids = data.map((_row: KeyValue) => {
+    const id = (_row.original && _row.original.id) || _row.id;
+    return {
+      [id]: true
+    };
+  });
+  data.forEach((row: KeyValue) => {
+    if (row.subRows.length > 0) {
+      row.subRows.forEach((_row: KeyValue) => {
+        const id = (_row.original && _row.original.id) || _row.id;
+        ids.push({
+          [id]: true
+        });
+      });
+    }
+  });
+  return ids;
 };

@@ -13,15 +13,8 @@ import Pagination, { IPageChange } from '../Pagination/Pagination';
 import KanbanViewCard from '../Card/KanbanViewCard';
 import Header from './Header';
 import { TableType, TableParams, SortType } from './types';
-import {
-  generateTableParams,
-  generateCardProps,
-} from './helpers/functions';
-import {
-  TableStyled,
-  StyledPagination,
-  CardGrid
-} from './TableStyles';
+import { generateTableParams, generateCardProps } from './helpers/functions';
+import { TableStyled, StyledPagination, CardGrid } from './TableStyles';
 
 export type Props = {
   path: string;
@@ -44,7 +37,6 @@ const Card: FC<Props> = ({
   tableType,
   sortBy
 }) => {
-
   const tableParams: TableParams = generateTableParams(
     tableType,
     columns,
@@ -56,6 +48,7 @@ const Card: FC<Props> = ({
     toggleSortBy,
     prepareRow,
     page,
+    rows,
     setPageSize,
     gotoPage,
     state: { pageIndex, pageSize }
@@ -90,9 +83,9 @@ const Card: FC<Props> = ({
     gotoPage(datas.currentPage - 1);
   };
 
-  const handleChangeRowsPerPage = (rows: number) => {
-    setPageSize(rows);
-    setRowsPerPage(rows);
+  const handleChangeRowsPerPage = (_rows: number) => {
+    setPageSize(_rows);
+    setRowsPerPage(_rows);
     setCurrentPage(1);
     gotoPage(0);
   };
@@ -113,6 +106,7 @@ const Card: FC<Props> = ({
           checked={checked}
           path={path}
           page={page}
+          rows={rows}
           columns={columns}
           totalRecords={totalRecords}
           rowsPerPage={rowsPerPage}
@@ -127,7 +121,11 @@ const Card: FC<Props> = ({
             prepareRow(row);
             return (
               <div key={indexOuter}>
-                <KanbanViewCard checkbox={true} styleType='view4' cardDetails={generateCardProps(row)} />
+                <KanbanViewCard
+                  checkbox={true}
+                  styleType='view4'
+                  cardDetails={generateCardProps(row)}
+                />
               </div>
             );
           })}

@@ -2,7 +2,11 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useQuery, withApollo } from 'react-apollo';
 import { gql, ApolloClient, ApolloError } from 'apollo-boost';
 import styled from 'styled-components';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import {
+  withRouter,
+  RouteComponentProps,
+  useRouteMatch
+} from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
 import { setupFilters } from '../../services/filters';
@@ -23,6 +27,10 @@ import {
 } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
+import {
+  tableTestData,
+  tableTestColumns
+} from '../../components/Table/testData';
 
 import { ResponseData } from './types';
 
@@ -36,7 +44,7 @@ export interface IProps {
   client: ApolloClient<any>;
 }
 
-export  type ViewDataType = {
+export type ViewDataType = {
   view: any;
   index: number;
 };
@@ -44,12 +52,12 @@ export  type ViewDataType = {
 type CombinedProps = IProps & RouteComponentProps<any>;
 
 const TableActionStyled = styled(dpstyle.div)`
-  margin-top:-30px;
-  margin-bottom:24px;
+  margin-top: -30px;
+  margin-bottom: 24px;
 `;
 
 const BodyMargin = styled(dpstyle.div)`
-  margin:0 34px 34px 34px;
+  margin: 0 34px 34px 34px;
 `;
 
 const StandardTablePage: FC<CombinedProps> = ({
@@ -58,12 +66,12 @@ const StandardTablePage: FC<CombinedProps> = ({
   client,
   history
 }) => {
-
   const [gqlError, setGqlError] = useState<boolean>(false);
   const [tabIndex, setTabState] = useState<number>(0);
   const [filters, setFilters] = useState<FilterType[]>([]);
   const [columnOrder, setColumnOrder] = useState<ColumnOrder[]>([]);
   const [sortItems, setSortItems] = useState<SortType[]>([]);
+  const [groupBy, setGroupBy] = useState<string[]>([]);
   const [pageResponse, setPageResponse] = useState<any>();
   const [tableData, setTableData] = useState<KeyValue[]>();
   const [filteredData, setFilteredData] = useState<KeyValue[]>([]);
@@ -71,6 +79,8 @@ const StandardTablePage: FC<CombinedProps> = ({
   const [view, setView] = useState<'table' | 'list' | 'card'>('table');
   const [currentView, setCurrentView] = useState<any>();
   const [pageSize] = useState<number>(10);
+
+  const match = useRouteMatch();
 
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
@@ -80,7 +90,6 @@ const StandardTablePage: FC<CombinedProps> = ({
   const primaryPath = Array.isArray(paths) ? paths[0] : path;
 
   const getCurrentView = (_views: any, _path: string) => {
-
     const results = {
       view: undefined,
       index: undefined
@@ -90,7 +99,7 @@ const StandardTablePage: FC<CombinedProps> = ({
       // If path matches current path OR if path is
       // null, assume 1 view in _views and set it to
       // the return value.
-      if(_view.path === _path || _view.path === null) {
+      if (_view.path === _path || _view.path === null) {
         results.view = _view;
         results.index = index;
       }
@@ -99,17 +108,21 @@ const StandardTablePage: FC<CombinedProps> = ({
     return results;
   };
 
-  useQuery(query, { errorPolicy: 'all', variables: { path: primaryPath },
+  useQuery(query, {
+    errorPolicy: 'all',
+    variables: { path: primaryPath },
     onCompleted: (_response: ResponseData) => {
-
       setPageResponse(_response);
       // If the response isn't formatted in a way that
       // expected, just return
-      if(!_response || !_response.hasOwnProperty('standardDataPage')) {
+      if (!_response || !_response.hasOwnProperty('standardDataPage')) {
         return false;
       }
 
-      const viewData: ViewDataType = getCurrentView(_response['standardDataPage'].views, primaryPath);
+      const viewData: ViewDataType = getCurrentView(
+        _response['standardDataPage'].views,
+        primaryPath
+      );
 
       setCurrentView(viewData.view);
       setTabState(viewData.index);
@@ -119,58 +132,60 @@ const StandardTablePage: FC<CombinedProps> = ({
     }
   });
 
-  const getTableData = useCallback(async (_response: ResponseData) => {
+  const getTableData = useCallback(
+    async (_response: ResponseData) => {
+      if (!currentView || !currentView.dataQuery) {
+        return undefined;
+      }
 
-    if(!currentView || !currentView.dataQuery) {
-      return undefined;
-    }
+      const unchangedDataQuery = currentView.dataQuery;
 
-    const unchangedDataQuery = currentView.dataQuery;
+      // FIX: removes ticket_department from gql
+      const dataQuery = unchangedDataQuery.replace(
+        'ticket_departments',
+        'departments'
+      );
 
-    // FIX: removes ticket_department from gql
-    const dataQuery = unchangedDataQuery.replace('ticket_departments', 'departments');
+      try {
+        const dataResponse = await client.query({
+          query: gql`
+            ${dataQuery}
+          `,
+          errorPolicy: 'all'
+        });
 
-    try {
-
-      const dataResponse = await client.query({
-        query: gql`${dataQuery}`,
-        errorPolicy: 'all'
-      });
-
-      const { results }: { results: KeyValue[]} = dataResponse.data;
-      const treedResults = treeify(results);
-      setTableData(treedResults);
-      setFilteredData(treedResults);
-      setTotalPageCount(Math.ceil(results.length / pageSize));
-
-    } catch(err) {
-      console.debug('sError for query: ' + dataQuery);
-      console.error(err);
-      logError(err);
-    }
-  }, [client, pageSize, currentView]);
+        const { results }: { results: KeyValue[] } = dataResponse.data;
+        const treedResults = treeify(results);
+        setTableData(treedResults);
+        setFilteredData(treedResults);
+        setTotalPageCount(Math.ceil(results.length / pageSize));
+      } catch (err) {
+        console.debug('sError for query: ' + dataQuery);
+        console.error(err);
+        logError(err);
+      }
+    },
+    [client, pageSize, currentView]
+  );
 
   useEffect(() => {
     setFilters(setupFilters('*'));
   }, [path]);
 
   const fetchData = useCallback(() => {
-
     if (pageResponse) {
       getTableData(pageResponse);
     }
   }, [pageResponse, getTableData]);
 
   useEffect(() => {
-
     if (pageResponse) {
       getTableData(pageResponse);
     }
-
   }, [pageResponse, getTableData]);
 
   useEffect(() => {
-    if(tableData) {
+    if (tableData) {
       setFilteredData(runFilters(tableData, filters));
     }
   }, [filters, tableData]);
@@ -195,38 +210,41 @@ const StandardTablePage: FC<CombinedProps> = ({
   const tableDef = currentView.tableDef;
   const filterDef = currentView.filterDef;
 
-  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map((_column: ITableColumn) => ({
-    column:_column.title,
-    show: true
-  }));
+  const initialColumnOrder: ColumnOrder[] = tableDef.columns.map(
+    (_column: ITableColumn) => ({
+      column: _column.title,
+      show: true
+    })
+  );
 
   const onFilterChange = (internalFilters: FilterProps[]) => {
-
     const serviceFilters = processFiltersToFilterTypes(internalFilters);
     const searchFilter = filters.find(_filter => _filter.id === '*-CONTAINS-1');
-
     setFilters([searchFilter, ...serviceFilters]);
   };
 
   const onSearchChange = (_value: string, internalFilters: FilterProps[]) => {
-    const searchFilter = processFiltersToFilterTypes([{
-      property: '*',
-      operatorName: 'CONTAINS',
-      value:[_value]
-    }, ...internalFilters]);
+    const searchFilter = processFiltersToFilterTypes([
+      {
+        property: '*',
+        operatorName: 'CONTAINS',
+        value: [_value]
+      },
+      ...internalFilters
+    ]);
     setFilters(searchFilter);
   };
 
-  const onOrderChange = (
-    _columnOrder: ColumnOrder[]
-  ) => {
+  const onOrderChange = (_columnOrder: ColumnOrder[]) => {
     setColumnOrder(_columnOrder);
   };
 
-  const onSortChange = (
-    _sortItems: SortType[]
-  ) => {
+  const onSortChange = (_sortItems: SortType[]) => {
     setSortItems(_sortItems);
+  };
+
+  const onGroupByChange = (columnNames: string[]) => {
+    setGroupBy(columnNames);
   };
 
   const getUniqueValues = (columnName: string): string[] => {
@@ -234,12 +252,10 @@ const StandardTablePage: FC<CombinedProps> = ({
   };
 
   const onNewClick = (_primaryPath: string) => {
-
     history.push(`${_primaryPath}/new`);
-
   };
 
-  const contextValue:StandardTableContextValues = {
+  const contextValue: StandardTableContextValues = {
     path,
     filters,
     onFilterChange,
@@ -277,6 +293,7 @@ const StandardTablePage: FC<CombinedProps> = ({
                 viewMenu={true}
                 onOrderChange={onOrderChange}
                 onSortChange={onSortChange}
+                onGroupByChange={onGroupByChange}
                 sortBy={sortItems}
                 getUniqueValues={getUniqueValues}
               />
@@ -296,16 +313,18 @@ const StandardTablePage: FC<CombinedProps> = ({
             )}
             {views && currentView && (
               <TableWrapper
-                {...currentView}
+                {...(match.url === '/agents' ? tableTestColumns : currentView)}
                 view={view}
-                path={path}
-                data={filteredData}
+                path={path || primaryPath}
+                data={match.url === '/agents' ? tableTestData : filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}
                 columnOrder={columnOrder}
                 sortBy={sortItems}
                 onSortChange={onSortChange}
+                groupBy={groupBy}
+                onGroupByChange={onGroupByChange}
               />
             )}
           </BodyMargin>

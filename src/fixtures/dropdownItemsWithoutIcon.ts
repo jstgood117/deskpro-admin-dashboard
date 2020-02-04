@@ -45,18 +45,31 @@ export const testDropdownItemsWithoutIcon: IMenuItemProps[] = [
   }
 ];
 export const testGroupItems: IMenuItemProps[] = [
-  { name: 'Access' },
-  { name: 'Team' },
-  { name: 'Permission Group' },
-  { name: 'Assigned tickets' },
+  { name: 'Teams', column: 'admin_common.col.teams' },
+  { name: 'Groups', column: 'admin_common.col.groups' },
+  { name: 'Departments', column: 'admin_common.col.departments' },
   {},
   {
     name: 'Sort group',
     subItems: [
-      { name: 'Name' },
-      { name: 'Date created' },
-      { name: 'Number of agents' },
-      { name: 'Number of tickets' }
-    ],
+      { name: 'Name', column: 'admin_common.col.name', sortable: true },
+      /*
+      {
+        name: 'Date created',
+        column: 'admin_common.col.date_created',
+        sortable: true
+      },
+      {
+        name: 'Number of agents',
+        column: 'admin_common.col.agents',
+        sortable: true
+      },
+      {
+        name: 'Number of tickets',
+        column: 'admin_common.col.tickets',
+        sortable: true
+      }
+      */
+    ]
   }
 ];

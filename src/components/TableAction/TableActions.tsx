@@ -23,10 +23,10 @@ import Menu from '../Menu';
 import {
   generateViewList,
   generatSortMenuItems,
+  generateGroupMenuItems,
   generatFilterOptions
 } from './functions';
 import { SortType } from '../Table/types';
-import { testGroupItems } from '../../resources/constants/constants';
 
 const StyledTableAction = styled(dpstyle.div)`
   z-index: 1;
@@ -76,6 +76,7 @@ export interface IProps {
   sortBy?: SortType[];
   onOrderChange: (columnOrder: ColumnOrder[]) => void;
   onSortChange: (sortItems: SortType[]) => void;
+  onGroupByChange: (columnNames: string[]) => void;
   getUniqueValues?: (columnName: string) => string[];
 }
 
@@ -122,6 +123,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   intl,
   onOrderChange,
   onSortChange,
+  onGroupByChange,
   sortBy,
   getUniqueValues,
   ...props
@@ -151,6 +153,14 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const [sortMenuItems, setSortMenuItems] = useState(
     generatSortMenuItems(tableDef, intl)
+  );
+  // eslint-disable-next-line
+  const [groupMenuItems, setGroupMenuItems] = useState(
+    generateGroupMenuItems({
+      tableDef,
+      sortMenuItems,
+      intl
+    })
   );
   const [checked, setChecked] = useState<KeyValue>(checkedState);
   const [initialChecked] = useState<KeyValue>(checkedState);
@@ -286,6 +296,16 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     });
   };
 
+  const handleGroupChange = (val: any) => {
+    if (val.sortable) {
+      const { name: label, column: link } = val;
+      return handleSortChange({ link, label });
+    }
+    const { column } = val;
+    onGroupByChange([column]);
+    setGroupValue(val);
+  };
+
   const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), [
     internalFilters
   ]);
@@ -412,13 +432,13 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
             <FlexStyled style={{ paddingRight: 10 }}>
               <Menu
                 name='group'
-                menuItems={testGroupItems}
+                menuItems={groupMenuItems}
                 iconName='group'
                 value={groupValue}
                 size='medium'
                 subMenuDirection='left'
                 label='admin_agents_groups.group'
-                onSelect={val => setGroupValue(val)}
+                onSelect={handleGroupChange}
               />
             </FlexStyled>
           )}
@@ -433,7 +453,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                 opened={openedSort}
                 items={sortMenuItems}
                 dropdownValue={Sort}
-                onSelect={(val: any) => handleSortChange(val)}
+                onSelect={handleSortChange}
                 name={
                   typeof Sort !== 'string' && Sort.desc ? 'sort-desc' : 'sort'
                 }
