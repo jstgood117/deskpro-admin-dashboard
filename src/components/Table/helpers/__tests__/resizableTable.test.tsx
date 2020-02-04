@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from '../../../../test/enzyme';
 import Table, { Props } from '../../Table';
-import { resizableTable } from '../functions';
+import { resizableTable, setTdsWidth } from '../functions';
 import { ColumnMeta } from '../../types';
 
 const testData = [
@@ -49,7 +49,7 @@ describe('resizableTable', () => {
     if (!mountedTable) {
       mountedTable = bShallow
         ? shallow(<Table {...props} />)
-        : mount(<Table {...props} />);
+        : mount(<Table {...props} />, {attachTo: document.body});
     }
     return mountedTable;
   };
@@ -66,12 +66,19 @@ describe('resizableTable', () => {
       }],
       groupBy: ['agents']
     };
-    mountedTable = undefined;
   });
 
   it('always renders four <div class="resizer">', () => {
     const elts = wrapper(false).find('.resizer');
+
     resizableTable();
-    expect(elts.length).toBe(4);
+    expect(elts.length).toEqual(4);
+  });
+
+  it('should have style {min-width: 10px}', () => {
+    const elts = wrapper(false).find('.td-0');
+
+    setTdsWidth(0, 10);
+    expect((elts.at(0).getDOMNode() as HTMLElement).style.minWidth).toBe('10px');
   });
 });

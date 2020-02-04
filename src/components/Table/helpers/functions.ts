@@ -277,7 +277,7 @@ function setListeners(div: any) {
   });
 }
 
-function setTdsWidth(colIndex: number, width: number) {
+export function setTdsWidth(colIndex: number, width: number) {
   const colTds = document.getElementsByClassName(`td-${colIndex}`);
 
   for (const tdEl of colTds) {
