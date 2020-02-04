@@ -250,6 +250,8 @@ function setListeners(div: any) {
   });
 
   div.addEventListener('dblclick', (e: any) => {
+    curCol = e.target.parentElement;
+    curCol.style.minWidth = '1px';
     setTdsWidth(curColIndex, 1);
   });
 
@@ -260,7 +262,7 @@ function setListeners(div: any) {
 
       if (nxtCol) nxtCol.style.width = nxtColWidth - diffX + 'px';
 
-      curCol.style.width = curColWidth + diffX + 'px';
+      curCol.style.minWidth = curColWidth + diffX + 'px';
 
       setTdsWidth(curColIndex, curColWidth + diffX);
     }
