@@ -1,0 +1,11 @@
+<Formik
+      onSubmit={submit}
+      validationSchema={ValidationSchema()}
+      initialValues={initialKayakoValues}
+    >
+      {(formikProps: any) => (
+        <form onSubmit={formikProps.handleSubmit}>
+          {SettingsFormFactory(uiSchema, formikProps)}
+        </form>
+      )}
+    </Formik>

@@ -3,11 +3,19 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   align-items: flex-start;
-  padding: 0 0 0px 55px;
   height: 100%;
   position: relative;
   .form-row {
     border-bottom: none;
+    min-width: unset;
+    .sub-container {
+      display: flex;
+      flex-direction: column;
+      width: -webkit-fill-available;
+    }
+  }
+  .form-row::after {
+    content: none;
   }
   .field-container {
     width: 100%;
@@ -21,14 +29,8 @@ export const Container = styled.div`
     .element-details {
       max-width: 578px;
       margin: 0;
-      label {
-        font-family: Rubik;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 150%;
-        color: #4c4f50;
-        margin-bottom: 10px;
+      .element-details-label {
+        margin: 0;
       }
       p {
         font-family: Rubik;
@@ -38,14 +40,15 @@ export const Container = styled.div`
         line-height: 150%;
         color: #8b9293;
         margin: 0;
-        padding-left: 39px;
+        padding-left: 45px;
         padding-top: 8px;
+        margin-bottom: 16px;
       }
     }
   }
   .form-ctrl {
     .helpdesk {
-      padding-left: 25px;
+      padding-left: 31px;
     }
     .info-link {
       position: absolute;
@@ -58,7 +61,10 @@ export const Container = styled.div`
     }
     .field-container {
       flex-direction: column;
-      padding-bottom: 16px;
+      padding-bottom: 0;
+    }
+    .form-item {
+      position: relative;
     }
   }
   .test-btn {
