@@ -49,6 +49,11 @@ export const StyledBinaryButton = styled.div<{ selected: boolean }>`
   .un-selected.no-btn {
     button {
       border-left: 0px;
+      &:hover {
+        border-left: ${props =>
+          props.selected !== true && 'solid 1px ' + props.theme.activeColour};
+        margin-left: ${props => props.selected === undefined && -1}px;
+      }
     }
   }
   .un-selected.yes-btn {
