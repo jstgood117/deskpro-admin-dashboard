@@ -74,7 +74,11 @@ const TableTr: FC<Props> = ({
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
           return (
             <td
-              className={!hasActions && indexInner === 0 ? 'firstColumn' : ''}
+              className={!hasActions &&
+                indexInner === 0
+                  ? `td-${indexInner} firstColumn`
+                  : `td-${indexInner}`
+              }
               {...cell.getCellProps()}
               {...cell.row.getExpandedToggleProps({
                 onClick: () => {},
