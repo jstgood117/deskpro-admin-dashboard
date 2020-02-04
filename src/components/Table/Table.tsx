@@ -227,16 +227,14 @@ const Table: FC<Props> = ({
                         return (
                           <th
                             key={indexInner}
-                            {...column.getHeaderProps(
-                              column.getSortByToggleProps()
-                            )}
+                            {...column.getHeaderProps()}
                             style={{
                               border: column.isSorted && '1px solid #D3D6D7',
                               width: isIdColumn ? 1 : column.width || 'auto'
                             }}
                             data-colindex={indexInner}
                           >
-                            <StyledTh alignRight={isIdColumn}>
+                            <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
                               {column.render('Header')}
                               {column.isSorted &&
                                 (column.isSortedDesc ? (
@@ -244,10 +242,10 @@ const Table: FC<Props> = ({
                                     <Icon name='ic-sort-up-active' />
                                   </span>
                                 ) : (
-                                  <span className='sort-icon'>
-                                    <Icon name='ic-sort-down-active' />
-                                  </span>
-                                ))}
+                                    <span className='sort-icon'>
+                                      <Icon name='ic-sort-down-active' />
+                                    </span>
+                                  ))}
                               {column.isSorted && (
                                 <Tooltip
                                   content='Filter'
@@ -274,9 +272,9 @@ const Table: FC<Props> = ({
               {Array.from(
                 groupBy && groupBy.length
                   ? _.sortBy(
-                      groupedRows.filter((r: any) => r.isGrouped),
-                      'index'
-                    )
+                    groupedRows.filter((r: any) => r.isGrouped),
+                    'index'
+                  )
                   : page
               ).map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
@@ -292,16 +290,16 @@ const Table: FC<Props> = ({
                     handleCheckboxChange={handleCheckboxChange}
                   />
                 ) : (
-                  <TableTr
-                    indexOuter={indexOuter}
-                    page={page}
-                    key={indexOuter}
-                    row={row}
-                    checked={checked}
-                    hasActions={hasActions}
-                    handleCheckboxChange={handleCheckboxChange}
-                  />
-                );
+                    <TableTr
+                      indexOuter={indexOuter}
+                      page={page}
+                      key={indexOuter}
+                      row={row}
+                      checked={checked}
+                      hasActions={hasActions}
+                      handleCheckboxChange={handleCheckboxChange}
+                    />
+                  );
               })}
             </tbody>
           </table>
