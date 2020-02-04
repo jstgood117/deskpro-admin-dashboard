@@ -2,11 +2,12 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 
-const FeatureSectionStyled = styled.div`
+export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 974px;
 
   .element-details-label {
     display: flex;
