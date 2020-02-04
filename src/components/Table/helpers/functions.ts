@@ -251,8 +251,7 @@ function setListeners(div: any) {
 
   div.addEventListener('dblclick', (e: any) => {
     curCol = e.target.parentElement;
-    curCol.style.minWidth = '1px';
-    setTdsWidth(curColIndex, 1);
+    resetColWidth(curCol);
   });
 
   document.addEventListener('mousemove', (e: any) => {
@@ -283,4 +282,10 @@ export function setTdsWidth(colIndex: number, width: number) {
   for (const tdEl of colTds) {
     (tdEl as HTMLElement).style.minWidth = width + 'px';
   }
+}
+
+export function resetColWidth(el: any) {
+  const curColIndex = el.getAttribute('data-colindex');
+  el.style.minWidth = '1px';
+  setTdsWidth(curColIndex, 1);
 }
