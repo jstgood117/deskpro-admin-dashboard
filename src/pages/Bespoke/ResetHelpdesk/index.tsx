@@ -113,23 +113,3 @@ const ResetHelpdeskPage: FC<IProps> = ({ ui, initialValues }) => {
 };
 
 export default ResetHelpdeskPage;
-
-//       <PageTitile>Reset Helpdesk</PageTitile>
-/*
-const PageTitile = styled.h1`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 40px 0 22px 0;
-  margin: 0;
-  border-bottom: 1px solid #eff0f0;
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 150%;
-  color: #4c4f50;
-  width: 100%;
-`;
-*/
