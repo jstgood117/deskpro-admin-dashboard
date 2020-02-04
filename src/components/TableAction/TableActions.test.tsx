@@ -41,8 +41,10 @@ describe('TableActions', () => {
       onOrderChange: (order: ColumnOrder[]) => {
         order.sort();
         return;
+      },
+      onGroupByChange: (columnNames: string[]) => {
+        return;
       }
-
     };
     mountedTableActions = undefined;
   });

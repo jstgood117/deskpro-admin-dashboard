@@ -14,6 +14,10 @@ storiesOf('Table Action', module).add('Default', () => {
     return;
   };
 
+  const onGroupByChange = () => {
+    return;
+  };
+
   return (
     <div style={{ padding: 10, position: 'relative' }}>
       <TableActions
@@ -24,6 +28,7 @@ storiesOf('Table Action', module).add('Default', () => {
         viewMenu={true}
         onOrderChange={onOrderChange}
         onSortChange={onSortChange}
+        onGroupByChange={onGroupByChange}
       />
     </div>
   );

@@ -59,6 +59,10 @@ export const TableStyled = styled(dpstyle.div)`
             .filter-icon {
               display: none;
             }
+            &.th-action-buttons {
+              min-width: 100px;
+              width: 100px;
+            }
           }
         }
       }
@@ -141,12 +145,10 @@ export const TableStyled = styled(dpstyle.div)`
             text-align: left;
             color: ${props => props.theme.staticColour};
             vertical-align: middle;
-            & img {
-              width: 25px;
-              height: 25px;
-              border-radius: 12px;
-              vertical-align: middle;
-              margin-right: 15px;
+            &.checkBox {
+              padding-right: 6px;
+              padding-left: 10px;
+              width: 16px;
             }
             & * {
               max-width: 400px;
@@ -154,6 +156,13 @@ export const TableStyled = styled(dpstyle.div)`
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+            }
+            & img {
+              width: 25px;
+              height: 25px;
+              border-radius: 12px;
+              vertical-align: middle;
+              margin-right: 15px;
             }
           }
           .action-buttons {
