@@ -78,7 +78,12 @@ const elementsSelector: {
     />
   ),
   stringlist: props => (
-    <StringListBuilder {...props} values={props.formikProps.values[props.id]} />
+    <div style={{ marginBottom: 16 }}>
+      <StringListBuilder
+        {...props}
+        values={props.formikProps.values[props.id]}
+      />
+    </div>
   ),
   units: props => {
     return (

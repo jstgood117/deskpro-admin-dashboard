@@ -7,7 +7,7 @@ export const StdElementRow = (props: any) => {
   if (props.type === 'field') {
     return (
       <div className='form-row'>
-        <label>{props.title}</label>
+        <label htmlFor={props.field.id}>{props.title}</label>
         <div className='form-ctrl'>
           <FieldElement {...props.field} formikProps={props.formikProps} />
         </div>
