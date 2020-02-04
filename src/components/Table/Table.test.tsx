@@ -80,10 +80,4 @@ describe('Table', () => {
     const elts = wrapper(false).find('div');
     expect(elts.length).toBeGreaterThan(0);
   });
-
-  it('always renders four <div class="resizer">', () => {
-    const elts = wrapper(false).find('.resizer');
-    resizableTable();
-    expect(elts.length).toBe(4);
-  });
 });
