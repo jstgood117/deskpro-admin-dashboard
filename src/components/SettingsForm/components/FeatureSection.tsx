@@ -55,7 +55,7 @@ export const FeatureSectionStyled = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
-    padding: 34px 0 16px 0;
+    padding: 31px 0 16px 0;
     position: relative;
     min-width: 1280px;
     &::after {
