@@ -12,6 +12,8 @@ export type TableParams = {
     pageSize: number;
     sortBy?:SortType[];
   };
+  orderByFn?: (...args: any[]) => any[];
+  manualSortBy?: boolean;
   manualPagination?: boolean;
   pageCount?: number;
   autoResetSortBy?: boolean;
