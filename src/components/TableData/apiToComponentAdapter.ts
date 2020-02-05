@@ -10,11 +10,11 @@ import {
 } from '../../codegen/types';
 import moment from 'moment';
 
-const getColor = (index: number): ITableColor => {
+export const getColor = (index: number): ITableColor => {
   return getColorByIndex(index);
 };
 
-const generateTeamAvatar = (team: any) => {
+export const generateTeamAvatar = (team: any) => {
   const randomItem = getColor(Math.floor(Math.random() * 20));
   return {
     ...team,
@@ -23,7 +23,7 @@ const generateTeamAvatar = (team: any) => {
   };
 };
 
-const generateAgentAvatar = (agent: any) => {
+export const generateAgentAvatar = (agent: any) => {
   const randomItem = getColor(Math.floor(Math.random() * 20));
   return {
     ...agent,
@@ -32,7 +32,7 @@ const generateAgentAvatar = (agent: any) => {
   };
 };
 
-const convertPhrases = (
+export const convertPhrases = (
   values: string[],
   phraseMap: API_TableColumnPhraseMapItem[]
 ) => {
