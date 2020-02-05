@@ -78,6 +78,7 @@ import { ReactComponent as IconGroupingUp } from '../../assets/svg/icons/ic-grou
 import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-grouping-down.svg';
 import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
 import { ReactComponent as IconUp } from '../../assets/svg/ic-up.svg';
+import { ReactComponent as IconGuide } from '../../assets/svg/icons/ic-guide.svg';
 
 export interface IProps {
   name: string;
@@ -241,6 +242,8 @@ const Icon: FC<IProps> = props => {
       return <IconGroupingDown />;
     case 'ic-save':
       return <IconSave />;
+    case 'guide':
+      return <IconGuide />;
     case 'info-text':
       return (
         <Tooltip content='Info text' styleType='light' placement='bottom'>
