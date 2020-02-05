@@ -4,11 +4,17 @@ export const orderByFn = (
   isDesc: boolean[]
 ) => {
 
+  // If some of the rows are grouped
+  // fallback to original data
+  if(data.some(_row => _row.isGrouped)) {
+    return data;
+  }
+
   // get top level rows
-  const topLevel = data.filter(_row => !_row.original.parent);
+  const topLevel = data.filter(_row => _row.isGrouped || !_row.original.parent);
 
   // ... get all children
-  const children = data.filter(_row => _row.original.parent);
+  const children = data.filter(_row => !_row.isGrouped && _row.original.parent);
 
   // clone data
   const sortedData = [...topLevel];
@@ -30,7 +36,7 @@ export const orderByFn = (
     result.push(_row);
 
     // if this top level row has subRows...
-    if(_row.subRows.length > 0) {
+    if(_row.subRows && _row.subRows.length > 0) {
 
       // Sort the subRows
       _row.subRows.sort(sortFunction[0]);

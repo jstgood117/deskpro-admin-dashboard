@@ -18,4 +18,22 @@ describe('orderByFn', () => {
     expect(t3-t2).toBeLessThan(200);
   });
 
+
+  test('Returns original data if any of the rows are grouped', () => {
+
+    const grouped = [{
+      'id':'1000',
+      'isGrouped': true,
+      'name':'Shelia Krok',
+      'subRows':[] as any[]
+    }, {
+      'id':'1001',
+      'name':'Able Limpton',
+      'subRows':[] as any[]
+    }];
+
+    const result = orderByFn(grouped, [customSortMethod], [false]);
+    expect(result).toEqual(grouped);
+  });
+
 });
