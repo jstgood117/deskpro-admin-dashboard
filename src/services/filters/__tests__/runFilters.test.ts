@@ -36,4 +36,13 @@ describe('Run filters', () => {
     expect(mockOperator1).toHaveBeenCalledTimes(2);
     expect(mockOperator2).toHaveBeenCalledTimes(2);
   });
+
+  test('Returns original data when no filters', () => {
+
+    const filters = [] as FilterType[];
+    const newData = runFilters(data, filters);
+
+    expect(newData).toEqual(data);
+
+  });
 });
