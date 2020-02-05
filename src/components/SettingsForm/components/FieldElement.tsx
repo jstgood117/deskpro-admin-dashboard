@@ -11,6 +11,7 @@ import Units from '../../Units';
 import Checkbox from '../../Checkbox';
 import FileUpload from '../../Attachment/FileUpload';
 import ColorPicker from '../../ColorPicker';
+import RadioGroup from '../../Radio/RadioGroup';
 import { UnitsValuesType } from '../../Units/Units';
 
 const StyledCheckbox = styled(Checkbox)`
@@ -32,14 +33,24 @@ const elementsSelector: {
 } = {
   fileUpload: props => (
     <FileUpload
+      id={props.id}
       onChangeFile={props.formikProps.handleChange}
       files={props.formikProps.values[props.id]}
     />
   ),
   colorPicker: props => (
     <ColorPicker
+      id={props.id}
       value={props.formikProps.values[props.id]}
       onChange={props.formikProps.handleChange}
+    />
+  ),
+  radioGroup: props => (
+    <RadioGroup
+      id={props.id}
+      options={props.options}
+      value={props.formikProps.values[props.id]}
+      onChange={val => props.formikProps.setFieldValue(props.id, val)}
     />
   ),
   toggle: props => (

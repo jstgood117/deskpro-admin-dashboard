@@ -20,7 +20,7 @@ const Container = styled.div`
   height: 100%;
 
   & .alert-section {
-    margin-left: -25px;
+    margin-left: 0px;
     margin-top: 16px;
     margin-bottom: 16px;
     font-family: Rubik;
@@ -28,6 +28,13 @@ const Container = styled.div`
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
+  }
+
+  & .field-container .element-details .element-details-label label {
+    font-weight: 500;
+  }
+  & .vert-elements .form-item {
+    margin-bottom: 24px;
   }
 `;
 

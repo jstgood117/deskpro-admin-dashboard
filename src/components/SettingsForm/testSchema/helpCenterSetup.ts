@@ -107,6 +107,26 @@ export const uiSchema: {
                   }
                 },
                 {
+                  type: 'field',
+                  title: 'Domain',
+                  field: {
+                    type: 'radioGroup',
+                    id: 'help_center_settings_helpdesk_domain',
+                    options: [
+                      { label: 'Deskpro Domain', value: 'deskpro' },
+                      { label: 'Custom Domain', value: 'custom' }
+                    ]
+                  },
+                  info: [
+                    {
+                      type: 'button',
+                      title: 'Custom domain',
+                      url: 'http://www.test.com',
+                      icon: 'view'
+                    }
+                  ]
+                },
+                {
                   type: 'alert',
                   description:
                     'Important: you must edit your DNS to create a CNAME record to testnew001.deskpro.com/admin/'
@@ -120,6 +140,18 @@ export const uiSchema: {
                   }
                 }
               ]
+            },
+            {
+              type: 'vertical_group',
+              title: 'Force HTTPS',
+              tooltip:
+                'Automatically redirect users to the correct https://URL if they try to access the helpdesk using http://.',
+              showOn: 'help_center_settings_https',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_https'
+              },
+              elements: []
             }
           ]
         },
@@ -412,6 +444,8 @@ export const jsonSchema: any = {
   help_center_settings_website_url: 'https://www.brand1.co.uk',
   help_center_settings_helpdesk_name: 'Brand 1 Support Centre',
   help_center_settings_helpdesk_slug: 'james-test',
+  help_center_settings_helpdesk_domain: 'deskpro',
+  help_center_settings_https: true,
   help_center_settings_knowledgebase: true,
   help_center_settings_news: true,
   help_center_settings_downloads: true,

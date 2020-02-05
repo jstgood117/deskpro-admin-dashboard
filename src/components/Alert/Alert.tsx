@@ -11,7 +11,7 @@ const styles = {
 const colorStyles: { [key: string]: any } = {
   warning: {
     borderLeft: '4px solid #F8AF3C',
-    backgroundColor: '#FFF8E1',
+    backgroundColor: '#fffdf6',
     color: '#4C4F50'
   }
 };
