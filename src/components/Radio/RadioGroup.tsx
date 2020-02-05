@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import classNames from 'classnames';
 
 import Radio from './Radio';
 
@@ -63,9 +64,8 @@ const RadioGroup: FC<IProps> = ({
   value,
   onChange
 }) => (
-  <Container className={className}>
+  <Container className={classNames('radio-group', className)}>
     {title && <Title>{title}</Title>}
-    {console.log(value)}
     {Array.from(options || []).map(
       ({ label, value: optionValue, description }, index) => (
         <div key={index} style={{ marginBottom: 8 }}>
@@ -79,7 +79,11 @@ const RadioGroup: FC<IProps> = ({
             id={`${id}_${index}`}
             label={label}
           />
-          {description && <Description>{description}</Description>}
+          {description && (
+            <Description className='radio-description'>
+              {description}
+            </Description>
+          )}
         </div>
       )
     )}

@@ -252,6 +252,7 @@ export const uiSchema: {
         {
           title: 'CAPTCHA',
           type: 'page_section',
+          className: 'captcha',
           elements: [
             {
               type: 'vertical_group',
@@ -287,141 +288,183 @@ export const uiSchema: {
                   elements: [
                     {
                       type: 'field',
+                      title: 'Site Key',
                       field: {
-                        type: 'checkbox',
-                        id: 'help_center_settings_captcha_enable_1',
-                        value: 'new_tickets'
+                        type: 'input',
+                        id: 'help_center_settings_captcha_site_key'
                       }
                     },
                     {
-                      type: 'horizontal_group',
-                      elements: [
-                        {
-                          type: 'label',
-                          label: 'Testing this out'
-                        },
-                        {
-                          type: 'field',
-                          field: {
-                            type: 'input',
-                            id: 'help_center_settings_captcha_unit_1'
-                          }
-                        }
-                      ]
+                      type: 'field',
+                      title: 'Secret Key',
+                      field: {
+                        type: 'input',
+                        id: 'help_center_settings_captcha_secret_key'
+                      }
                     }
                   ]
                 },
                 {
-                  type: 'group',
+                  type: 'vertical_group',
+                  title: 'CAPTCHA',
+                  description:
+                    'Normally CAPTCHA is only displayed in response to an user going over your defined rate limits. However, to reduce abuse/spam, you can choose to always enable CAPTCHA on certain features.',
+                  info: [
+                    {
+                      type: 'button',
+                      title: 'Rate limiting',
+                      url: 'http://www.test.com',
+                      icon: 'view'
+                    }
+                  ],
                   elements: [
                     {
-                      type: 'field',
-                      field: {
-                        type: 'checkbox',
-                        id: 'help_center_settings_captcha_enable_2',
-                        value: 'new_comments'
-                      }
-                    },
-                    {
-                      type: 'horizontal_group',
+                      type: 'group',
                       elements: [
-                        {
-                          type: 'label',
-                          label: 'New Comments'
-                        },
                         {
                           type: 'field',
                           field: {
-                            type: 'input',
-                            id: 'help_center_settings_captcha_unit_2'
+                            type: 'checkbox',
+                            id: 'help_center_settings_captcha_enable_1',
+                            value: 'new_tickets'
                           }
+                        },
+                        {
+                          type: 'horizontal_group',
+                          elements: [
+                            {
+                              type: 'label',
+                              label: 'Testing this out',
+                              id: 'help_center_settings_captcha_enable_1'
+                            },
+                            {
+                              type: 'field',
+                              field: {
+                                type: 'input',
+                                id: 'help_center_settings_captcha_unit_1'
+                              }
+                            }
+                          ]
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  type: 'group',
-                  elements: [
-                    {
-                      type: 'field',
-                      field: {
-                        type: 'checkbox',
-                        id: 'help_center_settings_captcha_enable_3',
-                        value: 'new_community_topics'
-                      }
                     },
                     {
-                      type: 'horizontal_group',
+                      type: 'group',
                       elements: [
-                        {
-                          type: 'label',
-                          label: 'New Community Topics'
-                        },
                         {
                           type: 'field',
                           field: {
-                            type: 'input',
-                            id: 'help_center_settings_captcha_unit_3'
+                            type: 'checkbox',
+                            id: 'help_center_settings_captcha_enable_2',
+                            value: 'new_comments'
                           }
+                        },
+                        {
+                          type: 'horizontal_group',
+                          elements: [
+                            {
+                              type: 'label',
+                              label: 'New Comments',
+                              id: 'help_center_settings_captcha_enable_2'
+                            },
+                            {
+                              type: 'field',
+                              field: {
+                                type: 'input',
+                                id: 'help_center_settings_captcha_unit_2'
+                              }
+                            }
+                          ]
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  type: 'group',
-                  elements: [
-                    {
-                      type: 'field',
-                      field: {
-                        type: 'checkbox',
-                        id: 'help_center_settings_captcha_enable_4',
-                        value: 'registration'
-                      }
                     },
                     {
-                      type: 'horizontal_group',
+                      type: 'group',
                       elements: [
-                        {
-                          type: 'label',
-                          label: 'Registration'
-                        },
                         {
                           type: 'field',
                           field: {
-                            type: 'input',
-                            id: 'help_center_settings_captcha_unit_4'
+                            type: 'checkbox',
+                            id: 'help_center_settings_captcha_enable_3',
+                            value: 'new_community_topics'
                           }
+                        },
+                        {
+                          type: 'horizontal_group',
+                          elements: [
+                            {
+                              type: 'label',
+                              label: 'New Community Topics',
+                              id: 'help_center_settings_captcha_enable_3'
+                            },
+                            {
+                              type: 'field',
+                              field: {
+                                type: 'input',
+                                id: 'help_center_settings_captcha_unit_3'
+                              }
+                            }
+                          ]
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  type: 'group',
-                  elements: [
-                    {
-                      type: 'field',
-                      field: {
-                        type: 'checkbox',
-                        id: 'help_center_settings_captcha_enable_5',
-                        value: 'sharing_content'
-                      }
                     },
                     {
-                      type: 'horizontal_group',
+                      type: 'group',
                       elements: [
-                        {
-                          type: 'label',
-                          label: 'Sharing Content'
-                        },
                         {
                           type: 'field',
                           field: {
-                            type: 'input',
-                            id: 'help_center_settings_captcha_unit_5'
+                            type: 'checkbox',
+                            id: 'help_center_settings_captcha_enable_4',
+                            value: 'registration'
                           }
+                        },
+                        {
+                          type: 'horizontal_group',
+                          elements: [
+                            {
+                              type: 'label',
+                              label: 'Registration',
+                              id: 'help_center_settings_captcha_enable_4'
+                            },
+                            {
+                              type: 'field',
+                              field: {
+                                type: 'input',
+                                id: 'help_center_settings_captcha_unit_4'
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      type: 'group',
+                      elements: [
+                        {
+                          type: 'field',
+                          field: {
+                            type: 'checkbox',
+                            id: 'help_center_settings_captcha_enable_5',
+                            value: 'sharing_content'
+                          }
+                        },
+                        {
+                          type: 'horizontal_group',
+                          elements: [
+                            {
+                              type: 'label',
+                              label: 'Sharing Content',
+                              id: 'help_center_settings_captcha_enable_5'
+                            },
+                            {
+                              type: 'field',
+                              field: {
+                                type: 'input',
+                                id: 'help_center_settings_captcha_unit_5'
+                              }
+                            }
+                          ]
                         }
                       ]
                     }
@@ -453,7 +496,7 @@ export const jsonSchema: any = {
   help_center_settings_community: true,
   help_center_settings_show_user_ratings_publicly: true,
   help_center_settings_allow_comments_content: true,
-  help_center_settings_captcha: 'desktop',
+  help_center_settings_captcha: 'deskpro',
   help_center_settings_captcha_enable_1: ['new_tickets'],
   help_center_settings_captcha_unit_1: 'another',
   help_center_settings_captcha_enable_2: ['new_comments'],

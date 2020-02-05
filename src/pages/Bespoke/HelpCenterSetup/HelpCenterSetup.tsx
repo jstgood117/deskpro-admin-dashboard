@@ -19,6 +19,55 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 
+  & .page-section.captcha {
+    .radio-group {
+      .radio-label {
+        padding-left: 24px;
+      }
+      .radio-description {
+        padding-left: 40px;
+      }
+    }
+    .group-elements {
+      .vert-element-group {
+        .form-item {
+          .vert-element-field {
+            max-width: 710px;
+          }
+        }
+        .vert-elements {
+          padding-left: 40px;
+          > .vert-element-group {
+            max-width: 100%;
+            .form-item {
+              .group-details {
+                max-width: 685px;
+              }
+            }
+          }
+          > .group-elements {
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 8px;
+            .form-checkbox {
+              transform: translateY(-12px);
+            }
+            input[name="help_center_settings_captcha_site_key"] {
+              width: 281px;
+              margin-right: 16px;
+            }
+            input[name="help_center_settings_captcha_secret_key"] {
+              width: 281px;
+            }
+          }
+          .vert-elements {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+
   & .alert-section {
     margin-left: 0px;
     margin-top: 16px;
@@ -59,6 +108,7 @@ const ButtonToolbar = styled.div`
   justify-content: space-around;
   padding: 16px 0;
   border-top: 1px solid #eff0f0;
+  padding-left: 95px;
   button {
     display: flex;
     flex-direction: row;
