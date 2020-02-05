@@ -110,7 +110,8 @@ export const FeatureSectionStyled = styled.div`
   }
 
   .vert-element-field {
-    margin-right: 20px;
+    width: 27px;
+    margin-right: 18px;
   }
 
   .vert-elements {
