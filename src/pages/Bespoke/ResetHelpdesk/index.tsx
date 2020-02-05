@@ -53,7 +53,7 @@ const Container = styled.div`
         font-weight: normal;
         font-size: 14px;
         line-height: 150%;
-        color: #4C4F50;
+        color: #4c4f50;
       }
       p {
         font-family: Rubik;
@@ -61,7 +61,7 @@ const Container = styled.div`
         font-weight: normal;
         font-size: 13px;
         line-height: 150%;
-        color: #8B9293;
+        color: #8b9293;
         margin: 0;
       }
     }
@@ -85,7 +85,7 @@ const Container = styled.div`
     font-size: 14px;
     line-height: 150%;
     .alert {
-      background-color: #FFF8E1 !important;
+      background-color: #fffdf6 !important;
     }
   }
 `;
@@ -97,6 +97,26 @@ const ButtonToolbar = styled.div`
   padding-left: 346px;
   align-items: center;
   border-top: 1px solid #d2d8dd;
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 34px;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 13px;
+  }
+  .btn-primary button {
+    background-color: #1c3e55;
+    color: white;
+  }
+  .btn-secondary button {
+    background-color: #f7f7f7;
+    color: #a9b0b0;
+    border: 1px solid #d3d6d7;
+  }
 `;
 
 const ResetHelpdeskPage: FC<IProps> = ({ ui, initialValues }) => {
@@ -112,7 +132,9 @@ const ResetHelpdeskPage: FC<IProps> = ({ ui, initialValues }) => {
     >
       {(formikProps: any) => (
         <form onSubmit={formikProps.handleSubmit}>
-          <Container>{SettingsFormFactory(ui || uiSchema, formikProps)}</Container>
+          <Container>
+            {SettingsFormFactory(ui || uiSchema, formikProps)}
+          </Container>
           <ButtonToolbar>
             <Button styleType='primary' size='medium'>
               Reset
