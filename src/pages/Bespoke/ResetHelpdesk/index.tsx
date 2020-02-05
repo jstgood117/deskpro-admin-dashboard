@@ -16,17 +16,31 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 0 30px 55px;
-  max-width: 974px;
+  padding: 0 0 30px 0;
+  max-width: 1280px;
   width: 100%;
   height: 100%;
+
+  & .form-row {
+    min-width: 974px;
+    > label {
+      min-width: 291px;
+    }
+  }
 
   & .form-row:last-child {
     border-bottom-width: 0;
     padding-bottom: 0;
+    &::after {
+      height: 0;
+    }
   }
 
-  & .field-container {
+  & .vert-elements {
+    padding: 0;
+  }
+
+  & .field-container .group-details {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
@@ -40,7 +54,6 @@ const Container = styled.div`
         font-size: 14px;
         line-height: 150%;
         color: #4C4F50;
-        margin-bottom: 10px;
       }
       p {
         font-family: Rubik;
@@ -51,9 +64,6 @@ const Container = styled.div`
         color: #8B9293;
         margin: 0;
       }
-    }
-    > .element-details {
-      margin-bottom: 24px;
     }
     > .element-context {
       margin-right: 12px;
@@ -74,6 +84,9 @@ const Container = styled.div`
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
+    .alert {
+      background-color: #FFF8E1 !important;
+    }
   }
 `;
 
@@ -84,7 +97,6 @@ const ButtonToolbar = styled.div`
   padding-left: 346px;
   align-items: center;
   border-top: 1px solid #d2d8dd;
-  margin-left: 55px;
 `;
 
 const ResetHelpdeskPage: FC<IProps> = ({ ui, initialValues }) => {
