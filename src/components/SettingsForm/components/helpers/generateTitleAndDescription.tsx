@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import settingsImages from '../../../SettingsImages/SettingsImages';
 
 import Tooltip from '../../../Tooltip';
@@ -17,7 +18,9 @@ export const generateTitleAndDescription = (className: string, props: any) => {
   }
 
   return (
-    <div className={className}>
+    <div
+      className={classNames(className, { 'feature-articles': props.articles })}
+    >
       <div className='element-details'>
         <div className='element-details-label'>
           {props.title && <label htmlFor={htmlFor}>{props.title}</label>}

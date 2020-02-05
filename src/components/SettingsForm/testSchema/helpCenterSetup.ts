@@ -161,6 +161,16 @@ export const uiSchema: {
           elements: [
             {
               type: 'vertical_group',
+              title: 'Knowledgebase',
+              showOn: 'help_center_settings_knowledgebase',
+              description:
+                'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_knowledgebase'
+              },
+              elements: [],
+              articles: 'featuredArticles',
               info: [
                 {
                   type: 'button',
@@ -168,61 +178,46 @@ export const uiSchema: {
                   url: 'http://www.test.com',
                   icon: 'view'
                 }
-              ],
-              elements: [
-                {
-                  type: 'vertical_group',
-                  title: 'Knowledgebase',
-                  showOn: 'help_center_settings_knowledgebase',
-                  description:
-                    'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
-                  field: {
-                    type: 'toggle',
-                    id: 'help_center_settings_knowledgebase'
-                  },
-                  elements: [],
-                  articles: 'featuredArticles'
-                },
-                {
-                  type: 'vertical_group',
-                  title: 'News',
-                  showOn: 'help_center_settings_news',
-                  description:
-                    'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
-                  field: {
-                    type: 'toggle',
-                    id: 'help_center_settings_news'
-                  },
-                  elements: [],
-                  articles: 'featuredArticles'
-                },
-                {
-                  type: 'vertical_group',
-                  title: 'Downloads',
-                  showOn: 'help_center_settings_downloads',
-                  description:
-                    'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
-                  field: {
-                    type: 'toggle',
-                    id: 'help_center_settings_downloads'
-                  },
-                  elements: [],
-                  articles: 'featuredArticles'
-                },
-                {
-                  type: 'vertical_group',
-                  title: 'Community',
-                  showOn: 'help_center_settings_community',
-                  description:
-                    'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
-                  field: {
-                    type: 'toggle',
-                    id: 'help_center_settings_community'
-                  },
-                  elements: [],
-                  articles: 'featuredArticles'
-                }
               ]
+            },
+            {
+              type: 'vertical_group',
+              title: 'News',
+              showOn: 'help_center_settings_news',
+              description:
+                'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_news'
+              },
+              elements: [],
+              articles: 'featuredArticles'
+            },
+            {
+              type: 'vertical_group',
+              title: 'Downloads',
+              showOn: 'help_center_settings_downloads',
+              description:
+                'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_downloads'
+              },
+              elements: [],
+              articles: 'featuredArticles'
+            },
+            {
+              type: 'vertical_group',
+              title: 'Community',
+              showOn: 'help_center_settings_community',
+              description:
+                'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_community'
+              },
+              elements: [],
+              articles: 'featuredArticles'
             }
           ]
         },
@@ -232,30 +227,25 @@ export const uiSchema: {
           elements: [
             {
               type: 'vertical_group',
-              elements: [
-                {
-                  type: 'vertical_group',
-                  title: 'Show user ratings publicly',
-                  showOn: 'help_center_settings_show_user_ratings_publicly',
-                  field: {
-                    type: 'toggle',
-                    id: 'help_center_settings_show_user_ratings_publicly'
-                  },
-                  elements: []
-                },
-                {
-                  type: 'vertical_group',
-                  title: 'Allow comments on published content',
-                  showOn: 'help_center_settings_allow_comments_content',
-                  description:
-                    'Enable comments on articles, news, and downloads. (This setting does not affect Community; discussions on community topics is always enabled).',
-                  field: {
-                    type: 'toggle',
-                    id: 'help_center_settings_allow_comments_content'
-                  },
-                  elements: []
-                }
-              ]
+              title: 'Show user ratings publicly',
+              showOn: 'help_center_settings_show_user_ratings_publicly',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_show_user_ratings_publicly'
+              },
+              elements: []
+            },
+            {
+              type: 'vertical_group',
+              title: 'Allow comments on published content',
+              showOn: 'help_center_settings_allow_comments_content',
+              description:
+                'Enable comments on articles, news, and downloads. (This setting does not affect Community; discussions on community topics is always enabled).',
+              field: {
+                type: 'toggle',
+                id: 'help_center_settings_allow_comments_content'
+              },
+              elements: []
             }
           ]
         },
@@ -265,22 +255,33 @@ export const uiSchema: {
           elements: [
             {
               type: 'vertical_group',
-              elements: [
+              field: {
+                type: 'radioGroup',
+                id: 'help_center_settings_captcha',
+                options: [
+                  {
+                    label: 'Use Deskpro’s built-in CAPTCHA system',
+                    value: 'deskpro',
+                    description:
+                      'Deskpro comes with an image-based CAPTCHA system that is suitable for most helpdesks.'
+                  },
+                  {
+                    label: 'Use reCAPTCHA (from Google)',
+                    value: 'google',
+                    description:
+                      'reCAPTCHA is a service operated by Google, reCAPTCHA uses advanced techniques to detect abusive users and it may be more effective than Deskpro’s built-in system. To use reCAPTCHA, you must register for a free API key.'
+                  }
+                ]
+              },
+              info: [
                 {
-                  type: 'vertical_group',
+                  type: 'button',
                   title: 'CAPTCHA',
-                  description:
-                    'Normally CAPTCHA is only displayed in response to an user going over your defined rate limits. However, to reduce abuse/spam, you can choose to always enable CAPTCHA on certain features.',
-                  info: [
-                    {
-                      type: 'button',
-                      title: 'Rate limiting',
-                      url: 'http://www.test.com',
-                      icon: 'view'
-                    }
-                  ],
-                  elements: []
-                },
+                  url: 'http://www.test.com',
+                  icon: 'view'
+                }
+              ],
+              elements: [
                 {
                   type: 'group',
                   elements: [
@@ -452,6 +453,7 @@ export const jsonSchema: any = {
   help_center_settings_community: true,
   help_center_settings_show_user_ratings_publicly: true,
   help_center_settings_allow_comments_content: true,
+  help_center_settings_captcha: 'desktop',
   help_center_settings_captcha_enable_1: ['new_tickets'],
   help_center_settings_captcha_unit_1: 'another',
   help_center_settings_captcha_enable_2: ['new_comments'],

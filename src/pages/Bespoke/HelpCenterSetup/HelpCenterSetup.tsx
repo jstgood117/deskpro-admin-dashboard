@@ -36,6 +36,20 @@ const Container = styled.div`
   & .vert-elements .form-item {
     margin-bottom: 24px;
   }
+  & .form-row .group-elements .vert-element-group {
+    margin-top: 30px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  & .form-row .group-details.feature-articles {
+    display: flex;
+    flex-direction: row;
+    .element-details {
+      padding-right: 40px;
+      width: 383px;
+    }
+  }
 `;
 
 const ButtonToolbar = styled.div`

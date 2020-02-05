@@ -6,6 +6,7 @@ import Radio from './Radio';
 type Option = {
   label: string;
   value: string;
+  description?: string;
 };
 
 export interface IProps {
@@ -42,6 +43,18 @@ const Title = styled.div`
   margin-bottom: 10px;
 `;
 
+const Description = styled.div`
+  padding-left: 25px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 150%;
+  color: #8b9293;
+`;
+
 const RadioGroup: FC<IProps> = ({
   className,
   id,
@@ -53,20 +66,23 @@ const RadioGroup: FC<IProps> = ({
   <Container className={className}>
     {title && <Title>{title}</Title>}
     {console.log(value)}
-    {Array.from(options || []).map(({ label, value: optionValue }, index) => (
-      <div key={index} style={{ marginBottom: 8 }}>
-        <Radio
-          className='radio-option'
-          setOption={(val: any) => {
-            onChange(val);
-          }}
-          option={value}
-          value={optionValue}
-          id={`${id}_${index}`}
-          label={label}
-        />
-      </div>
-    ))}
+    {Array.from(options || []).map(
+      ({ label, value: optionValue, description }, index) => (
+        <div key={index} style={{ marginBottom: 8 }}>
+          <Radio
+            className='radio-option'
+            setOption={(val: any) => {
+              onChange(val);
+            }}
+            option={value}
+            value={optionValue}
+            id={`${id}_${index}`}
+            label={label}
+          />
+          {description && <Description>{description}</Description>}
+        </div>
+      )
+    )}
   </Container>
 );
 
