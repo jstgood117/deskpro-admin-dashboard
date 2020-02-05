@@ -76,7 +76,7 @@ const Container = styled.div`
   }
 
   & .alert-section {
-    margin-left: -25px;
+    margin-left: -22px;
     margin-top: 16px;
     margin-bottom: 16px;
     font-family: Rubik;
