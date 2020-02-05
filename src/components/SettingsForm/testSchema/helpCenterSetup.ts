@@ -7,6 +7,7 @@ export const uiSchema: {
     {
       title: 'Help Center Setup',
       type: 'feature_section',
+      brandButtonGroup: true,
       elements: [
         {
           title: 'Brand Settings',

@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
+import BrandButtonGroup from '../../Button/BrandButtonGroup';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -241,15 +242,38 @@ interface Props {
   elements: any[];
   formikProps?: any;
   title: string;
+  brandButtonGroup?: boolean;
 }
 
-const FeatureSection: React.FC<Props> = ({ elements, formikProps, title }) => (
-  <FeatureSectionStyled>
-    <h1 className='feature-section-title'>{title}</h1>
-    {elements.map((element: any, i: number) => (
-      <StdElementRow key={i} {...element} formikProps={formikProps} />
-    ))}
-  </FeatureSectionStyled>
-);
+const FeatureSection: React.FC<Props> = ({
+  elements,
+  formikProps,
+  title,
+  brandButtonGroup
+}) => {
+  const [selected, selectBtn] = useState('brand1');
+
+  return (
+    <FeatureSectionStyled>
+      <h1 className='feature-section-title'>
+        {title}
+        {brandButtonGroup && (
+          <div style={{ margin: '16px 0 0 0' }}>
+            <BrandButtonGroup
+              size='medium'
+              selectBtn={(val: string) => {
+                selectBtn(val);
+              }}
+              selected={selected}
+            />
+          </div>
+        )}
+      </h1>
+      {elements.map((element: any, i: number) => (
+        <StdElementRow key={i} {...element} formikProps={formikProps} />
+      ))}
+    </FeatureSectionStyled>
+  );
+};
 
 export default FeatureSection;
