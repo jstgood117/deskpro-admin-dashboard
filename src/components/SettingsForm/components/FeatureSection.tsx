@@ -34,6 +34,7 @@ export const FeatureSectionStyled = styled.div`
     font-weight: normal;
     font-size: 13px;
     line-height: 150%;
+    width: 578px;
     padding: 0;
     margin: 0 0 16px 0;
   }
