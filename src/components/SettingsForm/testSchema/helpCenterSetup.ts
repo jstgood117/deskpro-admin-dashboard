@@ -36,7 +36,7 @@ export const uiSchema: {
                   type: 'field',
                   title: 'Brand logo',
                   field: {
-                    type: 'input',
+                    type: 'fileUpload',
                     id: 'help_center_settings_brand_logo'
                   }
                 },
@@ -44,7 +44,7 @@ export const uiSchema: {
                   type: 'field',
                   title: 'Favicon',
                   field: {
-                    type: 'input',
+                    type: 'fileUpload',
                     id: 'help_center_settings_brand_favicon'
                   }
                 },
@@ -52,7 +52,7 @@ export const uiSchema: {
                   type: 'field',
                   title: 'Default brand color',
                   field: {
-                    type: 'input',
+                    type: 'colorPicker',
                     id: 'help_center_settings_brand_color'
                   }
                 }

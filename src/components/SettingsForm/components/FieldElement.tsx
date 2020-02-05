@@ -9,6 +9,8 @@ import Profiles from '../../Profiles';
 import StringListBuilder from '../../StringListBuilder';
 import Units from '../../Units';
 import Checkbox from '../../Checkbox';
+import FileUpload from '../../Attachment/FileUpload';
+import ColorPicker from '../../ColorPicker';
 import { UnitsValuesType } from '../../Units/Units';
 
 const StyledCheckbox = styled(Checkbox)`
@@ -28,6 +30,18 @@ const ErrorMessage = styled.div`
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
 } = {
+  fileUpload: props => (
+    <FileUpload
+      onChangeFile={props.formikProps.handleChange}
+      files={props.formikProps.values[props.id]}
+    />
+  ),
+  colorPicker: props => (
+    <ColorPicker
+      value={props.formikProps.values[props.id]}
+      onChange={props.formikProps.handleChange}
+    />
+  ),
   toggle: props => (
     <Toggle
       className='form-toggle'
