@@ -51,7 +51,7 @@ const Container = styled.div`
   }
 `;
 
-const DataCenter: FC<IProps> = ({ ui, initialValues }) => {
+const DataCenterPage: FC<IProps> = ({ ui, initialValues }) => {
 
   return (
     <Formik
@@ -74,4 +74,4 @@ const DataCenter: FC<IProps> = ({ ui, initialValues }) => {
   );
 };
 
-export default DataCenter;
+export default DataCenterPage;
