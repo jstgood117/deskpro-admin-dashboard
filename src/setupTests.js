@@ -27,7 +27,6 @@ Object.defineProperty(global.window, 'getComputedStyle', {
   }
 });
 
-
 global.navigator = {
   userAgent: 'node.js',
 };
