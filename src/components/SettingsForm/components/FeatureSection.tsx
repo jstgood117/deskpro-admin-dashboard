@@ -72,7 +72,8 @@ export const FeatureSectionStyled = styled.div`
   }
 
   & > .form-row > label {
-    min-width: 246px;
+    width: 206px;
+    margin-right: 40px;
     text-align: left;
     font-weight: 500;
     font-size: 15px;
@@ -191,6 +192,26 @@ export const FeatureSectionStyled = styled.div`
   & .group-articles > img {
     max-width: 300px;
     max-height: 140px;
+  }
+
+  .code-section {
+    width: 578px;
+    .description {
+      margin-top: 8px;
+    }
+  }
+
+  .horz-element-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+
+    .element-info {
+      margin-left: 12px;
+      margin-top: -6px;
+      margin-bottom: 24px;
+    }
   }
 
   /*
