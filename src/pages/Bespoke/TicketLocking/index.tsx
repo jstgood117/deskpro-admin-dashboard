@@ -12,6 +12,12 @@ interface IProps {
   initialValues?: any;
 }
 
+const Container = styled.div`
+  .form-row :last-child :after {
+    content: none;
+  }
+`;
+
 const ButtonToolbar = styled.div`
   position: absolute;
   left: 0;
@@ -61,7 +67,9 @@ const TicketLockingPage: FC<IProps> = ({ ui, initialValues }) => {
     >
       {(formikProps: any) => (
         <form onSubmit={formikProps.handleSubmit}>
-          {SettingsFormFactory(ui || uiSchema, formikProps)}
+          <Container>
+            {SettingsFormFactory(ui || uiSchema, formikProps)}
+          </Container>
 
           <ButtonToolbar>
             <Button
