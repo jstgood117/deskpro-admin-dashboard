@@ -291,6 +291,7 @@ export const uiSchema: {
               field: {
                 type: 'radioGroup',
                 id: 'help_center_settings_captcha',
+                className: 'captcha',
                 options: [
                   {
                     label: 'Use Deskpro’s built-in CAPTCHA system',
@@ -314,7 +315,8 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                   type: 'button',
                   title: 'CAPTCHA',
                   url: 'http://www.test.com',
-                  icon: 'ic-save'
+                  icon: 'ic-save',
+                  className: 'captcha'
                 }
               ],
               elements: [
@@ -345,6 +347,7 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                 },
                 {
                   type: 'vertical_group',
+                  className: 'captcha-features',
                   title: 'CAPTCHA',
                   description:
                     'Normally CAPTCHA is only displayed in response to an user going over your defined rate limits. However, to reduce abuse/spam, you can choose to always enable CAPTCHA on certain features.',
@@ -353,7 +356,8 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                       type: 'button',
                       title: 'Rate limiting',
                       url: 'http://www.test.com',
-                      icon: 'ic-rate-limiting'
+                      icon: 'ic-rate-limiting',
+                      className: 'rate-limiting'
                     }
                   ],
                   elements: [
@@ -379,8 +383,23 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                             {
                               type: 'field',
                               field: {
-                                type: 'input',
-                                id: 'help_center_settings_captcha_unit_1'
+                                id: 'help_center_settings_captcha_unit_1',
+                                type: 'singleSelect',
+                                selectType: 'primary',
+                                options: [
+                                  {
+                                    label: 'for guests',
+                                    value: 'guests'
+                                  },
+                                  {
+                                    label: 'for everyone',
+                                    value: 'everyone'
+                                  },
+                                  {
+                                    label: 'based on rate limits',
+                                    value: 'rate-limits'
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -409,8 +428,23 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                             {
                               type: 'field',
                               field: {
-                                type: 'input',
-                                id: 'help_center_settings_captcha_unit_2'
+                                id: 'help_center_settings_captcha_unit_2',
+                                type: 'singleSelect',
+                                selectType: 'primary',
+                                options: [
+                                  {
+                                    label: 'for guests',
+                                    value: 'guests'
+                                  },
+                                  {
+                                    label: 'for everyone',
+                                    value: 'everyone'
+                                  },
+                                  {
+                                    label: 'based on rate limits',
+                                    value: 'rate-limits'
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -439,8 +473,23 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                             {
                               type: 'field',
                               field: {
-                                type: 'input',
-                                id: 'help_center_settings_captcha_unit_3'
+                                id: 'help_center_settings_captcha_unit_3',
+                                type: 'singleSelect',
+                                selectType: 'primary',
+                                options: [
+                                  {
+                                    label: 'for guests',
+                                    value: 'guests'
+                                  },
+                                  {
+                                    label: 'for everyone',
+                                    value: 'everyone'
+                                  },
+                                  {
+                                    label: 'based on rate limits',
+                                    value: 'rate-limits'
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -469,8 +518,23 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                             {
                               type: 'field',
                               field: {
-                                type: 'input',
-                                id: 'help_center_settings_captcha_unit_4'
+                                id: 'help_center_settings_captcha_unit_4',
+                                type: 'singleSelect',
+                                selectType: 'primary',
+                                options: [
+                                  {
+                                    label: 'for guests',
+                                    value: 'guests'
+                                  },
+                                  {
+                                    label: 'for everyone',
+                                    value: 'everyone'
+                                  },
+                                  {
+                                    label: 'based on rate limits',
+                                    value: 'rate-limits'
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -499,8 +563,23 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
                             {
                               type: 'field',
                               field: {
-                                type: 'input',
-                                id: 'help_center_settings_captcha_unit_5'
+                                id: 'help_center_settings_captcha_unit_5',
+                                type: 'singleSelect',
+                                selectType: 'primary',
+                                options: [
+                                  {
+                                    label: 'for guests',
+                                    value: 'guests'
+                                  },
+                                  {
+                                    label: 'for everyone',
+                                    value: 'everyone'
+                                  },
+                                  {
+                                    label: 'based on rate limits',
+                                    value: 'rate-limits'
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -540,13 +619,25 @@ export const jsonSchema: any = {
   help_center_settings_allow_comments_content: true,
   help_center_settings_captcha: 'deskpro',
   help_center_settings_captcha_enable_1: ['new_tickets'],
-  help_center_settings_captcha_unit_1: 'another',
+  help_center_settings_captcha_unit_1: { label: 'for guests', value: 'guests' },
   help_center_settings_captcha_enable_2: ['new_comments'],
-  help_center_settings_captcha_unit_2: 'hello',
+  help_center_settings_captcha_unit_2: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
   help_center_settings_captcha_enable_3: ['new_community_topics'],
-  help_center_settings_captcha_unit_3: 'hello',
+  help_center_settings_captcha_unit_3: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
   help_center_settings_captcha_enable_4: ['registration'],
-  help_center_settings_captcha_unit_4: 'hello',
+  help_center_settings_captcha_unit_4: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
   help_center_settings_captcha_enable_5: ['sharing_content'],
-  help_center_settings_captcha_unit_5: 'hello'
+  help_center_settings_captcha_unit_5: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  }
 };

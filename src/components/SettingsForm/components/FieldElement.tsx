@@ -12,6 +12,7 @@ import Checkbox from '../../Checkbox';
 import FileUpload from '../../Attachment/FileUpload';
 import ColorPicker from '../../ColorPicker';
 import RadioGroup from '../../Radio/RadioGroup';
+import SingleSelect from '../../SelectComponents/SingleSelect';
 import { UnitsValuesType } from '../../Units/Units';
 
 const StyledCheckbox = styled(Checkbox)`
@@ -54,6 +55,16 @@ const elementsSelector: {
       onChange={val => props.formikProps.setFieldValue(props.id, val)}
     />
   ),
+  singleSelect: props => {
+    console.log(props.formikProps.values[props.id])
+    return (
+    <SingleSelect
+      options={props.options}
+      type={props.selectType}
+      selectOption={val => props.formikProps.setFieldValue(props.id, val)}
+      selectedOption={props.formikProps.values[props.id]}
+    />
+  )},
   toggle: props => (
     <Toggle
       className='form-toggle'
