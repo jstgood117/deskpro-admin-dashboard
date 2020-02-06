@@ -23,6 +23,26 @@ const Container = styled.div`
 
   & .form-row {
     min-width: 974px;
+    .group-elements {
+      .vert-element-group {
+        .form-item {
+          .group-details {
+            .element-details {
+              .description {
+                max-width: 567px;
+              }
+            }
+          }
+        }
+        .vert-elements {
+          .alert-section {
+            .alert {
+              padding-right: 120px !important;
+            }
+          }
+        }
+      }
+    }
     > label {
       min-width: 291px;
       font-family: Rubik;
@@ -61,7 +81,7 @@ const Container = styled.div`
         line-height: 150%;
         color: #4c4f50;
       }
-      p {
+      p.description {
         font-family: Rubik;
         font-style: normal;
         font-weight: normal;
@@ -69,6 +89,7 @@ const Container = styled.div`
         line-height: 150%;
         color: #8b9293;
         margin: 0;
+        max-width: 550px;
       }
     }
     > .element-context {
