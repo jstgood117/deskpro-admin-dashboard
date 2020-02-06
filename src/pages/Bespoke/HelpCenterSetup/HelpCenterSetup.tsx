@@ -76,6 +76,14 @@ const Container = styled.div`
     }
   }
 
+  & .page-section.helpdesk {
+    .group-elements {
+      .vert-element-group {
+        margin-top: 0;
+      }
+    }
+  }
+
   & .group-elements.domain-custom-group {
     display: flex;
     flex-direction: column;
