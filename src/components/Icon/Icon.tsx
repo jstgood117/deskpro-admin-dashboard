@@ -36,6 +36,7 @@ import { ReactComponent as IconCheck } from '../../assets/svg/icons/ic-check.svg
 import { ReactComponent as IconCollapse } from '../../assets/svg/icons/ic-collapse.svg';
 import { ReactComponent as IconAttachment } from '../../assets/svg/icons/ic-attachment.svg';
 import { ReactComponent as IconError } from '../../assets/svg/icons/ic-error.svg';
+import { ReactComponent as IconError2 } from '../../assets/svg/icons/ic-error2.svg';
 import { ReactComponent as IconCaretRight } from '../../assets/svg/icons/ic-caret-right.svg';
 import { ReactComponent as IconCaretLeft } from '../../assets/svg/icons/ic-caret-left.svg';
 import { ReactComponent as IconCheck2 } from '../../assets/svg/icons/ic-check-2.svg';
@@ -161,6 +162,8 @@ const Icon: FC<IProps> = props => {
       return <IconAttachment />;
     case 'error':
       return <IconError />;
+    case 'error2':
+      return <IconError2 />;
     case 'caret-right':
       return <IconCaretRight />;
     case 'caret-left':
