@@ -56,15 +56,15 @@ const elementsSelector: {
     />
   ),
   singleSelect: props => {
-    console.log(props.formikProps.values[props.id])
     return (
-    <SingleSelect
-      options={props.options}
-      type={props.selectType}
-      selectOption={val => props.formikProps.setFieldValue(props.id, val)}
-      selectedOption={props.formikProps.values[props.id]}
-    />
-  )},
+      <SingleSelect
+        options={props.options}
+        type={props.selectType}
+        selectOption={val => props.formikProps.setFieldValue(props.id, val)}
+        selectedOption={props.formikProps.values[props.id]}
+      />
+    );
+  },
   toggle: props => (
     <Toggle
       className='form-toggle'
