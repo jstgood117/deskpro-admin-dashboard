@@ -224,6 +224,10 @@ export const getIdsFromData = (data: any) => {
   return ids;
 };
 
+const getElementStyle = (el: HTMLElement) => {
+  return window ? window.getComputedStyle(el) : {};
+};
+
 export const resizableTable = () => {
   const divs = document.getElementsByClassName('resizer');
   if (!divs.length) return;
@@ -233,6 +237,28 @@ export const resizableTable = () => {
   }
 };
 
+export function getLargestPadding(colIndex: number) {
+  const colTds = document.getElementsByClassName(`td-${colIndex}`);
+
+  let largestPadding = 0;
+  for (const tdEl of colTds) {
+
+    const currentStyle: any = getElementStyle(tdEl as HTMLElement); 
+    if( currentStyle &&
+        currentStyle.hasOwnProperty('padding-left') &&
+        currentStyle.hasOwnProperty('padding-right')
+      ) {
+
+      largestPadding = Math.max(
+        parseInt(currentStyle['padding-left'], 10) + parseInt(currentStyle['padding-right'], 10),
+        largestPadding
+      );
+    }
+  }
+
+  return largestPadding;
+}
+
 function setListeners(div: any) {
   let pageX: number;
   let curCol: any;
@@ -240,10 +266,12 @@ function setListeners(div: any) {
   let curColWidth: number;
   let nxtColWidth: number;
   let curColIndex: number;
+  let largestPadding: any;
   div.addEventListener('mousedown', (e: any) => {
     curCol = e.target.parentElement;
     nxtCol = curCol.nextElementSibling;
     curColIndex = curCol.getAttribute('data-colindex');
+    largestPadding = getLargestPadding(curColIndex);
     pageX = e.pageX;
     curColWidth = curCol.offsetWidth;
     if (nxtCol) nxtColWidth = nxtCol.offsetWidth;
@@ -257,13 +285,14 @@ function setListeners(div: any) {
   document.addEventListener('mousemove', (e: any) => {
 
     if (curCol) {
+
       const diffX = e.pageX - pageX;
 
-      if (nxtCol) nxtCol.style.width = nxtColWidth - diffX + 'px';
+      if (nxtCol) nxtCol.style.minWidth = nxtColWidth - diffX + largestPadding + 'px';
 
-      curCol.style.minWidth = curColWidth + diffX + 'px';
+      curCol.style.minWidth = curColWidth + diffX - largestPadding + 'px';
 
-      setTdsWidth(curColIndex, curColWidth + diffX);
+      setTdsWidth(curColIndex, curColWidth + diffX - largestPadding);
     }
   });
 
@@ -273,6 +302,7 @@ function setListeners(div: any) {
     pageX = undefined;
     nxtColWidth = undefined;
     curColWidth = undefined;
+    largestPadding = undefined;
   });
 }
 
@@ -280,6 +310,7 @@ export function setTdsWidth(colIndex: number, width: number) {
   const colTds = document.getElementsByClassName(`td-${colIndex}`);
 
   for (const tdEl of colTds) {
+
     (tdEl as HTMLElement).style.minWidth = width + 'px';
   }
 }
