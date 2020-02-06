@@ -16,7 +16,18 @@ function copyProps(src, target) {
 }
 
 global.window = window;
-global.document = window.document;
+global.document =  window.document;
+
+Object.defineProperty(global.window, 'getComputedStyle', {
+  value: () => {
+    return {
+      'padding-left': 20,
+      'padding-right': 20
+    }
+  }
+});
+
+
 global.navigator = {
   userAgent: 'node.js',
 };

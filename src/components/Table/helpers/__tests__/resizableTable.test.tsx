@@ -94,9 +94,10 @@ describe('resizableTable', () => {
     expect(el.style.minWidth).toBe('1px');
   });
 
-  it('should have style {min-width: 1px}', () => {
-    const largestPadding = getLargestPadding(0);
+  it('should have style {min-width: 26px}', () => {
 
-    expect(largestPadding).toEqual(26);
+    const elts = wrapper(false).find('.td-1');
+    const largestPadding = getLargestPadding(elts);
+    expect(largestPadding).toEqual(40);
   });
 });

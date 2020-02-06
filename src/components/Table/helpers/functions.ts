@@ -239,17 +239,16 @@ export const resizableTable = () => {
   }
 };
 
-export function getLargestPadding(colIndex: number) {
-  const colTds = document.getElementsByClassName(`td-${colIndex}`);
+export function getLargestPadding(colTds: HTMLCollectionOf<Element>) {
 
   let largestPadding = 0;
   for (const tdEl of colTds) {
-    const currentStyle: any = getElementStyle(tdEl as HTMLElement);
 
+    const currentStyle: any = getElementStyle(tdEl as HTMLElement);
     if (
       currentStyle &&
-      currentStyle._values.hasOwnProperty('padding-left') &&
-      currentStyle._values.hasOwnProperty('padding-right')
+      currentStyle.hasOwnProperty('padding-left') &&
+      currentStyle.hasOwnProperty('padding-right')
     ) {
       largestPadding = Math.max(
         parseInt(currentStyle['padding-left'], 10) +
@@ -263,6 +262,7 @@ export function getLargestPadding(colIndex: number) {
 }
 
 function setListeners(div: any) {
+
   let pageX: number;
   let curCol: any;
   let nxtCol: any;
@@ -272,22 +272,29 @@ function setListeners(div: any) {
   let largestPadding: any;
 
   div.addEventListener('mousedown', (e: any) => {
+
     e.stopImmediatePropagation();
     curCol = e.target.parentElement;
     nxtCol = curCol.nextElementSibling;
     curColIndex = curCol.getAttribute('data-colindex');
-    largestPadding = getLargestPadding(curColIndex);
     pageX = e.pageX;
     curColWidth = curCol.offsetWidth;
     if (nxtCol) nxtColWidth = nxtCol.offsetWidth;
+
+    const colTds = document.getElementsByClassName(`td-${curColIndex}`);
+    largestPadding = getLargestPadding(colTds);
+
   });
 
   div.addEventListener('dblclick', (e: any) => {
+
     curCol = e.target.parentElement;
     resetColWidth(curCol);
+
   });
 
   document.addEventListener('mousemove', (e: any) => {
+
     if (curCol) {
       const diffX = e.pageX - pageX;
 
@@ -298,28 +305,35 @@ function setListeners(div: any) {
 
       setTdsWidth(curColIndex, curColWidth + diffX - largestPadding);
     }
+
   });
 
   document.addEventListener('mouseup', (e: any) => {
+
     curCol = undefined;
     nxtCol = undefined;
     pageX = undefined;
     nxtColWidth = undefined;
     curColWidth = undefined;
     largestPadding = undefined;
+
   });
 }
 
 export function setTdsWidth(colIndex: number, width: number) {
+
   const colTds = document.getElementsByClassName(`td-${colIndex}`);
 
   for (const tdEl of colTds) {
     (tdEl as HTMLElement).style.minWidth = width + 'px';
   }
+
 }
 
 export function resetColWidth(el: any) {
+
   const curColIndex = el.getAttribute('data-colindex');
   el.style.minWidth = '1px';
   setTdsWidth(curColIndex, 1);
+
 }
