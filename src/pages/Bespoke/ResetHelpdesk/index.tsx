@@ -16,17 +16,57 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0 0 30px 55px;
-  max-width: 974px;
+  padding: 0 0 30px 0;
+  max-width: 1280px;
   width: 100%;
   height: 100%;
+
+  & .form-row {
+    min-width: 974px;
+    .group-elements {
+      .vert-element-group {
+        .form-item {
+          .group-details {
+            .element-details {
+              .description {
+                max-width: 567px;
+              }
+            }
+          }
+        }
+        .vert-elements {
+          .alert-section {
+            .alert {
+              padding-right: 120px !important;
+            }
+          }
+        }
+      }
+    }
+    > label {
+      min-width: 291px;
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 150%;
+      color: #4c4f50;
+    }
+  }
 
   & .form-row:last-child {
     border-bottom-width: 0;
     padding-bottom: 0;
+    &::after {
+      height: 0;
+    }
   }
 
-  & .field-container {
+  & .vert-elements {
+    padding: 0;
+  }
+
+  & .field-container .group-details {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
@@ -39,21 +79,18 @@ const Container = styled.div`
         font-weight: normal;
         font-size: 14px;
         line-height: 150%;
-        color: #4C4F50;
-        margin-bottom: 10px;
+        color: #4c4f50;
       }
-      p {
+      p.description {
         font-family: Rubik;
         font-style: normal;
         font-weight: normal;
         font-size: 13px;
         line-height: 150%;
-        color: #8B9293;
+        color: #8b9293;
         margin: 0;
+        max-width: 550px;
       }
-    }
-    > .element-details {
-      margin-bottom: 24px;
     }
     > .element-context {
       margin-right: 12px;
@@ -66,14 +103,17 @@ const Container = styled.div`
   }
 
   & .alert-section {
-    margin-left: -25px;
-    margin-top: 16px;
+    margin-left: -22px;
+    margin-top: 0;
     margin-bottom: 16px;
     font-family: Rubik;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
+    .alert {
+      background-color: #fffdf6 !important;
+    }
   }
 `;
 
@@ -84,7 +124,26 @@ const ButtonToolbar = styled.div`
   padding-left: 346px;
   align-items: center;
   border-top: 1px solid #d2d8dd;
-  margin-left: 55px;
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 34px;
+    border-radius: 4px;
+    border-width: 0;
+    font-size: 13px;
+  }
+  .btn-primary button {
+    background-color: #1c3e55;
+    color: white;
+  }
+  .btn-secondary button {
+    background-color: #f7f7f7;
+    color: #a9b0b0;
+    border: 1px solid #d3d6d7;
+  }
 `;
 
 const ResetHelpdeskPage: FC<IProps> = ({ ui, initialValues }) => {
@@ -100,7 +159,9 @@ const ResetHelpdeskPage: FC<IProps> = ({ ui, initialValues }) => {
     >
       {(formikProps: any) => (
         <form onSubmit={formikProps.handleSubmit}>
-          <Container>{SettingsFormFactory(ui || uiSchema, formikProps)}</Container>
+          <Container>
+            {SettingsFormFactory(ui || uiSchema, formikProps)}
+          </Container>
           <ButtonToolbar>
             <Button styleType='primary' size='medium'>
               Reset
