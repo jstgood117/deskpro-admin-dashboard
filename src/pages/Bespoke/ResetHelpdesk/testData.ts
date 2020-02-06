@@ -7,6 +7,7 @@ export const uiSchema: {
     {
       title: 'Reset Helpdesk',
       type: 'feature_section',
+      className: 'helpdesk',
       elements: [
         {
           title: 'Deskpro Helpdesk Reset',
