@@ -65,6 +65,7 @@ export const uiSchema: {
         {
           title: 'Website',
           type: 'page_section',
+          className: 'website',
           elements: [
             {
               type: 'vertical_group',

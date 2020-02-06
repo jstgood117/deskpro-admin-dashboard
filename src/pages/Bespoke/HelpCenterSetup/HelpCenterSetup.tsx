@@ -33,6 +33,21 @@ const Container = styled.div`
 
   }
 
+
+  & .page-section.website {
+    padding-bottom: 32px;
+    .vert-element-group {
+      .vert-elements {
+        .form-item {
+          margin-bottom: 32px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
   & .page-section.captcha {
     .radio-group {
       .radio-label {
