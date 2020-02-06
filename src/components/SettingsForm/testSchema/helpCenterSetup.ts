@@ -298,7 +298,11 @@ export const uiSchema: {
                     label: 'Use reCAPTCHA (from Google)',
                     value: 'google',
                     description:
-                      'reCAPTCHA is a service operated by Google, reCAPTCHA uses advanced techniques to detect abusive users and it may be more effective than Deskpro’s built-in system. To use reCAPTCHA, you must register for a free API key.'
+`
+reCAPTCHA is a service operated by Google, reCAPTCHA uses advanced techniques to detect abusive users and it may be more effective than Deskpro’s built-in system.
+
+To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https://google.com/recaptcha)
+`
                   }
                 ]
               },

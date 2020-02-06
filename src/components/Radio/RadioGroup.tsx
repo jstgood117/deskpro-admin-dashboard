@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
+import Markdown from 'react-markdown';
 
 import Radio from './Radio';
 
@@ -54,6 +55,25 @@ const Description = styled.div`
   font-size: 13px;
   line-height: 150%;
   color: #8b9293;
+  & * {
+    margin: 0;
+    padding: 0;
+  }
+  & > p {
+    margin-bottom: 8px;
+  }
+  & a {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 150%;
+    color: #3a8dde;
+    background: url(/images/vector.png) no-repeat left;
+    padding-left: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
 `;
 
 const RadioGroup: FC<IProps> = ({
@@ -81,7 +101,7 @@ const RadioGroup: FC<IProps> = ({
           />
           {description && (
             <Description className='radio-description'>
-              {description}
+              <Markdown>{description}</Markdown>
             </Description>
           )}
         </div>

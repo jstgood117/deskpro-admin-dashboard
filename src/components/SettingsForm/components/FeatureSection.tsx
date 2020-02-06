@@ -49,15 +49,6 @@ export const FeatureSectionStyled = styled.div`
       padding-left: 20px;
       margin-left: 8px;
       margin-right: 8px;
-      /*
-      &::before {
-        content: ' ';
-        background-image: url(/images/vector.png);
-        width: 16px;
-        height: 16px;
-        margin-right: 16px;
-      }
-      */
     }
   }
 
