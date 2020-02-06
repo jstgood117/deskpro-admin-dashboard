@@ -56,7 +56,7 @@ const TableTr: FC<Props> = ({
       {hasActions && (
         <td
           style={{
-            paddingLeft: `${row.depth === 1 && row.depth * 2}rem`
+            paddingLeft: `${row.depth === 1 && row.depth * 30}px`
           }}
           className='checkBox'
         >
@@ -74,7 +74,11 @@ const TableTr: FC<Props> = ({
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
           return (
             <td
-              className={!hasActions && indexInner === 0 ? 'firstColumn' : ''}
+              className={!hasActions &&
+                indexInner === 0
+                  ? `td-${indexInner} firstColumn`
+                  : `td-${indexInner}`
+              }
               {...cell.getCellProps()}
               {...cell.row.getExpandedToggleProps({
                 onClick: () => {},
@@ -84,7 +88,7 @@ const TableTr: FC<Props> = ({
                   paddingBottom: isIdColumn && '5px',
                   paddingLeft: `${indexInner === 0 &&
                     row.depth === 1 &&
-                    row.depth * 2}rem`,
+                    row.depth * 30}px`,
                   cursor: 'default'
                 }
               })}

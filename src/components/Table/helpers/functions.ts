@@ -50,7 +50,7 @@ export const onCheckboxChange = (
     } else {
       newIds = {
         ...checked,
-        [value]: true
+        [value]: true,
       };
     }
     if (isGrouped) {
@@ -58,7 +58,7 @@ export const onCheckboxChange = (
       groupedRows = groupedRows.reduce(
         (o: any, group: any) => ({
           ...o,
-          [group.id]: group.subRows.map((r: any) => r.original.id)
+          [group.id]: group.subRows.map((r: any) => r.original.id),
         }),
         {}
       );
@@ -67,7 +67,7 @@ export const onCheckboxChange = (
         if (_.difference(group, selected).length === 0) {
           newIds = {
             ...newIds,
-            [groupId]: true
+            [groupId]: true,
           };
         } else {
           delete newIds[groupId];
@@ -112,17 +112,16 @@ export const generateTableParams = (
   data: KeyValue[],
   controlledPageCount: number
 ): TableParams => {
-
   return tableType === 'async'
     ? {
         columns,
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100
+          pageSize: 100,
         },
         manualPagination: true,
-        pageCount: controlledPageCount
+        pageCount: controlledPageCount,
       }
     : {
         columns,
@@ -130,8 +129,8 @@ export const generateTableParams = (
         orderByFn,
         initialState: {
           pageIndex: 0,
-          pageSize: 100
-        }
+          pageSize: 100,
+        },
       };
 };
 
@@ -202,7 +201,7 @@ export const generateCardProps = (row: any): UserType => {
   return {
     userName: original.name,
     userNumber: original.phone,
-    userMail: original.primary_email
+    userMail: original.primary_email,
     // avatar: original.avatarUrn
   };
 };
@@ -211,7 +210,7 @@ export const getIdsFromData = (data: any) => {
   const ids = data.map((_row: KeyValue) => {
     const id = (_row.original && _row.original.id) || _row.id;
     return {
-      [id]: true
+      [id]: true,
     };
   });
   data.forEach((row: KeyValue) => {
@@ -219,10 +218,122 @@ export const getIdsFromData = (data: any) => {
       row.subRows.forEach((_row: KeyValue) => {
         const id = (_row.original && _row.original.id) || _row.id;
         ids.push({
-          [id]: true
+          [id]: true,
         });
       });
     }
   });
   return ids;
 };
+
+const getElementStyle = (el: HTMLElement) => {
+  return window ? window.getComputedStyle(el) : {};
+};
+
+export const resizableTable = () => {
+  const divs = document.getElementsByClassName('resizer');
+  if (!divs.length) return;
+
+  for (const div of divs) {
+    setListeners(div);
+  }
+};
+
+export function getLargestPadding(colTds: HTMLCollectionOf<Element>) {
+
+  let largestPadding = 0;
+  for (const tdEl of colTds) {
+
+    const currentStyle: any = getElementStyle(tdEl as HTMLElement);
+    if (
+      currentStyle &&
+      currentStyle.hasOwnProperty('padding-left') &&
+      currentStyle.hasOwnProperty('padding-right')
+    ) {
+      largestPadding = Math.max(
+        parseInt(currentStyle['padding-left'], 10) +
+          parseInt(currentStyle['padding-right'], 10),
+        largestPadding
+      );
+    }
+  }
+
+  return largestPadding;
+}
+
+function setListeners(div: any) {
+
+  let pageX: number;
+  let curCol: any;
+  let nxtCol: any;
+  let curColWidth: number;
+  let nxtColWidth: number;
+  let curColIndex: number;
+  let largestPadding: any;
+
+  div.addEventListener('mousedown', (e: any) => {
+
+    e.stopImmediatePropagation();
+    curCol = e.target.parentElement;
+    nxtCol = curCol.nextElementSibling;
+    curColIndex = curCol.getAttribute('data-colindex');
+    pageX = e.pageX;
+    curColWidth = curCol.offsetWidth;
+    if (nxtCol) nxtColWidth = nxtCol.offsetWidth;
+
+    const colTds = document.getElementsByClassName(`td-${curColIndex}`);
+    largestPadding = getLargestPadding(colTds);
+
+  });
+
+  div.addEventListener('dblclick', (e: any) => {
+
+    curCol = e.target.parentElement;
+    resetColWidth(curCol);
+
+  });
+
+  document.addEventListener('mousemove', (e: any) => {
+
+    if (curCol) {
+      const diffX = e.pageX - pageX;
+
+      if (nxtCol)
+        nxtCol.style.minWidth = nxtColWidth - diffX + largestPadding + 'px';
+
+      curCol.style.minWidth = curColWidth + diffX - largestPadding + 'px';
+
+      setTdsWidth(curColIndex, curColWidth + diffX - largestPadding);
+    }
+
+  });
+
+  document.addEventListener('mouseup', (e: any) => {
+
+    curCol = undefined;
+    nxtCol = undefined;
+    pageX = undefined;
+    nxtColWidth = undefined;
+    curColWidth = undefined;
+    largestPadding = undefined;
+
+  });
+}
+
+export function setTdsWidth(colIndex: number, width: number) {
+
+  const colTds = document.getElementsByClassName(`td-${colIndex}`);
+
+  for (const tdEl of colTds) {
+    (tdEl as HTMLElement).style.minWidth = width + 'px';
+  }
+
+}
+
+export function resetColWidth(el: any) {
+
+  const curColIndex = el.getAttribute('data-colindex');
+  el.style.minWidth = '1px';
+  setTdsWidth(curColIndex, 1);
+
+}
