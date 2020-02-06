@@ -79,6 +79,8 @@ import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-gr
 import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
 import { ReactComponent as IconUp } from '../../assets/svg/ic-up.svg';
 import { ReactComponent as IconGuide } from '../../assets/svg/icons/ic-guide.svg';
+import { ReactComponent as IconLink } from '../../assets/svg/icons/ic-link.svg';
+import { ReactComponent as IconCalendar } from '../../assets/svg/icons/ic-calendar.svg';
 
 export interface IProps {
   name: string;
@@ -244,6 +246,10 @@ const Icon: FC<IProps> = props => {
       return <IconSave />;
     case 'guide':
       return <IconGuide />;
+    case 'link':
+      return <IconLink />;
+    case 'calendar':
+      return <IconCalendar />;
     case 'info-text':
       return (
         <Tooltip content='Info text' styleType='light' placement='bottom'>
