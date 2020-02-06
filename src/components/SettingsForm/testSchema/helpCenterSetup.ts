@@ -29,7 +29,7 @@ export const uiSchema: {
                       type: 'button',
                       title: 'New brand',
                       url: 'http://www.test.com',
-                      icon: 'view'
+                      icon: 'ic-save'
                     }
                   ]
                 },
@@ -126,7 +126,7 @@ export const uiSchema: {
                       type: 'button',
                       title: 'Custom domain',
                       url: 'http://www.test.com',
-                      icon: 'view'
+                      icon: 'ic-save'
                     }
                   ]
                 },
@@ -203,7 +203,7 @@ export const uiSchema: {
                   type: 'button',
                   title: 'Help Center sections',
                   url: 'http://www.test.com',
-                  icon: 'view'
+                  icon: 'ic-save'
                 }
               ]
             },
@@ -307,7 +307,7 @@ export const uiSchema: {
                   type: 'button',
                   title: 'CAPTCHA',
                   url: 'http://www.test.com',
-                  icon: 'view'
+                  icon: 'ic-save'
                 }
               ],
               elements: [
@@ -346,7 +346,7 @@ export const uiSchema: {
                       type: 'button',
                       title: 'Rate limiting',
                       url: 'http://www.test.com',
-                      icon: 'view'
+                      icon: 'ic-rate-limiting'
                     }
                   ],
                   elements: [

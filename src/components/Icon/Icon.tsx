@@ -78,6 +78,7 @@ import { ReactComponent as IconGroupingUp } from '../../assets/svg/icons/ic-grou
 import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-grouping-down.svg';
 import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
 import { ReactComponent as IconUp } from '../../assets/svg/ic-up.svg';
+import { ReactComponent as IconRateLimiting } from '../../assets/svg/icons/ic-rate-limiting.svg';
 
 export interface IProps {
   name: string;
@@ -85,7 +86,7 @@ export interface IProps {
 const StyledIcon = styled.span`
   display: inline-flex;
 
-  &:hover {
+    &:hover {
     path {
       fill: ${props => props.theme.activeColour};
     }
@@ -255,6 +256,8 @@ const Icon: FC<IProps> = props => {
           <IconQuestionText />
         </StyledIcon>
       );
+    case 'ic-rate-limiting':
+      return <IconRateLimiting />;
     default:
       return <IconSetup />;
   }
