@@ -52,8 +52,9 @@ const Button: FC<IButtonProps> = ({
         <ButtonStyled
           disabled={!!disabled}
           styles={styles}
-          className={`${selected ? 'selected' : ''} ${imageBtnSelected &&
-            'selected-image-btn'}`}
+          className={`${selected ? 'selected' : ''} ${
+            imageBtnSelected ? 'selected-image-btn' : ''
+          }`}
           onClick={onClick}
           hasClearButton={showClearButton && selected}
           iconOnly={iconOnly}

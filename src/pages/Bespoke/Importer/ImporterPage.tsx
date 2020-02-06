@@ -28,7 +28,7 @@ const ImporterPage: FC<IProps> = () => {
         <h1 className='feature-section-title'>Importer</h1>
         <div className='form-row' style={{ justifyContent: 'flex-start' }}>
           <label>Data Importer</label>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className='sub-container'>
             {generateTitleAndDescription('field-container', {
               description:
                 'The importer allows you to import data from other sources into Deskpro. To begin select a data source.'

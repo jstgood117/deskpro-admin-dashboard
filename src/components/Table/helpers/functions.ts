@@ -3,6 +3,7 @@ import { KeyValue } from '../../../types';
 
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
 import { objectUseState, TableParams, TableType, ColumnMeta } from '../types';
+import { orderByFn } from './order';
 
 export const onCheckboxChange = (
   value: string,
@@ -111,6 +112,7 @@ export const generateTableParams = (
   data: KeyValue[],
   controlledPageCount: number
 ): TableParams => {
+
   return tableType === 'async'
     ? {
         columns,
@@ -125,6 +127,7 @@ export const generateTableParams = (
     : {
         columns,
         data,
+        orderByFn,
         initialState: {
           pageIndex: 0,
           pageSize: 100,
