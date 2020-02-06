@@ -105,6 +105,7 @@ export const uiSchema: {
                   title: 'Helpdesk name',
                   description:
                     'This is the name of your helpdesk. The name is displayed to users in their browser window title, and is also used in the default footer email template.',
+                  className: 'helpdesk-name',
                   field: {
                     type: 'input',
                     id: 'help_center_settings_helpdesk_name'

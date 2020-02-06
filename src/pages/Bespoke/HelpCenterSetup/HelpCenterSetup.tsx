@@ -30,9 +30,7 @@ const Container = styled.div`
   }
 
   & .page-section.brand {
-
   }
-
 
   & .page-section.website {
     padding-bottom: 32px;
@@ -109,6 +107,11 @@ const Container = styled.div`
     .group-elements {
       .vert-element-group {
         margin-top: 0;
+        .vert-elements {
+          .form-item.helpdesk-name {
+            margin-bottom: 32px;
+          }
+        }
       }
     }
   }
