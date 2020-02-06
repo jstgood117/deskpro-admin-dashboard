@@ -287,6 +287,7 @@ export const uiSchema: {
           elements: [
             {
               type: 'vertical_group',
+              className: 'captcha',
               field: {
                 type: 'radioGroup',
                 id: 'help_center_settings_captcha',

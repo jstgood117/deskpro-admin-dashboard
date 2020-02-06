@@ -69,6 +69,9 @@ const Container = styled.div`
           .vert-element-field {
             max-width: 710px;
           }
+          .element-info {
+            margin: 65px 0 0 101px;
+          }
         }
         .vert-elements {
           padding-left: 40px;
