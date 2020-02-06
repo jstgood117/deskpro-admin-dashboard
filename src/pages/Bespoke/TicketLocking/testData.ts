@@ -59,7 +59,7 @@ export const uiSchema: {
                 {
                   type: 'field',
                   field: {
-                    type: 'input',
+                    type: 'select',
                     id: 'ticket_unlocking_max_duration_select_1',
                     options: [
                       { value: '1 hour', label: '1 hour' },
