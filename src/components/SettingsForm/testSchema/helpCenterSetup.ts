@@ -300,8 +300,7 @@ export const uiSchema: {
                   {
                     label: 'Use reCAPTCHA (from Google)',
                     value: 'google',
-                    description:
-`
+                    description: `
 reCAPTCHA is a service operated by Google, reCAPTCHA uses advanced techniques to detect abusive users and it may be more effective than Deskpro’s built-in system.
 
 To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https://google.com/recaptcha)
@@ -520,7 +519,9 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
 
 export const jsonSchema: any = {
   help_center_settings_brand_name: 'Brand 1',
-  help_center_settings_brand_logo: '',
+  help_center_settings_brand_logo: [
+    /*{ name: 'favicon-32x32.png', size: 958, type: 'image/png' }*/
+  ],
   help_center_settings_brand_favicon: '',
   help_center_settings_brand_color: '#c4c4c4',
   help_center_settings_website_name: 'Brand1',
