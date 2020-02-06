@@ -172,10 +172,10 @@ const ButtonToolbar = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   padding: 16px 0;
   border-top: 1px solid #eff0f0;
-  padding-left: 95px;
+  padding-left: 340px;
   button {
     display: flex;
     flex-direction: row;
@@ -195,6 +195,7 @@ const ButtonToolbar = styled.div`
     background-color: #f7f7f7;
     color: #a9b0b0;
     border: 1px solid #d3d6d7;
+    margin-left: 349px;
   }
 `;
 
