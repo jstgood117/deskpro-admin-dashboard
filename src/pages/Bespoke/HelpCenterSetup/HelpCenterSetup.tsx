@@ -52,11 +52,11 @@ const Container = styled.div`
             .form-checkbox {
               transform: translateY(-12px);
             }
-            input[name="help_center_settings_captcha_site_key"] {
+            input[name='help_center_settings_captcha_site_key'] {
               width: 281px;
               margin-right: 16px;
             }
-            input[name="help_center_settings_captcha_secret_key"] {
+            input[name='help_center_settings_captcha_secret_key'] {
               width: 281px;
             }
           }
@@ -68,6 +68,69 @@ const Container = styled.div`
     }
   }
 
+  & .page-section.content-settings {
+    .group-elements {
+      .vert-element-group {
+        margin-top: 24px;
+      }
+    }
+  }
+
+  & .group-elements.domain-custom-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 26px;
+    max-width: 661px;
+    label {
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 150%;
+      color: #4c4f50;
+      margin-bottom: 8px;
+      margin-top: 8px;
+    }
+    .form-ctrl {
+      width: 246px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-top: 8px;
+      &::before {
+        content: 'https://';
+        margin-right: 5px;
+        color: #8b9293;
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 150%;
+      }
+      &::after {
+        content: '/';
+        margin-left: 5px;
+        color: #8b9293;
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 150%;
+      }
+    }
+    input {
+      width: 246px;
+    }
+  }
+
+  & .field-container.form-item.domain {
+    margin-bottom: 0;
+  }
+
+  & label.radio-label {
+    padding-left: 12px;
+  }
+
   & .alert-section {
     margin-left: 0px;
     margin-top: 16px;
@@ -77,6 +140,10 @@ const Container = styled.div`
     font-weight: normal;
     font-size: 14px;
     line-height: 150%;
+  }
+
+  & .alert-section.domain-custom {
+    margin-bottom: 24px;
   }
 
   & .field-container .element-details .element-details-label label {

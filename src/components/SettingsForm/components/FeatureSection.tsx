@@ -37,6 +37,53 @@ export const FeatureSectionStyled = styled.div`
     line-height: 150%;
     padding: 0;
     margin: 0 0 16px 0;
+    a {
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 150%;
+      color: #3A8DDE;
+      background: url(/images/vector.png) no-repeat left;
+      padding-left: 20px;
+      margin-left: 8px;
+      margin-right: 8px;
+      /*
+      &::before {
+        content: ' ';
+        background-image: url(/images/vector.png);
+        width: 16px;
+        height: 16px;
+        margin-right: 16px;
+      }
+      */
+    }
+  }
+
+  & .alert-section {
+    margin-left: 0px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      background: #EBE4F2;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: Source Code Pro;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 150%;
+      color: #7A56DE;
+    }
   }
 
   .feature-section-title {
@@ -49,6 +96,12 @@ export const FeatureSectionStyled = styled.div`
     padding: 39px 0 22px 0;
     margin: 0;
     max-width: 974px;
+  }
+
+  .settings-data {
+    margin-top: 30px;
+    margin-left: -250px;
+    margin-bottom: 24px;
   }
 
   & > .form-row {
@@ -176,7 +229,7 @@ export const FeatureSectionStyled = styled.div`
     font-family: Rubik;
     min-width: 280px;
     font-size: 12px;
-    transform: translate(-8px,-15px);
+    transform: translate(-20px,2px);
   }
 
   & div.group-articles > p {

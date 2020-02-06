@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import Markdown from 'react-markdown';
 import settingsImages from '../../../SettingsImages/SettingsImages';
 
 import Tooltip from '../../../Tooltip';
@@ -42,7 +43,9 @@ export const generateTitleAndDescription = (className: string, props: any) => {
           )}
         </div>
         {props.description && (
-          <p className='description'>{props.description}</p>
+          <p className='description'>
+            <Markdown>{props.description}</Markdown>
+          </p>
         )}
       </div>
       {props.articles && (

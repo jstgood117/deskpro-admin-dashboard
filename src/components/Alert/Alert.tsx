@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import Markdown from 'react-markdown';
 
 export type Props = {
   color: string;
@@ -19,7 +20,7 @@ const colorStyles: { [key: string]: any } = {
 const Alert: FC<Props> = ({ children, color = 'warning' }) => {
   return (
     <div className='alert' style={{ ...styles, ...colorStyles[color] }}>
-      {children}
+      <Markdown>{children}</Markdown>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import classNames from 'classnames'
 
 import FieldElement from './FieldElement';
 import { generateElementInfo } from './helpers/generateElementInfo';
@@ -14,7 +15,7 @@ const SubText = styled.span`
 `;
 
 export const FieldContainer: React.FC = (props: any) => (
-  <div className='field-container form-item'>
+  <div className={classNames('field-container form-item', props.className)}>
     <div className='group-details'>
       {generateTitleAndDescription('element-details', props)}
       <div className='element-context'>

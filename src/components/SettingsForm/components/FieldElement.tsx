@@ -48,6 +48,7 @@ const elementsSelector: {
   radioGroup: props => (
     <RadioGroup
       id={props.id}
+      className={props.className}
       options={props.options}
       value={props.formikProps.values[props.id]}
       onChange={val => props.formikProps.setFieldValue(props.id, val)}

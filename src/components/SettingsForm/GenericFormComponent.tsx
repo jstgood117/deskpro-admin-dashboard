@@ -8,6 +8,7 @@ import ElementGroup from './components/ElementGroup';
 import VertElementGroup from './components/VertElementGroup';
 import HorizontalElementGroup from './components/HorizontalElementGroup';
 import AlertSection from './components/AlertSection';
+import SettingsData from './components/SettingsData';
 
 // Common components
 import TabbedFieldGroup from '../TabbedFieldGroup';
@@ -34,6 +35,8 @@ export const GenericFormComponent = (props: any) => {
       return <Label {...props} />;
     case 'alert':
       return <AlertSection {...props} />;
+    case 'settings-data':
+      return <SettingsData {...props.options} />;
     case 'field':
       throw Error('Fields must be in a container');
     default:

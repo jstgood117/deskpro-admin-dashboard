@@ -93,6 +93,7 @@ export const uiSchema: {
         {
           title: 'Helpdesk',
           type: 'page_section',
+          className: 'helpdesk',
           elements: [
             {
               type: 'vertical_group',
@@ -110,8 +111,10 @@ export const uiSchema: {
                 {
                   type: 'field',
                   title: 'Domain',
+                  className: 'domain',
                   field: {
                     type: 'radioGroup',
+                    className: 'domain',
                     id: 'help_center_settings_helpdesk_domain',
                     options: [
                       { label: 'Deskpro Domain', value: 'deskpro' },
@@ -128,9 +131,26 @@ export const uiSchema: {
                   ]
                 },
                 {
-                  type: 'alert',
-                  description:
-                    'Important: you must edit your DNS to create a CNAME record to testnew001.deskpro.com/admin/'
+                  type: 'group',
+                  className: 'domain-custom-group',
+                  elements: [
+                    {
+                      type: 'field',
+                      title: 'Helpdesk URL',
+                      className: 'domain-custom',
+                      field: {
+                        type: 'input',
+                        className: 'domain-custom',
+                        id: 'help_center_settings_helpdesk_domain_custom'
+                      }
+                    },
+                    {
+                      type: 'alert',
+                      className: 'domain-custom',
+                      description:
+                        'Important: you must edit your DNS to create a ```CNAME``` record to ```testnew001.deskpro.com/admin/```'
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -153,6 +173,12 @@ export const uiSchema: {
                 id: 'help_center_settings_https'
               },
               elements: []
+            },
+            {
+              type: 'settings-data',
+              options: {
+                type: 'header-card'
+              }
             }
           ]
         },
@@ -165,7 +191,7 @@ export const uiSchema: {
               title: 'Knowledgebase',
               showOn: 'help_center_settings_knowledgebase',
               description:
-                'When enabled, the Knowledgebase section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
+                'When enabled, the [Knowledgebase](http://www.test.com) section of your Help Center will be accessible. Users will be able to view and subscribe to articles.',
               field: {
                 type: 'toggle',
                 id: 'help_center_settings_knowledgebase'
@@ -186,7 +212,7 @@ export const uiSchema: {
               title: 'News',
               showOn: 'help_center_settings_news',
               description:
-                'When enabled, the News section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
+                'When enabled, the [News](http://www.test.com) section of your Help Center will be accessible. Users will be able to view and subscribe to News posts.',
               field: {
                 type: 'toggle',
                 id: 'help_center_settings_news'
@@ -199,7 +225,7 @@ export const uiSchema: {
               title: 'Downloads',
               showOn: 'help_center_settings_downloads',
               description:
-                'When enabled, the Downloads section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
+                'When enabled, the [Downloads](http://www.test.com) section of your Help Center will be accessible. Users will be able to view and subscribe to documents.',
               field: {
                 type: 'toggle',
                 id: 'help_center_settings_downloads'
@@ -212,7 +238,7 @@ export const uiSchema: {
               title: 'Community',
               showOn: 'help_center_settings_community',
               description:
-                'When enabled, the Community section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
+                'When enabled, the [Community](http://www.test.com) section of your Help Center will be accessible. Users will be able to view and subscribe to Topics.',
               field: {
                 type: 'toggle',
                 id: 'help_center_settings_community'
@@ -225,6 +251,7 @@ export const uiSchema: {
         {
           title: 'Content settings',
           type: 'page_section',
+          className: 'content-settings',
           elements: [
             {
               type: 'vertical_group',
@@ -286,6 +313,10 @@ export const uiSchema: {
               elements: [
                 {
                   type: 'group',
+                  dependenceOn: {
+                    field: 'help_center_settings_captcha',
+                    value: 'google'
+                  },
                   elements: [
                     {
                       type: 'field',
@@ -489,7 +520,8 @@ export const jsonSchema: any = {
   help_center_settings_website_url: 'https://www.brand1.co.uk',
   help_center_settings_helpdesk_name: 'Brand 1 Support Centre',
   help_center_settings_helpdesk_slug: 'james-test',
-  help_center_settings_helpdesk_domain: 'deskpro',
+  help_center_settings_helpdesk_domain: 'custom',
+  help_center_settings_helpdesk_domain_custom: 'testnew001-test.deskpro.net',
   help_center_settings_https: true,
   help_center_settings_knowledgebase: true,
   help_center_settings_news: true,
