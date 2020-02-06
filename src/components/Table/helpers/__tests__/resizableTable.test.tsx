@@ -1,7 +1,12 @@
 import React from 'react';
 import { mount, shallow } from '../../../../test/enzyme';
 import Table, { Props } from '../../Table';
-import { resizableTable, setTdsWidth, resetColWidth } from '../functions';
+import {
+  resizableTable,
+  setTdsWidth,
+  resetColWidth,
+  getLargestPadding,
+} from '../functions';
 import { ColumnMeta } from '../../types';
 
 const testData = [
@@ -87,5 +92,11 @@ describe('resizableTable', () => {
     const el = elts.at(0).getDOMNode() as HTMLElement;
     resetColWidth(el);
     expect(el.style.minWidth).toBe('1px');
+  });
+
+  it('should have style {min-width: 1px}', () => {
+    const largestPadding = getLargestPadding(0);
+
+    expect(largestPadding).toEqual(26);
   });
 });

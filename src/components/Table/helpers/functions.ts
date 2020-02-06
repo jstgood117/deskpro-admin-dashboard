@@ -112,7 +112,6 @@ export const generateTableParams = (
   data: KeyValue[],
   controlledPageCount: number
 ): TableParams => {
-
   return tableType === 'async'
     ? {
         columns,
@@ -246,10 +245,11 @@ export function getLargestPadding(colIndex: number) {
   let largestPadding = 0;
   for (const tdEl of colTds) {
     const currentStyle: any = getElementStyle(tdEl as HTMLElement);
+
     if (
       currentStyle &&
-      currentStyle.hasOwnProperty('padding-left') &&
-      currentStyle.hasOwnProperty('padding-right')
+      currentStyle._values.hasOwnProperty('padding-left') &&
+      currentStyle._values.hasOwnProperty('padding-right')
     ) {
       largestPadding = Math.max(
         parseInt(currentStyle['padding-left'], 10) +
