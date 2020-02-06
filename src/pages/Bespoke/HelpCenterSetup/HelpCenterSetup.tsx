@@ -53,7 +53,11 @@ const Container = styled.div`
       }
       .radio-description {
         padding-left: 40px;
+        max-width: 580px;
       }
+    }
+    .description {
+      max-width: 580px;
     }
     .group-elements {
       .vert-element-group {
