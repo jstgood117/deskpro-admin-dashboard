@@ -20,6 +20,9 @@ const Container = styled.div`
   height: 100%;
 
   & .page-section {
+    .element-context, .element-details {
+      max-width: 578px;
+    }
     .element-details {
       .description {
         p {
@@ -30,9 +33,7 @@ const Container = styled.div`
   }
 
   & .page-section.brand {
-    .element-context {
-      max-width: 578px;
-    }
+
   }
 
   & .page-section.website {
@@ -191,6 +192,7 @@ const Container = styled.div`
 
   & .alert-section.domain-custom {
     margin-bottom: 24px;
+    max-width: 548px;
   }
 
   & .field-container .element-details .element-details-label label {
