@@ -49,7 +49,7 @@ export const onCheckboxChange = (
     } else {
       newIds = {
         ...checked,
-        [value]: true
+        [value]: true,
       };
     }
     if (isGrouped) {
@@ -57,7 +57,7 @@ export const onCheckboxChange = (
       groupedRows = groupedRows.reduce(
         (o: any, group: any) => ({
           ...o,
-          [group.id]: group.subRows.map((r: any) => r.original.id)
+          [group.id]: group.subRows.map((r: any) => r.original.id),
         }),
         {}
       );
@@ -66,7 +66,7 @@ export const onCheckboxChange = (
         if (_.difference(group, selected).length === 0) {
           newIds = {
             ...newIds,
-            [groupId]: true
+            [groupId]: true,
           };
         } else {
           delete newIds[groupId];
@@ -117,18 +117,18 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100
+          pageSize: 100,
         },
         manualPagination: true,
-        pageCount: controlledPageCount
+        pageCount: controlledPageCount,
       }
     : {
         columns,
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100
-        }
+          pageSize: 100,
+        },
       };
 };
 
@@ -199,7 +199,7 @@ export const generateCardProps = (row: any): UserType => {
   return {
     userName: original.name,
     userNumber: original.phone,
-    userMail: original.primary_email
+    userMail: original.primary_email,
     // avatar: original.avatarUrn
   };
 };
@@ -208,7 +208,7 @@ export const getIdsFromData = (data: any) => {
   const ids = data.map((_row: KeyValue) => {
     const id = (_row.original && _row.original.id) || _row.id;
     return {
-      [id]: true
+      [id]: true,
     };
   });
   data.forEach((row: KeyValue) => {
@@ -216,7 +216,7 @@ export const getIdsFromData = (data: any) => {
       row.subRows.forEach((_row: KeyValue) => {
         const id = (_row.original && _row.original.id) || _row.id;
         ids.push({
-          [id]: true
+          [id]: true,
         });
       });
     }
@@ -242,15 +242,15 @@ export function getLargestPadding(colIndex: number) {
 
   let largestPadding = 0;
   for (const tdEl of colTds) {
-
     const currentStyle: any = getElementStyle(tdEl as HTMLElement);
-    if( currentStyle &&
-        currentStyle.hasOwnProperty('padding-left') &&
-        currentStyle.hasOwnProperty('padding-right')
-      ) {
-
+    if (
+      currentStyle &&
+      currentStyle.hasOwnProperty('padding-left') &&
+      currentStyle.hasOwnProperty('padding-right')
+    ) {
       largestPadding = Math.max(
-        parseInt(currentStyle['padding-left'], 10) + parseInt(currentStyle['padding-right'], 10),
+        parseInt(currentStyle['padding-left'], 10) +
+          parseInt(currentStyle['padding-right'], 10),
         largestPadding
       );
     }
@@ -267,7 +267,9 @@ function setListeners(div: any) {
   let nxtColWidth: number;
   let curColIndex: number;
   let largestPadding: any;
+
   div.addEventListener('mousedown', (e: any) => {
+    e.stopImmediatePropagation();
     curCol = e.target.parentElement;
     nxtCol = curCol.nextElementSibling;
     curColIndex = curCol.getAttribute('data-colindex');
@@ -283,12 +285,11 @@ function setListeners(div: any) {
   });
 
   document.addEventListener('mousemove', (e: any) => {
-
     if (curCol) {
-
       const diffX = e.pageX - pageX;
 
-      if (nxtCol) nxtCol.style.minWidth = nxtColWidth - diffX + largestPadding + 'px';
+      if (nxtCol)
+        nxtCol.style.minWidth = nxtColWidth - diffX + largestPadding + 'px';
 
       curCol.style.minWidth = curColWidth + diffX - largestPadding + 'px';
 
@@ -310,7 +311,6 @@ export function setTdsWidth(colIndex: number, width: number) {
   const colTds = document.getElementsByClassName(`td-${colIndex}`);
 
   for (const tdEl of colTds) {
-
     (tdEl as HTMLElement).style.minWidth = width + 'px';
   }
 }
