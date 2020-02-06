@@ -17,6 +17,35 @@ const ButtonToolbar = styled.div`
   left: 0;
   bottom: 0;
   right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 70px;
+  padding-left: 346px;
+  border-top: 1px solid #d2d8dd;
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-width: 112px;
+    height: 34px;
+    border-radius: 4px;
+    border-width: 0;
+    font-family: Rubik;
+    font-size: 13px;
+    line-height: 150%;
+  }
+  .btn-primary button {
+    background-color: #1c3e55;
+    color: white;
+  }
+  .btn-secondary button {
+    margin-left: 329px;
+    background-color: #f7f7f7;
+    color: #a9b0b0;
+    border: 1px solid #d3d6d7;
+  }
   `;
 
 const TicketLockingPage: FC<IProps> = ({ ui, initialValues }) => {
