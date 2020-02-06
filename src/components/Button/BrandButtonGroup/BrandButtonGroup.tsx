@@ -22,6 +22,17 @@ const GroupStyled = styled.div`
 
 const StyledButton = styled.div`
   padding-right: 24px;
+  button {
+    padding: 0 12px 0 11px;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #4c4f50;
+  }
 `;
 
 const BrandButtonGroup: FC<IProps> = ({ size, selected, selectBtn }) => {

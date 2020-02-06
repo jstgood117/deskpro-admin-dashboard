@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 import BrandButtonGroup from '../../Button/BrandButtonGroup';
+import Icon from '../../Icon';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -309,7 +310,17 @@ const FeatureSection: React.FC<Props> = ({
   return (
     <FeatureSectionStyled>
       <h1 className='feature-section-title'>
-        {title}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            flexDirection: 'row'
+          }}
+        >
+          <span style={{ marginRight: 20 }}>{title}</span>
+          <Icon name='down' />
+        </div>
         {brandButtonGroup && (
           <div style={{ margin: '16px 0 0 0' }}>
             <BrandButtonGroup
