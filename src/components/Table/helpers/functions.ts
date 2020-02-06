@@ -243,7 +243,7 @@ export function getLargestPadding(colIndex: number) {
   let largestPadding = 0;
   for (const tdEl of colTds) {
 
-    const currentStyle: any = getElementStyle(tdEl as HTMLElement); 
+    const currentStyle: any = getElementStyle(tdEl as HTMLElement);
     if( currentStyle &&
         currentStyle.hasOwnProperty('padding-left') &&
         currentStyle.hasOwnProperty('padding-right')
