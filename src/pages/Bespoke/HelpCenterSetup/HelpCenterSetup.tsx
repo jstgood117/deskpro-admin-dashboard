@@ -30,6 +30,9 @@ const Container = styled.div`
   }
 
   & .page-section.brand {
+    .element-context {
+      max-width: 578px;
+    }
   }
 
   & .page-section.website {
