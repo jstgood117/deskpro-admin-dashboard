@@ -36,7 +36,7 @@ const Container = styled.div`
       }
       button {
         font-size: 13px;
-        margin-bottom: 24px;
+        margin-bottom: 32px;
       }
     }
   }
