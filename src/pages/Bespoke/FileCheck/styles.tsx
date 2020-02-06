@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -43,14 +44,50 @@ export const Container = styled.div`
       }
       .form-ctrl {
         display: flex;
-        .check-btn,
+      }
+      .form-ctrl.inside-group {
+        padding-left: 45px;
+        flex-direction: column;
+        display: flex;
         .log-btn {
-          padding-left: 45px;
+          padding-top: 24px;
+          padding-bottom: 16px;
         }
+      }
+      .form-ctrl.file-log {
+        display: flex;
+        flex-direction: column;
+        margin-left: 45px;
+        padding: 0px 11px 0px 11px;
+        background: #ffffff;
+        border: 1px solid #eff0f0;
+        box-sizing: border-box;
+        border-radius: 4px;
+        li {
+          font-family: Lato;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 15px;
+          line-height: 150%;
+          align-items: center;
+        }
+      }
+      .form-ctrl.board {
+        padding-top: 24px;
       }
     }
   }
   .form-row::after {
     content: none;
   }
+`;
+
+export const ProgressLabel = styled.div`
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #4c4f50;
+  padding-bottom: 17px;
 `;

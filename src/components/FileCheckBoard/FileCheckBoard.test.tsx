@@ -1,23 +1,24 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import ErrorBoard, { IProps } from './ErrorBoard';
+import FileCheckBoard, { IProps } from './FileCheckBoard';
 
-describe('ErrorBoard', () => {
+describe('FileCheckBoard', () => {
   let props: IProps;
   let mountedErrorBoard: any;
 
   const wrapper = (bShallow: boolean) => {
     if (!mountedErrorBoard) {
       mountedErrorBoard = bShallow
-        ? shallow(<ErrorBoard {...props} />)
-        : mount(<ErrorBoard {...props} />);
+        ? shallow(<FileCheckBoard {...props} />)
+        : mount(<FileCheckBoard {...props} />);
     }
     return mountedErrorBoard;
   };
 
   beforeEach(() => {
     props = {
+      type: 'error',
       errors: [
         '/usr/share/nginx/deskpro/site41500/config_new/advanced/config.settings.php',
         '/usr/share/nginx/deskpro/site41500/config_new/advanced/config.env.php'
@@ -34,6 +35,7 @@ describe('ErrorBoard', () => {
   describe('when children is defined', () => {
     beforeEach(() => {
       props = {
+        type: 'error',
         errors: []
       };
       mountedErrorBoard = undefined;

@@ -78,7 +78,7 @@ import { ReactComponent as IconSortUpActive } from '../../assets/svg/icons/ic-so
 import { ReactComponent as IconGroupingUp } from '../../assets/svg/icons/ic-grouping-up.svg';
 import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-grouping-down.svg';
 import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
-import { ReactComponent as IconUp } from '../../assets/svg/ic-up.svg';
+import { ReactComponent as IconUp } from '../../assets/svg/icons/ic-up.svg';
 
 export interface IProps {
   name: string;

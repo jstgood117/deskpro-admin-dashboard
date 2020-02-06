@@ -4,7 +4,8 @@ import Button from '../Button';
 import Icon from '../Icon';
 
 export interface IProps {
-  errors: string[];
+  type: 'error' | 'success';
+  errors?: string[];
 }
 
 const Text = styled.div`
@@ -19,10 +20,25 @@ const Text = styled.div`
   }
 `;
 
-const StyledBoard = styled.div`
+const StyledErrorBoard = styled.div`
   background: rgba(253, 102, 127, 0.1);
   border-left: 4px solid #fd667f;
   padding: 16px 49px 16px 16px;
+  width: 100%;
+`;
+
+const StyledSuccessBoard = styled.div`
+  background: rgba(91, 182, 177, 0.1);
+  border-left: 4px solid #5bb6b1;
+  padding: 15px 49px 13px 41px;
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  .success-icon {
+    position: absolute;
+    left: 15px;
+  }
 `;
 
 const Main = styled.div`
@@ -44,10 +60,10 @@ const Main = styled.div`
   }
 `;
 
-const ErrorBoard: FC<IProps> = ({ errors }) => (
+const FileCheckBoard: FC<IProps> = ({ errors, type }) => (
   <>
-    {errors.length > 0 && (
-      <StyledBoard>
+    {type === 'error' && errors.length > 0 && (
+      <StyledErrorBoard>
         <Main>
           <span className='error-icon'>
             <Icon name='error2' />
@@ -90,9 +106,17 @@ const ErrorBoard: FC<IProps> = ({ errors }) => (
             </Button>
           </div>
         </Main>
-      </StyledBoard>
+      </StyledErrorBoard>
+    )}
+    {type === 'success' && (
+      <StyledSuccessBoard>
+        <span className='success-icon'>
+          <Icon name='check' />
+        </span>
+        <Text>File integrity check complete! We have detected no issues.</Text>
+      </StyledSuccessBoard>
     )}
   </>
 );
 
-export default ErrorBoard;
+export default FileCheckBoard;
