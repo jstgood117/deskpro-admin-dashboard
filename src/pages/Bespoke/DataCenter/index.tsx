@@ -12,12 +12,6 @@ interface IProps {
 }
 
 const Container = styled.div`
-  .group-elements .form-row .form-ctrl span {
-    width: 14px;
-    height: 14px;
-    transform: translateY(-2px);
-  }
-
   .group-elements .field-container {
     .basic-multi-select {
       margin-right: 8px;
@@ -40,9 +34,17 @@ const Container = styled.div`
       }
     }
   }
+
+  .form-row .form-ctrl span {
+    width: 14px;
+    height: 14px;
+    transform: translateY(-2px);
+  }
+
   .horz-element-group:nth-child(1) {
     padding-left: 0px;
   }
+
   .form-item button svg {
     width: 13px;
     height: 13px;
