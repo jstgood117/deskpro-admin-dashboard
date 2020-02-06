@@ -19,6 +19,20 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 
+  & .page-section {
+    .element-details {
+      .description {
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  & .page-section.brand {
+
+  }
+
   & .page-section.captcha {
     .radio-group {
       .radio-label {

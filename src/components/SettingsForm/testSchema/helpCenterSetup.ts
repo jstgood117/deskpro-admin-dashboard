@@ -12,6 +12,7 @@ export const uiSchema: {
         {
           title: 'Brand Settings',
           type: 'page_section',
+          className: 'brand',
           elements: [
             {
               type: 'vertical_group',
