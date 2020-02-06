@@ -41,57 +41,16 @@ export const Container = styled.div`
           }
         }
       }
-    }
-    .form-ctrl {
-      &:nth-child(3) {
-        padding-top: 8px;
-      }
-      .helpdesk {
-        padding-left: 31px;
-      }
-      .info-link {
-        position: absolute;
-        right: -170px;
-        width: 170px;
-        top: 0px;
-        & svg path {
-          fill: ${props => props.theme.brandPrimary};
+      .form-ctrl {
+        display: flex;
+        .check-btn,
+        .log-btn {
+          padding-left: 45px;
         }
-      }
-      .form-row {
-        .field-container {
-          flex-direction: column;
-          padding-bottom: 0;
-        }
-      }
-      .form-item {
-        position: relative;
-      }
-      .test-btn {
-        padding-left: 45px;
-        padding-bottom: 20px;
       }
     }
   }
   .form-row::after {
     content: none;
   }
-  .footer {
-    .import-btn {
-      padding-left: 385px;
-    }
-    border-top: 1px solid ${props => props.theme.hoverColour};
-    background: ${props => props.theme.white};
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    height: 70px;
-    display: flex;
-    align-items: center;
-  }
-`;
-
-export const Group = styled.div`
-  position: relative;
 `;
