@@ -25,6 +25,12 @@ const Container = styled.div`
     min-width: 974px;
     > label {
       min-width: 291px;
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 150%;
+      color: #4c4f50;
     }
   }
 
@@ -77,7 +83,7 @@ const Container = styled.div`
 
   & .alert-section {
     margin-left: -22px;
-    margin-top: 16px;
+    margin-top: 0;
     margin-bottom: 16px;
     font-family: Rubik;
     font-style: normal;
