@@ -27,7 +27,7 @@ export const Container = styled.div`
           .element-details-label {
             margin: 0;
           }
-          p {
+          p.description {
             font-family: Rubik;
             font-style: normal;
             font-weight: normal;
@@ -38,6 +38,10 @@ export const Container = styled.div`
             padding-left: 45px;
             padding-top: 8px;
             margin-bottom: 16px;
+            * {
+              padding: 0;
+              margin: 0;
+            }
           }
         }
       }

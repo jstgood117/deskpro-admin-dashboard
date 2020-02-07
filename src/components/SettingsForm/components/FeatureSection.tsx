@@ -38,6 +38,9 @@ export const FeatureSectionStyled = styled.div`
     line-height: 150%;
     padding: 0;
     margin: 0 0 16px 0;
+    * {
+      padding: 0;
+    }
     a {
       font-family: Rubik;
       font-style: normal;
