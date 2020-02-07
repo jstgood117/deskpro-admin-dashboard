@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 import BrandButtonGroup from '../../Button/BrandButtonGroup';
 import Icon from '../../Icon';
+import SingleSelect from '../../SelectComponents/SingleSelect';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 export const FeatureSectionStyled = styled.div`
@@ -329,7 +330,13 @@ const FeatureSection: React.FC<Props> = ({
 
   return (
     <FeatureSectionStyled>
-      <h1 className='feature-section-title'>
+      <SingleSelect
+        options={[{ label: title, value: title }]}
+        type='large'
+        selectedOption={{ label: title, value: title }}
+        selectOption={() => null}
+      />
+      {/*<h1 className='feature-section-title'>
         <div
           style={{
             display: 'flex',
@@ -352,7 +359,7 @@ const FeatureSection: React.FC<Props> = ({
             />
           </div>
         )}
-      </h1>
+      </h1>*/}
       <FeatureSectionContext.Provider value={{ prefixName: selected }}>
         {elements.map((element: any, i: number) => (
           <StdElementRow key={i} {...element} formikProps={formikProps} />
