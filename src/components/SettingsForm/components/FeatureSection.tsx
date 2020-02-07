@@ -40,6 +40,7 @@ export const FeatureSectionStyled = styled.div`
     margin: 0 0 16px 0;
     * {
       padding: 0;
+      margin: 0;
     }
     a {
       font-family: Rubik;
