@@ -15,7 +15,7 @@ import Pagination, { IPageChange } from '../Pagination/Pagination';
 import Icon from '../Icon';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
-import { onCheckboxChange, generateTableParams } from './helpers/functions';
+import { onCheckboxChange, generateTableParams, resizableTable } from './helpers/functions';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
@@ -162,6 +162,10 @@ const Table: FC<Props> = ({
     // eslint-disable-next-line
   }, [pageIndex, data, page, groupBy]);
 
+  useEffect(() => {
+    resizableTable();
+  });
+
   const handleCheckboxChange = async (
     event: SyntheticEvent<HTMLInputElement>,
     subRows: API_ChatDepartment[]
@@ -223,15 +227,14 @@ const Table: FC<Props> = ({
                         return (
                           <th
                             key={indexInner}
-                            {...column.getHeaderProps(
-                              column.getSortByToggleProps()
-                            )}
+                            {...column.getHeaderProps()}
                             style={{
                               border: column.isSorted && '1px solid #D3D6D7',
                               width: isIdColumn ? 1 : column.width || 'auto'
                             }}
+                            data-colindex={indexInner}
                           >
-                            <StyledTh alignRight={isIdColumn}>
+                            <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
                               {column.render('Header')}
                               {column.isSorted &&
                                 (column.isSortedDesc ? (
@@ -239,10 +242,10 @@ const Table: FC<Props> = ({
                                     <Icon name='ic-sort-up-active' />
                                   </span>
                                 ) : (
-                                  <span className='sort-icon'>
-                                    <Icon name='ic-sort-down-active' />
-                                  </span>
-                                ))}
+                                    <span className='sort-icon'>
+                                      <Icon name='ic-sort-down-active' />
+                                    </span>
+                                  ))}
                               {column.isSorted && (
                                 <Tooltip
                                   content='Filter'
@@ -255,6 +258,7 @@ const Table: FC<Props> = ({
                                 </Tooltip>
                               )}
                             </StyledTh>
+                            <div className='resizer' />
                           </th>
                         );
                       }
@@ -268,9 +272,9 @@ const Table: FC<Props> = ({
               {Array.from(
                 groupBy && groupBy.length
                   ? _.sortBy(
-                      groupedRows.filter((r: any) => r.isGrouped),
-                      'index'
-                    )
+                    groupedRows.filter((r: any) => r.isGrouped),
+                    'index'
+                  )
                   : page
               ).map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
@@ -286,16 +290,16 @@ const Table: FC<Props> = ({
                     handleCheckboxChange={handleCheckboxChange}
                   />
                 ) : (
-                  <TableTr
-                    indexOuter={indexOuter}
-                    page={page}
-                    key={indexOuter}
-                    row={row}
-                    checked={checked}
-                    hasActions={hasActions}
-                    handleCheckboxChange={handleCheckboxChange}
-                  />
-                );
+                    <TableTr
+                      indexOuter={indexOuter}
+                      page={page}
+                      key={indexOuter}
+                      row={row}
+                      checked={checked}
+                      hasActions={hasActions}
+                      handleCheckboxChange={handleCheckboxChange}
+                    />
+                  );
               })}
             </tbody>
           </table>

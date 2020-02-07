@@ -7,7 +7,7 @@ import Icon from '../../../components/Icon';
 
 const ZendeskForm = (props: any) => {
   return (
-    <Form className='auth-form'>
+    <Form className='helpdesk-form'>
       {SettingsFormFactory(uiZendeskSchema, props)}
       <Button styleType='secondary' size='small' className='test-btn'>
         <Icon name='menu' />
