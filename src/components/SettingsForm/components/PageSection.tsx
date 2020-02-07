@@ -1,10 +1,11 @@
-import * as React from 'react';
+import React from 'react';
+import classNames from 'classnames';
 
 import ElementGroup from './ElementGroup';
 
 const PageSection = (props: any) => {
   return (
-    <div className='form-row'>
+    <div className={classNames('form-row', 'page-section', props.className)}>
       <label>{props.title}</label>
       <div className='form-ctrl'>
         <ElementGroup {...props} />

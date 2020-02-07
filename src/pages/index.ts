@@ -2,6 +2,7 @@ import AgentsSettings from './Agents/Settings';
 import ExamplePage from './Bespoke/Example';
 import ResetHelpdesk from './Bespoke/ResetHelpdesk';
 import ImporterPage from './Bespoke/Importer';
+import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
 import { KeyValue } from '../types';
@@ -11,6 +12,7 @@ export const RouteToPage: KeyValue = {
   '/sysadmin/settings': ExamplePage,
   '/help-center/kb/settings': ResetHelpdesk,
   '/importer': ImporterPage,
+  '/help-center/setup': HelpCenterSetupPage,
   '/data-center': DataCenter,
   '/tickets/locking': TicketLocking
 };

@@ -97,7 +97,7 @@ const Radio: FC<IProps> = ({
             <InnerCircle checked={option === value} />
           </StyledRadio>
         </RadioContainer>
-        {label && <Label htmlFor={id}>{label}</Label>}
+        {label && <Label className='radio-label' htmlFor={id}>{label}</Label>}
       </div>
     </ThemeProvider>
   );
