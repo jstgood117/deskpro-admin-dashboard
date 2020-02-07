@@ -91,11 +91,13 @@ const Container = styled.div`
           }
         }
         .element-info.captcha {
-          margin: 65px 0 0 101px;
+          margin: 65px 0 0 121px;
         }
         .form-item {
           .vert-element-field {
             max-width: 710px;
+            width: auto;
+            margin-right: 0;
           }
         }
         .vert-elements {
@@ -111,9 +113,9 @@ const Container = styled.div`
           > .group-elements {
             flex-direction: row;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 0;
             .form-checkbox {
-              transform: translateY(-12px);
+              transform: translateY(-16px);
             }
             input[name='help_center_settings_captcha_site_key'] {
               width: 281px;
@@ -149,6 +151,12 @@ const Container = styled.div`
           }
         }
       }
+    }
+  }
+
+  & .page-section.help-center {
+    .description {
+      max-width: 362px;
     }
   }
 

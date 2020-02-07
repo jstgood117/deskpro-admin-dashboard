@@ -12,6 +12,8 @@ import Checkbox from '../../Checkbox';
 import FileUpload from '../../Attachment/FileUpload';
 import ColorPicker from '../../ColorPicker';
 import RadioGroup from '../../Radio/RadioGroup';
+import Button from '../../Button';
+import Icon from '../../Icon';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import { UnitsValuesType } from '../../Units/Units';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
@@ -107,6 +109,25 @@ const elementsSelector: {
         </div>
       )}
     </Field>
+  ),
+  select: props => (
+    <SingleSelect
+      {...props}
+      selectOption={() => { }}
+      selectedOption={props.formikProps.values[props.id]}
+      placeholder={props.placeholder}
+      type='primary'
+    />
+  ),
+  button: props => (
+    <Button
+      styleType={props.styleType ? props.styleType : 'secondary'}
+      onClick={() => { }}
+      size='small'
+    >
+      {props.icon && <Icon name={props.icon} />}
+      {props.text}
+    </Button>
   ),
   profiles: props => (
     <Profiles

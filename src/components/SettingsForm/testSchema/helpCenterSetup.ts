@@ -188,6 +188,7 @@ export const uiSchema: {
         {
           title: 'Help Center',
           type: 'page_section',
+          className: 'help-center',
           elements: [
             {
               type: 'vertical_group',

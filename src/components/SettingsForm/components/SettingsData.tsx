@@ -1,11 +1,15 @@
 import React from 'react';
 
-import SettingsData from '../../SettingsData';
+import { HeaderCard } from '../../SettingsData/Helpers';
 
 const SettingsDataComponent = (props: any) => {
   return (
     <div className='settings-data'>
-      <SettingsData {...props} />
+      {props.type === 'header-card' && (
+        <div style={{ height: 167, maxWidth: 974 }}>
+          <HeaderCard />
+        </div>
+      )}
     </div>
   );
 };

@@ -15,11 +15,11 @@ const VertElementGroup: React.FC = (props: any) => {
   return (
     <div className={classNames('vert-element-group', props.className)}>
       <div className='form-item'>
-        {props.field && (
-          <div className='vert-element-field'>
+        <div className='vert-element-field'>
+          {props.field && (
             <FieldElement {...props.field} formikProps={props.formikProps} />
-          </div>
-        )}
+          )}
+        </div>
         {generateTitleAndDescription('group-details', props)}
         {generateElementInfo(props)}
       </div>
@@ -33,12 +33,12 @@ const VertElementGroup: React.FC = (props: any) => {
                 formikProps={props.formikProps}
               />
             ) : (
-              <GenericFormComponent
-                {...element}
-                key={i}
-                formikProps={props.formikProps}
-              />
-            )
+                <GenericFormComponent
+                  {...element}
+                  key={i}
+                  formikProps={props.formikProps}
+                />
+              )
           )}
       </div>
     </div>
