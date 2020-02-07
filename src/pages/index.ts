@@ -4,6 +4,7 @@ import ResetHelpdesk from './Bespoke/ResetHelpdesk';
 import ImporterPage from './Bespoke/Importer';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
+import TicketDeflection from './Bespoke/TicketDeflection';
 import { KeyValue } from '../types';
 
 export const RouteToPage: KeyValue = {
@@ -12,5 +13,6 @@ export const RouteToPage: KeyValue = {
   '/help-center/kb/settings': ResetHelpdesk,
   '/importer': ImporterPage,
   '/data-center': DataCenter,
-  '/tickets/locking': TicketLocking
+  '/tickets/locking': TicketLocking,
+  '/tickets/deflection': TicketDeflection
 };
