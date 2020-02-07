@@ -9,6 +9,7 @@ export const Container = styled.div`
     border-bottom: none;
     min-width: unset;
     .sub-container {
+      padding-left: 85px;
       display: flex;
       flex-direction: column;
       width: -webkit-fill-available;
@@ -46,6 +47,7 @@ export const Container = styled.div`
       }
       .form-ctrl.inside-group {
         padding-left: 45px;
+        padding-right: 49px;
         flex-direction: column;
         display: flex;
         .log-btn {
@@ -57,6 +59,7 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         margin-left: 45px;
+        margin-right: 49px;
         padding: 0px 11px 0px 11px;
         background: #ffffff;
         border: 1px solid #eff0f0;
