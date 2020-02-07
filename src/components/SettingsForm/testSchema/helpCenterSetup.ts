@@ -641,3 +641,36 @@ export const jsonSchema: any = {
     value: 'rate-limits'
   }
 };
+
+export const brandValues = {
+  brand1: {
+    help_center_settings_brand_name: 'Brand 1',
+    help_center_settings_website_name: 'Brand1',
+    help_center_settings_website_url: 'https://www.brand1.co.uk',
+    help_center_settings_helpdesk_name: 'Brand 1 Support Centre'
+  },
+  brand2: {
+    help_center_settings_brand_name: 'Brand 2',
+    help_center_settings_website_name: 'Brand2',
+    help_center_settings_website_url: 'https://www.brand2.co.uk',
+    help_center_settings_helpdesk_name: 'Brand 2 Support Centre'
+  },
+  brand3: {
+    help_center_settings_brand_name: 'Brand 3',
+    help_center_settings_website_name: 'Brand3',
+    help_center_settings_website_url: 'https://www.brand3.co.uk',
+    help_center_settings_helpdesk_name: 'Brand 3 Support Centre'
+  },
+  brand4: {
+    help_center_settings_brand_name: 'Brand 4',
+    help_center_settings_website_name: 'Brand4',
+    help_center_settings_website_url: 'https://www.brand4.co.uk',
+    help_center_settings_helpdesk_name: 'Brand 4 Support Centre'
+  },
+  brand5: {
+    help_center_settings_brand_name: 'Brand 5',
+    help_center_settings_website_name: 'Brand5',
+    help_center_settings_website_url: 'https://www.brand5.co.uk',
+    help_center_settings_helpdesk_name: 'Brand 5 Support Centre'
+  }
+};

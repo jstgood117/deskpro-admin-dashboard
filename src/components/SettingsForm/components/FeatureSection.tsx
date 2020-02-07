@@ -290,6 +290,7 @@ export const FeatureSectionStyled = styled.div`
 interface Props {
   elements: any[];
   formikProps?: any;
+  options?: any;
   title: string;
   brandButtonGroup?: boolean;
 }
@@ -298,8 +299,10 @@ const FeatureSection: React.FC<Props> = ({
   elements,
   formikProps,
   title,
-  brandButtonGroup
+  brandButtonGroup,
+  options = {}
 }) => {
+  const { brandValues } = options;
   const [selected, selectBtn] = useState('brand1');
 
   return (
@@ -321,6 +324,12 @@ const FeatureSection: React.FC<Props> = ({
             <BrandButtonGroup
               size='medium'
               selectBtn={(val: string) => {
+                if (brandValues) {
+                  formikProps.setValues(
+                    { ...formikProps.values, ...brandValues[val] },
+                    false
+                  );
+                }
                 selectBtn(val);
               }}
               selected={selected}

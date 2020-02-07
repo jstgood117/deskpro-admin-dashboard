@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
 import {
   uiSchema,
-  jsonSchema
+  jsonSchema,
+  brandValues
 } from '../../../components/SettingsForm/testSchema/helpCenterSetup';
 import Button from '../../../components/Button';
 
@@ -290,7 +291,7 @@ const HelpCenterSetuppage: FC<IProps> = ({ ui, initialValues }) => {
       {(formikProps: any) => (
         <Form>
           <Container>
-            {SettingsFormFactory(ui || uiSchema, formikProps)}
+            {SettingsFormFactory(ui || uiSchema, formikProps, { brandValues })}
           </Container>
           <ButtonToolbar>
             <Button
