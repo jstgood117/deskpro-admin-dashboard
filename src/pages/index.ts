@@ -13,7 +13,7 @@ export const RouteToPage: KeyValue = {
   '/sysadmin/settings': ExamplePage,
   '/help-center/kb/settings': ResetHelpdesk,
   '/importer': ImporterPage,
-  '/sysadmin/file-check': FileCheckPage
+  '/sysadmin/file-check': FileCheckPage,
   '/data-center': DataCenter,
   '/tickets/locking': TicketLocking
 };
