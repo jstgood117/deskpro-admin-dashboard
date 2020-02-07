@@ -9,6 +9,9 @@ import Profiles from '../../Profiles';
 import StringListBuilder from '../../StringListBuilder';
 import Units from '../../Units';
 import Checkbox from '../../Checkbox';
+import Button from '../../Button';
+import Icon from '../../Icon';
+import SingleSelect from '../../SelectComponents/SingleSelect';
 import { UnitsValuesType } from '../../Units/Units';
 
 const StyledCheckbox = styled(Checkbox)`
@@ -69,6 +72,25 @@ const elementsSelector: {
         </div>
       )}
     </Field>
+  ),
+  select: props => (
+    <SingleSelect
+      {...props}
+      selectOption={() => { }}
+      selectedOption={props.formikProps.values[props.id]}
+      placeholder={props.placeholder}
+      type='primary'
+    />
+  ),
+  button: props => (
+    <Button
+      styleType={props.styleType ? props.styleType : 'secondary'}
+      onClick={() => { }}
+      size='small'
+    >
+      {props.icon && <Icon name={props.icon} />}
+      {props.text}
+    </Button>
   ),
   profiles: props => (
     <Profiles
