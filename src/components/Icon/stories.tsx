@@ -77,4 +77,5 @@ storiesOf('Icon', module)
   .add('ic-help-center', () => <Icon name='ic-help-center' />)
   .add('ic-arrow-right', () => <Icon name='ic-arrow-right' />)
   .add('ic-grouping-up', () => <Icon name='ic-grouping-up' />)
-  .add('ic-grouping-down', () => <Icon name='ic-grouping-down' />);
+  .add('ic-grouping-down', () => <Icon name='ic-grouping-down' />)
+  .add('ic-rate-limiting', () => <Icon name='ic-rate-limiting' />);
