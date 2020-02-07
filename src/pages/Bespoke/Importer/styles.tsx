@@ -9,7 +9,7 @@ export const Container = styled.div`
     border-bottom: none;
     min-width: unset;
     .sub-container {
-      padding-left: 85px;
+      padding-left: 110px;
       display: flex;
       flex-direction: column;
       width: -webkit-fill-available;

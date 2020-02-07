@@ -5,11 +5,21 @@ export const Container = styled.div`
   align-items: flex-start;
   height: 100%;
   position: relative;
+  button {
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #1c3e55;
+  }
   .form-row {
     border-bottom: none;
     min-width: unset;
     .sub-container {
-      padding-left: 85px;
+      padding-left: 110px;
       display: flex;
       flex-direction: column;
       width: -webkit-fill-available;
