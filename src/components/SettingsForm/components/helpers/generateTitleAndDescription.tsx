@@ -43,9 +43,9 @@ export const generateTitleAndDescription = (className: string, props: any) => {
           )}
         </div>
         {props.description && (
-          <p className='description'>
+          <div className='description'>
             <Markdown>{props.description}</Markdown>
-          </p>
+          </div>
         )}
       </div>
       {props.articles && (
