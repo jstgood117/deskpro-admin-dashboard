@@ -89,7 +89,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     .import-btn {
-      padding-left: 290px;
+      padding-left: 246px;
       padding-top: 16px;
     }
     background: ${props => props.theme.white};
