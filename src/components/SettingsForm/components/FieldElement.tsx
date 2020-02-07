@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Field, useFormikContext } from 'formik';
+import { Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 
 import Toggle from '../../Toggle';
@@ -160,7 +160,6 @@ const elementsSelector: {
 
 // Generates specific element by `props.type` field
 const FieldElement = (props: any) => {
-  const formContext = useFormikContext();
   return (
     <FeatureSectionContext.Consumer>
       {context => (
@@ -168,7 +167,6 @@ const FieldElement = (props: any) => {
           {elementsSelector[props.type] &&
             elementsSelector[props.type]({
               ...props,
-              formikProps: formContext,
               id: context.prefixName
                 ? `${context.prefixName}_${props.id}`
                 : props.id
