@@ -5,9 +5,18 @@ export const uiSchema: {
 } = {
   elements: [
     {
-      title: 'Help Center Setup',
       type: 'feature_section',
       brandButtonGroup: true,
+      field: {
+        type: 'singleSelect',
+        selectType: 'large',
+        options: [
+          {
+            label: 'Help Center Setup',
+            value: 'Help Center Setup'
+          }
+        ]
+      },
       elements: [
         {
           title: 'Brand Settings',

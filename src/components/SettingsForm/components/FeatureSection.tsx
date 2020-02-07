@@ -86,7 +86,7 @@ export const FeatureSectionStyled = styled.div`
     }
   }
 
-  .feature-section-title {
+  & .feature-section-title {
     font-family: Rubik;
     font-weight: 500;
     font-size: 28px;
@@ -96,6 +96,26 @@ export const FeatureSectionStyled = styled.div`
     padding: 39px 0 22px 0;
     margin: 0;
     max-width: 974px;
+  }
+
+  & .feature-section-select {
+    padding: 39px 0 22px 0;
+    margin: 0;
+    max-width: 974px;
+    border-bottom: 1px solid #eff0f0;
+    color: #4c4f50;
+    .select__control {
+      margin: 0;
+      padding: 0;
+      width: 290px;
+      min-width: 290px;
+      .select__single-value {
+        margin-right: 0;
+      }
+      .select__indicators {
+        transform: translateX(-15px);
+      }
+    }
   }
 
   .settings-data {
@@ -318,48 +338,68 @@ interface Props {
   formikProps?: any;
   title: string;
   brandButtonGroup?: boolean;
+  field?: any;
 }
 
 const FeatureSection: React.FC<Props> = ({
   elements,
   formikProps,
   title,
+  field,
   brandButtonGroup
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
 
   return (
     <FeatureSectionStyled>
-      <SingleSelect
-        options={[{ label: title, value: title }]}
-        type='large'
-        selectedOption={{ label: title, value: title }}
-        selectOption={() => null}
-      />
-      {/*<h1 className='feature-section-title'>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            flexDirection: 'row'
-          }}
-        >
-          <span style={{ marginRight: 20 }}>{title}</span>
-          <Icon name='down' />
-        </div>
-        {brandButtonGroup && (
-          <div style={{ margin: '16px 0 0 0' }}>
-            <BrandButtonGroup
-              size='medium'
-              selectBtn={(val: string) => {
-                selectBtn(val);
-              }}
-              selected={selected}
-            />
+      {title ? (
+        <h1 className='feature-section-title'>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              flexDirection: 'row'
+            }}
+          >
+            <span style={{ marginRight: 20 }}>{title}</span>
+            <Icon name='down' />
           </div>
-        )}
-      </h1>*/}
+          {brandButtonGroup && (
+            <div style={{ margin: '8px 0 8px 0' }}>
+              <BrandButtonGroup
+                size='medium'
+                selectBtn={(val: string) => {
+                  selectBtn(val);
+                }}
+                selected={selected}
+              />
+            </div>
+          )}
+        </h1>
+      ) : (
+        <div className='feature-section-select'>
+          {field && (
+            <SingleSelect
+              options={field.options}
+              type={field.selectType}
+              selectedOption={field.options[0]}
+              selectOption={() => null}
+            />
+          )}
+          {brandButtonGroup && (
+            <div style={{ margin: '8px 0 8px 0' }}>
+              <BrandButtonGroup
+                size='medium'
+                selectBtn={(val: string) => {
+                  selectBtn(val);
+                }}
+                selected={selected}
+              />
+            </div>
+          )}
+        </div>
+      )}
       <FeatureSectionContext.Provider value={{ prefixName: selected }}>
         {elements.map((element: any, i: number) => (
           <StdElementRow key={i} {...element} formikProps={formikProps} />
