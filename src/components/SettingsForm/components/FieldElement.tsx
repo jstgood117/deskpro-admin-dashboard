@@ -38,7 +38,7 @@ const elementsSelector: {
   fileUpload: props => (
     <FileUpload
       id={props.id}
-      onChangeFile={props.formikProps.handleChange}
+      onChangeFile={value => props.formikProps.setFieldValue(props.id, value)}
       files={props.formikProps.values[props.id]}
     />
   ),
