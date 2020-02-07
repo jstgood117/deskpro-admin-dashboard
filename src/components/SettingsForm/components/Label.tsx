@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 type Props = {
   label: string;
@@ -6,11 +7,17 @@ type Props = {
 };
 
 export const Label: FC<Props> = ({ label, id }) => {
-  const htmlFor = id || '';
   return (
-    <div className='field-container'>
-      {label && <label htmlFor={htmlFor}>{label}</label>}
-    </div>
+    <FeatureSectionContext.Consumer>
+      {context => {
+        const htmlFor = context.prefixName ? `${context.prefixName}_${id}` : id;
+        return (
+          <div className='field-container'>
+            {label && <label htmlFor={htmlFor}>{label}</label>}
+          </div>
+        );
+      }}
+    </FeatureSectionContext.Consumer>
   );
 };
 

@@ -598,79 +598,228 @@ To use reCAPTCHA, you must register for a free API key. [Google reCAPTCHA](https
 };
 
 export const jsonSchema: any = {
-  help_center_settings_brand_name: 'Brand 1',
-  help_center_settings_brand_logo: [
-    /*{ name: 'favicon-32x32.png', size: 958, type: 'image/png' }*/
-  ],
-  help_center_settings_brand_favicon: '',
-  help_center_settings_brand_color: '#c4c4c4',
-  help_center_settings_website_name: 'Brand1',
-  help_center_settings_website_url: 'https://www.brand1.co.uk',
-  help_center_settings_helpdesk_name: 'Brand 1 Support Centre',
-  help_center_settings_helpdesk_slug: 'james-test',
-  help_center_settings_helpdesk_domain: 'custom',
-  help_center_settings_helpdesk_domain_custom: 'testnew001-test.deskpro.net',
-  help_center_settings_https: true,
-  help_center_settings_knowledgebase: true,
-  help_center_settings_news: true,
-  help_center_settings_downloads: true,
-  help_center_settings_community: true,
-  help_center_settings_show_user_ratings_publicly: true,
-  help_center_settings_allow_comments_content: true,
-  help_center_settings_captcha: 'deskpro',
-  help_center_settings_captcha_enable_1: ['new_tickets'],
-  help_center_settings_captcha_unit_1: { label: 'for guests', value: 'guests' },
-  help_center_settings_captcha_enable_2: ['new_comments'],
-  help_center_settings_captcha_unit_2: {
+  brand1_help_center_settings_brand_name: 'Brand 1',
+  brand1_help_center_settings_brand_logo: '',
+  brand1_help_center_settings_brand_favicon: '',
+  brand1_help_center_settings_brand_color: '#c4c4c4',
+  brand1_help_center_settings_website_name: 'Brand1',
+  brand1_help_center_settings_website_url: 'https://www.brand1.co.uk',
+  brand1_help_center_settings_helpdesk_name: 'Brand 1 Support Centre',
+  brand1_help_center_settings_helpdesk_slug: 'james-test',
+  brand1_help_center_settings_helpdesk_domain: 'custom',
+  brand1_help_center_settings_helpdesk_domain_custom:
+    'testnew001-test.deskpro.net',
+  brand1_help_center_settings_https: true,
+  brand1_help_center_settings_knowledgebase: true,
+  brand1_help_center_settings_news: true,
+  brand1_help_center_settings_downloads: true,
+  brand1_help_center_settings_community: true,
+  brand1_help_center_settings_show_user_ratings_publicly: true,
+  brand1_help_center_settings_allow_comments_content: true,
+  brand1_help_center_settings_captcha: 'deskpro',
+  brand1_help_center_settings_captcha_enable_1: ['new_tickets'],
+  brand1_help_center_settings_captcha_unit_1: {
+    label: 'for guests',
+    value: 'guests'
+  },
+  brand1_help_center_settings_captcha_enable_2: ['new_comments'],
+  brand1_help_center_settings_captcha_unit_2: {
     label: 'for everyone',
     value: 'everyone'
   },
-  help_center_settings_captcha_enable_3: ['new_community_topics'],
-  help_center_settings_captcha_unit_3: {
+  brand1_help_center_settings_captcha_enable_3: ['new_community_topics'],
+  brand1_help_center_settings_captcha_unit_3: {
     label: 'for everyone',
     value: 'everyone'
   },
-  help_center_settings_captcha_enable_4: ['registration'],
-  help_center_settings_captcha_unit_4: {
+  brand1_help_center_settings_captcha_enable_4: ['registration'],
+  brand1_help_center_settings_captcha_unit_4: {
     label: 'based on rate limits',
     value: 'rate-limits'
   },
-  help_center_settings_captcha_enable_5: ['sharing_content'],
-  help_center_settings_captcha_unit_5: {
+  brand1_help_center_settings_captcha_enable_5: ['sharing_content'],
+  brand1_help_center_settings_captcha_unit_5: {
     label: 'based on rate limits',
     value: 'rate-limits'
-  }
-};
+  },
 
-export const brandValues = {
-  brand1: {
-    help_center_settings_brand_name: 'Brand 1',
-    help_center_settings_website_name: 'Brand1',
-    help_center_settings_website_url: 'https://www.brand1.co.uk',
-    help_center_settings_helpdesk_name: 'Brand 1 Support Centre'
+  brand2_help_center_settings_brand_name: 'Brand 2',
+  brand2_help_center_settings_brand_logo: '',
+  brand2_help_center_settings_brand_favicon: '',
+  brand2_help_center_settings_brand_color: '#c4c4c4',
+  brand2_help_center_settings_website_name: 'Brand2',
+  brand2_help_center_settings_website_url: 'https://www.brand2.co.uk',
+  brand2_help_center_settings_helpdesk_name: 'Brand 2 Support Centre',
+  brand2_help_center_settings_helpdesk_slug: 'james-test',
+  brand2_help_center_settings_helpdesk_domain: 'custom',
+  brand2_help_center_settings_helpdesk_domain_custom:
+    'testnew001-test.deskpro.net',
+  brand2_help_center_settings_https: true,
+  brand2_help_center_settings_knowledgebase: true,
+  brand2_help_center_settings_news: true,
+  brand2_help_center_settings_downloads: true,
+  brand2_help_center_settings_community: true,
+  brand2_help_center_settings_show_user_ratings_publicly: true,
+  brand2_help_center_settings_allow_comments_content: true,
+  brand2_help_center_settings_captcha: 'deskpro',
+  brand2_help_center_settings_captcha_enable_1: ['new_tickets'],
+  brand2_help_center_settings_captcha_unit_1: {
+    label: 'for guests',
+    value: 'guests'
   },
-  brand2: {
-    help_center_settings_brand_name: 'Brand 2',
-    help_center_settings_website_name: 'Brand2',
-    help_center_settings_website_url: 'https://www.brand2.co.uk',
-    help_center_settings_helpdesk_name: 'Brand 2 Support Centre'
+  brand2_help_center_settings_captcha_enable_2: ['new_comments'],
+  brand2_help_center_settings_captcha_unit_2: {
+    label: 'for everyone',
+    value: 'everyone'
   },
-  brand3: {
-    help_center_settings_brand_name: 'Brand 3',
-    help_center_settings_website_name: 'Brand3',
-    help_center_settings_website_url: 'https://www.brand3.co.uk',
-    help_center_settings_helpdesk_name: 'Brand 3 Support Centre'
+  brand2_help_center_settings_captcha_enable_3: ['new_community_topics'],
+  brand2_help_center_settings_captcha_unit_3: {
+    label: 'for everyone',
+    value: 'everyone'
   },
-  brand4: {
-    help_center_settings_brand_name: 'Brand 4',
-    help_center_settings_website_name: 'Brand4',
-    help_center_settings_website_url: 'https://www.brand4.co.uk',
-    help_center_settings_helpdesk_name: 'Brand 4 Support Centre'
+  brand2_help_center_settings_captcha_enable_4: ['registration'],
+  brand2_help_center_settings_captcha_unit_4: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
   },
-  brand5: {
-    help_center_settings_brand_name: 'Brand 5',
-    help_center_settings_website_name: 'Brand5',
-    help_center_settings_website_url: 'https://www.brand5.co.uk',
-    help_center_settings_helpdesk_name: 'Brand 5 Support Centre'
+  brand2_help_center_settings_captcha_enable_5: ['sharing_content'],
+  brand2_help_center_settings_captcha_unit_5: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
+
+  brand3_help_center_settings_brand_name: 'Brand 3',
+  brand3_help_center_settings_brand_logo: '',
+  brand3_help_center_settings_brand_favicon: '',
+  brand3_help_center_settings_brand_color: '#c4c4c4',
+  brand3_help_center_settings_website_name: 'Brand3',
+  brand3_help_center_settings_website_url: 'https://www.brand3.co.uk',
+  brand3_help_center_settings_helpdesk_name: 'Brand 3 Support Centre',
+  brand3_help_center_settings_helpdesk_slug: 'james-test',
+  brand3_help_center_settings_helpdesk_domain: 'custom',
+  brand3_help_center_settings_helpdesk_domain_custom:
+    'testnew001-test.deskpro.net',
+  brand3_help_center_settings_https: true,
+  brand3_help_center_settings_knowledgebase: true,
+  brand3_help_center_settings_news: true,
+  brand3_help_center_settings_downloads: true,
+  brand3_help_center_settings_community: true,
+  brand3_help_center_settings_show_user_ratings_publicly: true,
+  brand3_help_center_settings_allow_comments_content: true,
+  brand3_help_center_settings_captcha: 'deskpro',
+  brand3_help_center_settings_captcha_enable_1: ['new_tickets'],
+  brand3_help_center_settings_captcha_unit_1: {
+    label: 'for guests',
+    value: 'guests'
+  },
+  brand3_help_center_settings_captcha_enable_2: ['new_comments'],
+  brand3_help_center_settings_captcha_unit_2: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
+  brand3_help_center_settings_captcha_enable_3: ['new_community_topics'],
+  brand3_help_center_settings_captcha_unit_3: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
+  brand3_help_center_settings_captcha_enable_4: ['registration'],
+  brand3_help_center_settings_captcha_unit_4: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
+  brand3_help_center_settings_captcha_enable_5: ['sharing_content'],
+  brand3_help_center_settings_captcha_unit_5: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
+
+  brand4_help_center_settings_brand_name: 'Brand 4',
+  brand4_help_center_settings_brand_logo: '',
+  brand4_help_center_settings_brand_favicon: '',
+  brand4_help_center_settings_brand_color: '#c4c4c4',
+  brand4_help_center_settings_website_name: 'Brand4',
+  brand4_help_center_settings_website_url: 'https://www.brand4.co.uk',
+  brand4_help_center_settings_helpdesk_name: 'Brand 4 Support Centre',
+  brand4_help_center_settings_helpdesk_slug: 'james-test',
+  brand4_help_center_settings_helpdesk_domain: 'custom',
+  brand4_help_center_settings_helpdesk_domain_custom:
+    'testnew001-test.deskpro.net',
+  brand4_help_center_settings_https: true,
+  brand4_help_center_settings_knowledgebase: true,
+  brand4_help_center_settings_news: true,
+  brand4_help_center_settings_downloads: true,
+  brand4_help_center_settings_community: true,
+  brand4_help_center_settings_show_user_ratings_publicly: true,
+  brand4_help_center_settings_allow_comments_content: true,
+  brand4_help_center_settings_captcha: 'deskpro',
+  brand4_help_center_settings_captcha_enable_1: ['new_tickets'],
+  brand4_help_center_settings_captcha_unit_1: {
+    label: 'for guests',
+    value: 'guests'
+  },
+  brand4_help_center_settings_captcha_enable_2: ['new_comments'],
+  brand4_help_center_settings_captcha_unit_2: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
+  brand4_help_center_settings_captcha_enable_3: ['new_community_topics'],
+  brand4_help_center_settings_captcha_unit_3: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
+  brand4_help_center_settings_captcha_enable_4: ['registration'],
+  brand4_help_center_settings_captcha_unit_4: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
+  brand4_help_center_settings_captcha_enable_5: ['sharing_content'],
+  brand4_help_center_settings_captcha_unit_5: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
+
+  brand5_help_center_settings_brand_name: 'Brand 5',
+  brand5_help_center_settings_brand_logo: '',
+  brand5_help_center_settings_brand_favicon: '',
+  brand5_help_center_settings_brand_color: '#c4c4c4',
+  brand5_help_center_settings_website_name: 'Brand5',
+  brand5_help_center_settings_website_url: 'https://www.brand5.co.uk',
+  brand5_help_center_settings_helpdesk_name: 'Brand 5 Support Centre',
+  brand5_help_center_settings_helpdesk_slug: 'james-test',
+  brand5_help_center_settings_helpdesk_domain: 'custom',
+  brand5_help_center_settings_helpdesk_domain_custom:
+    'testnew001-test.deskpro.net',
+  brand5_help_center_settings_https: true,
+  brand5_help_center_settings_knowledgebase: true,
+  brand5_help_center_settings_news: true,
+  brand5_help_center_settings_downloads: true,
+  brand5_help_center_settings_community: true,
+  brand5_help_center_settings_show_user_ratings_publicly: true,
+  brand5_help_center_settings_allow_comments_content: true,
+  brand5_help_center_settings_captcha: 'deskpro',
+  brand5_help_center_settings_captcha_enable_1: ['new_tickets'],
+  brand5_help_center_settings_captcha_unit_1: {
+    label: 'for guests',
+    value: 'guests'
+  },
+  brand5_help_center_settings_captcha_enable_2: ['new_comments'],
+  brand5_help_center_settings_captcha_unit_2: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
+  brand5_help_center_settings_captcha_enable_3: ['new_community_topics'],
+  brand5_help_center_settings_captcha_unit_3: {
+    label: 'for everyone',
+    value: 'everyone'
+  },
+  brand5_help_center_settings_captcha_enable_4: ['registration'],
+  brand5_help_center_settings_captcha_unit_4: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
+  },
+  brand5_help_center_settings_captcha_enable_5: ['sharing_content'],
+  brand5_help_center_settings_captcha_unit_5: {
+    label: 'based on rate limits',
+    value: 'rate-limits'
   }
 };

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
 import BrandButtonGroup from '../../Button/BrandButtonGroup';
 import Icon from '../../Icon';
+import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -27,6 +28,7 @@ export const FeatureSectionStyled = styled.div`
     line-height: 150%;
     color: #4C4F50;
     text-align: left;
+    cursor: pointer;
   }
 
   .description {
@@ -290,7 +292,6 @@ export const FeatureSectionStyled = styled.div`
 interface Props {
   elements: any[];
   formikProps?: any;
-  options?: any;
   title: string;
   brandButtonGroup?: boolean;
 }
@@ -299,11 +300,9 @@ const FeatureSection: React.FC<Props> = ({
   elements,
   formikProps,
   title,
-  brandButtonGroup,
-  options = {}
+  brandButtonGroup
 }) => {
-  const { brandValues } = options;
-  const [selected, selectBtn] = useState('brand1');
+  const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
 
   return (
     <FeatureSectionStyled>
@@ -324,12 +323,6 @@ const FeatureSection: React.FC<Props> = ({
             <BrandButtonGroup
               size='medium'
               selectBtn={(val: string) => {
-                if (brandValues) {
-                  formikProps.setValues(
-                    { ...formikProps.values, ...brandValues[val] },
-                    false
-                  );
-                }
                 selectBtn(val);
               }}
               selected={selected}
@@ -337,9 +330,11 @@ const FeatureSection: React.FC<Props> = ({
           </div>
         )}
       </h1>
-      {elements.map((element: any, i: number) => (
-        <StdElementRow key={i} {...element} formikProps={formikProps} />
-      ))}
+      <FeatureSectionContext.Provider value={{ prefixName: selected }}>
+        {elements.map((element: any, i: number) => (
+          <StdElementRow key={i} {...element} formikProps={formikProps} />
+        ))}
+      </FeatureSectionContext.Provider>
     </FeatureSectionStyled>
   );
 };

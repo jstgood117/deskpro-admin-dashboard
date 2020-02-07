@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Field } from 'formik';
+import { Field, useFormikContext } from 'formik';
 import { FormattedMessage } from 'react-intl';
 
 import Toggle from '../../Toggle';
@@ -14,6 +14,7 @@ import ColorPicker from '../../ColorPicker';
 import RadioGroup from '../../Radio/RadioGroup';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import { UnitsValuesType } from '../../Units/Units';
+import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 const StyledCheckbox = styled(Checkbox)`
   &.form-checkbox {
@@ -137,7 +138,24 @@ const elementsSelector: {
 };
 
 // Generates specific element by `props.type` field
-const FieldElement = (props: any) =>
-  elementsSelector[props.type] && elementsSelector[props.type](props);
+const FieldElement = (props: any) => {
+  const formContext = useFormikContext();
+  return (
+    <FeatureSectionContext.Consumer>
+      {context => (
+        <React.Fragment>
+          {elementsSelector[props.type] &&
+            elementsSelector[props.type]({
+              ...props,
+              formikProps: formContext,
+              id: context.prefixName
+                ? `${context.prefixName}_${props.id}`
+                : props.id
+            })}
+        </React.Fragment>
+      )}
+    </FeatureSectionContext.Consumer>
+  );
+};
 
 export default FieldElement;
