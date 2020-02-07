@@ -27,7 +27,7 @@ export const Container = styled.div`
           .element-details-label {
             margin: 0;
           }
-          p.description {
+          .description {
             font-family: Rubik;
             font-style: normal;
             font-weight: normal;
