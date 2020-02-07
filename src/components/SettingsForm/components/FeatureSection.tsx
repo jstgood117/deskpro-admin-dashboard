@@ -1,6 +1,10 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { StdElementRow } from './StdElementRow';
+import BrandButtonGroup from '../../Button/BrandButtonGroup';
+import Icon from '../../Icon';
+import SingleSelect from '../../SelectComponents/SingleSelect';
+import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -25,6 +29,7 @@ export const FeatureSectionStyled = styled.div`
     line-height: 150%;
     color: #4C4F50;
     text-align: left;
+    cursor: pointer;
   }
 
   .description {
@@ -37,9 +42,51 @@ export const FeatureSectionStyled = styled.div`
     width: 578px;
     padding: 0;
     margin: 0 0 16px 0;
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    a {
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 150%;
+      color: #3A8DDE;
+      background: url(/images/vector.png) no-repeat left;
+      padding-left: 20px;
+      margin-left: 8px;
+      margin-right: 8px;
+    }
   }
 
-  .feature-section-title {
+  & .alert-section {
+    margin-left: 0px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    code {
+      background: #EBE4F2;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-family: Source Code Pro;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 150%;
+      color: #7A56DE;
+    }
+  }
+
+  & .feature-section-title {
     font-family: Rubik;
     font-weight: 500;
     font-size: 28px;
@@ -49,6 +96,32 @@ export const FeatureSectionStyled = styled.div`
     padding: 39px 0 22px 0;
     margin: 0;
     max-width: 974px;
+  }
+
+  & .feature-section-select {
+    padding: 39px 0 22px 0;
+    margin: 0;
+    max-width: 974px;
+    border-bottom: 1px solid #eff0f0;
+    color: #4c4f50;
+    .select__control {
+      margin: 0;
+      padding: 0;
+      width: 290px;
+      min-width: 290px;
+      .select__single-value {
+        margin-right: 0;
+      }
+      .select__indicators {
+        transform: translateX(-15px);
+      }
+    }
+  }
+
+  .settings-data {
+    margin-top: 30px;
+    margin-left: -250px;
+    margin-bottom: 24px;
   }
 
   & > .form-row {
@@ -178,7 +251,7 @@ export const FeatureSectionStyled = styled.div`
     font-family: Rubik;
     min-width: 280px;
     font-size: 12px;
-    transform: translate(-8px,-15px);
+    transform: translate(-20px,2px);
   }
 
   & div.group-articles > p {
@@ -264,15 +337,76 @@ interface Props {
   elements: any[];
   formikProps?: any;
   title: string;
+  brandButtonGroup?: boolean;
+  field?: any;
 }
 
-const FeatureSection: React.FC<Props> = ({ elements, formikProps, title }) => (
-  <FeatureSectionStyled>
-    <h1 className='feature-section-title'>{title}</h1>
-    {elements.map((element: any, i: number) => (
-      <StdElementRow key={i} {...element} formikProps={formikProps} />
-    ))}
-  </FeatureSectionStyled>
-);
+const FeatureSection: React.FC<Props> = ({
+  elements,
+  formikProps,
+  title,
+  field,
+  brandButtonGroup
+}) => {
+  const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
+
+  return (
+    <FeatureSectionStyled>
+      {title ? (
+        <h1 className='feature-section-title'>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              flexDirection: 'row'
+            }}
+          >
+            <span style={{ marginRight: 20 }}>{title}</span>
+            <Icon name='down' />
+          </div>
+          {brandButtonGroup && (
+            <div style={{ margin: '8px 0 8px 0' }}>
+              <BrandButtonGroup
+                size='medium'
+                selectBtn={(val: string) => {
+                  selectBtn(val);
+                }}
+                selected={selected}
+              />
+            </div>
+          )}
+        </h1>
+      ) : (
+        <div className='feature-section-select'>
+          {field && (
+            <SingleSelect
+              options={field.options}
+              type={field.selectType}
+              selectedOption={field.options[0]}
+              selectOption={() => null}
+            />
+          )}
+          {brandButtonGroup && (
+            <div style={{ margin: '8px 0 8px 0' }}>
+              <BrandButtonGroup
+                size='medium'
+                selectBtn={(val: string) => {
+                  selectBtn(val);
+                }}
+                selected={selected}
+              />
+            </div>
+          )}
+        </div>
+      )}
+      <FeatureSectionContext.Provider value={{ prefixName: selected }}>
+        {elements.map((element: any, i: number) => (
+          <StdElementRow key={i} {...element} formikProps={formikProps} />
+        ))}
+      </FeatureSectionContext.Provider>
+    </FeatureSectionStyled>
+  );
+};
 
 export default FeatureSection;

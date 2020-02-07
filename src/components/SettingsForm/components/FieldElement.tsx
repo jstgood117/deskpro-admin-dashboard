@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Field } from 'formik';
+import { Field, useFormikContext } from 'formik';
 import { FormattedMessage } from 'react-intl';
 
 import Toggle from '../../Toggle';
@@ -9,10 +9,14 @@ import Profiles from '../../Profiles';
 import StringListBuilder from '../../StringListBuilder';
 import Units from '../../Units';
 import Checkbox from '../../Checkbox';
+import FileUpload from '../../Attachment/FileUpload';
+import ColorPicker from '../../ColorPicker';
+import RadioGroup from '../../Radio/RadioGroup';
 import Button from '../../Button';
 import Icon from '../../Icon';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import { UnitsValuesType } from '../../Units/Units';
+import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 const StyledCheckbox = styled(Checkbox)`
   &.form-checkbox {
@@ -31,6 +35,39 @@ const ErrorMessage = styled.div`
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
 } = {
+  fileUpload: props => (
+    <FileUpload
+      id={props.id}
+      onChangeFile={value => props.formikProps.setFieldValue(props.id, value)}
+      files={props.formikProps.values[props.id]}
+    />
+  ),
+  colorPicker: props => (
+    <ColorPicker
+      id={props.id}
+      value={props.formikProps.values[props.id]}
+      onChange={props.formikProps.handleChange}
+    />
+  ),
+  radioGroup: props => (
+    <RadioGroup
+      id={props.id}
+      className={props.className}
+      options={props.options}
+      value={props.formikProps.values[props.id]}
+      onChange={val => props.formikProps.setFieldValue(props.id, val)}
+    />
+  ),
+  singleSelect: props => {
+    return (
+      <SingleSelect
+        options={props.options}
+        type={props.selectType}
+        selectOption={val => props.formikProps.setFieldValue(props.id, val)}
+        selectedOption={props.formikProps.values[props.id]}
+      />
+    );
+  },
   toggle: props => (
     <Toggle
       className='form-toggle'
@@ -122,7 +159,24 @@ const elementsSelector: {
 };
 
 // Generates specific element by `props.type` field
-const FieldElement = (props: any) =>
-  elementsSelector[props.type] && elementsSelector[props.type](props);
+const FieldElement = (props: any) => {
+  const formContext = useFormikContext();
+  return (
+    <FeatureSectionContext.Consumer>
+      {context => (
+        <React.Fragment>
+          {elementsSelector[props.type] &&
+            elementsSelector[props.type]({
+              ...props,
+              formikProps: formContext,
+              id: context.prefixName
+                ? `${context.prefixName}_${props.id}`
+                : props.id
+            })}
+        </React.Fragment>
+      )}
+    </FeatureSectionContext.Consumer>
+  );
+};
 
 export default FieldElement;

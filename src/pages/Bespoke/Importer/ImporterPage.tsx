@@ -108,14 +108,15 @@ const ImporterPage: FC<IProps> = () => {
             </div>
           </div>
         </div>
+        {option && (
+          <div className='footer'>
+            <div className='divider' />
+            <Button styleType='primary' size='medium' className='import-btn'>
+              Import Helpdesk
+            </Button>
+          </div>
+        )}
       </FeatureSectionStyled>
-      {option && (
-        <div className='footer'>
-          <Button styleType='primary' size='medium' className='import-btn'>
-            Import Helpdesk
-          </Button>
-        </div>
-      )}
     </Container>
   );
 };

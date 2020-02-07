@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
 import FieldContainer from './FieldContainer';
 import FieldElement from './FieldElement';
@@ -12,7 +13,7 @@ const VertElementGroup: React.FC = (props: any) => {
     !props.showOn || props.formikProps.values[props.showOn] === true;
 
   return (
-    <div className='vert-element-group'>
+    <div className={classNames('vert-element-group', props.className)}>
       <div className='form-item'>
         <div className='vert-element-field'>
           {props.field && (

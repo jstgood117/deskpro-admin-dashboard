@@ -8,6 +8,7 @@ import ElementGroup from './components/ElementGroup';
 import VertElementGroup from './components/VertElementGroup';
 import HorizontalElementGroup from './components/HorizontalElementGroup';
 import AlertSection from './components/AlertSection';
+import SettingsData from './components/SettingsData';
 import CodeSection from './components/CodeSection';
 
 // Common components
@@ -35,6 +36,8 @@ export const GenericFormComponent = (props: any) => {
       return <Label {...props} />;
     case 'alert':
       return <AlertSection {...props} />;
+    case 'settings-data':
+      return <SettingsData {...props.options} />;
     case 'code':
       return <CodeSection {...props} />;
     case 'field':

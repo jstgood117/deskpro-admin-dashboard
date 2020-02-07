@@ -27,7 +27,7 @@ export const Container = styled.div`
           .element-details-label {
             margin: 0;
           }
-          p {
+          .description {
             font-family: Rubik;
             font-style: normal;
             font-weight: normal;
@@ -38,6 +38,10 @@ export const Container = styled.div`
             padding-left: 45px;
             padding-top: 8px;
             margin-bottom: 16px;
+            * {
+              padding: 0;
+              margin: 0;
+            }
           }
         }
       }
@@ -77,17 +81,24 @@ export const Container = styled.div`
     content: none;
   }
   .footer {
-    .import-btn {
-      padding-left: 385px;
+    .divider {
+      height: 10px;
+      position: absolute;
+      width: 100%;
+      left: 0px;
+      right: 0px;
+      border-top: 1px solid ${props => props.theme.hoverColour};
     }
-    border-top: 1px solid ${props => props.theme.hoverColour};
-    background: ${props => props.theme.white};
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
-    height: 70px;
+    position: relative
     display: flex;
+    flex-direction: column;
+    .import-btn {
+      padding-left: 246px;
+      padding-top: 16px;
+    }
+    background: ${props => props.theme.white};
+    width: 100%;
+    height: 70px;
     align-items: center;
   }
 `;
