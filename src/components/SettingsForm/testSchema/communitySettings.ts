@@ -110,10 +110,6 @@ export const jsonSchema: any = {
     'Extra Privileged',
     'General Users',
     'Registered',
-    'VIP',
-    'VIP',
-    'VIP',
-    'VIP',
     'VIP'
   ],
 
