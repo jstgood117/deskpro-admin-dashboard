@@ -156,7 +156,7 @@ const ButtonToolbar = styled.div`
     background-color: #f7f7f7;
     color: #a9b0b0;
     border: 1px solid #d3d6d7;
-    margin-left: 349px;
+    margin-left: 329px;
   }
 `;
 
