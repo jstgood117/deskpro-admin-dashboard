@@ -19,6 +19,7 @@ export const uiSchema: {
                 id: 'help_center_community_settings',
                 type: 'settings-data',
                 title: 'Community',
+                illustration: 'settings-header',
                 description:
                   'Enable the Community section of your Help Center so users can access it. Users will be able to create and subscribe to Topics.'
               }

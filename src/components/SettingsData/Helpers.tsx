@@ -80,6 +80,7 @@ const DollarIconWrapper = styled.div`
 export const SettingsData = ({
   title,
   description,
+  illustration = 'settings-header',
   checked,
   onChange
 }: any) => {
@@ -87,7 +88,7 @@ export const SettingsData = ({
     <Card>
       <StyledHeader
         style={{
-          backgroundImage: `url(${require('../../assets/svg/settings-header.svg')})`,
+          backgroundImage: `url(${require(`../../assets/svg/illustrations/${illustration}.svg`)})`,
           flexDirection: 'column'
         }}
       >

@@ -5,6 +5,7 @@ import ImporterPage from './Bespoke/Importer';
 import FileCheckPage from './Bespoke/FileCheck';
 import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import HelpCenterCommunitySettingsPage from './Bespoke/HelpCenterCommunitySettings';
+import HelpCenterDownloadSettingsPage from './Bespoke/HelpCenterDownloadSettings';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
@@ -21,6 +22,7 @@ export const RouteToPage: KeyValue = {
   '/help-center/kb/settings': ResetHelpdesk,
   '/help-center/setup': HelpCenterSetupPage,
   '/help-center/community/settings': HelpCenterCommunitySettingsPage,
+  '/help-center/downloads/settings': HelpCenterDownloadSettingsPage,
 
   '/sysadmin/settings': ExamplePage,
   '/sysadmin/file-check': FileCheckPage,

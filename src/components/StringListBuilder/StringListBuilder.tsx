@@ -37,6 +37,9 @@ const StringListContainer = styled.div`
     justify-content: flex-end;
     color: ${props => props.theme.static2Colour};
   }
+  & .string-list-rows {
+    margin-bottom: 16px;
+  }
   & .string-row {
     position: relative;
     border-radius: 6px;
@@ -169,7 +172,7 @@ const StringListBuilder: React.FC<IProps> = ({
         name={name || id || ''}
         render={arrayHelpers => (
           <div>
-            <div style={{ marginBottom: 8 }}>
+            <div className='string-list-rows'>
               {values.map((value, index) =>
                 index === editIndex ? (
                   <Input
