@@ -6,7 +6,7 @@ import Icon from '../Icon';
 import { StringRow } from './components/StringRow';
 import { FieldArray, ArrayHelpers } from 'formik';
 import Input from '../Input';
-// import Tooltip from '../Tooltip';
+import Tooltip from '../Tooltip';
 
 const StringListContainer = styled.div`
   position: relative;
@@ -64,6 +64,8 @@ const StringListContainer = styled.div`
     box-shadow: 0px 3px 8px ${props => props.theme.brandPrimary + '66'};
     border-radius: 6px;
     font-weight: 500;
+    margin-left: -8px;
+    cursor: pointer;
     color: ${props => props.theme.brandPrimary};
   }
 
@@ -99,7 +101,18 @@ const StringListContainer = styled.div`
     }
   }
   & .add-button > button[disabled] {
-    opacity: 0.5;
+    /*opacity: 0.5;*/
+    background: #f7f7f7;
+    border: 1px solid #d3d6d7;
+    box-sizing: border-box;
+    border-radius: 4px;
+    .text {
+      color: #a9b0b0;
+    }
+    svg,
+    path {
+      fill: #a9b0b0;
+    }
   }
 `;
 
@@ -149,12 +162,15 @@ const StringListBuilder: React.FC<IProps> = ({
     setInAdd(true);
     setNewItemValue('');
   }, []);
+
   const onChangeNewItem = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewItemValue(e.target.value);
     },
     []
   );
+
+  const addBtnDisable = !!inAdd || (!!max && max === values.length);
 
   return (
     <StringListContainer className='string-list-builder'>
@@ -241,16 +257,36 @@ const StringListBuilder: React.FC<IProps> = ({
                 />
               )}
             </div>
-            <Button
-              disabled={!!inAdd || (!!max && max === values.length)}
-              className='add-button'
-              onClick={onAddClick}
-              buttonType='button'
-              styleType='secondary'
-            >
-              <Icon name='plus' />
-              {addTitle && <span className='text'>{addTitle}</span>}
-            </Button>
+            {addBtnDisable ? (
+              <Tooltip
+                content='All usergroups have been added.'
+                styleType='dark'
+                placement='bottom'
+              >
+                <span>
+                  <Button
+                    className='add-button'
+                    onClick={onAddClick}
+                    buttonType='button'
+                    styleType='secondary'
+                    disabled={true}
+                  >
+                    <Icon name='plus' />
+                    {addTitle && <span className='text'>{addTitle}</span>}
+                  </Button>
+                </span>
+              </Tooltip>
+            ) : (
+              <Button
+                className='add-button'
+                onClick={onAddClick}
+                buttonType='button'
+                styleType='secondary'
+              >
+                <Icon name='plus' />
+                {addTitle && <span className='text'>{addTitle}</span>}
+              </Button>
+            )}
           </div>
         )}
       />
