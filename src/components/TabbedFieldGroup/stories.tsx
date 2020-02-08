@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { Formik } from 'formik';
 
 import TabbedFieldGroup from './TabbedFieldGroup';
 
@@ -187,43 +188,71 @@ const initialValues = {
 
 storiesOf('Tabbed Field Group', module)
   .add('Three brands or less', () => (
-    <TabbedFieldGroup
-      allowExpanded={true}
-      elements={elements}
-      handleChange={action('changed')}
+    <Formik
       initialValues={initialValues}
-      tabs={tabsThreeOrLess}
-      title='Brand'
-    />
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(false);
+      }}
+    >
+      <TabbedFieldGroup
+        allowExpanded={true}
+        elements={elements}
+        handleChange={action('changed')}
+        initialValues={initialValues}
+        tabs={tabsThreeOrLess}
+        title='Brand'
+      />
+    </Formik>
   ))
   .add('Initially expanded', () => (
-    <TabbedFieldGroup
-      allowExpanded={true}
-      initialExpanded={true}
-      elements={elements}
-      handleChange={action('changed')}
+    <Formik
       initialValues={initialValues}
-      tabs={tabsThreeOrLess}
-      title='Brand'
-    />
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(false);
+      }}
+    >
+      <TabbedFieldGroup
+        allowExpanded={true}
+        initialExpanded={true}
+        elements={elements}
+        handleChange={action('changed')}
+        initialValues={initialValues}
+        tabs={tabsThreeOrLess}
+        title='Brand'
+      />
+    </Formik>
   ))
   .add('More than three brands', () => (
-    <TabbedFieldGroup
-      allowExpanded={true}
-      elements={elements}
-      handleChange={action('changed')}
+    <Formik
       initialValues={initialValues}
-      tabs={tabsMoreThanTree}
-      title='Brand'
-    />
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(false);
+      }}
+    >
+      <TabbedFieldGroup
+        allowExpanded={true}
+        elements={elements}
+        handleChange={action('changed')}
+        initialValues={initialValues}
+        tabs={tabsMoreThanTree}
+        title='Brand'
+      />
+    </Formik>
   ))
   .add('Several settings fields', () => (
-    <TabbedFieldGroup
-      allowExpanded={true}
-      elements={multipleElements}
-      handleChange={action('changed')}
+    <Formik
       initialValues={initialValues}
-      tabs={tabsThreeOrLess}
-      title='Brand'
-    />
+      onSubmit={(values, { setSubmitting }) => {
+        setSubmitting(false);
+      }}
+    >
+      <TabbedFieldGroup
+        allowExpanded={true}
+        elements={multipleElements}
+        handleChange={action('changed')}
+        initialValues={initialValues}
+        tabs={tabsThreeOrLess}
+        title='Brand'
+      />
+    </Formik>
   ));
