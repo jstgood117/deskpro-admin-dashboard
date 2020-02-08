@@ -1,10 +1,13 @@
 import React from 'react';
+import { useFormikContext } from 'formik';
 
 import { SettingsData, HeaderCard } from '../../SettingsData/Helpers';
 
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
 
 const SettingsDataComponent = (props: any) => {
+  const { setFieldValue } = useFormikContext();
+
   return (
     <FeatureSectionContext.Consumer>
       {context => {
@@ -23,9 +26,7 @@ const SettingsDataComponent = (props: any) => {
                 {...props}
                 id={id}
                 checked={checked}
-                onChange={(value: any) =>
-                  props.formikProps.setValue(props.id, value)
-                }
+                onChange={(value: any) => setFieldValue(id, value)}
               />
             )}
           </div>
