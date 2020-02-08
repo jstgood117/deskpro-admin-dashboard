@@ -85,7 +85,7 @@ const Container = styled.div`
       max-width: 578px;
     }
     .element-info {
-      margin-left: 16px;
+      margin-left: 53px;
     }
   }
 
