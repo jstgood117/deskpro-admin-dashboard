@@ -25,7 +25,6 @@ const Container = styled.div`
 
   & .feature-section {
     flex-grow: 1;
-    /*height: calc(100vh - 70px);*/
   }
 
   & .feature-section-select {
@@ -85,13 +84,6 @@ const Container = styled.div`
     .element-details {
       max-width: 578px;
     }
-    .element-details {
-      .description {
-        p {
-          margin: 0;
-        }
-      }
-    }
     .element-info {
       margin-left: 16px;
     }
@@ -133,27 +125,6 @@ const Container = styled.div`
       .select__control {
         margin-bottom: 8px;
       }
-    }
-  }
-
-  & .field-container.form-item.domain {
-    margin-bottom: 0;
-  }
-
-  & label.radio-label {
-    padding-left: 12px;
-  }
-
-  & .field-container .element-details .element-details-label label {
-    font-weight: 500;
-  }
-  & .vert-elements .form-item {
-    margin-bottom: 24px;
-  }
-  & .form-row .group-elements .vert-element-group {
-    margin-top: 30px;
-    &:first-child {
-      margin-top: 0;
     }
   }
 `;
