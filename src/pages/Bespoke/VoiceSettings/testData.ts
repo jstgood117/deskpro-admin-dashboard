@@ -43,29 +43,31 @@ export const uiSchema: {
               },
               elements: [
                 {
-                  type: 'field',
+                  type: 'vertical_group',
                   title:
                     'Attach the transcript to the agent notification email',
                   description:
                     'A text version of the voicemail message will be added to the agent notification email.',
+                  showOn: 'voice_settings_checkbox_1',
                   field: {
                     type: 'checkbox',
                     id: 'voice_settings_checkbox_1',
                     value: 'admin1',
                   },
+                  elements: [],
                 },
               ],
             },
             {
-              type: 'field',
+              type: 'vertical_group',
               title: 'Attach the transcript to the agent notification email',
-              description:
-                'A text version of the voicemail message will be added to the agent notification email.',
+              showOn: 'voice_settings_checkbox_2',
               field: {
                 type: 'checkbox',
                 id: 'voice_settings_checkbox_2',
                 value: 'admin',
               },
+              elements: [],
             },
           ],
         },
