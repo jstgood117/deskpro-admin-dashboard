@@ -6,6 +6,7 @@ import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
 import TicketDeflection from './Bespoke/TicketDeflection';
+import VoiceSettings from './Bespoke/VoiceSettings';
 import { KeyValue } from '../types';
 
 export const RouteToPage: KeyValue = {
@@ -16,5 +17,6 @@ export const RouteToPage: KeyValue = {
   '/help-center/setup': HelpCenterSetupPage,
   '/data-center': DataCenter,
   '/tickets/locking': TicketLocking,
-  '/tickets/deflection': TicketDeflection
+  '/tickets/deflection': TicketDeflection,
+  '/voice/settings': VoiceSettings
 };
