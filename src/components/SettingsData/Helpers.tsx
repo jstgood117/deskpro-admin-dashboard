@@ -18,7 +18,7 @@ const StyledHeader = styled(dpstyle.div)`
   background-size: contain;
   background-position: 100%;
 `;
-export const StyledText = styled(dpstyle.div1)<{ isTitle: boolean }>`
+export const StyledText = styled.label<{ isTitle: boolean }>`
   font-weight: ${props => (props.isTitle ? 500 : 'normal')};
   display: block;
   font-size: 13px;
@@ -78,6 +78,7 @@ const DollarIconWrapper = styled.div`
 `;
 
 export const SettingsData = ({
+  id,
   title,
   description,
   illustration = 'settings-header',
@@ -93,7 +94,7 @@ export const SettingsData = ({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ width: 30 }}>
+          <div style={{ width: 30, height: 20 }}>
             <Toggle
               checked={checked}
               value='checked'
@@ -104,7 +105,9 @@ export const SettingsData = ({
           <StyledText
             className='title'
             style={{ fontSize: 18, paddingLeft: 14 }}
+            onClick={() => onChange(!checked)}
             isTitle={true}
+            htmlFor={id}
           >
             {title}
           </StyledText>
