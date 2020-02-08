@@ -1,5 +1,6 @@
 import React, { useState, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
+import Markdown from 'react-markdown';
 
 import Card from '../Card';
 import Toggle from '../Toggle';
@@ -75,6 +76,57 @@ const DollarIconWrapper = styled.div`
     background: rgba(248, 175, 60, 0.25);
   }
 `;
+
+export const SettingsData = ({
+  title,
+  description,
+  checked,
+  onChange
+}: any) => {
+  return (
+    <Card>
+      <StyledHeader
+        style={{
+          backgroundImage: `url(${require('../../assets/svg/settings-header.svg')})`,
+          flexDirection: 'column'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ width: 30 }}>
+            <Toggle
+              checked={checked}
+              value='checked'
+              onChange={event => onChange(event.target.checked)}
+              size='medium'
+            />
+          </div>
+          <StyledText
+            className='title'
+            style={{ fontSize: 18, paddingLeft: 14 }}
+            isTitle={true}
+          >
+            {title}
+          </StyledText>
+        </div>
+        <div>
+          <StyledText
+            style={{
+              maxWidth: '60%',
+              paddingLeft: 44,
+              fontSize: 13,
+              color: '#8b9293'
+            }}
+            isTitle={false}
+            className='description'
+          >
+            <Markdown>{description}</Markdown>
+          </StyledText>
+        </div>
+      </StyledHeader>
+    </Card>
+  );
+};
+
 export const HeaderCard = () => {
   const [checked, setChecked] = useState(false);
   return (
@@ -108,7 +160,10 @@ export const HeaderCard = () => {
             }}
             isTitle={false}
           >
-            The help center is the public facing side of your Helpdesk that your users can access using internet browsers and moblie devices. Here users can submit tickets, browse published content and share knowledge.
+            The help center is the public facing side of your Helpdesk that your
+            users can access using internet browsers and moblie devices. Here
+            users can submit tickets, browse published content and share
+            knowledge.
           </StyledText>
         </div>
       </StyledHeader>

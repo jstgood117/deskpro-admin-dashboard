@@ -34,9 +34,6 @@ const Container = styled.div`
   }
 
   & .page-section {
-    &:last-child::after {
-      height: 0;
-    }
     .field-container.form-item.method-name {
       margin-left: -40px;
       margin-bottom: 24px;

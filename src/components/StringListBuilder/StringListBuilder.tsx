@@ -50,10 +50,11 @@ const StringListContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     color: ${props => props.theme.staticColour};
-    padding: 0 8px;
+    padding: 0;
   }
   & .string-row:hover {
     background: ${props => `${props.theme.textHover}99`};
+    padding: 0 8px;
   }
 
   & .string-row.capped:hover {
@@ -84,9 +85,17 @@ const StringListContainer = styled.div`
     justify-content: center;
     .text {
       margin-left: 8px;
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 150%;
+      color: #1c3e55;
     }
     svg {
       padding-right: 0;
+      width: 12px;
+      height: 12px;
     }
   }
   & .add-button > button[disabled] {
@@ -148,7 +157,7 @@ const StringListBuilder: React.FC<IProps> = ({
   );
 
   return (
-    <StringListContainer>
+    <StringListContainer className='string-list-builder'>
       <div className='title-container'>
         {title || ' '}
         <span className='string-list-count'>

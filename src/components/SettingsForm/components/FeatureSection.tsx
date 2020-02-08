@@ -13,6 +13,12 @@ export const FeatureSectionStyled = styled.div`
   justify-content: flex-start;
   width: 974px;
 
+  & .page-section {
+    &:last-child::after {
+      height: 0;
+    }
+  }
+
   .element-details-label {
     display: flex;
     flex-direction: row;

@@ -40,7 +40,9 @@ export const GenericFormComponent = (props: any) => {
     case 'alert':
       return <AlertSection {...props} />;
     case 'settings-data':
-      return <SettingsData {...props.options} />;
+      return (
+        <SettingsData {...props.options} formikProps={props.formikProps} />
+      );
     case 'code':
       return <CodeSection {...props} />;
     case 'field':
