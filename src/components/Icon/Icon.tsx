@@ -83,6 +83,7 @@ import { ReactComponent as IconRateLimiting } from '../../assets/svg/icons/ic-ra
 import { ReactComponent as IconGuide } from '../../assets/svg/icons/ic-guide.svg';
 import { ReactComponent as IconLink } from '../../assets/svg/icons/ic-link.svg';
 import { ReactComponent as IconCalendar } from '../../assets/svg/icons/ic-calendar.svg';
+import { ReactComponent as IconExternalLink } from '../../assets/svg/icons/ic-external-link.svg';
 
 export interface IProps {
   name: string;
@@ -270,6 +271,8 @@ const Icon: FC<IProps> = props => {
       );
     case 'ic-rate-limiting':
       return <IconRateLimiting />;
+    case 'external-link':
+      return <IconExternalLink />;
     default:
       return <IconSetup />;
   }

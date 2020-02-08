@@ -351,7 +351,7 @@ const FeatureSection: React.FC<Props> = ({
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
 
   return (
-    <FeatureSectionStyled>
+    <FeatureSectionStyled className='feature-section'>
       {title ? (
         <h1 className='feature-section-title'>
           <div

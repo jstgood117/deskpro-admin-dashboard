@@ -11,6 +11,7 @@ import Units from '../../Units';
 import Checkbox from '../../Checkbox';
 import FileUpload from '../../Attachment/FileUpload';
 import ColorPicker from '../../ColorPicker';
+import Radio from '../../Radio/Radio';
 import RadioGroup from '../../Radio/RadioGroup';
 import Button from '../../Button';
 import Icon from '../../Icon';
@@ -58,6 +59,18 @@ const elementsSelector: {
       onChange={val => props.formikProps.setFieldValue(props.id, val)}
     />
   ),
+  radio: props => (
+    <Radio
+      className='radio-option'
+      setOption={(val: any) => {
+        props.formikProps.setFieldValue(props.id, val);
+      }}
+      option={props.formikProps.values[props.id]}
+      value={props.value}
+      id={props.id}
+      label={props.label}
+    />
+  ),
   singleSelect: props => {
     return (
       <SingleSelect
@@ -82,7 +95,8 @@ const elementsSelector: {
       className='form-checkbox'
       id={props.id}
       checked={
-        props.formikProps.values[props.id].includes(props.value) ? true : false
+        props.formikProps.values[props.id] &&
+        props.formikProps.values[props.id].includes(props.value)
       }
       value={props.value}
       onChange={event => {
@@ -113,7 +127,7 @@ const elementsSelector: {
   select: props => (
     <SingleSelect
       {...props}
-      selectOption={() => { }}
+      selectOption={() => {}}
       selectedOption={props.formikProps.values[props.id]}
       placeholder={props.placeholder}
       type='primary'
@@ -122,7 +136,7 @@ const elementsSelector: {
   button: props => (
     <Button
       styleType={props.styleType ? props.styleType : 'secondary'}
-      onClick={() => { }}
+      onClick={() => {}}
       size='small'
     >
       {props.icon && <Icon name={props.icon} />}

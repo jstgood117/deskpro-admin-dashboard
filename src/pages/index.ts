@@ -6,6 +6,7 @@ import FileCheckPage from './Bespoke/FileCheck';
 import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
+import RealTimeEvents from './Bespoke/RealTimeEvents';
 
 import { KeyValue } from '../types';
 
@@ -17,5 +18,6 @@ export const RouteToPage: KeyValue = {
   '/sysadmin/file-check': FileCheckPage,
   '/help-center/setup': HelpCenterSetupPage,
   '/data-center': DataCenter,
-  '/tickets/locking': TicketLocking
+  '/tickets/locking': TicketLocking,
+  '/sysadmin/realtime-events': RealTimeEvents
 };
