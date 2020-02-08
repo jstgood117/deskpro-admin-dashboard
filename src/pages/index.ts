@@ -5,6 +5,7 @@ import ImporterPage from './Bespoke/Importer';
 import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
+import RealTimeEvents from './Bespoke/RealTimeEvents';
 import { KeyValue } from '../types';
 
 export const RouteToPage: KeyValue = {
@@ -14,5 +15,6 @@ export const RouteToPage: KeyValue = {
   '/importer': ImporterPage,
   '/help-center/setup': HelpCenterSetupPage,
   '/data-center': DataCenter,
-  '/tickets/locking': TicketLocking
+  '/tickets/locking': TicketLocking,
+  '/sysadmin/realtime-events': RealTimeEvents
 };
