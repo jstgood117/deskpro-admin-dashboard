@@ -138,6 +138,11 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
       return;
     }
 
+    // If action.action is a function
+    if (action.action && typeof action.action === 'function') {
+      action.action(variables);
+    }
+
     // If action.selectOptions is DocumentNode then fetch values
     if (action.selectOptions && !Array.isArray(action.selectOptions)) {
       setFetchedOptions([]);
