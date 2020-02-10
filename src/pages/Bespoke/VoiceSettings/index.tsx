@@ -13,6 +13,20 @@ interface IProps {
 }
 
 const Container = styled.div`
+  .vert-element-field > .form-checkbox {
+    transform: translateY(1px);
+  }
+
+  .vert-elements > .vert-element-group {
+    .element-details-label > label {
+      font-weight: normal;
+    }
+
+    .vert-element-field  {
+      margin-right: 6px;
+    }
+  }
+
   .form-row :last-child :after {
     content: none;
   }
