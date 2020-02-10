@@ -66,6 +66,18 @@ const Container = styled.div`
     .description {
       max-width: 580px;
     }
+    .horz-element-group {
+      .field-container {
+      margin: 0 8px 0 0 !important;
+      min-width: 223px;
+      input {
+        margin: 0;
+      }
+      label {
+        margin: 0;
+      }
+    }
+    }
     .group-elements {
       .vert-element-group {
         &.captcha-features {
