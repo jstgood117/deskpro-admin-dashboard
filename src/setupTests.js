@@ -1,11 +1,12 @@
 const enzyme = require("enzyme");
 const Adapter = require("enzyme-adapter-react-16");
+const fetch = require("node-fetch")
 
 enzyme.configure({ adapter: new Adapter() });
 
 const { JSDOM } = require('jsdom');
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM('<!doctype html><html><body><div id="app-root"></div></body></html>');
 const { window } = jsdom;
 
 function copyProps(src, target) {
@@ -17,6 +18,7 @@ function copyProps(src, target) {
 
 global.window = window;
 global.document =  window.document;
+global.fetch = fetch;
 
 Object.defineProperty(global.window, 'getComputedStyle', {
   value: () => {
