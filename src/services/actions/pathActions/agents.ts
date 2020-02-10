@@ -42,7 +42,7 @@ const agents: ActionsType[] = [
         preAction: {
           type:'CONFIRM_MODAL',
           icon:'add',
-          title: 'Add Teamss?',
+          title: 'Add Teams?',
           message:`Added teams to %s agents.`,
           variant: 'default',
           leftButtonText:'Add Teams',
@@ -62,7 +62,19 @@ const agents: ActionsType[] = [
         actions: null
       }
     ]
-  }
+  },
+  {
+    type:'separator'
+  },
+  {
+    icon:'check',
+    title:'No side effect action',
+    type:'action',
+    action: (args: any) => {
+      console.log('test');
+      console.log(args);
+    }
+  },
 ];
 
 export default agents;

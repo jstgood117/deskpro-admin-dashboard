@@ -4,7 +4,6 @@ import { WrapperType } from '../../test/types';
 
 import Actions, { Props } from './Actions';
 
-
 jest.mock('../Button', () => () => (
   <button>Button</button>)
 );
@@ -31,7 +30,6 @@ const props: Props = {
   handlePreAction: jest.fn(),
   ids: ['0']
 };
-
 
 describe('Actions', () => {
 
