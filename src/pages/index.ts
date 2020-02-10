@@ -7,6 +7,7 @@ import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import HelpCenterCommunitySettingsPage from './Bespoke/HelpCenterCommunitySettings';
 import HelpCenterDownloadSettingsPage from './Bespoke/HelpCenterDownloadSettings';
 import HelpCenterNewsSettingsPage from './Bespoke/HelpCenterNewsSettings';
+import HelpCenterGuidesSettingsPage from './Bespoke/HelpCenterGuidesSettings';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
@@ -25,6 +26,7 @@ export const RouteToPage: KeyValue = {
   '/help-center/community/settings': HelpCenterCommunitySettingsPage,
   '/help-center/downloads/settings': HelpCenterDownloadSettingsPage,
   '/help-center/news/settings': HelpCenterNewsSettingsPage,
+  '/help-center/guides/settings': HelpCenterGuidesSettingsPage,
 
   '/sysadmin/settings': ExamplePage,
   '/sysadmin/file-check': FileCheckPage,
