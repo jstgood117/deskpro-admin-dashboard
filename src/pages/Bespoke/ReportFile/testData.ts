@@ -96,7 +96,7 @@ export const uiSchema: {
                 },
                 {
                   type: 'group',
-                  className: 'group-deskpro',
+                  className: 'report-panel',
                   dependenceOn: {
                     field: 'agent_report_progress',
                     value: 100

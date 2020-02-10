@@ -35,6 +35,9 @@ const Container = styled.div`
 
   & .page-section.method {
     .group-deskpro {
+      max-width: 578px;
+    }
+    .report-panel {
       max-width: 668px;
     }
     .group-deskpro {
