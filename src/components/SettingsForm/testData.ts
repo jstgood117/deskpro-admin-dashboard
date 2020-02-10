@@ -9,6 +9,7 @@ export const uiSchema: {
     {
       title: 'Agent Settings',
       type: 'feature_section',
+      icon: 'down',
       elements: [
         {
           title: 'Agent Security Settings',

@@ -210,7 +210,6 @@ export const FeatureSectionStyled = styled.div`
   .form-item {
     display: flex;
     flex-direction: row;
-    /*margin-bottom: 15px;*/
     .group-details {
       width: 100%;
       max-width: 685px;
@@ -286,51 +285,6 @@ export const FeatureSectionStyled = styled.div`
       margin-bottom: 24px;
     }
   }
-
-  /*
-  & .element-details {
-    margin-top: 16px;
-  }
-
-  & .group-details > .title,
-  & .element-details > .title {
-    display: flex;
-    align-items: center;
-  }
-
-  & .group-details > div.group-articles ol {
-    padding: 0;
-    margin: 0;
-  }
-
-  & .group-details > div.group-articles li {
-    list-style: none;
-  }
-
-  & .group-details > div.group-articles li a {
-    text-decoration: none;
-    color: ${props => props.theme.staticColour};
-  }
-
-  & .group-details > div.group-articles li::before {
-    content: attr(data-index);
-    border-radius: 100%;
-    padding: 2px;
-    margin: 8px 5px 0 0;
-    color: ${props => props.theme.brandPrimary};
-    background: ${props => `${props.theme.lightBlue}22`};
-    display: inline-flex;
-    height: 18px;
-    width: 18px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  & .element-info a svg path,
-  & .group-info a svg path {
-    fill: ${props => props.theme.brandPrimary};
-  }
-  */
 `;
 
 interface Props {
@@ -339,6 +293,7 @@ interface Props {
   title: string;
   brandButtonGroup?: boolean;
   field?: any;
+  icon?: string;
 }
 
 const FeatureSection: React.FC<Props> = ({
@@ -346,6 +301,7 @@ const FeatureSection: React.FC<Props> = ({
   formikProps,
   title,
   field,
+  icon,
   brandButtonGroup
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
@@ -363,7 +319,7 @@ const FeatureSection: React.FC<Props> = ({
             }}
           >
             <span style={{ marginRight: 20 }}>{title}</span>
-            <Icon name='down' />
+            {icon && <Icon name={icon} />}
           </div>
           {brandButtonGroup && (
             <div style={{ margin: '8px 0 8px 0' }}>
