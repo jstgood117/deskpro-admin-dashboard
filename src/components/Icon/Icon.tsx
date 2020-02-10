@@ -36,6 +36,7 @@ import { ReactComponent as IconCheck } from '../../assets/svg/icons/ic-check.svg
 import { ReactComponent as IconCollapse } from '../../assets/svg/icons/ic-collapse.svg';
 import { ReactComponent as IconAttachment } from '../../assets/svg/icons/ic-attachment.svg';
 import { ReactComponent as IconError } from '../../assets/svg/icons/ic-error.svg';
+import { ReactComponent as IconError2 } from '../../assets/svg/icons/ic-error2.svg';
 import { ReactComponent as IconCaretRight } from '../../assets/svg/icons/ic-caret-right.svg';
 import { ReactComponent as IconCaretLeft } from '../../assets/svg/icons/ic-caret-left.svg';
 import { ReactComponent as IconCheck2 } from '../../assets/svg/icons/ic-check-2.svg';
@@ -77,11 +78,12 @@ import { ReactComponent as IconSortUpActive } from '../../assets/svg/icons/ic-so
 import { ReactComponent as IconGroupingUp } from '../../assets/svg/icons/ic-grouping-up.svg';
 import { ReactComponent as IconGroupingDown } from '../../assets/svg/icons/ic-grouping-down.svg';
 import { ReactComponent as IconSave } from '../../assets/svg/icons/save.svg';
-import { ReactComponent as IconUp } from '../../assets/svg/ic-up.svg';
+import { ReactComponent as IconUp } from '../../assets/svg/icons/ic-up.svg';
 import { ReactComponent as IconRateLimiting } from '../../assets/svg/icons/ic-rate-limiting.svg';
 import { ReactComponent as IconGuide } from '../../assets/svg/icons/ic-guide.svg';
 import { ReactComponent as IconLink } from '../../assets/svg/icons/ic-link.svg';
 import { ReactComponent as IconCalendar } from '../../assets/svg/icons/ic-calendar.svg';
+import { ReactComponent as IconExternalLink } from '../../assets/svg/icons/ic-external-link.svg';
 
 export interface IProps {
   name: string;
@@ -165,6 +167,8 @@ const Icon: FC<IProps> = props => {
       return <IconAttachment />;
     case 'error':
       return <IconError />;
+    case 'error2':
+      return <IconError2 />;
     case 'caret-right':
       return <IconCaretRight />;
     case 'caret-left':
@@ -267,6 +271,8 @@ const Icon: FC<IProps> = props => {
       );
     case 'ic-rate-limiting':
       return <IconRateLimiting />;
+    case 'external-link':
+      return <IconExternalLink />;
     default:
       return <IconSetup />;
   }

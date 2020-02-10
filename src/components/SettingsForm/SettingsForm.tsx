@@ -38,29 +38,6 @@ const SettingsFormStyled = styled.div`
       border: 1px solid #d3d6d7;
     }
   }
-  /*
-  & .submit-button {
-    padding-left: 330px;
-    margin: 16px 0;
-  }
-  & .submit-button > button {
-    width: 112px;
-    justify-content: center;
-  }
-  & .discard-button {
-    padding-left: 330px;
-    margin: 16px 0;
-  }
-  & .discard-button > button {
-    width: 137px;
-    justify-content: center;
-    background: #f7f7f7;
-    border: 1px solid #d3d6d7;
-    box-sizing: border-box;
-    border-radius: 4px;
-    color: #a9b0b0;
-  }
-  */
 `;
 
 interface IProps {

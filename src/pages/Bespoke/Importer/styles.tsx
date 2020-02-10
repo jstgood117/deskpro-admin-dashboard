@@ -9,6 +9,7 @@ export const Container = styled.div`
     border-bottom: none;
     min-width: unset;
     .sub-container {
+      padding-left: 40px;
       display: flex;
       flex-direction: column;
       width: -webkit-fill-available;
@@ -22,7 +23,7 @@ export const Container = styled.div`
           width: 50%;
         }
         .element-details {
-          max-width: 578px;
+          max-width: 623px;
           margin: 0;
           .element-details-label {
             margin: 0;
@@ -93,7 +94,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     .import-btn {
-      padding-left: 246px;
+      padding-left: 284px;
       padding-top: 16px;
     }
     background: ${props => props.theme.white};
