@@ -33,10 +33,13 @@ export const uiSchema: {
             },
             {
               type: 'vertical_group',
-              title: 'Transcribe voicemail messages.',
-              showOn: 'voicemail_messages_enabled',
-              description:
-                'If a user leaves a voicemail it will be transcribed. This text version of the voicemail message will be added to the ticket along with the voicemail audio.',
+              featureBilling: {
+                title: 'Transcribe voicemail messages.',
+                description:
+                  'If a user leaves a voicemail it will be transcribed. This text version of the voicemail message will be added to the ticket along with the voicemail audio.',
+                showOn: 'voicemail_messages_enabled',
+                tooltip: 'Transcribe voicemail messages.',
+              },
               field: {
                 type: 'toggle',
                 id: 'voicemail_messages_enabled',
@@ -77,10 +80,12 @@ export const uiSchema: {
           elements: [
             {
               type: 'vertical_group',
-              title: 'Forwarding Machine Detection',
-              showOn: 'forwarding_machine_detection_enabled',
-              description:
-                'When enabled if a customer call is forwarded & is answered by the agent’s voicemail. Then the call will re-routed to the new available agent in the queue automatically.',
+              featureBilling: {
+                title: 'Forwarding Machine Detection',
+                showOn: 'forwarding_machine_detection_enabled',
+                description:
+                  'When enabled if a customer call is forwarded & is answered by the agent’s voicemail. Then the call will re-routed to the new available agent in the queue automatically.',
+              },
               field: {
                 type: 'toggle',
                 id: 'forwarding_machine_detection_enabled',
