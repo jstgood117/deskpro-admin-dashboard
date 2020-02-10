@@ -1,9 +1,15 @@
 import React from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
+import { buildYup } from 'schema-to-yup';
 
 import { SettingsFormFactory } from './SettingsFormFactory';
-import { jsonSchema, uiSchema } from './testData';
+import {
+  jsonSchema,
+  uiSchema,
+  vaildationSchema,
+  validationConfig
+} from './testData';
 import Button from '../Button';
 
 const SettingsFormStyled = styled.div`
@@ -46,13 +52,14 @@ interface IProps {
 }
 
 const SettingsForm: React.FC<IProps> = ({ initialValues, ui }) => {
+console.log(vaildationSchema);
+  const yupSchema = buildYup(vaildationSchema, validationConfig);
+
   return (
     <SettingsFormStyled>
       <Formik
         initialValues={initialValues || jsonSchema}
-        validate={values => {
-          console.log(values);
-        }}
+        validationSchema={yupSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values);
           setSubmitting(false);
