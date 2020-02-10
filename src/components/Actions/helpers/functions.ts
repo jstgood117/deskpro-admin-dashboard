@@ -1,8 +1,9 @@
 import { IMenuItemProps } from '../../../resources/interfaces';
 import { ActionsType } from '../../../services/actions/types';
 
-const generateMenuItem = (item: ActionsType) => {
+export const generateMenuItem = (item: ActionsType) => {
   switch (item.type) {
+    case 'action':
     case 'mutate':
       return {
         name: item.title,

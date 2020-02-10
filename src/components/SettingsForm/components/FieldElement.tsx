@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Field, useFormikContext } from 'formik';
+import { Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 
 import Toggle from '../../Toggle';
@@ -11,6 +11,7 @@ import Units from '../../Units';
 import Checkbox from '../../Checkbox';
 import FileUpload from '../../Attachment/FileUpload';
 import ColorPicker from '../../ColorPicker';
+import Radio from '../../Radio/Radio';
 import RadioGroup from '../../Radio/RadioGroup';
 import Button from '../../Button';
 import Icon from '../../Icon';
@@ -58,6 +59,18 @@ const elementsSelector: {
       onChange={val => props.formikProps.setFieldValue(props.id, val)}
     />
   ),
+  radio: props => (
+    <Radio
+      className='radio-option'
+      setOption={(val: any) => {
+        props.formikProps.setFieldValue(props.id, val);
+      }}
+      option={props.formikProps.values[props.id]}
+      value={props.value}
+      id={props.id}
+      label={props.label}
+    />
+  ),
   singleSelect: props => {
     return (
       <SingleSelect
@@ -82,7 +95,8 @@ const elementsSelector: {
       className='form-checkbox'
       id={props.id}
       checked={
-        props.formikProps.values[props.id].includes(props.value) ? true : false
+        props.formikProps.values[props.id] &&
+        props.formikProps.values[props.id].includes(props.value)
       }
       value={props.value}
       onChange={event => {
@@ -113,6 +127,10 @@ const elementsSelector: {
   select: props => (
     <SingleSelect
       {...props}
+<<<<<<< HEAD
+=======
+      selectOption={() => {}}
+>>>>>>> master
       selectedOption={props.formikProps.values[props.id]}
       selectOption={val => props.formikProps.setFieldValue(props.id, val)}
       placeholder={props.placeholder}
@@ -122,7 +140,7 @@ const elementsSelector: {
   button: props => (
     <Button
       styleType={props.styleType ? props.styleType : 'secondary'}
-      onClick={() => { }}
+      onClick={() => {}}
       size='small'
     >
       {props.icon && <Icon name={props.icon} />}
@@ -160,7 +178,6 @@ const elementsSelector: {
 
 // Generates specific element by `props.type` field
 const FieldElement = (props: any) => {
-  const formContext = useFormikContext();
   return (
     <FeatureSectionContext.Consumer>
       {context => (
@@ -168,7 +185,6 @@ const FieldElement = (props: any) => {
           {elementsSelector[props.type] &&
             elementsSelector[props.type]({
               ...props,
-              formikProps: formContext,
               id: context.prefixName
                 ? `${context.prefixName}_${props.id}`
                 : props.id

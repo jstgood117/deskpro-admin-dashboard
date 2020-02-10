@@ -32,25 +32,27 @@ export const generateTitleAndDescription = (className: string, props: any) => {
             })}
           >
             <div className='element-details'>
-              <div className='element-details-label'>
-                {props.title && <label htmlFor={htmlFor}>{props.title}</label>}
-                {props.tooltip && (
-                  <Tooltip
-                    content={props.tooltip}
-                    styleType='light'
-                    placement='bottom-start'
-                    distance={0}
-                  >
-                    <span
-                      style={{
-                        paddingLeft: 4
-                      }}
+              {props.title && (
+                <div className='element-details-label'>
+                  <label htmlFor={htmlFor}>{props.title}</label>
+                  {props.tooltip && (
+                    <Tooltip
+                      content={props.tooltip}
+                      styleType='light'
+                      placement='bottom-start'
+                      distance={0}
                     >
-                      <Icon name='info-question-text' />
-                    </span>
-                  </Tooltip>
-                )}
-              </div>
+                      <span
+                        style={{
+                          paddingLeft: 4
+                        }}
+                      >
+                        <Icon name='info-question-text' />
+                      </span>
+                    </Tooltip>
+                  )}
+                </div>
+              )}
               {props.description && (
                 <div className='description'>
                   <Markdown>{props.description}</Markdown>

@@ -81,12 +81,14 @@ const Radio: FC<IProps> = ({
   id,
   label
 }) => {
+  const radioId = `${id}-${value}`;
+
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <div style={{ display: 'inline-flex', alignItems: 'center' }}>
         <RadioContainer className={className}>
           <HiddenRadio
-            id={id}
+            id={radioId}
             value={value}
             checked={option === value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +99,11 @@ const Radio: FC<IProps> = ({
             <InnerCircle checked={option === value} />
           </StyledRadio>
         </RadioContainer>
-        {label && <Label className='radio-label' htmlFor={id}>{label}</Label>}
+        {label && (
+          <Label className='radio-label' htmlFor={radioId}>
+            {label}
+          </Label>
+        )}
       </div>
     </ThemeProvider>
   );

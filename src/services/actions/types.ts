@@ -13,4 +13,5 @@ export type ActionsType = {
   selectOptions?: IOptions[] | DocumentNode;
   preAction?: PreActionType;
   actions?: ActionsType[];
+  action?: (...args: any[]) => any;
 };

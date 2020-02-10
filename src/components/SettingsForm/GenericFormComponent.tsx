@@ -10,6 +10,7 @@ import HorizontalElementGroup from './components/HorizontalElementGroup';
 import AlertSection from './components/AlertSection';
 import SettingsData from './components/SettingsData';
 import CodeSection from './components/CodeSection';
+import ButtonSection from './components/ButtonSection';
 
 // Common components
 import TabbedFieldGroup from '../TabbedFieldGroup';
@@ -34,6 +35,8 @@ export const GenericFormComponent = (props: any) => {
       return <HorizontalElementGroup {...props} />;
     case 'label':
       return <Label {...props} />;
+    case 'button':
+      return <ButtonSection {...props} />;
     case 'alert':
       return <AlertSection {...props} />;
     case 'settings-data':
