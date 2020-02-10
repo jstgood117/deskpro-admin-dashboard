@@ -49,7 +49,7 @@ export const uiSchema: {
                           elements: [
                             {
                               type: 'label',
-                              label: 'Include results from a File check as well'
+                              label: 'Include results from a File integrity check as well'
                             }
                           ]
                         }
@@ -121,6 +121,6 @@ export const uiSchema: {
 
 export const jsonSchema: any = {
   agent_report_enabled: true,
-  agent_report_progress: 100,
+  agent_report_progress: 90,
   agent_report_file_check: ['yes']
 };

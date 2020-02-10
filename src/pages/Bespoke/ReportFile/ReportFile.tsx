@@ -26,11 +26,16 @@ const Container = styled.div`
     &:last-child::after {
       height: 0;
     }
+    & .form-item {
+      & .vert-elements {
+        padding-left: 0px;
+      }
+    }
   }
 
   & .page-section.method {
     .group-deskpro {
-      max-width: 578px;
+      max-width: 668px;
     }
     .group-deskpro {
       > .form-row {
