@@ -27,6 +27,7 @@ export interface IProps {
   styles?: {
     [style: string]: (styles: React.CSSProperties) => React.CSSProperties;
   };
+  visibleIcon?: boolean;
 }
 
 const SingleSelect: FC<IProps> = ({
@@ -37,7 +38,8 @@ const SingleSelect: FC<IProps> = ({
   closeMenuOnSelect,
   selectedOption,
   isSearchable,
-  styles
+  styles,
+  visibleIcon
 }) => {
   const onChange = (value: IOptions) => {
     selectOption(value);
@@ -124,6 +126,7 @@ const SingleSelect: FC<IProps> = ({
   );
 };
 SingleSelect.defaultProps = {
-  isSearchable: false
+  isSearchable: false,
+  visibleIcon: true
 };
 export default SingleSelect;

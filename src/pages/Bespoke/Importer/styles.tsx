@@ -81,27 +81,6 @@ export const Container = styled.div`
   .form-row::after {
     content: none;
   }
-  .footer {
-    .divider {
-      height: 10px;
-      position: absolute;
-      width: 100%;
-      left: 0px;
-      right: 0px;
-      border-top: 1px solid ${props => props.theme.hoverColour};
-    }
-    position: relative
-    display: flex;
-    flex-direction: column;
-    .import-btn {
-      padding-left: 284px;
-      padding-top: 16px;
-    }
-    background: ${props => props.theme.white};
-    width: 100%;
-    height: 70px;
-    align-items: center;
-  }
 `;
 
 export const Group = styled.div`
