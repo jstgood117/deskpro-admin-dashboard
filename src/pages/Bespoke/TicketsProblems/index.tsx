@@ -1,9 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
+import { buildYup } from 'schema-to-yup';
 import styled from 'styled-components';
 
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
-import { uiSchema, jsonSchema } from './testData';
+import {
+  jsonSchema,
+  uiSchema,
+  vaildationSchema,
+  validationConfig
+} from './testData';
 import Button from '../../../components/Button';
 
 interface IProps {
@@ -30,6 +36,7 @@ const ButtonToolbar = styled.div`
   padding-left: 346px;
   background-color: ${props => props.theme.white};
   border-top: 1px solid #d2d8dd;
+
   button {
     display: flex;
     flex-direction: row;
@@ -43,10 +50,12 @@ const ButtonToolbar = styled.div`
     font-size: 13px;
     line-height: 150%;
   }
+
   .btn-primary button {
     background-color: #1c3e55;
     color: white;
   }
+
   .btn-secondary button {
     margin-left: 329px;
     background-color: #f7f7f7;
@@ -56,14 +65,19 @@ const ButtonToolbar = styled.div`
   `;
 
 const TicketsProblemsPage: FC<IProps> = ({ ui, initialValues }) => {
+  const [yupSchema, setYupSchema] = useState({});
+
+  useEffect(() => {
+    setYupSchema(buildYup(vaildationSchema, validationConfig));
+  }, []);
+
   return (
     <Formik
       initialValues={initialValues || jsonSchema}
-      validate={values => {
+      validationSchema={yupSchema}
+      onSubmit={(values, { setSubmitting }) => {
         console.log(values);
-      }}
-      onSubmit={async values => {
-        console.log(values);
+        setSubmitting(false);
       }}
     >
       {(formikProps: any) => (

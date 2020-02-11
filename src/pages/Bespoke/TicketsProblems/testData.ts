@@ -228,3 +228,38 @@ export const jsonSchema: any = {
     { name: 'Selina Kyle' },
   ],
 };
+
+export const vaildationSchema = {
+  type: 'object',
+  properties: {
+    ticket_problems_enabled: {
+      type: 'boolean',
+    },
+    view_permissions: {
+      type: 'array',
+    },
+    agent_view_permissions_list: {
+      type: 'array',
+    },
+    create_permissions: {
+      type: 'array',
+    },
+    agent_create_permissions_list: {
+      type: 'array',
+    },
+    close_permissions: {
+      type: 'array',
+    },
+    agent_close_permissions_list: {
+      type: 'array',
+    },
+    reopen_permissions: {
+      type: 'array',
+    },
+    agent_reopen_permissions_list: {
+      type: 'array',
+    },
+  },
+};
+
+export const validationConfig = {};
