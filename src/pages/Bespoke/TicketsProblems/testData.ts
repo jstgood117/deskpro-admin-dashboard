@@ -8,8 +8,8 @@ export const uiSchema: {
       title: 'Problems & Incidents',
       type: 'feature_section',
       header: {
-        title: 'Ticket Deflection',
-        showOn: 'ticket_feflection_enabled',
+        title: 'Problems & Incidents',
+        showOn: 'ticket_problems_enabled',
         description:
           'Unlock your agent’s ability to analysis incoming ticket trends and spot common issues. Agents using Problems & Incidents can group together tickets relating to a single underlying cause. Allowing to work more efficiently and pool knowledge.',
         info: {
@@ -32,16 +32,11 @@ export const uiSchema: {
                 {
                   type: 'field',
                   field: {
-                    type: 'permissions',
+                    type: 'stringlist',
+                    id: 'view_permissions',
                     title: 'Permission Groups',
                     addTitle: 'Add usergroup',
-                    id: 'view_permissions',
-                    values: [
-                      'All Permissions',
-                      'All Non-Destructive Permissions',
-                      'Support Agents',
-                      'Trainee',
-                    ],
+                    max: 8,
                   },
                 },
                 {
@@ -51,7 +46,106 @@ export const uiSchema: {
                     type: 'profiles',
                     title: 'Agents',
                     max: 200,
-                    id: 'agent_view_permissions',
+                    id: 'agent_view_permissions_list',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: '‘Create’ Permissions',
+          type: 'page_section',
+          elements: [
+            {
+              type: 'vertical_group',
+              title: '',
+              description: 'Set which agents can create problems and incidents',
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    type: 'stringlist',
+                    id: 'create_permissions',
+                    title: 'Permission Groups',
+                    addTitle: 'Add usergroup',
+                    max: 8,
+                  },
+                },
+                {
+                  type: 'field',
+                  field: {
+                    editable: true,
+                    type: 'profiles',
+                    title: 'Agents',
+                    max: 200,
+                    id: 'agent_create_permissions_list',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: '‘Close’ Permissions',
+          type: 'page_section',
+          elements: [
+            {
+              type: 'vertical_group',
+              title: '',
+              description: 'Set which agents can close problems and incidents',
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    type: 'stringlist',
+                    id: 'close_permissions',
+                    title: 'Permission Groups',
+                    addTitle: 'Add usergroup',
+                    max: 8,
+                  },
+                },
+                {
+                  type: 'field',
+                  field: {
+                    editable: true,
+                    type: 'profiles',
+                    title: 'Agents',
+                    max: 200,
+                    id: 'agent_close_permissions_list',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          title: '‘Reopen’ Permissions',
+          type: 'page_section',
+          elements: [
+            {
+              type: 'vertical_group',
+              title: '',
+              description: 'Set which agents can reopen problems and incidents',
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    type: 'stringlist',
+                    id: 'reopen_permissions',
+                    title: 'Permission Groups',
+                    addTitle: 'Add usergroup',
+                    max: 8,
+                  },
+                },
+                {
+                  type: 'field',
+                  field: {
+                    editable: true,
+                    type: 'profiles',
+                    title: 'Agents',
+                    max: 200,
+                    id: 'agent_reopen_permissions_list',
                   },
                 },
               ],
@@ -64,6 +158,73 @@ export const uiSchema: {
 };
 
 export const jsonSchema: any = {
-  view_permissions: true,
-  agent_view_permissions: true,
+  ticket_problems_enabled: true,
+  view_permissions: [
+    'All Permissions',
+    'All Non-Destructive Permissions',
+    'Support Agents',
+    'Trainee',
+  ],
+  agent_view_permissions_list: [
+    { name: 'Arthur Curry' },
+    { name: 'Bruce Wayne' },
+    { name: 'Clark Kent' },
+    { name: 'Diana Prince' },
+    { name: 'Harleen Quinzel' },
+    { name: 'Ignatius Ogilvy' },
+    { name: 'Jason Todd' },
+    { name: 'Pamela Lillian ' },
+    { name: 'Selina Kyle' },
+  ],
+  create_permissions: [
+    'All Permissions',
+    'All Non-Destructive Permissions',
+    'Support Agents',
+    'Trainee',
+  ],
+  agent_create_permissions_list: [
+    { name: 'Arthur Curry' },
+    { name: 'Bruce Wayne' },
+    { name: 'Clark Kent' },
+    { name: 'Diana Prince' },
+    { name: 'Harleen Quinzel' },
+    { name: 'Ignatius Ogilvy' },
+    { name: 'Jason Todd' },
+    { name: 'Pamela Lillian ' },
+    { name: 'Selina Kyle' },
+  ],
+  close_permissions: [
+    'All Permissions',
+    'All Non-Destructive Permissions',
+    'Support Agents',
+    'Trainee',
+  ],
+  agent_close_permissions_list: [
+    { name: 'Arthur Curry' },
+    { name: 'Bruce Wayne' },
+    { name: 'Clark Kent' },
+    { name: 'Diana Prince' },
+    { name: 'Harleen Quinzel' },
+    { name: 'Ignatius Ogilvy' },
+    { name: 'Jason Todd' },
+    { name: 'Pamela Lillian ' },
+    { name: 'Selina Kyle' },
+  ],
+  reopen_permissions: [
+    'All Permissions',
+    'All Non-Destructive Permissions',
+    'Support Agents',
+    'Trainee',
+  ],
+  agent_reopen_permissions_list: [
+    { name: 'Arthur Curry' },
+    { name: 'Bruce Wayne' },
+    { name: 'Clark Kent' },
+    { name: 'Diana Prince' },
+    { name: 'Harleen Quinzel' },
+    { name: 'Ignatius Ogilvy' },
+    { name: 'Jason Todd' },
+    { name: 'Pamela Lillian ' },
+    { name: 'Selina Kyle' },
+  ],
 };
