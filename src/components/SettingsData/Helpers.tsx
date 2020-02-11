@@ -108,7 +108,8 @@ export const HeaderCard = () => {
             }}
             isTitle={false}
           >
-            The help center is the public facing side of your Helpdesk that your users can access using internet browsers and moblie devices. Here users can submit tickets, browse published content and share knowledge.
+            This help center is the public facing website that your users can
+            use from their browser or mobile phone.
           </StyledText>
         </div>
       </StyledHeader>
