@@ -61,6 +61,12 @@ const Container = styled.div`
   }
 
   & .page-section.subscriptions {
+    .vert-element-group {
+      margin-bottom: 24px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   & .page-section.user-access {
