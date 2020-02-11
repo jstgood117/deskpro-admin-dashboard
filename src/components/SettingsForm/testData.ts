@@ -571,10 +571,10 @@ export const vaildationSchema = {
 export const validationConfig = {
   errMessages: {
     agent_settings_security_idle_timeout: {
-      required: 'You must enter an idle timeout'
+      required: 'validation.required'
     },
     agent_settings_security_whitelist: {
-      pattern: 'Must be in the format of 192.168.2.1'
+      pattern: 'agent.settings.security_whitelist'
     }
   }
 };

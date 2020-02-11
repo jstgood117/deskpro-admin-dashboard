@@ -52,7 +52,7 @@ interface IProps {
 }
 
 const SettingsForm: React.FC<IProps> = ({ initialValues, ui }) => {
-console.log(vaildationSchema);
+
   const yupSchema = buildYup(vaildationSchema, validationConfig);
 
   return (
@@ -61,7 +61,7 @@ console.log(vaildationSchema);
         initialValues={initialValues || jsonSchema}
         validationSchema={yupSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+
           setSubmitting(false);
         }}
       >

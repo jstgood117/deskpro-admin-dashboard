@@ -129,4 +129,6 @@ export const testTranslations = {
   'validation.emailNotValid': 'Email is not valid.',
   'validation.tooShortPassword': 'Password is too short - should be 8 chars minimum.',
   'validation.passwordLetter': 'Password can only contain Latin letters.',
+
+  'agent.settings.security_whitelist': 'Must be in the format of 192.168.2.1'
 };
