@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import FieldContainer from './FieldContainer';
 import FieldElement from './FieldElement';
+import FeatureBilling from './FeatureBilling';
 import { GenericFormComponent } from '../GenericFormComponent';
 import { generateElementInfo } from './helpers/generateElementInfo';
 import { generateTitleAndDescription } from './helpers/generateTitleAndDescription';
@@ -14,15 +15,19 @@ const VertElementGroup: React.FC = (props: any) => {
   const enabledElement = props.showRevert ? !enabled : enabled;
   return (
     <div className={classNames('vert-element-group', props.className)}>
-      <div className='form-item'>
-        <div className='vert-element-field'>
-          {props.field && (
-            <FieldElement {...props.field} formikProps={props.formikProps} />
-          )}
-        </div>
-        {generateTitleAndDescription('group-details', props)}
-        {generateElementInfo(props)}
-      </div>
+      {props.featureBilling ? (
+        <FeatureBilling {...props.featureBilling} formikProps={props.formikProps} />
+      ) : (
+          <div className='form-item'>
+            <div className='vert-element-field'>
+              {props.field && (
+                <FieldElement {...props.field} formikProps={props.formikProps} />
+              )}
+            </div>
+            {generateTitleAndDescription('group-details', props)}
+            {generateElementInfo(props)}
+          </div>
+        )}
       <div className='vert-elements'>
         {enabledElement &&
           props.elements.map((element: any, i: number) =>

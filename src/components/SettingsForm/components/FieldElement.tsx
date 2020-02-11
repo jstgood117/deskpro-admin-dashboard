@@ -115,8 +115,8 @@ const elementsSelector: {
   select: props => (
     <SingleSelect
       {...props}
-      selectOption={() => {}}
       selectedOption={props.formikProps.values[props.id]}
+      selectOption={val => props.formikProps.setFieldValue(props.id, val)}
       placeholder={props.placeholder}
       type='primary'
     />
