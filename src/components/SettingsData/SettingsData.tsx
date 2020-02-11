@@ -115,16 +115,16 @@ const SettingsData: React.FC<IProps> = ({ type, props }) => {
               <Column>
                 <Row>
                   <Column className='is-4'>
-                    <Row>
+                    <Row style={{ paddingLeft: 25 }}>
                       <Code>{'<#>'}</Code>
                     </Row>
-                    <Row>
+                    <Row style={{ paddingLeft: 25 }}>
                       <Code>{'<YEAR>'}</Code>
                     </Row>
-                    <Row>
+                    <Row style={{ paddingLeft: 25 }}>
                       <Code>{'<DAY>'}</Code>
                     </Row>
-                    <Row>
+                    <Row style={{ paddingLeft: 25 }}>
                       <Code>{'<MIN>'}</Code>
                     </Row>
                   </Column>

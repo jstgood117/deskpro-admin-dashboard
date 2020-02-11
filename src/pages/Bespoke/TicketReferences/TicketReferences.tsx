@@ -13,6 +13,11 @@ interface IProps {
 }
 
 const Container = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
   .form-ctrl {
     .group-elements {
       .checkbox-field {
@@ -30,6 +35,9 @@ const Container = styled.div`
           .reference-markdown {
             padding-left: 20px;
           }
+          .group-details {
+            max-width: 708px;
+          }
         }
       }
     }
@@ -40,7 +48,7 @@ const Container = styled.div`
 `;
 
 const ButtonToolbar = styled.div`
-  position: absolute;
+  position: sticky;
   left: 0;
   bottom: 0;
   right: 0;
@@ -49,7 +57,9 @@ const ButtonToolbar = styled.div`
   justify-content: flex-start;
   min-height: 70px;
   padding-left: 346px;
+  background-color: ${props => props.theme.white};
   border-top: 1px solid #d2d8dd;
+
   button {
     display: flex;
     flex-direction: row;
@@ -63,6 +73,12 @@ const ButtonToolbar = styled.div`
     font-size: 13px;
     line-height: 150%;
   }
+
+  .btn-primary button {
+    background-color: #1c3e55;
+    color: white;
+  }
+
   .btn-secondary button {
     margin-left: 329px;
     background-color: #f7f7f7;
