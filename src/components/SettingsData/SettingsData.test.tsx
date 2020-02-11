@@ -3,24 +3,24 @@ import { mount, shallow } from '../../test/enzyme';
 
 import SettingsData from './SettingsData';
 
-describe('RuleBuilder', () => {
+describe('SettingsData', () => {
   let props: any;
-  let mountedRuleBuilder: any;
+  let mountedSettingsData: any;
 
   const wrapper = (bShallow: boolean) => {
-    if (!mountedRuleBuilder) {
-      mountedRuleBuilder = bShallow
+    if (!mountedSettingsData) {
+      mountedSettingsData = bShallow
         ? shallow(<SettingsData {...props} />)
         : mount(<SettingsData {...props} />);
     }
-    return mountedRuleBuilder;
+    return mountedSettingsData;
   };
 
   beforeEach(() => {
     props = {
       type: 'header-card'
     };
-    mountedRuleBuilder = undefined;
+    mountedSettingsData = undefined;
   });
 
   it('always renders a <div>', () => {
