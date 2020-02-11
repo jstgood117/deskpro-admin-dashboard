@@ -11,6 +11,7 @@ import HelpCenterGuidesSettingsPage from './Bespoke/HelpCenterGuidesSettings';
 import HelpCenterKnowledgebaseSettingsPage from './Bespoke/HelpCenterKnowledgebaseSettings';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
+import TicketsProblems from './Bespoke/TicketsProblems';
 import TicketReferences from './Bespoke/TicketReferences';
 import TicketDeflection from './Bespoke/TicketDeflection';
 import VoiceSettings from './Bespoke/VoiceSettings';
@@ -28,8 +29,9 @@ export const RouteToPage: KeyValue = {
   '/voice/settings': VoiceSettings,
 
   '/tickets/locking': TicketLocking,
-  '/tickets/deflection': TicketDeflection,
+  '/tickets/problems': TicketsProblems,
   '/tickets/ref-codes': TicketReferences,
+  '/tickets/deflection': TicketDeflection,
 
   // '/help-center/kb/settings': ResetHelpdesk,
   '/help-center/setup': HelpCenterSetupPage,
