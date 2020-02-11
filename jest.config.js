@@ -17,7 +17,7 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(react-file-drop)/)',
+    'node_modules/(?!(react-file-drop|schema-to-yup)/)',
   ],
   moduleDirectories: [
     'node_modules',
