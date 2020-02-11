@@ -15,13 +15,14 @@ import Pagination, { IPageChange } from '../Pagination/Pagination';
 import Icon from '../Icon';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
-import { onCheckboxChange, generateTableParams, resizableTable } from './helpers/functions';
+import { onCheckboxChange, generateTableParams } from './helpers/tableFn';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
 import { ActionFactory } from '../../services/actions/ActionFactory';
 import TableTr from './TableTr';
 import TableTrGroup from './TableTrGroup';
+import { resizableTable } from './helpers/editColumnFn';
 
 // Returns `true` on equal sorts
 const compareSorts = (sort1: SortType[], sort2: SortType[]) => {

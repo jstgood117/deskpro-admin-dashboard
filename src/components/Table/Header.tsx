@@ -30,8 +30,8 @@ import {
 import {
   onSelectEverything,
   onSelectAllChange,
-  generateCSVData
-} from './helpers/functions';
+} from './helpers/selectFn';
+import { generateCSVData } from './helpers/csvDataFn';
 
 export type Props = {
   setChecked: objectUseState;

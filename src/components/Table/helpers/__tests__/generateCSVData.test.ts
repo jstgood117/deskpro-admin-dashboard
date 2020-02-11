@@ -1,4 +1,4 @@
-import {generateCSVData} from '../functions';
+import { generateCSVData } from '../csvDataFn';
 
 describe('generateCSVData', () => {
   xtest('generates data to csv format', () => {
