@@ -480,6 +480,7 @@ export const vaildationSchema = {
     },
     agent_settings_security_idle_timeout: {
       type: 'string',
+      pattern: '^[0-9]*$',
       when: {
         agent_settings_security_enabled: {
           is: true,
@@ -571,7 +572,8 @@ export const vaildationSchema = {
 export const validationConfig = {
   errMessages: {
     agent_settings_security_idle_timeout: {
-      required: 'validation.required'
+      required: 'validation.required',
+      pattern: 'validation.numberNotValid'
     },
     agent_settings_security_whitelist: {
       pattern: 'agent.settings.security_whitelist'

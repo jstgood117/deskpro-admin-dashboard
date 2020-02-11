@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { buildYup } from 'schema-to-yup';
@@ -53,7 +53,11 @@ interface IProps {
 
 const SettingsForm: React.FC<IProps> = ({ initialValues, ui }) => {
 
-  const yupSchema = buildYup(vaildationSchema, validationConfig);
+  const [yupSchema, setYupSchema] = useState({});
+
+  useEffect(() => {
+    setYupSchema(buildYup(vaildationSchema, validationConfig));
+  }, []);
 
   return (
     <SettingsFormStyled>
@@ -61,7 +65,7 @@ const SettingsForm: React.FC<IProps> = ({ initialValues, ui }) => {
         initialValues={initialValues || jsonSchema}
         validationSchema={yupSchema}
         onSubmit={(values, { setSubmitting }) => {
-
+          console.log(values);
           setSubmitting(false);
         }}
       >

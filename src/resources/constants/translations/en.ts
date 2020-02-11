@@ -126,6 +126,7 @@ export const testTranslations = {
   'apikeys.api_flag.super': 'Super',
 
   'validation.required': 'This field is required.',
+  'validation.numberNotValid': 'A number is required for this field',
   'validation.emailNotValid': 'Email is not valid.',
   'validation.tooShortPassword': 'Password is too short - should be 8 chars minimum.',
   'validation.passwordLetter': 'Password can only contain Latin letters.',
