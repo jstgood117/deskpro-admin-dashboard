@@ -18,6 +18,8 @@ import { UnitsValuesType } from '../../Units/Units';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
 import ProgressBar from '../../ProgressBar';
 import { StyledCheckbox, ErrorMessage, ReportPanel } from './styles';
+import SettingsData from '../../SettingsData';
+import Markdown from '../../Markdown';
 
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
@@ -157,7 +159,12 @@ const elementsSelector: {
     );
   },
   progress: props => {
-    return <ProgressBar percentage={props.formikProps.values[props.value]} label={props.label} />;
+    return (
+      <ProgressBar
+        percentage={props.formikProps.values[props.value]}
+        label={props.label}
+      />
+    );
   },
   reportFilePanel: props => {
     return (
@@ -166,12 +173,23 @@ const elementsSelector: {
           <Icon name='check' />
           <span>Your report file is ready to download.</span>
         </div>
-        <Button styleType='secondary' onClick={() => {}} size='small' className='export-btn'>
+        <Button
+          styleType='secondary'
+          onClick={() => {}}
+          size='small'
+          className='export-btn'
+        >
           <Icon name='export' />
           Download Report File
         </Button>
       </ReportPanel>
     );
+  },
+  referenceFilePanel: props => {
+    return <SettingsData type='reference-code-panel' />;
+  },
+  markdown: () => {
+    return <Markdown />;
   }
 };
 

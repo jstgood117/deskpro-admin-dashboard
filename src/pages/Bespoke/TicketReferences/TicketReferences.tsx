@@ -13,6 +13,27 @@ interface IProps {
 }
 
 const Container = styled.div`
+  .form-ctrl {
+    .group-elements {
+      .checkbox-field {
+        padding-top: 9px;
+        padding-left: 4px;
+        .vert-element-field {
+          margin-right: 14px;
+        }
+        .form-checkbox {
+          transform: translateY(2px);
+        }
+        .vert-elements {
+          padding-left: 22px;
+          padding-top: 12px;
+          .reference-markdown {
+            padding-left: 20px;
+          }
+        }
+      }
+    }
+  }
   .form-row :last-child :after {
     content: none;
   }
@@ -48,7 +69,7 @@ const ButtonToolbar = styled.div`
     color: #a9b0b0;
     border: 1px solid #d3d6d7;
   }
-  `;
+`;
 
 const TicketReferences: FC<IProps> = ({ ui, initialValues }) => {
   return (

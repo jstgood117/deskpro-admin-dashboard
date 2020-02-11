@@ -15,12 +15,11 @@ export const uiSchema: {
             {
               type: 'vertical_group',
               title: 'Show ticket reference code',
-              showOn: 'ticket_locking_enabled',
               description:
                 'Show users the ticket reference code instead of numeric IDs on the Help Center and in URLs.',
               field: {
                 type: 'toggle',
-                id: 'ticket_locking_enabled'
+                id: 'ticket_reference_enabled'
               },
               info: [
                 {
@@ -31,6 +30,32 @@ export const uiSchema: {
                 }
               ],
               elements: []
+            },
+            {
+              type: 'vertical_group',
+              title: 'Use a custom reference code',
+              className: 'checkbox-field',
+              field: {
+                type: 'checkbox',
+                id: 'ticket_reference_code',
+                value: 'yes'
+              },
+              elements: [
+                {
+                  type: 'field',
+                  className: 'reference-panel',
+                  field: {
+                    type: 'referenceFilePanel'
+                  }
+                },
+                {
+                  type: 'field',
+                  className: 'reference-markdown',
+                  field: {
+                    type: 'markdown'
+                  }
+                }
+              ]
             }
           ]
         }
@@ -40,5 +65,6 @@ export const uiSchema: {
 };
 
 export const jsonSchema: any = {
-  ticket_locking_enabled: true
+  ticket_reference_enabled: true,
+  ticket_reference_code: ['yes']
 };
