@@ -13,6 +13,7 @@ const ElementGroup = (props: any) => {
       visible = false;
     }
   }
+  if (props.dependenceOn && props.dependenceOn.showRevert) visible = !visible;
   return visible ? (
     <div className={classNames('group-elements', props.className)}>
       {props.elements.map((element: any, i: number) => (
