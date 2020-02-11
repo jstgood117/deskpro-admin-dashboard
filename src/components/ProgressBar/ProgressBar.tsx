@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import BgImg from '../../assets/background/progress-vector.png';
 export interface IProps {
+  label?: string;
   percentage: number;
 }
 const OuterDiv = styled.div`
@@ -11,6 +12,16 @@ const OuterDiv = styled.div`
   width: 100%;
   height: 16px;
   position: relative;
+`;
+
+const Label = styled.div`
+  font-family: Rubik;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 150%;
+  color: #4c4f50;
+  padding-bottom: 8px;
 `;
 
 const InnerDiv = styled.div<{ percentage: number }>`
@@ -31,9 +42,12 @@ const percentageLimit = (min: number, value: number, max: number) => {
 };
 
 const ProgressBar: React.FC<IProps> = props => (
-  <OuterDiv>
-    <InnerDiv percentage={percentageLimit(0, props.percentage, 100)} />
-  </OuterDiv>
+  <>
+    {props.label && <Label>{props.label}</Label>}
+    <OuterDiv>
+      <InnerDiv percentage={percentageLimit(0, props.percentage, 100)} />
+    </OuterDiv>
+  </>
 );
 
 export default ProgressBar;

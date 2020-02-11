@@ -5,6 +5,7 @@ import BrandButtonGroup from '../../Button/BrandButtonGroup';
 import Icon from '../../Icon';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
+import HeaderCard from './HeaderCard';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -17,6 +18,10 @@ export const FeatureSectionStyled = styled.div`
     &:last-child::after {
       height: 0;
     }
+  }
+
+  .header-card {
+    height: 166px;
   }
 
   .element-details-label {
@@ -46,7 +51,6 @@ export const FeatureSectionStyled = styled.div`
     font-size: 13px;
     line-height: 150%;
     width: 578px;
-    padding: 0;
     margin: 0 0 16px 0;
     * {
       padding: 0;
@@ -182,6 +186,20 @@ export const FeatureSectionStyled = styled.div`
     }
   }
 
+  .header-card .element-info-link {
+    height: 34px;
+    display: flex;
+    align-items: center;
+    padding-left: 44px;
+
+    & > div {
+      box-shadow: none;
+      background: none;
+      padding: 0px;
+      box-sizing: border-box;
+    }
+  }
+
   .group-elements {
     display: flex;
     flex-direction: column;
@@ -304,6 +322,7 @@ interface Props {
   title: string;
   brandButtonGroup?: boolean;
   field?: any;
+  header?: any[];
   icon?: string;
 }
 
@@ -313,7 +332,8 @@ const FeatureSection: React.FC<Props> = ({
   title,
   field,
   icon,
-  brandButtonGroup
+  brandButtonGroup,
+  header
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
 
@@ -332,6 +352,7 @@ const FeatureSection: React.FC<Props> = ({
             <span style={{ marginRight: 20 }}>{title}</span>
             {icon && <Icon name={icon} />}
           </div>
+          {header ? <HeaderCard {...header} formikProps={formikProps} /> : null}
           {brandButtonGroup && (
             <div className='brand-button-group'>
               <BrandButtonGroup
@@ -367,6 +388,7 @@ const FeatureSection: React.FC<Props> = ({
           )}
         </div>
       )}
+
       <FeatureSectionContext.Provider value={{ prefixName: selected }}>
         {elements.map((element: any, i: number) => (
           <StdElementRow key={i} {...element} formikProps={formikProps} />

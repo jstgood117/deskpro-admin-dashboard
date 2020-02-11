@@ -13,8 +13,8 @@ interface IProps {
 }
 
 const Container = styled.div`
-  .form-row :last-child :after {
-    content: none;
+  .feature-section-title:nth-child(1) {
+    border-bottom: none;
   }
 `;
 
@@ -57,7 +57,7 @@ const ButtonToolbar = styled.div`
   }
   `;
 
-const TicketLockingPage: FC<IProps> = ({ ui, initialValues }) => {
+const TicketDeflectionPage: FC<IProps> = ({ ui, initialValues }) => {
   return (
     <Formik
       initialValues={initialValues || jsonSchema}
@@ -98,4 +98,4 @@ const TicketLockingPage: FC<IProps> = ({ ui, initialValues }) => {
   );
 };
 
-export default TicketLockingPage;
+export default TicketDeflectionPage;
