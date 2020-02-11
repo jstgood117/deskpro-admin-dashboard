@@ -12,7 +12,7 @@ const VertElementGroup: React.FC = (props: any) => {
   // If props doesn't exist or if it does, its set to true
   const enabled =
     !props.showOn || props.formikProps.values[props.showOn] === true;
-
+  const enabledElement = props.showRevert ? !enabled : enabled;
   return (
     <div className={classNames('vert-element-group', props.className)}>
       {props.featureBilling ? (
@@ -29,7 +29,7 @@ const VertElementGroup: React.FC = (props: any) => {
           </div>
         )}
       <div className='vert-elements'>
-        {enabled &&
+        {enabledElement &&
           props.elements.map((element: any, i: number) =>
             element.type === 'field' ? (
               <FieldContainer
@@ -38,12 +38,12 @@ const VertElementGroup: React.FC = (props: any) => {
                 formikProps={props.formikProps}
               />
             ) : (
-                <GenericFormComponent
-                  {...element}
-                  key={i}
-                  formikProps={props.formikProps}
-                />
-              )
+              <GenericFormComponent
+                {...element}
+                key={i}
+                formikProps={props.formikProps}
+              />
+            )
           )}
       </div>
     </div>

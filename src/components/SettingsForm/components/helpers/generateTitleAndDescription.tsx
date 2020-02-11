@@ -20,7 +20,7 @@ export const generateTitleAndDescription = (className: string, props: any) => {
         if (className === 'group-details') {
           propId = props.showOn;
         } else if (className === 'element-details') {
-          propId = props.field.id;
+          propId = props.field && props.field.id;
         }
         const htmlFor = context.prefixName
           ? `${context.prefixName}_${propId}`

@@ -22,7 +22,7 @@ export const FieldContainer: React.FC = (props: any) => (
         <FieldElement {...props.field} formikProps={props.formikProps} />
       </div>
     </div>
-    {props.field.subText && <SubText>{props.field.subText}</SubText>}
+    {props.field && props.field.subText && <SubText>{props.field.subText}</SubText>}
     {generateElementInfo(props)}
   </div>
 );
