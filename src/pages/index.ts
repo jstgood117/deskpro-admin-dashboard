@@ -1,6 +1,6 @@
 import AgentsSettings from './Agents/Settings';
 import ExamplePage from './Bespoke/Example';
-import ResetHelpdesk from './Bespoke/ResetHelpdesk';
+// import ResetHelpdesk from './Bespoke/ResetHelpdesk';
 import ImporterPage from './Bespoke/Importer';
 import FileCheckPage from './Bespoke/FileCheck';
 import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
@@ -29,13 +29,13 @@ export const RouteToPage: KeyValue = {
   '/tickets/locking': TicketLocking,
   '/tickets/deflection': TicketDeflection,
 
-  '/help-center/kb/settings': ResetHelpdesk,
+  // '/help-center/kb/settings': ResetHelpdesk,
   '/help-center/setup': HelpCenterSetupPage,
   '/help-center/community/settings': HelpCenterCommunitySettingsPage,
   '/help-center/downloads/settings': HelpCenterDownloadSettingsPage,
   '/help-center/news/settings': HelpCenterNewsSettingsPage,
   '/help-center/guides/settings': HelpCenterGuidesSettingsPage,
-  '/help-center/knowledgebase/settings': HelpCenterKnowledgebaseSettingsPage,
+  '/help-center/kb/settings': HelpCenterKnowledgebaseSettingsPage,
 
   '/sysadmin/settings': ExamplePage,
   '/sysadmin/file-check': FileCheckPage,
