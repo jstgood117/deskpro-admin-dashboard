@@ -8,6 +8,7 @@ import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
 import TicketReferences from './Bespoke/TicketReferences';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
+import ReportFile from './Bespoke/ReportFile';
 
 import { KeyValue } from '../types';
 
@@ -21,5 +22,6 @@ export const RouteToPage: KeyValue = {
   '/data-center': DataCenter,
   '/tickets/locking': TicketLocking,
   '/tickets/ref-codes': TicketReferences,
-  '/sysadmin/realtime-events': RealTimeEvents
+  '/sysadmin/realtime-events': RealTimeEvents,
+  '/agents/logs': ReportFile
 };
