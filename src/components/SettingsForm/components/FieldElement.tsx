@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { Field } from 'formik';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,7 +7,6 @@ import Input from '../../Input';
 import Profiles from '../../Profiles';
 import StringListBuilder from '../../StringListBuilder';
 import Units from '../../Units';
-import Checkbox from '../../Checkbox';
 import FileUpload from '../../Attachment/FileUpload';
 import ColorPicker from '../../ColorPicker';
 import Radio from '../../Radio/Radio';
@@ -18,20 +16,8 @@ import Icon from '../../Icon';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import { UnitsValuesType } from '../../Units/Units';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
-
-const StyledCheckbox = styled(Checkbox)`
-  &.form-checkbox {
-    position: absolute;
-    transform: translateY(9px);
-    z-index: 1;
-  }
-`;
-const ErrorMessage = styled.div`
-  padding-top: 4px;
-  padding-left: 4px;
-  font-size: 14px;
-  color: red;
-`;
+import ProgressBar from '../../ProgressBar';
+import { StyledCheckbox, ErrorMessage, ReportPanel } from './styles';
 
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
@@ -127,8 +113,8 @@ const elementsSelector: {
   select: props => (
     <SingleSelect
       {...props}
-      selectOption={() => {}}
       selectedOption={props.formikProps.values[props.id]}
+      selectOption={val => props.formikProps.setFieldValue(props.id, val)}
       placeholder={props.placeholder}
       type='primary'
     />
@@ -168,6 +154,23 @@ const elementsSelector: {
           console.log(value);
         }}
       />
+    );
+  },
+  progress: props => {
+    return <ProgressBar percentage={props.formikProps.values[props.value]} label={props.label} />;
+  },
+  reportFilePanel: props => {
+    return (
+      <ReportPanel>
+        <div className='label'>
+          <Icon name='check' />
+          <span>Your report file is ready to download.</span>
+        </div>
+        <Button styleType='secondary' onClick={() => {}} size='small' className='export-btn'>
+          <Icon name='export' />
+          Download Report File
+        </Button>
+      </ReportPanel>
     );
   }
 };
