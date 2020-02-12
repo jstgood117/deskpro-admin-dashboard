@@ -20,15 +20,9 @@ const HozizontalGroup = styled.div`
 
 const HozizontalGroupCol = styled.div`
   margin-bottom: 0px;
+
   & .field-container {
-    margin: 0 8px 0 0 !important;
-    min-width: 223px;
-    input {
-      margin: 0;
-    }
-    label {
-      margin: 0;
-    }
+    margin-right: 8px;
   }
   & .hidden {
     display: none;
