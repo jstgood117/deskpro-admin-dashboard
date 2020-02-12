@@ -36,7 +36,7 @@ describe('onCheckboxChange', () => {
       {
         id: 7,
         depth: 1,
-        parent: { id: 6, title: 'title' },
+        parent: { id: 7, title: 'title' },
         title: 'regulation',
         display_order: 2,
         effective_display_order: 4
@@ -44,17 +44,17 @@ describe('onCheckboxChange', () => {
       {
         id: 8,
         depth: 1,
-        parent: { id: 6, title: 'title' },
+        parent: { id: 8, title: 'title' },
         title: 'regulation',
         display_order: 2,
         effective_display_order: 5
       }
     ];
     onCheckboxChange('6', {6: true, 7: true, 8: true}, setChecked, subRows);
-    expect(setChecked).toHaveBeenCalledWith({'6': true, '7': true, '8': true});
+    expect(setChecked).toHaveBeenCalledWith({'7': true, '8': true});
   });
   test('uncheck general row', () => {
     onCheckboxChange('5', {5: true}, setChecked, []);
-    expect(setChecked).toHaveBeenCalledWith({'6': true, '7': true, '8': true});
+    expect(setChecked).toHaveBeenCalledWith({});
   });
 });

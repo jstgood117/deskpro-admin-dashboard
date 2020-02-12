@@ -6,6 +6,8 @@ const getQuery = (type:string) => {
       return queries['QUERY_INITIAL'];
     case 'standardTablePage':
       return queries['STANDARD_TABLES_PAGE'];
+    case 'standardSettingsPage':
+      return queries['STANDARD_SETTINGS_PAGE'];
     default:
       return {};
   }

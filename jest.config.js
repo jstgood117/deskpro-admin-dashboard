@@ -2,6 +2,7 @@ module.exports = {
   verbose: true,
   coverageDirectory:'<rootDir>/coverage/',
   testEnvironment:'jsdom',
+  clearMocks: true,
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
     '!**/*.d.ts',
