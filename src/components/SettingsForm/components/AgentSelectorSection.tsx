@@ -8,7 +8,7 @@ const CodeSection = (props: any) => {
       <AgentSelector
         {...props}
         selected={props.formikProps.values[props.id]}
-        onSelect={value => props.formikProps.setFielValue(props.id, value)}
+        onSelect={value => props.formikProps.setFieldValue(props.id, value)}
       />
     </div>
   );
