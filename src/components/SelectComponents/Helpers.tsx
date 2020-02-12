@@ -344,7 +344,7 @@ const { Option } = components;
 
 export const IconOption = (props: any) => (
   <Option {...props}>
-    {props.data.image && (
+    {props.visibleIcon && props.data.image && (
       <img
         src={require(`../../assets/brands/${props.data.image}.png`)}
         width={18}
@@ -354,7 +354,7 @@ export const IconOption = (props: any) => (
       />
     )}
     <div className='option-label'>{props.data.label}</div>
-    {props.isSelected && (
+    {props.visibleIcon && props.isSelected && (
       <span className='option-icon'>
         <Icon name='check-2' />
       </span>

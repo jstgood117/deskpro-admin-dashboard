@@ -14,7 +14,7 @@ export const getPageComponent = (props: IProps) => {
     case 'StandardDataPage':
       return <StandardTablePage path={path} paths={paths} />;
     case 'StandardSettingsPage':
-      return <StandardSettingsPage />;
+      return <StandardSettingsPage path={path} />;
     default:
       return RouteToPage.hasOwnProperty(path)
         ? React.createElement(RouteToPage[path], {path})
