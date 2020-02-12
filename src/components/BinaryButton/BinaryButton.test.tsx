@@ -54,6 +54,6 @@ describe('BinaryButton', () => {
     };
     const root = wrapper(false, props);
     simulateNoBtnClick(root);
-    expect(select).toBeCalledTimes(2);
+    expect(select).toBeCalledTimes(1);
   });
 });

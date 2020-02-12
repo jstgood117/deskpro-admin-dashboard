@@ -7,7 +7,7 @@ import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFo
 import {
   jsonSchema,
   uiSchema,
-  vaildationSchema,
+  validationSchema,
   validationConfig
 } from './testData';
 import Button from '../../../components/Button';
@@ -68,7 +68,7 @@ const TicketsProblemsPage: FC<IProps> = ({ ui, initialValues }) => {
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {
-    setYupSchema(buildYup(vaildationSchema, validationConfig));
+    setYupSchema(buildYup(validationSchema, validationConfig));
   }, []);
 
   return (

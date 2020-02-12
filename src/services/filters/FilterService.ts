@@ -45,7 +45,7 @@ export const runFilterOnAllColumns = (data:object[], filter: FilterType) => {
     return data;
   }
 
-  // @TODO: (O)n^2
+  // TODO: Should be lower than (O)n^2
   return data.filter((_row:any) => (
     Object.keys(_row).some((_colKey:any) => (
       typeof _row[_colKey] === 'string'

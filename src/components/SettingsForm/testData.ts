@@ -472,7 +472,7 @@ export const jsonSchema = {
   test_unit_another_input_2: 'hello'
 };
 
-export const vaildationSchema = {
+export const validationSchema = {
   type: 'object',
   properties: {
     agent_settings_security_enabled: {

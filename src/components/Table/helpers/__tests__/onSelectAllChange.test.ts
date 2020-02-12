@@ -84,6 +84,6 @@ describe('onSelectAllChange', () => {
       }
     ];
     onSelectAllChange(false, setChecked, 0, 100, data);
-    expect(setChecked).toHaveBeenCalledWith({'1': true, '2': true, '7': true, '8': true});
+    expect(setChecked).toHaveBeenCalledWith({});
   });
 });

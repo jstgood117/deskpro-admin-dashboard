@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { buildYup } from 'schema-to-yup';
+import { DocumentNode } from 'graphql';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
+
+import Button from '../Button';
 
 import { SettingsFormFactory } from './SettingsFormFactory';
-import {
-  jsonSchema,
-  uiSchema,
-  vaildationSchema,
-  validationConfig
-} from './testData';
-import Button from '../Button';
+
+import { settingsSave } from './helpers/settingsSave';
 
 const SettingsFormStyled = styled.div`
   width: 100%;
@@ -47,31 +47,43 @@ const SettingsFormStyled = styled.div`
 `;
 
 interface IProps {
-  initialValues?: any;
-  ui?: any;
+  saveSchema: DocumentNode;
+  jsonSchema: any;
+  uiSchema: any;
+  validationSchema: any;
+  validationConfig: any;
 }
 
-const SettingsForm: React.FC<IProps> = ({ initialValues, ui }) => {
+export type PropsWithApollo = WithApolloClient<IProps>;
+
+const SettingsForm: React.FC<PropsWithApollo> = ({
+  client,
+  saveSchema,
+  jsonSchema,
+  uiSchema,
+  validationSchema,
+  validationConfig
+}) => {
 
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {
-    setYupSchema(buildYup(vaildationSchema, validationConfig));
-  }, []);
+    setYupSchema(buildYup(validationSchema, validationConfig));
+  }, [validationSchema, validationConfig]);
 
   return (
     <SettingsFormStyled>
       <Formik
-        initialValues={initialValues || jsonSchema}
+        initialValues={jsonSchema}
         validationSchema={yupSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+          settingsSave(client, saveSchema, values);
           setSubmitting(false);
         }}
       >
         {(formikProps: any) => (
           <form onSubmit={formikProps.handleSubmit}>
-            {SettingsFormFactory(ui || uiSchema, formikProps)}
+            {SettingsFormFactory(uiSchema, formikProps)}
             <div className='button-toolbar'>
               <Button
                 className='btn-primary'
@@ -97,4 +109,4 @@ const SettingsForm: React.FC<IProps> = ({ initialValues, ui }) => {
   );
 };
 
-export default SettingsForm;
+export default withApollo<PropsWithApollo>(SettingsForm);

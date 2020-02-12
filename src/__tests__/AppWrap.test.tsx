@@ -4,8 +4,6 @@ import { AppWrap } from '../AppWrap';
 import { mount, shallow } from '../test/enzyme';
 import { WrapperType } from '../test/types';
 
-import { generateConfig } from '../config';
-
 jest.mock('../config', () => ({
   generateConfig: jest.fn(() => ({
     apiUrl: '/graphql'
