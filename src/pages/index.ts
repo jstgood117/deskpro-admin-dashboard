@@ -6,6 +6,7 @@ import FileCheckPage from './Bespoke/FileCheck';
 import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
 import DataCenter from './Bespoke/DataCenter';
 import TicketLocking from './Bespoke/TicketLocking';
+import TicketsProblems from './Bespoke/TicketsProblems';
 import TicketReferences from './Bespoke/TicketReferences';
 import TicketDeflection from './Bespoke/TicketDeflection';
 import VoiceSettings from './Bespoke/VoiceSettings';
@@ -24,9 +25,10 @@ export const RouteToPage: KeyValue = {
   '/help-center/setup': HelpCenterSetupPage,
   '/data-center': DataCenter,
   '/tickets/locking': TicketLocking,
+  '/tickets/problems': TicketsProblems,
+  '/tickets/ref-codes': TicketReferences,
   '/tickets/deflection': TicketDeflection,
   '/voice/settings': VoiceSettings,
-  '/tickets/ref-codes': TicketReferences,
   '/sysadmin/realtime-events': RealTimeEvents,
   '/agents/logs': ReportFile,
   '/tasks': Tasks
