@@ -61,7 +61,6 @@ const Container = styled.div`
   }
 
   & .page-section.subscriptions {
-
   }
 
   & .page-section.user-access {
@@ -78,6 +77,12 @@ const Container = styled.div`
 `;
 
 const ButtonToolbar = styled.div`
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+
   display: flex;
   flex-direction: row;
   align-items: center;

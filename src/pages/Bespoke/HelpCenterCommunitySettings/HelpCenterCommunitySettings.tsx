@@ -77,6 +77,12 @@ const Container = styled.div`
 `;
 
 const ButtonToolbar = styled.div`
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -102,7 +108,7 @@ const ButtonToolbar = styled.div`
   .btn-secondary button {
     background-color: #f7f7f7;
     color: #a9b0b0;
-    border: 1px solid #D2D8DD;
+    border: 1px solid #d2d8dd;
     margin-left: 329px;
     width: 137px;
   }
