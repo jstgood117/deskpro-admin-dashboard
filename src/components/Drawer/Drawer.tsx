@@ -5,19 +5,16 @@ import { OverlayStyled, DrawerStyled, StyledClose } from './DrawerStyles';
 import Icon from '../Icon';
 
 type Props = {
+  className?: string;
   open: boolean;
   onClose: () => void;
 };
 
-export const Drawer: FC<Props> = ({
-  open,
-  onClose,
-  children
-}) => {
-  return createPortal((
+export const Drawer: FC<Props> = ({ className, open, onClose, children }) => {
+  const drawer = (
     <div>
       <OverlayStyled open={open} onClick={onClose} />
-      <DrawerStyled open={open}>
+      <DrawerStyled className={className} open={open}>
         <StyledClose onClick={onClose}>
           <Icon name='caret-right' />
         </StyledClose>
@@ -25,9 +22,8 @@ export const Drawer: FC<Props> = ({
         {children}
       </DrawerStyled>
     </div>
-  ),
-    document.getElementById('app-settings')
   );
+  return createPortal(drawer, document.getElementById('app-settings'));
 };
 
 export default Drawer;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Formik, Form } from 'formik';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
 import {
@@ -114,6 +114,27 @@ const ButtonToolbar = styled.div`
   }
 `;
 
+const GlobalStyles = createGlobalStyle`
+  body {
+    .drawer-community-settings {
+      position: absolute;
+      right: 0;
+      transform: initial;
+      top: 0;
+      .agent-selector {
+        .agent-selector-container {
+          padding-right: 0;
+          .agent-selector-info,
+          .agent-selector-input,
+          .agent-selector-list {
+            padding-right: 32px;
+          }
+        }
+      }
+    }
+  }
+`;
+
 const HelpCenterCommunitySettings: FC<IProps> = ({ ui, initialValues }) => {
   return (
     <Formik
@@ -148,6 +169,7 @@ const HelpCenterCommunitySettings: FC<IProps> = ({ ui, initialValues }) => {
               </Button>
             </ButtonToolbar>
           </Container>
+          <GlobalStyles />
         </Form>
       )}
     </Formik>
