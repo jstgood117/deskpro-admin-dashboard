@@ -19,6 +19,7 @@ interface IProps {
 }
 
 const Container = styled.div`
+  height: 100vh;
   .form-row :last-child :after {
     content: none;
   }
