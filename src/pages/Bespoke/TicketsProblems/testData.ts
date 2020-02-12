@@ -229,7 +229,7 @@ export const jsonSchema: any = {
   ],
 };
 
-export const vaildationSchema = {
+export const validationSchema = {
   type: 'object',
   properties: {
     ticket_problems_enabled: {

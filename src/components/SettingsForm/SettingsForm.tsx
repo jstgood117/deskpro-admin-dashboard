@@ -50,7 +50,7 @@ interface IProps {
   saveSchema: DocumentNode;
   jsonSchema: any;
   uiSchema: any;
-  vaildationSchema: any;
+  validationSchema: any;
   validationConfig: any;
 }
 
@@ -61,15 +61,15 @@ const SettingsForm: React.FC<PropsWithApollo> = ({
   saveSchema,
   jsonSchema,
   uiSchema,
-  vaildationSchema,
+  validationSchema,
   validationConfig
 }) => {
 
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {
-    setYupSchema(buildYup(vaildationSchema, validationConfig));
-  }, [vaildationSchema, validationConfig]);
+    setYupSchema(buildYup(validationSchema, validationConfig));
+  }, [validationSchema, validationConfig]);
 
   return (
     <SettingsFormStyled>

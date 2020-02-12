@@ -1,10 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { DocumentNode } from 'graphql';
-import { useQuery, withApollo, WithApolloClient, } from 'react-apollo';
-import { gql, ApolloError } from 'apollo-boost';
+import { useQuery, withApollo, WithApolloClient } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 import { QueryService } from '../../services/query';
-import { API_StandardSettingsPage } from '../../codegen/types';
 
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
@@ -13,11 +12,11 @@ import SettingsForm from '../../components/SettingsForm';
 import {
   jsonSchema,
   uiSchema,
-  vaildationSchema,
+  validationSchema,
   validationConfig
 } from '../../components/SettingsForm/testData';
 
-type Props = {
+export type Props = {
   path: string;
 };
 
@@ -27,28 +26,19 @@ export const StandardSettingsPage: FC<PropsWithApollo> = ({
   path
 }) => {
 
-  const [pageResponse, setPageResponse] = useState<API_StandardSettingsPage>();
-  const [gqlError, setGqlError] = useState<boolean>(false);
-
   const queryService = QueryService();
   const query = queryService.getQuery('standardSettingsPage');
 
-  useQuery(query, {
+  const { loading, error } = useQuery(query, {
     errorPolicy: 'all',
-    variables: { path },
-    onCompleted: (_response: API_StandardSettingsPage) => {
-      setPageResponse(_response);
-    },
-    onError: (error: ApolloError) => {
-      setGqlError(true);
-    }
+    variables: { path }
   });
 
-  if (!pageResponse) {
+  if (loading) {
     return <Loading />;
   }
 
-  if (gqlError) {
+  if (error) {
     return <Error />;
   }
 
@@ -66,7 +56,7 @@ export const StandardSettingsPage: FC<PropsWithApollo> = ({
       saveSchema={testQuery}
       jsonSchema={jsonSchema}
       uiSchema={uiSchema}
-      vaildationSchema={vaildationSchema}
+      validationSchema={validationSchema}
       validationConfig={validationConfig}
     />
   );
