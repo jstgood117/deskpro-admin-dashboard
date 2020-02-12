@@ -1,15 +1,15 @@
 import React, { FC, SyntheticEvent, useState, useEffect } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 import { withApollo } from '@apollo/react-hoc';
 import { WithApolloClient } from 'react-apollo';
 import { CSVLink } from 'react-csv';
 import { without } from 'lodash';
-import { injectIntl, WrappedComponentProps } from 'react-intl';
+
 import { runAction, querySelectOptions } from '../../services/actions/run';
 import { ActionFactory } from '../../services/actions/ActionFactory';
 import { ActionsType } from '../../services/actions/types';
 import { KeyValue, IOptions } from '../../types';
 import { IMenuItemProps } from '../../resources/interfaces';
-
 import Actions from '../Actions';
 import ActionComponentFactory from '../Actions/helpers/ComponentFactory';
 import Checkbox from '../Checkbox';

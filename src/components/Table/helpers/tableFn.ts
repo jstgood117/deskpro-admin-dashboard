@@ -1,9 +1,12 @@
+import { IntlShape } from 'react-intl';
+import { customSortMethod } from './../../../utils/sort';
 import _ from 'lodash';
-import { KeyValue } from '../../../types';
+import { KeyValue, ColumnOrder } from '../../../types';
 
 import { UserType } from '../../Card/KanbanViewCard/KanbanViewCard';
-import { objectUseState, TableParams, TableType } from '../types';
+import { objectUseState, TableParams, TableType, SortType, ColumnMeta } from '../types';
 import { orderByFn } from './orderFn';
+import { ITableColumn } from '../../../resources/interfaces';
 
 export const onCheckboxChange = (
   value: string,
@@ -50,7 +53,7 @@ export const onCheckboxChange = (
     } else {
       newIds = {
         ...checked,
-        [value]: true,
+        [value]: true
       };
     }
     if (isGrouped) {
@@ -58,7 +61,7 @@ export const onCheckboxChange = (
       groupedRows = groupedRows.reduce(
         (o: any, group: any) => ({
           ...o,
-          [group.id]: group.subRows.map((r: any) => r.original.id),
+          [group.id]: group.subRows.map((r: any) => r.original.id)
         }),
         {}
       );
@@ -67,7 +70,7 @@ export const onCheckboxChange = (
         if (_.difference(group, selected).length === 0) {
           newIds = {
             ...newIds,
-            [groupId]: true,
+            [groupId]: true
           };
         } else {
           delete newIds[groupId];
@@ -91,10 +94,10 @@ export const generateTableParams = (
         data,
         initialState: {
           pageIndex: 0,
-          pageSize: 100,
+          pageSize: 100
         },
         manualPagination: true,
-        pageCount: controlledPageCount,
+        pageCount: controlledPageCount
       }
     : {
         columns,
@@ -102,8 +105,8 @@ export const generateTableParams = (
         orderByFn,
         initialState: {
           pageIndex: 0,
-          pageSize: 100,
-        },
+          pageSize: 100
+        }
       };
 };
 
@@ -112,8 +115,62 @@ export const generateCardProps = (row: any): UserType => {
   return {
     userName: original.name,
     userNumber: original.phone,
-    userMail: original.primary_email,
+    userMail: original.primary_email
     // avatar: original.avatarUrn
   };
 };
 
+export const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
+  let result = sort1.length === sort2.length;
+
+  if (result) {
+    sort1.forEach((item1, index) => {
+      const item2 = sort2[index];
+      result = result && item1.id === item2.id && !!item1.desc === !!item2.desc;
+      return result;
+    });
+  }
+  return result;
+};
+
+export const compareGroups = (group1: string[], group2: string[]) => {
+  return (
+    group1.length === group2.length && _.difference(group1, group2).length === 0
+  );
+};
+
+const generateSortType = (sortType: string) => {
+  if (!sortType) {
+    return 'alphanumeric';
+  }
+
+  switch (sortType) {
+    case 'ALPHANUMERIC':
+      return 'alphanumeric';
+    default:
+      return customSortMethod;
+  }
+};
+
+export const transformColumnData = (
+  columns: ITableColumn[],
+  columnOrder: ColumnOrder[],
+  intl: IntlShape
+) => {
+  const newCols: ColumnMeta[] = [];
+  columnOrder.forEach((_order: ColumnOrder) => {
+    const column = columns.find(_col => _order.column === _col.title);
+    if (column && _order.show) {
+      newCols.push({
+        columnProps: column.field,
+        id: column.title,
+        Header: intl.formatMessage({ id: column.title }),
+        accessor: column.sortField || '',
+        type: column.field,
+        sortType: generateSortType(column.sortField)
+      });
+    }
+  });
+
+  return newCols;
+};
