@@ -58,9 +58,11 @@ const HeaderCard = (props: any) => (
           checked={props.formikProps.values[props.showOn]}
           onChange={props.formikProps.handleChange}
         />
-        <div className='title'>
-          {props.title}
-        </div>
+        {props.title && (
+          <label className='title' htmlFor={props.showOn}>
+            {props.title}
+          </label>
+        )}
       </div>
       <div className='description'>
         {props.description}
