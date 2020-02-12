@@ -21,9 +21,17 @@ interface IProps {
 const Container = styled.div`
   .horz-element-group{
     padding-left: 0px;
+
     &  > div {
       display: flex;
       justify-content: space-between;
+
+      .field-container.form-item {
+        margin-right: 0px;
+      }
+      .select__control {
+        min-width: 188px;
+      }
     }
   }
 

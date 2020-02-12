@@ -11,7 +11,7 @@ const HozizontalGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 685px;
+  width: 578px;
   box-sizing: border-box;
   & .hidden {
     display: none;
