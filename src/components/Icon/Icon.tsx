@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Tooltip from '../Tooltip';
 
 import { ReactComponent as IconSetup } from '../../assets/svg/icons/ic-setup.svg';
 import { ReactComponent as IconChannel } from '../../assets/svg/icons/ic-channel.svg';
