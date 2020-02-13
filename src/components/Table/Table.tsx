@@ -109,32 +109,6 @@ const Table: FC<Props> = ({
     }
   }, [sortByInfo, onSortChange, currentSort]);
 
-  // Process internal sort change
-  // useEffect(() => {
-  //   console.log(sortBy, sortByInfo);
-  //   if (onSortChange && !compareSorts(sortBy, sortByInfo)) {
-  //     onSortChange(sortByInfo);
-  //   }
-  // }, [onSortChange, toggleSortBy, sortBy, sortByInfo]);
-
-  // // Handle incoming sort rules
-  // useEffect(() => {
-  //   if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
-  //     toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [sortBy]);
-
-  // Handle incoming group by
-  useEffect(() => {
-    if (!compareGroups(groupBy, groupByInfo)) {
-      setFirstGrouped(true);
-      dispatch({ type: 'resetGroupBy' });
-      toggleGroupBy(groupBy[0], true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [groupBy]);
-
   useEffect(() => {
     if (fetchData && tableType === 'async') {
       fetchData();
@@ -142,6 +116,7 @@ const Table: FC<Props> = ({
   }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
+
     if (groupBy && groupBy.length) {
       let countExpanded = 0;
       if (firstGrouped) {
@@ -157,11 +132,26 @@ const Table: FC<Props> = ({
         if (row.canExpand) toggleExpanded(row.id, true);
         return true;
       });
-      setChecked({});
     }
+  }, [firstGrouped, toggleExpanded, pageIndex, page, groupBy]);
+
+  useEffect(() => {
+    setChecked({});
+  }, [groupBy]);
+
+  useEffect(() => {
     setTotalRecords(data.length);
-    // eslint-disable-next-line
-  }, [pageIndex, data, page, groupBy]);
+  }, [data]);
+
+  // Handle incoming group by
+  useEffect(() => {
+    if (!compareGroups(groupBy, groupByInfo)) {
+      setFirstGrouped(true);
+      dispatch({ type: 'resetGroupBy' });
+      toggleGroupBy(groupBy[0], true);
+    }
+  }, [groupByInfo, groupBy, dispatch, toggleGroupBy]);
+
 
   useEffect(() => {
     resizableTable();
