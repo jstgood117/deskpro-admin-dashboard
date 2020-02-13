@@ -11,20 +11,16 @@ export const uiSchema: {
         {
           title: 'New Tickets',
           type: 'page_section',
+          settingsInfo: {
+            title:
+              'These settings control the default values for options and form inputs in the agent interface.',
+            showOn: 'new_tickets_settings_info',
+          },
           elements: [
             {
               type: 'vertical_group',
-              title:
-                'These settings control the default values for options and form inputs in the agent interface.',
+              title: '',
               description: '',
-              info: [
-                {
-                  type: 'button',
-                  title: 'Interface Defaults',
-                  url: 'http://www.test.com',
-                  icon: 'guide',
-                },
-              ],
               elements: [
                 {
                   type: 'horizontal_group',
@@ -54,6 +50,14 @@ export const uiSchema: {
                         ],
                         placeholder: '',
                       },
+                    },
+                  ],
+                  info: [
+                    {
+                      type: 'button',
+                      title: 'Interface Defaults',
+                      url: 'http://www.test.com',
+                      icon: 'guide',
                     },
                   ],
                 },
@@ -373,6 +377,7 @@ export const uiSchema: {
 };
 
 export const jsonSchema: any = {
+  new_tickets_settings_info: true,
   new_tickets_set_status: {
     value: 'Awaiting User',
     label: 'Awaiting User',
