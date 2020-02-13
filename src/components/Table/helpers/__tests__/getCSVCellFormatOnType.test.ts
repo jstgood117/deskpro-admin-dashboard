@@ -1,4 +1,4 @@
-import { getCSVCellFormatOnType } from '../functions';
+import { getCSVCellFormatOnType } from '../csvDataFn';
 import { KeyValue } from '../../../../types';
 
 

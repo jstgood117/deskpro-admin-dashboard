@@ -5,7 +5,6 @@ import _ from 'lodash';
 import Checkbox from '../Checkbox';
 import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import TableData from '../TableData';
-
 import { KeyValue } from '../../types';
 
 export type Props = {
@@ -74,8 +73,8 @@ const TableTr: FC<Props> = ({
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
           return (
             <td
-              className={!hasActions &&
-                indexInner === 0
+              className={
+                !hasActions && indexInner === 0
                   ? `td-${indexInner} firstColumn`
                   : `td-${indexInner}`
               }

@@ -1,4 +1,4 @@
-import { orderByFn } from '../order';
+import { orderByFn } from '../orderFn';
 import data from '../../../../fixtures/tableDataLarge';
 import { customSortMethod  } from '../../../../utils/sort';
 

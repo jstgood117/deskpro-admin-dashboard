@@ -10,38 +10,23 @@ import {
 import _ from 'lodash';
 
 import { KeyValue } from '../../types';
-
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 import Icon from '../Icon';
 import Header from './Header';
 import { TableType, TableParams, SortType, HeaderGroup } from './types';
-import { onCheckboxChange, generateTableParams, resizableTable } from './helpers/functions';
+import {
+  onCheckboxChange,
+  generateTableParams,
+  compareSorts,
+  compareGroups
+} from './helpers/tableFn';
 import { TableStyled, StyledPagination, StyledTh } from './TableStyles';
 import Tooltip from '../Tooltip';
 import { API_ChatDepartment } from '../../codegen/types';
 import { ActionFactory } from '../../services/actions/ActionFactory';
 import TableTr from './TableTr';
 import TableTrGroup from './TableTrGroup';
-
-// Returns `true` on equal sorts
-const compareSorts = (sort1: SortType[], sort2: SortType[]) => {
-  let result = sort1.length === sort2.length;
-
-  if (result) {
-    sort1.forEach((item1, index) => {
-      const item2 = sort2[index];
-      result = result && item1.id === item2.id && !!item1.desc === !!item2.desc;
-      return result;
-    });
-  }
-  return result;
-};
-
-const compareGroups = (group1: string[], group2: string[]) => {
-  return (
-    group1.length === group2.length && _.difference(group1, group2).length === 0
-  );
-};
+import { resizableTable } from './helpers/editColumnFn';
 
 export type Props = {
   path: string;
@@ -98,7 +83,7 @@ const Table: FC<Props> = ({
     gotoPage,
     toggleExpanded,
     dispatch,
-    state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo } // expanded
+    state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo }
   } = useTable(
     tableParams,
     useGroupBy,
@@ -208,45 +193,47 @@ const Table: FC<Props> = ({
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           refreshData={fetchData}
         />
-        <div className='overflow'>
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map(
-                (headerGroup: HeaderGroup, indexOuter: number) => (
-                  <tr
-                    key={indexOuter}
-                    {...(headerGroup.getHeaderGroupProps &&
-                      headerGroup.getHeaderGroupProps())}
-                  >
-                    {hasActions && <th />}
-                    {_.sortBy(headerGroup.headers, 'index').map(
-                      (column: KeyValue, indexInner: number) => {
-                        const isIdColumn =
-                          column.type.__typename === 'TableColumnId';
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map(
+              (headerGroup: HeaderGroup, indexOuter: number) => (
+                <tr
+                  key={indexOuter}
+                  {...(headerGroup.getHeaderGroupProps &&
+                    headerGroup.getHeaderGroupProps())}
+                >
+                  {hasActions && <th />}
+                  {_.sortBy(headerGroup.headers, 'index').map(
+                    (column: KeyValue, indexInner: number) => {
+                      const isIdColumn =
+                        column.type.__typename === 'TableColumnId';
 
-                        return (
-                          <th
-                            key={indexInner}
-                            {...column.getHeaderProps()}
-                            style={{
-                              border: column.isSorted && '1px solid #D3D6D7',
-                              width: isIdColumn ? 1 : column.width || 'auto'
-                            }}
-                            data-colindex={indexInner}
+                      return (
+                        <th
+                          key={indexInner}
+                          {...column.getHeaderProps()}
+                          style={{
+                            border: column.isSorted && '1px solid #D3D6D7',
+                            width: isIdColumn ? 1 : column.width || 'auto'
+                          }}
+                          data-colindex={indexInner}
+                        >
+                          <StyledTh
+                            {...column.getSortByToggleProps()}
+                            alignRight={isIdColumn}
                           >
-                            <StyledTh {...column.getSortByToggleProps()} alignRight={isIdColumn}>
-                              {column.render('Header')}
-                              {column.isSorted &&
-                                (column.isSortedDesc ? (
-                                  <span className='sort-icon'>
-                                    <Icon name='ic-sort-up-active' />
-                                  </span>
-                                ) : (
-                                    <span className='sort-icon'>
-                                      <Icon name='ic-sort-down-active' />
-                                    </span>
-                                  ))}
-                              {column.isSorted && (
+                            {column.render('Header')}
+                            {column.isSorted && (
+                              <>
+                                <span className='sort-icon'>
+                                  <Icon
+                                    name={
+                                      column.isSortedDesc
+                                        ? 'ic-sort-up-active'
+                                        : 'ic-sort-down-active'
+                                    }
+                                  />
+                                </span>
                                 <Tooltip
                                   content='Filter'
                                   styleType='dark'
@@ -256,54 +243,54 @@ const Table: FC<Props> = ({
                                     <Icon name='filter' />
                                   </span>
                                 </Tooltip>
-                              )}
-                            </StyledTh>
-                            <div className='resizer' />
-                          </th>
-                        );
-                      }
-                    )}
-                    <th className='th-action-buttons' />
-                  </tr>
-                )
-              )}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {Array.from(
-                groupBy && groupBy.length
-                  ? _.sortBy(
+                              </>
+                            )}
+                          </StyledTh>
+                          <div className='resizer' />
+                        </th>
+                      );
+                    }
+                  )}
+                  <th className='th-action-buttons' />
+                </tr>
+              )
+            )}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {Array.from(
+              groupBy && groupBy.length
+                ? _.sortBy(
                     groupedRows.filter((r: any) => r.isGrouped),
                     'index'
                   )
-                  : page
-              ).map((row: KeyValue, indexOuter: number) => {
-                prepareRow(row);
-                return row.isGrouped ? (
-                  <TableTrGroup
-                    indexOuter={indexOuter}
-                    page={page}
-                    key={indexOuter}
-                    row={row}
-                    checked={checked}
-                    hasActions={hasActions}
-                    prepareRow={prepareRow}
-                    handleCheckboxChange={handleCheckboxChange}
-                  />
-                ) : (
-                    <TableTr
-                      indexOuter={indexOuter}
-                      page={page}
-                      key={indexOuter}
-                      row={row}
-                      checked={checked}
-                      hasActions={hasActions}
-                      handleCheckboxChange={handleCheckboxChange}
-                    />
-                  );
-              })}
-            </tbody>
-          </table>
-        </div>
+                : page
+            ).map((row: KeyValue, indexOuter: number) => {
+              prepareRow(row);
+              return row.isGrouped ? (
+                <TableTrGroup
+                  indexOuter={indexOuter}
+                  page={page}
+                  key={indexOuter}
+                  row={row}
+                  checked={checked}
+                  hasActions={hasActions}
+                  prepareRow={prepareRow}
+                  handleCheckboxChange={handleCheckboxChange}
+                />
+              ) : (
+                <TableTr
+                  indexOuter={indexOuter}
+                  page={page}
+                  key={indexOuter}
+                  row={row}
+                  checked={checked}
+                  hasActions={hasActions}
+                  handleCheckboxChange={handleCheckboxChange}
+                />
+              );
+            })}
+          </tbody>
+        </table>
         {!loading && page.length > 0 && (
           <StyledPagination>
             <Pagination

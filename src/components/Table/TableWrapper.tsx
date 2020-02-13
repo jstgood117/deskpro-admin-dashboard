@@ -1,12 +1,12 @@
-import React, { FC, Fragment } from 'react';
-import { injectIntl, WrappedComponentProps, IntlShape } from 'react-intl';
+import React, { FC } from 'react';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-import { ITableSetup, ITableColumn } from '../../resources/interfaces';
+import { ITableSetup } from '../../resources/interfaces';
 import { KeyValue, ColumnOrder } from '../../types';
-import { customSortMethod } from '../../utils/sort';
 import Table from './Table';
 import Card from './Card';
-import { SortType, ColumnMeta } from './types';
+import { SortType } from './types';
+import { transformColumnData } from './helpers/tableFn';
 
 interface IProps {
   view: 'table' | 'list' | 'card';
@@ -25,42 +25,6 @@ interface IProps {
   onGroupByChange?: (columnNames: string[]) => void;
 }
 
-const generateSortType = (sortType: string) => {
-  if (!sortType) {
-    return 'alphanumeric';
-  }
-
-  switch (sortType) {
-    case 'ALPHANUMERIC':
-      return 'alphanumeric';
-    default:
-      return customSortMethod;
-  }
-};
-
-const transformColumnData = (
-  columns: ITableColumn[],
-  columnOrder: ColumnOrder[],
-  intl: IntlShape
-) => {
-  const newCols: ColumnMeta[] = [];
-  columnOrder.forEach((_order: ColumnOrder) => {
-    const column = columns.find(_col => _order.column === _col.title);
-    if (column && _order.show) {
-      newCols.push({
-        columnProps: column.field,
-        id: column.title,
-        Header: intl.formatMessage({ id: column.title }),
-        accessor: column.sortField || '',
-        type: column.field,
-        sortType: generateSortType(column.sortField)
-      });
-    }
-  });
-
-  return newCols;
-};
-
 const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   intl,
   path,
@@ -78,7 +42,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   view
 }) => {
   return (
-    <Fragment>
+    <>
       {view === 'table' && (
         <Table
           path={path}
@@ -114,7 +78,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           sortBy={sortBy}
         />
       )}
-    </Fragment>
+    </>
   );
 };
 

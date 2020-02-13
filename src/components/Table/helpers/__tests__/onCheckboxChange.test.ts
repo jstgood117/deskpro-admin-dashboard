@@ -1,4 +1,4 @@
-import { onCheckboxChange } from '../functions';
+import { onCheckboxChange } from '../tableFn';
 
 const setChecked = jest.fn();
 
