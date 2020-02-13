@@ -2,9 +2,6 @@ import styled from 'styled-components';
 import { dpstyle } from '../Styled';
 
 export const TableStyled = styled(dpstyle.div)`
-  overflow-y: auto;
-  overflow-x: auto;
-
   & table {
     width: 100%;
     border-collapse: collapse;
