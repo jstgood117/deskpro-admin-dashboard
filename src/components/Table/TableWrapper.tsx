@@ -42,7 +42,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
   view
 }) => {
   return (
-    <>
+    <div style={{ overflow: 'auto' }}>
       {view === 'table' && (
         <Table
           path={path}
@@ -78,7 +78,7 @@ const TableWrapper: FC<ITableSetup & IProps & WrappedComponentProps> = ({
           sortBy={sortBy}
         />
       )}
-    </>
+    </div>
   );
 };
 
