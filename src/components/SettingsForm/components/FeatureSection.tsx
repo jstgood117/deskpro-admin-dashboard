@@ -311,7 +311,7 @@ interface Props {
   title: string;
   brandButtonGroup?: boolean;
   field?: any;
-  header?: any[];
+  header?: any;
   icon?: string;
 }
 
@@ -325,6 +325,8 @@ const FeatureSection: React.FC<Props> = ({
   header
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
+  const enabled =
+    !header || !header.showOn || formikProps.values[header.showOn] === true;
 
   return (
     <FeatureSectionStyled className='feature-section'>
@@ -381,9 +383,10 @@ const FeatureSection: React.FC<Props> = ({
         )}
 
       <FeatureSectionContext.Provider value={{ prefixName: selected }}>
-        {elements.map((element: any, i: number) => (
-          <StdElementRow key={i} {...element} formikProps={formikProps} />
-        ))}
+        {enabled &&
+          elements.map((element: any, i: number) => (
+            <StdElementRow key={i} {...element} formikProps={formikProps} />
+          ))}
       </FeatureSectionContext.Provider>
     </FeatureSectionStyled>
   );

@@ -13,7 +13,7 @@ import Pagination, { IPageChange } from '../Pagination/Pagination';
 import KanbanViewCard from '../Card/KanbanViewCard';
 import Header from './Header';
 import { TableType, TableParams, SortType } from './types';
-import { generateTableParams, generateCardProps } from './helpers/functions';
+import { generateTableParams, generateCardProps } from './helpers/tableFn';
 import { TableStyled, StyledPagination, CardGrid } from './TableStyles';
 
 export type Props = {

@@ -1,4 +1,4 @@
-import { onSelectAllChange } from '../functions';
+import { onSelectAllChange } from '../selectFn';
 
 const setChecked = jest.fn();
 describe('onSelectAllChange', () => {

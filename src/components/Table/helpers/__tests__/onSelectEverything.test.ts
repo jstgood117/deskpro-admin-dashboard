@@ -1,4 +1,4 @@
-import { onSelectEverything } from '../functions';
+import { onSelectEverything } from '../selectFn';
 
 const setChecked = jest.fn();
 

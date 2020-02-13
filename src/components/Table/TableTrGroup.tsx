@@ -1,9 +1,9 @@
 import React, { FC, SyntheticEvent } from 'react';
-import styled from 'styled-components';
 
 import Checkbox from '../Checkbox';
 import Icon from '../Icon';
 import TableTr from './TableTr';
+import { GroupCaret } from './TableStyles';
 
 export type Props = {
   indexOuter: number;
@@ -18,13 +18,6 @@ export type Props = {
   ) => void;
 };
 
-const GroupCaret = styled.span`
-  margin-left: 10px;
-  & path {
-    fill: #4c4f50;
-  }
-`;
-
 const TableTrGroup: FC<Props> = ({
   indexOuter,
   page,
@@ -36,12 +29,7 @@ const TableTrGroup: FC<Props> = ({
 }) => {
   return (
     <React.Fragment>
-      <tr
-        {...row.getRowProps()}
-        style={{
-          borderBottom: '1px solid #b0bbc3'
-        }}
-      >
+      <tr {...row.getRowProps()} className='groupRow'>
         {hasActions && (
           <td className='checkBox' style={{ backgroundImage: 'none' }}>
             <Checkbox
@@ -53,35 +41,9 @@ const TableTrGroup: FC<Props> = ({
             />
           </td>
         )}
-        <td
-          colSpan={1}
-          style={{
-            backgroundImage: 'none',
-            padding: '4px 0px 4px 10px'
-          }}
-        >
-          <div
-            {...row.getExpandedToggleProps()}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              maxWidth: 310,
-              cursor: 'pointer'
-            }}
-          >
-            <span
-              style={{
-                marginRight: 'auto',
-                marginLeft: 0, // hasActions ? 16 : 0,
-                color: '#1C3E55',
-                fontFamily: 'Rubik',
-                fontWeight: 500,
-                fontSize: 15,
-                lineHeight: '150%'
-              }}
-            >
+        <td colSpan={1} className='groupCol'>
+          <div {...row.getExpandedToggleProps()} className='groupTitle'>
+            <span>
               {row.groupByVal} ({row.subRows.length})
             </span>
             <GroupCaret>
