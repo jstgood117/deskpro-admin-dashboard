@@ -19,6 +19,18 @@ interface IProps {
 }
 
 const Container = styled.div`
+
+  .page-section > label {
+    display: flex;
+    align-items: center;
+
+    & > span {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+    }
+  }
+
   .horz-element-group{
     padding-left: 0px;
 
