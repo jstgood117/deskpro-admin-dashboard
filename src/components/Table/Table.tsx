@@ -59,6 +59,7 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
+  const [currentSort, setCurrentSort] = useState<SortType[]>([]);
   const actions = ActionFactory(path);
   const hasActions = actions && actions.length > 0;
 
@@ -93,31 +94,20 @@ const Table: FC<Props> = ({
     useRowSelect
   ) as any;
 
-  // Process internal sort change
   useEffect(() => {
-    if (onSortChange && !compareSorts(sortBy, sortByInfo)) {
-      onSortChange(sortByInfo);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortByInfo]);
-
-  // Handle incoming sort rules
-  useEffect(() => {
-    if (sortBy.length && !compareSorts(sortBy, sortByInfo)) {
+    if(sortBy.length > 0 && !compareSorts(sortBy, currentSort)) {
+      setCurrentSort(sortBy);
       toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortBy]);
+  }, [currentSort, toggleSortBy, setCurrentSort, sortBy]);
 
-  // Handle incoming group by
   useEffect(() => {
-    if (!compareGroups(groupBy, groupByInfo)) {
-      setFirstGrouped(true);
-      dispatch({ type: 'resetGroupBy' });
-      toggleGroupBy(groupBy[0], true);
+
+    if (onSortChange && !compareSorts(currentSort, sortByInfo)) {
+      setCurrentSort(sortByInfo);
+      onSortChange(sortByInfo);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [groupBy]);
+  }, [sortByInfo, onSortChange, currentSort]);
 
   useEffect(() => {
     if (fetchData && tableType === 'async') {
@@ -126,6 +116,7 @@ const Table: FC<Props> = ({
   }, [fetchData, pageIndex, pageSize, tableType]);
 
   useEffect(() => {
+
     if (groupBy && groupBy.length) {
       let countExpanded = 0;
       if (firstGrouped) {
@@ -141,11 +132,26 @@ const Table: FC<Props> = ({
         if (row.canExpand) toggleExpanded(row.id, true);
         return true;
       });
-      setChecked({});
     }
+  }, [firstGrouped, toggleExpanded, pageIndex, page, groupBy]);
+
+  useEffect(() => {
+    setChecked({});
+  }, [groupBy]);
+
+  useEffect(() => {
     setTotalRecords(data.length);
-    // eslint-disable-next-line
-  }, [pageIndex, data, page, groupBy]);
+  }, [data]);
+
+  // Handle incoming group by
+  useEffect(() => {
+    if (!compareGroups(groupBy, groupByInfo)) {
+      setFirstGrouped(true);
+      dispatch({ type: 'resetGroupBy' });
+      toggleGroupBy(groupBy[0], true);
+    }
+  }, [groupByInfo, groupBy, dispatch, toggleGroupBy]);
+
 
   useEffect(() => {
     resizableTable();
