@@ -84,6 +84,7 @@ import { ReactComponent as IconGuide } from '../../assets/svg/icons/ic-guide.svg
 import { ReactComponent as IconLink } from '../../assets/svg/icons/ic-link.svg';
 import { ReactComponent as IconCalendar } from '../../assets/svg/icons/ic-calendar.svg';
 import { ReactComponent as IconExternalLink } from '../../assets/svg/icons/ic-external-link.svg';
+import { ReactComponent as IconKanban } from '../../assets/svg/icons/ic-kanban.svg';
 
 export interface IProps {
   name: string;
@@ -273,6 +274,8 @@ const Icon: FC<IProps> = props => {
       return <IconRateLimiting />;
     case 'external-link':
       return <IconExternalLink />;
+    case 'kanban':
+      return <IconKanban />;
     default:
       return <IconSetup />;
   }
