@@ -258,11 +258,9 @@ const Icon: FC<IProps> = props => {
       return <IconCalendar />;
     case 'info-text':
       return (
-        <Tooltip content='Info text' styleType='light' placement='bottom'>
-          <StyledIcon>
-            <IconInfoText />
-          </StyledIcon>
-        </Tooltip>
+        <StyledIcon>
+          <IconInfoText />
+        </StyledIcon>
       );
     case 'info-question-text':
       return (

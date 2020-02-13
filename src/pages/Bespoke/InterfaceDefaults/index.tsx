@@ -31,6 +31,16 @@ const Container = styled.div`
     }
   }
 
+  .form-row .form-ctrl {
+    position: relative;
+  }
+
+  .settings-info-button {
+    position: absolute;
+    top: -5px;
+    left: 744px;
+  }
+
   .horz-element-group{
     padding-left: 0px;
 
@@ -40,9 +50,11 @@ const Container = styled.div`
 
       .field-container.form-item {
         margin-right: 0px;
+        margin-bottom: 0px;
       }
       .select__control {
         min-width: 188px;
+        margin-bottom: 0px;
       }
     }
   }
