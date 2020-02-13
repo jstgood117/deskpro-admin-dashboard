@@ -14,7 +14,16 @@ export const uiSchema: {
           settingsInfo: {
             title:
               'These settings control the default values for options and form inputs in the agent interface.',
+            tooltip: 'New Tickets',
             showOn: 'new_tickets_settings_info',
+            info: [
+              {
+                type: 'button',
+                title: 'Interface Defaults',
+                url: 'http://www.test.com',
+                icon: 'guide',
+              },
+            ],
           },
           elements: [
             {
@@ -50,14 +59,6 @@ export const uiSchema: {
                         ],
                         placeholder: '',
                       },
-                    },
-                  ],
-                  info: [
-                    {
-                      type: 'button',
-                      title: 'Interface Defaults',
-                      url: 'http://www.test.com',
-                      icon: 'guide',
                     },
                   ],
                 },
