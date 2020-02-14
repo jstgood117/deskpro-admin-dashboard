@@ -48,7 +48,7 @@ export const uiSchema: {
                           {
                             label: '09:00 to 17:00',
                             value: '09:00 to 17:00'
-                          },
+                          }
                         ]
                       }
                     },
@@ -65,7 +65,7 @@ export const uiSchema: {
                           {
                             label: 'UTC',
                             value: 'UTC'
-                          },
+                          }
                         ]
                       }
                     }
@@ -247,7 +247,61 @@ export const uiSchema: {
           title: 'Holidays',
           className: 'holidays',
           type: 'page_section',
-          elements: []
+          elements: [
+            {
+              type: 'vertical_group',
+              description:
+                'Holidays are days when thr helpdesk is closed & agents are unavailable to repond to users.',
+              className: 'button-group',
+              elements: [
+                {
+                  type: 'field',
+                  className: 'holiday-btn',
+                  field: {
+                    type: 'button',
+                    id: 'business_hours_add_holiday',
+                    icon: 'plus',
+                    text: 'Add new holiday'
+                  }
+                },
+                {
+                  type: 'field',
+                  className: 'calendar-btn',
+                  field: {
+                    type: 'button',
+                    id: 'business_hours_add_calender',
+                    icon: 'calendar',
+                    text: 'Add calender'
+                  }
+                }
+              ]
+            },
+            {
+              type: 'vertical_group',
+              title: '',
+              description: 'Set which agents can use the Tasks.',
+              info: [
+                {
+                  type: 'button',
+                  title: 'Agent Task Permissions',
+                  url: 'http://www.test.com',
+                  icon: 'guide'
+                }
+              ],
+              elements: [
+                {
+                  type: 'field',
+                  field: {
+                    type: 'stringlist',
+                    id: 'agent_task_permissions',
+                    title: 'Permission Groups',
+                    addTitle: 'Add usergroup',
+                    max: 8
+                  }
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -261,5 +315,6 @@ export const jsonSchema: any = {
   business_hours_thursday: ['thursday'],
   business_hours_friday: ['friday'],
   business_hours_saturday: [],
-  business_hours_sunday: []
+  business_hours_sunday: [],
+  agent_task_permissions: ['Trainee']
 };

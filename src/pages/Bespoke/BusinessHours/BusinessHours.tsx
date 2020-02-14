@@ -79,7 +79,6 @@ const Container = styled.div`
         margin-bottom: 16px;
       }
       & .vert-elements {
-
         & .form-checkbox {
           transform: translateY(2px);
           z-index: 0;
@@ -96,6 +95,17 @@ const Container = styled.div`
   }
 
   & .page-section.holidays {
+    padding-left: 20px;
+
+    & .button-group {
+      & .vert-elements {
+        display: flex;
+        align-items: center;
+        & .calendar-btn {
+          padding-left: 8px;
+        }
+      }
+    }
   }
 `;
 
