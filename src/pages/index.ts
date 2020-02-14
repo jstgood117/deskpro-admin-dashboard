@@ -13,6 +13,7 @@ import VoiceSettings from './Bespoke/VoiceSettings';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
 import ReportFile from './Bespoke/ReportFile';
 import Tasks from './Bespoke/Tasks';
+import BusinessHours from './Bespoke/BusinessHours';
 
 import { KeyValue } from '../types';
 
@@ -31,5 +32,6 @@ export const RouteToPage: KeyValue = {
   '/voice/settings': VoiceSettings,
   '/sysadmin/realtime-events': RealTimeEvents,
   '/agents/logs': ReportFile,
-  '/tasks': Tasks
+  '/tasks': Tasks,
+  '/settings/business-hours': BusinessHours
 };

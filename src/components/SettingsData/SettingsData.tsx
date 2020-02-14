@@ -33,13 +33,11 @@ const SettingsData: React.FC<IProps> = ({ type, props }) => {
       );
     case 'setting-info':
       return (
-        <div style={{ height: 134, maxWidth: 688 }}>
-          <SettingInfo onClose={setClose} closed={closed}>
-            <StyledText isTitle={false} style={{ opacity: 0.9 }}>
-              Setting Info
-            </StyledText>
-          </SettingInfo>
-        </div>
+        <SettingInfo onClose={setClose} closed={closed}>
+          <StyledText isTitle={false} style={{ opacity: 0.9 }}>
+            {props.text}
+          </StyledText>
+        </SettingInfo>
       );
     case 'setting-info-inUse':
       return (

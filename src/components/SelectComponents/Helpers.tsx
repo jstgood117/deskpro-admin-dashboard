@@ -53,8 +53,7 @@ export const selectStyles = {
     position: 'unset',
     overflow: 'unset',
     textOverflow: 'unset',
-    transform: 'none',
-    marginRight: '20px'
+    transform: 'none'
   }),
   multiValue: (styles: any) => ({
     ...styles,
