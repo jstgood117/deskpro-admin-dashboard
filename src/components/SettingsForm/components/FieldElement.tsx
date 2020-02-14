@@ -153,7 +153,8 @@ const elementsSelector: {
         inputValue={props.formikProps.values[props.id]}
         option={props.formikProps.values[props.optionId]}
         onChange={(value: UnitsValuesType) => {
-          console.log(value);
+          props.formikProps.setFieldValue(props.id, value.inputValue);
+          props.formikProps.setFieldValue(props.optionId, value.selectValue.value);
         }}
       />
     );
