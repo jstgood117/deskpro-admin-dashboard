@@ -6,9 +6,11 @@ import { dpstyle } from '../../Styled';
 import Button from '../../Button';
 import Icon from '../../Icon';
 import Input from '../../Input';
+import FieldElement from './FieldElement';
 
 export interface IProps {
   inline: any;
+  field: any;
   formikProps: any;
 }
 
@@ -31,6 +33,14 @@ const InlineEditWrapper = styled(dpstyle.div) <{ editing: boolean }>`
         background: ${props => !props.editing && 'rgba(232, 235, 238, 0.5)'};
     }
   }
+  .edit-btn button {
+     width: 24px;
+     height: 24px;
+   }
+  .hourglass-undo-btn button {
+    width: 36px;
+    height: 22px;
+  }
 `;
 
 const StyledEditBox = styled(dpstyle.div1) <{ editing: boolean }>`
@@ -38,21 +48,15 @@ const StyledEditBox = styled(dpstyle.div1) <{ editing: boolean }>`
   align-items: center;
   font-size: 14px;
   line-height: 150%;
-  height: 40px;
+  height: 30px;
   border-radius: 6px;
   padding-left: 35px;
   padding-right: 40px;
   position: relative;
-  min-width: 590px;
+  min-width: 515px;
   box-shadow: ${props => props.editing && '0px 3px 8px rgba(0, 0, 0, 0.25)'};
   .edit-btn, .hourglass-undo-btn  {
     display: none;
-  }
-  .hourglass-undo-btn {
-    button {
-        width: 40px !important;
-        height: 26px;
-    }
   }
   .input-wrapper {
     padding: 0;
@@ -80,19 +84,20 @@ interface InlineProps {
   label: string;
 }
 
-const InlineEdit: FC<IProps> = ({ inline, formikProps }) => {
+const InlineEdit: FC<IProps> = ({ inline, formikProps, field }) => {
   const [editing, setEdit] = useState(false);
-  const resetValueInput = ({ id, type } : InlineProps) => {
+  const resetValueInput = ({ id, type }: InlineProps) => {
     if (type === 'input') {
-        formikProps.setFieldValue(id, formikProps.values[`${id}_default`]);
+      formikProps.setFieldValue(id, formikProps.values[`${id}_default`]);
     }
   };
 
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <InlineEditWrapper editing={editing}>
+        <FieldElement {...field} formikProps={formikProps} />
         <StyledEditBox editing={editing}>
-          {inline.map(({ type, label, id } : InlineProps, key: number) => {
+          {inline.map(({ type, label, id }: InlineProps, key: number) => {
             return (
               <React.Fragment key={key}>
                 {type === 'label' && label}
@@ -108,8 +113,8 @@ const InlineEdit: FC<IProps> = ({ inline, formikProps }) => {
                       }}
                       inputType='primary'
                       style={{
-                        width: 30,
-                        height: 30,
+                        width: 25,
+                        height: 25,
                         textAlign: 'center'
                       }}
                     />
@@ -122,7 +127,7 @@ const InlineEdit: FC<IProps> = ({ inline, formikProps }) => {
                       &nbsp;
                       {formikProps.values[id]}
                       &nbsp;
-                    </div>
+                      </div>
                   ) : ''
                 }
               </React.Fragment>
@@ -136,6 +141,10 @@ const InlineEdit: FC<IProps> = ({ inline, formikProps }) => {
               }}
               size='small'
               iconOnly={true}
+              style={{
+                width: 25,
+                height: 25
+              }}
             >
               <Icon name='pencil' />
             </Button>
@@ -152,7 +161,7 @@ const InlineEdit: FC<IProps> = ({ inline, formikProps }) => {
               <Icon name='hourglass' />
             </Button>
           </div>
-          <div style={{ position: 'absolute', right: '-95px' }} className='hourglass-undo-btn'>
+          <div style={{ position: 'absolute', right: '-94px' }} className='hourglass-undo-btn'>
             <Button
               styleType='tertiary'
               onClick={() => {
@@ -183,7 +192,6 @@ const InlineEdit: FC<IProps> = ({ inline, formikProps }) => {
             <Button
               styleType='tertiary'
               onClick={() => {
-                // setInlineValues(inputValues);
                 setEdit(false);
               }}
               size='small'

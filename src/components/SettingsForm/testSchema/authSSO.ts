@@ -45,7 +45,7 @@ export const uiSchema: {
                     id: 'agent_auth_sso_remember_device_field',
                     optionId: 'agent_auth_sso_remember_device_option',
                     options: [
-                      { value: 'days', label: 'days' },
+                      { value: 'day', label: 'day' },
                       { value: 'months', label: 'months' }
                     ]
                   }
@@ -263,20 +263,6 @@ export const uiSchema: {
                       },
                       showRevert: true
                     },
-                      /*
-                    {
-                      type: 'vertical_group',
-                      title: 'Require this many symbols: **0** ',
-                      description:
-                        'Define the minimum number of symbols (!, @, $, % etc) that must be used in the password.',
-                      className: 'checkbox-field',
-                      field: {
-                        type: 'checkbox',
-                        id: 'custom_policy_require_symbols',
-                        value: 'yes'
-                      },
-                      showRevert: true
-                    },*/
                   ]
                 }
               ]
@@ -324,83 +310,7 @@ export const vaildationSchema = {
     },
     agent_auth_sso_remember_device_field: {
       type: 'number',
-    },
-    agent_settings_security_idle_timeout_action: {
-      type: 'string'
-    },
-    agent_settings_security_whitelist: {
-      type: 'string',
-      pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-    },
-    admin_settings_security_enabled: {
-      type: 'boolean'
-    },
-    admin_settings_security_idle_timeout_enabled: {
-      type: 'string'
-    },
-    admin_settings_security_idle_timeout: {
-      type: 'string'
-    },
-    admin_settings_security_whitelist: {
-      type: 'string',
-      pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-    },
-    agent_notifications_enabled: {
-      type: 'boolean'
-    },
-    agent_keyboard_shortcuts_enabled: {
-      type: 'boolean'
-    },
-    forwards_out_of_helpdesk_enabled: {
-      type: 'boolean'
-    },
-    agent_email_subscriptions: {
-      type: 'array'
-    },
-    agent_keyboard_shortcuts: {
-      type: 'array'
-    },
-    brand1_default_email_account: {
-      type: 'string',
-      format: 'email'
-    },
-    brand2_default_email_account: {
-      type: 'string',
-      format: 'email'
-    },
-    agent_settings_help_center_knowledgebase: {
-      type: 'boolean'
-    },
-    agent_settings_help_center_news: {
-      type: 'boolean'
-    },
-    agent_settings_help_center_downloads: {
-      type: 'boolean'
-    },
-    agent_settings_help_center_community: {
-      type: 'boolean'
-    },
-    test_list_of_strings: {
-      type: 'array'
-    },
-    test_unit_value: {
-      type: 'string'
-    },
-    test_unit_option: {
-      type: 'string'
-    },
-    test_unit_checkbox_1: {
-      type: 'array'
-    },
-    test_unit_another_input_1: {
-      type: 'string'
-    },
-    test_unit_checkbox_2: {
-      type: 'array'
-    },
-    test_unit_another_input_2: {
-      type: 'string'
-    },
+    }
   },
 };
 
