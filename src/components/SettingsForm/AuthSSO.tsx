@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { buildYup } from 'schema-to-yup';
+import { DocumentNode } from 'graphql';
+import { WithApolloClient } from 'react-apollo';
+import { withApollo } from '@apollo/react-hoc';
+import { gql } from 'apollo-boost';
+
 
 import { SettingsFormFactory } from './SettingsFormFactory';
 import {
@@ -11,6 +16,13 @@ import {
   validationConfig
 } from './testSchema/authSSO';
 import Button from '../Button';
+import { settingsSave } from './helpers/settingsSave';
+
+const testQuery: DocumentNode = gql`
+  mutation UpdateSettings($payload: Object!) {
+    update_settings(payload: $payload)
+  }
+`;
 
 const SettingsFormStyled = styled.div`
   width: 100%;
@@ -98,10 +110,21 @@ const SettingsFormStyled = styled.div`
 interface IProps {
   initialValues?: any;
   ui?: any;
+  initYupSchema?: any;
+  saveSchema?: DocumentNode;
 }
 
-const AuthSSOForm: React.FC<IProps> = ({ initialValues, ui }) => {
+export type PropsWithApollo = WithApolloClient<IProps>;
 
+const AuthSSO: React.FC<PropsWithApollo> = (
+  {
+    client,
+    initialValues = jsonSchema,
+    ui = uiSchema,
+    initYupSchema = vaildationSchema,
+    saveSchema= testQuery
+  }
+) => {
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {
@@ -112,9 +135,9 @@ const AuthSSOForm: React.FC<IProps> = ({ initialValues, ui }) => {
     <SettingsFormStyled>
       <Formik
         initialValues={initialValues || jsonSchema}
-        validationSchema={yupSchema}
+        validationSchema={yupSchema || initYupSchema}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
+          settingsSave(client, saveSchema, values);
           setSubmitting(false);
         }}
       >
@@ -146,4 +169,4 @@ const AuthSSOForm: React.FC<IProps> = ({ initialValues, ui }) => {
   );
 };
 
-export default AuthSSOForm;
+export default withApollo<PropsWithApollo>(AuthSSO);
