@@ -13,17 +13,17 @@ const testQuery: DocumentNode = gql`
 
 describe('GeneralSettings', () => {
   const wrapper = (ui: any, values?: any) =>
-      mount(
-          <GeneralSetting
-              ui={ui}
-              initialValues={values || {}}
-              initYupSchema={{
-                type:'object',
-                properties: {}
-              }}
-              saveSchema={testQuery}
-          />
-      );
+    mount(
+      <GeneralSetting
+        ui={ui}
+        initialValues={values || {}}
+        initYupSchema={{
+          type: 'object',
+          properties: {}
+        }}
+        saveSchema={testQuery}
+      />
+    );
   it('should render settings form', () => {
     const root = wrapper({
       elements: [

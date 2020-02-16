@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import {dpstyle} from '../../../style/styled';
 
 type Props = {
-  id?: string;
+  value?: string;
   placeholder?: string;
-  formikProps?: any
+  onChange?: (val: string) => void;
 };
 
 export const InputStyled = styled(dpstyle.textarea)`
@@ -40,18 +40,18 @@ export const InputStyled = styled(dpstyle.textarea)`
 
 export const TextArea: FC<Props> = (
   {
+    value,
     placeholder,
-    formikProps,
-    id
+    onChange,
   }
 ) => {
   return (
     <div>
       <InputStyled
-        value={formikProps.values[id]}
+        value={value}
         placeholder={placeholder}
         onChange={(e: any) => {
-          formikProps.setFieldValue(id, e.target.value);
+          onChange(e.target.value);
         }}
       />
     </div>

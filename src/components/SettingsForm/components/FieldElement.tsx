@@ -116,9 +116,9 @@ const elementsSelector: {
   textarea: props => (
     <div>
       <TextArea
-        id={props.id}
+        value={props.formikProps.values[props.id]}
         placeholder={props.placeholder}
-        onChange={props.formikProps}
+        onChange={(val: Text) => props.formikProps.setFieldValue(props.id, val)}
         {...props}
       />
     </div>
