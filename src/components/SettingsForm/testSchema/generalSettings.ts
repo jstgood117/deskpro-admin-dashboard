@@ -147,6 +147,7 @@ export const uiSchema: {
               type: 'vertical_group',
               title:
                 'Automatically install new languages',
+              className: 'checkbox-middle',
               description:
                 'New languages translations are sometimes added with new Deskpro updates. When this option is enabled, new languages will be automatically installed and enabled on your helpdesk.',
               showOn: 'helpdesk_settings_checkbox',

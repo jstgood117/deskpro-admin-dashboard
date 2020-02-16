@@ -155,6 +155,12 @@ const SettingsFormStyled = styled.div`
       width: 320px;
     }
   }
+  .checkbox-middle {
+    .form-checkbox {
+      transform: translateY(4px);
+    }
+  }
+
 `;
 
 const testQuery: DocumentNode = gql`
