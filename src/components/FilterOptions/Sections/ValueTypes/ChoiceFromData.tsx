@@ -6,7 +6,7 @@ import { IOptions } from '../../../../types';
 
 import { Props } from './types';
 
-const formatToIOptionsFormat = (uniqueValues: string[]): IOptions[] => {
+export const formatToIOptionsFormat = (uniqueValues: string[]): IOptions[] => {
   if (!uniqueValues) {
     return [] as IOptions[];
   }
@@ -21,7 +21,7 @@ const formatToIOptionsFormat = (uniqueValues: string[]): IOptions[] => {
     });
 };
 
-const formatFlatArrayFormat = (values: IOptions[]): string[] => {
+export const formatFlatArrayFormat = (values: IOptions[]): string[] => {
   if (!values) return [];
 
   return values.map(_val => _val.value);
