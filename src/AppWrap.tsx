@@ -14,7 +14,6 @@ import App from './pages/App/App';
 import AppError from './components/AppError';
 
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-boost';
-
 const config: ConfigType = generateConfig();
 const { apiUrl } = config;
 
