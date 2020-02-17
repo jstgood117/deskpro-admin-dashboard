@@ -6,6 +6,7 @@ import {
   FeatureBilling
 } from './Helpers';
 import { ReferencePanel } from './ReferencePanel';
+import { HolidayList } from './HolidayList';
 import { StyledText } from './styles';
 
 interface IProps {
@@ -30,6 +31,8 @@ const SettingsData: React.FC<IProps> = ({ type, props }) => {
       return <FeatureBilling />;
     case 'reference-code-panel':
       return <ReferencePanel />;
+    case 'holiday-list':
+      return <HolidayList />;
     default:
       return null;
   }

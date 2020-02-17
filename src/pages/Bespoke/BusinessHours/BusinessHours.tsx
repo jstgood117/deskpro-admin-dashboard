@@ -106,6 +106,51 @@ const Container = styled.div`
         }
       }
     }
+
+    & .calendar-setting {
+      & .calendars {
+        & .add-button {
+          display: none;
+        }
+        & .sync-calendars {
+          width: auto;
+          & .string-list-count {
+            position: relative;
+            width: auto;
+            padding-left: 16px;
+            &:after {
+              content: ')';
+            }
+            &:before {
+              content: '(';
+            }
+          }
+          & .string-row {
+            font-family: Rubik;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 150%;
+            color: #4c4f50;
+            &:hover {
+              text-decoration-line: underline;
+              color: #3a8dde;
+              cursor: defalut;
+            }
+            max-width: 632px;
+            word-break: break-all;
+            padding: 9px 8px 9px 8px;
+            & .content-text {
+              padding-right: 14px;
+            }
+          }
+        }
+
+        & .holidays {
+          max-width: 632px;
+        }
+      }
+    }
   }
 `;
 

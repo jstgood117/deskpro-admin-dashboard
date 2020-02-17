@@ -33,4 +33,5 @@ storiesOf('Settings Data', module)
     <div style={{ maxWidth: 699 }}>
       <SettingsData type='reference-code-panel' />
     </div>
-  ));
+  ))
+  .add('holiday-list', () => <SettingsData type='holiday-list' />);

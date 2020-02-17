@@ -143,6 +143,7 @@ const elementsSelector: {
     <div style={{ marginBottom: 16 }}>
       <StringListBuilder
         {...props}
+        className={props.className}
         values={props.formikProps.values[props.id]}
       />
     </div>
@@ -188,6 +189,9 @@ const elementsSelector: {
   },
   referenceFilePanel: () => {
     return <SettingsData type='reference-code-panel' />;
+  },
+  holidayList: () => {
+    return <SettingsData type='holiday-list' />;
   },
   settingInfo: props => {
     return (

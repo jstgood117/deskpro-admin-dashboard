@@ -65,6 +65,10 @@ export const uiSchema: {
                           {
                             label: 'UTC',
                             value: 'UTC'
+                          },
+                          {
+                            label: 'CEST',
+                            value: 'CEST'
                           }
                         ]
                       }
@@ -280,23 +284,32 @@ export const uiSchema: {
               type: 'vertical_group',
               title: '',
               description: 'Set which agents can use the Tasks.',
-              info: [
-                {
-                  type: 'button',
-                  title: 'Agent Task Permissions',
-                  url: 'http://www.test.com',
-                  icon: 'guide'
-                }
-              ],
+              className: 'calendar-setting',
               elements: [
                 {
+                  info: [
+                    {
+                      type: 'button',
+                      title: 'Syncing Calendars',
+                      url: 'http://www.test.com',
+                      icon: 'guide'
+                    }
+                  ],
                   type: 'field',
+                  className: 'calendars',
                   field: {
+                    className: 'sync-calendars',
                     type: 'stringlist',
                     id: 'agent_task_permissions',
-                    title: 'Permission Groups',
-                    addTitle: 'Add usergroup',
-                    max: 8
+                    title: 'Synced calendars'
+                  }
+                },
+                {
+                  type: 'field',
+                  className: 'holidays',
+                  field: {
+                    type: 'holidayList',
+                    title: 'Synced calendars'
                   }
                 }
               ]
@@ -316,5 +329,5 @@ export const jsonSchema: any = {
   business_hours_friday: ['friday'],
   business_hours_saturday: [],
   business_hours_sunday: [],
-  agent_task_permissions: ['Trainee']
+  agent_task_permissions: ['https://webhooks.gettimely.com/calendar/feed/37firebnow-alsjd39-bsdnfos-suwheibjosin938475shdbv.ics']
 };
