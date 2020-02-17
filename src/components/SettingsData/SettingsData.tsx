@@ -6,11 +6,11 @@ import {
   FeatureBilling
 } from './Helpers';
 import { ReferencePanel } from './ReferencePanel';
-import { AddCalendarForm } from './AddCalendarForm';
+import AddCalendarForm from './AddCalendarForm';
 import { HolidayList } from './HolidayList';
 import { StyledText } from './styles';
 
-interface IProps {
+export interface IProps {
   type: string;
   props?: any;
 }

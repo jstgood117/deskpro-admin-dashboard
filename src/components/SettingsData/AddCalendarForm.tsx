@@ -8,11 +8,13 @@ import { ButtonStyleType } from '../Button/types';
 import { DrawerHeader, DrawerFooter } from '../Drawer/DrawerStyles';
 import { dpstyle } from '../Styled';
 
-export const AddCalendarForm = (props: {
-  styleType: ButtonStyleType;
-  icon: string;
-  text: string;
-}) => {
+export interface IProps {
+  styleType?: ButtonStyleType;
+  icon?: string;
+  text?: string;
+}
+
+const AddCalendarForm = (props: IProps) => {
   const [isOpened, openDrawer] = useState(false);
   const EditFormInputTitle = styled(dpstyle.div1)`
     font-weight: 500;
@@ -51,28 +53,32 @@ export const AddCalendarForm = (props: {
         {props.icon && <Icon name={props.icon} />}
         {props.text}
       </Button>
-      <Drawer
-        open={isOpened}
-        onClose={() => {
-          openDrawer(false);
-        }}
-      >
-        <DrawerHeader>Add calendar</DrawerHeader>
-        <div style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 19 }}>
-          <EditFormInputTitle>Link</EditFormInputTitle>
-          <EditFormInputStyle>
-            <textarea />
-          </EditFormInputStyle>
-        </div>
-        <DrawerFooter>
-          <Button styleType='primary' size='medium'>
-            Save
-          </Button>
-          <Button styleType='secondary' size='medium'>
-            Delete
-          </Button>
-        </DrawerFooter>
-      </Drawer>
+      <div>
+        <Drawer
+          open={isOpened}
+          onClose={() => {
+            openDrawer(false);
+          }}
+        >
+          <DrawerHeader>Add calendar</DrawerHeader>
+          <div style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 19 }}>
+            <EditFormInputTitle>Link</EditFormInputTitle>
+            <EditFormInputStyle>
+              <textarea />
+            </EditFormInputStyle>
+          </div>
+          <DrawerFooter>
+            <Button styleType='primary' size='medium'>
+              Save
+            </Button>
+            <Button styleType='secondary' size='medium'>
+              Delete
+            </Button>
+          </DrawerFooter>
+        </Drawer>
+      </div>
     </div>
   );
 };
+
+export default AddCalendarForm;
