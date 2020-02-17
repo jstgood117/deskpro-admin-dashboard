@@ -19,16 +19,19 @@ describe('ChoiceFromData', () => {
     return mount(<ChoiceFromData {...props} />);
   };
 
-  test('renders <MultiSelect> tag at ChoiceFromData', () => {
+  test('renders <MultiSelect> tag at ChoiceFromData and calls setFilterValue on clicking', () => {
+
+    const setFilterValue = jest.fn();
+
     const props: Props = {
       filterValue: ['no'],
       filters: [{operatorName:'EQUAL', property: 'can_admin', value:['no']}],
       index: 0,
-      setFilterValue: jest.fn(),
+      setFilterValue,
       uniqueValues: []
     };
 
-    const root = wrapper(true, props);
+    const root = wrapper(false, props);
     expect(root.find('MultiSelect').length).toEqual(1);
     root.unmount();
   });
