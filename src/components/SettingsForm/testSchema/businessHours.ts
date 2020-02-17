@@ -272,7 +272,7 @@ export const uiSchema: {
                   type: 'field',
                   className: 'calendar-btn',
                   field: {
-                    type: 'button',
+                    type: 'addCalendarButton',
                     id: 'business_hours_add_calender',
                     icon: 'calendar',
                     text: 'Add calender'

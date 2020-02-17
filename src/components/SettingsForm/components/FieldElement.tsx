@@ -132,6 +132,9 @@ const elementsSelector: {
       {props.text}
     </Button>
   ),
+  addCalendarButton: props => (
+    <SettingsData type='add-calendar-form' props={props}/>
+  ),
   profiles: props => (
     <Profiles
       {...props}

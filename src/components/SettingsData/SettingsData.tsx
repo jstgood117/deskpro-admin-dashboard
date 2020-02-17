@@ -6,6 +6,7 @@ import {
   FeatureBilling
 } from './Helpers';
 import { ReferencePanel } from './ReferencePanel';
+import { AddCalendarForm } from './AddCalendarForm';
 import { HolidayList } from './HolidayList';
 import { StyledText } from './styles';
 
@@ -33,6 +34,8 @@ const SettingsData: React.FC<IProps> = ({ type, props }) => {
       return <ReferencePanel />;
     case 'holiday-list':
       return <HolidayList />;
+    case 'add-calendar-form':
+      return <AddCalendarForm {...props} />;
     default:
       return null;
   }
