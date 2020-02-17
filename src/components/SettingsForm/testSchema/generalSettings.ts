@@ -74,7 +74,7 @@ export const uiSchema: {
                       elements: [
                         {
                           type: 'header-medium-card',
-                          title: 'Temporarily Disabel Helpdesk',
+                          title: 'Temporarily Disable Helpdesk',
                           description: 'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.',
                         },
                         {
@@ -108,12 +108,33 @@ export const uiSchema: {
                       className: 'brand-1-group',
                       elements: [
                         {
+                          type: 'header-medium-card',
+                          title: 'Temporarily Disable Helpdesk',
+                          description: 'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.',
+                        },
+                        {
                           type: 'field',
-                          title: 'Default email account',
+                          className: 'notification-block',
+                          title: 'Notification Message',
+                          description: 'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow',
+                        },
+                        {
+                          type: 'field',
+                          className: 'input-filed',
+                          title: 'Agent Message ',
                           field: {
-                            type: 'input',
-                            id: 'brand2_default_email_account'
-                          },
+                            type: 'textarea',
+                            id: 'helpdes_setting_agent_message'
+                          }
+                        },
+                        {
+                          type: 'field',
+                          title: 'User Message ',
+                          className: 'input-filed',
+                          field: {
+                            type: 'textarea',
+                            id: 'helpdes_setting_user_message'
+                          }
                         }
                       ]
                     },
@@ -122,11 +143,32 @@ export const uiSchema: {
                       className: 'brand-1-group',
                       elements: [
                         {
+                          type: 'header-medium-card',
+                          title: 'Temporarily Disable Helpdesk',
+                          description: 'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.',
+                        },
+                        {
                           type: 'field',
-                          title: 'Default email account',
+                          className: 'notification-block',
+                          title: 'Notification Message',
+                          description: 'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow',
+                        },
+                        {
+                          type: 'field',
+                          className: 'input-filed',
+                          title: 'Agent Message ',
                           field: {
-                            type: 'input',
-                            id: 'brand3_default_email_account'
+                            type: 'textarea',
+                            id: 'helpdes_setting_agent_message'
+                          }
+                        },
+                        {
+                          type: 'field',
+                          title: 'User Message ',
+                          className: 'input-filed',
+                          field: {
+                            type: 'textarea',
+                            id: 'helpdes_setting_user_message'
                           }
                         }
                       ]
@@ -466,7 +508,7 @@ export const uiSchema: {
                     type: 'stringlist',
                     id: 'general_settings_file_uploads_reopen_permissions',
                     title: 'Permitted Extensions',
-                    addTitle: 'Add IP',
+                    addTitle: 'Add Extensions',
                   },
                 },
               ]
@@ -1411,8 +1453,8 @@ export const jsonSchema = {
     '345.138.85.2134',
   ],
   brand1_default_email_account: 'support@brand1.deskpro.com',
-  brand2_default_email_account: '',
-  brand3_default_email_account: '',
+  brand2_default_email_account: 'support@brand2.deskpro.com',
+  brand3_default_email_account: 'support@brand3.deskpro.com',
   agent_settings_help_center_knowledgebase: true,
   agent_settings_help_center_news: true,
   agent_settings_help_center_downloads: true,
