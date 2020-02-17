@@ -38,12 +38,12 @@ const VertElementGroup: React.FC = (props: any) => {
                 formikProps={props.formikProps}
               />
             ) : (
-              <GenericFormComponent
-                {...element}
-                key={i}
-                formikProps={props.formikProps}
-              />
-            )
+                <GenericFormComponent
+                  {...element}
+                  key={i}
+                  formikProps={props.formikProps}
+                />
+              )
           )}
       </div>
     </div>
