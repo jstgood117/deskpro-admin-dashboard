@@ -12,6 +12,7 @@ import TicketReferences from './Bespoke/TicketReferences';
 import TicketDeflection from './Bespoke/TicketDeflection';
 import VoiceSettings from './Bespoke/VoiceSettings';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
+import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
 import GeneralSetting from '../components/SettingsForm/GeneralSettings';
 import Tasks from './Bespoke/Tasks';
@@ -33,6 +34,7 @@ export const RouteToPage: KeyValue = {
   '/tickets/deflection': TicketDeflection,
   '/voice/settings': VoiceSettings,
   '/sysadmin/realtime-events': RealTimeEvents,
+  '/interface-defaults': InterfaceDefaults,
   '/agents/logs': ReportFile,
   '/tasks': Tasks,
   '/settings/general': GeneralSetting
