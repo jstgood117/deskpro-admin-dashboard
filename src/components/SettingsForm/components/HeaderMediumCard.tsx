@@ -34,7 +34,7 @@ const HeaderMediumCard: FC<IProps> = ({ title, description }) => {
       <Card>
         <StyledHeader style={{ flexDirection: 'row' }}>
           <div style={{ flex: 6 }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 3 }}>
               <div style={{ width: 30 }}>
                 <Toggle
                   checked={checked}
@@ -44,7 +44,7 @@ const HeaderMediumCard: FC<IProps> = ({ title, description }) => {
                 />
               </div>
               <StyledText
-                style={{ fontSize: 18, paddingLeft: 14 }}
+                style={{ fontSize: 14, paddingLeft: 14, paddingBottom: 5 }}
                 isTitle={true}
               >
                 {title}
