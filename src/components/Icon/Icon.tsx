@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Tooltip from '../Tooltip';
 
 import { ReactComponent as IconSetup } from '../../assets/svg/icons/ic-setup.svg';
 import { ReactComponent as IconChannel } from '../../assets/svg/icons/ic-channel.svg';
@@ -85,6 +84,7 @@ import { ReactComponent as IconLink } from '../../assets/svg/icons/ic-link.svg';
 import { ReactComponent as IconCalendar } from '../../assets/svg/icons/ic-calendar.svg';
 import { ReactComponent as IconExternalLink } from '../../assets/svg/icons/ic-external-link.svg';
 import { ReactComponent as IconHourglass } from '../../assets/svg/icons/hourglass.svg';
+import { ReactComponent as IconKanban } from '../../assets/svg/icons/ic-kanban.svg';
 
 export interface IProps {
   name: string;
@@ -258,11 +258,9 @@ const Icon: FC<IProps> = props => {
       return <IconCalendar />;
     case 'info-text':
       return (
-        <Tooltip content='Info text' styleType='light' placement='bottom'>
-          <StyledIcon>
-            <IconInfoText />
-          </StyledIcon>
-        </Tooltip>
+        <StyledIcon>
+          <IconInfoText />
+        </StyledIcon>
       );
     case 'info-question-text':
       return (
@@ -276,6 +274,8 @@ const Icon: FC<IProps> = props => {
       return <IconExternalLink />;
     case 'hourglass':
       return <IconHourglass />;
+    case 'kanban':
+      return <IconKanban />;
     default:
       return <IconSetup />;
   }
