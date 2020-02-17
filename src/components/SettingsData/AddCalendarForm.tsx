@@ -24,7 +24,7 @@ export const AddCalendarForm = (props: {
     textarea {
       font-family: Lato;
       font-style: normal;
-      font-weight: 600;
+      font-weight: normal;
       font-size: 15px;
       line-height: 150%;
       display: flex;
