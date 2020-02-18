@@ -89,7 +89,7 @@ export const uiSchema: {
                           title: 'Agent Message ',
                           field: {
                             type: 'textarea',
-                            id: 'helpdes_setting_agent_message'
+                            id: 'brand1_helpdes_setting_agent_message'
                           }
                         },
                         {
@@ -98,7 +98,7 @@ export const uiSchema: {
                           className: 'input-filed',
                           field: {
                             type: 'textarea',
-                            id: 'helpdes_setting_user_message'
+                            id: 'brand1_helpdes_setting_user_message'
                           }
                         }
                       ]
@@ -124,7 +124,7 @@ export const uiSchema: {
                           title: 'Agent Message ',
                           field: {
                             type: 'textarea',
-                            id: 'helpdes_setting_agent_message'
+                            id: 'brand2_helpdes_setting_agent_message'
                           }
                         },
                         {
@@ -133,7 +133,7 @@ export const uiSchema: {
                           className: 'input-filed',
                           field: {
                             type: 'textarea',
-                            id: 'helpdes_setting_user_message'
+                            id: 'brand2_helpdes_setting_user_message'
                           }
                         }
                       ]
@@ -159,7 +159,7 @@ export const uiSchema: {
                           title: 'Agent Message ',
                           field: {
                             type: 'textarea',
-                            id: 'helpdes_setting_agent_message'
+                            id: 'brand3_helpdes_setting_agent_message'
                           }
                         },
                         {
@@ -168,7 +168,7 @@ export const uiSchema: {
                           className: 'input-filed',
                           field: {
                             type: 'textarea',
-                            id: 'helpdes_setting_user_message'
+                            id: 'brand3_helpdes_setting_user_message'
                           }
                         }
                       ]
@@ -1420,8 +1420,12 @@ export const jsonSchema = {
   file_upload_unit_option_2: 'MB',
   general_settings_file_uploads_select_1: { value: 'Allow all files', label: 'Allow all files' },
   general_settings_file_uploads_select_2: { value: 'Only allow specific file extensions', label: 'Only allow specific file extensions' },
-  helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand1_helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand1_helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand2_helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand2_helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand3_helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand3_helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
   agent_email_subscriptions: [
     { name: 'Arthur Curry' },
     { name: 'Bruce Wayne' },
@@ -1525,9 +1529,31 @@ export const vaildationSchema = {
       type: 'string',
       format: 'email'
     },
+    brand1_helpdes_setting_agent_message: {
+      type: 'string'
+    },
+    brand1_helpdes_setting_user_message: {
+      type: 'string'
+    },
     brand2_default_email_account: {
       type: 'string',
       format: 'email'
+    },
+    brand2_helpdes_setting_agent_message: {
+      type: 'string'
+    },
+    brand2_helpdes_setting_user_message: {
+      type: 'string'
+    },
+    brand3_default_email_account: {
+      type: 'string',
+      format: 'email'
+    },
+    brand3_helpdes_setting_agent_message: {
+      type: 'string'
+    },
+    brand3_helpdes_setting_user_message: {
+      type: 'string'
     },
     agent_settings_help_center_knowledgebase: {
       type: 'boolean'
