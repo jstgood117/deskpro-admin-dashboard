@@ -2,7 +2,6 @@ import React, { FC, SyntheticEvent } from 'react';
 
 import Checkbox from '../Checkbox';
 import Icon from '../Icon';
-import TableTr from './TableTr';
 import { GroupCaret } from './TableStyles';
 
 export type Props = {
@@ -19,12 +18,9 @@ export type Props = {
 };
 
 const TableTrGroup: FC<Props> = ({
-  indexOuter,
-  page,
   row,
   checked,
   hasActions,
-  prepareRow,
   handleCheckboxChange
 }) => {
   return (
@@ -53,23 +49,6 @@ const TableTrGroup: FC<Props> = ({
         </td>
         <td colSpan={row.cells.length} style={{ backgroundImage: 'none' }} />
       </tr>
-      {row.isExpanded &&
-        Array.from(
-          row.subRows.map((subRow: any, innerIndex: number) => {
-            prepareRow(subRow);
-            return (
-              <TableTr
-                indexOuter={indexOuter}
-                page={page}
-                key={innerIndex}
-                row={subRow}
-                checked={checked}
-                hasActions={hasActions}
-                handleCheckboxChange={handleCheckboxChange}
-              />
-            );
-          })
-        )}
     </React.Fragment>
   );
 };
