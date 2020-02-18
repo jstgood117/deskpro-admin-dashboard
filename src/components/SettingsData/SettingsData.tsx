@@ -33,7 +33,7 @@ const SettingsData: React.FC<IProps> = ({ type, props }) => {
     case 'reference-code-panel':
       return <ReferencePanel />;
     case 'holiday-list':
-      return <HolidayList />;
+      return <HolidayList data={props.data} />;
     case 'add-calendar-form':
       return <AddCalendarForm {...props} />;
     default:

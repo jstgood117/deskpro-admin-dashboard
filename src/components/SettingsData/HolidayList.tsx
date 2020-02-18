@@ -7,47 +7,16 @@ import Drawer from '../Drawer';
 import Input from '../Input';
 import { DrawerFooter, DrawerHeader } from '../Drawer/DrawerStyles';
 
-interface IHolidays {
+export interface IHolidays {
   date: string;
   day: string;
   comment: string;
 }
 
-interface IHolidayList {
+export interface IHolidayList {
   year: number;
   holidays: IHolidays[];
 }
-
-const data: IHolidayList[] = [
-  {
-    year: 2020,
-    holidays: [
-      { date: '1 January', day: 'Wednesday', comment: 'New Years day' },
-      { date: '10 April', day: 'Friday', comment: 'Good Friday' },
-      { date: '13 April', day: 'Monday', comment: 'Easter Monday' },
-      {
-        date: '8 May',
-        day: 'Friday',
-        comment: 'Early May bank holiday(VE day)'
-      },
-      { date: '25 May', day: 'Monday', comment: 'Spring bank holiday' }
-    ]
-  },
-  {
-    year: 2019,
-    holidays: [
-      { date: '1 January', day: 'Wednesday', comment: 'New Years day' },
-      { date: '10 April', day: 'Friday', comment: 'Good Friday' },
-      { date: '13 April', day: 'Monday', comment: 'Easter Monday' },
-      {
-        date: '8 May',
-        day: 'Friday',
-        comment: 'Early May bank holiday(VE day)'
-      },
-      { date: '25 May', day: 'Monday', comment: 'Spring bank holiday' }
-    ]
-  }
-];
 
 const Year = styled(dpstyle.div1)`
   margin-top: 16px;
@@ -118,7 +87,11 @@ const EditFormInputTitle = styled(dpstyle.div1)`
   font-size: 14px;
 `;
 
-export const HolidayList = () => {
+interface IProps {
+  data: IHolidayList[];
+}
+
+export const HolidayList = (props: IProps) => {
   const [openedList, openHolidayList] = useState([]);
   const [isOpened, openDrawer] = useState(false);
   const [date, setDate] = useState('');
@@ -127,7 +100,7 @@ export const HolidayList = () => {
   return (
     <>
       <div>
-        {data.map((property, index) => {
+        {props.data.map((property, index) => {
           const opIndex = openedList.findIndex(
             (option: IHolidayList) => option.year === property.year
           );

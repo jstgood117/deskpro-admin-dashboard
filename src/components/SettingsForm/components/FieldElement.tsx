@@ -133,7 +133,7 @@ const elementsSelector: {
     </Button>
   ),
   addCalendarButton: props => (
-    <SettingsData type='add-calendar-form' props={props}/>
+    <SettingsData type='add-calendar-form' props={props} />
   ),
   profiles: props => (
     <Profiles
@@ -193,8 +193,8 @@ const elementsSelector: {
   referenceFilePanel: () => {
     return <SettingsData type='reference-code-panel' />;
   },
-  holidayList: () => {
-    return <SettingsData type='holiday-list' />;
+  holidayList: props => {
+    return <SettingsData type='holiday-list' props={{ data: props.value }} />;
   },
   settingInfo: props => {
     return (

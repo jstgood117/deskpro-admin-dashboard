@@ -2,6 +2,38 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import SettingsData from './SettingsData';
+import { IHolidayList } from './HolidayList';
+
+const holidayList: IHolidayList[] = [
+  {
+    year: 2020,
+    holidays: [
+      { date: '1 January', day: 'Wednesday', comment: 'New Years day' },
+      { date: '10 April', day: 'Friday', comment: 'Good Friday' },
+      { date: '13 April', day: 'Monday', comment: 'Easter Monday' },
+      {
+        date: '8 May',
+        day: 'Friday',
+        comment: 'Early May bank holiday(VE day)'
+      },
+      { date: '25 May', day: 'Monday', comment: 'Spring bank holiday' }
+    ]
+  },
+  {
+    year: 2019,
+    holidays: [
+      { date: '1 January', day: 'Wednesday', comment: 'New Years day' },
+      { date: '10 April', day: 'Friday', comment: 'Good Friday' },
+      { date: '13 April', day: 'Monday', comment: 'Easter Monday' },
+      {
+        date: '8 May',
+        day: 'Friday',
+        comment: 'Early May bank holiday(VE day)'
+      },
+      { date: '25 May', day: 'Monday', comment: 'Spring bank holiday' }
+    ]
+  }
+];
 
 storiesOf('Settings Data', module)
   .add('header-card', () => (
@@ -34,4 +66,11 @@ storiesOf('Settings Data', module)
       <SettingsData type='reference-code-panel' />
     </div>
   ))
-  .add('holiday-list', () => <SettingsData type='holiday-list' />);
+  .add('holiday-list', () => (
+    <SettingsData
+      type='holiday-list'
+      props={{
+        data: holidayList
+      }}
+    />
+  ));

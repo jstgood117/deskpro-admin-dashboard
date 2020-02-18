@@ -1,4 +1,36 @@
+import { IHolidayList } from './../../SettingsData/HolidayList';
 import { API_SettingsUiElement } from '../../../codegen/types';
+
+const data: IHolidayList[] = [
+  {
+    year: 2020,
+    holidays: [
+      { date: '1 January', day: 'Wednesday', comment: 'New Years day' },
+      { date: '10 April', day: 'Friday', comment: 'Good Friday' },
+      { date: '13 April', day: 'Monday', comment: 'Easter Monday' },
+      {
+        date: '8 May',
+        day: 'Friday',
+        comment: 'Early May bank holiday(VE day)'
+      },
+      { date: '25 May', day: 'Monday', comment: 'Spring bank holiday' }
+    ]
+  },
+  {
+    year: 2019,
+    holidays: [
+      { date: '1 January', day: 'Wednesday', comment: 'New Years day' },
+      { date: '10 April', day: 'Friday', comment: 'Good Friday' },
+      { date: '13 April', day: 'Monday', comment: 'Easter Monday' },
+      {
+        date: '8 May',
+        day: 'Friday',
+        comment: 'Early May bank holiday(VE day)'
+      },
+      { date: '25 May', day: 'Monday', comment: 'Spring bank holiday' }
+    ]
+  }
+];
 
 export const uiSchema: {
   elements: API_SettingsUiElement & { type: string }[];
@@ -309,7 +341,8 @@ export const uiSchema: {
                   className: 'holidays',
                   field: {
                     type: 'holidayList',
-                    title: 'Synced calendars'
+                    title: 'Synced calendars',
+                    value: data
                   }
                 }
               ]
