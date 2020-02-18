@@ -19,10 +19,12 @@ storiesOf('StringListSelector', module)
     const [items, setItems] = useState(values);
 
     return (
-      <StringListSelector
-        description=''
-        items={items}
-        onSelect={newItems => setItems(newItems)}
-      />
+      <div style={{ width: '376px' }} >
+        <StringListSelector
+          description=''
+          items={items}
+          onSelect={newItems => setItems(newItems)}
+        />
+      </div>
     );
   });
