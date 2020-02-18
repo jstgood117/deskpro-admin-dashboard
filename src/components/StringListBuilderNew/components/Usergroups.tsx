@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import Button from '../../Button';
@@ -22,6 +22,7 @@ export interface Items {
 
 interface IProps {
   id: string;
+  open: boolean;
   title: string;
   options: string[];
   selectedOptions: string[];
@@ -31,6 +32,7 @@ interface IProps {
 
 const Usergroups: FC<IProps> = ({
   id,
+  open,
   title,
   options,
   selectedOptions,
@@ -45,8 +47,13 @@ const Usergroups: FC<IProps> = ({
       selected: selectedOptions && selectedOptions.includes(option),
     }));
 
-  const initialItems = getInitialItems();
-  const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState(getInitialItems());
+
+  useEffect(() => {
+    if (open) {
+      setItems(getInitialItems());
+    }
+  }, [open]);
 
   const onSelect = (newItems: Items[]) => {
     setItems(newItems);

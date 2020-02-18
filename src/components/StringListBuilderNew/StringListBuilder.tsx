@@ -133,7 +133,8 @@ const StringListBuilder: React.FC<IProps> = ({
     setOpen(false);
   };
 
-  const canAdd = !selectedOptions || options.length > selectedOptions.length;
+  // if all usergroups have been added, make button disable.
+  const enabled = !selectedOptions || options.length > selectedOptions.length;
 
   return (
     <StringListContainer>
@@ -164,11 +165,11 @@ const StringListBuilder: React.FC<IProps> = ({
               content={tooltip}
               styleType='dark'
               placement='bottom'
-              enabled={!canAdd && !!tooltip}
+              enabled={!enabled && !!tooltip}
             >
               <span>
                 <Button
-                  disabled={!canAdd}
+                  disabled={!enabled}
                   className='add-button'
                   onClick={onAddClick}
                   buttonType='button'
@@ -186,6 +187,7 @@ const StringListBuilder: React.FC<IProps> = ({
       <Drawer open={open} onClose={closeDrawer}>
         <Usergroups
           id={id}
+          open={open}
           title={title}
           options={options}
           selectedOptions={selectedOptions}

@@ -27,7 +27,7 @@ const SelectorRowStyled = styled.div`
 
 interface IProps {
   item: Items;
-  onSelect: (item: any) => void;
+  onSelect: () => void;
 }
 
 const StringListSelectorRow: FC<IProps> = ({ item, onSelect }) => (

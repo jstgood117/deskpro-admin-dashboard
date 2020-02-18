@@ -165,7 +165,7 @@ const StringListSelector: FC<IProps & WrappedComponentProps> = ({
             <StringListSelectorRow
               key={index}
               item={item}
-              onSelect={(id: number) => onItemClick(item.id)}
+              onSelect={() => onItemClick(item.id)}
             />
           ))}
         </SelectorList>
