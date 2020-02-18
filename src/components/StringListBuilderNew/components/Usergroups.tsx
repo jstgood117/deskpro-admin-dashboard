@@ -53,6 +53,7 @@ const Usergroups: FC<IProps> = ({
     if (open) {
       setItems(getInitialItems());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const onSelect = (newItems: Items[]) => {
