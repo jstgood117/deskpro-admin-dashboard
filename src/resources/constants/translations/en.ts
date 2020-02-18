@@ -51,6 +51,10 @@ export const testTranslations = {
   'admin.agentselector.restricted':
     'You cannot remove this agent as they belong to a selected permission group',
 
+  'admin.stringlistselector.select-all': 'Select all',
+  'admin.stringlistselector.selected': 'Selected',
+  'admin.stringlistselector.search': 'Search',
+
   'admin.page.error': 'Something has gone wrong',
   'admin.page.loading': 'Loading',
   'admin.page.new': 'New',
@@ -128,8 +132,9 @@ export const testTranslations = {
   'validation.required': 'This field is required.',
   'validation.numberNotValid': 'A number is required for this field',
   'validation.emailNotValid': 'Email is not valid.',
-  'validation.tooShortPassword': 'Password is too short - should be 8 chars minimum.',
+  'validation.tooShortPassword':
+    'Password is too short - should be 8 chars minimum.',
   'validation.passwordLetter': 'Password can only contain Latin letters.',
 
-  'agent.settings.security_whitelist': 'Must be in the format of 192.168.2.1'
+  'agent.settings.security_whitelist': 'Must be in the format of 192.168.2.1',
 };
