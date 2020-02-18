@@ -2,6 +2,7 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
+import unfetch from 'unfetch';
 
 import { appDebug } from './logging';
 
@@ -29,7 +30,10 @@ export const AppWrap = () => {
     introspectionQueryResultData: introspectionResult
   });
 
-  const link = createHttpLink({ uri: apiUrl });
+  const link = createHttpLink({
+    uri: apiUrl,
+    fetch: unfetch
+  });
   const client = new ApolloClient({
     cache: new InMemoryCache({
       fragmentMatcher
