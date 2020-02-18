@@ -16,7 +16,7 @@ export const OverlayStyled = styled.div<{ open: boolean }>`
 `;
 
 export const DrawerStyled = styled.div<{ open: boolean }> `
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
