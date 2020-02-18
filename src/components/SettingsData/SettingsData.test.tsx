@@ -20,7 +20,17 @@ describe('SettingsData-HolidayList', () => {
 
   beforeEach(() => {
     props = {
-      type: 'holiday-list'
+      type: 'holiday-list',
+      props: {
+        data: [
+          {
+            year: 2020,
+            holidays: [
+              { date: '1 January', day: 'Wednesday', comment: 'New Years day' }
+            ]
+          }
+        ]
+      }
     };
   });
   it('always renders a <div>', () => {
