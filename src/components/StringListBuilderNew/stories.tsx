@@ -6,12 +6,12 @@ import { Formik } from 'formik';
 import StringListBuilder from './StringListBuilder';
 
 const options = [
-  'Usergroup 5',
-  'Usergroup 6',
   'Extra Privileged',
   'General Users',
   'Registered',
   'VIP',
+  'Usergroup 5',
+  'Usergroup 6',
   'Usergroup 7',
   'Usergroup 8',
 ];

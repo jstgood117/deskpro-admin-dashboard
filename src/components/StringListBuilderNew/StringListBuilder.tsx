@@ -109,6 +109,7 @@ interface IProps {
   options: string[];
   selectedOptions?: string[];
   tooltip?: string;
+  formType?: string;
   formikProps: any;
 }
 
@@ -131,6 +132,26 @@ const StringListBuilder: React.FC<IProps> = ({
 
   const closeDrawer = () => {
     setOpen(false);
+  };
+
+  const getDrawerChildComponent = (formType: string) => {
+
+    switch (formType) {
+      case 'Usergroups':
+        return (
+          <Usergroups
+            id={id}
+            open={open}
+            title={title}
+            options={options}
+            selectedOptions={selectedOptions}
+            onCancel={closeDrawer}
+            formikProps={formikProps}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   // if all usergroups have been added, make button disable.
@@ -185,15 +206,7 @@ const StringListBuilder: React.FC<IProps> = ({
       />
 
       <Drawer open={open} onClose={closeDrawer}>
-        <Usergroups
-          id={id}
-          open={open}
-          title={title}
-          options={options}
-          selectedOptions={selectedOptions}
-          onCancel={closeDrawer}
-          formikProps={formikProps}
-        />
+        {getDrawerChildComponent(title)}
       </Drawer>
     </StringListContainer>
   );
