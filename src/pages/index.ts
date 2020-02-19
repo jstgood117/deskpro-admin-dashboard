@@ -15,6 +15,7 @@ import RealTimeEvents from './Bespoke/RealTimeEvents';
 import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
 import Tasks from './Bespoke/Tasks';
+import BusinessHours from './Bespoke/BusinessHours';
 
 import { KeyValue } from '../types';
 
@@ -35,5 +36,6 @@ export const RouteToPage: KeyValue = {
   '/sysadmin/realtime-events': RealTimeEvents,
   '/interface-defaults': InterfaceDefaults,
   '/agents/logs': ReportFile,
-  '/tasks': Tasks
+  '/tasks': Tasks,
+  '/settings/business-hours': BusinessHours
 };
