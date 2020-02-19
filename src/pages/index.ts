@@ -16,6 +16,7 @@ import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
 import Tasks from './Bespoke/Tasks';
 import BusinessHours from './Bespoke/BusinessHours';
+import Elastic from './Bespoke/Elastic';
 
 import { KeyValue } from '../types';
 
@@ -37,5 +38,6 @@ export const RouteToPage: KeyValue = {
   '/interface-defaults': InterfaceDefaults,
   '/agents/logs': ReportFile,
   '/tasks': Tasks,
-  '/settings/business-hours': BusinessHours
+  '/settings/business-hours': BusinessHours,
+  '/sysadmin/elastic': Elastic
 };

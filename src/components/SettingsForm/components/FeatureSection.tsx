@@ -6,6 +6,7 @@ import Icon from '../../Icon';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
 import HeaderCard from './HeaderCard';
+import ElasticsearchCard from './ElasticsearchCard';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -33,13 +34,13 @@ export const FeatureSectionStyled = styled.div`
     font-weight: 500;
     font-size: 14px;
     line-height: 150%;
-    color: #4C4F50;
+    color: #4c4f50;
     text-align: left;
     cursor: pointer;
   }
 
   .description {
-    color: #8B9293;
+    color: #8b9293;
     font-family: Rubik;
     font-style: normal;
     font-weight: normal;
@@ -57,7 +58,7 @@ export const FeatureSectionStyled = styled.div`
       font-weight: 500;
       font-size: 13px;
       line-height: 150%;
-      color: #3A8DDE;
+      color: #3a8dde;
       background: url(/images/vector.png) no-repeat left;
       padding-left: 20px;
       margin-left: 8px;
@@ -79,7 +80,7 @@ export const FeatureSectionStyled = styled.div`
       margin: 0;
     }
     code {
-      background: #EBE4F2;
+      background: #ebe4f2;
       border-radius: 4px;
       padding: 4px 10px;
       font-family: Source Code Pro;
@@ -87,7 +88,7 @@ export const FeatureSectionStyled = styled.div`
       font-weight: 600;
       font-size: 12px;
       line-height: 150%;
-      color: #7A56DE;
+      color: #7a56de;
     }
   }
 
@@ -140,7 +141,7 @@ export const FeatureSectionStyled = styled.div`
     &::after {
       position: absolute;
       background-color: #eff0f0;
-      content: " ";
+      content: ' ';
       display: inline-block;
       width: 974px;
       height: 1px;
@@ -238,7 +239,6 @@ export const FeatureSectionStyled = styled.div`
       margin-top: -6px;
       margin-bottom: 0;
       .element-info-link {
-
       }
     }
   }
@@ -269,7 +269,7 @@ export const FeatureSectionStyled = styled.div`
     font-family: Rubik;
     min-width: 280px;
     font-size: 12px;
-    transform: translate(-20px,2px);
+    transform: translate(-20px, 2px);
   }
 
   & div.group-articles > p {
@@ -344,8 +344,9 @@ const FeatureSection: React.FC<Props> = ({
             <span style={{ marginRight: 20 }}>{title}</span>
             {icon && <Icon name={icon} />}
           </div>
-          {header ? (
-            <HeaderCard {...header} formikProps={formikProps} />
+          {header && header.card === 'HeaderCard' ? <HeaderCard {...header} formikProps={formikProps} /> : null}
+          {header && header.card === 'ElasticsearchCard' ? (
+            <ElasticsearchCard {...header} formikProps={formikProps} />
           ) : null}
           {brandButtonGroup && (
             <div style={{ margin: '8px 0 8px 0' }}>
@@ -360,28 +361,28 @@ const FeatureSection: React.FC<Props> = ({
           )}
         </h1>
       ) : (
-          <div className='feature-section-select'>
-            {field && (
-              <SingleSelect
-                options={field.options}
-                type={field.selectType}
-                selectedOption={field.options[0]}
-                selectOption={() => null}
+        <div className='feature-section-select'>
+          {field && (
+            <SingleSelect
+              options={field.options}
+              type={field.selectType}
+              selectedOption={field.options[0]}
+              selectOption={() => null}
+            />
+          )}
+          {brandButtonGroup && (
+            <div style={{ margin: '8px 0 8px 0' }}>
+              <BrandButtonGroup
+                size='medium'
+                selectBtn={(val: string) => {
+                  selectBtn(val);
+                }}
+                selected={selected}
               />
-            )}
-            {brandButtonGroup && (
-              <div style={{ margin: '8px 0 8px 0' }}>
-                <BrandButtonGroup
-                  size='medium'
-                  selectBtn={(val: string) => {
-                    selectBtn(val);
-                  }}
-                  selected={selected}
-                />
-              </div>
-            )}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
+      )}
 
       <FeatureSectionContext.Provider value={{ prefixName: selected }}>
         {enabled &&
