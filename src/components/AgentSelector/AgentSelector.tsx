@@ -96,6 +96,7 @@ const SelectorFooter = styled.div`
   }
 
   .btn-cancel button {
+    width: 88px;
     color: ${props => props.theme.activeColour};
     background-color: ${props => props.theme.textHover};
     border: 1px solid ${props => props.theme.activeColour};
