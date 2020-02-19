@@ -1,22 +1,28 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Avatar from '../Avatar';
 import { getColorByChar } from '../../utils/getRandomColor';
 import Button from '../Button';
 import Icon from '../Icon';
+import Drawer from '../Drawer';
 
-interface IProfile {
-  avatarUrn: string;
-}
+import AgentSelector from '../AgentSelector';
 
 interface IProps {
   editable?: boolean;
   emptyText?: string;
   onEditClick?: () => void;
   profiles?: {
+    id: string;
     name: string;
-    avatarUrn?: string;
+    avatar?: string;
   }[];
+  selected?: {
+    [id: string]: boolean;
+  };
+  restricted?: {
+    [id: string]: true;
+  };
   max?: number;
   title: string;
 }
@@ -92,51 +98,89 @@ const Profiles: React.FC<IProps> = ({
   onEditClick,
   max,
   profiles,
+  selected,
+  restricted,
   title
-}) => (
-  <ProfilesContainer>
-    <ProfilesTitle>
-      {title}
-      {!!profiles.length && (
-        <ProfileTitleNotice>
-          ({profiles.length}
-          {max && ` of ${max}`})
+}) => {
+
+  const [open, setOpen] = useState(false);
+  const [selectedAgents, setSelectedAgents] = useState(selected);
+
+  const handleEditClick = () => {
+    setOpen(true);
+    onEditClick();
+  };
+
+  const closeDrawer = () => {
+    setOpen(false);
+  };
+
+  const onSaveClick = () => {
+    setOpen(false);
+  };
+
+  const onCancelClick = () => {
+    setOpen(false);
+  };
+
+  return (
+    <ProfilesContainer>
+      <ProfilesTitle>
+        {title}
+        {!!profiles.length && (
+          <ProfileTitleNotice>
+            ({profiles.length}
+            {max && ` of ${max}`})
         </ProfileTitleNotice>
-      )}
-    </ProfilesTitle>
-    <ProfilesContent>
-      {!(profiles && profiles.length) && (
-        <ProfileMoreNotice>{emptyText || 'No profiles'}</ProfileMoreNotice>
-      )}
-      {profiles &&
-        profiles.slice(0, 6).map((profile, index) => {
-          const colors = getColorByChar(profile.name[0]);
-          return (
-            <ProfileAvatar key={index}>
-              <Avatar
-                content={profile.avatarUrn || profile.name}
-                textBackgroundColor={colors.background}
-                textColor={colors.textColor}
-                size={36}
-                textSize={32}
-                type={profile.avatarUrn ? 'image' : 'text'}
-              />
-            </ProfileAvatar>
-          );
-        })}
-      {profiles && profiles.length > 6 && (
-        <ProfileMoreNotice>+ {profiles.length - 6}</ProfileMoreNotice>
-      )}
-      {editable && onEditClick && (
-        <ProfileEditButton>
-          <Button onClick={onEditClick} styleType='secondary'>
-            <Icon name='pencil' />
-            Edit
+        )}
+      </ProfilesTitle>
+      <ProfilesContent>
+        {!(profiles && profiles.length) && (
+          <ProfileMoreNotice>{emptyText || 'No profiles'}</ProfileMoreNotice>
+        )}
+        {profiles &&
+          profiles.slice(0, 6).map((profile, index) => {
+            const colors = getColorByChar(profile.name[0]);
+            return (
+              <ProfileAvatar key={index}>
+                <Avatar
+                  content={profile.avatar || profile.name}
+                  textBackgroundColor={colors.background}
+                  textColor={colors.textColor}
+                  size={36}
+                  textSize={32}
+                  type={profile.avatar ? 'image' : 'text'}
+                />
+              </ProfileAvatar>
+            );
+          })}
+        {profiles && profiles.length > 6 && (
+          <ProfileMoreNotice>+ {profiles.length - 6}</ProfileMoreNotice>
+        )}
+        {editable && onEditClick && (
+          <ProfileEditButton>
+            <Button onClick={handleEditClick} styleType='secondary'>
+              <Icon name='pencil' />
+              Edit
           </Button>
-        </ProfileEditButton>
-      )}
-    </ProfilesContent>
-  </ProfilesContainer>
-);
+          </ProfileEditButton>
+        )}
+      </ProfilesContent>
+
+      <Drawer open={open} onClose={closeDrawer}>
+        <AgentSelector
+          agents={profiles}
+          restricted={restricted}
+          description='Select agents to enable keyboard shortcut. Incomplete info.'
+          title='Agent selector'
+          selected={selectedAgents}
+          onSelect={setSelectedAgents}
+          onSave={onSaveClick}
+          onCancel={onCancelClick}
+        />
+      </Drawer>
+    </ProfilesContainer>
+  );
+};
 
 export default Profiles;
