@@ -17,7 +17,10 @@ describe('treeify',() => {
         'title':'Awaiting Agent',
         'display_order':-6,
         'effective_display_order':0,
-        'subRows':[]
+        'subRows':[],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       },
       {
         'id':'awaiting_user',
@@ -28,7 +31,10 @@ describe('treeify',() => {
         'title':'Awaiting User',
         'display_order':-5,
         'effective_display_order':1,
-        'subRows':[]
+        'subRows':[],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       },
       {
         'id':'pending',
@@ -39,7 +45,10 @@ describe('treeify',() => {
         'title':'Pending',
         'display_order':-4,
         'effective_display_order':2,
-        'subRows':[]
+        'subRows':[],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       },
       {
         'id':'resolved',
@@ -50,7 +59,10 @@ describe('treeify',() => {
         'title':'Resolved',
         'display_order':-3,
         'effective_display_order':3,
-        'subRows':[]
+        'subRows':[],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       },
       {
         'id':'archived',
@@ -61,7 +73,10 @@ describe('treeify',() => {
         'title':'Archived',
         'display_order':-2,
         'effective_display_order':4,
-        'subRows':[]
+        'subRows':[],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       },
       {
         'id':'hidden',
@@ -84,7 +99,10 @@ describe('treeify',() => {
             'title':'Deleted',
             'display_order':0,
             'effective_display_order':6,
-            'subRows':[]
+            'subRows':[],
+            'agent_teams': [{'name': 'Team 1'}],
+            'agent_groups': [{'title': 'All Permissions'}],
+            'departments': [{'title': 'Widgets'}],
           },
           {
             'id':'hidden.2',
@@ -97,9 +115,15 @@ describe('treeify',() => {
             'title':'Spam',
             'display_order':0,
             'effective_display_order':7,
-            'subRows':[]
+            'subRows':[],
+            'agent_teams': [{'name': 'Team 1'}],
+            'agent_groups': [{'title': 'All Permissions'}],
+            'departments': [{'title': 'Widgets'}],
           }
-        ]
+        ],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       }
     ]);
   });
@@ -145,7 +169,10 @@ describe('treeify',() => {
             'effective_display_order':7,
             'custom_children':[]
           }
-        ]
+        ],
+        'agent_teams': ['Team 1'],
+        'agent_groups': ['All Permissions'],
+        'departments': ['Widgets'],
       }
     ]);
   });
