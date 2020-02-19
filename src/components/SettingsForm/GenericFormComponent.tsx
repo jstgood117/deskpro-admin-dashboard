@@ -6,6 +6,7 @@ import FeatureSection from './components/FeatureSection';
 import PageSection from './components/PageSection';
 import ElementGroup from './components/ElementGroup';
 import VertElementGroup from './components/VertElementGroup';
+import InlineEditGroup from './components/InlineEditGroup';
 import HorizontalElementGroup from './components/HorizontalElementGroup';
 import AlertSection from './components/AlertSection';
 import SettingsData from './components/SettingsData';
@@ -29,6 +30,8 @@ export const GenericFormComponent = (props: any) => {
       return <PageSection {...props} />;
     case 'group':
       return <ElementGroup {...props} />;
+    case 'inline_edit_group':
+      return <InlineEditGroup {...props} />;
     case 'vertical_group':
       return <VertElementGroup {...props} />;
     case 'horizontal_group':

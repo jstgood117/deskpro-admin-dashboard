@@ -48,11 +48,11 @@ describe('StringListBuilder', () => {
         name: 'test'
       }
     });
-    expect(root.find('.string-row span').length).toEqual(2);
+    expect(root.find('.string-row div').length).toEqual(4);
     await act(async () => {
       root
-      .find('.string-row span')
-      .first()
+      .find('.string-row div')
+      .at(1)
       .simulate('click');
     });
     expect(mockValidate).toBeCalled();
