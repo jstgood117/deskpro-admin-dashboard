@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const ButtonToolbar = styled.div`
-  position: absolute;
+  position: sticky;
   left: 0;
   bottom: 0;
   right: 0;
@@ -29,7 +29,9 @@ const ButtonToolbar = styled.div`
   justify-content: flex-start;
   min-height: 70px;
   padding-left: 346px;
+  background-color: ${props => props.theme.white};
   border-top: 1px solid #d2d8dd;
+
   button {
     display: flex;
     flex-direction: row;
@@ -42,6 +44,11 @@ const ButtonToolbar = styled.div`
     font-family: Rubik;
     font-size: 13px;
     line-height: 150%;
+  }
+
+  .btn-primary button {
+    background-color: #1c3e55;
+    color: white;
   }
 
   .btn-secondary button {

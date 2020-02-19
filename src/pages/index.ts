@@ -1,4 +1,5 @@
 import AgentsSettings from './Agents/Settings';
+import AuthSSO from './Agents/AuthSSO';
 import ExamplePage from './Bespoke/Example';
 import ResetHelpdesk from './Bespoke/ResetHelpdesk';
 import ImporterPage from './Bespoke/Importer';
@@ -11,12 +12,15 @@ import TicketReferences from './Bespoke/TicketReferences';
 import TicketDeflection from './Bespoke/TicketDeflection';
 import VoiceSettings from './Bespoke/VoiceSettings';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
+import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
 import Tasks from './Bespoke/Tasks';
+import BusinessHours from './Bespoke/BusinessHours';
 
 import { KeyValue } from '../types';
 
 export const RouteToPage: KeyValue = {
+  '/agents/auth/settings': AuthSSO,
   '/agents/settings': AgentsSettings,
   '/sysadmin/settings': ExamplePage,
   '/help-center/kb/settings': ResetHelpdesk,
@@ -30,6 +34,8 @@ export const RouteToPage: KeyValue = {
   '/tickets/deflection': TicketDeflection,
   '/voice/settings': VoiceSettings,
   '/sysadmin/realtime-events': RealTimeEvents,
+  '/interface-defaults': InterfaceDefaults,
   '/agents/logs': ReportFile,
-  '/tasks': Tasks
+  '/tasks': Tasks,
+  '/settings/business-hours': BusinessHours
 };

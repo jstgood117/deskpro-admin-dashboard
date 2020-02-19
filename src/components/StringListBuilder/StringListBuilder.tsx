@@ -38,6 +38,8 @@ const StringListContainer = styled.div`
     color: ${props => props.theme.static2Colour};
   }
   & .string-row {
+    display: flex;
+    align-items: center;
     position: relative;
     border-radius: 6px;
     height: 32px;
@@ -46,11 +48,16 @@ const StringListContainer = styled.div`
     font-weight: normal;
     font-size: 14px;
     line-height: 32px;
-    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     color: ${props => props.theme.staticColour};
     padding: 0 8px;
+    & .content-text {
+      width: 100%;
+    }
+    & .content-icon {
+      width: 24px;
+    }
   }
   & .string-row:hover {
     background: ${props => `${props.theme.textHover}99`};
@@ -70,15 +77,20 @@ const StringListContainer = styled.div`
     display: none;
   }
   & .string-row:hover svg {
-    display: block;
+    display: flex;
+    margin: auto;
     cursor: pointer;
-    position: absolute;
     padding: 4px;
     background: ${props => props.theme.white};
     border: ${props => `1px solid ${props.theme.greyLight}`};
     border-radius: 3px;
-    right: 8px;
-    top: 4px;
+    &:hover {
+      border: ${props => `1px solid ${props.theme.activeColour}`};
+      background: ${props => props.theme.hoverColour};
+      path {
+        fill: ${props => props.theme.activeColour};
+      }
+    }
   }
   & .add-button {
     justify-content: center;
@@ -101,6 +113,7 @@ interface IProps {
   max?: number;
   title?: string;
   values: string[];
+  className?: string;
 }
 
 const handleAddItem = (
@@ -129,7 +142,8 @@ const StringListBuilder: React.FC<IProps> = ({
   max,
   name,
   title,
-  values
+  values,
+  ...props
 }) => {
   // Flag that mentioned that new item was added but not saved yet
   const [inAdd, setInAdd] = React.useState(false);
@@ -148,7 +162,7 @@ const StringListBuilder: React.FC<IProps> = ({
   );
 
   return (
-    <StringListContainer>
+    <StringListContainer className={props.className}>
       <div className='title-container'>
         {title || ' '}
         <span className='string-list-count'>

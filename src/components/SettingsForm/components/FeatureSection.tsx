@@ -13,6 +13,7 @@ export const FeatureSectionStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 974px;
+  min-height: calc(100vh - 70px);
 
   .header-card {
     height: 166px;
@@ -298,7 +299,7 @@ export const FeatureSectionStyled = styled.div`
     padding-left: 24px;
 
     .element-info {
-      margin-left: 12px;
+      margin-left: 121px;
       margin-top: -6px;
       margin-bottom: 24px;
     }
