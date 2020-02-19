@@ -19,27 +19,9 @@ describe('getValueFromColumnType', () => {
     can_admin: true,
     can_reports: false,
     date_last_login: '2020-01-22 05:27:14',
-    agent_teams: [{
-      id:2,
-      title:'Team 1'
-    },{
-      id:5,
-      title:'Team 2'
-    }],
-    agent_groups: [{
-      id:3,
-      title:'Group 1'
-    }, {
-      id:6,
-      title:'Group 2'
-    }],
-    departments:[{
-      id:4,
-      title:'Department 1'
-    }, {
-      id:7,
-      title:'Department 2'
-    }],
+    agent_teams: ['Team 1','Team 2'],
+    agent_groups: ['Group 1','Group 2'],
+    departments:['Department 1','Department 2'],
     timezone: 'Asia/Kolkata',
     date_created: '2020-01-22 01:29:43',
     tickets: 154,
