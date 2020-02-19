@@ -9,6 +9,11 @@ import UserGroupSelectorRow from './UserGroupSelectorRow';
 import { dpstyle } from '../Styled';
 
 const SelectorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
   & input {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -40,6 +45,10 @@ const SelectorInfo = styled(dpstyle.div1)`
   & button {
     font-family: Rubik;
     font-size: 13px;
+  }
+
+  :nth-child(1) {
+    margin-top: 0px;
   }
 `;
 

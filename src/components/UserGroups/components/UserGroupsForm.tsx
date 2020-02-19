@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from 'react';
-import styled from 'styled-components';
 
 import Button from '../../Button';
 import {
@@ -8,11 +7,6 @@ import {
   DrawerFooter
 } from '../../Drawer/DrawerStyles';
 import UserGroupSelector from '../../UserGroupSelector';
-
-const FormContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 export interface Items {
   id: number;
@@ -53,7 +47,7 @@ const UserGroupsForm: FC<IProps> = ({
     if (open) {
       setItems(getInitialItems());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const onSelect = (newItems: Items[]) => {
@@ -74,15 +68,13 @@ const UserGroupsForm: FC<IProps> = ({
   return (
     <div>
       <DrawerHeader>
-        Usergroups
+        {title}
       </DrawerHeader>
       <DrawerBody>
-        <FormContainer>
-          <UserGroupSelector
-            items={items}
-            onSelect={newItems => onSelect(newItems)}
-          />
-        </FormContainer>
+        <UserGroupSelector
+          items={items}
+          onSelect={newItems => onSelect(newItems)}
+        />
       </DrawerBody>
       <DrawerFooter>
         <Button
