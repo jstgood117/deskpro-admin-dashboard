@@ -1,4 +1,5 @@
 import AgentsSettings from './Agents/Settings';
+import AuthSSO from './Agents/AuthSSO';
 import ExamplePage from './Bespoke/Example';
 import ResetHelpdesk from './Bespoke/ResetHelpdesk';
 import ImporterPage from './Bespoke/Importer';
@@ -18,6 +19,7 @@ import Tasks from './Bespoke/Tasks';
 import { KeyValue } from '../types';
 
 export const RouteToPage: KeyValue = {
+  '/agents/auth/settings': AuthSSO,
   '/agents/settings': AgentsSettings,
   '/sysadmin/settings': ExamplePage,
   '/help-center/kb/settings': ResetHelpdesk,
