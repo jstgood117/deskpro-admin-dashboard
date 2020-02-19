@@ -53,8 +53,7 @@ export const selectStyles = {
     position: 'unset',
     overflow: 'unset',
     textOverflow: 'unset',
-    transform: 'none',
-    marginRight: '20px'
+    transform: 'none'
   }),
   multiValue: (styles: any) => ({
     ...styles,
@@ -107,7 +106,7 @@ export const StyledSelect = styled(dpstyle.div)`
   }
   .select__control {
     min-height: 34px;
-    min-width: 160px;
+    min-width: 104px;
     .select__indicators {
       padding-right: 12px;
       padding-left: 12px;

@@ -10,7 +10,8 @@ import SingleSelect from '../SelectComponents/SingleSelect';
 const UnitsContainer = styled.div`
   display: flex;
   .textbox {
-    width: 88px;
+    width: 120px;
+    min-width: 120px;
   }
   .selectbox {
     min-width: 104px;

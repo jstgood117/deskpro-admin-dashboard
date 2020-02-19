@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { dpstyle } from '../Styled';
 
 export const OverlayStyled = styled.div<{ open: boolean }>`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -46,7 +46,7 @@ export const StyledClose = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 33px;
   right: 32px;
   width: 24px;

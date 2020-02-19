@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import BgImg from '../../assets/background/progress-vector.png';
 export interface IProps {
   label?: string;
   percentage: number;
@@ -33,8 +32,29 @@ const InnerDiv = styled.div<{ percentage: number }>`
   width: ${props => props.percentage}%;
   height: 16px;
   position: relative;
-  background-image: url(${BgImg});
   transition: 0.25s;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(58, 141, 222, .2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(58, 141, 222, .2) 50%,
+    rgba(58, 141, 222, .2) 75%,
+    transparent 75%,
+    transparent
+  );
+  @keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 40px 40px;
+    }
+  }
+  background-size: 40px 40px;
+  animation: move 2s linear infinite;
+  overflow: hidden;
+}
 `;
 
 const percentageLimit = (min: number, value: number, max: number) => {
