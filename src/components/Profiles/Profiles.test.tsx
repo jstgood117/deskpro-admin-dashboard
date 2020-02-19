@@ -1,48 +1,62 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { Formik } from 'formik';
+import { mount } from '../../test/enzyme';
 
-import Profiles from './index';
+import Profiles from './Profiles';
 
-import { mount, shallow } from '../../test/enzyme';
-import { WrapperType } from '../../test/types';
+const profiles = [
+  { id: 'agent1', name: 'agent 1' },
+  { id: 'agent2', name: 'agent 2' },
+  { id: 'agent3', name: 'agent 2' }
+];
+
+const selected = {
+  agent1: true,
+  agent2: true
+};
+
+jest.mock('react-dom', () => ({
+  createPortal: (node: ReactNode) => node
+}));
 
 describe('Profiles', () => {
-  const wrapper = (bShallow: boolean, props: any): WrapperType => {
-    if (bShallow) {
-      return shallow(<Profiles {...props} />);
-    }
 
-    return mount(<Profiles {...props} />);
+  let mountedProfiles: any;
+
+  const wrapper = () => {
+    if (!mountedProfiles) {
+      mountedProfiles = mount(
+        <Formik
+          initialValues={{
+            profiles,
+            selected,
+          }}
+          validate={() => { }}
+          onSubmit={() => { }}
+        >
+          {formikProps => (
+            <Profiles
+              editable={true}
+              onEditClick={() => { }}
+              profiles={formikProps.values.profiles}
+              selected={formikProps.values['selected']}
+              title='Agents'
+              formikProps={formikProps}
+            />
+          )}
+        </Formik>
+      );
+    }
+    return mountedProfiles;
   };
 
-  it('should generate edit button once both `editable` and `onEditClick` passed', () => {
-    const onEditClick = jest.fn();
-    const root = wrapper(false, {
-      editable: true,
-      onEditClick,
-      profiles: [],
-      title: 'test'
-    });
-    expect(root.find('button').length).toEqual(1);
-
-    root.find('button').simulate('click');
-    expect(onEditClick).toBeCalledTimes(1);
+  it('renders a <div> root', () => {
+    const root = wrapper();
+    expect(root.length).toEqual(1);
   });
 
-  it('should generate no edit button', () => {
-    const root = wrapper(false, {
-      profiles: [],
-      title: 'test'
-    });
-    expect(root.find('button').length).toEqual(0);
-  });
-
-  it('should generate not more than 6 avatars', () => {
-    const root = wrapper(false, {
-      profiles: Array.from(Array(20), () => ({
-        name: 'test',
-        avatarUrn: 'test'
-      }))
-    });
-    expect(root.find('img').length).toEqual(6);
+  it('should generate 4 buttons', () => {
+    const root = wrapper();
+    expect(root.find('button').length).toEqual(4);
   });
 });
