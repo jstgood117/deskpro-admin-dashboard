@@ -99,6 +99,8 @@ interface InlineProps {
   label: string;
   title: string;
   isBold?: boolean;
+  option?: string;
+  placeholder?: string;
 }
 
 const InlineEdit: FC<IProps> = (
@@ -123,7 +125,7 @@ const InlineEdit: FC<IProps> = (
         <FieldElement {...field} formikProps={formikProps} />
         <StyledEditBox editing={editing}>
           <Fragment>
-            {inline.map(({type, label, id, isBold, title}: InlineProps, key: number) => {
+            {inline.map(({type, label, id, isBold, title, option = 'number', placeholder= 'Placeholder'}: InlineProps, key: number) => {
               return (
                 <Fragment key={key}>
                   {type === 'field' && <StyledTitle>{title}</StyledTitle>}
@@ -134,8 +136,8 @@ const InlineEdit: FC<IProps> = (
                       &nbsp;
                       <Input
                         value={formikProps.values[id]}
-                        placeholder='Placeholder'
-                        type='number'
+                        placeholder={placeholder}
+                        type={option}
                         onChange={event => {
                           formikProps.setFieldValue(id, event.target.value);
                         }}

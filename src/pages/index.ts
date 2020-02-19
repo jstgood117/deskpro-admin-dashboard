@@ -16,6 +16,7 @@ import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
 import GeneralSetting from '../components/SettingsForm/GeneralSettings';
 import Tasks from './Bespoke/Tasks';
+import BusinessHours from './Bespoke/BusinessHours';
 
 import { KeyValue } from '../types';
 
@@ -37,5 +38,6 @@ export const RouteToPage: KeyValue = {
   '/interface-defaults': InterfaceDefaults,
   '/agents/logs': ReportFile,
   '/tasks': Tasks,
-  '/settings/general': GeneralSetting
+  '/settings/general': GeneralSetting,
+  '/settings/business-hours': BusinessHours,
 };

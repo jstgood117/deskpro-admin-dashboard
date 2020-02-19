@@ -29,6 +29,7 @@ const SettingsFormStyled = styled.div`
     }
   }
   .info-custom {
+    margin-bottom: 20px;
     > .form-item {
       position: relative;
       .element-info.info-custom {

@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  height: 100%;
+  flex-direction: column;
+  justify-content: stretch;
+
   position: relative;
   .form-row {
     border-bottom: none;

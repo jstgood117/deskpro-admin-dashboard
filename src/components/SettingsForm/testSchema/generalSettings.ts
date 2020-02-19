@@ -798,7 +798,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'general_settings_forgot_password_1'
+                          id: 'general_settings_forgot_password_value_1'
                         },
                         {
                           type: 'label',
@@ -806,7 +806,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'general_settings_forgot_password_2'
+                          id: 'general_settings_forgot_password_value_2'
                         },
                         {
                           type: 'label',
@@ -823,7 +823,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'general_settings_forgot_password_3'
+                          id: 'general_settings_forgot_password_value_3'
                         },
                         {
                           type: 'label',
@@ -909,7 +909,8 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'general_settings_logged_in_community_value_1'
+                          id: 'general_settings_logged_in_community_value_1',
+                          option: 'string'
                         },
                         {
                           type: 'label',
@@ -917,7 +918,8 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'general_settings_logged_in_community_value_2'
+                          id: 'general_settings_logged_in_community_value_2',
+                          option: 'string'
                         },
                         {
                           type: 'label',

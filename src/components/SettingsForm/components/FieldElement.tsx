@@ -63,6 +63,7 @@ const elementsSelector: {
   singleSelect: props => {
     return (
       <SingleSelect
+        placeholder={props.placeholder}
         options={props.options}
         type={props.selectType}
         selectOption={val => props.formikProps.setFieldValue(props.id, val)}
@@ -142,6 +143,9 @@ const elementsSelector: {
       {props.text}
     </Button>
   ),
+  addCalendarButton: props => (
+    <SettingsData type='add-calendar-form' props={props} />
+  ),
   profiles: props => (
     <Profiles
       {...props}
@@ -153,6 +157,7 @@ const elementsSelector: {
     <div style={{ marginBottom: 16 }}>
       <StringListBuilder
         {...props}
+        className={props.className}
         values={props.formikProps.values[props.id]}
       />
     </div>
@@ -197,8 +202,26 @@ const elementsSelector: {
       </ReportPanel>
     );
   },
-  referenceFilePanel: props => {
+  referenceFilePanel: () => {
     return <SettingsData type='reference-code-panel' />;
+  },
+  holidayList: props => {
+    return (
+      <SettingsData
+        type='holiday-list'
+        props={{ data: props.formikProps.values[props.id] }}
+      />
+    );
+  },
+  settingInfo: props => {
+    return (
+      <SettingsData
+        type='setting-info'
+        props={{
+          text: props.text
+        }}
+      />
+    );
   },
   markdown: () => {
     return <Markdown />;
