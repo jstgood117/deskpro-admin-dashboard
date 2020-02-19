@@ -22,7 +22,7 @@ const SettingsFormStyled = styled.div`
     align-items: center;
     justify-content: space-around;
     padding: 16px 0;
-    border-top: 1px solid #EFF0F0;
+    border-top: 1px solid #eff0f0;
     button {
       display: flex;
       flex-direction: row;
@@ -33,10 +33,6 @@ const SettingsFormStyled = styled.div`
       border-radius: 4px;
       border-width: 0;
       font-size: 13px;
-    }
-    .btn-primary button {
-      background-color: #1c3e55;
-      color: white;
     }
     .btn-secondary button {
       background-color: #f7f7f7;
@@ -64,7 +60,6 @@ const SettingsForm: React.FC<PropsWithApollo> = ({
   validationSchema,
   validationConfig
 }) => {
-
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {

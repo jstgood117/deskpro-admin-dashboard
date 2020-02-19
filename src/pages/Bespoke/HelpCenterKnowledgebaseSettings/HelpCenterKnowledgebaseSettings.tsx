@@ -107,8 +107,6 @@ const ButtonToolbar = styled.div`
     font-size: 13px;
   }
   .btn-primary button {
-    background-color: #1c3e55;
-    color: white;
     width: 112px;
   }
   .btn-secondary button {
