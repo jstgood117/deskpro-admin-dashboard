@@ -146,6 +146,7 @@ const UserGroupSelector: FC<IProps & WrappedComponentProps> = ({
         placeholder={intl.formatMessage({
           id: 'admin.usergroupselector.search',
         })}
+        showSearch={true}
         showClear={true}
         value={filter}
       />

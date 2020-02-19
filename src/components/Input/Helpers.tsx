@@ -109,6 +109,8 @@ export const SearchIconWrapper = styled.div`
   position: absolute;
   left: 11px;
   top: 10px;
+  z-index: 1;
+
   & svg {
     width: 14px;
     height: 14px;

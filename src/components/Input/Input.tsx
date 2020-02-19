@@ -43,7 +43,7 @@ const Input: FC<Props> = ({
 }) => {
   const [hasValue, setHasValue] = useState(false);
   const [hasFocus, setHasFocus] = useState(false);
-  console.log('sh-----------', props.showSearch);
+
   useEffect(() => {
     setHasValue((props.value || '').toString().length > 0);
   }, [props.value]);
