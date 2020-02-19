@@ -21,7 +21,7 @@ const SelectorRowStyled = styled.div`
   }
 
   & > div:first-child {
-    margin: 0 12px 0 10px;
+    margin: 0 8px 0 10px;
   }
 `;
 
