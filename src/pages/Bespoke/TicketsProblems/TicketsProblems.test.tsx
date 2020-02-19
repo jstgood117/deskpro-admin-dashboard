@@ -1,10 +1,6 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { mount, shallow } from 'enzyme';
 import TicketsProblemsPage from './index';
-
-jest.mock('react-dom', () => ({
-  createPortal: (node: ReactNode) => node
-}));
 
 describe('TicketsProblemsPage', () => {
   let mountedPage: any;
