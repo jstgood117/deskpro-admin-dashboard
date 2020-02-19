@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import Card from '../../Card';
 import Toggle from '../../Toggle';
-import { StyledText } from '../../SettingsData/Helpers';
 import { dpstyle } from '../../../style/styled';
+import { StyledText } from '../../SettingsData/styles';
 
 const StyledHeader = styled(dpstyle.div)`
   padding: 26px 24px 26px 24px;
