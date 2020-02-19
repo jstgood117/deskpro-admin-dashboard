@@ -52,11 +52,9 @@ const AgentSelectorInfo = styled.div`
   font-size: 14px;
   line-height: 150%;
   color: ${props => props.theme.staticColour};
-
   display: flex;
   align-items: center;
   margin: 16px 0;
-
   /* Selected info */
   & > p {
     margin: 0;
@@ -79,7 +77,6 @@ const AgentSelectorActions = styled.div`
   height: 68px;
   margin-top: 25px;
   padding-top: 16px;
-
   & > div:first-child button {
     border: 0;
     width: 112px;
@@ -156,12 +153,12 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
     );
 
   return (
-    <AgentSelectorContainer className='agent-selector-container'>
+    <AgentSelectorContainer>
       <AgentSelectorTitle>{title}</AgentSelectorTitle>
       {description && (
         <AgentSelectorDescription>{description}</AgentSelectorDescription>
       )}
-      <AgentSelectorInfo className='agent-selector-info'>
+      <AgentSelectorInfo>
         <p>
           {intl.formatMessage({ id: 'admin.agentselector.selected' })}:{' '}
           {selectedCount} of {agents.length}
@@ -174,57 +171,53 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
           {intl.formatMessage({ id: 'admin.agentselector.select-all' })}
         </Button>
       </AgentSelectorInfo>
-      <div className='agent-selector-input'>
-        <Input
-          inputType='primary'
-          onChange={onChangeFilter}
-          onClear={onClearFilter}
-          placeholder={intl.formatMessage({ id: 'admin.agentselector.search' })}
-          showClear={true}
-          value={filter}
-        />
-      </div>
-      <div className='agent-selector-list'>
-        <Scrollbars
-          style={{
-            borderRadius: 4,
-            borderTop: 0,
-            borderTopLeftRadius: 0,
-            borderTopRightRadius: 0,
-            paddingTop: 4,
-            height: 34 * filteredAgents.length + 1,
-            zIndex: 1,
-            width: '100%',
-            maxHeight: '100%'
-          }}
-          renderTrackVertical={({ style }) => (
-            <div
-              style={{
-                background: '#EFF0F0',
-                position: 'absolute',
-                width: 16,
-                right: 0,
-                bottom: 0,
-                top: 0,
-                borderRadius: 3
-              }}
+      <Input
+        inputType='primary'
+        onChange={onChangeFilter}
+        onClear={onClearFilter}
+        placeholder={intl.formatMessage({ id: 'admin.agentselector.search' })}
+        showClear={true}
+        value={filter}
+      />
+      <Scrollbars
+        style={{
+          borderRadius: 4,
+          borderTop: 0,
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+          paddingTop: 4,
+          height: 34 * filteredAgents.length + 1,
+          zIndex: 1,
+          width: '100%',
+          maxHeight: '100%'
+        }}
+        renderTrackVertical={({ style }) => (
+          <div
+            style={{
+              background: '#EFF0F0',
+              position: 'absolute',
+              width: 16,
+              right: 0,
+              bottom: 0,
+              top: 0,
+              borderRadius: 3
+            }}
+          />
+        )}
+      >
+        <AgentSelectorList>
+          {filteredAgents.map(agent => (
+            <AgentSelectorRow
+              agent={agent}
+              key={agent.id}
+              onSelect={onAgentSelect}
+              restricted={restricted && restricted[agent.id]}
+              selected={selected[agent.id]}
             />
-          )}
-        >
-          <AgentSelectorList>
-            {filteredAgents.map(agent => (
-              <AgentSelectorRow
-                agent={agent}
-                key={agent.id}
-                onSelect={onAgentSelect}
-                restricted={restricted && restricted[agent.id]}
-                selected={selected[agent.id]}
-              />
-            ))}
-          </AgentSelectorList>
-        </Scrollbars>
-      </div>
-      <AgentSelectorActions className='agent-selector-actions'>
+          ))}
+        </AgentSelectorList>
+      </Scrollbars>
+      <AgentSelectorActions>
         <Button onClick={onSave} styleType='primary'>
           {intl.formatMessage({ id: 'admin.common.save' })}
         </Button>
