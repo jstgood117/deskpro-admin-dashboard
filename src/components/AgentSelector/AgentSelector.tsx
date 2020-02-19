@@ -34,7 +34,7 @@ const SelectorHeader = styled(dpstyle.div1)`
 const SelectorBody = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 19px 32px;
+  padding: 19px 32px 25px 32px;
   height: calc(100vh - 151px);
   box-sizing: border-box;
   overflow-y: auto;
@@ -65,13 +65,14 @@ const SelectorInfo = styled(dpstyle.div1)`
 `;
 
 const SelectorList = styled.div`
+  height: 100%;
   border-radius: 4px;
   border: ${props => `1px solid ${props.theme.greyLight}`};
   border-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   padding-top: 4px;
-  max-height: '100%';
+  box-sizing: border-box;
 `;
 
 const SelectorFooter = styled.div`
@@ -206,10 +207,9 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
             borderTopLeftRadius: 0,
             borderTopRightRadius: 0,
             paddingTop: 4,
-            height: 34 * filteredAgents.length + 1,
             zIndex: 1,
             width: '100%',
-            maxHeight: '100%'
+            height: '100%'
           }}
           renderTrackVertical={({ style }) => (
             <div
