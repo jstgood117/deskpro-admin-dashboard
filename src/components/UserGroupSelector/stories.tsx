@@ -19,7 +19,7 @@ storiesOf('UserGroupSelector', module)
     const [items, setItems] = useState(values);
 
     return (
-      <div style={{ width: '376px' }} >
+      <div style={{ width: '376px', height: '500px' }} >
         <UserGroupSelector
           description=''
           items={items}

@@ -53,13 +53,14 @@ const SelectorInfo = styled(dpstyle.div1)`
 `;
 
 const SelectorList = styled.div`
+  height: 100%;
   border-radius: 4px;
   border: ${props => `1px solid ${props.theme.greyLight}`};
   border-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   padding-top: 4px;
-  max-height: '100%';
+  box-sizing: border-box;
 `;
 
 
@@ -156,10 +157,9 @@ const UserGroupSelector: FC<IProps & WrappedComponentProps> = ({
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
           paddingTop: 4,
-          height: 34 * filteredItems.length + 1,
+          height: '100%',
           zIndex: 1,
           width: '100%',
-          maxHeight: '100%'
         }}
         renderTrackVertical={({ style }) => (
           <div
