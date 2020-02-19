@@ -93,6 +93,7 @@ interface IProps {
   };
   max?: number;
   title: string;
+  formikProps: any;
 }
 
 const Profiles: React.FC<IProps> = ({
@@ -103,13 +104,16 @@ const Profiles: React.FC<IProps> = ({
   profiles,
   selected,
   restricted,
-  title
+  title,
+  formikProps
 }) => {
 
   const [open, setOpen] = useState(false);
   const [selectedAgents, setSelectedAgents] = useState(selected);
+  const initialSelected = selected;
 
   const handleEditClick = () => {
+    setSelectedAgents(initialSelected);
     setOpen(true);
     onEditClick();
   };
@@ -119,6 +123,7 @@ const Profiles: React.FC<IProps> = ({
   };
 
   const onSaveClick = () => {
+    formikProps.setFieldValue('selected', selectedAgents);
     setOpen(false);
   };
 

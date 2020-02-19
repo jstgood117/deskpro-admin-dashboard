@@ -40,6 +40,7 @@ storiesOf('Profiles', module)
           selected={formikProps.values['selected']}
           restricted={formikProps.values.restricted}
           title='Agents'
+          formikProps={formikProps}
         />
       )}
     </Formik>
@@ -62,6 +63,7 @@ storiesOf('Profiles', module)
           selected={formikProps.values['selected']}
           restricted={formikProps.values.restricted}
           title='Agents'
+          formikProps={formikProps}
         />
       )}
     </Formik>
