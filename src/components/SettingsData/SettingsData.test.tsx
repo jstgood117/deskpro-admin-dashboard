@@ -57,19 +57,6 @@ describe('SettingsData', () => {
     });
   });
 
-  describe('SettingsData: setting-info-inUse', () => {
-    beforeEach(() => {
-      props = {
-        type: 'setting-info-inUse'
-      };
-      mountedSettingsData = undefined;
-    });
-    it('always renders a <div>', () => {
-      const elts = wrapper(false).find('div');
-      expect(elts.length).toBeGreaterThan(0);
-    });
-  });
-
   describe('SettingsData: feature-billing', () => {
     beforeEach(() => {
       props = {
