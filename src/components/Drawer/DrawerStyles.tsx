@@ -63,8 +63,8 @@ export const StyledClose = styled.div`
 
 export const DrawerBody = styled.div`
   display: flex;
-  padding: 19px 32px;
   height: calc(100vh - 151px);
+  padding: 19px 32px 25px 32px;
   box-sizing: border-box;
   overflow-y: auto;
 `;
