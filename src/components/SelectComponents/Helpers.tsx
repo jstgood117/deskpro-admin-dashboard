@@ -107,7 +107,7 @@ export const StyledSelect = styled(dpstyle.div)`
   }
   .select__control {
     min-height: 34px;
-    min-width: 160px;
+    min-width: 104px;
     .select__indicators {
       padding-right: 12px;
       padding-left: 12px;
