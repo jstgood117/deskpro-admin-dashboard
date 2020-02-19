@@ -8,10 +8,15 @@ const avatarUrn =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
 const names = ['Bruce Wayne', 'Clark Kent', 'Arthur Curry'];
 
-const profiles = Array.from(Array(20), (never, index) => ({
-  avatarUrn: !(index % 2) ? avatarUrn : '',
+const AGENTS_COUNT = 20;
+
+const profiles = Array.from(Array(AGENTS_COUNT), (never, index) => ({
+  id: `agent${index}`,
+  avatar: !(index % 2) ? avatarUrn : '',
   name: names[index % 3]
 }));
+
+const selected = { agent1: true };
 
 storiesOf('Profiles', module)
   .add('Editable profiles (20)', () => (
@@ -20,6 +25,7 @@ storiesOf('Profiles', module)
       max={200}
       onEditClick={action('edit click')}
       profiles={profiles}
+      selected={selected}
       title='Agents'
     />
   ))
@@ -28,6 +34,7 @@ storiesOf('Profiles', module)
       editable={true}
       onEditClick={action('edit click')}
       profiles={profiles}
+      selected={selected}
       title='Agents'
     />
   ))
@@ -37,11 +44,12 @@ storiesOf('Profiles', module)
       max={200}
       onEditClick={action('edit click')}
       profiles={profiles.slice(0, 4)}
+      selected={selected}
       title='Agents'
     />
   ))
   .add('Non-editable profiles (20)', () => (
-    <Profiles max={200} profiles={profiles} title='Agents' />
+    <Profiles max={200} profiles={profiles} selected={selected} title='Agents' />
   ))
   .add('No profiles (0)', () => (
     <Profiles
