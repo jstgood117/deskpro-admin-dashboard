@@ -72,7 +72,7 @@ export const uiSchema: {
                       title: 'Time',
                       className: 'time',
                       field: {
-                        id: 'help_center_settings_captcha_unit_1',
+                        id: 'business_hours_time',
                         type: 'singleSelect',
                         placeholder: '',
                         selectType: 'primary',
@@ -89,7 +89,7 @@ export const uiSchema: {
                       className: 'timezone',
                       title: 'Timezone',
                       field: {
-                        id: 'help_center_settings_captcha_unit_1',
+                        id: 'business_hours_timezone',
                         type: 'singleSelect',
                         placeholder: '',
                         selectType: 'primary',
@@ -295,7 +295,6 @@ export const uiSchema: {
                   className: 'holiday-btn',
                   field: {
                     type: 'button',
-                    id: 'business_hours_add_holiday',
                     icon: 'plus',
                     text: 'Add new holiday'
                   }
@@ -305,7 +304,6 @@ export const uiSchema: {
                   className: 'calendar-btn',
                   field: {
                     type: 'addCalendarButton',
-                    id: 'business_hours_add_calender',
                     icon: 'calendar',
                     text: 'Add calender'
                   }
@@ -332,7 +330,7 @@ export const uiSchema: {
                   field: {
                     className: 'sync-calendars',
                     type: 'stringlist',
-                    id: 'agent_task_permissions',
+                    id: 'business_hours_sync_calendars',
                     title: 'Synced calendars'
                   }
                 },
@@ -362,5 +360,19 @@ export const jsonSchema: any = {
   business_hours_friday: ['friday'],
   business_hours_saturday: [],
   business_hours_sunday: [],
-  agent_task_permissions: ['https://webhooks.gettimely.com/calendar/feed/37firebnow-alsjd39-bsdnfos-suwheibjosin938475shdbv.ics']
+  business_hours_sync_calendars: [
+    'https://webhooks.gettimely.com/calendar/feed/37firebnow-alsjd39-bsdnfos-suwheibjosin938475shdbv.ics'
+  ],
+  business_hours_time: [
+    {
+      label: '09:00 to 17:00',
+      value: '09:00 to 17:00'
+    }
+  ],
+  business_hours_timezone: [
+    {
+      label: 'CEST',
+      value: 'CEST'
+    }
+  ]
 };
