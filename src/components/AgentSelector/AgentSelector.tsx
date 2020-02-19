@@ -195,6 +195,7 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
           onChange={onChangeFilter}
           onClear={onClearFilter}
           placeholder={intl.formatMessage({ id: 'admin.agentselector.search' })}
+          showSearch={true}
           showClear={true}
           value={filter}
         />
