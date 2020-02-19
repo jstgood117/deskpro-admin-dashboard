@@ -113,7 +113,7 @@ interface Props {
   }[];
   description?: string;
   restricted?: {
-    [id: string]: true;
+    [id: string]: boolean;
   };
   onSelect: (selected: { [id: string]: boolean }) => void;
   onSave?: () => void;

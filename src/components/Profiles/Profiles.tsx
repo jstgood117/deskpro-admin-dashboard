@@ -8,26 +8,6 @@ import Drawer from '../Drawer';
 
 import AgentSelector from '../AgentSelector';
 
-interface IProps {
-  editable?: boolean;
-  emptyText?: string;
-  onEditClick?: () => void;
-  profiles?: {
-    id: string;
-    name: string;
-    avatar?: string;
-  }[];
-  selected?: {
-    [id: string]: boolean;
-  };
-  restricted?: {
-    [id: string]: true;
-  };
-  max?: number;
-  title: string;
-}
-
-const ProfilesContainer = styled.div``;
 const ProfilesTitle = styled.div`
   padding-bottom: 8px;
   border-bottom: 1px solid #eff0f0;
@@ -55,10 +35,12 @@ const ProfileTitleNotice = styled.span`
   align-items: center;
   color: #a9b0b0;
 `;
+
 const ProfilesContent = styled.div`
   display: flex;
   position: relative;
 `;
+
 const ProfileAvatar = styled.div`
   display: inline-block;
   max-width: 36px;
@@ -73,6 +55,7 @@ const ProfileAvatar = styled.div`
     box-shadow: none;
   }
 `;
+
 const ProfileMoreNotice = styled.span`
   font-family: Rubik;
   font-style: normal;
@@ -86,11 +69,31 @@ const ProfileMoreNotice = styled.span`
   margin-left: 14px;
   height: 42px;
 `;
+
 const ProfileEditButton = styled.div`
   position: absolute;
   left: 320px;
   top: 6px;
 `;
+
+interface IProps {
+  editable?: boolean;
+  emptyText?: string;
+  onEditClick?: () => void;
+  profiles?: {
+    id: string;
+    name: string;
+    avatar?: string;
+  }[];
+  selected?: {
+    [id: string]: boolean;
+  };
+  restricted?: {
+    [id: string]: boolean;
+  };
+  max?: number;
+  title: string;
+}
 
 const Profiles: React.FC<IProps> = ({
   editable,
@@ -124,7 +127,7 @@ const Profiles: React.FC<IProps> = ({
   };
 
   return (
-    <ProfilesContainer>
+    <div className='profiles'>
       <ProfilesTitle>
         {title}
         {!!profiles.length && (
@@ -179,7 +182,7 @@ const Profiles: React.FC<IProps> = ({
           onCancel={onCancelClick}
         />
       </Drawer>
-    </ProfilesContainer>
+    </div>
   );
 };
 

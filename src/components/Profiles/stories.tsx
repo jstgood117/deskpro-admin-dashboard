@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Profiles from './Profiles';
 import { action } from '@storybook/addon-actions';
+import { Formik } from 'formik';
 
 const avatarUrn =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
@@ -17,26 +18,53 @@ const profiles = Array.from(Array(AGENTS_COUNT), (never, index) => ({
 }));
 
 const selected = { agent1: true };
+const restricted = { agent2: true };
 
 storiesOf('Profiles', module)
   .add('Editable profiles (20)', () => (
-    <Profiles
-      editable={true}
-      max={200}
-      onEditClick={action('edit click')}
-      profiles={profiles}
-      selected={selected}
-      title='Agents'
-    />
+    <Formik
+      initialValues={{
+        profiles,
+        selected,
+        restricted,
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {formikProps => (
+        <Profiles
+          editable={true}
+          max={200}
+          onEditClick={action('edit click')}
+          profiles={formikProps.values.profiles}
+          selected={formikProps.values['selected']}
+          restricted={formikProps.values.restricted}
+          title='Agents'
+        />
+      )}
+    </Formik>
   ))
   .add('Editable profiles uncaped (20)', () => (
-    <Profiles
-      editable={true}
-      onEditClick={action('edit click')}
-      profiles={profiles}
-      selected={selected}
-      title='Agents'
-    />
+    <Formik
+      initialValues={{
+        profiles,
+        selected,
+        restricted,
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {formikProps => (
+        <Profiles
+          editable={true}
+          onEditClick={action('edit click')}
+          profiles={formikProps.values.profiles}
+          selected={formikProps.values['selected']}
+          restricted={formikProps.values.restricted}
+          title='Agents'
+        />
+      )}
+    </Formik>
   ))
   .add('Editable profiles (4)', () => (
     <Profiles
