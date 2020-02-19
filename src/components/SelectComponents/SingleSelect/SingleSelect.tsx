@@ -108,7 +108,7 @@ const SingleSelect: FC<IProps> = ({
             options={options}
             className='basic-multi-select'
             classNamePrefix='select'
-            placeholder={placeholder ? placeholder : 'Select Item'}
+            placeholder={placeholder !==undefined ? placeholder : 'Select Item'}
             styles={appliedStyles}
             hideSelectedOptions={false}
             defaultValue={selectedOption}
