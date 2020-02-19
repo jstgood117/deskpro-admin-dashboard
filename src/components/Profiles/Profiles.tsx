@@ -91,7 +91,6 @@ interface IProps {
   restricted?: {
     [id: string]: boolean;
   };
-  max?: number;
   title: string;
   formikProps: any;
 }
@@ -100,7 +99,6 @@ const Profiles: React.FC<IProps> = ({
   editable,
   emptyText,
   onEditClick,
-  max,
   profiles,
   selected,
   restricted,
@@ -110,10 +108,14 @@ const Profiles: React.FC<IProps> = ({
 
   const [open, setOpen] = useState(false);
   const [selectedAgents, setSelectedAgents] = useState(selected);
-  const initialSelected = selected;
+
+  const selectedProfiles = profiles.filter(
+    profile =>
+      (selected && selected[profile.id]) || (restricted && restricted[profile.id])
+  );
 
   const handleEditClick = () => {
-    setSelectedAgents(initialSelected);
+    setSelectedAgents(selected);
     setOpen(true);
     onEditClick();
   };
@@ -135,19 +137,18 @@ const Profiles: React.FC<IProps> = ({
     <div className='profiles'>
       <ProfilesTitle>
         {title}
-        {!!profiles.length && (
+        {!!(selectedProfiles && selectedProfiles.length) && (
           <ProfileTitleNotice>
-            ({profiles.length}
-            {max && ` of ${max}`})
+            ({selectedProfiles.length} of {profiles.length})
         </ProfileTitleNotice>
         )}
       </ProfilesTitle>
       <ProfilesContent>
-        {!(profiles && profiles.length) && (
-          <ProfileMoreNotice>{emptyText || 'No profiles'}</ProfileMoreNotice>
+        {!(selectedProfiles && selectedProfiles.length) && (
+          <ProfileMoreNotice>No profiles</ProfileMoreNotice>
         )}
-        {profiles &&
-          profiles.slice(0, 6).map((profile, index) => {
+        {!!(selectedProfiles && selectedProfiles.length) &&
+          selectedProfiles.slice(0, 6).map((profile, index) => {
             const colors = getColorByChar(profile.name[0]);
             return (
               <ProfileAvatar key={index}>
@@ -162,8 +163,8 @@ const Profiles: React.FC<IProps> = ({
               </ProfileAvatar>
             );
           })}
-        {profiles && profiles.length > 6 && (
-          <ProfileMoreNotice>+ {profiles.length - 6}</ProfileMoreNotice>
+        {selectedProfiles && selectedProfiles.length > 6 && (
+          <ProfileMoreNotice>+ {selectedProfiles.length - 6}</ProfileMoreNotice>
         )}
         {editable && onEditClick && (
           <ProfileEditButton>
@@ -178,13 +179,13 @@ const Profiles: React.FC<IProps> = ({
       <Drawer open={open} onClose={closeDrawer}>
         <AgentSelector
           agents={profiles}
-          restricted={restricted}
-          description='Select agents to enable keyboard shortcut. Incomplete info.'
           title='Agent selector'
+          description='Select agents to enable keyboard shortcut. Incomplete info.'
           selected={selectedAgents}
-          onSelect={setSelectedAgents}
+          restricted={restricted}
           onSave={onSaveClick}
           onCancel={onCancelClick}
+          onSelect={setSelectedAgents}
         />
       </Drawer>
     </div>

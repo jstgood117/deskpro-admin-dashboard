@@ -111,29 +111,29 @@ interface Props {
     name: string;
     avatar?: string;
   }[];
+  title: string;
   description?: string;
-  restricted?: {
-    [id: string]: boolean;
-  };
-  onSelect: (selected: { [id: string]: boolean }) => void;
-  onSave?: () => void;
-  onCancel?: () => void;
   selected: {
     [id: string]: boolean;
   };
-  title: string;
+  restricted?: {
+    [id: string]: boolean;
+  };
+  onSave?: () => void;
+  onCancel?: () => void;
+  onSelect: (selected: { [id: string]: boolean }) => void;
 }
 
 const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
-  agents,
-  description,
   intl,
-  onCancel,
-  onSave,
-  onSelect,
-  restricted,
+  agents,
+  title,
+  description,
   selected,
-  title
+  restricted,
+  onSave,
+  onCancel,
+  onSelect,
 }) => {
   const [filter, setFilter] = React.useState('');
   const onAgentSelect = React.useCallback(
@@ -157,7 +157,7 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
 
   // Get selected count - list of `true` selected fields
   const selectedCount =
-    Object.values(selected).filter(value => value).length +
+    Object.values(selected || {}).filter(value => value).length +
     // And restricted keys
     Object.keys(restricted || {}).filter(key => !selected[key]).length;
 
@@ -231,7 +231,7 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
                 key={agent.id}
                 onSelect={onAgentSelect}
                 restricted={restricted && restricted[agent.id]}
-                selected={selected[agent.id]}
+                selected={selected && selected[agent.id]}
               />
             ))}
           </SelectorList>
