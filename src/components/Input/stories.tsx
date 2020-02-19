@@ -39,7 +39,11 @@ storiesOf('Input', module)
     <InputComponent inputType='secondary' showClear={true} />
   ))
   .add('input with search icon', () => (
-    <InputComponent inputType='primary' showSearch={true} />
+    <InputComponent
+      inputType='primary'
+      showSearch={true}
+      showClear={true}
+    />
   ))
   .add('input error', () => (
     <InputComponent

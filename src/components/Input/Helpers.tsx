@@ -88,7 +88,7 @@ export const PrimaryInputWrapper =
   `}
 
   :focus-within {
-    & > div > svg > path {
+    & div:nth-child(1) svg > path {
       fill: ${props => props.theme.brandPrimary};
     }
   }
