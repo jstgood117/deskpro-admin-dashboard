@@ -16,7 +16,7 @@ export const OverlayStyled = styled.div<{ open: boolean }>`
 `;
 
 export const DrawerStyled = styled.div<{ open: boolean }> `
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -81,9 +81,21 @@ export const DrawerFooter = styled.div`
   background-color: ${props => props.theme.white};
   border-top: 1px solid ${props => props.theme.greyLighter};
   box-sizing: border-box;
+
   button {
+    font-family: Rubik;
     width: 112px;
     margin-right: 16px;
     justify-content: center;
+  }
+
+  .btn-cancel button {
+    color: ${props => props.theme.activeColour};
+    background-color: ${props => props.theme.textHover};
+    border: 1px solid ${props => props.theme.activeColour};
+
+    :hover {
+      background-color: ${props => props.theme.hoverColour};
+    }
   }
 `;
