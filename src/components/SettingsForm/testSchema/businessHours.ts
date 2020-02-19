@@ -340,7 +340,7 @@ export const uiSchema: {
                   field: {
                     type: 'holidayList',
                     title: 'Synced calendars',
-                    value: data
+                    id: 'business_hours_sync_calendars_data'
                   }
                 }
               ]
@@ -374,5 +374,6 @@ export const jsonSchema: any = {
       label: 'CEST',
       value: 'CEST'
     }
-  ]
+  ],
+  business_hours_sync_calendars_data: data
 };

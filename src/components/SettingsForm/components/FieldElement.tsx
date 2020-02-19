@@ -194,7 +194,12 @@ const elementsSelector: {
     return <SettingsData type='reference-code-panel' />;
   },
   holidayList: props => {
-    return <SettingsData type='holiday-list' props={{ data: props.value }} />;
+    return (
+      <SettingsData
+        type='holiday-list'
+        props={{ data: props.formikProps.values[props.id] }}
+      />
+    );
   },
   settingInfo: props => {
     return (
