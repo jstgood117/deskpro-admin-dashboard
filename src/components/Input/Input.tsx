@@ -9,6 +9,7 @@ import Icon from '../Icon';
 import {
   InputWrapper,
   InputStyled,
+  SearchIconWrapper,
   ButtonClear,
   IconErrorWrapper,
   ErrorWrapper,
@@ -24,6 +25,7 @@ export type Props = {
   hasError?: boolean;
   onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   errorMessage?: string;
+  showSearch?: boolean;
   showClear?: boolean;
   inputType: InputStyleType;
   placeholder?: string;
@@ -41,14 +43,14 @@ const Input: FC<Props> = ({
 }) => {
   const [hasValue, setHasValue] = useState(false);
   const [hasFocus, setHasFocus] = useState(false);
-
+  console.log('sh-----------', props.showSearch);
   useEffect(() => {
     setHasValue((props.value || '').toString().length > 0);
   }, [props.value]);
 
   const className = `input-wrapper ${containerClassName} ${
     hasValue ? 'selected' : ''
-  } ${hasFocus ? 'focus' : ''}`;
+    } ${hasFocus ? 'focus' : ''}`;
   return (
     <div>
       {inputType === 'secondary' && (
@@ -87,7 +89,15 @@ const Input: FC<Props> = ({
         </InputWrapper>
       )}
       {inputType === 'primary' && (
-        <PrimaryInputWrapper error={hasError}>
+        <PrimaryInputWrapper
+          error={hasError}
+          search={props.showSearch}
+        >
+          {props.showSearch && (
+            <SearchIconWrapper>
+              <Icon name='search' />
+            </SearchIconWrapper>
+          )}
           <InputStyled
             className={className}
             onFocus={(event: React.FocusEvent<HTMLInputElement>) => {
