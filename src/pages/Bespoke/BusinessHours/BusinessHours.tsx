@@ -46,19 +46,28 @@ const Container = styled.div`
         }
         & .time {
           & .element-context {
-            .select__control {
+            & .select__control {
               min-width: 170px;
             }
           }
         }
         & .timezone {
           & .element-context {
-            .select__control {
+            & .select__control {
               min-width: 80px !important;
             }
           }
         }
-
+        & .select__single-value {
+          font-family: Rubik;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          color: #4c4f50;
+        }
         & .element-details-label {
           label {
             font-family: Rubik;
