@@ -1,4 +1,4 @@
-# StringListSelector Component
+# UserGroupSelector Component
 
 - it has Props of:
   items: {id: number; value: string; selected: boolean}[] - string list includes its state - selected/unselected

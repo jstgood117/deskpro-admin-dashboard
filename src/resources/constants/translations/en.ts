@@ -51,9 +51,9 @@ export const testTranslations = {
   'admin.agentselector.restricted':
     'You cannot remove this agent as they belong to a selected permission group',
 
-  'admin.stringlistselector.select-all': 'Select all',
-  'admin.stringlistselector.selected': 'Selected',
-  'admin.stringlistselector.search': 'Search',
+  'admin.usergroupselector.select-all': 'Select all',
+  'admin.usergroupselector.selected': 'Selected',
+  'admin.usergroupselector.search': 'Search',
 
   'admin.page.error': 'Something has gone wrong',
   'admin.page.loading': 'Loading',

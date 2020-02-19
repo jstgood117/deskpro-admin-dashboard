@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { Formik } from 'formik';
 import { mount } from '../../test/enzyme';
 
-import StringListBuilder from './StringListBuilder';
+import UserGroups from './UserGroups';
 
 const options = [
   'Usergroup 1',
@@ -18,13 +18,13 @@ jest.mock('react-dom', () => ({
   createPortal: (node: ReactNode) => node
 }));
 
-describe('StringListBuilder', () => {
+describe('UserGroups', () => {
 
-  let mountedBuilder: any;
+  let mountedUserGroups: any;
 
   const wrapper = () => {
-    if (!mountedBuilder) {
-      mountedBuilder = mount(
+    if (!mountedUserGroups) {
+      mountedUserGroups = mount(
         <Formik
           initialValues={{
             options,
@@ -34,7 +34,7 @@ describe('StringListBuilder', () => {
           onSubmit={() => { }}
         >
           {props => (
-            <StringListBuilder
+            <UserGroups
               id='selectedOptions'
               title='Usergroups'
               buttonTitle='Add Usergroup'
@@ -46,7 +46,7 @@ describe('StringListBuilder', () => {
         </Formik>
       );
     }
-    return mountedBuilder;
+    return mountedUserGroups;
   };
 
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import StringListSelector from './StringListSelector';
+import UserGroupSelector from './UserGroupSelector';
 
-describe('StringListBuilder', () => {
+describe('UserGroupSelector', () => {
 
   const items = [
     { id: 0, value: 'Extra Privileged', selected: true },
@@ -21,8 +21,8 @@ describe('StringListBuilder', () => {
   const wrapper = (bShallow: boolean) => {
     if (!mountedSelector) {
       mountedSelector = bShallow
-        ? shallow(<StringListSelector {...props} />)
-        : mount(<StringListSelector {...props} />);
+        ? shallow(<UserGroupSelector {...props} />)
+        : mount(<UserGroupSelector {...props} />);
     }
     return mountedSelector;
   };

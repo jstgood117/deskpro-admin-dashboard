@@ -8,9 +8,9 @@ import Tooltip from '../Tooltip';
 import Drawer from '../Drawer';
 import { StringRow } from './components/StringRow';
 
-import Usergroups from './components/Usergroups';
+import UserGroupsForm from './components/UserGroupsForm';
 
-const StringListContainer = styled.div`
+const UserGroupsContainer = styled.div`
   width: 240px;
   font-family: Rubik;
   font-style: normal;
@@ -113,7 +113,7 @@ interface IProps {
   formikProps: any;
 }
 
-const StringListBuilder: React.FC<IProps> = ({
+const UserGroups: React.FC<IProps> = ({
   id,
   name,
   title = '',
@@ -134,31 +134,11 @@ const StringListBuilder: React.FC<IProps> = ({
     setOpen(false);
   };
 
-  const getDrawerChildComponent = (formType: string) => {
-
-    switch (formType) {
-      case 'Usergroups':
-        return (
-          <Usergroups
-            id={id}
-            open={open}
-            title={title}
-            options={options}
-            selectedOptions={selectedOptions}
-            onCancel={closeDrawer}
-            formikProps={formikProps}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
   // if all usergroups have been added, make button disable.
   const enabled = !selectedOptions || options.length > selectedOptions.length;
 
   return (
-    <StringListContainer>
+    <UserGroupsContainer>
       <div className='title-container'>
         {title}
         <span className='string-list-count'>
@@ -206,10 +186,18 @@ const StringListBuilder: React.FC<IProps> = ({
       />
 
       <Drawer open={open} onClose={closeDrawer}>
-        {getDrawerChildComponent(title)}
+        <UserGroupsForm
+          id={id}
+          open={open}
+          title={title}
+          options={options}
+          selectedOptions={selectedOptions}
+          onCancel={closeDrawer}
+          formikProps={formikProps}
+        />
       </Drawer>
-    </StringListContainer>
+    </UserGroupsContainer>
   );
 };
 
-export default StringListBuilder;
+export default UserGroups;

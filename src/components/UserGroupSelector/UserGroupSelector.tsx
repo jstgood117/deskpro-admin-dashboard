@@ -5,10 +5,8 @@ import styled from 'styled-components';
 
 import Input from '../Input';
 import Button from '../Button';
-import StringListSelectorRow from './StringListSelectorRow';
+import UserGroupSelectorRow from './UserGroupSelectorRow';
 import { dpstyle } from '../Styled';
-
-import { Items } from '../StringListBuilderNew/components/Usergroups';
 
 const SelectorContainer = styled.div`
   & input {
@@ -55,13 +53,20 @@ const SelectorList = styled.div`
   max-height: '100%';
 `;
 
+
+export interface Items {
+  id: number;
+  value: string;
+  selected: boolean;
+}
+
 export interface IProps {
   description?: string;
   items: Items[];
   onSelect: (item: Items[]) => void;
 }
 
-const StringListSelector: FC<IProps & WrappedComponentProps> = ({
+const UserGroupSelector: FC<IProps & WrappedComponentProps> = ({
   intl,
   description,
   items,
@@ -110,7 +115,7 @@ const StringListSelector: FC<IProps & WrappedComponentProps> = ({
       <SelectorInfo>
         <p>
           {intl.formatMessage({
-            id: 'admin.stringlistselector.selected',
+            id: 'admin.usergroupselector.selected',
           })}
           : {selectedCount} of {items.length}
         </p>
@@ -121,7 +126,7 @@ const StringListSelector: FC<IProps & WrappedComponentProps> = ({
           size='small'
         >
           {intl.formatMessage({
-            id: 'admin.stringlistselector.select-all',
+            id: 'admin.usergroupselector.select-all',
           })}
         </Button>
       </SelectorInfo>
@@ -130,7 +135,7 @@ const StringListSelector: FC<IProps & WrappedComponentProps> = ({
         onChange={onChangeFilter}
         onClear={onClearFilter}
         placeholder={intl.formatMessage({
-          id: 'admin.stringlistselector.search',
+          id: 'admin.usergroupselector.search',
         })}
         showClear={true}
         value={filter}
@@ -162,7 +167,7 @@ const StringListSelector: FC<IProps & WrappedComponentProps> = ({
       >
         <SelectorList>
           {filteredItems.map((item, index) => (
-            <StringListSelectorRow
+            <UserGroupSelectorRow
               key={index}
               item={item}
               onSelect={() => onItemClick(item.id)}
@@ -174,4 +179,4 @@ const StringListSelector: FC<IProps & WrappedComponentProps> = ({
   );
 };
 
-export default injectIntl(StringListSelector);
+export default injectIntl(UserGroupSelector);

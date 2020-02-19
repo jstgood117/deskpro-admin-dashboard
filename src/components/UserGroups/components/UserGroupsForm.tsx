@@ -7,7 +7,7 @@ import {
   DrawerBody,
   DrawerFooter
 } from '../../Drawer/DrawerStyles';
-import StringListSelector from '../../StringListSelector';
+import UserGroupSelector from '../../UserGroupSelector';
 
 const FormContainer = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ interface IProps {
   formikProps: any;
 }
 
-const Usergroups: FC<IProps> = ({
+const UserGroupsForm: FC<IProps> = ({
   id,
   open,
   title,
@@ -78,7 +78,7 @@ const Usergroups: FC<IProps> = ({
       </DrawerHeader>
       <DrawerBody>
         <FormContainer>
-          <StringListSelector
+          <UserGroupSelector
             items={items}
             onSelect={newItems => onSelect(newItems)}
           />
@@ -105,4 +105,4 @@ const Usergroups: FC<IProps> = ({
   );
 };
 
-export default Usergroups;
+export default UserGroupsForm;

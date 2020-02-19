@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import Checkbox from '../Checkbox';
-import { Items } from '../StringListBuilderNew/components/Usergroups';
+import { Items } from './UserGroupSelector';
 
 const SelectorRowStyled = styled.div`
   display: flex;
@@ -30,11 +30,11 @@ interface IProps {
   onSelect: () => void;
 }
 
-const StringListSelectorRow: FC<IProps> = ({ item, onSelect }) => (
+const UserGroupSelectorRow: FC<IProps> = ({ item, onSelect }) => (
   <SelectorRowStyled>
     <Checkbox checked={item.selected} onChange={onSelect} />
     {item.value}
   </SelectorRowStyled>
 );
 
-export default StringListSelectorRow;
+export default UserGroupSelectorRow;

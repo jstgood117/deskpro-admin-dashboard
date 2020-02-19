@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import StringListSelector from './StringListSelector';
+import UserGroupSelector from './UserGroupSelector';
 
 const values = [
   { id: 0, value: 'Extra Privileged', selected: true },
@@ -14,13 +14,13 @@ const values = [
   { id: 7, value: 'Usergroup 8', selected: false },
 ];
 
-storiesOf('StringListSelector', module)
+storiesOf('UserGroupSelector', module)
   .add('default', () => {
     const [items, setItems] = useState(values);
 
     return (
       <div style={{ width: '376px' }} >
-        <StringListSelector
+        <UserGroupSelector
           description=''
           items={items}
           onSelect={newItems => setItems(newItems)}

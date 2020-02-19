@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Formik } from 'formik';
 
-import StringListBuilder from './StringListBuilder';
+import UserGroups from './UserGroups';
 
 const options = [
   'Extra Privileged',
@@ -23,8 +23,8 @@ const selectedOptions = [
   'VIP',
 ];
 
-storiesOf('String List Builder New', module)
-  .add('List builder usergroups', () => (
+storiesOf('UserGroups', module)
+  .add('UserGroups with Drawer', () => (
     <Formik
       initialValues={{
         options,
@@ -34,7 +34,7 @@ storiesOf('String List Builder New', module)
       onSubmit={action('submit')}
     >
       {props => (
-        <StringListBuilder
+        <UserGroups
           id='selectedOptions'
           title='Usergroups'
           buttonTitle='Add Usergroup'
