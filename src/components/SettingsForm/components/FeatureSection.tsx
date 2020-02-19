@@ -13,6 +13,7 @@ export const FeatureSectionStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 974px;
+  min-height: calc(100vh - 70px);
 
   & .page-section {
     &:last-child::after {
@@ -309,7 +310,7 @@ export const FeatureSectionStyled = styled.div`
     padding-left: 24px;
 
     .element-info {
-      margin-left: 12px;
+      margin-left: 121px;
       margin-top: -6px;
       margin-bottom: 24px;
     }
@@ -322,7 +323,7 @@ interface Props {
   title: string;
   brandButtonGroup?: boolean;
   field?: any;
-  header?: any[];
+  header?: any;
   icon?: string;
 }
 
@@ -336,6 +337,8 @@ const FeatureSection: React.FC<Props> = ({
   header
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
+  const enabled =
+    !header || !header.showOn || formikProps.values[header.showOn] === true;
 
   return (
     <FeatureSectionStyled className='feature-section'>
@@ -390,9 +393,10 @@ const FeatureSection: React.FC<Props> = ({
       )}
 
       <FeatureSectionContext.Provider value={{ prefixName: selected }}>
-        {elements.map((element: any, i: number) => (
-          <StdElementRow key={i} {...element} formikProps={formikProps} />
-        ))}
+        {enabled &&
+          elements.map((element: any, i: number) => (
+            <StdElementRow key={i} {...element} formikProps={formikProps} />
+          ))}
       </FeatureSectionContext.Provider>
     </FeatureSectionStyled>
   );

@@ -4,11 +4,17 @@ import Markdown from 'react-markdown';
 
 import Card from '../Card';
 import Toggle from '../Toggle';
-import { dpstyle } from '../Styled';
-import styled from 'styled-components';
 import Icon from '../Icon';
 import Tooltip from '../Tooltip';
+import {
+  StyledHeader,
+  StyledText,
+  StyledSettingInfo,
+  CloseIconWrapper,
+  DollarIconWrapper
+} from './styles';
 
+/*
 const StyledHeader = styled(dpstyle.div)`
   padding: 26px 24px 26px 24px;
   display: flex;
@@ -76,6 +82,7 @@ const DollarIconWrapper = styled.div`
     background: rgba(248, 175, 60, 0.25);
   }
 `;
+*/
 
 export const SettingsData = ({
   id,
@@ -107,7 +114,6 @@ export const SettingsData = ({
             style={{ fontSize: 18, paddingLeft: 14 }}
             onClick={() => onChange(!checked)}
             isTitle={true}
-            htmlFor={id}
           >
             {title}
           </StyledText>
@@ -225,17 +231,17 @@ export const HeaderMediumCard = () => {
 };
 
 export const SettingInfo: React.FC<{
-  onClose: (val: boolean) => void;
-  closed: boolean;
   children?: ReactNode;
 }> = props => {
-  if (!props.closed) {
+  const [closed, setClose] = React.useState(false);
+
+  if (!closed) {
     return (
       <StyledSettingInfo>
         {props.children}
         <CloseIconWrapper
           onClick={() => {
-            props.onClose(true);
+            setClose(true);
           }}
         >
           <Icon name='close' />
@@ -247,51 +253,6 @@ export const SettingInfo: React.FC<{
   }
 };
 
-export const SettingInfoInUse = () => {
-  const [closed, setClose] = useState(false);
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        borderTop: '1px solid #EFF0F0',
-        position: 'relative'
-      }}
-    >
-      <StyledText
-        style={{
-          fontSize: 15,
-          maxWidth: 271,
-          marginTop: 31,
-          display: 'flex'
-        }}
-        isTitle={true}
-      >
-        Section header
-        {closed && (
-          <div style={{ display: 'flex', paddingLeft: 8 }}>
-            <Icon name='info-text' />
-          </div>
-        )}
-      </StyledText>
-      <div
-        style={{
-          height: 134,
-          width: 688,
-          position: 'absolute',
-          top: 17,
-          right: 0
-        }}
-      >
-        <SettingInfo onClose={setClose} closed={closed}>
-          <StyledText isTitle={false} style={{ fontSize: 13 }}>
-            Setting Info
-          </StyledText>
-        </SettingInfo>
-      </div>
-    </div>
-  );
-};
 export const FeatureBilling = () => {
   const [checked, setChecked] = useState(false);
   const [clickedDollar, clickDollar] = useState(false);

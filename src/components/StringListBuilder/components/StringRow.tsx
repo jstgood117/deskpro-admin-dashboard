@@ -24,10 +24,10 @@ export const StringRow: React.FC<IProps> = ({
 
   return (
     <div className={className + ' string-row'} onClick={onEditClick}>
-      {value}
-      <span onClick={onRemoveClick}>
+      <div className='content-text'>{value}</div>
+      <div onClick={onRemoveClick} className='content-icon'>
         <Icon name='trash' />
-      </span>
+      </div>
     </div>
   );
 };

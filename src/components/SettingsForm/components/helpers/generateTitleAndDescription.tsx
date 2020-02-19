@@ -34,7 +34,13 @@ export const generateTitleAndDescription = (className: string, props: any) => {
             <div className='element-details'>
               {props.title && (
                 <div className='element-details-label'>
-                  <label htmlFor={htmlFor}>{props.title}</label>
+                  <label htmlFor={htmlFor}>
+                    <Markdown
+                      source={props.title}
+                      disallowedTypes={['paragraph']}
+                      unwrapDisallowed={true}
+                    />
+                  </label>
                   {props.tooltip && (
                     <Tooltip
                       content={props.tooltip}

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
-import SettingsData from './SettingsData';
+import SettingsData, { IProps } from './SettingsData';
+import { IProps as ICalendarProps } from './AddCalendarForm';
+import AddCalendarForm from './AddCalendarForm';
 
 describe('SettingsData', () => {
   let props: any;
@@ -92,5 +94,69 @@ describe('SettingsData', () => {
       const elts = wrapper(false).find('div');
       expect(elts.length).toBeGreaterThan(0);
     });
+  });
+});
+
+describe('SettingsData-HolidayList', () => {
+  let props: IProps;
+  let mountedCode: any;
+
+  const wrapper = (bShallow: boolean) => {
+    if (!mountedCode) {
+      mountedCode = bShallow
+        ? shallow(<SettingsData {...props} />)
+        : mount(<SettingsData {...props} />);
+    }
+    return mountedCode;
+  };
+
+  beforeEach(() => {
+    props = {
+      type: 'holiday-list',
+      props: {
+        data: [
+          {
+            year: 2020,
+            holidays: [
+              { date: '1 January', day: 'Wednesday', comment: 'New Years day' }
+            ]
+          }
+        ]
+      }
+    };
+  });
+  it('always renders a <div>', () => {
+    const elts = wrapper(false).find('div');
+    expect(elts.length).toBeGreaterThan(0);
+  });
+});
+
+jest.mock('react-dom', () => ({
+  createPortal: (node: ReactNode) => node
+}));
+
+describe('SettingsData-AddCalendarForm', () => {
+  let props: ICalendarProps;
+  let mountedCode: any;
+
+  const wrapper = (bShallow: boolean) => {
+    if (!mountedCode) {
+      mountedCode = bShallow
+        ? shallow(<AddCalendarForm {...props} />)
+        : mount(<AddCalendarForm {...props} />);
+    }
+    return mountedCode;
+  };
+
+  beforeEach(() => {
+    props = {
+      icon: 'calendar',
+      text: 'Add Calendar'
+    };
+  });
+
+  it('always renders a <div>', () => {
+    const elts = wrapper(false).find('div');
+    expect(elts.length).toBeGreaterThan(0);
   });
 });

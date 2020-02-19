@@ -1,13 +1,8 @@
 import React from 'react';
 import { mount, shallow } from '../../../../test/enzyme';
 import Table, { Props } from '../../Table';
-import {
-  resizableTable,
-  setTdsWidth,
-  resetColWidth,
-  getLargestPadding,
-} from '../functions';
 import { ColumnMeta } from '../../types';
+import { resizableTable, setTdsWidth, resetColWidth, getLargestPadding } from '../editColumnFn';
 
 const testData = [
   { 'id': 75950, 'name': 'Louella Wallace', 'age': 24, 'phone': '+44 (0)203 437 7302', 'avatar': 'https://randomuser.me/api/portraits/men/49.jpg' },

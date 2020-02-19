@@ -1,11 +1,30 @@
 import * as React from 'react';
-import { mount } from '../../test/enzyme';
+import { DocumentNode } from 'graphql';
+import { gql } from 'apollo-boost';
 
+import { mount } from '../../test/enzyme';
 import SettingsForm from './SettingsForm';
+
+const testQuery: DocumentNode = gql`
+  mutation UpdateSettings($payload: Object!) {
+    update_settings(payload: $payload)
+  }
+`;
 
 describe('SettingsForm', () => {
   const wrapper = (ui: any, values?: any) =>
-    mount(<SettingsForm ui={ui} initialValues={values || {}} />);
+    mount(
+      <SettingsForm
+        uiSchema={ui}
+        jsonSchema={values || {}}
+        validationSchema={{
+          type:'object',
+          properties: {}
+        }}
+        validationConfig={{}}
+        saveSchema={testQuery}
+      />
+    );
   it('should render settings form', () => {
     const root = wrapper({
       elements: [
