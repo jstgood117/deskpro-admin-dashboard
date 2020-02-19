@@ -158,7 +158,9 @@ const Table: FC<Props> = ({
     if (!compareGroups(groupBy, groupByInfo)) {
       setFirstGrouped(true);
       dispatch({ type: 'resetGroupBy' });
-      toggleGroupBy(groupBy[0], true);
+      if (groupBy[0]) {
+        toggleGroupBy(groupBy[0], true);
+      }
     }
   }, [groupByInfo, groupBy, dispatch, toggleGroupBy]);
 

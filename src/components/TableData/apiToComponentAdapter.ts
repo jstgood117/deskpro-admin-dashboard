@@ -116,12 +116,11 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'multiple_teams', props: agentTeamProps };
 
     case 'TableColumnAgentGroupList':
-      const agentGroupList = [
-        getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title)
-      ];
+      const agentGroupList = getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title);
+
       return {
         type: 'string',
-        props: { values: agentGroupList }
+        props: { values: agentGroupList, max: 2 }
       };
 
     case 'TableColumnAgentList':

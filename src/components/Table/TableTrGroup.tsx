@@ -34,6 +34,7 @@ const TableTrGroup: FC<Props> = ({
               onChange={(e: SyntheticEvent<HTMLInputElement>) => {
                 handleCheckboxChange(e, row.subRows);
               }}
+              indeterminate={(checked[row.id] === 'indeterminate')}
             />
           </td>
         )}

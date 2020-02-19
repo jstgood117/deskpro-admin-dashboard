@@ -25,7 +25,7 @@ export const treeify = (
           lookup[obj[parent]['id']][children].push(obj);
       } else {
         const agent_groups = obj.agent_groups && obj.agent_groups.map((item: any) => item.title);
-        const agent_teams = obj.agent_teams && obj.agent_teams.map((item: any) => item.title);
+        const agent_teams = obj.agent_teams && obj.agent_teams.map((item: any) => item.name);
         const departments = obj.departments && obj.departments.map((item: any) => item.title);
 
         treeList.push(assignIn(obj, {

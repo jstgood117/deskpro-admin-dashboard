@@ -304,9 +304,8 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     const { column } = val;
     const isSelectedGroupBy = val === groupValue;
 
-    onGroupByChange([isSelectedGroupBy ? '' : column]);
+    onGroupByChange(isSelectedGroupBy ? [] : [column]);
     setGroupValue(isSelectedGroupBy ? '' : val);
-
   };
 
   const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), [
