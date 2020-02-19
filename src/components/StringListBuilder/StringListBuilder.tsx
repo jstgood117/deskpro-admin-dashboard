@@ -1,13 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import classNames from 'classnames';
 
 import Button from '../Button';
 import Icon from '../Icon';
 import { StringRow } from './components/StringRow';
 import { FieldArray, ArrayHelpers } from 'formik';
 import Input from '../Input';
-import Tooltip from '../Tooltip';
+// import Tooltip from '../Tooltip';
 
 const StringListContainer = styled.div`
   position: relative;
@@ -38,9 +37,6 @@ const StringListContainer = styled.div`
     justify-content: flex-end;
     color: ${props => props.theme.static2Colour};
   }
-  & .string-list-rows {
-    margin-bottom: 16px;
-  }
   & .string-row {
     display: flex;
     align-items: center;
@@ -65,9 +61,7 @@ const StringListContainer = styled.div`
   }
   & .string-row:hover {
     background: ${props => `${props.theme.textHover}99`};
-    padding: 0 8px;
   }
-
   & .string-row.capped:hover {
     background: ${props => props.theme.white};
     border: ${props => `1px solid ${props.theme.pageHeader}`};
@@ -75,11 +69,8 @@ const StringListContainer = styled.div`
     box-shadow: 0px 3px 8px ${props => props.theme.brandPrimary + '66'};
     border-radius: 6px;
     font-weight: 500;
-    margin-left: -8px;
-    cursor: pointer;
     color: ${props => props.theme.brandPrimary};
   }
-
   & .string-row svg {
     display: none;
   }
@@ -103,32 +94,13 @@ const StringListContainer = styled.div`
     justify-content: center;
     .text {
       margin-left: 8px;
-      font-family: Rubik;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 13px;
-      line-height: 150%;
-      color: #1c3e55;
     }
     svg {
       padding-right: 0;
-      width: 12px;
-      height: 12px;
     }
   }
   & .add-button > button[disabled] {
-    /*opacity: 0.5;*/
-    background: #f7f7f7;
-    border: 1px solid #d3d6d7;
-    box-sizing: border-box;
-    border-radius: 4px;
-    .text {
-      color: #a9b0b0;
-    }
-    svg,
-    path {
-      fill: #a9b0b0;
-    }
+    opacity: 0.5;
   }
 `;
 
@@ -180,7 +152,6 @@ const StringListBuilder: React.FC<IProps> = ({
     setInAdd(true);
     setNewItemValue('');
   }, []);
-
   const onChangeNewItem = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setNewItemValue(e.target.value);
@@ -188,12 +159,8 @@ const StringListBuilder: React.FC<IProps> = ({
     []
   );
 
-  const addBtnDisable = !!inAdd || (!!max && max === values.length);
-
   return (
-    <StringListContainer
-      className={classNames('string-list-builder', props.className)}
-    >
+    <StringListContainer className={props.className}>
       <div className='title-container'>
         {title || ' '}
         <span className='string-list-count'>
@@ -205,7 +172,7 @@ const StringListBuilder: React.FC<IProps> = ({
         name={name || id || ''}
         render={arrayHelpers => (
           <div>
-            <div className='string-list-rows'>
+            <div style={{ marginBottom: 8 }}>
               {values.map((value, index) =>
                 index === editIndex ? (
                   <Input
@@ -277,36 +244,16 @@ const StringListBuilder: React.FC<IProps> = ({
                 />
               )}
             </div>
-            {addBtnDisable ? (
-              <Tooltip
-                content='All usergroups have been added.'
-                styleType='dark'
-                placement='bottom'
-              >
-                <span>
-                  <Button
-                    className='add-button'
-                    onClick={onAddClick}
-                    buttonType='button'
-                    styleType='secondary'
-                    disabled={true}
-                  >
-                    <Icon name='plus' />
-                    {addTitle && <span className='text'>{addTitle}</span>}
-                  </Button>
-                </span>
-              </Tooltip>
-            ) : (
-              <Button
-                className='add-button'
-                onClick={onAddClick}
-                buttonType='button'
-                styleType='secondary'
-              >
-                <Icon name='plus' />
-                {addTitle && <span className='text'>{addTitle}</span>}
-              </Button>
-            )}
+            <Button
+              disabled={!!inAdd || (!!max && max === values.length)}
+              className='add-button'
+              onClick={onAddClick}
+              buttonType='button'
+              styleType='secondary'
+            >
+              <Icon name='plus' />
+              {addTitle && <span className='text'>{addTitle}</span>}
+            </Button>
           </div>
         )}
       />
