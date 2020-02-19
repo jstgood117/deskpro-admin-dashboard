@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import map from 'lodash/map';
 import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
 import { ITableColor } from '../../resources/interfaces';
@@ -61,6 +62,11 @@ export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
     default:
       return null;
   }
+};
+
+export const convertStringToObject = (values: string, phrase: string = ', ') => {
+  const arrayValues = values.split(phrase);
+  return map(arrayValues, (title: string) => ({ id: title, title }));
 };
 
 export const generateComponentProps = (cell: any): ITableDataProps => {
@@ -132,10 +138,10 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
           viewModel: 'label',
           agents: getPayloadValue(row, type.valuesArray).map(
             (department: any) => {
-              const colors = getColorByChar(department.title.charAt(0));
+              const colors = getColorByChar(department.title ? department.title.charAt(0) : '');
 
               return {
-                name: department.title,
+                name: department.title || '',
                 avatar: department.avatar,
                 avatarProps: {
                   textBackgroundColor: colors.background,

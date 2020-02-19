@@ -18,12 +18,7 @@ export const getValueFromColumnType = (
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
     case 'TableColumnAgentTeamList':
-      return (
-        values[columnProps.valuesArray.dataPath] &&
-        values[columnProps.valuesArray.dataPath]
-          .map((item: any) => item.title)
-          .join(', ')
-      );
+      return values[columnProps.valuesArray.dataPath];
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
