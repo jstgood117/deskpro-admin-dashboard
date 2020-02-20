@@ -26,7 +26,7 @@ const StyledButton = styled.div`
     padding: 0 12px 0 11px;
     font-family: Rubik;
     font-style: normal;
-    font-weight: 500;
+    font-weight: normal;
     font-size: 16px;
     line-height: 150%;
     display: flex;

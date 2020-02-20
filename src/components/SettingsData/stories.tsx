@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import SettingsData from './SettingsData';
 import { IHolidayList } from './HolidayList';
+import { SettingsData as SettingsDataHelper } from './Helpers';
 
 const holidayList: IHolidayList[] = [
   {
@@ -73,4 +74,7 @@ storiesOf('Settings Data', module)
         data: holidayList
       }}
     />
+  ))
+  .add('settings data helper', () => (
+    <SettingsDataHelper title='title' description='desc' />
   ));

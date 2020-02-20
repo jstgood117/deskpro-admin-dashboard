@@ -1,5 +1,6 @@
 import React, { useState, ReactNode } from 'react';
 import { FormattedMessage } from 'react-intl';
+import Markdown from 'react-markdown';
 
 import Card from '../Card';
 import Toggle from '../Toggle';
@@ -12,6 +13,59 @@ import {
   CloseIconWrapper,
   DollarIconWrapper
 } from './styles';
+
+export const SettingsData = ({
+  id,
+  title,
+  description,
+  illustration = 'settings-header',
+  checked,
+  onChange
+}: any) => {
+  return (
+    <Card>
+      <StyledHeader
+        style={{
+          backgroundImage: `url(${require(`../../assets/svg/illustrations/${illustration}.svg`)})`,
+          flexDirection: 'column'
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ width: 30, height: 20 }}>
+            <Toggle
+              checked={checked}
+              value='checked'
+              onChange={event => onChange(event.target.checked)}
+              size='medium'
+            />
+          </div>
+          <StyledText
+            className='title'
+            style={{ fontSize: 18, paddingLeft: 14 }}
+            onClick={() => onChange(!checked)}
+            isTitle={true}
+          >
+            {title}
+          </StyledText>
+        </div>
+        <div>
+          <StyledText
+            style={{
+              maxWidth: '60%',
+              paddingLeft: 44,
+              fontSize: 13,
+              color: '#8b9293'
+            }}
+            isTitle={false}
+            className='description'
+          >
+            <Markdown>{description}</Markdown>
+          </StyledText>
+        </div>
+      </StyledHeader>
+    </Card>
+  );
+};
 
 export const HeaderCard = () => {
   const [checked, setChecked] = useState(false);

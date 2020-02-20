@@ -62,7 +62,6 @@ const StringListContainer = styled.div`
   & .string-row:hover {
     background: ${props => `${props.theme.textHover}99`};
   }
-
   & .string-row.capped:hover {
     background: ${props => props.theme.white};
     border: ${props => `1px solid ${props.theme.pageHeader}`};
@@ -72,7 +71,6 @@ const StringListContainer = styled.div`
     font-weight: 500;
     color: ${props => props.theme.brandPrimary};
   }
-
   & .string-row svg {
     display: none;
   }
