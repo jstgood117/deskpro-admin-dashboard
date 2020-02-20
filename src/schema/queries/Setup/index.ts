@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const QUERY_INITIAL = gql`
-	query  {
+	query initalSetup {
 		translations: setupUi_translations_all(locale: "en") {
 			id
 			message
