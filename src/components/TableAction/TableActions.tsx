@@ -282,9 +282,11 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
     const id = val.link;
     const link = intl.formatMessage({ id });
     let desc = false;
-
     if (typeof Sort !== 'string' && Sort.link === link) {
       desc = !Sort.desc;
+    }
+    if (val.sort) {
+      desc = val.sort !== 'asc';
     }
 
     onSortChange([{ id, desc }]);
@@ -298,8 +300,8 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
 
   const handleGroupChange = (val: any) => {
     if (val.sortable) {
-      const { name: label, column: link } = val;
-      return handleSortChange({ link, label });
+      const { name: label, column: link, ...item } = val;
+      return handleSortChange({ link, label, ...item });
     }
     const { column } = val;
     const isSelectedGroupBy = val === groupValue;
