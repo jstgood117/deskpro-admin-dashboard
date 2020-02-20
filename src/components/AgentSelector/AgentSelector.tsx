@@ -18,6 +18,20 @@ const SelectorContainer = styled.div`
   & input:focus {
     background: ${props => props.theme.white};
   }
+
+  .scrollbars {
+    height: 100%;
+    border-radius: 4px;
+    border: ${props => `1px solid ${props.theme.greyLight}`};
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-sizing: border-box;
+
+    & > div {
+      box-sizing: border-box;
+    }
+  }
 `;
 
 const SelectorHeader = styled(dpstyle.div1)`
@@ -62,17 +76,6 @@ const SelectorInfo = styled(dpstyle.div1)`
     font-family: Rubik;
     font-size: 13px;
   }
-`;
-
-const SelectorList = styled.div`
-  height: 100%;
-  border-radius: 4px;
-  border: ${props => `1px solid ${props.theme.greyLight}`};
-  border-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  padding-top: 4px;
-  box-sizing: border-box;
 `;
 
 const SelectorFooter = styled.div`
@@ -201,32 +204,32 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
           showClear={true}
           value={filter}
         />
-        <Scrollbars
-          style={{
-            borderRadius: 4,
-            borderTop: 0,
-            borderTopLeftRadius: 0,
-            borderTopRightRadius: 0,
-            paddingTop: 4,
-            zIndex: 1,
-            width: '100%',
-            height: '100%'
-          }}
-          renderTrackVertical={({ style }) => (
-            <div
-              style={{
-                background: '#EFF0F0',
-                position: 'absolute',
-                width: 16,
-                right: 0,
-                bottom: 0,
-                top: 0,
-                borderRadius: 3
-              }}
-            />
-          )}
-        >
-          <SelectorList>
+        <div className='scrollbars'>
+          <Scrollbars
+            style={{
+              borderRadius: 4,
+              borderTop: 0,
+              borderTopLeftRadius: 0,
+              borderTopRightRadius: 0,
+              paddingTop: 4,
+              zIndex: 1,
+              width: '100%',
+              height: '100%'
+            }}
+            renderTrackVertical={({ style }) => (
+              <div
+                style={{
+                  background: '#EFF0F0',
+                  position: 'absolute',
+                  width: 16,
+                  right: 0,
+                  bottom: 0,
+                  top: 0,
+                  borderRadius: 3
+                }}
+              />
+            )}
+          >
             {filteredAgents.map(agent => (
               <AgentSelectorRow
                 agent={agent}
@@ -236,8 +239,9 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
                 selected={selected && selected[agent.id]}
               />
             ))}
-          </SelectorList>
-        </Scrollbars>
+
+          </Scrollbars>
+        </div>
       </SelectorBody>
       <SelectorFooter>
         <Button
