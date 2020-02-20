@@ -3,52 +3,120 @@ import { storiesOf } from '@storybook/react';
 
 import Profiles from './Profiles';
 import { action } from '@storybook/addon-actions';
+import { Formik } from 'formik';
 
 const avatarUrn =
   'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80';
 const names = ['Bruce Wayne', 'Clark Kent', 'Arthur Curry'];
 
-const profiles = Array.from(Array(20), (never, index) => ({
-  avatarUrn: !(index % 2) ? avatarUrn : '',
+const AGENTS_COUNT = 20;
+
+const profiles = Array.from(Array(AGENTS_COUNT), (never, index) => ({
+  id: `agent${index}`,
+  avatar: !(index % 2) ? avatarUrn : '',
   name: names[index % 3]
 }));
 
+const selected = {
+  agent1: true,
+  agent3: true,
+  agent4: true,
+  agent6: true,
+  agent7: true,
+  agent8: true,
+  agent9: true,
+};
+const restricted = { agent2: true };
+
 storiesOf('Profiles', module)
   .add('Editable profiles (20)', () => (
-    <Profiles
-      editable={true}
-      max={200}
-      onEditClick={action('edit click')}
-      profiles={profiles}
-      title='Agents'
-    />
+    <Formik
+      initialValues={{
+        profiles,
+        selected,
+        restricted,
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {formikProps => (
+        <Profiles
+          editable={true}
+          onEditClick={action('edit click')}
+          profiles={formikProps.values.profiles}
+          selected={formikProps.values['selected']}
+          restricted={formikProps.values.restricted}
+          title='Agents'
+          formikProps={formikProps}
+        />
+      )}
+    </Formik>
   ))
-  .add('Editable profiles uncaped (20)', () => (
-    <Profiles
-      editable={true}
-      onEditClick={action('edit click')}
-      profiles={profiles}
-      title='Agents'
-    />
-  ))
-  .add('Editable profiles (4)', () => (
-    <Profiles
-      editable={true}
-      max={200}
-      onEditClick={action('edit click')}
-      profiles={profiles.slice(0, 4)}
-      title='Agents'
-    />
+  .add('Editable profiles (3)', () => (
+    <Formik
+      initialValues={{
+        profiles,
+        selected: {
+          agent5: true,
+          agent6: true
+        },
+        restricted,
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {formikProps => (
+        <Profiles
+          editable={true}
+          onEditClick={action('edit click')}
+          profiles={formikProps.values.profiles}
+          selected={formikProps.values['selected']}
+          restricted={formikProps.values.restricted}
+          title='Agents'
+          formikProps={formikProps}
+        />
+      )}
+    </Formik>
   ))
   .add('Non-editable profiles (20)', () => (
-    <Profiles max={200} profiles={profiles} title='Agents' />
+    <Formik
+      initialValues={{
+        profiles,
+        selected,
+        restricted,
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {formikProps => (
+        <Profiles
+          profiles={formikProps.values.profiles}
+          selected={formikProps.values['selected']}
+          restricted={formikProps.values.restricted}
+          title='Agents'
+          formikProps={formikProps}
+        />
+      )}
+    </Formik>
   ))
   .add('No profiles (0)', () => (
-    <Profiles
-      editable={true}
-      onEditClick={action('edit click')}
-      max={200}
-      profiles={[]}
-      title='Agents'
-    />
+    <Formik
+      initialValues={{
+        profiles,
+        selected: {},
+      }}
+      validate={action('validate')}
+      onSubmit={action('submit')}
+    >
+      {formikProps => (
+        <Profiles
+          editable={true}
+          onEditClick={action('edit click')}
+          profiles={formikProps.values.profiles}
+          selected={formikProps.values['selected']}
+          title='Agents'
+          formikProps={formikProps}
+        />
+      )}
+    </Formik>
   ));

@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import map from 'lodash/map';
 import jp from 'jsonpath';
 import { getColorByIndex, getColorByChar } from '../../utils/getRandomColor';
 import { ITableColor } from '../../resources/interfaces';
@@ -63,6 +64,11 @@ export const getPayloadValue = (row: any, value: API_TablePayloadValue) => {
   }
 };
 
+export const convertStringToObject = (values: string, phrase: string = ', ') => {
+  const arrayValues = values.split(phrase);
+  return map(arrayValues, (title: string) => ({ id: title, title }));
+};
+
 export const generateComponentProps = (cell: any): ITableDataProps => {
   const type = cell.column.type as API_TableColumnField;
   const row = cell.row.original;
@@ -110,12 +116,11 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'multiple_teams', props: agentTeamProps };
 
     case 'TableColumnAgentGroupList':
-      const agentGroupList = [
-        getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title)
-      ];
+      const agentGroupList = getPayloadValue(row, type.valuesArray).map((_item: any) => _item.title);
+
       return {
         type: 'string',
-        props: { values: agentGroupList }
+        props: { values: agentGroupList, max: 2 }
       };
 
     case 'TableColumnAgentList':
@@ -132,10 +137,10 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
           viewModel: 'label',
           agents: getPayloadValue(row, type.valuesArray).map(
             (department: any) => {
-              const colors = getColorByChar(department.title.charAt(0));
+              const colors = getColorByChar(department.title ? department.title.charAt(0) : '');
 
               return {
-                name: department.title,
+                name: department.title || '',
                 avatar: department.avatar,
                 avatarProps: {
                   textBackgroundColor: colors.background,
