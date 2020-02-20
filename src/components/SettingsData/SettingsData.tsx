@@ -14,7 +14,7 @@ export interface IProps {
   type: string;
   props?: any;
 }
-const SettingsData: React.FC<IProps> = ({ type, props }) => {
+const SettingsData: React.FC<IProps> = ({ type, props = {} }) => {
   switch (type) {
     case 'header-card':
       return <HeaderCard />;

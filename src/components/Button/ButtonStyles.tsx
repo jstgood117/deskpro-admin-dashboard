@@ -123,7 +123,7 @@ export const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
     }
   }
   .selected-image-btn {
-    font-weight: bold;
+    font-weight: 500;
   }
   img {
     padding-right: 8px;

@@ -7,7 +7,6 @@ import { WithApolloClient } from 'react-apollo';
 import { withApollo } from '@apollo/react-hoc';
 import { gql } from 'apollo-boost';
 
-
 import { SettingsFormFactory } from './SettingsFormFactory';
 import {
   jsonSchema,
@@ -32,12 +31,12 @@ const SettingsFormStyled = styled.div`
   }
   .password-policy {
     .checkbox-field-inline {
-       .form-checkbox {
+      .form-checkbox {
         transform: translateY(0);
         margin-left: 5px;
       }
       .group-details {
-        padding-left: 35px
+        padding-left: 35px;
       }
     }
     .group-custom-policy {
@@ -79,30 +78,26 @@ const SettingsFormStyled = styled.div`
     justify-content: flex-start;
     min-height: 70px;
     padding-left: 346px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     border-top: 1px solid #d2d8dd;
     button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    min-width: 112px;
-    height: 34px;
-    border-radius: 4px;
-    border-width: 0;
-    font-family: Rubik;
-    font-size: 13px;
-    line-height: 150%;
-    }
-    .btn-primary button {
-    background-color: #1c3e55;
-    color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      min-width: 112px;
+      height: 34px;
+      border-radius: 4px;
+      border-width: 0;
+      font-family: Rubik;
+      font-size: 13px;
+      line-height: 150%;
     }
     .btn-secondary button {
-    margin-left: 329px;
-    background-color: #f7f7f7;
-    color: #a9b0b0;
-    border: 1px solid #d3d6d7;
+      margin-left: 329px;
+      background-color: #f7f7f7;
+      color: #a9b0b0;
+      border: 1px solid #d3d6d7;
     }
   }
 `;
@@ -116,15 +111,13 @@ interface IProps {
 
 export type PropsWithApollo = WithApolloClient<IProps>;
 
-const AuthSSO: React.FC<PropsWithApollo> = (
-  {
-    client,
-    initialValues = jsonSchema,
-    ui = uiSchema,
-    initYupSchema = vaildationSchema,
-    saveSchema= testQuery
-  }
-) => {
+const AuthSSO: React.FC<PropsWithApollo> = ({
+  client,
+  initialValues = jsonSchema,
+  ui = uiSchema,
+  initYupSchema = vaildationSchema,
+  saveSchema = testQuery
+}) => {
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {

@@ -52,7 +52,8 @@ export const uiSchema: {
                   type: 'field',
                   className: 'reference-markdown',
                   field: {
-                    type: 'markdown'
+                    type: 'markdown',
+                    id: 'ticket_reference_markdown'
                   }
                 }
               ]
@@ -66,5 +67,24 @@ export const uiSchema: {
 
 export const jsonSchema: any = {
   ticket_reference_enabled: true,
-  ticket_reference_code: ['yes']
+  ticket_reference_code: ['yes'],
+  ticket_reference_markdown: ''
+};
+
+export const validationSchema = {
+  type: 'object',
+  properties: {
+    ticket_reference_markdown: {
+      type: 'string',
+      required: true
+    }
+  }
+};
+
+export const validationConfig = {
+  errMessages: {
+    ticket_reference_markdown: {
+      required: 'validation.required'
+    }
+  }
 };

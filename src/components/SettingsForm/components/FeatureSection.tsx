@@ -16,6 +16,12 @@ export const FeatureSectionStyled = styled.div`
   width: 974px;
   min-height: calc(100vh - 70px);
 
+  & .page-section {
+    &:last-child::after {
+      height: 0;
+    }
+  }
+
   .header-card {
     height: 166px;
   }
@@ -102,6 +108,9 @@ export const FeatureSectionStyled = styled.div`
     padding: 39px 0 22px 0;
     margin: 0;
     max-width: 974px;
+    & .brand-button-group {
+      margin: 16px 0 8px 0;
+    }
   }
 
   & .feature-section-select {
@@ -121,6 +130,9 @@ export const FeatureSectionStyled = styled.div`
       .select__indicators {
         transform: translateX(-15px);
       }
+    }
+    & .brand-button-group {
+      margin: 8px 0 8px 0;
     }
   }
 
@@ -314,6 +326,7 @@ interface Props {
   field?: any;
   header?: any;
   icon?: string;
+  className?: string;
 }
 
 const FeatureSection: React.FC<Props> = ({
@@ -323,14 +336,15 @@ const FeatureSection: React.FC<Props> = ({
   field,
   icon,
   brandButtonGroup,
-  header
+  header,
+  className
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
   const enabled =
     !header || !header.showOn || formikProps.values[header.showOn] === true;
 
   return (
-    <FeatureSectionStyled className='feature-section'>
+    <FeatureSectionStyled className={`feature-section ${className}`}>
       {title ? (
         <h1 className='feature-section-title'>
           <div
@@ -349,7 +363,7 @@ const FeatureSection: React.FC<Props> = ({
             <ElasticsearchCard {...header} formikProps={formikProps} />
           ) : null}
           {brandButtonGroup && (
-            <div style={{ margin: '8px 0 8px 0' }}>
+            <div className='brand-button-group'>
               <BrandButtonGroup
                 size='medium'
                 selectBtn={(val: string) => {
@@ -371,7 +385,7 @@ const FeatureSection: React.FC<Props> = ({
             />
           )}
           {brandButtonGroup && (
-            <div style={{ margin: '8px 0 8px 0' }}>
+            <div className='brand-button-group'>
               <BrandButtonGroup
                 size='medium'
                 selectBtn={(val: string) => {

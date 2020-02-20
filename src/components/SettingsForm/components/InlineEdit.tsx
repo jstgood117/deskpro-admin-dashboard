@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, Fragment } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { DeskproAdminTheme } from '../../Theme';
@@ -12,9 +12,11 @@ export interface IProps {
   inline: any;
   field: any;
   formikProps: any;
+  hiddenExtension?: boolean;
+  maxWidth?: number;
 }
 
-const InlineEditWrapper = styled(dpstyle.div) <{ editing: boolean }>`
+const InlineEditWrapper = styled(dpstyle.div)<{ editing: boolean, width: number }>`
   display: flex;
   align-items: center;
   input[type='number']::-webkit-inner-spin-button,
@@ -22,7 +24,7 @@ const InlineEditWrapper = styled(dpstyle.div) <{ editing: boolean }>`
     -webkit-appearance: none;
     margin: 0;
   };
-  width: 825px;
+  width: ${props => props.width}px;
   &:hover {
     .edit-btn, .hourglass-undo-btn {
       display: ${props => !props.editing && 'block'};
@@ -43,7 +45,7 @@ const InlineEditWrapper = styled(dpstyle.div) <{ editing: boolean }>`
   }
 `;
 
-const StyledEditBox = styled(dpstyle.div1) <{ editing: boolean }>`
+const StyledEditBox = styled(dpstyle.div1)<{ editing: boolean }>`
   display: flex;
   align-items: center;
   font-size: 14px;
@@ -64,6 +66,9 @@ const StyledEditBox = styled(dpstyle.div1) <{ editing: boolean }>`
       display: none;
     }
   }
+  .input-wrapper {
+    width: 40px !important;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -78,15 +83,37 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const StyledBold = styled.div`
+  font-weight: 500;
+  font-family: 'Rubik';
+  font-size: 15;
+`;
+
+const StyledTitle = styled.div`
+  width: 200px;
+`;
+
 interface InlineProps {
   id: string;
   type: string;
   label: string;
+  title: string;
+  isBold?: boolean;
+  option?: string;
+  placeholder?: string;
 }
 
-const InlineEdit: FC<IProps> = ({ inline, formikProps, field }) => {
+const InlineEdit: FC<IProps> = (
+  {
+    inline,
+    formikProps,
+    field,
+    hiddenExtension = false,
+    maxWidth = 825
+  }
+  ) => {
   const [editing, setEdit] = useState(false);
-  const resetValueInput = ({ id, type }: InlineProps) => {
+  const resetValueInput = ({id, type}: InlineProps) => {
     if (type === 'input') {
       formikProps.setFieldValue(id, formikProps.values[`${id}_default`]);
     }
@@ -94,88 +121,96 @@ const InlineEdit: FC<IProps> = ({ inline, formikProps, field }) => {
 
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
-      <InlineEditWrapper editing={editing}>
+      <InlineEditWrapper editing={editing} width={maxWidth}>
         <FieldElement {...field} formikProps={formikProps} />
         <StyledEditBox editing={editing}>
-          {inline.map(({ type, label, id }: InlineProps, key: number) => {
-            return (
-              <React.Fragment key={key}>
-                {type === 'label' && label}
-                {editing && type === 'input' ? (
-                  <React.Fragment>
-                    &nbsp;
-                    <Input
-                      value={formikProps.values[id]}
-                      placeholder='Placeholder'
-                      type='number'
-                      onChange={event => {
-                        formikProps.setFieldValue(id, event.target.value);
-                      }}
-                      inputType='primary'
-                      style={{
-                        width: 25,
-                        height: 25,
-                        textAlign: 'center'
-                      }}
-                    />
-                    &nbsp;
-                  </React.Fragment>
-                ) : ''}
-                {
-                  !editing && type === 'input' ? (
-                    <div style={{ fontWeight: 500, fontFamily: 'Rubik', fontSize: 15 }}>
+          <Fragment>
+            {inline.map(({type, label, id, isBold, title, option = 'number', placeholder= 'Placeholder'}: InlineProps, key: number) => {
+              return (
+                <Fragment key={key}>
+                  {type === 'field' && <StyledTitle>{title}</StyledTitle>}
+                  {type === 'label' && !isBold && label}
+                  {type === 'label' && isBold && <StyledBold>&nbsp;{label}&nbsp;</StyledBold>}
+                  {editing && type === 'input' ? (
+                    <Fragment>
                       &nbsp;
-                      {formikProps.values[id]}
+                      <Input
+                        value={formikProps.values[id]}
+                        placeholder={placeholder}
+                        type={option}
+                        onChange={event => {
+                          formikProps.setFieldValue(id, event.target.value);
+                        }}
+                        inputType='primary'
+                        style={{
+                          width: 25,
+                          height: 25,
+                          textAlign: 'center'
+                        }}
+                      />
                       &nbsp;
+                    </Fragment>
+                  ) : ''}
+                  {
+                    !editing && type === 'input' ? (
+                      <div style={{fontWeight: 500, fontFamily: 'Rubik', fontSize: 15}}>
+                        &nbsp;
+                        {formikProps.values[id]}
+                        &nbsp;
                       </div>
-                  ) : ''
-                }
-              </React.Fragment>
-            );
-          })}
-          <div style={{ position: 'absolute', right: 8 }} className='edit-btn'>
-            <Button
-              styleType='tertiary'
-              onClick={() => {
-                setEdit(true);
-              }}
-              size='small'
-              iconOnly={true}
-              style={{
-                width: 25,
-                height: 25
-              }}
-            >
-              <Icon name='pencil' />
-            </Button>
-          </div>
-          <div style={{ position: 'absolute', right: '-50px' }} className='hourglass-undo-btn'>
-            <Button
-              styleType='tertiary'
-              onClick={() => {
-                console.log('Click hourglass');
-              }}
-              size='small'
-              iconOnly={true}
-            >
-              <Icon name='hourglass' />
-            </Button>
-          </div>
-          <div style={{ position: 'absolute', right: '-94px' }} className='hourglass-undo-btn'>
-            <Button
-              styleType='tertiary'
-              onClick={() => {
-                inline.map(resetValueInput);
-              }}
-              size='small'
-              iconOnly={true}
-            >
-              <Icon name='undo' />
-            </Button>
-          </div>
+                    ) : ''
+                  }
+                </Fragment>
+              );
+            })}
+            <div style={{position: 'absolute', right: 8}} className='edit-btn'>
+              <Button
+                styleType='tertiary'
+                onClick={() => {
+                  setEdit(true);
+                }}
+                size='small'
+                iconOnly={true}
+                style={{
+                  width: 25,
+                  height: 25
+                }}
+              >
+                <Icon name='pencil'/>
+              </Button>
+            </div>
+            {!hiddenExtension && (
+              <Fragment>
+                <div style={{position: 'absolute', right: '-50px'}} className='hourglass-undo-btn'>
+                  <Button
+                    styleType='tertiary'
+                    onClick={() => {
+                      console.log('Click hourglass');
+                    }}
+                    size='small'
+                    iconOnly={true}
+                  >
+                    <Icon name='hourglass' />
+                  </Button>
+                </div>
+                <div style={{position: 'absolute', right: '-94px'}} className='hourglass-undo-btn'>
+                <Button
+                  styleType='tertiary'
+                  onClick={() => {
+                    inline.map(resetValueInput);
+                  }}
+                  size='small'
+                  iconOnly={true}
+                >
+                  <Icon name='undo' />
+                </Button>
+              </div>
+              </Fragment>
+            )}
+          </Fragment>
         </StyledEditBox>
         {editing && (
-          <ButtonWrapper style={{ marginLeft: 24 }}>
+          <ButtonWrapper style={{marginLeft: 24}}>
             <Button
               styleType='tertiary'
               onClick={() => {

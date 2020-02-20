@@ -21,7 +21,7 @@ const StyledCard = styled(dpstyle.div)`
   background-position: 100%;
   box-sizing: border-box;
 
-  font-family: Rubik;
+  font-family: Lato;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;

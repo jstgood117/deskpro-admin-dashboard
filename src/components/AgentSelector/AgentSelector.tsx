@@ -51,7 +51,6 @@ const SelectorInfo = styled(dpstyle.div1)`
   font-weight: 500;
   font-size: 14px;
   margin: 16px 0;
-
   /* Selected info */
   & > p {
     margin: 0;
@@ -133,7 +132,7 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
   restricted,
   onSave,
   onCancel,
-  onSelect,
+  onSelect
 }) => {
   const [filter, setFilter] = React.useState('');
   const onAgentSelect = React.useCallback(
@@ -168,14 +167,10 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
 
   return (
     <SelectorContainer>
-      <SelectorHeader>
-        {title}
-      </SelectorHeader>
+      <SelectorHeader>{title}</SelectorHeader>
       <SelectorBody>
         {description && (
-          <SelectorDescription>
-            {description}
-          </SelectorDescription>
+          <SelectorDescription>{description}</SelectorDescription>
         )}
         <SelectorInfo>
           <p>
@@ -238,11 +233,7 @@ const AgentSelector: React.FC<Props & WrappedComponentProps> = ({
         </Scrollbars>
       </SelectorBody>
       <SelectorFooter>
-        <Button
-          styleType='primary'
-          size='medium'
-          onClick={onSave}
-        >
+        <Button styleType='primary' size='medium' onClick={onSave}>
           {intl.formatMessage({ id: 'admin.common.save' })}
         </Button>
         <Button
