@@ -8,10 +8,20 @@ export const uiSchema: {
 } = {
   elements: [
     {
-      title: 'General Settings',
+      // title: 'General Settings',
       type: 'feature_section',
       className: 'custom-section',
       icon: 'down',
+      field: {
+        type: 'singleSelect',
+        selectType: 'large',
+        options: [
+          {
+            label: 'General Settings',
+            value: 'General Settings'
+          }
+        ]
+      },
       elements: [
         {
           type: 'page_section',

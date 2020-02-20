@@ -26,6 +26,9 @@ const SettingsFormStyled = styled.div`
       p  {
         max-width: unset;
       }
+      label {
+        font-family: Lato;
+      }
     }
   }
   .info-custom {
@@ -44,6 +47,15 @@ const SettingsFormStyled = styled.div`
          &.file-upload, &.rate-limit {
           right: -116px;
         }
+      }
+    }
+    .form-item {
+      margin-bottom: 0;
+      input {
+        width: 200px;
+      }
+      .description: {
+        margin-bottom: 0;
       }
     }
   }
@@ -67,13 +79,14 @@ const SettingsFormStyled = styled.div`
       margin-right: 0px !important;
     }
     .horz-element-group {
-      padding-left: 0
+      padding-left: 0;
     }
-    .css-dyniur-control, input{
+    .select__control {
       width: 200px;
-    }
-    .select__control.css-dyniur-control input {
-      width: 1px;
+      height: 34px;
+      input {
+        width: 1px;
+      }
     }
   }
   .custom-group-element {
@@ -105,7 +118,7 @@ const SettingsFormStyled = styled.div`
       height: 34px;
       border-radius: 4px;
       border-width: 0;
-      font-family: Rubik;
+      font-family: Lato;
       font-size: 13px;
       line-height: 150%;
     }
@@ -155,13 +168,23 @@ const SettingsFormStyled = styled.div`
     .select__control {
       width: 320px;
     }
+    label {
+      font-family: Lato;
+      font-weight: 700;
+    }
   }
   .checkbox-middle {
     .form-checkbox {
       transform: translateY(4px);
     }
   }
-
+  .notification-block {
+    .element-details {
+      label {
+        font-weight: 600;
+      }
+    }
+  }
 `;
 
 const testQuery: DocumentNode = gql`

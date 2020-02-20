@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const InputStyled = styled(dpstyle.textarea)`
-  font-family: Rubik, sans-serif;
+  font-family: Lato, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
@@ -25,7 +25,7 @@ export const InputStyled = styled(dpstyle.textarea)`
   width: 578px;
   resize: none;
   ::placeholder {
-    font-family: Rubik, sans-serif;
+    font-family: Lato, sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
