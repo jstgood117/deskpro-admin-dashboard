@@ -68,3 +68,17 @@ export const jsonSchema: any = {
   ticket_reference_enabled: true,
   ticket_reference_code: ['yes']
 };
+
+export const validationSchema = {
+  type: 'object',
+  properties: {
+    ticket_reference_enabled: {
+      type: 'boolean'
+    },
+    ticket_reference_code: {
+      type: 'array'
+    },
+  },
+};
+
+export const validationConfig = {};
