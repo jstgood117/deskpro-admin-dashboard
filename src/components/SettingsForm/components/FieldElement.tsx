@@ -159,7 +159,10 @@ const elementsSelector: {
         option={props.formikProps.values[props.optionId]}
         onChange={(value: UnitsValuesType) => {
           props.formikProps.setFieldValue(props.id, value.inputValue);
-          props.formikProps.setFieldValue(props.optionId, value.selectValue.value);
+          props.formikProps.setFieldValue(
+            props.optionId,
+            value.selectValue.value
+          );
         }}
       />
     );
@@ -212,8 +215,21 @@ const elementsSelector: {
       />
     );
   },
-  markdown: () => {
-    return <Markdown />;
+  markdown: props => {
+    return (
+      <Field name={props.id}>
+        {({ field, meta }: any) => (
+          <div>
+            <Markdown {...field} />
+            {meta.touched && meta.error && (
+              <ErrorMessage className='error'>
+                <FormattedMessage id={meta.error} />
+              </ErrorMessage>
+            )}
+          </div>
+        )}
+      </Field>
+    );
   }
 };
 
