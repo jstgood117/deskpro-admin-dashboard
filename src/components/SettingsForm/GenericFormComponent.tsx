@@ -6,12 +6,13 @@ import FeatureSection from './components/FeatureSection';
 import PageSection from './components/PageSection';
 import ElementGroup from './components/ElementGroup';
 import VertElementGroup from './components/VertElementGroup';
-import InlineEditGroup from './components/InlineEditGroup';
 import HorizontalElementGroup from './components/HorizontalElementGroup';
 import AlertSection from './components/AlertSection';
 import SettingsData from './components/SettingsData';
 import CodeSection from './components/CodeSection';
 import ButtonSection from './components/ButtonSection';
+import InlineEditGroup from './components/InlineEditGroup';
+import HeaderMediumCard from './components/HeaderMediumCard';
 
 // Common components
 import TabbedFieldGroup from '../TabbedFieldGroup';
@@ -20,7 +21,7 @@ export const GenericFormComponent = (props: any) => {
   switch (props.type) {
     case 'tabs_section':
       return (
-        <div style={{ position: 'relative', maxWidth: 685 }}>
+        <div style={{ position: 'relative', maxWidth: 765, marginBottom: 24, borderBottom: '1px solid #E8EBEE' }}>
           <TabbedFieldGroup {...props} />
         </div>
       );
@@ -50,6 +51,8 @@ export const GenericFormComponent = (props: any) => {
       return <CodeSection {...props} />;
     case 'field':
       throw Error('Fields must be in a container');
+    case 'header-medium-card':
+      return <HeaderMediumCard {...props}/>;
     default:
       return null;
   }

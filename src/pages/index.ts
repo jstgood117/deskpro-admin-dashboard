@@ -19,6 +19,7 @@ import VoiceSettings from './Bespoke/VoiceSettings';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
 import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
+import GeneralSetting from '../components/SettingsForm/GeneralSettings';
 import Tasks from './Bespoke/Tasks';
 import BusinessHours from './Bespoke/BusinessHours';
 
@@ -51,5 +52,6 @@ export const RouteToPage: KeyValue = {
 
   '/sysadmin/settings': ExamplePage,
   '/sysadmin/file-check': FileCheckPage,
-  '/sysadmin/realtime-events': RealTimeEvents
+  '/sysadmin/realtime-events': RealTimeEvents,
+  '/settings/general': GeneralSetting
 };

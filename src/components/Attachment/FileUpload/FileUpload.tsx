@@ -156,11 +156,11 @@ const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
             ) : (
               <Icon name='elephant' />
             )}
-            <span
+            {/* <span
               style={{ paddingLeft: 10, paddingRight: 10, display: 'flex' }}
             >
               <Icon name='file' />
-            </span>
+            </span> */}
             {fileName}
             <Tooltip content='Remove file' styleType='dark' placement='bottom'>
               <span style={{ paddingLeft: 8 }}>

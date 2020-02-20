@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Toggle from '../../Toggle';
 import Input from '../../Input';
+import TextArea from './TextArea';
 import Profiles from '../../Profiles';
 import StringListBuilder from '../../StringListBuilder';
 import Units from '../../Units';
@@ -124,6 +125,16 @@ const elementsSelector: {
         </div>
       )}
     </Field>
+  ),
+  textarea: props => (
+    <div>
+      <TextArea
+        value={props.formikProps.values[props.id]}
+        placeholder={props.placeholder}
+        onChange={(val: Text) => props.formikProps.setFieldValue(props.id, val)}
+        {...props}
+      />
+    </div>
   ),
   select: props => (
     <SingleSelect

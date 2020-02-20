@@ -325,6 +325,7 @@ interface Props {
   field?: any;
   header?: any;
   icon?: string;
+  className?: string;
 }
 
 const FeatureSection: React.FC<Props> = ({
@@ -334,14 +335,15 @@ const FeatureSection: React.FC<Props> = ({
   field,
   icon,
   brandButtonGroup,
-  header
+  header,
+  className
 }) => {
   const [selected, selectBtn] = useState(brandButtonGroup ? 'brand1' : '');
   const enabled =
     !header || !header.showOn || formikProps.values[header.showOn] === true;
 
   return (
-    <FeatureSectionStyled className='feature-section'>
+    <FeatureSectionStyled className={`feature-section ${className}`}>
       {title ? (
         <h1 className='feature-section-title'>
           <div

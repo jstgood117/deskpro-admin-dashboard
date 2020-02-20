@@ -5,12 +5,20 @@ import Button from '../../Button';
 import { SettingsFormFactory } from '../../SettingsForm/SettingsFormFactory';
 import { IFieldGroupProps, FormContainer } from '../TabbedFieldGroup';
 
-const TabsContainer = styled.div`
+const TabsContainer = styled.div<{ borderBottom: boolean}>`
   /* border-bottom: 1px solid #e8ebee; */
+  border-bottom: ${({ borderBottom }) => (borderBottom ? '1px solid #e8ebee;' : '')};
   margin-bottom: 24px;
   & .selected-image-btn {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+  > div {
+    width: 107px;
+    margin-right: 8px;
+    button {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -19,12 +27,13 @@ export const CollapsedFieldGroup: React.FC<IFieldGroupProps> = ({
   formikProps,
   handleChange,
   values,
-  tabs
+  tabs,
+  borderBottom
 }) => {
   const [selected, setSelected] = React.useState(0);
   return (
     <React.Fragment>
-      <TabsContainer>
+      <TabsContainer borderBottom={borderBottom}>
         {tabs.map((tab, index) => (
           <Button
             styleType='imageButton'
