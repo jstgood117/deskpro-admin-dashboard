@@ -10,7 +10,7 @@ export const OverlayStyled = styled.div<{ open: boolean, opacity?: number }>`
   z-index: 9;
   background-color: ${props => props.theme.black};
   opacity: ${props => props.open
-    ? props.opacity
+    ? props.opacity !== undefined
       ? props.opacity
       : 0.2
     : 0

@@ -185,7 +185,11 @@ const UserGroups: React.FC<IProps> = ({
         )}
       />
 
-      <Drawer open={open} onClose={closeDrawer}>
+      <Drawer
+        open={open}
+        opacity={0}
+        onClose={closeDrawer}
+      >
         <UserGroupsForm
           id={id}
           open={open}
