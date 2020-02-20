@@ -87,11 +87,21 @@ Use the [Help center editor](http://www.test.com) to re-order items in the tab b
                 {
                   type: 'field',
                   field: {
-                    type: 'stringlist',
+                    type: 'userGroups',
                     id: 'help_center_guides_settings_user_access',
                     title: 'Usergroups',
-                    addTitle: 'Add Usergroup',
-                    max: 8
+                    buttonTitle: 'Add Usergroup',
+                    tooltip: 'All usergroups have been added.',
+                    options: [
+                      'Extra Privileged',
+                      'General Users',
+                      'Internal Teams',
+                      'Privileged',
+                      'Registered',
+                      'Recruiters',
+                      'VIP',
+                      'VVIP'
+                    ]
                   }
                 }
               ]
@@ -108,29 +118,54 @@ export const jsonSchema: any = {
   brand1_help_center_guides_settings_homepage: true,
   brand1_help_center_guides_settings_subscriptions: true,
   brand1_help_center_guides_settings_permissions: true,
-  brand1_help_center_guides_settings_user_access: ['Extra Privileged', 'General Users', 'Registered', 'VIP'],
+  brand1_help_center_guides_settings_user_access: [
+    'Extra Privileged',
+    'General Users',
+    'Registered',
+    'VIP'
+  ],
 
   brand2_help_center_guides_settings: true,
   brand2_help_center_guides_settings_homepage: true,
   brand2_help_center_guides_settings_subscriptions: true,
   brand2_help_center_guides_settings_permissions: true,
-  brand2_help_center_guides_settings_user_access: ['Extra Privileged', 'General Users', 'Registered', 'VIP'],
+  brand2_help_center_guides_settings_user_access: [
+    'Extra Privileged',
+    'General Users',
+    'Registered',
+    'VIP'
+  ],
 
   brand3_help_center_guides_settings: true,
   brand3_help_center_guides_settings_homepage: true,
   brand3_help_center_guides_settings_subscriptions: true,
   brand3_help_center_guides_settings_permissions: true,
-  brand3_help_center_guides_settings_user_access: ['Extra Privileged', 'General Users', 'Registered', 'VIP'],
+  brand3_help_center_guides_settings_user_access: [
+    'Extra Privileged',
+    'General Users',
+    'Registered',
+    'VIP'
+  ],
 
   brand4_help_center_guides_settings: true,
   brand4_help_center_guides_settings_homepage: true,
   brand4_help_center_guides_settings_subscriptions: true,
   brand4_help_center_guides_settings_permissions: true,
-  brand4_help_center_guides_settings_user_access: ['Extra Privileged', 'General Users', 'Registered', 'VIP'],
+  brand4_help_center_guides_settings_user_access: [
+    'Extra Privileged',
+    'General Users',
+    'Registered',
+    'VIP'
+  ],
 
   brand5_help_center_guides_settings: true,
   brand5_help_center_guides_settings_homepage: true,
   brand5_help_center_guides_settings_subscriptions: true,
   brand5_help_center_guides_settings_permissions: true,
-  brand5_help_center_guides_settings_user_access: ['Extra Privileged', 'General Users', 'Registered', 'VIP'],
+  brand5_help_center_guides_settings_user_access: [
+    'Extra Privileged',
+    'General Users',
+    'Registered',
+    'VIP'
+  ]
 };

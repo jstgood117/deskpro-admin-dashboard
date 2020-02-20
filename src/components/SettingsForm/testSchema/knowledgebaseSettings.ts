@@ -100,11 +100,21 @@ Use the [Help center editor](http://www.test.com) to re-order items in the tab b
                 {
                   type: 'field',
                   field: {
-                    type: 'stringlist',
+                    type: 'userGroups',
                     id: 'help_center_knowledgebase_settings_user_access',
                     title: 'Usergroups',
-                    addTitle: 'Add Usergroup',
-                    max: 8
+                    buttonTitle: 'Add Usergroup',
+                    tooltip: 'All usergroups have been added.',
+                    options: [
+                      'Extra Privileged',
+                      'General Users',
+                      'Internal Teams',
+                      'Privileged',
+                      'Registered',
+                      'Recruiters',
+                      'VIP',
+                      'VVIP'
+                    ]
                   }
                 }
               ]

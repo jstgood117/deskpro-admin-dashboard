@@ -12,8 +12,6 @@ import AlertSection from './components/AlertSection';
 import SettingsData from './components/SettingsData';
 import CodeSection from './components/CodeSection';
 import ButtonSection from './components/ButtonSection';
-import DrawerSection from './components/DrawerSection';
-import AgentSelectorSection from './components/AgentSelectorSection';
 
 // Common components
 import TabbedFieldGroup from '../TabbedFieldGroup';
@@ -48,10 +46,6 @@ export const GenericFormComponent = (props: any) => {
       return (
         <SettingsData {...props.options} formikProps={props.formikProps} />
       );
-    case 'drawer':
-      return <DrawerSection {...props} />;
-    case 'agent-selector':
-      return <AgentSelectorSection {...props} />;
     case 'code':
       return <CodeSection {...props} />;
     case 'field':

@@ -20,10 +20,22 @@ import ProgressBar from '../../ProgressBar';
 import { StyledCheckbox, ErrorMessage, ReportPanel } from './styles';
 import SettingsData from '../../SettingsData';
 import Markdown from '../../Markdown';
+import UserGroups from '../../UserGroups';
 
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
 } = {
+  userGroups: props => (
+    <UserGroups
+      id={props.id}
+      title={props.title}
+      buttonTitle={props.buttonTitle}
+      options={props.options}
+      selectedOptions={props.formikProps.values[props.id]}
+      tooltip={props.tooltip}
+      formikProps={props.formikProps}
+    />
+  ),
   fileUpload: props => (
     <FileUpload
       id={props.id}
@@ -140,7 +152,7 @@ const elementsSelector: {
       {...props}
       profiles={props.profiles}
       selected={props.formikProps.values[props.id]}
-      onEditClick={() => { }}
+      onEditClick={() => {}}
       formikProps={props.formikProps}
     />
   ),
@@ -161,7 +173,10 @@ const elementsSelector: {
         option={props.formikProps.values[props.optionId]}
         onChange={(value: UnitsValuesType) => {
           props.formikProps.setFieldValue(props.id, value.inputValue);
-          props.formikProps.setFieldValue(props.optionId, value.selectValue.value);
+          props.formikProps.setFieldValue(
+            props.optionId,
+            value.selectValue.value
+          );
         }}
       />
     );

@@ -10,51 +10,6 @@ export const uiSchema: {
       brandButtonGroup: true,
       elements: [
         {
-          type: 'drawer',
-          className: 'drawer-community-settings',
-          elements: [
-            {
-              id: 'help_center_community_usergroups',
-              type: 'agent-selector',
-              title: 'Usergroups',
-              agents: [
-                {
-                  id: 'group1',
-                  name: 'Extra Privileged'
-                },
-                {
-                  id: 'group2',
-                  name: 'General Users'
-                },
-                {
-                  id: 'group3',
-                  name: 'Internal Teams'
-                },
-                {
-                  id: 'group4',
-                  name: 'Privileged'
-                },
-                {
-                  id: 'group5',
-                  name: 'Registered'
-                },
-                {
-                  id: 'group6',
-                  name: 'Recruiters'
-                },
-                {
-                  id: 'group7',
-                  name: 'VIP'
-                },
-                {
-                  id: 'group8',
-                  name: 'VVIP'
-                }
-              ]
-            }
-          ]
-        },
-        {
           type: 'page_section',
           className: 'community-settings',
           elements: [
@@ -132,11 +87,21 @@ Use the [Help center editor](http://www.test.com) to re-order items in the tab b
                 {
                   type: 'field',
                   field: {
-                    type: 'stringlist',
+                    type: 'userGroups',
                     id: 'help_center_community_settings_user_access',
                     title: 'Usergroups',
-                    addTitle: 'Add Usergroup',
-                    max: 8
+                    buttonTitle: 'Add Usergroup',
+                    tooltip: 'All usergroups have been added.',
+                    options: [
+                      'Extra Privileged',
+                      'General Users',
+                      'Internal Teams',
+                      'Privileged',
+                      'Registered',
+                      'Recruiters',
+                      'VIP',
+                      'VVIP'
+                    ]
                   }
                 }
               ]
@@ -149,13 +114,6 @@ Use the [Help center editor](http://www.test.com) to re-order items in the tab b
 };
 
 export const jsonSchema: any = {
-  help_center_community_usergroups: {
-    group1: true,
-    group2: true,
-    group5: true,
-    group7: true
-  },
-
   brand1_help_center_community_settings: true,
   brand1_help_center_community_settings_homepage: true,
   brand1_help_center_community_settings_subscriptions: true,
