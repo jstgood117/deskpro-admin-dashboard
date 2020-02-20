@@ -1,7 +1,7 @@
 import AgentsSettings from './Agents/Settings';
 import AuthSSO from './Agents/AuthSSO';
 import ExamplePage from './Bespoke/Example';
-// import ResetHelpdesk from './Bespoke/ResetHelpdesk';
+import ResetHelpdeskPage from './Bespoke/ResetHelpdesk';
 import ImporterPage from './Bespoke/Importer';
 import FileCheckPage from './Bespoke/FileCheck';
 import HelpCenterSetupPage from './Bespoke/HelpCenterSetup';
@@ -42,13 +42,13 @@ export const RouteToPage: KeyValue = {
   '/tickets/ref-codes': TicketReferences,
   '/tickets/deflection': TicketDeflection,
 
-  // '/help-center/kb/settings': ResetHelpdesk,
   '/help-center/setup': HelpCenterSetupPage,
   '/help-center/community/settings': HelpCenterCommunitySettingsPage,
   '/help-center/downloads/settings': HelpCenterDownloadSettingsPage,
   '/help-center/news/settings': HelpCenterNewsSettingsPage,
   '/help-center/guides/settings': HelpCenterGuidesSettingsPage,
   '/help-center/kb/settings': HelpCenterKnowledgebaseSettingsPage,
+  '/help-center/reset': ResetHelpdeskPage,
 
   '/sysadmin/settings': ExamplePage,
   '/sysadmin/file-check': FileCheckPage,
