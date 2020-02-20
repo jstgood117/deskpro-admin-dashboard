@@ -14,6 +14,10 @@ const SelectorRowStyled = styled.div`
   user-select: none;
   color: ${props => props.theme.staticColour};
 
+  &:first-child {
+    margin-top: 5px;
+  }
+
   &:hover {
     background: ${props => props.theme.textHover};
     font-weight: normal;
