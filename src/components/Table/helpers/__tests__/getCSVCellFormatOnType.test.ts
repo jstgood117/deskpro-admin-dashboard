@@ -1,8 +1,10 @@
-import { getCSVCellFormatOnType } from '../csvDataFn';
+import {
+  getValueFromColumnType
+} from '../../../../utils/getValueFromColumnType';
+
 import { KeyValue } from '../../../../types';
 
-
-describe('getCSVCellFormatOnType', () => {
+describe('getValueFromColumnType', () => {
 
   const values: KeyValue = {
     id: '1',
@@ -17,27 +19,9 @@ describe('getCSVCellFormatOnType', () => {
     can_admin: true,
     can_reports: false,
     date_last_login: '2020-01-22 05:27:14',
-    agent_teams: [{
-      id:2,
-      title:'Team 1'
-    },{
-      id:5,
-      title:'Team 2'
-    }],
-    agent_groups: [{
-      id:3,
-      title:'Group 1'
-    }, {
-      id:6,
-      title:'Group 2'
-    }],
-    departments:[{
-      id:4,
-      title:'Department 1'
-    }, {
-      id:7,
-      title:'Department 2'
-    }],
+    agent_teams: 'Team 1, Team 2',
+    agent_groups: 'Group 1, Group 2',
+    departments:'Department 1, Department 2',
     timezone: 'Asia/Kolkata',
     date_created: '2020-01-22 01:29:43',
     tickets: 154,
@@ -56,7 +40,7 @@ describe('getCSVCellFormatOnType', () => {
     };
 
     test('TableColumnId', () => {
-      const result = getCSVCellFormatOnType(columnProps, values);
+      const result = getValueFromColumnType(columnProps, values);
       expect(result).toEqual('1');
     });
 
@@ -71,7 +55,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(timeAgoProps, values);
+      const result = getValueFromColumnType(timeAgoProps, values);
       expect(result).toEqual('2020-01-22 01:29:43');
     });
 
@@ -85,7 +69,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(emailProps, values);
+      const result = getValueFromColumnType(emailProps, values);
       expect(result).toEqual('testing@deskpro.com');
     });
 
@@ -99,7 +83,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(salaryProps, values);
+      const result = getValueFromColumnType(salaryProps, values);
       expect(result).toEqual(1_000_000);
     });
 
@@ -117,7 +101,7 @@ describe('getCSVCellFormatOnType', () => {
     };
 
     test('TableColumnTextCommaSep', () => {
-      const result = getCSVCellFormatOnType(valuesArrayProps, values);
+      const result = getValueFromColumnType(valuesArrayProps, values);
       expect(result).toEqual('testing@deskpro.com, john@deskpro.com');
     });
 
@@ -131,7 +115,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(departmentsProps, values);
+      const result = getValueFromColumnType(departmentsProps, values);
       expect(result).toEqual('Department 1, Department 2');
     });
 
@@ -145,7 +129,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(groupsListProps, values);
+      const result = getValueFromColumnType(groupsListProps, values);
       expect(result).toEqual('Group 1, Group 2');
     });
 
@@ -159,7 +143,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(teamsListProps, values);
+      const result = getValueFromColumnType(teamsListProps, values);
       expect(result).toEqual('Team 1, Team 2');
     });
 
@@ -177,7 +161,7 @@ describe('getCSVCellFormatOnType', () => {
     };
 
     test('TableColumnBoolYesNo truey', () => {
-      const result = getCSVCellFormatOnType(boolanProps, values);
+      const result = getValueFromColumnType(boolanProps, values);
       expect(result).toEqual('Yes');
     });
 
@@ -191,7 +175,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(falseBoolanProps, values);
+      const result = getValueFromColumnType(falseBoolanProps, values);
       expect(result).toEqual('No');
     });
 
@@ -205,7 +189,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(failBoolanProps, values);
+      const result = getValueFromColumnType(failBoolanProps, values);
       expect(result).toEqual('');
     });
   });
@@ -229,7 +213,7 @@ describe('getCSVCellFormatOnType', () => {
         }
       };
 
-      const result = getCSVCellFormatOnType(avatarProps, values);
+      const result = getValueFromColumnType(avatarProps, values);
       expect(result).toEqual('John Doe');
     });
 

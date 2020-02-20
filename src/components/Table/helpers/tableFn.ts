@@ -72,7 +72,12 @@ export const onCheckboxChange = (
             ...newIds,
             [groupId]: true
           };
-        } else {
+        } else if (_.difference(group, selected).length < group.length) {
+          newIds = {
+            ...newIds,
+            [groupId]: 'indeterminate'
+          };
+        } else{
           delete newIds[groupId];
         }
       });

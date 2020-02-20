@@ -14,8 +14,8 @@ describe('TasksPage', () => {
     return mountedPage;
   };
 
-  it('always renders a <div>', () => {
-    const elts = wrapper(false).find('div');
-    expect(elts.length).toBeGreaterThan(0);
+  it('renders a <div> root', () => {
+    const root = wrapper(true);
+    expect(root.length).toEqual(1);
   });
 });

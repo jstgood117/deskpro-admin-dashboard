@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 import _ from 'lodash';
 
 import Checkbox from '../Checkbox';
-import { generateComponentProps } from '../TableData/apiToComponentAdapter';
+import { generateComponentProps, convertStringToObject } from '../TableData/apiToComponentAdapter';
 import TableData from '../TableData';
 import { KeyValue } from '../../types';
 
@@ -71,6 +71,13 @@ const TableTr: FC<Props> = ({
       {_.sortBy(row.cells, 'column.index').map(
         (cell: any, indexInner: number) => {
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+          const isAgentPage = match.url === '/agents';
+          const isTeamAgentsPage = cell.column.id === 'admin_common.col.teams' && isAgentPage;
+          const isDepartmentsAgentsPage = cell.column.id === 'admin_common.col.departments' && isAgentPage;
+          const isGroupAgentsPage = cell.column.id === 'admin_common.col.groups' && isAgentPage;
+          const dataPath = isTeamAgentsPage ? 'agent_teams' : (isGroupAgentsPage ? 'agent_groups' : 'departments');
+          const __typename = isGroupAgentsPage ? 'TableColumnAgentGroupList' : 'TableColumnTicketDepartmentList';
+
           return (
             <td
               className={
@@ -93,17 +100,16 @@ const TableTr: FC<Props> = ({
               })}
               key={indexInner}
             >
-              {cell.column.id === 'admin_common.col.teams' &&
-              match.url === '/agents' ? (
+              {(isTeamAgentsPage || isGroupAgentsPage || isDepartmentsAgentsPage) ? (
                 <TableData
                   {...generateComponentProps({
                     ...cell,
                     column: {
                       ...cell.column,
                       type: {
-                        __typename: 'TableColumnTicketDepartmentList',
+                        __typename,
                         valuesArray: {
-                          dataPath: 'agent_teams'
+                          dataPath
                         }
                       }
                     },
@@ -111,10 +117,10 @@ const TableTr: FC<Props> = ({
                       ...cell.row,
                       original: {
                         ...cell.row.original,
-                        agent_teams: [{ id: cell.value, title: cell.value }]
+                        [dataPath]: _.isEmpty(cell.value[0]) ? cell.value : convertStringToObject(cell.value[0])
                       }
                     },
-                    value: [{ id: cell.value, title: cell.value }]
+                    value: _.isEmpty(cell.value[0]) ? cell.value : convertStringToObject(cell.value[0])
                   })}
                 />
               ) : (
