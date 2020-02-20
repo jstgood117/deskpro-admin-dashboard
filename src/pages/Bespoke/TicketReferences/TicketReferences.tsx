@@ -1,16 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
+import { buildYup } from 'schema-to-yup';
 import styled from 'styled-components';
 
-import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
-import { uiSchema, jsonSchema } from './testData';
+import {
+  jsonSchema,
+  uiSchema,
+  validationSchema,
+  validationConfig
+} from './testData';
 import Button from '../../../components/Button';
 
-interface IProps {
-  path: string;
-  ui?: any;
-  initialValues?: any;
-}
+import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -87,21 +88,30 @@ const ButtonToolbar = styled.div`
   }
 `;
 
-const TicketReferences: FC<IProps> = ({ ui, initialValues }) => {
+interface IProps {
+  path: string;
+}
+
+const TicketReferences: FC<IProps> = () => {
+  const [yupSchema, setYupSchema] = useState({});
+
+  useEffect(() => {
+    setYupSchema(buildYup(validationSchema, validationConfig));
+  }, []);
+
   return (
     <Formik
-      initialValues={initialValues || jsonSchema}
-      validate={values => {
+      initialValues={jsonSchema}
+      validationSchema={yupSchema}
+      onSubmit={(values, { setSubmitting }) => {
         console.log(values);
-      }}
-      onSubmit={async values => {
-        console.log(values);
+        setSubmitting(false);
       }}
     >
       {(formikProps: any) => (
         <form onSubmit={formikProps.handleSubmit}>
           <Container>
-            {SettingsFormFactory(ui || uiSchema, formikProps)}
+            {SettingsFormFactory(uiSchema, formikProps)}
           </Container>
           <ButtonToolbar>
             <Button
