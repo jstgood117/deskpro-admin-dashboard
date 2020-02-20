@@ -29,6 +29,7 @@ const Container = styled.div`
     &.form-item {
       margin: 0;
       .select__control {
+        min-width: 169px;
         min-height: 28px;
         .select__single-value {
           font-size: 15px;
