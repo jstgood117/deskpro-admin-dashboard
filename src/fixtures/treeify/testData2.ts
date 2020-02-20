@@ -1,4 +1,4 @@
-export const testData2 = [
+export const testData2 : any = [
   {
     'id': 'hidden',
     'sys_id': 'hidden',
@@ -7,7 +7,10 @@ export const testData2 = [
     'depth': 0,
     'title': 'Hidden',
     'display_order': -1,
-    'effective_display_order': 5
+    'effective_display_order': 5,
+    'agent_teams': [{'name': 'Team 1'}],
+    'agent_groups': [{'title': 'All Permissions'}],
+    'departments': [{'title': 'Widgets'}],
   },
   {
     'id': 'hidden.1',
@@ -19,7 +22,7 @@ export const testData2 = [
     'depth': 1,
     'title': 'Deleted',
     'display_order': 0,
-    'effective_display_order': 6
+    'effective_display_order': 6,
   },
   {
     'id': 'hidden.2',
@@ -31,6 +34,6 @@ export const testData2 = [
     'depth': 1,
     'title': 'Spam',
     'display_order': 0,
-    'effective_display_order': 7
+    'effective_display_order': 7,
   }
 ];
