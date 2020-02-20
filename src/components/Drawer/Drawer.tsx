@@ -6,17 +6,23 @@ import Icon from '../Icon';
 
 type Props = {
   open: boolean;
+  opacity?: number;
   onClose: () => void;
 };
 
 export const Drawer: FC<Props> = ({
   open,
+  opacity,
   onClose,
   children
 }) => {
   return createPortal((
     <div>
-      <OverlayStyled open={open} onClick={onClose} />
+      <OverlayStyled
+        open={open}
+        opacity={opacity}
+        onClick={onClose}
+      />
       <DrawerStyled open={open}>
         <StyledClose onClick={onClose}>
           <Icon name='caret-right' />

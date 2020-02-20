@@ -302,8 +302,10 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
       return handleSortChange({ link, label });
     }
     const { column } = val;
-    onGroupByChange([column]);
-    setGroupValue(val);
+    const isSelectedGroupBy = val === groupValue;
+
+    onGroupByChange(isSelectedGroupBy ? [] : [column]);
+    setGroupValue(isSelectedGroupBy ? '' : val);
   };
 
   const debounceOnSearchChange = useCallback(debounce(_onSearchChange, 300), [

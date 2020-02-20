@@ -135,18 +135,32 @@ const Table: FC<Props> = ({
 
   useEffect(() => {
     setChecked({});
-  }, [groupBy]);
+    setCurrentPage(1);
+    gotoPage(0);
+  }, [groupBy, gotoPage]);
 
   useEffect(() => {
-    setTotalRecords(data.length);
-  }, [data]);
+    let totalRecord = data.length;
+    if (groupBy && groupBy.length) {
+      let countSubRow = 0;
+      const groups = _.sortBy(groupedRows.filter((r: any) => r.isGrouped), 'index');
+      const groupsNoExpanded = page.filter((r: any) => r.canExpand && r.isExpanded === undefined);
+      _.map(groupsNoExpanded, ({ subRows }) => countSubRow += subRows.length);
+
+      totalRecord += groups.length || 0;
+      totalRecord -= countSubRow;
+    }
+    setTotalRecords(totalRecord);
+  }, [data, page, groupBy, toggleExpanded, groupedRows]);
 
   // Handle incoming group by
   useEffect(() => {
     if (!compareGroups(groupBy, groupByInfo)) {
       setFirstGrouped(true);
       dispatch({ type: 'resetGroupBy' });
-      toggleGroupBy(groupBy[0], true);
+      if (groupBy[0]) {
+        toggleGroupBy(groupBy[0], true);
+      }
     }
   }, [groupByInfo, groupBy, dispatch, toggleGroupBy]);
 
@@ -261,14 +275,7 @@ const Table: FC<Props> = ({
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {Array.from(
-                groupBy && groupBy.length
-                  ? _.sortBy(
-                      groupedRows.filter((r: any) => r.isGrouped),
-                      'index'
-                    )
-                  : page
-              ).map((row: KeyValue, indexOuter: number) => {
+              {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return row.isGrouped ? (
                   <TableTrGroup

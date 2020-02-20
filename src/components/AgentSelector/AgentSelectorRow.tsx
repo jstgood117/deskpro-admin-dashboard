@@ -49,7 +49,6 @@ const AgentSelectorRowStyled = styled.div`
   }
 
   &:hover > div:nth-child(2) .text {
-    font-weight: 500;
     color: ${props => props.theme.brandPrimary};
   }
 

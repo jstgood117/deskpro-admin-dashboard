@@ -138,8 +138,10 @@ const elementsSelector: {
   profiles: props => (
     <Profiles
       {...props}
-      profiles={props.formikProps.values[props.id]}
-      onEditClick={() => ({})}
+      profiles={props.profiles}
+      selected={props.formikProps.values[props.id]}
+      onEditClick={() => { }}
+      formikProps={props.formikProps}
     />
   ),
   stringlist: props => (

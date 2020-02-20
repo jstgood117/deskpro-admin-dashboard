@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { dpstyle } from '../Styled';
 
-export const OverlayStyled = styled.div<{ open: boolean }>`
+export const OverlayStyled = styled.div<{ open: boolean, opacity?: number }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,12 @@ export const OverlayStyled = styled.div<{ open: boolean }>`
   bottom: 0;
   z-index: 9;
   background-color: ${props => props.theme.black};
-  opacity: ${props => props.open ? .2 : 0};
+  opacity: ${props => props.open
+    ? props.opacity !== undefined
+      ? props.opacity
+      : 0.2
+    : 0
+  };
   visibility: ${props => props.open ? 'visible' : 'hidden'};
   transition: opacity .3s ease-out, visibility .3s ease-out;
   will-change: opacity;
@@ -63,8 +68,8 @@ export const StyledClose = styled.div`
 
 export const DrawerBody = styled.div`
   display: flex;
-  padding: 19px 32px;
   height: calc(100vh - 151px);
+  padding: 19px 32px 25px 32px;
   box-sizing: border-box;
   overflow-y: auto;
 `;
@@ -81,9 +86,22 @@ export const DrawerFooter = styled.div`
   background-color: ${props => props.theme.white};
   border-top: 1px solid ${props => props.theme.greyLighter};
   box-sizing: border-box;
+
   button {
+    font-family: Rubik;
     width: 112px;
     margin-right: 16px;
     justify-content: center;
+  }
+
+  .btn-cancel button {
+    width: 88px;
+    color: ${props => props.theme.activeColour};
+    background-color: ${props => props.theme.textHover};
+    border: 1px solid ${props => props.theme.activeColour};
+
+    :hover {
+      background-color: ${props => props.theme.hoverColour};
+    }
   }
 `;
