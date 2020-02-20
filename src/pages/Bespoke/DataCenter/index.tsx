@@ -1,9 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
+import { buildYup } from 'schema-to-yup';
 
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
-import { uiSchema, jsonSchema } from './testData1';
+import {
+  uiSchema,
+  jsonSchema,
+  validationSchema,
+  validationConfig
+} from './testData1';
 
 interface IProps {
   path: string;
@@ -53,14 +59,19 @@ const Container = styled.div`
 
 const DataCenterPage: FC<IProps> = ({ ui, initialValues }) => {
 
+  const [yupSchema, setYupSchema] = useState({});
+
+  useEffect(() => {
+    setYupSchema(buildYup(validationSchema, validationConfig));
+  }, []);
+
   return (
     <Formik
-      initialValues={initialValues || jsonSchema}
-      onSubmit={async values => {
+      initialValues={jsonSchema}
+      validationSchema={yupSchema}
+      onSubmit={(values, { setSubmitting }) => {
         console.log(values);
-      }}
-      validate={values => {
-        console.log(values);
+        setSubmitting(false);
       }}
     >
       {(formikProps: any) => (

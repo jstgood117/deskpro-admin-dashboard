@@ -22,8 +22,8 @@ export const uiSchema: {
                   type: 'button',
                   title: 'Automatic updater',
                   url: 'http://www.test.com',
-                  icon: 'guide',
-                },
+                  icon: 'guide'
+                }
               ],
               elements: [
                 {
@@ -34,8 +34,8 @@ export const uiSchema: {
                       field: {
                         type: 'checkbox',
                         id: 'data_center_schedule_checkbox',
-                        value: 'admin',
-                      },
+                        value: 'admin'
+                      }
                     },
                     {
                       type: 'horizontal_group',
@@ -43,7 +43,7 @@ export const uiSchema: {
                         {
                           type: 'label',
                           label:
-                            'I want to manually schedule the updater to run in',
+                            'I want to manually schedule the updater to run in'
                         },
                         {
                           type: 'field',
@@ -53,14 +53,14 @@ export const uiSchema: {
                             options: [
                               { value: '1 minute', label: '1 minute' },
                               { value: '2 minutes', label: '2 minutes' },
-                              { value: '3 minutes', label: '3 minutes' },
+                              { value: '3 minutes', label: '3 minutes' }
                             ],
-                            placeholder: '',
-                          },
-                        },
-                      ],
-                    },
-                  ],
+                            placeholder: ''
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -68,10 +68,10 @@ export const uiSchema: {
                     type: 'button',
                     id: 'data_center_schedule_button',
                     icon: 'calendar',
-                    text: 'Schedule an update',
-                  },
-                },
-              ],
+                    text: 'Schedule an update'
+                  }
+                }
+              ]
             },
             {
               type: 'vertical_group',
@@ -84,11 +84,11 @@ export const uiSchema: {
                   code:
                     '/user/bin/php7.0/usr/share/nginx/deskpro/site41500/bin/console dp:update',
                   description:
-                    'Running this line will start the updater. It will check for updates and prompt you to install them if any are available.',
-                },
-              ],
-            },
-          ],
+                    'Running this line will start the updater. It will check for updates and prompt you to install them if any are available.'
+                }
+              ]
+            }
+          ]
         },
         {
           title: 'Mass update ticket language',
@@ -109,13 +109,13 @@ export const uiSchema: {
                           type: 'button',
                           title: 'Languages & Locales',
                           url: 'http://www.test.com',
-                          icon: 'link',
-                        },
+                          icon: 'link'
+                        }
                       ],
                       elements: [
                         {
                           type: 'label',
-                          label: 'For all',
+                          label: 'For all'
                         },
                         {
                           type: 'field',
@@ -124,14 +124,14 @@ export const uiSchema: {
                             id: 'data_center_ticket_language_select_1',
                             options: [
                               { value: 'English', label: 'English' },
-                              { value: 'Russian', label: 'Russian' },
+                              { value: 'Russian', label: 'Russian' }
                             ],
-                            placeholder: 'select language',
-                          },
+                            placeholder: 'select language'
+                          }
                         },
                         {
                           type: 'label',
-                          label: 'tickets update to',
+                          label: 'tickets update to'
                         },
                         {
                           type: 'field',
@@ -140,14 +140,14 @@ export const uiSchema: {
                             id: 'data_center_ticket_language_select_2',
                             options: [
                               { value: 'English', label: 'English' },
-                              { value: 'Russian', label: 'Russian' },
+                              { value: 'Russian', label: 'Russian' }
                             ],
-                            placeholder: 'select language',
-                          },
-                        },
-                      ],
-                    },
-                  ],
+                            placeholder: 'select language'
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -155,12 +155,12 @@ export const uiSchema: {
                     type: 'button',
                     id: 'data_center_ticket_language_button',
                     icon: 'menu',
-                    text: 'Mass-update tickets',
-                  },
-                },
-              ],
-            },
-          ],
+                    text: 'Mass-update tickets'
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           title: 'Mass update user language choice',
@@ -179,7 +179,7 @@ export const uiSchema: {
                       elements: [
                         {
                           type: 'label',
-                          label: 'For all',
+                          label: 'For all'
                         },
                         {
                           type: 'field',
@@ -188,14 +188,14 @@ export const uiSchema: {
                             id: 'data_center_user_language_select_1',
                             options: [
                               { value: 'English', label: 'English' },
-                              { value: 'Russian', label: 'Russian' },
+                              { value: 'Russian', label: 'Russian' }
                             ],
-                            placeholder: 'select language',
-                          },
+                            placeholder: 'select language'
+                          }
                         },
                         {
                           type: 'label',
-                          label: 'user update to',
+                          label: 'user update to'
                         },
                         {
                           type: 'field',
@@ -204,14 +204,14 @@ export const uiSchema: {
                             id: 'data_center_user_language_select_2',
                             options: [
                               { value: 'English', label: 'English' },
-                              { value: 'Russian', label: 'Russian' },
+                              { value: 'Russian', label: 'Russian' }
                             ],
-                            placeholder: 'select language',
-                          },
-                        },
-                      ],
-                    },
-                  ],
+                            placeholder: 'select language'
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -219,12 +219,12 @@ export const uiSchema: {
                     type: 'button',
                     id: 'data_center_user_language_button',
                     icon: 'menu',
-                    text: 'Mass-update users',
-                  },
-                },
-              ],
-            },
-          ],
+                    text: 'Mass-update users'
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           title: 'Download latest language',
@@ -243,7 +243,7 @@ export const uiSchema: {
                       elements: [
                         {
                           type: 'label',
-                          label: 'Download the latest language pack for',
+                          label: 'Download the latest language pack for'
                         },
                         {
                           type: 'field',
@@ -255,15 +255,15 @@ export const uiSchema: {
                               { value: 'Russian', label: 'Russian' },
                               {
                                 value: 'all languages',
-                                label: 'all languages',
-                              },
+                                label: 'all languages'
+                              }
                             ],
-                            placeholder: 'select language',
-                          },
-                        },
-                      ],
-                    },
-                  ],
+                            placeholder: 'select language'
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -271,12 +271,12 @@ export const uiSchema: {
                     type: 'button',
                     id: 'data_center_download_language_button',
                     icon: 'export',
-                    text: 'Download latest language',
-                  },
-                },
-              ],
-            },
-          ],
+                    text: 'Download latest language'
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           title: 'Reset language phrases',
@@ -296,7 +296,7 @@ export const uiSchema: {
                         {
                           type: 'label',
                           label:
-                            'Reset all altered phrases to the default version for',
+                            'Reset all altered phrases to the default version for'
                         },
                         {
                           type: 'field',
@@ -308,15 +308,15 @@ export const uiSchema: {
                               { value: 'Russian', label: 'Russian' },
                               {
                                 value: 'all languages',
-                                label: 'all languages',
-                              },
+                                label: 'all languages'
+                              }
                             ],
-                            placeholder: 'select language',
-                          },
-                        },
-                      ],
-                    },
-                  ],
+                            placeholder: 'select language'
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   type: 'field',
@@ -324,16 +324,16 @@ export const uiSchema: {
                     type: 'button',
                     id: 'data_center_download_language_button',
                     icon: 'refresh',
-                    text: 'Reset phrases',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
+                    text: 'Reset phrases'
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
 export const jsonSchema: any = {
@@ -341,10 +341,61 @@ export const jsonSchema: any = {
   data_center_schedule_select: { value: '1 minute', label: '1 minute' },
   data_center_download_language_select_1: {
     value: 'all languages',
-    label: 'all languages',
+    label: 'all languages'
   },
   data_center_reset_language_select_1: {
     value: 'all languages',
-    label: 'all languages',
-  },
+    label: 'all languages'
+  }
+};
+
+export const validationSchema = {
+  type: 'object',
+  properties: {
+    data_center_schedule_checkbox: {
+      type: 'array'
+    },
+
+    data_center_schedule_select: {
+      type: 'object',
+      when: {
+        data_center_schedule_checkbox: {
+          is: true,
+          then: {
+            required: true
+          }
+        }
+      }
+    },
+    data_center_ticket_language_select_1: {
+      type: 'object'
+    },
+    data_center_ticket_language_select_2: {
+      type: 'object'
+    },
+    data_center_user_language_select_1: {
+      type: 'object'
+    },
+    data_center_user_language_select_2: {
+      type: 'object'
+    },
+    data_center_download_language_select_1: {
+      type: 'object'
+    },
+    data_center_reset_language_select_1: {
+      type: 'object'
+    }
+  }
+};
+
+export const validationConfig = {
+  errMessages: {
+    agent_settings_security_idle_timeout: {
+      required: 'validation.required',
+      pattern: 'validation.numberNotValid'
+    },
+    agent_settings_security_whitelist: {
+      pattern: 'agent.settings.security_whitelist'
+    }
+  }
 };
