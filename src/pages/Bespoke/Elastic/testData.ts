@@ -149,8 +149,17 @@ export const vaildationSchema = {
 
 export const validationConfig = {
   errMessages: {
-    agent_auth_sso_remember_device_field: {
-      required: 'validation.required'
+    elastic_search_apache_tika_ip_address: {
+      required: 'validation.required',
+      pattern: 'validation.ipPattern'
+    },
+    elastic_search_apache_tika_port: {
+      required: 'validation.required',
+      pattern: 'validation.portPattern'
+    },
+    elastic_search_setting_url: {
+      required: 'validation.required',
+      pattern: 'validation.urlPattern'
     }
   }
 };
