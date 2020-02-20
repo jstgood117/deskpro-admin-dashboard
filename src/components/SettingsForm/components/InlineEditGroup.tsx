@@ -17,8 +17,8 @@ const InlineEditGroup: React.FC = (props: any) => {
       <div className='form-item'>
         <div className='vert-element-field'>
           {props.inline && (
-            <InlineEdit inline={props.inline} field={props.field} formikProps={props.formikProps} />
-          )}
+            <InlineEdit {...props} inline={props.inline} field={props.field} formikProps={props.formikProps} />
+            )}
           {generateTitleAndDescription('group-details', props)}
           {generateElementInfo(props)}
         </div>

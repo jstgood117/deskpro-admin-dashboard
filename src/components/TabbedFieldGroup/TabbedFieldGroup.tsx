@@ -19,6 +19,7 @@ const FieldGroupTitle = styled.p`
   font-size: 14px;
   line-height: 150%;
   color: ${props => props.theme.staticColour};
+  margin-top: 0;
 `;
 
 // Container for `Expand/Collapse` Brands toggle
@@ -42,8 +43,6 @@ const FieldGroupCollapse = styled.div<{ collapsed: boolean }>`
 
 export const FormContainer = styled.div<{ collapsed?: boolean }>`
   padding-left: 36px;
-  /* border-bottom: 1px solid #e8ebee; */
-  padding-bottom: 24px;
   max-width: ${({ collapsed }) => (collapsed ? 'calc(100% - 170px)' : '100%')};
   & label {
     font-family: Rubik;
@@ -70,6 +69,7 @@ export interface IProps {
   initialValues?: any;
   tabs?: ITab[];
   title?: string;
+  borderBottom?: boolean;
 }
 
 export interface IFieldGroupProps {
@@ -79,6 +79,7 @@ export interface IFieldGroupProps {
   handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   tabs: ITab[];
   values: any;
+  borderBottom?: boolean;
 }
 
 // This methods returns true if provided elements contains only 1 input for every tab
@@ -88,8 +89,7 @@ const isSingleOptionElement = (tabs: ITab[], elements: any[]): boolean => {
   for (const element of elements) {
     result =
       result &&
-      Array.isArray(element.elements) &&
-      element.elements.length === 1;
+      Array.isArray(element.elements);
   }
 
   return result;
@@ -127,7 +127,8 @@ const getFieldGroupProps = (
   },
   setValues,
   tabs: props.tabs,
-  values
+  values,
+  borderBottom: props.borderBottom
 });
 
 const isPropsValid = (props: IProps) =>

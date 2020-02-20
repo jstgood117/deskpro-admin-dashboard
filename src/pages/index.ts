@@ -14,6 +14,7 @@ import VoiceSettings from './Bespoke/VoiceSettings';
 import RealTimeEvents from './Bespoke/RealTimeEvents';
 import InterfaceDefaults from './Bespoke/InterfaceDefaults';
 import ReportFile from './Bespoke/ReportFile';
+import GeneralSetting from '../components/SettingsForm/GeneralSettings';
 import Tasks from './Bespoke/Tasks';
 import BusinessHours from './Bespoke/BusinessHours';
 
@@ -37,5 +38,6 @@ export const RouteToPage: KeyValue = {
   '/interface-defaults': InterfaceDefaults,
   '/agents/logs': ReportFile,
   '/tasks': Tasks,
-  '/settings/business-hours': BusinessHours
+  '/settings/general': GeneralSetting,
+  '/settings/business-hours': BusinessHours,
 };

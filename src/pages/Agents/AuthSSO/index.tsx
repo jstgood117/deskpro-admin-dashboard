@@ -4,7 +4,7 @@ import AuthSSOForm from '../../../components/SettingsForm/AuthSSO';
 
 export const AuthSSOPage = (props: any) => {
   return (
-    <AuthSSOForm/>
+    <AuthSSOForm />
   );
 };
 
