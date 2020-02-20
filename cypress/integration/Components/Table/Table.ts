@@ -31,7 +31,7 @@ describe('Table', () => {
     cy.get('h1').contains('Agent');
   });
 
-  it.only('Filters correctly', () => {
+  it('Filters correctly', () => {
 
     cy.visit('/#/agents');
 
