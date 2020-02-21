@@ -59,7 +59,7 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
-  const [currentSort, setCurrentSort] = useState<SortType[]>([]);
+  const [currentSort, setCurrentSort] = useState<SortType[]>([{ id: 'name', desc: false }]);
   const actions = ActionFactory(path);
   const hasActions = actions && actions.length > 0;
 
@@ -102,7 +102,7 @@ const Table: FC<Props> = ({
       currentPageFiltered.map((r: any) => r.toggleExpanded());
       currentPageFiltered.map((r: any) => r.toggleExpanded());
     }
-  }, [page, currentSort, toggleSortBy, setCurrentSort, sortBy]);
+  }, [page, currentSort, toggleSortBy, sortBy]);
 
   useEffect(() => {
     if (onSortChange && !compareSorts(currentSort, sortByInfo)) {
