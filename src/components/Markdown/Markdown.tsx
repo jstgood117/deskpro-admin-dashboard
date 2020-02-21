@@ -1,13 +1,14 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 import { dpstyle } from '../Styled';
 import SingleSelect from '../SelectComponents/SingleSelect';
 import { IOptions } from '../../types';
 
-export interface IProps {
+export type IProps = {
   children?: ReactNode;
-}
+} & InputHTMLAttributes<HTMLInputElement>;
+
 const MarkdownWrapper = styled(dpstyle.div)`
   input {
     background: #ffffff;
@@ -65,13 +66,13 @@ const options: IOptions[] = [
   { value: '4', label: '4 digits' }
 ];
 
-const Markdown: FC<IProps> = () => {
+const Markdown: FC<IProps> = props => {
   const [selectedOption, selectOptions] = React.useState();
   return (
     <div>
       <div style={{ display: 'flex' }}>
         <MarkdownWrapper>
-          <dpstyle.input placeholder='Reference Code' />
+          <dpstyle.input placeholder='Reference Code' {...props} />
           {' and append '}
         </MarkdownWrapper>
         &nbsp;

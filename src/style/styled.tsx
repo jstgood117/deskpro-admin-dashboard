@@ -213,6 +213,17 @@ export const dpstyle = {
     cursor: pointer;
   `,
 
+  textarea: styled.textarea`
+    border-radius: 3px;
+    padding: 4px 10px;
+    font-size: 100%;
+    line-height: 1;
+    font-family: ${props => props.theme.mainFont};
+    font-weight: nomral;
+    box-sizing: content-box;
+    cursor: pointer;
+  `,
+
   p: styled.p`
     margin: 10px 0;
     padding: 0;

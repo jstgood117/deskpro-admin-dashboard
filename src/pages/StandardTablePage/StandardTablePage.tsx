@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import {
   withRouter,
   RouteComponentProps,
-  useRouteMatch
 } from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
@@ -27,10 +26,6 @@ import {
 } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
-import {
-  tableTestData,
-  tableTestColumns
-} from '../../components/Table/testData';
 
 import { ResponseData } from './types';
 
@@ -79,8 +74,6 @@ const StandardTablePage: FC<CombinedProps> = ({
   const [view, setView] = useState<'table' | 'list' | 'card'>('table');
   const [currentView, setCurrentView] = useState<any>();
   const [pageSize] = useState<number>(10);
-
-  const match = useRouteMatch();
 
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
@@ -313,10 +306,10 @@ const StandardTablePage: FC<CombinedProps> = ({
             )}
             {views && currentView && (
               <TableWrapper
-                {...(match.url === '/agents' ? tableTestColumns : currentView)}
+                {...(currentView)}
                 view={view}
                 path={path || primaryPath}
-                data={match.url === '/agents' ? tableTestData : filteredData}
+                data={filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}

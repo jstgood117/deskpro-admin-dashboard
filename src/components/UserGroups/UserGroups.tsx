@@ -40,6 +40,7 @@ const UserGroupsContainer = styled.div`
     justify-content: space-between;
     height: 32px;
     padding: 0 8px;
+    margin-left: -8px;
     border-radius: 6px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -121,9 +122,8 @@ const UserGroups: React.FC<IProps> = ({
   options,
   selectedOptions,
   tooltip = '',
-  formikProps,
+  formikProps
 }) => {
-
   const [open, setOpen] = useState(false);
 
   const onAddClick = () => {
@@ -152,15 +152,15 @@ const UserGroups: React.FC<IProps> = ({
         render={arrayHelpers => (
           <div>
             <div style={{ marginBottom: 8 }}>
-              {selectedOptions && selectedOptions.map((option, index) => (
-                <StringRow
-                  index={index}
-                  key={index}
-                  onRemove={() => arrayHelpers.remove(index)}
-                  value={option}
-                />
-              )
-              )}
+              {selectedOptions &&
+                selectedOptions.map((option, index) => (
+                  <StringRow
+                    index={index}
+                    key={index}
+                    onRemove={() => arrayHelpers.remove(index)}
+                    value={option}
+                  />
+                ))}
             </div>
             <Tooltip
               content={tooltip}
@@ -185,7 +185,7 @@ const UserGroups: React.FC<IProps> = ({
         )}
       />
 
-      <Drawer open={open} onClose={closeDrawer}>
+      <Drawer open={open} opacity={0} onClose={closeDrawer}>
         <UserGroupsForm
           id={id}
           open={open}

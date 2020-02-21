@@ -2,6 +2,7 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
+import unfetch from 'unfetch';
 
 import { appDebug } from './logging';
 
@@ -14,7 +15,6 @@ import App from './pages/App/App';
 import AppError from './components/AppError';
 
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-boost';
-
 const config: ConfigType = generateConfig();
 const { apiUrl } = config;
 
@@ -29,7 +29,10 @@ export const AppWrap = () => {
     introspectionQueryResultData: introspectionResult
   });
 
-  const link = createHttpLink({ uri: apiUrl });
+  const link = createHttpLink({
+    uri: apiUrl,
+    fetch: unfetch
+  });
   const client = new ApolloClient({
     cache: new InMemoryCache({
       fragmentMatcher

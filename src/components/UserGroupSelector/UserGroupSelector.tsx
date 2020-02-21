@@ -22,6 +22,21 @@ const SelectorContainer = styled.div`
   & input:focus {
     background: ${props => props.theme.white};
   }
+
+  .scrollbars {
+    position: relative;
+    height: 100%;
+    border-radius: 4px;
+    border: ${props => `1px solid ${props.theme.greyLight}`};
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    box-sizing: border-box;
+
+    & > div {
+      box-sizing: border-box;
+    }
+  }
 `;
 
 const SelectorDescription = styled(dpstyle.div1)`
@@ -51,18 +66,6 @@ const SelectorInfo = styled(dpstyle.div1)`
     margin-top: 0px;
   }
 `;
-
-const SelectorList = styled.div`
-  height: 100%;
-  border-radius: 4px;
-  border: ${props => `1px solid ${props.theme.greyLight}`};
-  border-top: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  padding-top: 4px;
-  box-sizing: border-box;
-`;
-
 
 export interface Items {
   id: number;
@@ -151,31 +154,30 @@ const UserGroupSelector: FC<IProps & WrappedComponentProps> = ({
         showClear={true}
         value={filter}
       />
-      <Scrollbars
-        style={{
-          borderTop: 0,
-          borderTopLeftRadius: 0,
-          borderTopRightRadius: 0,
-          paddingTop: 4,
-          height: '100%',
-          zIndex: 1,
-          width: '100%',
-        }}
-        renderTrackVertical={({ style }) => (
-          <div
-            style={{
-              background: '#EFF0F0',
-              position: 'absolute',
-              width: 16,
-              right: 0,
-              bottom: 0,
-              top: 0,
-              borderRadius: 3
-            }}
-          />
-        )}
-      >
-        <SelectorList>
+      <div className='scrollbars'>
+        <Scrollbars
+          style={{
+            borderTop: 0,
+            borderTopLeftRadius: 0,
+            borderTopRightRadius: 0,
+            paddingTop: 4,
+            height: '100%',
+            width: '100%',
+          }}
+          renderTrackVertical={({ style }) => (
+            <div
+              style={{
+                background: '#EFF0F0',
+                position: 'absolute',
+                width: 16,
+                right: 0,
+                bottom: 0,
+                top: 0,
+                borderRadius: 3
+              }}
+            />
+          )}
+        >
           {filteredItems.map((item, index) => (
             <UserGroupSelectorRow
               key={index}
@@ -183,8 +185,8 @@ const UserGroupSelector: FC<IProps & WrappedComponentProps> = ({
               onSelect={() => onItemClick(item.id)}
             />
           ))}
-        </SelectorList>
-      </Scrollbars>
+        </Scrollbars>
+      </div>
     </SelectorContainer>
   );
 };

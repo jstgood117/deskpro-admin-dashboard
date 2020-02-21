@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { dpstyle } from '../Styled';
 
-export const OverlayStyled = styled.div<{ open: boolean }>`
+export const OverlayStyled = styled.div<{ open: boolean, opacity?: number }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -9,7 +9,12 @@ export const OverlayStyled = styled.div<{ open: boolean }>`
   bottom: 0;
   z-index: 9;
   background-color: ${props => props.theme.black};
-  opacity: ${props => props.open ? .2 : 0};
+  opacity: ${props => props.open
+    ? props.opacity !== undefined
+      ? props.opacity
+      : 0.2
+    : 0
+  };
   visibility: ${props => props.open ? 'visible' : 'hidden'};
   transition: opacity .3s ease-out, visibility .3s ease-out;
   will-change: opacity;

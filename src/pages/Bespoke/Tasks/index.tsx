@@ -52,18 +52,13 @@ const ButtonToolbar = styled.div`
     line-height: 150%;
   }
 
-  .btn-primary button {
-    background-color: #1c3e55;
-    color: white;
-  }
-
   .btn-secondary button {
     margin-left: 329px;
     background-color: #f7f7f7;
     color: #a9b0b0;
     border: 1px solid #d3d6d7;
   }
-  `;
+`;
 
 const TasksPage: FC<IProps> = ({ ui, initialValues }) => {
   const [yupSchema, setYupSchema] = useState({});
