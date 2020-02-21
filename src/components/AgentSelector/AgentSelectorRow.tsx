@@ -59,6 +59,10 @@ const AgentSelectorRowStyled = styled.div`
   & img {
     margin-left: 1px;
   }
+
+  &:first-child {
+    margin-top: 5px;
+  }
 `;
 
 interface Props {
@@ -94,8 +98,8 @@ const AgentSelectorRow: React.FC<Props & WrappedComponentProps> = React.memo(
             </FlowLayout>
           </Tooltip>
         ) : (
-          <Checkbox checked={!!selected} onChange={onCheck} />
-        )}
+            <Checkbox checked={!!selected} onChange={onCheck} />
+          )}
         <NameAndAvatar avatar={agent.avatar} name={agent.name} />
       </AgentSelectorRowStyled>
     );

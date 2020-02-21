@@ -176,7 +176,11 @@ const Profiles: React.FC<IProps> = ({
         )}
       </ProfilesContent>
 
-      <Drawer open={open} onClose={closeDrawer}>
+      <Drawer
+        open={open}
+        onClose={closeDrawer}
+        opacity={0}
+      >
         <AgentSelector
           agents={profiles}
           title='Agent selector'
