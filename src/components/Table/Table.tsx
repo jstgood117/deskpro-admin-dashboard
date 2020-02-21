@@ -59,7 +59,7 @@ const Table: FC<Props> = ({
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
-  const [currentSort, setCurrentSort] = useState<SortType[]>([]);
+  const [currentSort, setCurrentSort] = useState<SortType[]>([{ id: 'name', desc: false }]);
   const actions = ActionFactory(path);
   const hasActions = actions && actions.length > 0;
 
@@ -96,10 +96,13 @@ const Table: FC<Props> = ({
 
   useEffect(() => {
     if (sortBy.length > 0 && !compareSorts(sortBy, currentSort)) {
-      setCurrentSort(sortBy);
       toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
+      const currentPageFiltered = page
+        .filter((r: any) => r.canExpand && r.isExpanded);
+      currentPageFiltered.map((r: any) => r.toggleExpanded());
+      currentPageFiltered.map((r: any) => r.toggleExpanded());
     }
-  }, [currentSort, toggleSortBy, setCurrentSort, sortBy]);
+  }, [page, currentSort, toggleSortBy, sortBy]);
 
   useEffect(() => {
     if (onSortChange && !compareSorts(currentSort, sortByInfo)) {
@@ -237,7 +240,11 @@ const Table: FC<Props> = ({
                             data-colindex={indexInner}
                           >
                             <StyledTh
-                              {...column.getSortByToggleProps()}
+                              {...column.getSortByToggleProps({
+                                onClick: () => {
+                                  onSortChange([{ id: column.id, desc: !column.isSortedDesc }]);
+                                }
+                              })}
                               alignRight={isIdColumn}
                             >
                               {column.render('Header')}

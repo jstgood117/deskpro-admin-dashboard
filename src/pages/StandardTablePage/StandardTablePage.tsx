@@ -32,6 +32,7 @@ import { ResponseData } from './types';
 import { getColumnUniqueValues } from './helpers/getColumnUniqueValues';
 import { treeify } from './helpers/treeify';
 import { processFiltersToFilterTypes } from './helpers/processFiltersToFilterTypes';
+import {compareSorts} from '../../components/Table/helpers/tableFn';
 
 export interface IProps {
   path: string;
@@ -233,7 +234,9 @@ const StandardTablePage: FC<CombinedProps> = ({
   };
 
   const onSortChange = (_sortItems: SortType[]) => {
-    setSortItems(_sortItems);
+    if (!compareSorts(sortItems, _sortItems)) {
+      setSortItems(_sortItems);
+    }
   };
 
   const onGroupByChange = (columnNames: string[]) => {
