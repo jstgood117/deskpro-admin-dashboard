@@ -24,14 +24,14 @@ export const treeify = (
     if (obj[parent] != null) {
       lookup[obj[parent]['id']][children].push(obj);
     } else {
-      const agent_groups = obj.agent_groups && obj.agent_groups.map((item: any) => item.title);
-      const agent_teams = obj.agent_teams && obj.agent_teams.map((item: any) => item.name);
-      const departments = obj.departments && obj.departments.map((item: any) => item.title);
+      const agent_groups = obj.agent_groups ? obj.agent_groups.map((item: any) => item.title) : [];
+      const agent_teams = obj.agent_teams ? obj.agent_teams.map((item: any) => item.name) : [];
+      const departments = obj.departments ? obj.departments.map((item: any) => item.title) : [];
 
       treeList.push(assignIn(obj, {
-        agent_groups: agent_groups && agent_groups.length ? [agent_groups.join(', ')] : agent_groups,
-        agent_teams: agent_groups && agent_teams.length ? [agent_teams.join(', ')] : agent_teams,
-        departments: agent_groups && departments.length ? [departments.join(', ')] : departments,
+        agent_groups: agent_groups.length ? [agent_groups.join(', ')] : agent_groups,
+        agent_teams: agent_teams.length ? [agent_teams.join(', ')] : agent_teams,
+        departments: departments.length ? [departments.join(', ')] : departments,
       }));
     }
   });
