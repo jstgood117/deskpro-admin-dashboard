@@ -9,21 +9,28 @@ export interface IProps {
   href: string;
   icon?: string;
   className?: string;
+  type?: 'card' | 'string';
 }
 
-const StyledLink = styled(dpstyle.div1)`
+const StyledLink = styled(dpstyle.div1)<{ type: 'card' | 'string' }>`
   background: ${props => props.theme.white};
-  box-shadow: 0px 3px 8px rgba(159, 204, 243, 0.7);
+  box-shadow: ${props =>
+    props.type === 'card' ? '0px 3px 8px rgba(159, 204, 243, 0.7)' : 'none'};
   border-radius: 4px;
   color: ${props => props.theme.brandPrimary};
   font-size: 13px;
   font-weight: 500;
   display: inline-flex;
-  height: 34px;
-  padding: 9px 16px;
+  height: ${props => (props.type === 'card' ? '34px' : 'auto')};
+  padding: ${props => (props.type === 'card' ? '9px 16px' : 'none')};
   box-sizing: border-box;
   align-items: center;
   cursor: pointer;
+  svg {
+    path {
+      fill: ${props => props.theme.brandPrimary};
+    }
+  }
 `;
 
 const Link: FC<IProps> = props => {
@@ -31,11 +38,11 @@ const Link: FC<IProps> = props => {
     <a
       className={props.className}
       href={props.href}
-      style={{ textDecoration: 'none' }}
+      style={{ textDecoration: 'none', display: 'inline-flex' }}
       target='_blank'
       rel='noopener noreferrer'
     >
-      <StyledLink>
+      <StyledLink type={props.type}>
         <div style={{ paddingRight: 12, display: 'flex' }}>
           <Icon name={props.icon || 'ic-help-center'} />
         </div>
@@ -43,6 +50,10 @@ const Link: FC<IProps> = props => {
       </StyledLink>
     </a>
   );
+};
+
+Link.defaultProps = {
+  type: 'card'
 };
 
 export default Link;

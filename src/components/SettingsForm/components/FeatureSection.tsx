@@ -6,6 +6,7 @@ import Icon from '../../Icon';
 import SingleSelect from '../../SelectComponents/SingleSelect';
 import FeatureSectionContext from '../contexts/FeatureSectionContext';
 import HeaderCard from './HeaderCard';
+import ElasticsearchCard from './ElasticsearchCard';
 
 export const FeatureSectionStyled = styled.div`
   padding: 0px 0px 0px 55px;
@@ -357,7 +358,10 @@ const FeatureSection: React.FC<Props> = ({
             <span style={{ marginRight: 20 }}>{title}</span>
             {icon && <Icon name={icon} />}
           </div>
-          {header ? <HeaderCard {...header} formikProps={formikProps} /> : null}
+          {header && header.card === 'HeaderCard' ? <HeaderCard {...header} formikProps={formikProps} /> : null}
+          {header && header.card === 'ElasticsearchCard' ? (
+            <ElasticsearchCard {...header} formikProps={formikProps} />
+          ) : null}
           {brandButtonGroup && (
             <div className='brand-button-group'>
               <BrandButtonGroup
