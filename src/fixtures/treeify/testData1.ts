@@ -1,4 +1,4 @@
-export const testData1 : any = [
+export const testData1: any = [
   {
     'id': 'awaiting_agent',
     'sys_id': 'awaiting_agent',
@@ -8,9 +8,9 @@ export const testData1 : any = [
     'title': 'Awaiting Agent',
     'display_order': -6,
     'effective_display_order': 0,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'awaiting_user',
@@ -21,9 +21,9 @@ export const testData1 : any = [
     'title': 'Awaiting User',
     'display_order': -5,
     'effective_display_order': 1,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'pending',
@@ -34,9 +34,9 @@ export const testData1 : any = [
     'title': 'Pending',
     'display_order': -4,
     'effective_display_order': 2,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'resolved',
@@ -47,9 +47,9 @@ export const testData1 : any = [
     'title': 'Resolved',
     'display_order': -3,
     'effective_display_order': 3,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'archived',
@@ -60,9 +60,9 @@ export const testData1 : any = [
     'title': 'Archived',
     'display_order': -2,
     'effective_display_order': 4,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'hidden',
@@ -73,9 +73,9 @@ export const testData1 : any = [
     'title': 'Hidden',
     'display_order': -1,
     'effective_display_order': 5,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'hidden.1',
@@ -88,9 +88,9 @@ export const testData1 : any = [
     'title': 'Deleted',
     'display_order': 0,
     'effective_display_order': 6,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   },
   {
     'id': 'hidden.2',
@@ -103,8 +103,8 @@ export const testData1 : any = [
     'title': 'Spam',
     'display_order': 0,
     'effective_display_order': 7,
-    'agent_teams': [{'name': 'Team 1'}],
-    'agent_groups': [{'title': 'All Permissions'}],
-    'departments': [{'title': 'Widgets'}],
+    'agent_teams': [{ 'title': 'Team 1' }],
+    'agent_groups': [{ 'title': 'All Permissions' }],
+    'departments': [{ 'title': 'Widgets' }],
   }
 ];

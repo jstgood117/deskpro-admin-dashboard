@@ -45,7 +45,7 @@ const TableTrGroup: FC<Props> = ({
         <td colSpan={1} className='groupCol'>
           <div {...row.getExpandedToggleProps()} className='groupTitle'>
             <span>
-              {groupColumn && getValueFromColumnType(groupColumn.columnProps, row.subRows[0].original, true)} ({row.subRows.length})
+              {groupColumn && getValueFromColumnType(groupColumn.columnProps, row.subRows[0].original)} ({row.subRows.length})
             </span>
             <GroupCaret>
               {row.isExpanded ? <Icon name='up' /> : <Icon name='down' />}
