@@ -13,7 +13,7 @@ import { KeyValue } from '../../types';
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 import Icon from '../Icon';
 import Header from './Header';
-import { TableType, TableParams, SortType, HeaderGroup } from './types';
+import { TableType, TableParams, SortType, HeaderGroup, ColumnMeta } from './types';
 import {
   onCheckboxChange,
   generateTableParams,
@@ -55,6 +55,7 @@ const Table: FC<Props> = ({
   groupBy
 }) => {
   const [checked, setChecked] = useState<object>({});
+  const [groupColumn, setGroupColumn] = useState<ColumnMeta>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
@@ -145,6 +146,7 @@ const Table: FC<Props> = ({
   useEffect(() => {
     let totalRecord = data.length;
     if (groupBy && groupBy.length) {
+      setGroupColumn(columns.find((_col: ColumnMeta) => groupBy[0] === _col.id));
       let countSubRow = 0;
       const groups = _.sortBy(groupedRows.filter((r: any) => r.isGrouped), 'index');
       const groupsNoExpanded = page.filter((r: any) => r.canExpand && r.isExpanded === undefined);
@@ -154,7 +156,7 @@ const Table: FC<Props> = ({
       totalRecord -= countSubRow;
     }
     setTotalRecords(totalRecord);
-  }, [data, page, groupBy, toggleExpanded, groupedRows]);
+  }, [data, page, groupBy, toggleExpanded, groupedRows, columns]);
 
   // Handle incoming group by
   useEffect(() => {
@@ -192,7 +194,6 @@ const Table: FC<Props> = ({
     setCurrentPage(1);
     gotoPage(0);
   };
-
   return (
     <>
       <TableStyled>
@@ -290,22 +291,23 @@ const Table: FC<Props> = ({
                     page={page}
                     key={indexOuter}
                     row={row}
+                    groupColumn={groupColumn}
                     checked={checked}
                     hasActions={hasActions}
                     prepareRow={prepareRow}
                     handleCheckboxChange={handleCheckboxChange}
                   />
                 ) : (
-                  <TableTr
-                    indexOuter={indexOuter}
-                    page={page}
-                    key={indexOuter}
-                    row={row}
-                    checked={checked}
-                    hasActions={hasActions}
-                    handleCheckboxChange={handleCheckboxChange}
-                  />
-                );
+                    <TableTr
+                      indexOuter={indexOuter}
+                      page={page}
+                      key={indexOuter}
+                      row={row}
+                      checked={checked}
+                      hasActions={hasActions}
+                      handleCheckboxChange={handleCheckboxChange}
+                    />
+                  );
               })}
             </tbody>
           </table>

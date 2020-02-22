@@ -1,9 +1,8 @@
 import React, { FC, SyntheticEvent } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import _ from 'lodash';
 
 import Checkbox from '../Checkbox';
-import { generateComponentProps, convertStringToObject } from '../TableData/apiToComponentAdapter';
+import { generateComponentProps } from '../TableData/apiToComponentAdapter';
 import TableData from '../TableData';
 import { KeyValue } from '../../types';
 
@@ -28,7 +27,6 @@ const TableTr: FC<Props> = ({
   handleCheckboxChange
 }) => {
   const isChecked = checked.hasOwnProperty(row.original.id);
-  const match = useRouteMatch();
 
   return (
     <tr
@@ -40,8 +38,8 @@ const TableTr: FC<Props> = ({
             ? 'isLastSubRow '
             : 'subrow '
           : row.subRows.length > 0 && row.isExpanded
-          ? 'hasSubRows '
-          : ' ') +
+            ? 'hasSubRows '
+            : ' ') +
         (checked.hasOwnProperty((row.original as KeyValue).id.toString())
           ? 'row--selected '
           : ' ') +
@@ -71,12 +69,6 @@ const TableTr: FC<Props> = ({
       {_.sortBy(row.cells, 'column.index').map(
         (cell: any, indexInner: number) => {
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
-          const isAgentPage = match.url === '/agents';
-          const isTeamAgentsPage = cell.column.id === 'admin_common.col.teams' && isAgentPage;
-          const isDepartmentsAgentsPage = cell.column.id === 'admin_common.col.departments' && isAgentPage;
-          const isGroupAgentsPage = cell.column.id === 'admin_common.col.groups' && isAgentPage;
-          const dataPath = isTeamAgentsPage ? 'agent_teams' : (isGroupAgentsPage ? 'agent_groups' : 'departments');
-          const __typename = isGroupAgentsPage ? 'TableColumnAgentGroupList' : 'TableColumnTicketDepartmentList';
 
           return (
             <td
@@ -87,7 +79,7 @@ const TableTr: FC<Props> = ({
               }
               {...cell.getCellProps()}
               {...cell.row.getExpandedToggleProps({
-                onClick: () => {},
+                onClick: () => { },
                 style: {
                   textAlign: isIdColumn && 'right',
                   verticalAlign: isIdColumn && 'bottom',
@@ -100,32 +92,7 @@ const TableTr: FC<Props> = ({
               })}
               key={indexInner}
             >
-              {(isTeamAgentsPage || isGroupAgentsPage || isDepartmentsAgentsPage) ? (
-                <TableData
-                  {...generateComponentProps({
-                    ...cell,
-                    column: {
-                      ...cell.column,
-                      type: {
-                        __typename,
-                        valuesArray: {
-                          dataPath
-                        }
-                      }
-                    },
-                    row: {
-                      ...cell.row,
-                      original: {
-                        ...cell.row.original,
-                        [dataPath]: _.isEmpty(cell.value[0]) ? cell.value : convertStringToObject(cell.value[0])
-                      }
-                    },
-                    value: _.isEmpty(cell.value[0]) ? cell.value : convertStringToObject(cell.value[0])
-                  })}
-                />
-              ) : (
-                <TableData {...generateComponentProps(cell)} />
-              )}
+              <TableData {...generateComponentProps(cell)} />
             </td>
           );
         }
@@ -135,15 +102,15 @@ const TableTr: FC<Props> = ({
           {!checked.hasOwnProperty(
             (row.original as KeyValue).id.toString()
           ) && (
-            <TableData
-              type='action_buttons'
-              props={{
-                onPencilClick: () => {},
-                onDuplicateClick: () => {},
-                onTrashClick: () => {}
-              }}
-            />
-          )}
+              <TableData
+                type='action_buttons'
+                props={{
+                  onPencilClick: () => { },
+                  onDuplicateClick: () => { },
+                  onTrashClick: () => { }
+                }}
+              />
+            )}
         </span>
       </td>
     </tr>
