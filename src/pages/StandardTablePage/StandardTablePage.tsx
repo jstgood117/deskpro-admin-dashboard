@@ -32,7 +32,7 @@ import { ResponseData } from './types';
 import { getColumnUniqueValues } from './helpers/getColumnUniqueValues';
 import { treeify } from './helpers/treeify';
 import { processFiltersToFilterTypes } from './helpers/processFiltersToFilterTypes';
-import {compareSorts} from '../../components/Table/helpers/tableFn';
+import { compareSorts } from '../../components/Table/helpers/tableFn';
 
 export interface IProps {
   path: string;
@@ -134,7 +134,7 @@ const StandardTablePage: FC<CombinedProps> = ({
 
       const unchangedDataQuery = currentView.dataQuery;
 
-      // FIX: removes ticket_department from gql
+      // TODO: removes ticket_department from gql
       const dataQuery = unchangedDataQuery.replace(
         'ticket_departments',
         'departments'

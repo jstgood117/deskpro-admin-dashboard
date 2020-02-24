@@ -3,6 +3,8 @@ import React, { FC, SyntheticEvent } from 'react';
 import Checkbox from '../Checkbox';
 import Icon from '../Icon';
 import { GroupCaret } from './TableStyles';
+import { ColumnMeta } from './types';
+import { getValueFromColumnType } from '../../utils/getValueFromColumnType';
 
 export type Props = {
   indexOuter: number;
@@ -11,6 +13,7 @@ export type Props = {
   checked: any;
   hasActions: boolean;
   prepareRow: any;
+  groupColumn?: ColumnMeta;
   handleCheckboxChange?: (
     e: SyntheticEvent<HTMLInputElement>,
     rows: any
@@ -21,7 +24,8 @@ const TableTrGroup: FC<Props> = ({
   row,
   checked,
   hasActions,
-  handleCheckboxChange
+  handleCheckboxChange,
+  groupColumn
 }) => {
   return (
     <React.Fragment>
@@ -41,7 +45,7 @@ const TableTrGroup: FC<Props> = ({
         <td colSpan={1} className='groupCol'>
           <div {...row.getExpandedToggleProps()} className='groupTitle'>
             <span>
-              {row.groupByVal} ({row.subRows.length})
+              {groupColumn && getValueFromColumnType(groupColumn.columnProps, row.subRows[0].original)} ({row.subRows.length})
             </span>
             <GroupCaret>
               {row.isExpanded ? <Icon name='up' /> : <Icon name='down' />}
