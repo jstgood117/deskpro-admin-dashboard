@@ -23,6 +23,7 @@ import GeneralSetting from '../components/SettingsForm/GeneralSettings';
 import Tasks from './Bespoke/Tasks';
 import BusinessHours from './Bespoke/BusinessHours';
 import Elastic from './Bespoke/Elastic';
+import SettingUserAuthSSO from './Bespoke/SettingUserAuthSSO';
 
 import { KeyValue } from '../types';
 
@@ -55,5 +56,7 @@ export const RouteToPage: KeyValue = {
   '/sysadmin/file-check': FileCheckPage,
   '/sysadmin/realtime-events': RealTimeEvents,
   '/settings/general': GeneralSetting,
-  '/sysadmin/elastic': Elastic
+  '/sysadmin/elastic': Elastic,
+
+  '/crm/auth': SettingUserAuthSSO
 };

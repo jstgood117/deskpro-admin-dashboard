@@ -127,14 +127,20 @@ const elementsSelector: {
     </Field>
   ),
   textarea: props => (
-    <div>
-      <TextArea
-        value={props.formikProps.values[props.id]}
-        placeholder={props.placeholder}
-        onChange={(val: Text) => props.formikProps.setFieldValue(props.id, val)}
-        {...props}
-      />
-    </div>
+    <Field name={props.id}>
+      {({ field, meta }: any) => {
+        return (
+          <>
+            <TextArea placeholder={props.placeholder} {...field} />
+            {meta.touched && meta.error && (
+              <ErrorMessage className='error'>
+                <FormattedMessage id={meta.error} />
+              </ErrorMessage>
+            )}
+          </>
+        );
+      }}
+    </Field>
   ),
   select: props => (
     <SingleSelect
