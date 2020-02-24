@@ -2,8 +2,11 @@ import { KeyValue } from '../types';
 
 export const getValueFromColumnType = (
   columnProps: KeyValue,
-  values: any = {}
+  values: KeyValue = {},
 ): string => {
+
+  let _values: KeyValue[];
+
   switch (columnProps.__typename) {
     case 'TableColumnNameAvatar':
       return values[columnProps.name.dataPath];
@@ -17,8 +20,11 @@ export const getValueFromColumnType = (
       return values[columnProps.valuesArray.dataPath].join(', ');
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
+      _values = values[columnProps.valuesArray.dataPath];
+      return _values ? _values.map((_val: KeyValue) => _val.title).join(', ') : '';
     case 'TableColumnAgentTeamList':
-      return values[columnProps.valuesArray.dataPath];
+      _values = values[columnProps.valuesArray.dataPath];
+      return _values ? _values.map((_val: KeyValue) => _val.name).join(', ') : '';
     case 'TableColumnBoolYesNo':
       if (values.hasOwnProperty(columnProps.value.dataPath)) {
         return values[columnProps.value.dataPath] === true ? 'Yes' : 'No';
