@@ -116,7 +116,7 @@ const elementsSelector: {
   select: props => (
     <Field name={props.id}>
       {({ field, meta }: any) => (
-        <div>
+        <div style={{ position: 'relative' }}>
           <SingleSelect
             type='primary'
             options={props.options}

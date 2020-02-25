@@ -25,6 +25,11 @@ const Container = styled.div`
     label {
       font-weight: normal;
     }
+    .error {
+      top: 32px;
+      left: 4px;
+      position: absolute;
+    }
 
     &.form-item {
       margin: 0;
