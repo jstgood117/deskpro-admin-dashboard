@@ -131,8 +131,11 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'multiple_agents', props: agentsProps };
 
     case 'TableColumnTicketDepartmentList':
+      const isTicketForm = get(row, '__typename') === 'TicketForm';
+      const currentType = isTicketForm ? 'multiple_ticket' : 'multiple_agents';
+
       return {
-        type: 'multiple_agents',
+        type: currentType,
         props: {
           viewModel: 'label',
           agents: getPayloadValue(row, type.valuesArray).map(

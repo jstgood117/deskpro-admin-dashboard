@@ -35,6 +35,36 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
         />
       );
 
+
+    case 'multiple_ticket': {
+      const maxNumber = props.max || 3;
+      return (
+        <OverflowList
+          max={maxNumber}
+          viewMode={props.viewMode}
+          renderItem={(item, index) => (
+            <div className={'multiple-ticket'} key={index}>
+              <ActiveAvatar
+                containerClassName={'image'}
+                key={`${index}-avatar`}
+                active={item.active}
+                name={item.name}
+                avatar={item.avatar}
+                activeColor={props.activeColor}
+                position={props.position}
+                avatarProps={item.avatarProps || props.avatarProps}
+              />
+              <P1 className='text'>
+                {item.name}
+              </P1>
+            </div>
+          )}
+          items={props.agents}
+        />
+      );
+    }
+
+
     case 'multiple_agents':
       const max = props.max || 3;
       return (
@@ -46,7 +76,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
               key={index}
               active={item.active}
               name={item.name}
-              avatar={item.avatar}
+              avatar={item.avatarUrn}
               activeColor={props.activeColor}
               position={props.position}
               avatarProps={item.avatarProps || props.avatarProps}

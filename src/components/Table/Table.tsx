@@ -68,7 +68,8 @@ const Table: FC<Props> = ({
     tableType,
     columns,
     data,
-    controlledPageCount
+    controlledPageCount,
+    path
   );
 
   const {
