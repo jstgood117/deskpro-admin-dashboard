@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import Toggle from '../../Toggle';
 import Input from '../../Input';
+import TextArea from './TextArea';
 import Profiles from '../../Profiles';
 import StringListBuilder from '../../StringListBuilder';
 import Units from '../../Units';
@@ -20,10 +21,22 @@ import ProgressBar from '../../ProgressBar';
 import { StyledCheckbox, ErrorMessage, ReportPanel } from './styles';
 import SettingsData from '../../SettingsData';
 import Markdown from '../../Markdown';
+import UserGroups from '../../UserGroups';
 
 const elementsSelector: {
   [index: string]: (props: any) => React.ReactElement;
 } = {
+  userGroups: props => (
+    <UserGroups
+      id={props.id}
+      title={props.title}
+      buttonTitle={props.buttonTitle}
+      options={props.options}
+      selectedOptions={props.formikProps.values[props.id]}
+      tooltip={props.tooltip}
+      formikProps={props.formikProps}
+    />
+  ),
   fileUpload: props => (
     <FileUpload
       id={props.id}
@@ -113,6 +126,16 @@ const elementsSelector: {
       )}
     </Field>
   ),
+  textarea: props => (
+    <div>
+      <TextArea
+        value={props.formikProps.values[props.id]}
+        placeholder={props.placeholder}
+        onChange={(val: Text) => props.formikProps.setFieldValue(props.id, val)}
+        {...props}
+      />
+    </div>
+  ),
   select: props => (
     <Field name={props.id}>
       {({ field, meta }: any) => (
@@ -153,8 +176,10 @@ const elementsSelector: {
   profiles: props => (
     <Profiles
       {...props}
-      profiles={props.formikProps.values[props.id]}
-      onEditClick={() => ({})}
+      profiles={props.profiles}
+      selected={props.formikProps.values[props.id]}
+      onEditClick={() => {}}
+      formikProps={props.formikProps}
     />
   ),
   stringlist: props => (
@@ -174,7 +199,10 @@ const elementsSelector: {
         option={props.formikProps.values[props.optionId]}
         onChange={(value: UnitsValuesType) => {
           props.formikProps.setFieldValue(props.id, value.inputValue);
-          props.formikProps.setFieldValue(props.optionId, value.selectValue.value);
+          props.formikProps.setFieldValue(
+            props.optionId,
+            value.selectValue.value
+          );
         }}
       />
     );
@@ -227,8 +255,21 @@ const elementsSelector: {
       />
     );
   },
-  markdown: () => {
-    return <Markdown />;
+  markdown: props => {
+    return (
+      <Field name={props.id}>
+        {({ field, meta }: any) => (
+          <div>
+            <Markdown {...field} />
+            {meta.touched && meta.error && (
+              <ErrorMessage className='error'>
+                <FormattedMessage id={meta.error} />
+              </ErrorMessage>
+            )}
+          </div>
+        )}
+      </Field>
+    );
   }
 };
 

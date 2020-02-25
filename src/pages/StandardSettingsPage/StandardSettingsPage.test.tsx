@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { mount } from '../../test/enzyme';
 import StandardSettingsPage from './StandardSettingsPage';
 import SettingsForm from '../../components/SettingsForm';
@@ -13,6 +13,10 @@ jest.mock('@apollo/react-hooks', () => ({
     error: null,
     data: []
   }))
+}));
+
+jest.mock('react-dom', () => ({
+  createPortal: (node: ReactNode) => node
 }));
 
 describe('StandardSettingsPage', () => {

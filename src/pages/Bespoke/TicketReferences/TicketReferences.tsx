@@ -1,17 +1,35 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
-import { buildYup } from 'schema-to-yup';
 import styled from 'styled-components';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
+import { buildYup } from 'schema-to-yup';
+import { DocumentNode } from 'graphql';
+import { gql } from 'apollo-boost';
 
+import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
 import {
-  jsonSchema,
   uiSchema,
+  jsonSchema,
   validationSchema,
   validationConfig
 } from './testData';
 import Button from '../../../components/Button';
+import { settingsSave } from '../../../components/SettingsForm/helpers/settingsSave';
 
-import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
+interface IProps {
+  path: string;
+  initialValues?: any;
+  ui?: any;
+  initYupSchema?: any;
+  saveSchema?: DocumentNode;
+}
+
+const testQuery: DocumentNode = gql`
+  mutation UpdateSettings($payload: Object!) {
+    update_settings(payload: $payload)
+  }
+`;
 
 const Container = styled.div`
   min-height: 100vh;
@@ -75,11 +93,6 @@ const ButtonToolbar = styled.div`
     line-height: 150%;
   }
 
-  .btn-primary button {
-    background-color: #1c3e55;
-    color: white;
-  }
-
   .btn-secondary button {
     margin-left: 329px;
     background-color: #f7f7f7;
@@ -88,11 +101,15 @@ const ButtonToolbar = styled.div`
   }
 `;
 
-interface IProps {
-  path: string;
-}
+export type PropsWithApollo = WithApolloClient<IProps>;
 
-const TicketReferences: FC<IProps> = () => {
+const TicketReferences: FC<PropsWithApollo> = ({
+  client,
+  initialValues = jsonSchema,
+  ui = uiSchema,
+  initYupSchema = validationSchema,
+  saveSchema = testQuery
+}) => {
   const [yupSchema, setYupSchema] = useState({});
 
   useEffect(() => {
@@ -101,17 +118,17 @@ const TicketReferences: FC<IProps> = () => {
 
   return (
     <Formik
-      initialValues={jsonSchema}
-      validationSchema={yupSchema}
+      initialValues={initialValues || jsonSchema}
+      validationSchema={yupSchema || initYupSchema}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
+        settingsSave(client, saveSchema, values);
         setSubmitting(false);
       }}
     >
       {(formikProps: any) => (
         <form onSubmit={formikProps.handleSubmit}>
           <Container>
-            {SettingsFormFactory(uiSchema, formikProps)}
+            {SettingsFormFactory(ui || uiSchema, formikProps)}
           </Container>
           <ButtonToolbar>
             <Button
@@ -137,4 +154,4 @@ const TicketReferences: FC<IProps> = () => {
   );
 };
 
-export default TicketReferences;
+export default withApollo<PropsWithApollo>(TicketReferences);

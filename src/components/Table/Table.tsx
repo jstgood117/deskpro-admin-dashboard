@@ -13,7 +13,7 @@ import { KeyValue } from '../../types';
 import Pagination, { IPageChange } from '../Pagination/Pagination';
 import Icon from '../Icon';
 import Header from './Header';
-import { TableType, TableParams, SortType, HeaderGroup } from './types';
+import { TableType, TableParams, SortType, HeaderGroup, ColumnMeta } from './types';
 import {
   onCheckboxChange,
   generateTableParams,
@@ -55,11 +55,12 @@ const Table: FC<Props> = ({
   groupBy
 }) => {
   const [checked, setChecked] = useState<object>({});
+  const [groupColumn, setGroupColumn] = useState<ColumnMeta>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(100);
   const [totalRecords, setTotalRecords] = useState<number>(0);
   const [firstGrouped, setFirstGrouped] = useState<boolean>(false);
-  const [currentSort, setCurrentSort] = useState<SortType[]>([]);
+  const [currentSort, setCurrentSort] = useState<SortType[]>([{ id: 'name', desc: false }]);
   const actions = ActionFactory(path);
   const hasActions = actions && actions.length > 0;
 
@@ -96,10 +97,13 @@ const Table: FC<Props> = ({
 
   useEffect(() => {
     if (sortBy.length > 0 && !compareSorts(sortBy, currentSort)) {
-      setCurrentSort(sortBy);
       toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
+      const currentPageFiltered = page
+        .filter((r: any) => r.canExpand && r.isExpanded);
+      currentPageFiltered.map((r: any) => r.toggleExpanded());
+      currentPageFiltered.map((r: any) => r.toggleExpanded());
     }
-  }, [currentSort, toggleSortBy, setCurrentSort, sortBy]);
+  }, [page, currentSort, toggleSortBy, sortBy]);
 
   useEffect(() => {
     if (onSortChange && !compareSorts(currentSort, sortByInfo)) {
@@ -135,18 +139,33 @@ const Table: FC<Props> = ({
 
   useEffect(() => {
     setChecked({});
-  }, [groupBy]);
+    setCurrentPage(1);
+    gotoPage(0);
+  }, [groupBy, gotoPage]);
 
   useEffect(() => {
-    setTotalRecords(data.length);
-  }, [data]);
+    let totalRecord = data.length;
+    if (groupBy && groupBy.length) {
+      setGroupColumn(columns.find((_col: ColumnMeta) => groupBy[0] === _col.id));
+      let countSubRow = 0;
+      const groups = _.sortBy(groupedRows.filter((r: any) => r.isGrouped), 'index');
+      const groupsNoExpanded = page.filter((r: any) => r.canExpand && r.isExpanded === undefined);
+      _.map(groupsNoExpanded, ({ subRows }) => countSubRow += subRows.length);
+
+      totalRecord += groups.length || 0;
+      totalRecord -= countSubRow;
+    }
+    setTotalRecords(totalRecord);
+  }, [data, page, groupBy, toggleExpanded, groupedRows, columns]);
 
   // Handle incoming group by
   useEffect(() => {
     if (!compareGroups(groupBy, groupByInfo)) {
       setFirstGrouped(true);
       dispatch({ type: 'resetGroupBy' });
-      toggleGroupBy(groupBy[0], true);
+      if (groupBy[0]) {
+        toggleGroupBy(groupBy[0], true);
+      }
     }
   }, [groupByInfo, groupBy, dispatch, toggleGroupBy]);
 
@@ -175,7 +194,6 @@ const Table: FC<Props> = ({
     setCurrentPage(1);
     gotoPage(0);
   };
-
   return (
     <>
       <TableStyled>
@@ -223,7 +241,11 @@ const Table: FC<Props> = ({
                             data-colindex={indexInner}
                           >
                             <StyledTh
-                              {...column.getSortByToggleProps()}
+                              {...column.getSortByToggleProps({
+                                onClick: () => {
+                                  onSortChange([{ id: column.id, desc: !column.isSortedDesc }]);
+                                }
+                              })}
                               alignRight={isIdColumn}
                             >
                               {column.render('Header')}
@@ -261,14 +283,7 @@ const Table: FC<Props> = ({
               )}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {Array.from(
-                groupBy && groupBy.length
-                  ? _.sortBy(
-                      groupedRows.filter((r: any) => r.isGrouped),
-                      'index'
-                    )
-                  : page
-              ).map((row: KeyValue, indexOuter: number) => {
+              {page.map((row: KeyValue, indexOuter: number) => {
                 prepareRow(row);
                 return row.isGrouped ? (
                   <TableTrGroup
@@ -276,22 +291,23 @@ const Table: FC<Props> = ({
                     page={page}
                     key={indexOuter}
                     row={row}
+                    groupColumn={groupColumn}
                     checked={checked}
                     hasActions={hasActions}
                     prepareRow={prepareRow}
                     handleCheckboxChange={handleCheckboxChange}
                   />
                 ) : (
-                  <TableTr
-                    indexOuter={indexOuter}
-                    page={page}
-                    key={indexOuter}
-                    row={row}
-                    checked={checked}
-                    hasActions={hasActions}
-                    handleCheckboxChange={handleCheckboxChange}
-                  />
-                );
+                    <TableTr
+                      indexOuter={indexOuter}
+                      page={page}
+                      key={indexOuter}
+                      row={row}
+                      checked={checked}
+                      hasActions={hasActions}
+                      handleCheckboxChange={handleCheckboxChange}
+                    />
+                  );
               })}
             </tbody>
           </table>

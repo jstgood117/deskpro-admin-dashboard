@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import {
   withRouter,
   RouteComponentProps,
-  useRouteMatch
 } from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
@@ -27,16 +26,13 @@ import {
 } from '../../contexts/StandardTableContext';
 import TableActions from '../../components/TableAction';
 import { SortType } from '../../components/Table/types';
-import {
-  tableTestData,
-  tableTestColumns
-} from '../../components/Table/testData';
 
 import { ResponseData } from './types';
 
 import { getColumnUniqueValues } from './helpers/getColumnUniqueValues';
 import { treeify } from './helpers/treeify';
 import { processFiltersToFilterTypes } from './helpers/processFiltersToFilterTypes';
+import { compareSorts } from '../../components/Table/helpers/tableFn';
 
 export interface IProps {
   path: string;
@@ -79,8 +75,6 @@ const StandardTablePage: FC<CombinedProps> = ({
   const [view, setView] = useState<'table' | 'list' | 'card'>('table');
   const [currentView, setCurrentView] = useState<any>();
   const [pageSize] = useState<number>(10);
-
-  const match = useRouteMatch();
 
   const queryService = QueryService();
   const query = queryService.getQuery('standardTablePage');
@@ -140,7 +134,7 @@ const StandardTablePage: FC<CombinedProps> = ({
 
       const unchangedDataQuery = currentView.dataQuery;
 
-      // FIX: removes ticket_department from gql
+      // TODO: removes ticket_department from gql
       const dataQuery = unchangedDataQuery.replace(
         'ticket_departments',
         'departments'
@@ -240,7 +234,9 @@ const StandardTablePage: FC<CombinedProps> = ({
   };
 
   const onSortChange = (_sortItems: SortType[]) => {
-    setSortItems(_sortItems);
+    if (!compareSorts(sortItems, _sortItems)) {
+      setSortItems(_sortItems);
+    }
   };
 
   const onGroupByChange = (columnNames: string[]) => {
@@ -313,10 +309,10 @@ const StandardTablePage: FC<CombinedProps> = ({
             )}
             {views && currentView && (
               <TableWrapper
-                {...(match.url === '/agents' ? tableTestColumns : currentView)}
+                {...(currentView)}
                 view={view}
                 path={path || primaryPath}
-                data={match.url === '/agents' ? tableTestData : filteredData}
+                data={filteredData}
                 fetchData={fetchData}
                 totalPageCount={totalPageCount}
                 dataType={dataType || 'sync'}

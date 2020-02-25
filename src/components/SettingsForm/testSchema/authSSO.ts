@@ -9,6 +9,7 @@ export const uiSchema: {
       type: 'feature_section',
       header: {
         title: 'Deskpro Agent Authentication ',
+        card: 'HeaderCard',
         showOn: 'agent_auth_sso_header_enabled',
         description:
           'You can only disable Deskpro Agent Authentication if you have enabled a different agent authentication source.',

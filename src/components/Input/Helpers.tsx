@@ -3,7 +3,7 @@ import { dpstyle } from '../Styled';
 import { P1 } from '../Typography';
 import { InputStyleType } from './Input';
 
-export const InputStyled = styled(dpstyle.input)<{ inputType: InputStyleType }>`
+export const InputStyled = styled(dpstyle.input) <{ inputType: InputStyleType }>`
   font-family: Rubik, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -32,7 +32,7 @@ export const InputStyled = styled(dpstyle.input)<{ inputType: InputStyleType }>`
   }
 `;
 
-export const InputWrapper = styled(dpstyle.div)<{ error: boolean }>`
+export const InputWrapper = styled(dpstyle.div) <{ error: boolean }>`
   display: inline-flex;
   align-items: center;
   background: ${props => props.theme.greyLightest};
@@ -62,7 +62,9 @@ export const InputWrapper = styled(dpstyle.div)<{ error: boolean }>`
     }
   }
 `;
-export const PrimaryInputWrapper = styled(dpstyle.div)<{ error: boolean }>`
+export const PrimaryInputWrapper =
+  styled(dpstyle.div) < { error: boolean, search: boolean } > `
+
   display: flex;
   align-items: center;
   position: relative;
@@ -73,13 +75,23 @@ export const PrimaryInputWrapper = styled(dpstyle.div)<{ error: boolean }>`
     }
   }
   ${props =>
-    props.error &&
-    css`
+      props.error &&
+      css`
       input {
         border: 1px solid ${_props => _props.theme.warningColour};
         padding-right: 35px;
       }
     `}
+  ${props =>
+      props.search &&
+      css`input { padding-left: 34px; }
+  `}
+
+  :focus-within {
+    & div:nth-child(1) svg > path {
+      fill: ${props => props.theme.brandPrimary};
+    }
+  }
 `;
 
 export const ErrorWrapper = styled.div`
@@ -91,6 +103,18 @@ export const ErrorWrapper = styled.div`
 
 export const ErrorText = styled(P1)`
   color: ${props => props.theme.warningColour};
+`;
+
+export const SearchIconWrapper = styled.div`
+  position: absolute;
+  left: 11px;
+  top: 10px;
+  z-index: 1;
+
+  & svg {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 export const IconErrorWrapper = styled.div`

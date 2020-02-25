@@ -72,6 +72,11 @@ export const onCheckboxChange = (
             ...newIds,
             [groupId]: true
           };
+        } else if (_.difference(group, selected).length < group.length) {
+          newIds = {
+            ...newIds,
+            [groupId]: 'indeterminate'
+          };
         } else {
           delete newIds[groupId];
         }
@@ -90,24 +95,24 @@ export const generateTableParams = (
 ): TableParams => {
   return tableType === 'async'
     ? {
-        columns,
-        data,
-        initialState: {
-          pageIndex: 0,
-          pageSize: 100
-        },
-        manualPagination: true,
-        pageCount: controlledPageCount
-      }
+      columns,
+      data,
+      initialState: {
+        pageIndex: 0,
+        pageSize: 100
+      },
+      manualPagination: true,
+      pageCount: controlledPageCount
+    }
     : {
-        columns,
-        data,
-        orderByFn,
-        initialState: {
-          pageIndex: 0,
-          pageSize: 100
-        }
-      };
+      columns,
+      data,
+      orderByFn,
+      initialState: {
+        pageIndex: 0,
+        pageSize: 100
+      }
+    };
 };
 
 export const generateCardProps = (row: any): UserType => {

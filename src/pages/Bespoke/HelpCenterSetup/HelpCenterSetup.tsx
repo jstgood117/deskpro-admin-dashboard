@@ -66,6 +66,18 @@ const Container = styled.div`
     .description {
       max-width: 580px;
     }
+    .horz-element-group {
+      .field-container {
+        margin: 0 8px 0 0 !important;
+        min-width: 223px;
+        input {
+          margin: 0;
+        }
+        label {
+          margin: 0;
+        }
+      }
+    }
     .group-elements {
       .vert-element-group {
         &.captcha-features {
@@ -271,10 +283,6 @@ const ButtonToolbar = styled.div`
     border-radius: 4px;
     border-width: 0;
     font-size: 13px;
-  }
-  .btn-primary button {
-    background-color: #1c3e55;
-    color: white;
   }
   .btn-secondary button {
     background-color: #f7f7f7;

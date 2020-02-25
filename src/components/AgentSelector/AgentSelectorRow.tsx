@@ -49,7 +49,6 @@ const AgentSelectorRowStyled = styled.div`
   }
 
   &:hover > div:nth-child(2) .text {
-    font-weight: 500;
     color: ${props => props.theme.brandPrimary};
   }
 
@@ -59,6 +58,10 @@ const AgentSelectorRowStyled = styled.div`
 
   & img {
     margin-left: 1px;
+  }
+
+  &:first-child {
+    margin-top: 5px;
   }
 `;
 
@@ -95,8 +98,8 @@ const AgentSelectorRow: React.FC<Props & WrappedComponentProps> = React.memo(
             </FlowLayout>
           </Tooltip>
         ) : (
-          <Checkbox checked={!!selected} onChange={onCheck} />
-        )}
+            <Checkbox checked={!!selected} onChange={onCheck} />
+          )}
         <NameAndAvatar avatar={agent.avatar} name={agent.name} />
       </AgentSelectorRowStyled>
     );

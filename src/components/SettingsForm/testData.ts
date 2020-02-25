@@ -171,6 +171,17 @@ export const uiSchema: {
                   field: {
                     editable: true,
                     type: 'profiles',
+                    profiles: [
+                      { id: 'agent1', name: 'Arthur Curry' },
+                      { id: 'agent2', name: 'Bruce Wayne' },
+                      { id: 'agent3', name: 'Clark Kent' },
+                      { id: 'agent4', name: 'Diana Prince' },
+                      { id: 'agent5', name: 'Harleen Quinzel' },
+                      { id: 'agent6', name: 'Ignatius Ogilvy' },
+                      { id: 'agent7', name: 'Jason Todd' },
+                      { id: 'agent8', name: 'Pamela Lillian ' },
+                      { id: 'agent9', name: 'Selina Kyle' },
+                    ],
                     title: 'Agents',
                     max: 200,
                     id: 'agent_email_subscriptions'
@@ -201,6 +212,13 @@ export const uiSchema: {
                     type: 'profiles',
                     title: 'Agents',
                     max: 200,
+                    profiles: [
+                      { id: 'agent1', name: 'Arthur Curry' },
+                      { id: 'agent2', name: 'Bruce Wayne' },
+                      { id: 'agent3', name: 'Clark Kent' },
+                      { id: 'agent4', name: 'Diana Prince' },
+                      { id: 'agent5', name: 'Harleen Quinzel' },
+                    ],
                     id: 'agent_keyboard_shortcuts'
                   }
                 }
@@ -440,22 +458,21 @@ export const jsonSchema = {
   agent_keyboard_shortcuts_enabled: true,
   forwards_out_of_helpdesk_enabled: true,
   agent_email_subscriptions: [
-    { name: 'Arthur Curry' },
-    { name: 'Bruce Wayne' },
-    { name: 'Clark Kent' },
-    { name: 'Diana Prince' },
-    { name: 'Harleen Quinzel' },
-    { name: 'Ignatius Ogilvy' },
-    { name: 'Jason Todd' },
-    { name: 'Pamela Lillian ' },
-    { name: 'Selina Kyle' }
+    { agent1: true },
+    { agent2: true },
+    { agent3: true },
+    { agent4: true },
+    { agent5: true },
+    { agent6: true },
+    { agent7: true },
+    { agent8: true }
   ],
   agent_keyboard_shortcuts: [
-    { name: 'Arthur Curry' },
-    { name: 'Bruce Wayne' },
-    { name: 'Clark Kent' },
-    { name: 'Diana Prince' },
-    { name: 'Harleen Quinzel' }
+    { agent1: true },
+    { agent2: true },
+    { agent3: true },
+    { agent4: true },
+    { agent5: true }
   ],
   brand1_default_email_account: 'support@brand1.deskpro.com',
   brand2_default_email_account: '',

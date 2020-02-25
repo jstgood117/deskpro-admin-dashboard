@@ -15,16 +15,16 @@ export const treeify = (
   const treeList: any[] = [];
   const lookup: KeyValue = {};
   list.forEach((obj: any) => {
-      lookup[obj[id]] = obj;
-      obj[children] = [];
+    lookup[obj[id]] = obj;
+    obj[children] = [];
   });
 
   list.forEach((obj: KeyValue) => {
-      if (obj[parent] != null) {
-          lookup[obj[parent]['id']][children].push(obj);
-      } else {
-          treeList.push(obj);
-      }
+    if (obj[parent]) {
+      lookup[obj[parent]['id']][children].push(obj);
+    } else {
+      treeList.push(obj);
+    }
   });
   return treeList;
 };

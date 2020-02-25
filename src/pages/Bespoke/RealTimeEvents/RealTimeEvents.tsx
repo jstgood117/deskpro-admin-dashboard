@@ -34,9 +34,6 @@ const Container = styled.div`
   }
 
   & .page-section {
-    &:last-child::after {
-      height: 0;
-    }
     .field-container.form-item.method-name {
       margin-left: -40px;
       margin-bottom: 24px;
@@ -147,10 +144,6 @@ const ButtonToolbar = styled.div`
     border-radius: 4px;
     border-width: 0;
     font-size: 13px;
-  }
-  .btn-primary button {
-    background-color: #1c3e55;
-    color: white;
   }
   .btn-secondary button {
     background-color: #f7f7f7;

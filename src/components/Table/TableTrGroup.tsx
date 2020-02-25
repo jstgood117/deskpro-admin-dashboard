@@ -2,8 +2,9 @@ import React, { FC, SyntheticEvent } from 'react';
 
 import Checkbox from '../Checkbox';
 import Icon from '../Icon';
-import TableTr from './TableTr';
 import { GroupCaret } from './TableStyles';
+import { ColumnMeta } from './types';
+import { getValueFromColumnType } from '../../utils/getValueFromColumnType';
 
 export type Props = {
   indexOuter: number;
@@ -12,6 +13,7 @@ export type Props = {
   checked: any;
   hasActions: boolean;
   prepareRow: any;
+  groupColumn?: ColumnMeta;
   handleCheckboxChange?: (
     e: SyntheticEvent<HTMLInputElement>,
     rows: any
@@ -19,13 +21,11 @@ export type Props = {
 };
 
 const TableTrGroup: FC<Props> = ({
-  indexOuter,
-  page,
   row,
   checked,
   hasActions,
-  prepareRow,
-  handleCheckboxChange
+  handleCheckboxChange,
+  groupColumn
 }) => {
   return (
     <React.Fragment>
@@ -38,13 +38,14 @@ const TableTrGroup: FC<Props> = ({
               onChange={(e: SyntheticEvent<HTMLInputElement>) => {
                 handleCheckboxChange(e, row.subRows);
               }}
+              indeterminate={(checked[row.id] === 'indeterminate')}
             />
           </td>
         )}
         <td colSpan={1} className='groupCol'>
           <div {...row.getExpandedToggleProps()} className='groupTitle'>
             <span>
-              {row.groupByVal} ({row.subRows.length})
+              {groupColumn && getValueFromColumnType(groupColumn.columnProps, row.subRows[0].original)} ({row.subRows.length})
             </span>
             <GroupCaret>
               {row.isExpanded ? <Icon name='up' /> : <Icon name='down' />}
@@ -53,23 +54,6 @@ const TableTrGroup: FC<Props> = ({
         </td>
         <td colSpan={row.cells.length} style={{ backgroundImage: 'none' }} />
       </tr>
-      {row.isExpanded &&
-        Array.from(
-          row.subRows.map((subRow: any, innerIndex: number) => {
-            prepareRow(subRow);
-            return (
-              <TableTr
-                indexOuter={indexOuter}
-                page={page}
-                key={innerIndex}
-                row={subRow}
-                checked={checked}
-                hasActions={hasActions}
-                handleCheckboxChange={handleCheckboxChange}
-              />
-            );
-          })
-        )}
     </React.Fragment>
   );
 };

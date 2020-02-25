@@ -1,5 +1,4 @@
 import React, { FC, SyntheticEvent } from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import _ from 'lodash';
 
 import Checkbox from '../Checkbox';
@@ -28,7 +27,6 @@ const TableTr: FC<Props> = ({
   handleCheckboxChange
 }) => {
   const isChecked = checked.hasOwnProperty(row.original.id);
-  const match = useRouteMatch();
 
   return (
     <tr
@@ -40,8 +38,8 @@ const TableTr: FC<Props> = ({
             ? 'isLastSubRow '
             : 'subrow '
           : row.subRows.length > 0 && row.isExpanded
-          ? 'hasSubRows '
-          : ' ') +
+            ? 'hasSubRows '
+            : ' ') +
         (checked.hasOwnProperty((row.original as KeyValue).id.toString())
           ? 'row--selected '
           : ' ') +
@@ -71,6 +69,7 @@ const TableTr: FC<Props> = ({
       {_.sortBy(row.cells, 'column.index').map(
         (cell: any, indexInner: number) => {
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+
           return (
             <td
               className={
@@ -80,7 +79,7 @@ const TableTr: FC<Props> = ({
               }
               {...cell.getCellProps()}
               {...cell.row.getExpandedToggleProps({
-                onClick: () => {},
+                onClick: () => { },
                 style: {
                   textAlign: isIdColumn && 'right',
                   verticalAlign: isIdColumn && 'bottom',
@@ -93,33 +92,7 @@ const TableTr: FC<Props> = ({
               })}
               key={indexInner}
             >
-              {cell.column.id === 'admin_common.col.teams' &&
-              match.url === '/agents' ? (
-                <TableData
-                  {...generateComponentProps({
-                    ...cell,
-                    column: {
-                      ...cell.column,
-                      type: {
-                        __typename: 'TableColumnTicketDepartmentList',
-                        valuesArray: {
-                          dataPath: 'agent_teams'
-                        }
-                      }
-                    },
-                    row: {
-                      ...cell.row,
-                      original: {
-                        ...cell.row.original,
-                        agent_teams: [{ id: cell.value, title: cell.value }]
-                      }
-                    },
-                    value: [{ id: cell.value, title: cell.value }]
-                  })}
-                />
-              ) : (
-                <TableData {...generateComponentProps(cell)} />
-              )}
+              <TableData {...generateComponentProps(cell)} />
             </td>
           );
         }
@@ -129,15 +102,15 @@ const TableTr: FC<Props> = ({
           {!checked.hasOwnProperty(
             (row.original as KeyValue).id.toString()
           ) && (
-            <TableData
-              type='action_buttons'
-              props={{
-                onPencilClick: () => {},
-                onDuplicateClick: () => {},
-                onTrashClick: () => {}
-              }}
-            />
-          )}
+              <TableData
+                type='action_buttons'
+                props={{
+                  onPencilClick: () => { },
+                  onDuplicateClick: () => { },
+                  onTrashClick: () => { }
+                }}
+              />
+            )}
         </span>
       </td>
     </tr>
