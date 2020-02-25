@@ -30,7 +30,7 @@ export const RouteToPage: KeyValue = {
   '/data-center': DataCenter,
   '/tickets/locking': TicketLocking,
   '/tickets/problems': TicketsProblems,
-  '/tickets/ref-codes': DataCenter,
+  '/tickets/ref-codes': TicketReferences,
   '/tickets/deflection': TicketDeflection,
   '/voice/settings': VoiceSettings,
   '/sysadmin/realtime-events': RealTimeEvents,
