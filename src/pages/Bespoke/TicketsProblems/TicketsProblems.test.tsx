@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import TicketsProblemsPage from './index';
+import TicketsProblemsPage from './TicketsProblems';
 
 describe('TicketsProblemsPage', () => {
   let mountedPage: any;

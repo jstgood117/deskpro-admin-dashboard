@@ -1,22 +1,21 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import { buildYup } from 'schema-to-yup';
+import { gql } from 'apollo-boost';
+import { DocumentNode } from 'graphql';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
 import styled from 'styled-components';
 
+import Button from '../../../components/Button';
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
+import { settingsSave } from '../../../components/SettingsForm/helpers/settingsSave';
 import {
-  jsonSchema,
   uiSchema,
+  jsonSchema,
   validationSchema,
   validationConfig
 } from './testData';
-import Button from '../../../components/Button';
-
-interface IProps {
-  path: string;
-  ui?: any;
-  initialValues?: any;
-}
 
 const Container = styled.div`
   .form-row :last-child :after {
@@ -59,8 +58,27 @@ const ButtonToolbar = styled.div`
   }
 `;
 
-const TicketsProblemsPage: FC<IProps> = ({ ui, initialValues }) => {
+interface IProps {
+  path: string;
+  ui?: any;
+  initialValues?: any;
+}
+
+export type PropsWithApollo = WithApolloClient<IProps>;
+
+const TicketsProblemsPage: FC<PropsWithApollo> = ({
+  client,
+  ui,
+  initialValues,
+}) => {
+
   const [yupSchema, setYupSchema] = useState({});
+  // saveMutation from response
+  const saveSchema: DocumentNode = gql`
+   mutation UpdateSettings($payload: Object!) {
+     update_settings(payload: $payload)
+   }
+ `;
 
   useEffect(() => {
     setYupSchema(buildYup(validationSchema, validationConfig));
@@ -68,10 +86,10 @@ const TicketsProblemsPage: FC<IProps> = ({ ui, initialValues }) => {
 
   return (
     <Formik
-      initialValues={initialValues || jsonSchema}
+      initialValues={jsonSchema}
       validationSchema={yupSchema}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
+        settingsSave(client, saveSchema, values);
         setSubmitting(false);
       }}
     >
@@ -105,4 +123,4 @@ const TicketsProblemsPage: FC<IProps> = ({ ui, initialValues }) => {
   );
 };
 
-export default TicketsProblemsPage;
+export default withApollo<PropsWithApollo>(TicketsProblemsPage);
