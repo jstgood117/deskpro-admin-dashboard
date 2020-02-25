@@ -178,18 +178,34 @@ const elementsSelector: {
   ),
   units: props => {
     return (
-      <Units
-        {...props}
-        inputValue={props.formikProps.values[props.id]}
-        option={props.formikProps.values[props.optionId]}
-        onChange={(value: UnitsValuesType) => {
-          props.formikProps.setFieldValue(props.id, value.inputValue);
-          props.formikProps.setFieldValue(
-            props.optionId,
-            value.selectValue.value
+      <Field name={props.id}>
+        {({ meta }: any) => {
+          return (
+            <div>
+              <Units
+                {...props}
+                inputValue={props.formikProps.values[props.id]}
+                option={props.formikProps.values[props.optionId]}
+                onBlur={() => {
+                  props.formikProps.setFieldTouched(props.id);
+                }}
+                onChange={(value: UnitsValuesType) => {
+                  props.formikProps.setFieldValue(props.id, value.inputValue);
+                  props.formikProps.setFieldValue(
+                    props.optionId,
+                    value.selectValue.value
+                  );
+                }}
+              />
+              {meta.touched && meta.error && (
+                <ErrorMessage className='error'>
+                  <FormattedMessage id={meta.error} />
+                </ErrorMessage>
+              )}
+            </div>
           );
         }}
-      />
+      </Field>
     );
   },
   progress: props => {
