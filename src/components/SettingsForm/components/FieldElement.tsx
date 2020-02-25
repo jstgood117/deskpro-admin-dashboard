@@ -95,23 +95,19 @@ const elementsSelector: {
   checkbox: props => {
     return (
       <Field name={props.id}>
-        {({ field, form, meta }: any) => {
+        {({ meta }: any) => {
           return (
             <>
               <StyledCheckbox
                 className='form-checkbox'
                 id={props.id}
-                checked={field.value.includes(props.value)}
+                checked={
+                  props.formikProps.values[props.id] &&
+                  props.formikProps.values[props.id].includes(props.value)
+                }
+                value={props.value}
                 onChange={event => {
-                  if (field.value.includes(props.value)) {
-                    const nextValue = field.value.filter(
-                      (value: any) => value !== props.value
-                    );
-                    form.setFieldValue(props.id, nextValue);
-                  } else {
-                    const nextValue = field.value.concat(props.value);
-                    form.setFieldValue(props.id, nextValue);
-                  }
+                  props.formikProps.handleChange(event);
                 }}
               />
               {meta.touched && meta.error && (
