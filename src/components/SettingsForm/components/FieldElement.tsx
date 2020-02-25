@@ -114,18 +114,32 @@ const elementsSelector: {
     </Field>
   ),
   select: props => (
-    <SingleSelect
-      {...props}
-      selectedOption={props.formikProps.values[props.id]}
-      selectOption={val => props.formikProps.setFieldValue(props.id, val)}
-      placeholder={props.placeholder}
-      type='primary'
-    />
+    <Field name={props.id}>
+      {({ field, meta }: any) => (
+        <div>
+          <SingleSelect
+            type='primary'
+            options={props.options}
+            selectedOption={props.formikProps.values[props.id]}
+            selectOption={val => {
+              props.formikProps.setFieldTouched(props.id, true);
+              return props.formikProps.setFieldValue(props.id, val);
+            }}
+            placeholder={props.placeholder}
+          />
+          {meta.touched && meta.error && (
+            <ErrorMessage className='error'>
+              <FormattedMessage id={'validation.required'} />
+            </ErrorMessage>
+          )}
+        </div>
+      )}
+    </Field>
   ),
   button: props => (
     <Button
       styleType={props.styleType ? props.styleType : 'secondary'}
-      onClick={() => {}}
+      onClick={() => { }}
       size='small'
     >
       {props.icon && <Icon name={props.icon} />}
@@ -181,7 +195,7 @@ const elementsSelector: {
         </div>
         <Button
           styleType='secondary'
-          onClick={() => {}}
+          onClick={() => { }}
           size='small'
           className='export-btn'
         >
