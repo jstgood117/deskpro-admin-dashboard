@@ -51,6 +51,7 @@ export const uiSchema: {
                             type: 'select',
                             id: 'data_center_schedule_select',
                             options: [
+                              { value: '', label: 'Select...' },
                               { value: '1 minute', label: '1 minute' },
                               { value: '2 minutes', label: '2 minutes' },
                               { value: '3 minutes', label: '3 minutes' },
@@ -329,4 +330,57 @@ export const jsonSchema: any = {
     value: 'all languages',
     label: 'all languages',
   },
+};
+
+export const validationSchema = {
+  type: 'object',
+  properties: {
+    data_center_schedule_checkbox: {
+      type: 'array'
+    },
+    data_center_schedule_select: {
+      type: 'object',
+      properties: {
+        value: {
+          type: 'string',
+          required: true
+        },
+        label: {
+          type: 'string',
+          required: true
+        }
+      }
+    },
+    data_center_ticket_language_select_1: {
+      type: 'object'
+    },
+    data_center_ticket_language_select_2: {
+      type: 'object'
+    },
+    data_center_user_language_select_1: {
+      type: 'object'
+    },
+    data_center_user_language_select_2: {
+      type: 'object'
+    },
+    data_center_download_language_select_1: {
+      type: 'object'
+    },
+    data_center_reset_language_select_1: {
+      type: 'object'
+    }
+  }
+};
+
+export const validationConfig = {
+  errMessages: {
+    data_center_schedule_select: {
+      value: {
+        required: 'validation.required'
+      },
+      label: {
+        required: 'validation.required'
+      }
+    }
+  }
 };

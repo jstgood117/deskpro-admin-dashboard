@@ -9,7 +9,7 @@ import {
   jsonSchema,
   validationSchema,
   validationConfig
-} from './testData1';
+} from './testData2';
 
 interface IProps {
   path: string;
