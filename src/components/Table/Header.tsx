@@ -172,6 +172,8 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     setCurrentAction(undefined);
     setShowActionComponent(false);
+
+    setChecked({});
   };
 
   const handleCancelAction = () => {
