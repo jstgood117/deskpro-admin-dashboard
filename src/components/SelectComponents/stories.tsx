@@ -9,7 +9,7 @@ const MultiSelectComponent: React.FC<{
   options: IOptions[];
   type: 'fixed' | 'autocomplete';
 }> = props => {
-  const [selectedOptions, selectOptions] = React.useState([]);
+  const [selectedOptions, selectOptions] = React.useState<IOptions[]>([]);
 
   return (
     <MultiSelect
@@ -25,7 +25,7 @@ const SingleSelectComponent: React.FC<{
   type: 'withImage' | 'medium' | 'large' | 'primary';
   isSearchable?: boolean;
 }> = props => {
-  const [selectedOption, selectOptions] = React.useState();
+  const [selectedOption, selectOptions] = React.useState<IOptions>();
 
   return (
     <SingleSelect
@@ -53,10 +53,10 @@ const imageOptions: IOptions[] = [
 ];
 
 storiesOf('SelectComponents', module)
-  .add('SingleSelect-large', () => <SingleSelectComponent options={options} type='large'/>)
-  .add('SingleSelect-with-image', () => <SingleSelectComponent options={imageOptions} type='withImage'/>)
-  .add('SingleSelect-primary', () => <SingleSelectComponent options={options} type='primary'/>)
-  .add('SingleSelect-primary-autocomplete', () => <SingleSelectComponent options={options} type='primary' isSearchable={true}/>)
+  .add('SingleSelect-large', () => <SingleSelectComponent options={options} type='large' />)
+  .add('SingleSelect-with-image', () => <SingleSelectComponent options={imageOptions} type='withImage' />)
+  .add('SingleSelect-primary', () => <SingleSelectComponent options={options} type='primary' />)
+  .add('SingleSelect-primary-autocomplete', () => <SingleSelectComponent options={options} type='primary' isSearchable={true} />)
   .add('MultiSelect - searchable type', () => (
     <MultiSelectComponent options={options} type='autocomplete' />
   ))
