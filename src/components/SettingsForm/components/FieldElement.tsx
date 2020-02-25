@@ -139,7 +139,8 @@ const elementsSelector: {
   button: props => (
     <Button
       styleType={props.styleType ? props.styleType : 'secondary'}
-      onClick={() => { }}
+      onClick={props.formikProps.handleSubmit}
+      disabled={props.formikProps.isSubmitting}
       size='small'
     >
       {props.icon && <Icon name={props.icon} />}

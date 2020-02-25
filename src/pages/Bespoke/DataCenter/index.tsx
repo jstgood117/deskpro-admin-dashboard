@@ -2,20 +2,19 @@ import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import { buildYup } from 'schema-to-yup';
+import { gql } from 'apollo-boost';
+import { DocumentNode } from 'graphql';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
 
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
+import { settingsSave } from '../../../components/SettingsForm/helpers/settingsSave';
 import {
   uiSchema,
   jsonSchema,
   validationSchema,
   validationConfig
-} from './testData2';
-
-interface IProps {
-  path: string;
-  ui?: any;
-  initialValues?: any;
-}
+} from './testData1';
 
 const Container = styled.div`
   .group-elements .field-container {
@@ -63,9 +62,27 @@ const Container = styled.div`
   }
 `;
 
-const DataCenterPage: FC<IProps> = ({ ui, initialValues }) => {
+interface IProps {
+  path: string;
+  ui?: any;
+  initialValues?: any;
+}
+
+export type PropsWithApollo = WithApolloClient<IProps>;
+
+const DataCenterPage: FC<PropsWithApollo> = ({
+  client,
+  ui,
+  initialValues,
+}) => {
 
   const [yupSchema, setYupSchema] = useState({});
+   // saveMutation from response
+   const saveSchema: DocumentNode = gql`
+   mutation UpdateSettings($payload: Object!) {
+     update_settings(payload: $payload)
+   }
+ `;
 
   useEffect(() => {
     setYupSchema(buildYup(validationSchema, validationConfig));
@@ -76,7 +93,7 @@ const DataCenterPage: FC<IProps> = ({ ui, initialValues }) => {
       initialValues={jsonSchema}
       validationSchema={yupSchema}
       onSubmit={(values, { setSubmitting }) => {
-        console.log(values);
+        settingsSave(client, saveSchema, values);
         setSubmitting(false);
       }}
     >
@@ -91,4 +108,5 @@ const DataCenterPage: FC<IProps> = ({ ui, initialValues }) => {
   );
 };
 
-export default DataCenterPage;
+export default withApollo<PropsWithApollo>(DataCenterPage);
+
