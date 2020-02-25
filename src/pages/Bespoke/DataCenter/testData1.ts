@@ -51,6 +51,7 @@ export const uiSchema: {
                             type: 'select',
                             id: 'data_center_schedule_select',
                             options: [
+                              { value: '', label: 'Select...' },
                               { value: '1 minute', label: '1 minute' },
                               { value: '2 minutes', label: '2 minutes' },
                               { value: '3 minutes', label: '3 minutes' }
@@ -355,15 +356,16 @@ export const validationSchema = {
     data_center_schedule_checkbox: {
       type: 'array'
     },
-
     data_center_schedule_select: {
       type: 'object',
-      when: {
-        data_center_schedule_checkbox: {
-          is: true,
-          then: {
-            required: true
-          }
+      properties: {
+        value: {
+          type: 'string',
+          required: true
+        },
+        label: {
+          type: 'string',
+          required: true
         }
       }
     },
@@ -390,12 +392,13 @@ export const validationSchema = {
 
 export const validationConfig = {
   errMessages: {
-    agent_settings_security_idle_timeout: {
-      required: 'validation.required',
-      pattern: 'validation.numberNotValid'
-    },
-    agent_settings_security_whitelist: {
-      pattern: 'agent.settings.security_whitelist'
+    data_center_schedule_select: {
+      value: {
+        required: 'validation.required'
+      },
+      label: {
+        required: 'validation.required'
+      }
     }
   }
 };
