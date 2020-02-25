@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { SizeTypes } from '../../types';
-import { IItemProps } from './Button';
+import { IButtonItemProps } from '../../resources/interfaces';
 
 export interface IButtonStyleProp {
   styles: IButtonStyle;
@@ -33,12 +33,12 @@ export type IButtonProps = {
   styleType: ButtonStyleType;
   size?: SizeTypes;
   opened?: boolean;
-  items?: IItemProps[] | any;
+  items?: IButtonItemProps[] | any;
   showClearButton?: boolean;
   renderItem?: (item: any, index: number) => React.ReactElement;
   onClear?: () => void;
   onClick?: () => void;
-  onSelect?: (value: IItemProps) => void;
+  onSelect?: (value: any) => void;
   dropdownValue?: any;
   iconOnly?: boolean;
   className?: string;
@@ -53,6 +53,6 @@ export type ButtonStyleType =
   | 'danger'
   | 'imageButton';
 
-  export interface IHasButtonType {
-    hasClearButton: boolean;
-  }
+export interface IHasButtonType {
+  hasClearButton: boolean;
+}

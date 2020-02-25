@@ -74,6 +74,7 @@
     "use-force-update": "^1.0.7",
     "use-react-router": "^1.0.7",
     "warning": "^4.0.3",
+    "whatwg-fetch": "^3.0.0",
     "yup": "^0.28.1"
   },
   "devDependencies": {

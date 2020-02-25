@@ -13,7 +13,7 @@ describe('BrandButtonGroup', () => {
   const BrandButtonGroupComponent: React.FC<{
     size?: SizeTypes;
   }> = _props => {
-    const [selected, selectBtn] = useState();
+    const [selected, selectBtn] = useState<string>();
     return (
       <BrandButtonGroup
         size={_props.size}

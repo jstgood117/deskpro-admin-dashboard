@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import Input from '../Input';
 import SingleSelect from '../SelectComponents/SingleSelect';
 import { IOptions } from '../../types';
@@ -36,7 +36,7 @@ const StyledSizeDropdown = styled.div`
 `;
 
 const FormAndDropdown: FC<IProps> = props => {
-  const [selectedOption, selectOptions] = React.useState();
+  const [selectedOption, selectOptions] = useState<IOptions>();
 
   return (
     <StyledFormAndDropdown>
