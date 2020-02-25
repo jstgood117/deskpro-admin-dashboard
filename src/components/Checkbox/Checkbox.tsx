@@ -57,7 +57,10 @@ const ArrowButton = styled.span<{ checked: boolean; opened?: boolean }>`
   }
 `;
 
-const CheckboxWrapper = styled(dpstyle.div)<{ opened?: boolean, showArrow?:boolean }>`
+const CheckboxWrapper = styled(dpstyle.div)<{
+  opened?: boolean;
+  showArrow?: boolean;
+}>`
   display: inline-flex;
   align-items: center;
   height: fit-content;

@@ -92,20 +92,47 @@ const elementsSelector: {
       onChange={props.formikProps.handleChange}
     />
   ),
-  checkbox: props => (
-    <StyledCheckbox
-      className='form-checkbox'
-      id={props.id}
-      checked={
-        props.formikProps.values[props.id] &&
-        props.formikProps.values[props.id].includes(props.value)
-      }
-      value={props.value}
-      onChange={event => {
-        props.formikProps.handleChange(event);
-      }}
-    />
-  ),
+  checkbox: props => {
+    return (
+      <Field name={props.id}>
+        {({ field, form, meta }: any) => {
+          return (
+            <>
+              <StyledCheckbox
+                className='form-checkbox'
+                id={props.id}
+                checked={field.value.includes(props.value)}
+                onChange={event => {
+                  if (field.value.includes(props.value)) {
+                    const nextValue = field.value.filter(
+                      (value: any) => value !== props.value
+                    );
+                    form.setFieldValue(props.id, nextValue);
+                  } else {
+                    const nextValue = field.value.concat(props.value);
+                    form.setFieldValue(props.id, nextValue);
+                  }
+                }}
+              />
+              {meta.touched && meta.error && (
+                <ErrorMessage
+                  className='error'
+                  style={{
+                    position: 'absolute',
+                    bottom: '-40px',
+                    minWidth: '643px',
+                    left: 24
+                  }}
+                >
+                  <FormattedMessage id={meta.error} />
+                </ErrorMessage>
+              )}
+            </>
+          );
+        }}
+      </Field>
+    );
+  },
   input: props => (
     <Field name={props.id}>
       {({ field, meta }: any) => (
