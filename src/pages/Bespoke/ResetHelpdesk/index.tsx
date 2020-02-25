@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { WithApolloClient } from 'react-apollo';
+import { withApollo } from '@apollo/react-hoc';
 import { DocumentNode } from 'graphql';
 import { gql } from 'apollo-boost';
 import { buildYup } from 'schema-to-yup';
@@ -22,6 +23,7 @@ interface IProps {
   initialValues?: any;
   initYupSchema?: any;
   saveSchema?: DocumentNode;
+  client?: any;
 }
 
 const testQuery: DocumentNode = gql`
@@ -29,6 +31,7 @@ const testQuery: DocumentNode = gql`
     update_settings(payload: $payload)
   }
 `;
+export type PropsWithApollo = WithApolloClient<IProps>;
 
 const ResetHelpdeskPage: FC<WithApolloClient<IProps>> = ({
   client,
@@ -71,4 +74,4 @@ const ResetHelpdeskPage: FC<WithApolloClient<IProps>> = ({
   );
 };
 
-export default ResetHelpdeskPage;
+export default withApollo<PropsWithApollo>(ResetHelpdeskPage);
