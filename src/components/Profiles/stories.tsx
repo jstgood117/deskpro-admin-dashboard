@@ -33,7 +33,7 @@ storiesOf('Profiles', module)
     <Formik
       initialValues={{
         profiles,
-        selected,
+        'agents-profiles': selected,
         restricted,
       }}
       validate={action('validate')}
@@ -41,10 +41,11 @@ storiesOf('Profiles', module)
     >
       {formikProps => (
         <Profiles
+          id='agents-profiles'
           editable={true}
           onEditClick={action('edit click')}
           profiles={formikProps.values.profiles}
-          selected={formikProps.values['selected']}
+          selected={formikProps.values['agents-profiles']}
           restricted={formikProps.values.restricted}
           title='Agents'
           formikProps={formikProps}
@@ -56,7 +57,7 @@ storiesOf('Profiles', module)
     <Formik
       initialValues={{
         profiles,
-        selected: {
+        'agents-profiles': {
           agent5: true,
           agent6: true
         },
@@ -67,10 +68,11 @@ storiesOf('Profiles', module)
     >
       {formikProps => (
         <Profiles
+          id='agents-profiles'
           editable={true}
           onEditClick={action('edit click')}
           profiles={formikProps.values.profiles}
-          selected={formikProps.values['selected']}
+          selected={formikProps.values['agents-profiles']}
           restricted={formikProps.values.restricted}
           title='Agents'
           formikProps={formikProps}
@@ -82,7 +84,7 @@ storiesOf('Profiles', module)
     <Formik
       initialValues={{
         profiles,
-        selected,
+        'agents-profiles': selected,
         restricted,
       }}
       validate={action('validate')}
@@ -90,8 +92,9 @@ storiesOf('Profiles', module)
     >
       {formikProps => (
         <Profiles
+          id='agents-profiles'
           profiles={formikProps.values.profiles}
-          selected={formikProps.values['selected']}
+          selected={formikProps.values['agents-profiles']}
           restricted={formikProps.values.restricted}
           title='Agents'
           formikProps={formikProps}
@@ -103,17 +106,18 @@ storiesOf('Profiles', module)
     <Formik
       initialValues={{
         profiles,
-        selected: {},
+        'agents-profiles': {},
       }}
       validate={action('validate')}
       onSubmit={action('submit')}
     >
       {formikProps => (
         <Profiles
+          id='agents-profiles'
           editable={true}
           onEditClick={action('edit click')}
           profiles={formikProps.values.profiles}
-          selected={formikProps.values['selected']}
+          selected={formikProps.values['agents-profiles']}
           title='Agents'
           formikProps={formikProps}
         />
