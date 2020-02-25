@@ -88,17 +88,3 @@ export const validationConfig = {
     }
   }
 };
-
-export const validationSchema = {
-  type: 'object',
-  properties: {
-    ticket_reference_enabled: {
-      type: 'boolean'
-    },
-    ticket_reference_code: {
-      type: 'array'
-    },
-  },
-};
-
-export const validationConfig = {};
