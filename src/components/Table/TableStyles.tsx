@@ -188,8 +188,9 @@ export const TableStyled = styled(dpstyle.div)`
           color: ${props => props.theme.staticColour};
           vertical-align: middle;
           .multiple-ticket {
-            min-width: 100px;
+            max-width: 100px;
             display: flex;
+            margin-right: 10px;
             .image {
               min-width: 25px;
               img {
