@@ -3,7 +3,7 @@ import { dpstyle } from '../Styled';
 
 import { IButtonStyleProp, IHasButtonType } from './types';
 
-export const ButtonStyled = styled(dpstyle.button)<IButtonStyleProp>`
+export const ButtonStyled = styled(dpstyle.button) <IButtonStyleProp>`
   background-color: ${props => props.styles.static.backgroundColor};
   color: ${props => props.styles.static.color};
   border: ${props => props.styles.static.border};
@@ -48,7 +48,7 @@ export const DropdownContent = styled(dpstyle.div)`
   width: 100%;
 `;
 
-export const ClearButton = styled(dpstyle.button)<IHasButtonType>`
+export const ClearButton = styled(dpstyle.button) <IHasButtonType>`
   outline: none;
   width: 30px;
   align-items: center;
@@ -107,7 +107,7 @@ export const DropdownContentLink = styled.div`
   }
 `;
 
-export const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
+export const ButtonWrapper = styled(dpstyle.div) <IHasButtonType>`
   display: inline-flex;
   position: relative;
   .selected {
@@ -117,7 +117,7 @@ export const ButtonWrapper = styled(dpstyle.div)<IHasButtonType>`
     color: ${props => props.theme.activeColour};
     border-color: ${props => props.theme.activeColour};
     background-color: ${props =>
-      props.hasClearButton ? props.theme.hoverColour : props.theme.white};
+    props.hasClearButton ? props.theme.hoverColour : props.theme.white};
     path {
       fill: ${props => props.theme.activeColour};
     }
