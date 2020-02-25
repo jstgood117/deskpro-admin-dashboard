@@ -77,6 +77,7 @@ const ProfileEditButton = styled.div`
 `;
 
 interface IProps {
+  id: string;
   editable?: boolean;
   emptyText?: string;
   onEditClick?: () => void;
@@ -96,6 +97,7 @@ interface IProps {
 }
 
 const Profiles: React.FC<IProps> = ({
+  id,
   editable,
   emptyText,
   onEditClick,
@@ -125,7 +127,7 @@ const Profiles: React.FC<IProps> = ({
   };
 
   const onSaveClick = () => {
-    formikProps.setFieldValue('selected', selectedAgents);
+    formikProps.setFieldValue(id, selectedAgents);
     setOpen(false);
   };
 
