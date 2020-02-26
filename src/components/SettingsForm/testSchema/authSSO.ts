@@ -301,7 +301,7 @@ export const jsonSchema = {
   custom_policy_minimum_password_value_default: 5,
   password_policy: 'standard_policy',
   agent_auth_sso_remember_device_option: 'months',
-  agent_auth_sso_remember_device_field: 6
+  agent_auth_sso_remember_device_field: ''
 };
 
 export const vaildationSchema = {
@@ -311,7 +311,22 @@ export const vaildationSchema = {
       type: 'boolean'
     },
     agent_auth_sso_remember_device_field: {
-      type: 'number'
+      type: 'number',
+      when: {
+        agent_auth_sso_header_enabled: {
+          is: true,
+          then: {
+            when: {
+              agent_auth_sso_remember_device_enabled: {
+                is: true,
+                then: {
+                  required: true
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 };
