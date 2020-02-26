@@ -5,8 +5,6 @@ import { IOptions } from '../../types';
 import Input from '../Input';
 import SingleSelect from '../SelectComponents/SingleSelect';
 
-
-
 const UnitsContainer = styled.div`
   display: flex;
   .textbox {
@@ -24,6 +22,7 @@ export interface IProps {
   options: IOptions[];
   option?: string;
   onChange: (value: UnitsValuesType) => void;
+  onBlur?: () => void;
 }
 
 export type UnitsValuesType = {
@@ -35,7 +34,8 @@ const Units: React.FC<IProps> = ({
   inputValue,
   options,
   option,
-  onChange
+  onChange,
+  onBlur
 }) => {
   const [value, setValue] = useState(inputValue);
   const defaultOption = options.find(item => item.value === option);
@@ -50,6 +50,7 @@ const Units: React.FC<IProps> = ({
   }
 
   function handleSelectChange(opt: IOptions) {
+    onBlur();
     setSelectOptions(opt);
     onChange({
       inputValue: value,
@@ -64,6 +65,7 @@ const Units: React.FC<IProps> = ({
           value={value}
           inputType='primary'
           onChange={handleInputChange}
+          onBlur={onBlur}
         />
       </div>
       <div className='selectbox'>

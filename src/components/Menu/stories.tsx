@@ -8,11 +8,11 @@ import {
   testOrderableMenuItems,
   testGroupItems
 } from '../../resources/constants/constants';
-import { IMenuProps } from '../../resources/interfaces';
+import { IMenuProps, IMenuItemProps } from '../../resources/interfaces';
 import OrderableMenu from './OrderableMenu';
 
 const MenuComponent: React.FC<IMenuProps> = props => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<IMenuItemProps>();
 
   return (
     <Menu
@@ -27,7 +27,7 @@ const MenuComponent: React.FC<IMenuProps> = props => {
 };
 
 const OrderableMenuComponent: React.FC<IMenuProps> = props => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<IMenuItemProps>();
   const [SortList, SetList] = useState(testOrderableMenuItems);
   const checkedState: { [key: string]: boolean } = {};
   const [checked, setChecked] = useState(checkedState);

@@ -2,7 +2,8 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
-import unfetch from 'unfetch';
+import { ApolloLink } from 'apollo-link';
+import { fetch as fetchpf } from 'whatwg-fetch';
 
 import { appDebug } from './logging';
 
@@ -31,13 +32,24 @@ export const AppWrap = () => {
 
   const link = createHttpLink({
     uri: apiUrl,
-    fetch: unfetch
+    fetch: fetchpf
   });
+
+  const middlewareLink = new ApolloLink((operation, forward) => {
+    operation.setContext({
+      headers: {
+        'X-Test-Deskpro-User-Context': '1',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+    return forward(operation);
+  });
+
   const client = new ApolloClient({
     cache: new InMemoryCache({
       fragmentMatcher
     }),
-    link,
+    link: middlewareLink.concat(link),
     defaultOptions: {
       watchQuery: {
         fetchPolicy: 'no-cache',

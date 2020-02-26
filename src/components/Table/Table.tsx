@@ -83,14 +83,14 @@ const Table: FC<Props> = ({
     page,
     setPageSize,
     gotoPage,
-    toggleExpanded,
+    toggleRowExpanded,
     dispatch,
     state: { pageIndex, pageSize, sortBy: sortByInfo, groupBy: groupByInfo }
   } = useTable(
     tableParams,
     useGroupBy,
-    useExpanded,
     useSortBy,
+    useExpanded,
     usePagination,
     useRowSelect
   ) as any;
@@ -100,8 +100,8 @@ const Table: FC<Props> = ({
       toggleSortBy(sortBy[0].id, sortBy[0].desc, false);
       const currentPageFiltered = page
         .filter((r: any) => r.canExpand && r.isExpanded);
-      currentPageFiltered.map((r: any) => r.toggleExpanded());
-      currentPageFiltered.map((r: any) => r.toggleExpanded());
+      currentPageFiltered.map((r: any) => r.toggleRowExpanded());
+      currentPageFiltered.map((r: any) => r.toggleRowExpanded());
     }
   }, [page, currentSort, toggleSortBy, sortBy]);
 
@@ -124,18 +124,18 @@ const Table: FC<Props> = ({
       if (firstGrouped) {
         countExpanded = page
           .filter((r: any) => r.canExpand && r.isExpanded === undefined)
-          .map((r: any) => r.toggleExpanded()).length;
+          .map((r: any) => r.toggleRowExpanded()).length;
         if (countExpanded > 0) {
           setFirstGrouped(false);
         }
       }
     } else {
       page.map((row: { canExpand: any; id: any }) => {
-        if (row.canExpand) toggleExpanded(row.id, true);
+        if (row.canExpand) toggleRowExpanded(row.id, true);
         return true;
       });
     }
-  }, [firstGrouped, toggleExpanded, pageIndex, page, groupBy]);
+  }, [firstGrouped, toggleRowExpanded, pageIndex, page, groupBy]);
 
   useEffect(() => {
     setChecked({});
@@ -156,7 +156,7 @@ const Table: FC<Props> = ({
       totalRecord -= countSubRow;
     }
     setTotalRecords(totalRecord);
-  }, [data, page, groupBy, toggleExpanded, groupedRows, columns]);
+  }, [data, page, groupBy, toggleRowExpanded, groupedRows, columns]);
 
   // Handle incoming group by
   useEffect(() => {

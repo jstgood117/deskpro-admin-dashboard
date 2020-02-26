@@ -1,7 +1,8 @@
 import queries from '../../schema/queries';
+import { DocumentNode } from 'graphql';
 
-const getQuery = (type:string) => {
-  switch(type) {
+const getQuery = (type: string) => {
+  switch (type) {
     case 'initial':
       return queries['QUERY_INITIAL'];
     case 'standardTablePage':
@@ -9,7 +10,7 @@ const getQuery = (type:string) => {
     case 'standardSettingsPage':
       return queries['STANDARD_SETTINGS_PAGE'];
     default:
-      return {};
+      return {} as DocumentNode;
   }
 };
 

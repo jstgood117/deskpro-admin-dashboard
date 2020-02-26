@@ -23,7 +23,7 @@ export interface IProps {
 
 const TabBar: FC<IProps> = ({ tabItems, focusedIndex, handleClick, sharedTabsCount }) => {
   const [tabIndex, setTabState] = useState(focusedIndex || 0);
-  const [dropdownValue, setDropdownValue] = useState();
+  const [dropdownValue, setDropdownValue] = useState<ITabsProps>();
   const moreItems = tabItems.slice(sharedTabsCount);
   function changeTab(index: number) {
     setTabState(index);
@@ -57,7 +57,7 @@ const TabBar: FC<IProps> = ({ tabItems, focusedIndex, handleClick, sharedTabsCou
         {moreItems.length > 0 && (
           <div>
             <AdditonalTab
-              label={'More('+moreItems.length+')'}
+              label={'More(' + moreItems.length + ')'}
               tabItems={moreItems}
               selectedTabValue={dropdownValue}
               handle={handleMoreTab}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { mount, shallow } from '../../../test/enzyme';
 
 import SingleSelect from './SingleSelect';
@@ -15,7 +15,7 @@ describe('SingleSelect', () => {
     options: IOptions[];
     type: 'withImage' | 'medium' | 'large' | 'primary';
   }> = _props => {
-    const [selectedOption, selectOptions] = React.useState();
+    const [selectedOption, selectOptions] = useState<IOptions>();
 
     return (
       <SingleSelect

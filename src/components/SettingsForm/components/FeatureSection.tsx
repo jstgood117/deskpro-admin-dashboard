@@ -358,10 +358,6 @@ const FeatureSection: React.FC<Props> = ({
             <span style={{ marginRight: 20 }}>{title}</span>
             {icon && <Icon name={icon} />}
           </div>
-          {header && header.card === 'HeaderCard' ? <HeaderCard {...header} formikProps={formikProps} /> : null}
-          {header && header.card === 'ElasticsearchCard' ? (
-            <ElasticsearchCard {...header} formikProps={formikProps} />
-          ) : null}
           {brandButtonGroup && (
             <div className='brand-button-group'>
               <BrandButtonGroup
@@ -373,6 +369,12 @@ const FeatureSection: React.FC<Props> = ({
               />
             </div>
           )}
+          {header && header.card === 'HeaderCard' ? (
+            <HeaderCard {...header} formikProps={formikProps} />
+          ) : null}
+          {header && header.card === 'ElasticsearchCard' ? (
+            <ElasticsearchCard {...header} formikProps={formikProps} />
+          ) : null}
         </h1>
       ) : (
         <div className='feature-section-select'>

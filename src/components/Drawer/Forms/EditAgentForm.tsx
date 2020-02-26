@@ -144,8 +144,8 @@ const links: IOptions[] = [
 
 const EditAgentForm = () => {
   const title = 'Support UK';
-  const [value, setValue] = useState(title);
-  const [selectedOption, selectOptions] = useState();
+  const [value, setValue] = useState<string>(title);
+  const [selectedOption, selectOptions] = useState<IOptions>();
 
   return (
     <div>
