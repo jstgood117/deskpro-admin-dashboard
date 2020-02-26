@@ -18,6 +18,7 @@ query StandardDataPage($path: String!) {
       tableDef {
         columns {
           title
+          groupable
           sortField
           defaultShow
           field {

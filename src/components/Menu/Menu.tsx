@@ -72,8 +72,8 @@ export const multiSubMenuItem: FC<IMenuProps & WrappedComponentProps> = ({
             name={name + 'Sub'}
           />
         ) : (
-          <MenuSub menuItems={item.subItems} onSelect={onSelect} />
-        )
+            <MenuSub menuItems={item.subItems} onSelect={onSelect} />
+          )
       }
       positionOptions={{
         position: subMenuDirection ? subMenuDirection : 'left',
@@ -195,6 +195,7 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
   onSelect,
   menuItems,
   subMenuDirection,
+  isDisabled,
   ...props
 }) => {
   const selected = !isNil(value) && value !== '';
@@ -205,6 +206,7 @@ const menu: FC<IMenuProps & WrappedComponentProps> = ({
           className={`menu-btn ${selected ? 'selected' : ''}`}
           openedClassName='selected'
           openedStyle={{ background: '#D2D8DD' }}
+          disabled={isDisabled}
           menu={(
             <MenuSub
               menuItems={menuItems}

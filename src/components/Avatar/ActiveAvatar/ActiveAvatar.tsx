@@ -53,7 +53,7 @@ const ActiveAvatar: React.FC<IProps> = ({
     <Tooltip content={name} styleType='lightBox'>
       <Container style={containerStyle} className={containerClassName}>
         <Avatar
-          type={avatar ? 'image' : 'text'}
+          type={avatar ? (avatar.includes('urn') ? 'svg' : 'image') : 'text'}
           content={avatar ? avatar : name}
           {...avatarProps}
         />

@@ -443,6 +443,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                 subMenuDirection='left'
                 label='admin_agents_groups.group'
                 onSelect={handleGroupChange}
+                isDisabled={(groupMenuItems[0] && Object.keys(groupMenuItems[0]).length === 0)}
               />
             </FlexStyled>
           )}
