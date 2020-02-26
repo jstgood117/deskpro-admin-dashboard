@@ -87,8 +87,8 @@ export const MenuStyle = () => {
 
 const AutoComplete: FC<IProps> = ({ menuItems, ...props }) => {
 
-  const [value, setValue] = useState();
-  const [containItems, setItems] = useState(menuItems);
+  const [value, setValue] = useState<IItemType>();
+  const [containItems, setItems] = useState<IItemType[]>(menuItems);
   return (
     <ThemeProvider theme={DeskproAdminTheme}>
       <StyledAutoComplete>
@@ -97,7 +97,7 @@ const AutoComplete: FC<IProps> = ({ menuItems, ...props }) => {
           items={containItems}
           inputProps={{ placeholder: props.placeholder }}
           renderItem={(item: IItemType, isHighlighted: boolean) => {
-            const selected = item.label === value;
+            const selected = value && item.label === value.label ? true : false;
             return (
               <div
                 style={AutoCompleteItemStyle(
@@ -124,13 +124,13 @@ const AutoComplete: FC<IProps> = ({ menuItems, ...props }) => {
             });
             setItems(newItems);
 
-            if(typeof props.onChange === 'function') {
+            if (typeof props.onChange === 'function') {
               props.onChange(e.target.value);
             }
           }}
           onSelect={(val: IItemType) => {
             setValue(val);
-            if(typeof props.onChange === 'function') {
+            if (typeof props.onChange === 'function') {
               props.onChange(val);
             }
           }}
