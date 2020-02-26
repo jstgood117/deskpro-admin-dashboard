@@ -36,7 +36,8 @@ export const uiSchema: {
                 {
                   type: 'field',
                   title: 'Purge agents',
-                  description: 'Delete all agents in the helpdesk (except you).',
+                  description:
+                    'Delete all agents in the helpdesk (except you).',
                   field: {
                     type: 'checkbox',
                     id: 'helpdesk_checkbox_2',
@@ -87,7 +88,8 @@ export const uiSchema: {
                 {
                   type: 'field',
                   title: 'Reset help center and email templates',
-                  description: 'Undo any customization of help center and email templates.',
+                  description:
+                    'Undo any customization of help center and email templates.',
                   field: {
                     type: 'checkbox',
                     id: 'helpdesk_checkbox_7',
@@ -189,7 +191,8 @@ export const uiSchema: {
                 {
                   type: 'field',
                   title: 'Reset apps',
-                  description: 'Uninstall every Deskpro app (including Gravatar).',
+                  description:
+                    'Uninstall every Deskpro app (including Gravatar).',
                   field: {
                     type: 'checkbox',
                     id: 'helpdesk_checkbox_17',
@@ -223,4 +226,22 @@ export const jsonSchema: any = {
   helpdesk_checkbox_15: [],
   helpdesk_checkbox_16: [],
   helpdesk_checkbox_17: []
+};
+
+export const vaildationSchema = {
+  type: 'object',
+  properties: {
+    helpdesk_checkbox_17: {
+      type: 'array',
+      required: true
+    }
+  }
+};
+
+export const validationConfig = {
+  errMessages: {
+    helpdesk_checkbox_17: {
+      required: 'validation.required'
+    }
+  }
 };

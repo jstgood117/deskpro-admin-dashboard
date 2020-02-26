@@ -1,15 +1,10 @@
 import React from 'react';
-import {mount} from '../../../test/enzyme';
+import { mount } from '../../../test/enzyme';
 
 import InlineEditGroup from './InlineEditGroup';
 
 describe('InlineEditGroup', () => {
-  const wrapper = (props: any) =>
-    mount(
-      <InlineEditGroup
-        {...props}
-      />
-    );
+  const wrapper = (props: any) => mount(<InlineEditGroup {...props} />);
   it('should render', () => {
     const root = wrapper({
       description:
@@ -22,18 +17,13 @@ describe('InlineEditGroup', () => {
         },
         {
           type: 'input',
-          id: 'custom_policy_maximum_password_value',
+          id: 'custom_policy_maximum_password_value'
         },
         {
           type: 'label',
           label: 'days'
         }
       ],
-      field: {
-        type: 'checkbox',
-        id: 'custom_policy_maximum_password',
-        value: 'yes'
-      },
       showRevert: true,
       formikProps: {
         values: {

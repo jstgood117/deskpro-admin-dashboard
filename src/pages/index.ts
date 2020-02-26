@@ -29,7 +29,7 @@ import { KeyValue } from '../types';
 export const RouteToPage: KeyValue = {
   '/agents/auth/settings': AuthSSO,
   '/agents/settings': AgentsSettings,
-  '/agents/logs': ReportFile,
+  '/report/file': ReportFile,
 
   '/importer': ImporterPage,
   '/data-center': DataCenter,
