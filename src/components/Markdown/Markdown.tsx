@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, InputHTMLAttributes } from 'react';
+import React, { FC, ReactNode, InputHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 
 import { dpstyle } from '../Styled';
@@ -67,7 +67,7 @@ const options: IOptions[] = [
 ];
 
 const Markdown: FC<IProps> = props => {
-  const [selectedOption, selectOptions] = React.useState();
+  const [selectedOption, selectOptions] = useState<IOptions>();
   return (
     <div>
       <div style={{ display: 'flex' }}>
@@ -80,7 +80,7 @@ const Markdown: FC<IProps> = props => {
           <SingleSelect
             options={options}
             type='primary'
-            selectOption={selectOptions}
+            selectOption={(value: IOptions) => selectOptions(value)}
             selectedOption={selectedOption}
             placeholder='0 digits'
             visibleIcon={false}

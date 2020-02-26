@@ -43,7 +43,7 @@ const TableTrGroup: FC<Props> = ({
           </td>
         )}
         <td colSpan={1} className='groupCol'>
-          <div {...row.getExpandedToggleProps()} className='groupTitle'>
+          <div {...row.getToggleRowExpandedProps()} className='groupTitle'>
             <span>
               {groupColumn && getValueFromColumnType(groupColumn.columnProps, row.subRows[0].original)} ({row.subRows.length})
             </span>
