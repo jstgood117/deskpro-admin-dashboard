@@ -168,13 +168,26 @@ const elementsSelector: {
     />
   ),
   stringlist: props => (
-    <div style={{ marginBottom: 16 }}>
-      <StringListBuilder
-        {...props}
-        className={props.className}
-        values={props.formikProps.values[props.id]}
-      />
-    </div>
+    <Field name={props.id}>
+      {({ field, meta }: any) => (
+        <div
+          tabIndex={0}
+          style={{ marginBottom: 16, outline: 'none' }}
+          onBlur={() => props.formikProps.setFieldTouched(props.id, true)}
+        >
+          <StringListBuilder
+            {...props}
+            className={props.className}
+            values={props.formikProps.values[props.id]}
+          />
+          {meta.touched && meta.error && (
+            <ErrorMessage className='error'>
+              <FormattedMessage id={'validation.permissions.min_1'} />
+            </ErrorMessage>
+          )}
+        </div>
+      )}
+    </Field>
   ),
   units: props => {
     return (

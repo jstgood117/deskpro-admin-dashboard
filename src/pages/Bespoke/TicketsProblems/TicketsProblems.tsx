@@ -103,6 +103,7 @@ const TicketsProblemsPage: FC<PropsWithApollo> = ({
             <Button
               className='btn-primary'
               onClick={formikProps.handleSubmit}
+              disabled={formikProps.isSubmitting}
               size='medium'
               styleType='primary'
             >
