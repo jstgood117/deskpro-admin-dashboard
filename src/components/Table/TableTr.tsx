@@ -69,7 +69,6 @@ const TableTr: FC<Props> = ({
       {_.sortBy(row.cells, 'column.index').map(
         (cell: any, indexInner: number) => {
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
-
           return (
             <td
               className={
@@ -78,7 +77,7 @@ const TableTr: FC<Props> = ({
                   : `td-${indexInner}`
               }
               {...cell.getCellProps()}
-              {...cell.row.getExpandedToggleProps({
+              {...cell.row.getToggleRowExpandedProps({
                 onClick: () => { },
                 style: {
                   textAlign: isIdColumn && 'right',

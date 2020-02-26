@@ -89,20 +89,20 @@ const initialFilter: FilterProps[] = [
   { property: '', operatorName: '', value: [''], applied: false }
 ];
 
-const StyledFilterButton = styled(dpstyle.div)<IFilterButton>`
+const StyledFilterButton = styled(dpstyle.div) <IFilterButton>`
   display: flex;
   button {
     color: ${props =>
-      (props.active || props.existing) && props.theme.activeColour};
+    (props.active || props.existing) && props.theme.activeColour};
     path {
       fill: ${props =>
-        (props.active || props.existing) && props.theme.activeColour};
+    (props.active || props.existing) && props.theme.activeColour};
     }
     border: ${props =>
-      (props.active || props.existing) &&
-      `1px solid ${props.theme.activeColour}`};
+    (props.active || props.existing) &&
+    `1px solid ${props.theme.activeColour}`};
     background: ${props =>
-      (props.active || props.existing) && props.theme.hoverColour};
+    (props.active || props.existing) && props.theme.hoverColour};
   }
   .add-btn {
     button {
@@ -148,7 +148,7 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
   const [applied, apply] = useState(false);
   const [internalFilters, setFilters] = useState(initialFilter);
   const [sortList, setList] = useState(columnsViewList);
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<IMenuItemProps>();
   const [groupValue, setGroupValue] = useState();
 
   const [sortMenuItems, setSortMenuItems] = useState(
@@ -381,8 +381,8 @@ const TableActions: FC<IProps & WrappedComponentProps> = ({
                   Filter{' '}
                   {internalFilters[0].applied &&
                     `(${
-                      internalFilters.filter(filter => filter.applied === true)
-                        .length
+                    internalFilters.filter(filter => filter.applied === true)
+                      .length
                     })`}
                 </Button>
                 {internalFilters[0].applied && (

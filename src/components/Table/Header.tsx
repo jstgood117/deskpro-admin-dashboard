@@ -9,7 +9,7 @@ import { runAction, querySelectOptions } from '../../services/actions/run';
 import { ActionFactory } from '../../services/actions/ActionFactory';
 import { ActionsType } from '../../services/actions/types';
 import { KeyValue, IOptions } from '../../types';
-import { IMenuItemProps } from '../../resources/interfaces';
+import { IMenuItemProps, IButtonItemProps } from '../../resources/interfaces';
 import Actions from '../Actions';
 import ActionComponentFactory from '../Actions/helpers/ComponentFactory';
 import Checkbox from '../Checkbox';
@@ -76,7 +76,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
     return { label: intl.formatMessage({ id: column.id }), key: column.id };
   });
   const [opened, clickButton] = useState(false);
-  const [menuValue, setMenuValue] = useState();
+  const [menuValue, setMenuValue] = useState<IMenuItemProps>();
   const [currentAction, setCurrentAction] = useState<ActionsType>();
   const [selectedOptions, selectOptions] = useState<IOptions[]>([]);
 
@@ -84,7 +84,7 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
   const [fetchedOptions, setFetchedOptions] = useState<IOptions[]>();
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isIndeterminate, setIsIndeterminate] = useState<boolean>(false);
-  const [dropdownValue, setDropdownValue] = useState();
+  const [dropdownValue, setDropdownValue] = useState<IButtonItemProps>();
   const [showActionComponent, setShowActionComponent] = useState(false);
 
   useEffect(() => {
@@ -172,6 +172,8 @@ const Header: FC<PropsWithApollo & WrappedComponentProps> = ({
 
     setCurrentAction(undefined);
     setShowActionComponent(false);
+
+    setChecked({});
   };
 
   const handleCancelAction = () => {

@@ -2,6 +2,7 @@ import React, { FC, CSSProperties, MouseEvent } from 'react';
 import styled from 'styled-components';
 import Icon from '../Icon';
 import Button from '../Button';
+import { IButtonItemProps } from '../../resources/interfaces';
 import { IItemProps } from '../Button/DropdownButton';
 import { dpstyle } from '../Styled';
 import Tooltip from '../Tooltip';
@@ -51,16 +52,13 @@ const ArrowButton = styled.span<{ checked: boolean; opened?: boolean }>`
   }
   path {
     fill: ${props =>
-      props.checked || props.opened
-        ? props.theme.activeColour
-        : props.theme.static2Colour};
+    props.checked || props.opened
+      ? props.theme.activeColour
+      : props.theme.static2Colour};
   }
 `;
 
-const CheckboxWrapper = styled(dpstyle.div)<{
-  opened?: boolean;
-  showArrow?: boolean;
-}>`
+const CheckboxWrapper = styled(dpstyle.div) <{ opened?: boolean, showArrow?: boolean }>`
   display: inline-flex;
   align-items: center;
   height: fit-content;
@@ -98,7 +96,7 @@ export interface IProps {
   opened?: boolean;
   clickButton?: (e: boolean) => void;
   dropdownValue?: any;
-  setDropdownValue?: (e: boolean) => void;
+  setDropdownValue?: (e: IButtonItemProps) => void;
   items?: IItemProps[];
   className?: string;
 }
@@ -122,66 +120,66 @@ const Checkbox: FC<IProps> = ({
   setDropdownValue,
   className
 }) => (
-  <CheckboxWrapper className={className} opened={opened} showArrow={showArrow}>
-    <CheckboxContainer
-      size={size}
-      style={containerStyle}
-      className={containerClassName}
-    >
-      <HiddenCheckbox
-        id={id}
-        checked={checked}
-        value={value}
-        disabled={disabled}
-        onChange={onChange}
-        {...inputProps}
-      />
-      <StyledCheckbox
+    <CheckboxWrapper className={className} opened={opened} showArrow={showArrow}>
+      <CheckboxContainer
         size={size}
-        indeterminate={indeterminate}
-        checked={checked}
+        style={containerStyle}
+        className={containerClassName}
       >
-        {indeterminate && checked && <Icon name='checkbox.indeterminate' />}
-        {!indeterminate && checked && <Icon name='checkbox.normal' />}
-      </StyledCheckbox>
-    </CheckboxContainer>
-    {showArrow && (
-      <Tooltip
-        content='Select'
-        styleType='dark'
-        className='mt-10'
-        placement='bottom'
-      >
-        <span>
-          <ArrowButton
-            checked={checked}
-            opened={opened}
-            onClick={event => {
-              event.preventDefault();
-              if (onArrowClick) {
-                onArrowClick(event);
-              }
-            }}
-          >
-            <Button
-              className='arrow-btn'
-              items={items}
-              size='medium'
-              styleType='secondary'
-              iconOnly={true}
-              onClick={() => {
-                clickButton(!opened);
-              }}
+        <HiddenCheckbox
+          id={id}
+          checked={checked}
+          value={value}
+          disabled={disabled}
+          onChange={onChange}
+          {...inputProps}
+        />
+        <StyledCheckbox
+          size={size}
+          indeterminate={indeterminate}
+          checked={checked}
+        >
+          {indeterminate && checked && <Icon name='checkbox.indeterminate' />}
+          {!indeterminate && checked && <Icon name='checkbox.normal' />}
+        </StyledCheckbox>
+      </CheckboxContainer>
+      {showArrow && (
+        <Tooltip
+          content='Select'
+          styleType='dark'
+          className='mt-10'
+          placement='bottom'
+        >
+          <span>
+            <ArrowButton
+              checked={checked}
               opened={opened}
-              onSelect={(val: any) => setDropdownValue(val)}
+              onClick={event => {
+                event.preventDefault();
+                if (onArrowClick) {
+                  onArrowClick(event);
+                }
+              }}
             >
-              <Icon name='downVector' />
-            </Button>
-          </ArrowButton>
-        </span>
-      </Tooltip>
-    )}
-  </CheckboxWrapper>
-);
+              <Button
+                className='arrow-btn'
+                items={items}
+                size='medium'
+                styleType='secondary'
+                iconOnly={true}
+                onClick={() => {
+                  clickButton(!opened);
+                }}
+                opened={opened}
+                onSelect={(val: any) => setDropdownValue(val)}
+              >
+                <Icon name='downVector' />
+              </Button>
+            </ArrowButton>
+          </span>
+        </Tooltip>
+      )}
+    </CheckboxWrapper>
+  );
 
 export default Checkbox;
