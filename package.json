@@ -137,7 +137,7 @@
     "build-storybook": "build-storybook -s public",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
     "generate": "graphql-codegen",
-    "type-coverage": "$(npm bin)/type-coverage --at-least 100 --details true --ignore-files 'node_modules' --ignore-files 'codegen' --ignore-files 'src/logging.ts' --project ./tsconfig.json"
+    "type-coverage": "$(npm bin)/type-coverage --at-least 100 --strict true --details true --ignore-files 'node_modules' --ignore-files 'codegen' --ignore-files 'src/logging.ts' --project ./tsconfig.json"
   },
   "eslintConfig": {
     "extends": "react-app"
