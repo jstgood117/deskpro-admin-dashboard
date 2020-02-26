@@ -21,16 +21,16 @@ export type API_Agent = {
   first_name: Scalars['String'],
   last_name: Scalars['String'],
   primary_email: Scalars['String'],
-  emails: Scalars['String'][],
+  emails: Array<Scalars['String']>,
   can_admin: Scalars['Boolean'],
   can_reports: Scalars['Boolean'],
-  agent_teams: Maybe<API_AgentTeam>[],
-  agent_groups: Maybe<API_AgentGroup>[],
+  agent_teams: Array<Maybe<API_AgentTeam>>,
+  agent_groups: Array<Maybe<API_AgentGroup>>,
   timezone?: Maybe<Scalars['String']>,
   language?: Maybe<API_Language>,
   date_last_login?: Maybe<Scalars['DateTime']>,
   date_created: Scalars['DateTime'],
-  departments: Maybe<API_TicketDepartment>[],
+  departments: Array<Maybe<API_TicketDepartment>>,
   tickets?: Maybe<Scalars['Int']>,
 };
 
@@ -40,14 +40,14 @@ export type API_AgentGroup = {
   sys_name?: Maybe<Scalars['String']>,
   title: Scalars['String'],
   note?: Maybe<Scalars['String']>,
-  members: Maybe<API_Agent>[],
+  members: Array<Maybe<API_Agent>>,
 };
 
 export type API_AgentMassActionsInput = {
-  addGroups?: Maybe<Scalars['ID'][]>,
-  removeGroups?: Maybe<Scalars['ID'][]>,
-  addTeams?: Maybe<Scalars['ID'][]>,
-  removeTeams?: Maybe<Scalars['ID'][]>,
+  addGroups?: Maybe<Array<Scalars['ID']>>,
+  removeGroups?: Maybe<Array<Scalars['ID']>>,
+  addTeams?: Maybe<Array<Scalars['ID']>>,
+  removeTeams?: Maybe<Array<Scalars['ID']>>,
   setAdmin?: Maybe<Scalars['Boolean']>,
   setReportsAdmin?: Maybe<Scalars['Boolean']>,
   setDeleted?: Maybe<Scalars['Boolean']>,
@@ -65,7 +65,7 @@ export type API_AgentTeam = {
   id: Scalars['ID'],
   name: Scalars['String'],
   avatarUrn?: Maybe<Scalars['String']>,
-  members: Maybe<API_Agent>[],
+  members: Array<Maybe<API_Agent>>,
 };
 
 export type API_ApiKey = {
@@ -75,7 +75,7 @@ export type API_ApiKey = {
   token: Scalars['String'],
   agent?: Maybe<API_Agent>,
   note?: Maybe<Scalars['String']>,
-  flags: Maybe<API_ApiKeyFlags>[],
+  flags: Array<Maybe<API_ApiKeyFlags>>,
 };
 
 export enum API_ApiKeyFlags {
@@ -110,7 +110,7 @@ export type API_ApprovalTemplate = {
   type: API_ApprovalType,
   required_approvals: Scalars['Int'],
   required_rejections: Scalars['Int'],
-  approvers: API_ApprovalApprover[],
+  approvers: Array<API_ApprovalApprover>,
 };
 
 export type API_ApprovalType = {
@@ -129,7 +129,7 @@ export type API_AsyncPageDataView = {
   groupByType?: Maybe<Scalars['String']>,
   dataQuery: Scalars['String'],
   tableDef?: Maybe<API_PageDataTable>,
-  filterDef: Maybe<API_PageDataFilters>[],
+  filterDef: Array<Maybe<API_PageDataFilters>>,
 };
 
 export type API_Brand = {
@@ -143,7 +143,7 @@ export type API_ChatDepartment = {
    __typename?: 'ChatDepartment',
   id: Scalars['ID'],
   parent?: Maybe<API_ChatDepartment>,
-  children: Maybe<API_ChatDepartment>[],
+  children: Array<Maybe<API_ChatDepartment>>,
   depth: Scalars['Int'],
   avatarUrn?: Maybe<Scalars['String']>,
   title: Scalars['String'],
@@ -159,7 +159,7 @@ export type API_ChatQueue = {
   answer_timeout: Scalars['Int'],
   is_all_agents: Scalars['Boolean'],
   max_queue_size: Scalars['Int'],
-  agents?: Maybe<Maybe<API_Agent>[]>,
+  agents?: Maybe<Array<Maybe<API_Agent>>>,
 };
 
 export enum API_ChatQueueRoutingModel {
@@ -174,10 +174,10 @@ export type API_CommunityForum = {
   title: Scalars['String'],
   description?: Maybe<Scalars['String']>,
   slug?: Maybe<Scalars['String']>,
-  usergroups?: Maybe<API_CrmUserGroup[]>,
-  statuses?: Maybe<Maybe<API_CommunityTopicStatus>[]>,
-  active_statuses?: Maybe<Maybe<API_CommunityTopicStatus>[]>,
-  closed_statuses?: Maybe<Maybe<API_CommunityTopicStatus>[]>,
+  usergroups?: Maybe<Array<API_CrmUserGroup>>,
+  statuses?: Maybe<Array<Maybe<API_CommunityTopicStatus>>>,
+  active_statuses?: Maybe<Array<Maybe<API_CommunityTopicStatus>>>,
+  closed_statuses?: Maybe<Array<Maybe<API_CommunityTopicStatus>>>,
 };
 
 export type API_CommunityForumsFilter = {
@@ -242,7 +242,7 @@ export type API_CrmUserRule = {
   id: Scalars['ID'],
   add_organization_id?: Maybe<Scalars['Int']>,
   add_usergroup?: Maybe<API_CrmUserGroup>,
-  email_patterns: Maybe<Scalars['String']>[],
+  email_patterns: Array<Maybe<Scalars['String']>>,
   run_order: Scalars['Int'],
 };
 
@@ -294,11 +294,13 @@ export type API_EmailAccount = {
   account_type: API_EmailAccountType,
   is_enabled: Scalars['Boolean'],
   address: Scalars['String'],
-  other_addresses: Maybe<Scalars['String']>[],
+  other_addresses: Array<Maybe<Scalars['String']>>,
   date_created: Scalars['DateTime'],
   date_last_incoming?: Maybe<Scalars['DateTime']>,
   is_all_brands?: Maybe<Scalars['Boolean']>,
-  brands: Maybe<API_Brand>[],
+  brands: Array<Maybe<API_Brand>>,
+  new_ticket_department?: Maybe<API_TicketDepartment>,
+  new_ticket_brand?: Maybe<API_Brand>,
 };
 
 export enum API_EmailAccountType {
@@ -319,7 +321,7 @@ export type API_Form = {
 };
 
 export type API_GetAgentsFilter = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   name_contains?: Maybe<Scalars['String']>,
   email?: Maybe<Scalars['String']>,
   email_contains?: Maybe<Scalars['String']>,
@@ -329,23 +331,24 @@ export type API_GetAgentsFilter = {
 };
 
 export type API_GetTicketTriggersFilter = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   include_hidden?: Maybe<Scalars['Boolean']>,
   is_hidden?: Maybe<Scalars['Boolean']>,
   event_trigger?: Maybe<API_TicketTriggerEventTrigger>,
   include_department_linked?: Maybe<Scalars['Boolean']>,
   include_email_account_linked?: Maybe<Scalars['Boolean']>,
-  for_department_ids?: Maybe<Maybe<Scalars['ID']>[]>,
-  for_email_account_ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  for_department_ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
+  for_email_account_ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
 };
 
 export type API_InMemoryPageDataView = {
    __typename?: 'InMemoryPageDataView',
   title?: Maybe<Scalars['String']>,
   path?: Maybe<Scalars['String']>,
+  newLink?: Maybe<Scalars['String']>,
   dataQuery: Scalars['String'],
   tableDef?: Maybe<API_PageDataTable>,
-  filterDef: Maybe<API_PageDataFilters>[],
+  filterDef: Array<Maybe<API_PageDataFilters>>,
 };
 
 
@@ -392,12 +395,12 @@ export enum API_LanguagesOrderFields {
 
 export type API_Mutation = {
    __typename?: 'Mutation',
-  agents_massActions: Maybe<API_Agent>[],
+  agents_massActions: Array<Maybe<API_Agent>>,
 };
 
 
 export type API_MutationAgents_MassActionsArgs = {
-  ids: Scalars['ID'][],
+  ids: Array<Scalars['ID']>,
   actions: API_AgentMassActionsInput
 };
 
@@ -425,16 +428,18 @@ export type API_PageDataFilters = {
   title: Scalars['String'],
   path: Scalars['String'],
   type: API_FilterType,
-  operators: API_Operator[],
+  operators: Array<API_Operator>,
   dataPath: Scalars['String'],
 };
 
 export type API_PageDataTable = {
    __typename?: 'PageDataTable',
-  columns: API_TableColumnDef[],
+  columns: Array<API_TableColumnDef>,
   defaultSort?: Maybe<Scalars['String']>,
   defaultGrouping?: Maybe<Scalars['String']>,
-  massActions?: Maybe<Maybe<API_PageLink>[]>,
+  unsortable?: Maybe<Scalars['Boolean']>,
+  ungroupable?: Maybe<Scalars['Boolean']>,
+  massActions?: Maybe<Array<Maybe<API_PageLink>>>,
 };
 
 export type API_PageInfo = {
@@ -476,45 +481,45 @@ export type API_PlaceholderPageData = {
 
 export type API_Query = {
    __typename?: 'Query',
-  agents_getAgents: Maybe<API_Agent>[],
-  agents_teams_getTeams: Maybe<API_AgentTeam>[],
-  agents_groups_getGroups: Maybe<API_AgentGroup>[],
-  roundRobins: Maybe<API_RoundRobin>[],
-  approvalsTypesList: Maybe<API_ApprovalType>[],
-  approvalsTemplatesList: Maybe<API_ApprovalTemplate>[],
-  apiKeys: Maybe<API_ApiKey>[],
-  appInstancesList: Maybe<API_AppInstance>[],
+  agents_getAgents: Array<Maybe<API_Agent>>,
+  agents_teams_getTeams: Array<Maybe<API_AgentTeam>>,
+  agents_groups_getGroups: Array<Maybe<API_AgentGroup>>,
+  roundRobins: Array<Maybe<API_RoundRobin>>,
+  approvalsTypesList: Array<Maybe<API_ApprovalType>>,
+  approvalsTemplatesList: Array<Maybe<API_ApprovalTemplate>>,
+  apiKeys: Array<Maybe<API_ApiKey>>,
+  appInstancesList: Array<Maybe<API_AppInstance>>,
   authMe: API_CurrentUser,
-  authUserSourcesList: Maybe<API_UserSource>[],
-  brands_getBrands: Maybe<API_Brand>[],
-  crmUserGroups: Maybe<API_CrmUserGroup>[],
-  crmUserRules: Maybe<API_CrmUserRule>[],
-  crmBannedEmails: Maybe<API_CrmBannedEmail>[],
-  crmBannedIps: Maybe<API_CrmBannedIp>[],
-  chatDepartments: Maybe<API_ChatDepartment>[],
-  chatQueues: Maybe<API_ChatQueue>[],
-  communityForumsList: Maybe<API_CommunityForum>[],
-  communityTopicStatusesList: Maybe<API_CommunityTopicStatus>[],
-  customFieldsList: Maybe<API_CustomField>[],
-  email_accounts_getAccounts: Maybe<API_EmailAccount>[],
-  languagesLanguagesList: Maybe<API_Language>[],
+  authUserSourcesList: Array<Maybe<API_UserSource>>,
+  brands_getBrands: Array<Maybe<API_Brand>>,
+  crmUserGroups: Array<Maybe<API_CrmUserGroup>>,
+  crmUserRules: Array<Maybe<API_CrmUserRule>>,
+  crmBannedEmails: Array<Maybe<API_CrmBannedEmail>>,
+  crmBannedIps: Array<Maybe<API_CrmBannedIp>>,
+  chatDepartments: Array<Maybe<API_ChatDepartment>>,
+  chatQueues: Array<Maybe<API_ChatQueue>>,
+  communityForumsList: Array<Maybe<API_CommunityForum>>,
+  communityTopicStatusesList: Array<Maybe<API_CommunityTopicStatus>>,
+  customFieldsList: Array<Maybe<API_CustomField>>,
+  email_accounts_getAccounts: Array<Maybe<API_EmailAccount>>,
+  languagesLanguagesList: Array<Maybe<API_Language>>,
   settings_email_getForm: API_Form,
-  setupUi_interface_sidebar: API_SidebarSection[],
+  setupUi_interface_sidebar: Array<API_SidebarSection>,
   standardDataPage: API_StandardDataPage,
   standardSettingsPage: API_StandardSettingsPage,
-  setupUi_translations_all: API_Translation[],
-  labelDefs: Maybe<API_LabelDef>[],
-  ticketEscalations: Maybe<API_TicketEscalation>[],
-  ticketMacros: Maybe<API_TicketMacro>[],
-  ticketSlas: Maybe<API_TicketSla>[],
-  tickets_departments_getDepartments: Maybe<API_TicketDepartment>[],
-  ticketStatuses: Maybe<API_TicketStatus>[],
-  ticketTriggers: Maybe<API_TicketTrigger>[],
+  setupUi_translations_all: Array<API_Translation>,
+  labelDefs: Array<Maybe<API_LabelDef>>,
+  ticketEscalations: Array<Maybe<API_TicketEscalation>>,
+  ticketMacros: Array<Maybe<API_TicketMacro>>,
+  ticketSlas: Array<Maybe<API_TicketSla>>,
+  tickets_departments_getDepartments: Array<Maybe<API_TicketDepartment>>,
+  ticketStatuses: Array<Maybe<API_TicketStatus>>,
+  ticketTriggers: Array<Maybe<API_TicketTrigger>>,
 };
 
 
 export type API_QueryAgents_GetAgentsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   filter?: Maybe<API_GetAgentsFilter>,
   orderBy?: Maybe<API_AgentOrderFields>,
   sortOrder?: Maybe<API_SortOrder>
@@ -522,96 +527,96 @@ export type API_QueryAgents_GetAgentsArgs = {
 
 
 export type API_QueryAgents_Teams_GetTeamsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryAgents_Groups_GetGroupsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryRoundRobinsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryApprovalsTypesListArgs = {
-  ids?: Maybe<Scalars['ID'][]>
+  ids?: Maybe<Array<Scalars['ID']>>
 };
 
 
 export type API_QueryApprovalsTemplatesListArgs = {
-  ids?: Maybe<Scalars['ID'][]>,
-  types?: Maybe<Scalars['ID'][]>
+  ids?: Maybe<Array<Scalars['ID']>>,
+  types?: Maybe<Array<Scalars['ID']>>
 };
 
 
 export type API_QueryApiKeysArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryAuthUserSourcesListArgs = {
-  ids?: Maybe<Scalars['ID'][]>,
+  ids?: Maybe<Array<Scalars['ID']>>,
   type: API_UserSourceType,
   orderBy?: Maybe<API_UserSourcesOrderBy>
 };
 
 
 export type API_QueryBrands_GetBrandsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryCrmUserGroupsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryCrmUserRulesArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryChatDepartmentsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryChatQueuesArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryCommunityForumsListArgs = {
-  ids?: Maybe<Scalars['ID'][]>,
+  ids?: Maybe<Array<Scalars['ID']>>,
   filter?: Maybe<API_CommunityForumsFilter>,
   orderBy?: Maybe<API_CommunityForumsOrderBy>
 };
 
 
 export type API_QueryCommunityTopicStatusesListArgs = {
-  ids?: Maybe<Scalars['ID'][]>,
+  ids?: Maybe<Array<Scalars['ID']>>,
   filter?: Maybe<API_CommunityTopicStatusFilter>,
   orderBy?: Maybe<API_CommunityTopicStatusesOrderBy>
 };
 
 
 export type API_QueryCustomFieldsListArgs = {
-  ids?: Maybe<Scalars['ID'][]>,
+  ids?: Maybe<Array<Scalars['ID']>>,
   type: API_CustomFieldTypes,
   orderBy?: Maybe<API_CustomFieldsOrderBy>
 };
 
 
 export type API_QueryEmail_Accounts_GetAccountsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryLanguagesLanguagesListArgs = {
-  ids?: Maybe<Scalars['ID'][]>,
+  ids?: Maybe<Array<Scalars['ID']>>,
   orderBy?: Maybe<API_LanguagesOrderBy>
 };
 
@@ -632,43 +637,43 @@ export type API_QuerySetupUi_Translations_AllArgs = {
 
 
 export type API_QueryLabelDefsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   labelType?: Maybe<API_LabelDefType>
 };
 
 
 export type API_QueryTicketEscalationsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   event_trigger?: Maybe<API_TicketEscalationEventTrigger>
 };
 
 
 export type API_QueryTicketMacrosArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
-  agent_ids?: Maybe<Maybe<Scalars['ID']>[]>,
-  department_ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
+  agent_ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
+  department_ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   is_global?: Maybe<Scalars['Boolean']>
 };
 
 
 export type API_QueryTicketSlasArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   sla_type?: Maybe<API_TicketSlaType>
 };
 
 
 export type API_QueryTickets_Departments_GetDepartmentsArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryTicketStatusesArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>
 };
 
 
 export type API_QueryTicketTriggersArgs = {
-  ids?: Maybe<Maybe<Scalars['ID']>[]>,
+  ids?: Maybe<Array<Maybe<Scalars['ID']>>>,
   filter?: Maybe<API_GetTicketTriggersFilter>
 };
 
@@ -678,7 +683,7 @@ export type API_RoundRobin = {
   title: Scalars['String'],
   online_only: Scalars['Boolean'],
   last_agent?: Maybe<API_Agent>,
-  members: Maybe<API_RoundRobinAgent>[],
+  members: Array<Maybe<API_RoundRobinAgent>>,
 };
 
 export type API_RoundRobinAgent = {
@@ -701,7 +706,7 @@ export type API_SettingsUiFeatureSectionElement = API_SettingsUiSectionParentEle
   description?: Maybe<Scalars['String']>,
   illustration?: Maybe<Scalars['String']>,
   toggleFieldId?: Maybe<Scalars['String']>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
 };
 
 export type API_SettingsUiField = API_SettingsUiFieldText | API_SettingsUiFieldToggle | API_SettingsUiFieldCheckbox | API_SettingsUiFieldFilesize;
@@ -750,14 +755,14 @@ export type API_SettingsUiFieldRadio = API_SettingsUiFieldInterface & {
 export type API_SettingsUiFieldRadioGroup = API_SettingsUiFieldInterface & {
    __typename?: 'SettingsUIFieldRadioGroup',
   id: Scalars['String'],
-  options: Maybe<API_SettingsUiFieldOption>[],
+  options: Array<Maybe<API_SettingsUiFieldOption>>,
 };
 
 export type API_SettingsUiFieldReact = API_SettingsUiFieldInterface & {
    __typename?: 'SettingsUIFieldReact',
   id: Scalars['String'],
   reactComponent: Scalars['String'],
-  reactProps?: Maybe<Maybe<API_SettingsUiFieldReactProp>[]>,
+  reactProps?: Maybe<Array<Maybe<API_SettingsUiFieldReactProp>>>,
 };
 
 export type API_SettingsUiFieldReactProp = {
@@ -769,7 +774,7 @@ export type API_SettingsUiFieldReactProp = {
 export type API_SettingsUiFieldSelect = API_SettingsUiFieldInterface & {
    __typename?: 'SettingsUIFieldSelect',
   id: Scalars['String'],
-  options: Maybe<API_SettingsUiFieldOption>[],
+  options: Array<Maybe<API_SettingsUiFieldOption>>,
 };
 
 export type API_SettingsUiFieldText = API_SettingsUiFieldInterface & {
@@ -786,14 +791,14 @@ export type API_SettingsUiGroupElement = API_SettingsUiGroupInterface & API_Sett
    __typename?: 'SettingsUIGroupElement',
   title?: Maybe<Scalars['String']>,
   description?: Maybe<Scalars['String']>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
   showOn?: Maybe<Scalars['String']>,
 };
 
 export type API_SettingsUiGroupInterface = {
   title?: Maybe<Scalars['String']>,
   description?: Maybe<Scalars['String']>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
   showOn?: Maybe<Scalars['String']>,
 };
 
@@ -807,38 +812,38 @@ export type API_SettingsUiHorizontalGroupElement = API_SettingsUiGroupInterface 
    __typename?: 'SettingsUIHorizontalGroupElement',
   title?: Maybe<Scalars['String']>,
   description?: Maybe<Scalars['String']>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
   showOn?: Maybe<Scalars['String']>,
 };
 
 export type API_SettingsUiSchema = {
    __typename?: 'SettingsUISchema',
-  elements: API_SettingsUiElement[],
+  elements: Array<API_SettingsUiElement>,
 };
 
 export type API_SettingsUiSectionElement = API_SettingsUiSectionParentElement & {
    __typename?: 'SettingsUISectionElement',
   title?: Maybe<Scalars['String']>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
 };
 
 export type API_SettingsUiSectionParentElement = {
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
 };
 
 export type API_SettingsUiSubGroupElement = API_SettingsUiGroupInterface & API_SettingsUiSectionParentElement & {
    __typename?: 'SettingsUISubGroupElement',
   title?: Maybe<Scalars['String']>,
   description?: Maybe<Scalars['String']>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
   showOn?: Maybe<Scalars['String']>,
 };
 
 export type API_SettingsUiTabElement = API_SettingsUiSectionParentElement & {
    __typename?: 'SettingsUITabElement',
   title?: Maybe<Scalars['String']>,
-  tabs?: Maybe<Maybe<API_SettingsUiTabItem>[]>,
-  elements?: Maybe<Maybe<API_SettingsUiElement>[]>,
+  tabs?: Maybe<Array<Maybe<API_SettingsUiTabItem>>>,
+  elements?: Maybe<Array<Maybe<API_SettingsUiElement>>>,
 };
 
 export type API_SettingsUiTabItem = {
@@ -851,19 +856,19 @@ export type API_SidebarItem = {
    __typename?: 'SidebarItem',
   itemName: Scalars['String'],
   path?: Maybe<Scalars['String']>,
-  paths?: Maybe<Scalars['String'][]>,
+  paths?: Maybe<Array<Scalars['String']>>,
   url?: Maybe<Scalars['String']>,
-  navItems?: Maybe<Maybe<API_SidebarItem>[]>,
+  navItems?: Maybe<Array<Maybe<API_SidebarItem>>>,
   pageType?: Maybe<Scalars['String']>,
   metadataQuery?: Maybe<Scalars['String']>,
-  drawerItems?: Maybe<Maybe<API_SidebarItem>[]>,
+  drawerItems?: Maybe<Array<Maybe<API_SidebarItem>>>,
 };
 
 export type API_SidebarSection = {
    __typename?: 'SidebarSection',
   sectionName: Scalars['String'],
   icon?: Maybe<Scalars['String']>,
-  navItems: API_SidebarItem[],
+  navItems: Array<API_SidebarItem>,
 };
 
 export enum API_SortOrder {
@@ -876,9 +881,9 @@ export type API_StandardDataPage = {
   title: Scalars['String'],
   description: Scalars['String'],
   illustration: Scalars['String'],
-  headerLinks?: Maybe<Maybe<API_PageLink>[]>,
+  headerLinks?: Maybe<Array<Maybe<API_PageLink>>>,
   newLink?: Maybe<Scalars['String']>,
-  views: API_InMemoryPageDataView[],
+  views: Array<API_InMemoryPageDataView>,
 };
 
 export type API_StandardSettingsPage = {
@@ -917,6 +922,11 @@ export type API_TableColumnBoolYesNo = API_TableColumnValueField & {
   value: API_TablePayloadValue,
 };
 
+export type API_TableColumnBrandList = API_TableColumnArrayValueField & {
+   __typename?: 'TableColumnBrandList',
+  valuesArray: API_TablePayloadValue,
+};
+
 export type API_TableColumnDateTime = API_TableColumnValueField & {
    __typename?: 'TableColumnDateTime',
   value: API_TablePayloadValue,
@@ -931,7 +941,7 @@ export type API_TableColumnDef = {
   defaultShow?: Maybe<Scalars['Boolean']>,
 };
 
-export type API_TableColumnField = API_TableColumnId | API_TableColumnBoolYesNo | API_TableColumnBoolOnOff | API_TableColumnText | API_TableColumnTextCommaSep | API_TableColumnTextPhrase | API_TableColumnTextPhraseCommaSep | API_TableColumnNameAvatar | API_TableColumnInteger | API_TableColumnMoney | API_TableColumnTimeAgo | API_TableColumnDateTime | API_TableColumnAgentTeamList | API_TableColumnAgentGroupList | API_TableColumnAgentList | API_TableColumnTicketDepartmentList;
+export type API_TableColumnField = API_TableColumnId | API_TableColumnBoolYesNo | API_TableColumnBoolOnOff | API_TableColumnText | API_TableColumnTextCommaSep | API_TableColumnTextPhrase | API_TableColumnTextPhraseCommaSep | API_TableColumnNameAvatar | API_TableColumnInteger | API_TableColumnMoney | API_TableColumnTimeAgo | API_TableColumnDateTime | API_TableColumnAgentTeamList | API_TableColumnBrandList | API_TableColumnAgentGroupList | API_TableColumnAgentList | API_TableColumnTicketDepartmentList;
 
 export type API_TableColumnId = API_TableColumnValueField & {
    __typename?: 'TableColumnId',
@@ -956,7 +966,7 @@ export type API_TableColumnNameAvatar = {
 };
 
 export type API_TableColumnPhraseMap = {
-  phraseMap: API_TableColumnPhraseMapItem[],
+  phraseMap: Array<API_TableColumnPhraseMapItem>,
   defaultPhraseId?: Maybe<Scalars['String']>,
 };
 
@@ -979,14 +989,14 @@ export type API_TableColumnTextCommaSep = API_TableColumnArrayValueField & {
 export type API_TableColumnTextPhrase = API_TableColumnValueField & API_TableColumnPhraseMap & {
    __typename?: 'TableColumnTextPhrase',
   value: API_TablePayloadValue,
-  phraseMap: API_TableColumnPhraseMapItem[],
+  phraseMap: Array<API_TableColumnPhraseMapItem>,
   defaultPhraseId?: Maybe<Scalars['String']>,
 };
 
 export type API_TableColumnTextPhraseCommaSep = API_TableColumnArrayValueField & API_TableColumnPhraseMap & {
    __typename?: 'TableColumnTextPhraseCommaSep',
   valuesArray: API_TablePayloadValue,
-  phraseMap: API_TableColumnPhraseMapItem[],
+  phraseMap: Array<API_TableColumnPhraseMapItem>,
   defaultPhraseId?: Maybe<Scalars['String']>,
 };
 
@@ -1015,7 +1025,7 @@ export type API_TicketDepartment = {
    __typename?: 'TicketDepartment',
   id: Scalars['ID'],
   parent?: Maybe<API_TicketDepartment>,
-  children: Maybe<API_TicketDepartment>[],
+  children: Array<Maybe<API_TicketDepartment>>,
   depth: Scalars['Int'],
   avatarUrn?: Maybe<Scalars['String']>,
   title: Scalars['String'],
@@ -1030,6 +1040,7 @@ export type API_TicketEscalation = {
   event_trigger: API_TicketEscalationEventTrigger,
   event_trigger_time: Scalars['Int'],
   is_enabled: Scalars['Boolean'],
+  date_created: Scalars['DateTime'],
 };
 
 export enum API_TicketEscalationEventTrigger {
@@ -1077,11 +1088,13 @@ export type API_TicketStatus = {
   sys_id?: Maybe<Scalars['ID']>,
   status_type: API_TicketStatusType,
   parent?: Maybe<API_TicketStatus>,
-  children: Maybe<API_TicketStatus>[],
+  children: Array<Maybe<API_TicketStatus>>,
   depth: Scalars['Int'],
   title: Scalars['String'],
+  description?: Maybe<Scalars['String']>,
   display_order: Scalars['Int'],
   effective_display_order: Scalars['Int'],
+  tickets: Scalars['Int'],
 };
 
 export enum API_TicketStatusType {
@@ -1100,15 +1113,16 @@ export type API_TicketTrigger = {
   email_account?: Maybe<API_EmailAccount>,
   title: Scalars['String'],
   event_trigger: API_TicketTriggerEventTrigger,
-  event_flags: Maybe<API_TicketTriggerEventFlag>[],
-  by_agent_mode: Maybe<API_TicketTriggerEventMode>[],
-  by_user_mode: Maybe<API_TicketTriggerEventMode>[],
-  by_app_mode: Maybe<API_TicketTriggerEventMode>[],
+  event_flags: Array<Maybe<API_TicketTriggerEventFlag>>,
+  by_agent_mode: Array<Maybe<API_TicketTriggerEventMode>>,
+  by_user_mode: Array<Maybe<API_TicketTriggerEventMode>>,
+  by_app_mode: Array<Maybe<API_TicketTriggerEventMode>>,
   is_enabled: Scalars['Boolean'],
   is_hidden: Scalars['Boolean'],
   is_editable: Scalars['Boolean'],
   sys_name?: Maybe<Scalars['String']>,
   run_order: Scalars['Int'],
+  group_type: API_TicketTriggerGroupType,
 };
 
 export enum API_TicketTriggerEventFlag {
@@ -1122,7 +1136,8 @@ export enum API_TicketTriggerEventMode {
   Form = 'form',
   Email = 'email',
   Api = 'api',
-  Mobile = 'mobile'
+  Mobile = 'mobile',
+  Phone = 'phone'
 }
 
 export enum API_TicketTriggerEventTrigger {
@@ -1130,6 +1145,12 @@ export enum API_TicketTriggerEventTrigger {
   Newreply = 'newreply',
   Update = 'update',
   Webhook = 'webhook'
+}
+
+export enum API_TicketTriggerGroupType {
+  Department = 'department',
+  EmailAccount = 'email_account',
+  General = 'general'
 }
 
 export type API_Translation = {

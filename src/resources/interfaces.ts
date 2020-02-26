@@ -1,5 +1,5 @@
 import { SizeTypes } from '../types';
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 export interface IUser {
   locale: string;
@@ -17,8 +17,8 @@ export interface IPageData {
   description?: string;
   illustration?: string; // TBD whether this is a local link
   headerLinks: [{
-      title: string,
-      path: string,
+    title: string,
+    path: string,
   }];
   newLink?: string;
   views?: IViewData[];
@@ -61,7 +61,7 @@ export interface ITableSetup {
   columns: ITableColumn[];
 }
 
-export interface ISortItem 	{
+export interface ISortItem {
   label: string;
   field: string;
   sort: 'asc' | 'desc';
@@ -78,12 +78,13 @@ export interface IMenuProps {
   onSelect?: (value: IMenuItemProps) => void;
   order?: (value: IMenuItemProps[]) => void;
   setChecked?: (value: any) => void;
-  checked?: {[key: string]: any};
-  initialChecked?: {[key: string]: any};
+  checked?: { [key: string]: any };
+  initialChecked?: { [key: string]: any };
   item?: IMenuItemProps;
-  selected? : boolean;
+  selected?: boolean;
   size?: SizeTypes;
   subMenuDirection?: string;
+  children?: ReactNode;
 }
 
 export interface IMenuItemProps {
@@ -104,4 +105,10 @@ export interface ITableColor {
 export interface ITabsProps {
   label?: string;
   messageId?: string;
+}
+
+
+export interface IButtonItemProps {
+  label?: string | number;
+  link: string;
 }

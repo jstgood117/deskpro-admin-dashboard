@@ -31,12 +31,12 @@ interface IImageBtn {
   size?: SizeTypes;
 }
 const DropdownButtonComponent: React.FC<IDropdownBtn> = props => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<IItemProps>();
 
   return (
     <DropdownButton
       {...props}
-      setValue={val => {
+      setValue={(val: any) => {
         setValue(val);
       }}
       value={value}
@@ -60,7 +60,7 @@ const BrandButtonGroupComponent: React.FC<IImageBtn> = props => {
   return (
     <BrandButtonGroup
       size={props.size}
-      selectBtn={(val: string) => {
+      selectBtn={(val: any) => {
         selectBtn(val);
       }}
       selected={selected}
@@ -274,8 +274,8 @@ storiesOf('Button', module)
   ))
   .add('button/ActionButtons', () => (
     <ActionButtons
-      onPencilClick={() => {}}
-      onDuplicateClick={() => {}}
-      onTrashClick={() => {}}
+      onPencilClick={() => { }}
+      onDuplicateClick={() => { }}
+      onTrashClick={() => { }}
     />
   ));
