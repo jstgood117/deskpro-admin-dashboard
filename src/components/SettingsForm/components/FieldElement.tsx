@@ -92,20 +92,43 @@ const elementsSelector: {
       onChange={props.formikProps.handleChange}
     />
   ),
-  checkbox: props => (
-    <StyledCheckbox
-      className='form-checkbox'
-      id={props.id}
-      checked={
-        props.formikProps.values[props.id] &&
-        props.formikProps.values[props.id].includes(props.value)
-      }
-      value={props.value}
-      onChange={event => {
-        props.formikProps.handleChange(event);
-      }}
-    />
-  ),
+  checkbox: props => {
+    return (
+      <Field name={props.id}>
+        {({ meta }: any) => {
+          return (
+            <>
+              <StyledCheckbox
+                className='form-checkbox'
+                id={props.id}
+                checked={
+                  props.formikProps.values[props.id] &&
+                  props.formikProps.values[props.id].includes(props.value)
+                }
+                value={props.value}
+                onChange={event => {
+                  props.formikProps.handleChange(event);
+                }}
+              />
+              {meta.touched && meta.error && (
+                <ErrorMessage
+                  className='error'
+                  style={{
+                    position: 'absolute',
+                    bottom: '-40px',
+                    minWidth: '643px',
+                    left: 24
+                  }}
+                >
+                  <FormattedMessage id={meta.error} />
+                </ErrorMessage>
+              )}
+            </>
+          );
+        }}
+      </Field>
+    );
+  },
   input: props => (
     <Field name={props.id}>
       {({ field, meta }: any) => (
@@ -127,14 +150,20 @@ const elementsSelector: {
     </Field>
   ),
   textarea: props => (
-    <div>
-      <TextArea
-        value={props.formikProps.values[props.id]}
-        placeholder={props.placeholder}
-        onChange={(val: Text) => props.formikProps.setFieldValue(props.id, val)}
-        {...props}
-      />
-    </div>
+    <Field name={props.id}>
+      {({ field, meta }: any) => {
+        return (
+          <>
+            <TextArea placeholder={props.placeholder} {...field} />
+            {meta.touched && meta.error && (
+              <ErrorMessage className='error'>
+                <FormattedMessage id={meta.error} />
+              </ErrorMessage>
+            )}
+          </>
+        );
+      }}
+    </Field>
   ),
   select: props => (
     <SingleSelect
@@ -191,18 +220,34 @@ const elementsSelector: {
   ),
   units: props => {
     return (
-      <Units
-        {...props}
-        inputValue={props.formikProps.values[props.id]}
-        option={props.formikProps.values[props.optionId]}
-        onChange={(value: UnitsValuesType) => {
-          props.formikProps.setFieldValue(props.id, value.inputValue);
-          props.formikProps.setFieldValue(
-            props.optionId,
-            value.selectValue.value
+      <Field name={props.id}>
+        {({ meta }: any) => {
+          return (
+            <div>
+              <Units
+                {...props}
+                inputValue={props.formikProps.values[props.id]}
+                option={props.formikProps.values[props.optionId]}
+                onBlur={() => {
+                  props.formikProps.setFieldTouched(props.id);
+                }}
+                onChange={(value: UnitsValuesType) => {
+                  props.formikProps.setFieldValue(props.id, value.inputValue);
+                  props.formikProps.setFieldValue(
+                    props.optionId,
+                    value.selectValue.value
+                  );
+                }}
+              />
+              {meta.touched && meta.error && (
+                <ErrorMessage className='error'>
+                  <FormattedMessage id={meta.error} />
+                </ErrorMessage>
+              )}
+            </div>
           );
         }}
-      />
+      </Field>
     );
   },
   progress: props => {

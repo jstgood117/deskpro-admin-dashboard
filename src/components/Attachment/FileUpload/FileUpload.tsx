@@ -13,7 +13,7 @@ const InputFile = styled.input.attrs({
   display: none;
 `;
 
-const Label = styled(dpstyle.div)<{ dragOver: boolean }>`
+const Label = styled(dpstyle.div) <{ dragOver: boolean }>`
   display: inline-flex;
   font-size: 13px;
   color: ${props => props.theme.greyDark};
@@ -21,7 +21,7 @@ const Label = styled(dpstyle.div)<{ dragOver: boolean }>`
     !props.dragOver ? props.theme.white : props.theme.pageHeader};
   button {
     background: ${props =>
-      !props.dragOver ? props.theme.white : props.theme.pageHeader};
+    !props.dragOver ? props.theme.white : props.theme.pageHeader};
   }
   border: 1px dashed;
   border-color: ${props =>
@@ -64,11 +64,11 @@ export interface IProps {
 const randomId = uniqueId().toString();
 
 const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
-  const [imagePreviewUrl, setImagePreviewUrl] = useState();
-  const [dragOver, setDragover] = useState(false);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string>();
+  const [dragOver, setDragover] = useState<boolean>(false);
   const reader = new FileReader();
   reader.onloadend = () => {
-    setImagePreviewUrl(reader.result);
+    setImagePreviewUrl(reader.result as string);
   };
   if (files && files.length > 0) {
     reader.readAsDataURL(files[0]);
@@ -99,8 +99,8 @@ const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
           e.target.files && e.target.files.length > 0
             ? onChangeFile(e.target.files)
             : files
-            ? onChangeFile(files)
-            : onChangeFile(undefined);
+              ? onChangeFile(files)
+              : onChangeFile(undefined);
         }}
       />
       <FileDrop
@@ -154,8 +154,8 @@ const FileUpload: React.FC<IProps> = ({ id, onChangeFile, files }) => {
                 }}
               />
             ) : (
-              <Icon name='elephant' />
-            )}
+                <Icon name='elephant' />
+              )}
             {/* <span
               style={{ paddingLeft: 10, paddingRight: 10, display: 'flex' }}
             >

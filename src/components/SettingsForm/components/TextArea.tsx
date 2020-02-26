@@ -1,12 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, TextareaHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import {dpstyle} from '../../../style/styled';
+import { dpstyle } from '../../../style/styled';
 
 type Props = {
-  value?: string;
   placeholder?: string;
-  onChange?: (val: string) => void;
-};
+} & TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export const InputStyled = styled(dpstyle.textarea)`
   font-family: Lato, sans-serif;
@@ -18,7 +16,7 @@ export const InputStyled = styled(dpstyle.textarea)`
   background: transparent;
   height: 58px;
   box-sizing: border-box;
-  border: 1px solid #D3D6D7;
+  border: 1px solid #d3d6d7;
   border-radius: 4px;
   outline: none;
   color: ${props => props.theme.staticColour};
@@ -33,27 +31,15 @@ export const InputStyled = styled(dpstyle.textarea)`
     color: ${props => props.theme.greyDark};
   }
   :focus {
-    box-shadow: 0px 0px 8px #D2D8DD;
+    box-shadow: 0px 0px 8px #d2d8dd;
     border-color: #9fccf3;
   }
 `;
 
-export const TextArea: FC<Props> = (
-  {
-    value,
-    placeholder,
-    onChange,
-  }
-) => {
+export const TextArea: FC<Props> = ({ ...props }) => {
   return (
     <div>
-      <InputStyled
-        value={value}
-        placeholder={placeholder}
-        onChange={(e: any) => {
-          onChange(e.target.value);
-        }}
-      />
+      <InputStyled {...props} />
     </div>
   );
 };
