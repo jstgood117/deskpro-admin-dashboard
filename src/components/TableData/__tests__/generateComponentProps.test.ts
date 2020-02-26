@@ -168,7 +168,7 @@ describe('generateComponentProps', () => {
     };
 
     const cell = {
-      row: { original: { departments: [{ id: 1, title: 'Department 1', avatar: 'url:test' }] } },
+      row: { original: { departments: [{ id: 1, title: 'Department 1', avatarUrn: 'url:test' }] } },
       column: { type }
     };
 
@@ -193,7 +193,7 @@ describe('generateComponentProps', () => {
     };
 
     const cell = {
-      row: { original: { departments: [{ id: 1, title: 'Department ticket', avatar: 'url:test' }], __typename: 'TicketForm' } },
+      row: { original: { departments: [{ id: 1, title: 'Department ticket', avatarUrn: 'url:test' }], __typename: 'TicketForm' } },
       column: { type }
     };
 

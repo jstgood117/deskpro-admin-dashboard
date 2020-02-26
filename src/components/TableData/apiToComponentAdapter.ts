@@ -144,7 +144,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
 
               return {
                 name: department.title || '',
-                avatar: department.avatarUrn || '',
+                avatar: department.avatarUrn || undefined,
                 avatarProps: {
                   textBackgroundColor: colors.background,
                   textColor: colors.textColor
