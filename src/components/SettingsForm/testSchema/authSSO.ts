@@ -12,7 +12,7 @@ export const uiSchema: {
         card: 'HeaderCard',
         showOn: 'agent_auth_sso_header_enabled',
         description:
-          'You can only disable Deskpro Agent Authentication if you have enabled a different agent authentication source.',
+          'You can only disable Deskpro Agent Authentication if you have enabled a different agent authentication source.'
       },
       elements: [
         {
@@ -65,7 +65,7 @@ export const uiSchema: {
                 value: 'yes'
               },
               showRevert: true
-            },
+            }
           ]
         },
         {
@@ -91,7 +91,8 @@ export const uiSchema: {
                     label: 'Custom policy ',
                     id: 'custom_policy',
                     value: 'custom_policy',
-                    description: 'Specify custom password requirements.'}
+                    description: 'Specify custom password requirements.'
+                  }
                 ]
               },
               info: [
@@ -99,7 +100,7 @@ export const uiSchema: {
                   type: 'button',
                   title: 'Agent password policy',
                   url: 'http://www.test.com',
-                  icon: 'guide',
+                  icon: 'guide'
                 }
               ],
               elements: [
@@ -114,7 +115,7 @@ export const uiSchema: {
                     {
                       type: 'inline_edit_group',
                       description:
-                          'The minimum number of characters the password has to be.',
+                        'The minimum number of characters the password has to be.',
                       className: 'checkbox-field-inline',
                       inline: [
                         {
@@ -123,7 +124,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'custom_policy_minimum_password_value',
+                          id: 'custom_policy_minimum_password_value'
                         },
                         {
                           type: 'label',
@@ -140,7 +141,7 @@ export const uiSchema: {
                     {
                       type: 'inline_edit_group',
                       description:
-                          'How many days a password can remain unchanged until Deskpro requires the user to change it.',
+                        'How many days a password can remain unchanged until Deskpro requires the user to change it.',
                       className: 'checkbox-field-inline',
                       inline: [
                         {
@@ -149,7 +150,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'custom_policy_maximum_password_value',
+                          id: 'custom_policy_maximum_password_value'
                         },
                         {
                           type: 'label',
@@ -167,7 +168,7 @@ export const uiSchema: {
                       type: 'vertical_group',
                       title: 'Forbid password reuse',
                       description:
-                          'When enabled, users will not be able to change their password to a password they have used in the past.',
+                        'When enabled, users will not be able to change their password to a password they have used in the past.',
                       className: 'checkbox-field',
                       field: {
                         type: 'checkbox',
@@ -179,7 +180,7 @@ export const uiSchema: {
                     {
                       type: 'inline_edit_group',
                       description:
-                          'Define the minimum number of lower-case (a-z) characters that must be used in the password.',
+                        'Define the minimum number of lower-case (a-z) characters that must be used in the password.',
                       className: 'checkbox-field-inline',
                       inline: [
                         {
@@ -188,7 +189,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'custom_policy_require_lower_case_value',
+                          id: 'custom_policy_require_lower_case_value'
                         }
                       ],
                       field: {
@@ -201,7 +202,7 @@ export const uiSchema: {
                     {
                       type: 'inline_edit_group',
                       description:
-                          'Define the minimum number of upper-case (A-Z) characters that must be used in the password.',
+                        'Define the minimum number of upper-case (A-Z) characters that must be used in the password.',
                       className: 'checkbox-field-inline',
                       inline: [
                         {
@@ -210,7 +211,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'custom_policy_require_upper_case_value',
+                          id: 'custom_policy_require_upper_case_value'
                         }
                       ],
                       field: {
@@ -223,7 +224,7 @@ export const uiSchema: {
                     {
                       type: 'inline_edit_group',
                       description:
-                          'Define the minimum number of numbers (0-9) that must be used in the password.',
+                        'Define the minimum number of numbers (0-9) that must be used in the password.',
                       className: 'checkbox-field-inline',
                       inline: [
                         {
@@ -232,7 +233,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'custom_policy_require_number_value',
+                          id: 'custom_policy_require_number_value'
                         }
                       ],
                       field: {
@@ -245,7 +246,7 @@ export const uiSchema: {
                     {
                       type: 'inline_edit_group',
                       description:
-                          'Define the minimum number of symbols (!, @, $, % etc) that must be used in the password.',
+                        'Define the minimum number of symbols (!, @, $, % etc) that must be used in the password.',
                       className: 'checkbox-field-inline',
                       inline: [
                         {
@@ -254,7 +255,7 @@ export const uiSchema: {
                         },
                         {
                           type: 'input',
-                          id: 'custom_policy_require_symbols_value',
+                          id: 'custom_policy_require_symbols_value'
                         }
                       ],
                       field: {
@@ -263,7 +264,7 @@ export const uiSchema: {
                         value: 'yes'
                       },
                       showRevert: true
-                    },
+                    }
                   ]
                 }
               ]
@@ -300,7 +301,7 @@ export const jsonSchema = {
   custom_policy_minimum_password_value_default: 5,
   password_policy: 'standard_policy',
   agent_auth_sso_remember_device_option: 'months',
-  agent_auth_sso_remember_device_field: 6,
+  agent_auth_sso_remember_device_field: ''
 };
 
 export const vaildationSchema = {
@@ -311,14 +312,29 @@ export const vaildationSchema = {
     },
     agent_auth_sso_remember_device_field: {
       type: 'number',
+      when: {
+        agent_auth_sso_header_enabled: {
+          is: true,
+          then: {
+            when: {
+              agent_auth_sso_remember_device_enabled: {
+                is: true,
+                then: {
+                  required: true
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  },
+  }
 };
 
 export const validationConfig = {
   errMessages: {
     agent_auth_sso_remember_device_field: {
-      required: 'validation.required',
+      required: 'validation.required'
     }
   }
 };
