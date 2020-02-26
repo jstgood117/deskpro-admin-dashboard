@@ -4,16 +4,15 @@ import Button from '../../Button';
 import Icon from '../../Icon';
 
 const ButtonSection = ({ icon, text, ...props }: any) => {
-  console.log(props);
   return (
     <Button
       {...props}
       onClick={() => {
         props.state
           ? props.formikProps.setFieldValue(
-              props.state,
-              !props.formikProps.values[props.state]
-            )
+            props.state,
+            !props.formikProps.values[props.state]
+          )
           : console.log(props.formikProps);
       }}
     >

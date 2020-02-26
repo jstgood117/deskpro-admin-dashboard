@@ -16,11 +16,7 @@ import {
 } from './ButtonStyles';
 import { IButtonProps } from './types';
 import { getStyle } from './Helpers';
-
-export interface IItemProps {
-  label?: string | number;
-  link: string;
-}
+import { IButtonItemProps } from '../../resources/interfaces';
 
 const Button: FC<IButtonProps> = ({
   buttonType,
@@ -54,7 +50,7 @@ const Button: FC<IButtonProps> = ({
           styles={styles}
           className={`${selected ? 'selected' : ''} ${
             imageBtnSelected ? 'selected-image-btn' : ''
-          }`}
+            }`}
           onClick={onClick}
           hasClearButton={showClearButton && selected}
           iconOnly={iconOnly}
@@ -80,37 +76,37 @@ const Button: FC<IButtonProps> = ({
                 />
               )}
             >
-              {items.map((item: IItemProps, index: number) => {
+              {items.map((item: IButtonItemProps, index: number) => {
                 return renderItem ? (
                   renderItem(item, index)
                 ) : (
-                  <DropdownContentLink
-                    key={index}
-                    onClick={() => onSelect && onSelect(item)}
-                  >
-                    <span
-                      className={`${
-                        name === 'sort' && dropdownValue.label === item.label
-                          ? 'selected'
-                          : ''
-                      }`}
+                    <DropdownContentLink
+                      key={index}
+                      onClick={() => onSelect && onSelect(item)}
                     >
-                      {item.label ? item.label : item.link}
-                    </span>
-
-                    {name === 'sort' && dropdownValue.label === item.label && (
-                      <span className='sort-icon'>
-                        <Icon name='ic-sort-down-active' />
+                      <span
+                        className={`${
+                          name === 'sort' && dropdownValue.label === item.label
+                            ? 'selected'
+                            : ''
+                          }`}
+                      >
+                        {item.label ? item.label : item.link}
                       </span>
-                    )}
-                    {name === 'sort-desc' &&
-                      dropdownValue.label === item.label && (
+
+                      {name === 'sort' && dropdownValue.label === item.label && (
                         <span className='sort-icon'>
-                          <Icon name='ic-sort-up-active' />
+                          <Icon name='ic-sort-down-active' />
                         </span>
                       )}
-                  </DropdownContentLink>
-                );
+                      {name === 'sort-desc' &&
+                        dropdownValue.label === item.label && (
+                          <span className='sort-icon'>
+                            <Icon name='ic-sort-up-active' />
+                          </span>
+                        )}
+                    </DropdownContentLink>
+                  );
               })}
             </Scrollbars>
 
