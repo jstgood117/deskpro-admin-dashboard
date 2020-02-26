@@ -1,21 +1,20 @@
-import React from 'react';
-import { mount, shallow } from 'enzyme';
+import React, { ReactNode } from 'react';
+import { mount } from '../../../test/enzyme';
 import TicketsProblemsPage from './TicketsProblems';
 
+jest.mock('react-dom', () => ({
+  createPortal: (node: ReactNode) => node
+}));
+
 describe('TicketsProblemsPage', () => {
-  let mountedPage: any;
+  const wrapper = () =>
+    mount(
+      <TicketsProblemsPage path='/tickets/problems' />
+    );
 
-  const wrapper = (bShallow: boolean) => {
-    if (!mountedPage) {
-      mountedPage = bShallow
-        ? shallow(<TicketsProblemsPage path='/tickets/problems' />)
-        : mount(<TicketsProblemsPage path='/tickets/problems' />);
-    }
-    return mountedPage;
-  };
-
-  it('renders a <div> root', () => {
-    const root = wrapper(true);
-    expect(root.length).toEqual(1);
+  it('should render settings form', () => {
+    const root = wrapper();
+    expect(root.find('h1').length).toEqual(1);
+    expect(root.find('h1').text()).toEqual('Problems & Incidents');
   });
 });
