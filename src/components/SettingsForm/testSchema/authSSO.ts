@@ -313,10 +313,17 @@ export const vaildationSchema = {
     agent_auth_sso_remember_device_field: {
       type: 'number',
       when: {
-        agent_auth_sso_remember_device_enabled: {
+        agent_auth_sso_header_enabled: {
           is: true,
           then: {
-            required: true
+            when: {
+              agent_auth_sso_remember_device_enabled: {
+                is: true,
+                then: {
+                  required: true
+                }
+              }
+            }
           }
         }
       }
