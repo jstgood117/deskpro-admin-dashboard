@@ -197,7 +197,7 @@ const elementsSelector: {
     <Button
       styleType={props.styleType ? props.styleType : 'secondary'}
       onClick={props.formikProps.handleSubmit}
-      disabled={props.formikProps.isSubmitting}
+      disabled={!props.formikProps.isValid}
       size='small'
     >
       {props.icon && <Icon name={props.icon} />}
