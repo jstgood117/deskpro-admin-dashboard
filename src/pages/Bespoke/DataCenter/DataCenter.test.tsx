@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from '../../../test/enzyme';
-import DataCenterPage from './index';
+import DataCenterPage from './DataCenter';
 
 describe('DataCenterPage', () => {
 
