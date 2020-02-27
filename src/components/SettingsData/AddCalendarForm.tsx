@@ -61,54 +61,58 @@ const AddCalendarForm = ({ ...props }) => {
       validationSchema={ValidationSchema()}
       initialValues={initialZendeskValues}
     >
-      <div>
-        <Button
-          styleType={props.styleType ? props.styleType : 'secondary'}
-          onClick={() => {
-            openDrawer(true);
-          }}
-          size='small'
-        >
-          {props.icon && <Icon name={props.icon} />}
-          {props.text}
-        </Button>
+      {(formikProps: any) => (
         <div>
-          <Drawer
-            open={isOpened}
-            onClose={() => {
-              props.formikProps.setFieldTouched(props.id, false);
-              openDrawer(false);
+          <Button
+            styleType={props.styleType ? props.styleType : 'secondary'}
+            onClick={() => {
+              openDrawer(true);
             }}
+            size='small'
           >
-            <DrawerHeader>Add calendar</DrawerHeader>
-            <div style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 19 }}>
-              <EditFormInputTitle>Link</EditFormInputTitle>
-              <Field name='business_hours_add_calendar_form_input'>
-                {({ field, meta }: any) => {
-                  return (
-                    <>
-                      <textarea {...field} style={EditFormStyle} />
-                      {meta.touched && meta.error && (
-                        <ErrorMessage className='error'>
-                          <FormattedMessage id={meta.error} />
-                        </ErrorMessage>
-                      )}
-                    </>
-                  );
-                }}
-              </Field>
-            </div>
-            <DrawerFooter>
-              <Button styleType='primary' size='medium'>
-                Save
-              </Button>
-              <Button styleType='secondary' size='medium'>
-                Delete
-              </Button>
-            </DrawerFooter>
-          </Drawer>
+            {props.icon && <Icon name={props.icon} />}
+            {props.text}
+          </Button>
+          <div>
+            <Drawer
+              open={isOpened}
+              onClose={() => {
+                formikProps.setFieldTouched('business_hours_add_calendar_form_input', false);
+                openDrawer(false);
+              }}
+            >
+              <DrawerHeader>Add calendar</DrawerHeader>
+              <div
+                style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 19 }}
+              >
+                <EditFormInputTitle>Link</EditFormInputTitle>
+                <Field name='business_hours_add_calendar_form_input'>
+                  {({ field, meta }: any) => {
+                    return (
+                      <>
+                        <textarea {...field} style={EditFormStyle} />
+                        {meta.touched && meta.error && (
+                          <ErrorMessage className='error'>
+                            <FormattedMessage id={meta.error} />
+                          </ErrorMessage>
+                        )}
+                      </>
+                    );
+                  }}
+                </Field>
+              </div>
+              <DrawerFooter>
+                <Button styleType='primary' size='medium'>
+                  Save
+                </Button>
+                <Button styleType='secondary' size='medium'>
+                  Delete
+                </Button>
+              </DrawerFooter>
+            </Drawer>
+          </div>
         </div>
-      </div>
+      )}
     </Formik>
   );
 };
