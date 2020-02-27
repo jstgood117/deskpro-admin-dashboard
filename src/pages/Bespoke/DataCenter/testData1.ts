@@ -338,7 +338,7 @@ export const uiSchema: {
 };
 
 export const jsonSchema: any = {
-  data_center_schedule_checkbox: ['admin1'],
+  data_center_schedule_checkbox: [],
   data_center_schedule_select: { value: '1 minute', label: '1 minute' },
   data_center_download_language_select_1: {
     value: 'all languages',
@@ -357,15 +357,13 @@ export const validationSchema = {
       type: 'array'
     },
     data_center_schedule_select: {
-      type: 'object',
-      properties: {
-        value: {
-          type: 'string',
-          required: true
-        },
-        label: {
-          type: 'string',
-          required: true
+      type: 'string',
+      when: {
+        data_center_schedule_checkbox: {
+          is: (val: any) => val.includes('admin'),
+          then: {
+            required: true
+          }
         }
       }
     },

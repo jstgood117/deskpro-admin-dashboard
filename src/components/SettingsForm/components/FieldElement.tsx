@@ -173,9 +173,14 @@ const elementsSelector: {
             type='primary'
             options={props.options}
             selectedOption={props.formikProps.values[props.id]}
-            selectOption={val => {
+            selectOption={option => {
+
               props.formikProps.setFieldTouched(props.id, true);
-              return props.formikProps.setFieldValue(props.id, val);
+
+              return props.formikProps.setFieldValue(
+                props.id,
+                option.value ? option : undefined
+              );
             }}
             placeholder={props.placeholder}
           />
@@ -207,7 +212,7 @@ const elementsSelector: {
       {...props}
       profiles={props.profiles}
       selected={props.formikProps.values[props.id]}
-      onEditClick={() => {}}
+      onEditClick={() => { }}
       formikProps={props.formikProps}
     />
   ),
