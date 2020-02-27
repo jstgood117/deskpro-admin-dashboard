@@ -117,10 +117,17 @@ export const vaildationSchema = {
       pattern:
         '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$',
       when: {
-        elastic_search_apache_tika: {
+        elastic_search_header: {
           is: true,
           then: {
-            required: true
+            when: {
+              elastic_search_apache_tika: {
+                is: true,
+                then: {
+                  required: true
+                }
+              }
+            }
           }
         }
       }
@@ -130,10 +137,17 @@ export const vaildationSchema = {
       pattern:
         '^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$',
       when: {
-        elastic_search_apache_tika: {
+        elastic_search_header: {
           is: true,
           then: {
-            required: true
+            when: {
+              elastic_search_apache_tika: {
+                is: true,
+                then: {
+                  required: true
+                }
+              }
+            }
           }
         }
       }
@@ -142,7 +156,14 @@ export const vaildationSchema = {
       type: 'string',
       pattern:
         '^(?:([a-z0-9+.-]+)://)(?:S+(?::S*)?@)?(?:(?:[1-9]d?|1dd|2[01]d|22[0-3])(?:.(?:1?d{1,2}|2[0-4]d|25[0-5])){2}(?:.(?:[1-9]d?|1dd|2[0-4]d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*.?)(?::d{2,5})?(?:[/?#]S*)?$',
-      required: true
+      when: {
+        elastic_search_header: {
+          is: true,
+          then: {
+            required: true
+          }
+        }
+      }
     }
   }
 };
