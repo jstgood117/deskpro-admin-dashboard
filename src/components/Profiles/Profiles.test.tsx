@@ -29,17 +29,18 @@ describe('Profiles', () => {
         <Formik
           initialValues={{
             profiles,
-            selected,
+            'agents-profiles': selected,
           }}
           validate={() => { }}
           onSubmit={() => { }}
         >
           {formikProps => (
             <Profiles
+              id='agents-profiles'
               editable={true}
               onEditClick={() => { }}
               profiles={formikProps.values.profiles}
-              selected={formikProps.values['selected']}
+              selected={formikProps.values['agents-profiles']}
               title='Agents'
               formikProps={formikProps}
             />

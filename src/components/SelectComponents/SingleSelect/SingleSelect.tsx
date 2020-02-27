@@ -9,7 +9,6 @@ import {
   WithImageSelectButton,
   selectStyles,
   IconOption,
-  DropdownIndicator2,
   SingleSelectImageContainer,
   StyledSelect,
   DropdownIndicator
@@ -38,8 +37,7 @@ const SingleSelect: FC<IProps> = ({
   closeMenuOnSelect,
   selectedOption,
   isSearchable,
-  styles,
-  visibleIcon
+  styles
 }) => {
   const onChange = (value: IOptions) => {
     selectOption(value);
@@ -62,7 +60,6 @@ const SingleSelect: FC<IProps> = ({
         defaultValue={selectedOption}
         components={{
           ClearIndicator: false,
-          DropdownIndicator2,
           IndicatorSeparator: null,
           Option: IconOption
         }}
@@ -92,7 +89,6 @@ const SingleSelect: FC<IProps> = ({
             onChange={onChange}
             components={{
               ClearIndicator: false,
-              DropdownIndicator2,
               IndicatorSeparator: null,
               Option: IconOption,
               ValueContainer: SingleSelectImageContainer
@@ -108,7 +104,9 @@ const SingleSelect: FC<IProps> = ({
             options={options}
             className='basic-multi-select'
             classNamePrefix='select'
-            placeholder={placeholder !==undefined ? placeholder : 'Select Item'}
+            placeholder={
+              placeholder !== undefined ? placeholder : 'Select Item'
+            }
             styles={appliedStyles}
             hideSelectedOptions={false}
             defaultValue={selectedOption}

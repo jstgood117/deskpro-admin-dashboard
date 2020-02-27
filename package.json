@@ -122,6 +122,7 @@
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "storybook-addon-jsx": "^7.1.13",
     "ts-jest": "^24.2.0",
+    "type-coverage": "^2.4.0",
     "url-loader": "^3.0.0"
   },
   "scripts": {
@@ -135,7 +136,8 @@
     "storybook:build": "build-storybook",
     "build-storybook": "build-storybook -s public",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "type-coverage": "$(npm bin)/type-coverage --at-least 100 --strict true --details true --ignore-files 'node_modules' --ignore-files 'codegen' --ignore-files 'src/logging.ts' --project ./tsconfig.json"
   },
   "eslintConfig": {
     "extends": "react-app"

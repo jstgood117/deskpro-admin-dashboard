@@ -61,7 +61,7 @@ export const generateTitleAndDescription = (className: string, props: any) => {
               )}
               {props.description && (
                 <div className='description'>
-                  {!props.markdown ? (
+                  {props.markdown !== undefined && !props.markdown ? (
                     props.description
                   ) : (
                     <Markdown>{props.description}</Markdown>
