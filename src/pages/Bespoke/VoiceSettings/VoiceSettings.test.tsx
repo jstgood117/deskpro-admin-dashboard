@@ -1,21 +1,22 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from '../../../test/enzyme';
 import VoiceSettingsPage from './VoiceSettings';
 
 describe('VoiceSettingsPage', () => {
-  let mountedPage: any;
 
-  const wrapper = (bShallow: boolean) => {
-    if (!mountedPage) {
-      mountedPage = bShallow
-        ? shallow(<VoiceSettingsPage path='/voice/settings' />)
-        : mount(<VoiceSettingsPage path='/voice/settings' />);
-    }
-    return mountedPage;
-  };
+  const wrapper = () =>
+    mount(
+      <VoiceSettingsPage path='/voice/settings' />
+    );
 
-  it('always renders a <div>', () => {
-    const elts = wrapper(false).find('div');
-    expect(elts.length).toBeGreaterThan(0);
+  it('should render settings form', () => {
+    const root = wrapper();
+    expect(root.find('h1').length).toEqual(1);
+    expect(root.find('h1').text()).toEqual('Voice General Settings');
+  });
+
+  it('should generate feature-billing', () => {
+    const root = wrapper();
+    expect(root.find('div.feature-billing').length).toBeGreaterThan(0);
   });
 });
