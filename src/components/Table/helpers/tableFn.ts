@@ -89,7 +89,7 @@ export const onCheckboxChange = (
 
 export const getSortDefault = (
   path?: string
-) => {
+): SortType[] => {
   let sortBy: any[] = [];
   switch (path) {
     case '/tickets/forms':
