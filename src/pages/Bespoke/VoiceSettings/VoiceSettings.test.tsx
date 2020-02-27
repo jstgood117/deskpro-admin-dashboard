@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import VoiceSettingsPage from './index';
+import VoiceSettingsPage from './VoiceSettings';
 
 describe('VoiceSettingsPage', () => {
   let mountedPage: any;
