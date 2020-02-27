@@ -22,7 +22,12 @@ export interface IProps {
   defaultValue?: IOptions[];
 }
 
-const MultiSelect: FC<IProps> = ({ options, type, selectOptions, defaultValue }) => {
+const MultiSelect: FC<IProps> = ({
+  options,
+  type,
+  selectOptions,
+  defaultValue
+}) => {
   const onChange = (selectedOptions: IOptions[]) => {
     selectOptions(selectedOptions);
   };
@@ -40,7 +45,9 @@ const MultiSelect: FC<IProps> = ({ options, type, selectOptions, defaultValue })
             styles={selectStyles}
             hideSelectedOptions={false}
             onChange={onChange}
-            defaultValue={defaultValue && defaultValue.length > 0 ? defaultValue : undefined}
+            defaultValue={
+              defaultValue && defaultValue.length > 0 ? defaultValue : undefined
+            }
             components={{
               ClearIndicator: false,
               DropdownIndicator,
