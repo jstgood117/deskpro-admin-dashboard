@@ -16,8 +16,8 @@ export const uiSchema: {
           type: 'button',
           title: 'Problems & Incidents',
           url: 'http://www.test.com',
-          icon: 'guide',
-        },
+          icon: 'guide'
+        }
       },
       elements: [
         {
@@ -36,12 +36,14 @@ export const uiSchema: {
                     id: 'view_permissions',
                     title: 'Permission Groups',
                     addTitle: 'Add usergroup',
-                    max: 8,
-                  },
+                    max: 8
+                  }
                 },
                 {
                   type: 'field',
                   field: {
+                    id: 'agent_view_permissions_list',
+                    title: 'Agents',
                     editable: true,
                     type: 'profiles',
                     profiles: [
@@ -53,16 +55,14 @@ export const uiSchema: {
                       { id: 'agent6', name: 'Ignatius Ogilvy' },
                       { id: 'agent7', name: 'Jason Todd' },
                       { id: 'agent8', name: 'Pamela Lillian ' },
-                      { id: 'agent9', name: 'Selina Kyle' },
+                      { id: 'agent9', name: 'Selina Kyle' }
                     ],
-                    title: 'Agents',
-                    max: 200,
-                    id: 'agent_view_permissions_list',
-                  },
-                },
-              ],
-            },
-          ],
+                    restricted: { agent2: true }
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           title: '‘Create’ Permissions',
@@ -80,12 +80,14 @@ export const uiSchema: {
                     id: 'create_permissions',
                     title: 'Permission Groups',
                     addTitle: 'Add usergroup',
-                    max: 8,
-                  },
+                    max: 8
+                  }
                 },
                 {
                   type: 'field',
                   field: {
+                    id: 'agent_create_permissions_list',
+                    title: 'Agents',
                     editable: true,
                     type: 'profiles',
                     profiles: [
@@ -97,16 +99,14 @@ export const uiSchema: {
                       { id: 'agent6', name: 'Ignatius Ogilvy' },
                       { id: 'agent7', name: 'Jason Todd' },
                       { id: 'agent8', name: 'Pamela Lillian ' },
-                      { id: 'agent9', name: 'Selina Kyle' },
+                      { id: 'agent9', name: 'Selina Kyle' }
                     ],
-                    title: 'Agents',
-                    max: 200,
-                    id: 'agent_create_permissions_list',
-                  },
-                },
-              ],
-            },
-          ],
+                    restricted: { agent2: true }
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           title: '‘Close’ Permissions',
@@ -124,12 +124,14 @@ export const uiSchema: {
                     id: 'close_permissions',
                     title: 'Permission Groups',
                     addTitle: 'Add usergroup',
-                    max: 8,
-                  },
+                    max: 8
+                  }
                 },
                 {
                   type: 'field',
                   field: {
+                    id: 'agent_close_permissions_list',
+                    title: 'Agents',
                     editable: true,
                     type: 'profiles',
                     profiles: [
@@ -141,16 +143,14 @@ export const uiSchema: {
                       { id: 'agent6', name: 'Ignatius Ogilvy' },
                       { id: 'agent7', name: 'Jason Todd' },
                       { id: 'agent8', name: 'Pamela Lillian ' },
-                      { id: 'agent9', name: 'Selina Kyle' },
+                      { id: 'agent9', name: 'Selina Kyle' }
                     ],
-                    title: 'Agents',
-                    max: 200,
-                    id: 'agent_close_permissions_list',
-                  },
-                },
-              ],
-            },
-          ],
+                    restricted: { agent2: true }
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           title: '‘Reopen’ Permissions',
@@ -168,12 +168,14 @@ export const uiSchema: {
                     id: 'reopen_permissions',
                     title: 'Permission Groups',
                     addTitle: 'Add usergroup',
-                    max: 8,
-                  },
+                    max: 8
+                  }
                 },
                 {
                   type: 'field',
                   field: {
+                    id: 'agent_reopen_permissions_list',
+                    title: 'Agents',
                     editable: true,
                     type: 'profiles',
                     profiles: [
@@ -185,20 +187,18 @@ export const uiSchema: {
                       { id: 'agent6', name: 'Ignatius Ogilvy' },
                       { id: 'agent7', name: 'Jason Todd' },
                       { id: 'agent8', name: 'Pamela Lillian ' },
-                      { id: 'agent9', name: 'Selina Kyle' },
+                      { id: 'agent9', name: 'Selina Kyle' }
                     ],
-                    title: 'Agents',
-                    max: 200,
-                    id: 'agent_reopen_permissions_list',
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ],
+                    restricted: { agent2: true }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 };
 
 export const jsonSchema: any = {
@@ -207,99 +207,102 @@ export const jsonSchema: any = {
     'All Permissions',
     'All Non-Destructive Permissions',
     'Support Agents',
-    'Trainee',
+    'Trainee'
   ],
-  agent_view_permissions_list: [
-    { agent1: true },
-    { agent2: true },
-    { agent3: true },
-    { agent4: true },
-    { agent5: true },
-    { agent6: true },
-    { agent7: true },
-    { agent8: true },
-  ],
+  agent_view_permissions_list: {
+    agent1: true,
+    agent3: true,
+    agent4: true,
+    agent6: true,
+    agent7: true,
+    agent8: true,
+    agent9: true
+  },
   create_permissions: [
     'All Permissions',
     'All Non-Destructive Permissions',
     'Support Agents',
-    'Trainee',
+    'Trainee'
   ],
-  agent_create_permissions_list: [
-    { agent1: true },
-    { agent2: true },
-    { agent3: true },
-    { agent4: true },
-    { agent5: true },
-    { agent6: true },
-    { agent7: true },
-    { agent8: true },
-  ],
+  agent_create_permissions_list: {
+    agent1: true,
+    agent3: true,
+    agent4: true,
+    agent6: true,
+    agent7: true,
+    agent8: true,
+    agent9: true
+  },
   close_permissions: [
     'All Permissions',
     'All Non-Destructive Permissions',
     'Support Agents',
-    'Trainee',
+    'Trainee'
   ],
-  agent_close_permissions_list: [
-    { agent1: true },
-    { agent2: true },
-    { agent3: true },
-    { agent4: true },
-    { agent5: true },
-    { agent6: true },
-    { agent7: true },
-    { agent8: true },
-  ],
+  agent_close_permissions_list: {
+    agent1: true,
+    agent3: true,
+    agent4: true,
+    agent6: true,
+    agent7: true,
+    agent8: true,
+    agent9: true
+  },
   reopen_permissions: [
     'All Permissions',
     'All Non-Destructive Permissions',
     'Support Agents',
-    'Trainee',
+    'Trainee'
   ],
-  agent_reopen_permissions_list: [
-    { agent1: true },
-    { agent2: true },
-    { agent3: true },
-    { agent4: true },
-    { agent5: true },
-    { agent6: true },
-    { agent7: true },
-    { agent8: true },
-  ],
+  agent_reopen_permissions_list: {
+    agent1: true,
+    agent3: true,
+    agent4: true,
+    agent6: true,
+    agent7: true,
+    agent8: true,
+    agent9: true
+  }
 };
 
 export const validationSchema = {
   type: 'object',
   properties: {
     ticket_problems_enabled: {
-      type: 'boolean',
+      type: 'boolean'
     },
     view_permissions: {
       type: 'array',
+      minItems: 1
     },
     agent_view_permissions_list: {
-      type: 'array',
+      type: 'object'
     },
     create_permissions: {
-      type: 'array',
+      type: 'array'
     },
     agent_create_permissions_list: {
-      type: 'array',
+      type: 'object'
     },
     close_permissions: {
-      type: 'array',
+      type: 'array'
     },
     agent_close_permissions_list: {
-      type: 'array',
+      type: 'object'
     },
     reopen_permissions: {
-      type: 'array',
+      type: 'array'
     },
     agent_reopen_permissions_list: {
-      type: 'array',
-    },
-  },
+      type: 'object'
+    }
+  }
 };
 
-export const validationConfig = {};
+export const validationConfig = {
+  errMessages: {
+    view_permissions: {
+      minItems: 'validation.permissions.min_1'
+    }
+  }
+};

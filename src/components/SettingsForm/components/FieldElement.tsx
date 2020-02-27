@@ -166,18 +166,38 @@ const elementsSelector: {
     </Field>
   ),
   select: props => (
-    <SingleSelect
-      {...props}
-      selectedOption={props.formikProps.values[props.id]}
-      selectOption={val => props.formikProps.setFieldValue(props.id, val)}
-      placeholder={props.placeholder}
-      type='primary'
-    />
+    <Field name={props.id}>
+      {({ field, meta }: any) => (
+        <div style={{ position: 'relative' }}>
+          <SingleSelect
+            type='primary'
+            options={props.options}
+            selectedOption={props.formikProps.values[props.id]}
+            selectOption={option => {
+
+              props.formikProps.setFieldTouched(props.id, true);
+
+              return props.formikProps.setFieldValue(
+                props.id,
+                option.value ? option : undefined
+              );
+            }}
+            placeholder={props.placeholder}
+          />
+          {meta.touched && meta.error && (
+            <ErrorMessage className='error'>
+              <FormattedMessage id={meta.error} />
+            </ErrorMessage>
+          )}
+        </div>
+      )}
+    </Field>
   ),
   button: props => (
     <Button
       styleType={props.styleType ? props.styleType : 'secondary'}
-      onClick={() => {}}
+      onClick={props.formikProps.handleSubmit}
+      disabled={!props.formikProps.isValid}
       size='small'
     >
       {props.icon && <Icon name={props.icon} />}
@@ -192,18 +212,31 @@ const elementsSelector: {
       {...props}
       profiles={props.profiles}
       selected={props.formikProps.values[props.id]}
-      onEditClick={() => {}}
+      onEditClick={() => { }}
       formikProps={props.formikProps}
     />
   ),
   stringlist: props => (
-    <div style={{ marginBottom: 16 }}>
-      <StringListBuilder
-        {...props}
-        className={props.className}
-        values={props.formikProps.values[props.id]}
-      />
-    </div>
+    <Field name={props.id}>
+      {({ field, meta }: any) => (
+        <div
+          tabIndex={0}
+          style={{ marginBottom: 16, outline: 'none' }}
+          onBlur={() => props.formikProps.setFieldTouched(props.id, true)}
+        >
+          <StringListBuilder
+            {...props}
+            className={props.className}
+            values={props.formikProps.values[props.id]}
+          />
+          {meta.touched && meta.error && (
+            <ErrorMessage className='error'>
+              <FormattedMessage id={'validation.permissions.min_1'} />
+            </ErrorMessage>
+          )}
+        </div>
+      )}
+    </Field>
   ),
   units: props => {
     return (
@@ -254,7 +287,7 @@ const elementsSelector: {
         </div>
         <Button
           styleType='secondary'
-          onClick={() => {}}
+          onClick={() => { }}
           size='small'
           className='export-btn'
         >

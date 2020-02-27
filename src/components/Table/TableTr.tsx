@@ -69,12 +69,15 @@ const TableTr: FC<Props> = ({
       {_.sortBy(row.cells, 'column.index').map(
         (cell: any, indexInner: number) => {
           const isIdColumn = cell.column.type.__typename === 'TableColumnId';
+
           return (
             <td
               className={
-                !hasActions && indexInner === 0
+                (!hasActions && indexInner === 0)
                   ? `td-${indexInner} firstColumn`
-                  : `td-${indexInner}`
+                  : (!hasActions && indexInner === row.cells.length - 1)
+                    ? `td-${indexInner} lastColumn`
+                    : `td-${indexInner}`
               }
               {...cell.getCellProps()}
               {...cell.row.getToggleRowExpandedProps({

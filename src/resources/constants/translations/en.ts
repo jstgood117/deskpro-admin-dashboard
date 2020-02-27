@@ -138,6 +138,7 @@ export const testTranslations = {
   'validation.ipPattern': 'Invalid IP address.',
   'validation.portPattern': 'Invalid Port.',
   'validation.urlPattern': 'Invalid URL.',
+  'validation.permissions.min_1': 'Permissions field must have at least 1 items.',
 
   'agent.settings.security_whitelist': 'Must be in the format of 192.168.2.1',
 };
