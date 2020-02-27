@@ -109,4 +109,3 @@ const DataCenterPage: FC<PropsWithApollo> = ({
 };
 
 export default withApollo<PropsWithApollo>(DataCenterPage);
-

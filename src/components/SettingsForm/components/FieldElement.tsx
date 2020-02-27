@@ -186,7 +186,7 @@ const elementsSelector: {
           />
           {meta.touched && meta.error && (
             <ErrorMessage className='error'>
-              <FormattedMessage id={'validation.required'} />
+              <FormattedMessage id={meta.error} />
             </ErrorMessage>
           )}
         </div>

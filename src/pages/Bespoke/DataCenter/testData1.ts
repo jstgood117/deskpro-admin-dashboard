@@ -391,12 +391,7 @@ export const validationSchema = {
 export const validationConfig = {
   errMessages: {
     data_center_schedule_select: {
-      value: {
-        required: 'validation.required'
-      },
-      label: {
-        required: 'validation.required'
-      }
+      required: 'validation.required'
     }
   }
 };
