@@ -93,9 +93,15 @@ const StringListContainer = styled.div`
   & .add-button {
     justify-content: center;
     .text {
+      font-family: Rubik;
+      font-style: Regular;
+      font-size: 13px;
+      line-height: 150%;
       margin-left: 8px;
     }
     svg {
+      width: 11px;
+      height: 11px;
       padding-right: 0;
     }
   }
@@ -205,15 +211,15 @@ const StringListBuilder: React.FC<IProps> = ({
                     inputType='secondary'
                   />
                 ) : (
-                  <StringRow
-                    className={max ? 'capped' : ''}
-                    index={index}
-                    key={index}
-                    onEdit={() => setEditIndex(index)}
-                    onRemove={() => arrayHelpers.remove(index)}
-                    value={value}
-                  />
-                )
+                    <StringRow
+                      className={max ? 'capped' : ''}
+                      index={index}
+                      key={index}
+                      onEdit={() => setEditIndex(index)}
+                      onRemove={() => arrayHelpers.remove(index)}
+                      value={value}
+                    />
+                  )
               )}
               {inAdd && (
                 <Input
