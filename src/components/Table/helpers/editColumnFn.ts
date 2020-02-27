@@ -6,10 +6,10 @@ export const setTdsWidth = (colIndex: number, width: number) => {
   }
 };
 
-export const resetColWidth = (el: any) => {
-  const curColIndex = el.getAttribute('data-colindex');
+export const resetColWidth = (el: HTMLElement) => {
+  const curColIndex: string = el.getAttribute('data-colindex');
   el.style.minWidth = '1px';
-  setTdsWidth(curColIndex, 1);
+  setTdsWidth(parseInt(curColIndex, 10), 1);
 };
 
 export const resizableTable = () => {
@@ -17,22 +17,22 @@ export const resizableTable = () => {
   if (!divs.length) return;
 
   for (const div of divs) {
-    setListeners(div);
+    setListeners(div as HTMLElement);
   }
 };
 
 export const getLargestPadding = (colTds: HTMLCollectionOf<Element>) => {
   let largestPadding = 0;
   for (const tdEl of colTds) {
-    const currentStyle: any = getElementStyle(tdEl as HTMLElement);
+    const currentStyle: CSSStyleDeclaration = getElementStyle(tdEl as HTMLElement);
     if (
       currentStyle &&
       currentStyle.hasOwnProperty('padding-left') &&
       currentStyle.hasOwnProperty('padding-right')
     ) {
       largestPadding = Math.max(
-        parseInt(currentStyle['padding-left'], 10) +
-          parseInt(currentStyle['padding-right'], 10),
+        parseInt(currentStyle['padding-left' as any], 10) +
+          parseInt(currentStyle['padding-right' as any], 10),
         largestPadding
       );
     }
@@ -41,43 +41,36 @@ export const getLargestPadding = (colTds: HTMLCollectionOf<Element>) => {
   return largestPadding;
 };
 
-const getElementStyle = (el: HTMLElement) => {
-  return window ? window.getComputedStyle(el) : {};
+const getElementStyle = (el: HTMLElement): CSSStyleDeclaration => {
+  return window ? window.getComputedStyle(el) : {} as CSSStyleDeclaration;
 };
 
-const setListeners = (div: any) => {
+const setListeners = (div: HTMLElement) => {
   let pageX: number;
-  let curCol: any;
-  let nxtCol: any;
+  let curCol: HTMLElement;
   let curColWidth: number;
-  let nxtColWidth: number;
   let curColIndex: number;
-  let largestPadding: any;
+  let largestPadding: number;
 
-  div.addEventListener('mousedown', (e: any) => {
+  div.addEventListener('mousedown', (e: MouseEvent) => {
     e.stopImmediatePropagation();
-    curCol = e.target.parentElement;
-    nxtCol = curCol.nextElementSibling;
-    curColIndex = curCol.getAttribute('data-colindex');
+    curCol = (e.target as HTMLDivElement).parentElement;
+    curColIndex = parseInt(curCol.getAttribute('data-colindex'), 10);
     pageX = e.pageX;
     curColWidth = curCol.offsetWidth;
-    if (nxtCol) nxtColWidth = nxtCol.offsetWidth;
 
     const colTds = document.getElementsByClassName(`td-${curColIndex}`);
     largestPadding = getLargestPadding(colTds);
   });
 
-  div.addEventListener('dblclick', (e: any) => {
-    curCol = e.target.parentElement;
+  div.addEventListener('dblclick', (e: MouseEvent) => {
+    curCol = (e.target as HTMLElement).parentElement;
     resetColWidth(curCol);
   });
 
-  document.addEventListener('mousemove', (e: any) => {
+  document.addEventListener('mousemove', (e: MouseEvent) => {
     if (curCol) {
       const diffX = e.pageX - pageX;
-
-      if (nxtCol)
-        nxtCol.style.minWidth = nxtColWidth - diffX + largestPadding + 'px';
 
       curCol.style.minWidth = curColWidth + diffX - largestPadding + 'px';
 
@@ -85,11 +78,9 @@ const setListeners = (div: any) => {
     }
   });
 
-  document.addEventListener('mouseup', (e: any) => {
+  document.addEventListener('mouseup', (e: MouseEvent) => {
     curCol = undefined;
-    nxtCol = undefined;
     pageX = undefined;
-    nxtColWidth = undefined;
     curColWidth = undefined;
     largestPadding = undefined;
   });
