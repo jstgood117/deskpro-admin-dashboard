@@ -26,7 +26,7 @@ const AddCalendarForm = ({ ...props }) => {
       business_hours_add_calendar_form_input: requiredValidation
     });
 
-  const initialZendeskValues = {
+  const initialFormValue = {
     business_hours_add_calendar_form_input: props.formikProps.values[props.id]
   };
   const submit = () => {};
@@ -59,7 +59,7 @@ const AddCalendarForm = ({ ...props }) => {
     <Formik
       onSubmit={submit}
       validationSchema={ValidationSchema()}
-      initialValues={initialZendeskValues}
+      initialValues={initialFormValue}
     >
       {(formikProps: any) => (
         <div>
