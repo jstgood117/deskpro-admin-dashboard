@@ -193,7 +193,6 @@ export const TableStyled = styled(dpstyle.div)`
             width: 16px;
           }
           & * {
-            max-width: 400px;
             flex-wrap: nowrap;
             white-space: nowrap;
             overflow: hidden;
@@ -217,6 +216,9 @@ export const TableStyled = styled(dpstyle.div)`
           visibility: visible;
         }
       }
+    }
+    .lastColumn {
+      width:100%;
     }
   }
 `;
