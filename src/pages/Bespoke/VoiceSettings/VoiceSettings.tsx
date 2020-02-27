@@ -32,6 +32,14 @@ const Container = styled.div`
     }
   }
 
+  .form-item .select__control{
+    min-width: 240px;
+  }
+
+  .selectbox .select__control {
+    min-width: 104px;
+  }
+
   .form-row :last-child :after {
     content: none;
   }
