@@ -941,7 +941,12 @@ export type API_TableColumnDef = {
   defaultShow?: Maybe<Scalars['Boolean']>,
 };
 
-export type API_TableColumnField = API_TableColumnId | API_TableColumnBoolYesNo | API_TableColumnBoolOnOff | API_TableColumnText | API_TableColumnTextCommaSep | API_TableColumnTextPhrase | API_TableColumnTextPhraseCommaSep | API_TableColumnNameAvatar | API_TableColumnInteger | API_TableColumnMoney | API_TableColumnTimeAgo | API_TableColumnDateTime | API_TableColumnAgentTeamList | API_TableColumnBrandList | API_TableColumnAgentGroupList | API_TableColumnAgentList | API_TableColumnTicketDepartmentList;
+export type API_TableColumnField = API_TableColumnRoundRobinAgentList| API_TableColumnId | API_TableColumnBoolYesNo | API_TableColumnBoolOnOff | API_TableColumnText | API_TableColumnTextCommaSep | API_TableColumnTextPhrase | API_TableColumnTextPhraseCommaSep | API_TableColumnNameAvatar | API_TableColumnInteger | API_TableColumnMoney | API_TableColumnTimeAgo | API_TableColumnDateTime | API_TableColumnAgentTeamList | API_TableColumnBrandList | API_TableColumnAgentGroupList | API_TableColumnAgentList | API_TableColumnTicketDepartmentList;
+
+export type API_TableColumnRoundRobinAgentList = API_TableColumnArrayValueField & {
+  __typename?: 'TableColumnRoundRobinAgentList',
+  valuesArray: API_TablePayloadValue,
+};
 
 export type API_TableColumnId = API_TableColumnValueField & {
    __typename?: 'TableColumnId',

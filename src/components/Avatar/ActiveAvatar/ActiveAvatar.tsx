@@ -13,7 +13,7 @@ const Container = styled(FlowLayout)`
 
 const Dot = styled.span<{ position: 'top' | 'bottom'; color: string }>`
   position: absolute;
-  right: -5px;
+  right: -1px;
   width: 10px;
   height: 10px;
   border-radius: 50%;

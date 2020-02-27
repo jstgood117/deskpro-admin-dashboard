@@ -205,6 +205,32 @@ describe('generateComponentProps', () => {
 
   });
 
+
+  test('returns correct payload for `TableColumnRoundRobinAgentList` type', () => {
+
+    const valuesArray: API_TablePayloadValue = {
+      __typename: 'TablePayloadValue',
+      dataPath: 'members'
+    };
+
+    const type: API_TableColumnField = {
+      __typename: 'TableColumnRoundRobinAgentList',
+      valuesArray,
+    };
+
+    const cell = {
+      row: { original: { members: [{ agent: { id: 1, name: 'TableColumnRoundRobinAgentList', avatarUrn: 'url:test' } }]} },
+      column: { type }
+    };
+
+    const result = generateComponentProps(cell);
+
+    expect(result.type).toEqual('multiple_ticket');
+    expect(result.props.agents[0].name).toEqual('TableColumnRoundRobinAgentList');
+    expect(result.props.agents[0].avatar).toEqual('url:test');
+
+  });
+
   test('returns correct payload for `TableColumnTextCommaSep` type', () => {
 
     const valuesArray: API_TablePayloadValue = {

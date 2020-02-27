@@ -156,6 +156,31 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
         }
       };
 
+    case 'TableColumnRoundRobinAgentList': {
+      return {
+        type: 'multiple_ticket',
+        props: {
+          viewModel: 'label',
+          agents: getPayloadValue(row, type.valuesArray).map(
+            ({ agent }: any) => {
+              const colors = getColorByChar(agent.name ? agent.name.charAt(0) : '');
+
+              return {
+                name: agent.name || '',
+                active: agent.active || false,
+                avatar: agent.avatarUrn || undefined,
+                avatarProps: {
+                  textBackgroundColor: colors.background,
+                  textColor: colors.textColor
+                }
+              };
+            }
+          ),
+          max: 3
+        }
+      };
+    }
+
     case 'TableColumnTextCommaSep':
       return {
         type: 'string',

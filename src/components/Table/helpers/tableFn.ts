@@ -92,6 +92,7 @@ export const getSortDefault = (
 ): SortType[] => {
   let sortBy: any[] = [];
   switch (path) {
+    case '/tickets/round-robin':
     case '/tickets/forms':
       sortBy = [
         {

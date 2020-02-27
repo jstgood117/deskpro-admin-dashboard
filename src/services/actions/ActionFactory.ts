@@ -6,6 +6,8 @@ export const ActionFactory = (path: string) => {
       return agents;
     case '/tickets/forms':
       return agents;
+    case '/tickets/round-robin':
+      return agents;
     default:
       return null;
   }
