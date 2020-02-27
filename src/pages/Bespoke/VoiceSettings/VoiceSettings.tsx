@@ -1,16 +1,21 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Formik } from 'formik';
 import styled from 'styled-components';
+import { buildYup } from 'schema-to-yup';
+import { gql } from 'apollo-boost';
+import { DocumentNode } from 'graphql';
+import { withApollo } from '@apollo/react-hoc';
+import { WithApolloClient } from 'react-apollo';
 
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
-import { uiSchema, jsonSchema } from './testData';
+import { settingsSave } from '../../../components/SettingsForm/helpers/settingsSave';
 import Button from '../../../components/Button';
-
-interface IProps {
-  path: string;
-  ui?: any;
-  initialValues?: any;
-}
+import {
+  uiSchema,
+  jsonSchema,
+  validationSchema,
+  validationConfig
+} from './testData';
 
 const Container = styled.div`
   .vert-element-field > .form-checkbox {
@@ -67,15 +72,39 @@ const ButtonToolbar = styled.div`
   }
 `;
 
-const VoiceSettingsPage: FC<IProps> = ({ ui, initialValues }) => {
+interface IProps {
+  path: string;
+  ui?: any;
+  initialValues?: any;
+}
+
+export type PropsWithApollo = WithApolloClient<IProps>;
+
+const VoiceSettingsPage: FC<PropsWithApollo> = ({
+  client,
+  ui,
+  initialValues,
+}) => {
+
+  const [yupSchema, setYupSchema] = useState({});
+  // saveMutation from response
+  const saveSchema: DocumentNode = gql`
+   mutation UpdateSettings($payload: Object!) {
+     update_settings(payload: $payload)
+   }
+ `;
+
+  useEffect(() => {
+    setYupSchema(buildYup(validationSchema, validationConfig));
+  }, []);
+
   return (
     <Formik
-      initialValues={initialValues || jsonSchema}
-      validate={values => {
-        console.log(values);
-      }}
-      onSubmit={async values => {
-        console.log(values);
+      initialValues={jsonSchema}
+      validationSchema={yupSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        settingsSave(client, saveSchema, values);
+        setSubmitting(false);
       }}
     >
       {(formikProps: any) => (
@@ -88,6 +117,7 @@ const VoiceSettingsPage: FC<IProps> = ({ ui, initialValues }) => {
             <Button
               className='btn-primary'
               onClick={formikProps.handleSubmit}
+              disabled={formikProps.isSubmitting}
               size='medium'
               styleType='primary'
             >
@@ -108,4 +138,4 @@ const VoiceSettingsPage: FC<IProps> = ({ ui, initialValues }) => {
   );
 };
 
-export default VoiceSettingsPage;
+export default withApollo<PropsWithApollo>(VoiceSettingsPage);

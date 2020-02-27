@@ -184,7 +184,7 @@ const elementsSelector: {
             }}
             placeholder={props.placeholder}
           />
-          {meta.touched && meta.error && (
+          {meta.error && (
             <ErrorMessage className='error'>
               <FormattedMessage id={meta.error} />
             </ErrorMessage>
