@@ -45,4 +45,11 @@ describe('Actions', () => {
     const menu = root.find('div');
     expect(menu.length).toBeGreaterThan(0);
   });
+
+  test('renders a menu element in initial state which: Route tickets/forms', () => {
+
+    const root = wrapper(false, { ...props, path: '/tickets/forms' });
+    const menu = root.find('div');
+    expect(menu.length).toBeGreaterThan(0);
+  });
 });

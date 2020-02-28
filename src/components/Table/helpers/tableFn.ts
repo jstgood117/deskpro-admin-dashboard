@@ -87,11 +87,30 @@ export const onCheckboxChange = (
   }
 };
 
+export const getSortDefault = (
+  path?: string
+): SortType[] => {
+  let sortBy: any[] = [];
+  switch (path) {
+    case '/tickets/round-robin':
+    case '/tickets/forms':
+      sortBy = [
+        {
+          id: 'admin_common.col.name',
+          desc: true,
+        }
+      ];
+  }
+
+  return sortBy;
+};
+
 export const generateTableParams = (
   tableType: TableType,
   columns: any[],
   data: KeyValue[],
-  controlledPageCount: number
+  controlledPageCount: number,
+  path?: string
 ): TableParams => {
   return tableType === 'async'
     ? {
@@ -99,7 +118,8 @@ export const generateTableParams = (
       data,
       initialState: {
         pageIndex: 0,
-        pageSize: 100
+        pageSize: 100,
+        sortBy: getSortDefault(path)
       },
       manualPagination: true,
       pageCount: controlledPageCount
@@ -110,7 +130,8 @@ export const generateTableParams = (
       orderByFn,
       initialState: {
         pageIndex: 0,
-        pageSize: 100
+        pageSize: 100,
+        sortBy: getSortDefault(path)
       }
     };
 };

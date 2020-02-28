@@ -85,6 +85,7 @@ export interface IMenuProps {
   size?: SizeTypes;
   subMenuDirection?: string;
   children?: ReactNode;
+  isDisabled?: boolean;
 }
 
 export interface IMenuItemProps {

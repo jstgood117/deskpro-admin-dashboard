@@ -13,7 +13,7 @@ const Container = styled(FlowLayout)`
 
 const Dot = styled.span<{ position: 'top' | 'bottom'; color: string }>`
   position: absolute;
-  right: -5px;
+  right: -1px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -53,7 +53,7 @@ const ActiveAvatar: React.FC<IProps> = ({
     <Tooltip content={name} styleType='lightBox'>
       <Container style={containerStyle} className={containerClassName}>
         <Avatar
-          type={avatar ? 'image' : 'text'}
+          type={avatar ? (avatar.includes('urn') ? 'svg' : 'image') : 'text'}
           content={avatar ? avatar : name}
           {...avatarProps}
         />

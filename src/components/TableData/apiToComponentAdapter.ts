@@ -131,8 +131,11 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
       return { type: 'multiple_agents', props: agentsProps };
 
     case 'TableColumnTicketDepartmentList':
+      const isTicketForm = get(row, '__typename') === 'TicketForm';
+      const currentType = isTicketForm ? 'multiple_ticket' : 'multiple_agents';
+
       return {
-        type: 'multiple_agents',
+        type: currentType,
         props: {
           viewModel: 'label',
           agents: getPayloadValue(row, type.valuesArray).map(
@@ -141,7 +144,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
 
               return {
                 name: department.title || '',
-                avatar: department.avatar,
+                avatar: department.avatarUrn || undefined,
                 avatarProps: {
                   textBackgroundColor: colors.background,
                   textColor: colors.textColor
@@ -152,6 +155,31 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
           max: 3
         }
       };
+
+    case 'TableColumnRoundRobinAgentList': {
+      return {
+        type: 'multiple_agents',
+        props: {
+          viewModel: 'label',
+          agents: getPayloadValue(row, type.valuesArray).map(
+            ({ agent }: any) => {
+              const colors = getColorByChar(agent.name ? agent.name.charAt(0) : '');
+
+              return {
+                name: agent.name || '',
+                active: agent.active || false,
+                avatar: agent.avatarUrn || undefined,
+                avatarProps: {
+                  textBackgroundColor: colors.background,
+                  textColor: colors.textColor
+                }
+              };
+            }
+          ),
+          max: 3
+        }
+      };
+    }
 
     case 'TableColumnTextCommaSep':
       return {

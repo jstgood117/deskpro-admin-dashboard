@@ -187,6 +187,17 @@ export const TableStyled = styled(dpstyle.div)`
           text-align: left;
           color: ${props => props.theme.staticColour};
           vertical-align: middle;
+          .multiple-ticket {
+            max-width: 100px;
+            display: flex;
+            margin-right: 10px;
+            .image {
+              min-width: 25px;
+              img {
+                margin-right: 0 !important;
+              }
+            }
+          }
           &.checkBox {
             padding-right: 6px;
             padding-left: 10px;

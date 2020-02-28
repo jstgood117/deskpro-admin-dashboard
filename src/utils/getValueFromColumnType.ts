@@ -18,6 +18,7 @@ export const getValueFromColumnType = (
       return values[columnProps.value.dataPath];
     case 'TableColumnTextCommaSep':
       return values[columnProps.valuesArray.dataPath].join(', ');
+    case 'TableColumnRoundRobinAgentList':
     case 'TableColumnTicketDepartmentList':
     case 'TableColumnAgentGroupList':
       _values = values[columnProps.valuesArray.dataPath];

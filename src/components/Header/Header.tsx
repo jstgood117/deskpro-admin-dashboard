@@ -6,7 +6,7 @@ import { dpstyle, HeadingText, TextLinkLabel } from '../Styled';
 import { DeskproAdminTheme } from '../Theme';
 import Icon from '../Icon';
 
-const HeaderStyled = styled(dpstyle.div)<IHeader>`
+const HeaderStyled = styled(dpstyle.div) <IHeader>`
   background-color: ${props => props.theme.pageHeader};
   padding: 39px 30px 60px 30px;
   display: flex;
@@ -35,7 +35,7 @@ const ViewModeContainer = styled(dpstyle.div)`
   background: ${props => props.theme.white};
 `;
 
-export const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
+export const ViewModeButton = styled(dpstyle.button) <{ active: boolean }>`
   height: 100%;
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@ export const ViewModeButton = styled(dpstyle.button)<{ active: boolean }>`
   width: 44px;
   path {
     fill: ${props =>
-      props.active ? props.theme.activeColour : props.theme.static2Colour};
+    props.active ? props.theme.activeColour : props.theme.static2Colour};
   }
   background-color: ${props =>
     (props.active && props.theme.hoverColour) || props.theme.white};
@@ -157,51 +157,51 @@ const Header: FC<IProps> = ({
               <FormattedMessage id={description} />
             </HeaderDescription>
           )}
-          {links && links.length && (
-            <HeaderOptions>
-              <div style={{ flex: 1 }}>
-                {links.map((link, key) => (
+          <HeaderOptions>
+            <div style={{ flex: 1 }}>
+              {links && links.length && (
+                links.map((link, key) => (
                   <Link href={link.path} key={key}>
                     {link.icon && <Icon name={link.icon} />}
                     <TextLinkLabel messageId={link.title} />
                   </Link>
-                ))}
-              </div>
-              <ActionContainer>
-                {showViewModeSwitcher && onChangeView && (
-                  <ViewModeContainer>
-                    <ViewModeButton
-                      onClick={() => changeView('table')}
-                      active={state === 'table'}
-                    >
-                      <Icon name='viewMode.table' />
-                    </ViewModeButton>
-                    <ViewModeButton
-                      onClick={() => changeView('list')}
-                      active={state === 'list'}
-                    >
-                      <Icon name='viewMode.list' />
-                    </ViewModeButton>
-                    <ViewModeButton
-                      onClick={() => changeView('card')}
-                      active={state === 'card'}
-                    >
-                      <Icon name='viewMode.map' />
-                    </ViewModeButton>
-                  </ViewModeContainer>
-                )}
+                ))
+              )}
+            </div>
+            <ActionContainer>
+              {showViewModeSwitcher && onChangeView && (
+                <ViewModeContainer>
+                  <ViewModeButton
+                    onClick={() => changeView('table')}
+                    active={state === 'table'}
+                  >
+                    <Icon name='viewMode.table' />
+                  </ViewModeButton>
+                  <ViewModeButton
+                    onClick={() => changeView('list')}
+                    active={state === 'list'}
+                  >
+                    <Icon name='viewMode.list' />
+                  </ViewModeButton>
+                  <ViewModeButton
+                    onClick={() => changeView('card')}
+                    active={state === 'card'}
+                  >
+                    <Icon name='viewMode.map' />
+                  </ViewModeButton>
+                </ViewModeContainer>
+              )}
 
-                {showNewButton && onNewClick && (
-                  <NewButton onClick={onNewClick}>
-                    <Icon name='plus' />
-                    <span>
-                      <FormattedMessage id='admin.page.new' />
-                    </span>
-                  </NewButton>
-                )}
-              </ActionContainer>
-            </HeaderOptions>
-          )}
+              {showNewButton && onNewClick && (
+                <NewButton onClick={onNewClick}>
+                  <Icon name='plus' />
+                  <span>
+                    <FormattedMessage id='admin.page.new' />
+                  </span>
+                </NewButton>
+              )}
+            </ActionContainer>
+          </HeaderOptions>
         </div>
 
         {showHelpButton && (

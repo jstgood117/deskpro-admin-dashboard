@@ -28,7 +28,7 @@ describe('generateComponentProps', () => {
     };
 
     const result = generateComponentProps(cell);
-    expect(result).toEqual({ type: 'id', props: { id: [ '123' ] } });
+    expect(result).toEqual({ type: 'id', props: { id: ['123'] } });
   });
 
   test('returns correct payload for `TableColumnNameAvatar` type', () => {
@@ -120,7 +120,7 @@ describe('generateComponentProps', () => {
     };
 
     const cell = {
-      row: { original: { team: [{id:1, name:'Team 1'}] } },
+      row: { original: { team: [{ id: 1, name: 'Team 1' }] } },
       column: { type }
     };
 
@@ -144,7 +144,7 @@ describe('generateComponentProps', () => {
     };
 
     const cell = {
-      row: { original: { team: [{id:1, title:'Agent 1'}] } },
+      row: { original: { team: [{ id: 1, title: 'Agent 1' }] } },
       column: { type }
     };
 
@@ -168,7 +168,7 @@ describe('generateComponentProps', () => {
     };
 
     const cell = {
-      row: { original: { departments: [{id:1, title:'Department 1', avatar: 'url:test'}] } },
+      row: { original: { departments: [{ id: 1, title: 'Department 1', avatarUrn: 'url:test' }] } },
       column: { type }
     };
 
@@ -176,6 +176,57 @@ describe('generateComponentProps', () => {
 
     expect(result.type).toEqual('multiple_agents');
     expect(result.props.agents[0].name).toEqual('Department 1');
+    expect(result.props.agents[0].avatar).toEqual('url:test');
+
+  });
+
+  test('returns correct payload for `TableColumnTicketDepartmentList` type, TicketForm', () => {
+
+    const valuesArray: API_TablePayloadValue = {
+      __typename: 'TablePayloadValue',
+      dataPath: 'departments'
+    };
+
+    const type: API_TableColumnField = {
+      __typename: 'TableColumnTicketDepartmentList',
+      valuesArray,
+    };
+
+    const cell = {
+      row: { original: { departments: [{ id: 1, title: 'Department ticket', avatarUrn: 'url:test' }], __typename: 'TicketForm' } },
+      column: { type }
+    };
+
+    const result = generateComponentProps(cell);
+
+    expect(result.type).toEqual('multiple_ticket');
+    expect(result.props.agents[0].name).toEqual('Department ticket');
+    expect(result.props.agents[0].avatar).toEqual('url:test');
+
+  });
+
+
+  test('returns correct payload for `TableColumnRoundRobinAgentList` type', () => {
+
+    const valuesArray: API_TablePayloadValue = {
+      __typename: 'TablePayloadValue',
+      dataPath: 'members'
+    };
+
+    const type: API_TableColumnField = {
+      __typename: 'TableColumnRoundRobinAgentList',
+      valuesArray,
+    };
+
+    const cell = {
+      row: { original: { members: [{ agent: { id: 1, name: 'TableColumnRoundRobinAgentList', avatarUrn: 'url:test' } }]} },
+      column: { type }
+    };
+
+    const result = generateComponentProps(cell);
+
+    expect(result.type).toEqual('multiple_agents');
+    expect(result.props.agents[0].name).toEqual('TableColumnRoundRobinAgentList');
     expect(result.props.agents[0].avatar).toEqual('url:test');
 
   });
@@ -200,7 +251,7 @@ describe('generateComponentProps', () => {
     const result = generateComponentProps(cell);
     expect(result).toEqual({
       type: 'string',
-      props: { values: [ 'String 1', 'String 2', 'String 3' ], max: 1 }
+      props: { values: ['String 1', 'String 2', 'String 3'], max: 1 }
     });
   });
 
@@ -230,7 +281,7 @@ describe('generateComponentProps', () => {
     const result = generateComponentProps(cell);
     expect(result).toEqual({
       type: 'phrase',
-      props: { values: [ '123' ], max: 1 }
+      props: { values: ['123'], max: 1 }
     });
   });
 
@@ -260,7 +311,7 @@ describe('generateComponentProps', () => {
     const result = generateComponentProps(cell);
     expect(result).toEqual({
       type: 'string',
-      props: { values: [ '123' ] }
+      props: { values: ['123'] }
     });
   });
 
@@ -305,7 +356,7 @@ describe('generateComponentProps', () => {
     const result = generateComponentProps(cell);
     expect(result).toEqual({
       type: 'count',
-      props: { values: [ 321 ] }
+      props: { values: [321] }
     });
   });
 
@@ -329,7 +380,7 @@ describe('generateComponentProps', () => {
     const result = generateComponentProps(cell);
     expect(result).toEqual({
       type: 'id',
-      props: { id: [ 321 ] }
+      props: { id: [321] }
     });
   });
 

@@ -20,12 +20,12 @@ describe('Header styled components', () => {
   describe('ViewModeButton', () => {
     const theme = { white: 'testWhite', hoverColour: 'testHover' };
     it('should use `hoverColour` background color while active', () => {
-      const wrapper = mount(<ViewModeButton theme={theme} active={true} />);
+      const wrapper = mount(<ViewModeButton theme={theme} active={true} onClick={() => {}} />);
       expect(wrapper).toHaveStyleRule('background-color', 'testHover');
     });
 
     it('should use `white` background color while inactive', () => {
-      const wrapper = mount(<ViewModeButton theme={theme} active={false} />);
+      const wrapper = mount(<ViewModeButton theme={theme} active={false} onClick={() => {}} />);
       expect(wrapper).toHaveStyleRule('background-color', 'testWhite');
     });
   });
