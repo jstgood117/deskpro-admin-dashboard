@@ -1,15 +1,34 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import styled from 'styled-components';
+import { buildYup } from 'schema-to-yup';
+import { DocumentNode } from 'graphql';
+import { WithApolloClient } from 'react-apollo';
+import { withApollo } from '@apollo/react-hoc';
+import { gql } from 'apollo-boost';
 
 import { SettingsFormFactory } from '../../../components/SettingsForm/SettingsFormFactory';
-import { uiSchema, jsonSchema } from './testData';
+import {
+  uiSchema,
+  jsonSchema,
+  vaildationSchema,
+  validationConfig
+} from './testData';
+import { settingsSave } from '../../../components/SettingsForm/helpers/settingsSave';
 
 interface IProps {
   path: string;
-  ui?: any;
   initialValues?: any;
+  ui?: any;
+  initYupSchema?: any;
+  saveSchema?: DocumentNode;
 }
+
+const testQuery: DocumentNode = gql`
+  mutation UpdateSettings($payload: Object!) {
+    update_settings(payload: $payload)
+  }
+`;
 
 const Container = styled.div`
   min-height: 100vh;
@@ -83,15 +102,27 @@ const Container = styled.div`
   }
 `;
 
-const ReportFile: FC<IProps> = ({ ui, initialValues }) => {
+export type PropsWithApollo = WithApolloClient<IProps>;
+
+const ReportFile: React.FC<PropsWithApollo> = ({
+  client,
+  initialValues = jsonSchema,
+  ui = uiSchema,
+  initYupSchema = vaildationSchema,
+  saveSchema = testQuery
+}) => {
+  const [yupSchema, setYupSchema] = useState({});
+
+  useEffect(() => {
+    setYupSchema(buildYup(vaildationSchema, validationConfig));
+  }, []);
   return (
     <Formik
       initialValues={initialValues || jsonSchema}
-      validate={values => {
-        console.log(values);
-      }}
-      onSubmit={async values => {
-        console.log(values);
+      validationSchema={yupSchema || initYupSchema}
+      onSubmit={(values, { setSubmitting }) => {
+        settingsSave(client, saveSchema, values);
+        setSubmitting(false);
       }}
     >
       {(formikProps: any) => (
@@ -105,4 +136,4 @@ const ReportFile: FC<IProps> = ({ ui, initialValues }) => {
   );
 };
 
-export default ReportFile;
+export default withApollo<PropsWithApollo>(ReportFile);

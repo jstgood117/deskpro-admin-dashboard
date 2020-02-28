@@ -49,7 +49,8 @@ export const uiSchema: {
                           elements: [
                             {
                               type: 'label',
-                              label: 'Include results from a File integrity check as well'
+                              label:
+                                'Include results from a File integrity check as well'
                             }
                           ]
                         }
@@ -123,4 +124,12 @@ export const jsonSchema: any = {
   agent_report_enabled: true,
   agent_report_progress: 90,
   agent_report_file_check: ['yes']
+};
+export const vaildationSchema = {
+  type: 'object',
+  properties: {}
+};
+
+export const validationConfig = {
+  errMessages: {}
 };
