@@ -225,7 +225,7 @@ describe('generateComponentProps', () => {
 
     const result = generateComponentProps(cell);
 
-    expect(result.type).toEqual('multiple_ticket');
+    expect(result.type).toEqual('multiple_agents');
     expect(result.props.agents[0].name).toEqual('TableColumnRoundRobinAgentList');
     expect(result.props.agents[0].avatar).toEqual('url:test');
 

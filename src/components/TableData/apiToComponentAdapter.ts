@@ -158,7 +158,7 @@ export const generateComponentProps = (cell: any): ITableDataProps => {
 
     case 'TableColumnRoundRobinAgentList': {
       return {
-        type: 'multiple_ticket',
+        type: 'multiple_agents',
         props: {
           viewModel: 'label',
           agents: getPayloadValue(row, type.valuesArray).map(

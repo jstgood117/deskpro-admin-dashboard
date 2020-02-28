@@ -76,7 +76,7 @@ const TableData: React.FC<ITableDataProps> = ({ type, props }) => {
               key={index}
               active={item.active}
               name={item.name}
-              avatar={item.avatarUrn}
+              avatar={item.avatar}
               activeColor={props.activeColor}
               position={props.position}
               avatarProps={item.avatarProps || props.avatarProps}
