@@ -305,7 +305,8 @@ export const uiSchema: {
                   field: {
                     type: 'addCalendarButton',
                     icon: 'calendar',
-                    text: 'Add calender'
+                    text: 'Add calender',
+                    id: 'business_hours_add_calendar_form'
                   }
                 }
               ]
@@ -375,5 +376,19 @@ export const jsonSchema: any = {
       value: 'CEST'
     }
   ],
-  business_hours_sync_calendars_data: data
+  business_hours_sync_calendars_data: data,
+  business_hours_add_calendar_form: 'default value'
+};
+
+export const vaildationSchema = {
+  type: 'object',
+  properties: {}
+};
+
+export const validationConfig = {
+  errMessages: {
+    business_hours_add_calendar_form: {
+      required: 'validation.required'
+    }
+  }
 };

@@ -2,8 +2,8 @@ import React, { ReactNode } from 'react';
 import { mount, shallow } from '../../test/enzyme';
 
 import SettingsData, { IProps } from './SettingsData';
-import { IProps as ICalendarProps } from './AddCalendarForm';
 import AddCalendarForm from './AddCalendarForm';
+import { IProps as ICalendarProps } from './AddCalendarForm';
 
 describe('SettingsData', () => {
   let props: any;
@@ -138,7 +138,14 @@ describe('SettingsData-AddCalendarForm', () => {
   beforeEach(() => {
     props = {
       icon: 'calendar',
-      text: 'Add Calendar'
+      text: 'Add Calendar',
+      type: 'addCalendarButton',
+      id: 'business_hours_add_calendar_form',
+      formikProps: {
+        values: {
+          business_hours_add_calendar_form: ''
+        }
+      }
     };
   });
 

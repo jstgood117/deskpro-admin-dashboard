@@ -13,6 +13,7 @@ export const ErrorMessage = styled.div`
   padding-left: 4px;
   font-size: 14px;
   color: red;
+  font-family: Rubik;
 `;
 export const ReportPanel = styled.div`
   display: flex;
