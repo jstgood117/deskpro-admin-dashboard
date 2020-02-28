@@ -40,12 +40,12 @@ export const uiSchema: {
                   type: 'field',
                   field: {
                     type: 'fileUpload',
-                    id: 'general_setting_upload_file',
-                  },
+                    id: 'general_setting_upload_file'
+                  }
                 }
-              ],
-            },
-          ],
+              ]
+            }
+          ]
         },
         {
           type: 'page_section',
@@ -85,13 +85,15 @@ export const uiSchema: {
                         {
                           type: 'header-medium-card',
                           title: 'Temporarily Disable Helpdesk',
-                          description: 'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.',
+                          description:
+                            'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.'
                         },
                         {
                           type: 'field',
                           className: 'notification-block',
                           title: 'Notification Message',
-                          description: 'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow',
+                          description:
+                            'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow'
                         },
                         {
                           type: 'field',
@@ -120,13 +122,15 @@ export const uiSchema: {
                         {
                           type: 'header-medium-card',
                           title: 'Temporarily Disable Helpdesk',
-                          description: 'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.',
+                          description:
+                            'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.'
                         },
                         {
                           type: 'field',
                           className: 'notification-block',
                           title: 'Notification Message',
-                          description: 'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow',
+                          description:
+                            'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow'
                         },
                         {
                           type: 'field',
@@ -155,13 +159,15 @@ export const uiSchema: {
                         {
                           type: 'header-medium-card',
                           title: 'Temporarily Disable Helpdesk',
-                          description: 'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.',
+                          description:
+                            'Disable the Help Center, website embeds and stop processing emails. Both the Agent the Admin interfaces will remain accessible.'
                         },
                         {
                           type: 'field',
                           className: 'notification-block',
                           title: 'Notification Message',
-                          description: 'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow',
+                          description:
+                            'This message will be displayed when the helpdesk is offline or when you are installing updates. HTML is allow'
                         },
                         {
                           type: 'field',
@@ -182,9 +188,9 @@ export const uiSchema: {
                           }
                         }
                       ]
-                    },
+                    }
                   ]
-                },
+                }
               ],
               info: [
                 {
@@ -192,13 +198,12 @@ export const uiSchema: {
                   title: 'Disabling the Helpdesk',
                   url: 'http://www.test.com',
                   icon: 'ic-save'
-                },
-              ],
+                }
+              ]
             },
             {
               type: 'vertical_group',
-              title:
-                'Automatically install new languages',
+              title: 'Automatically install new languages',
               className: 'checkbox-middle',
               description:
                 'New languages translations are sometimes added with new Deskpro updates. When this option is enabled, new languages will be automatically installed and enabled on your helpdesk.',
@@ -206,10 +211,10 @@ export const uiSchema: {
               field: {
                 type: 'checkbox',
                 id: 'helpdesk_settings_checkbox',
-                value: 'admin1',
+                value: 'admin1'
               },
-              elements: [],
-            },
+              elements: []
+            }
           ]
         },
         {
@@ -238,23 +243,23 @@ export const uiSchema: {
                             options: [
                               {
                                 value: 'UTC',
-                                label: 'UTC',
+                                label: 'UTC'
                               },
                               {
                                 value: 'UTC1',
-                                label: 'UTC1',
+                                label: 'UTC1'
                               },
                               {
                                 value: 'UTC2',
-                                label: 'UTC2',
-                              },
+                                label: 'UTC2'
+                              }
                             ],
-                            placeholder: '',
-                          },
-                        },
+                            placeholder: ''
+                          }
+                        }
                       ]
                     }
-                  ],
+                  ]
                 },
                 {
                   type: 'horizontal_group',
@@ -273,7 +278,7 @@ export const uiSchema: {
                     {
                       type: 'field',
                       description: 'Tue, 12th November 2019 5:00 pm'
-                    },
+                    }
                   ]
                 },
                 {
@@ -293,7 +298,7 @@ export const uiSchema: {
                     {
                       type: 'field',
                       description: 'Tue, 12th November 2019'
-                    },
+                    }
                   ]
                 },
                 {
@@ -313,7 +318,7 @@ export const uiSchema: {
                     {
                       type: 'field',
                       description: 'Nov 12 2019'
-                    },
+                    }
                   ]
                 },
                 {
@@ -333,7 +338,7 @@ export const uiSchema: {
                     {
                       type: 'field',
                       description: 'Nov 12'
-                    },
+                    }
                   ]
                 },
                 {
@@ -353,9 +358,9 @@ export const uiSchema: {
                     {
                       type: 'field',
                       description: '5:00 pm'
-                    },
+                    }
                   ]
-                },
+                }
               ],
               info: [
                 {
@@ -363,14 +368,15 @@ export const uiSchema: {
                   title: 'Date and time format',
                   url: 'http://www.test.com',
                   icon: 'ic-save'
-                },
+                }
               ]
             },
             {
               type: 'vertical_group',
               title: 'Relative Time',
               showOn: 'general_settings_date_and_time_enabled',
-              description: 'Enable to display times and dates in Deskpro, as how long ago an event occurred. Instead of showing a Timestamp in absolute format.',
+              description:
+                'Enable to display times and dates in Deskpro, as how long ago an event occurred. Instead of showing a Timestamp in absolute format.',
               field: {
                 type: 'toggle',
                 id: 'general_settings_date_and_time_enabled'
@@ -386,7 +392,8 @@ export const uiSchema: {
             {
               type: 'vertical_group',
               title: 'Maximum upload file size',
-              description: 'The maximum file size supported by your server is 32.00 MB.',
+              description:
+                'The maximum file size supported by your server is 32.00 MB.',
               elements: [],
               className: 'info-custom file-upload',
               info: [
@@ -395,7 +402,7 @@ export const uiSchema: {
                   title: 'File Uploads',
                   url: 'http://www.test.com',
                   icon: 'link'
-                },
+                }
               ]
             },
             {
@@ -407,7 +414,7 @@ export const uiSchema: {
                   elements: [
                     {
                       type: 'field',
-                      title: 'An user can upload',
+                      title: 'An user can upload'
                     },
                     {
                       type: 'field',
@@ -420,10 +427,10 @@ export const uiSchema: {
                         options: [
                           { value: 'MB', label: 'MB' },
                           { value: 'GB', label: 'GB' },
-                          { value: 'TB', label: 'TB' },
-                        ],
-                      },
-                    },
+                          { value: 'TB', label: 'TB' }
+                        ]
+                      }
+                    }
                   ]
                 },
                 {
@@ -431,7 +438,7 @@ export const uiSchema: {
                   elements: [
                     {
                       type: 'field',
-                      title: 'An agent can upload',
+                      title: 'An agent can upload'
                     },
                     {
                       type: 'field',
@@ -443,12 +450,12 @@ export const uiSchema: {
                         options: [
                           { value: 'MB', label: 'MB' },
                           { value: 'GB', label: 'GB' },
-                          { value: 'TB', label: 'TB' },
-                        ],
-                      },
-                    },
+                          { value: 'TB', label: 'TB' }
+                        ]
+                      }
+                    }
                   ]
-                },
+                }
               ]
             },
             {
@@ -464,20 +471,20 @@ export const uiSchema: {
                     options: [
                       {
                         value: 'Allow all files',
-                        label: 'Allow all files',
+                        label: 'Allow all files'
                       },
                       {
                         value: 'Allow all files 1',
-                        label: 'Allow all files 1',
+                        label: 'Allow all files 1'
                       },
                       {
                         value: 'Allow all files 2',
-                        label: 'Allow all files 2',
-                      },
+                        label: 'Allow all files 2'
+                      }
                     ],
-                    placeholder: '',
-                  },
-                },
+                    placeholder: ''
+                  }
+                }
               ]
             },
             {
@@ -493,20 +500,20 @@ export const uiSchema: {
                     options: [
                       {
                         value: 'Only allow specific file extensions',
-                        label: 'Only allow specific file extensions',
+                        label: 'Only allow specific file extensions'
                       },
                       {
                         value: 'Only allow specific file extensions 1',
-                        label: 'Only allow specific file extensions 1',
+                        label: 'Only allow specific file extensions 1'
                       },
                       {
                         value: 'Only allow specific file extensions 2',
-                        label: 'Only allow specific file extensions 2',
-                      },
+                        label: 'Only allow specific file extensions 2'
+                      }
                     ],
-                    placeholder: '',
-                  },
-                },
+                    placeholder: ''
+                  }
+                }
               ]
             },
             {
@@ -518,11 +525,11 @@ export const uiSchema: {
                     type: 'stringlist',
                     id: 'general_settings_file_uploads_reopen_permissions',
                     title: 'Permitted Extensions',
-                    addTitle: 'Add Extensions',
-                  },
-                },
+                    addTitle: 'Add Extensions'
+                  }
+                }
               ]
-            },
+            }
           ]
         },
         {
@@ -535,7 +542,7 @@ export const uiSchema: {
               showOn: 'general_settings_rate_limiting_enabel',
               field: {
                 type: 'toggle',
-                id: 'general_settings_rate_limiting_enabel',
+                id: 'general_settings_rate_limiting_enabel'
               },
               elements: [],
               className: 'info-custom rate-limit',
@@ -545,14 +552,13 @@ export const uiSchema: {
                   title: 'Rate Limiting',
                   url: 'http://www.test.com',
                   icon: 'ic-save'
-                },
+                }
               ]
             },
             {
               type: 'vertical_group',
               title: 'Whitelist Ip addresses',
-              description:
-                `Enter IP's you wish to be exempted from the follwing rate limiting restrictions. When entering IP addresses please use the follwing format: 192.168.1.1, 192.168.*, 192.168.1.0/24, 2000:ff90:0/32`,
+              description: `Enter IP's you wish to be exempted from the follwing rate limiting restrictions. When entering IP addresses please use the follwing format: 192.168.1.1, 192.168.*, 192.168.1.0/24, 2000:ff90:0/32`,
               elements: [
                 {
                   type: 'field',
@@ -560,10 +566,10 @@ export const uiSchema: {
                     type: 'stringlist',
                     id: 'general_settings_rate_limiting_reopen_permissions',
                     title: 'Exempted IPs',
-                    addTitle: 'Add IP',
-                  },
-                },
-              ],
+                    addTitle: 'Add IP'
+                  }
+                }
+              ]
             },
             {
               type: 'vertical_group',
@@ -605,7 +611,7 @@ export const uiSchema: {
                           type: 'label',
                           label: 'show a CAPCHA to the user.',
                           isBold: true
-                        },
+                        }
                       ],
                       field: {
                         type: 'checkbox',
@@ -614,7 +620,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -669,7 +675,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -724,8 +730,8 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
-                    },
+                      maxWidth: 1200
+                    }
                   ]
                 }
               ]
@@ -792,7 +798,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -847,8 +853,8 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
-                    },
+                      maxWidth: 1200
+                    }
                   ]
                 }
               ]
@@ -894,7 +900,7 @@ export const uiSchema: {
                           type: 'label',
                           label: 'show a CAPCHA to the user.',
                           isBold: true
-                        },
+                        }
                       ],
                       field: {
                         type: 'checkbox',
@@ -903,7 +909,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -939,7 +945,7 @@ export const uiSchema: {
                           type: 'label',
                           label: 'perform an action.',
                           isBold: true
-                        },
+                        }
                       ],
                       field: {
                         type: 'checkbox',
@@ -948,7 +954,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -982,7 +988,7 @@ export const uiSchema: {
                           type: 'label',
                           label: 'show a CAPCHA to the user.',
                           isBold: true
-                        },
+                        }
                       ],
                       field: {
                         type: 'checkbox',
@@ -991,7 +997,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -1046,7 +1052,7 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
+                      maxWidth: 1200
                     },
                     {
                       type: 'inline_edit_group',
@@ -1080,7 +1086,7 @@ export const uiSchema: {
                           type: 'label',
                           label: 'show a CAPCHA to the user.',
                           isBold: true
-                        },
+                        }
                       ],
                       field: {
                         type: 'checkbox',
@@ -1089,8 +1095,8 @@ export const uiSchema: {
                       },
                       showRevert: true,
                       hiddenExtension: true,
-                      maxWidth: 1200,
-                    },
+                      maxWidth: 1200
+                    }
                   ]
                 }
               ]
@@ -1132,7 +1138,7 @@ export const uiSchema: {
                       type: 'label',
                       label: 'show a CAPCHA to the user.',
                       isBold: true
-                    },
+                    }
                   ],
                   field: {
                     type: 'checkbox',
@@ -1141,7 +1147,7 @@ export const uiSchema: {
                   },
                   showRevert: true,
                   hiddenExtension: true,
-                  maxWidth: 1200,
+                  maxWidth: 1200
                 },
                 {
                   type: 'inline_edit_group',
@@ -1175,7 +1181,7 @@ export const uiSchema: {
                       type: 'label',
                       label: 'show a CAPCHA to the user.',
                       isBold: true
-                    },
+                    }
                   ],
                   field: {
                     type: 'checkbox',
@@ -1184,7 +1190,7 @@ export const uiSchema: {
                   },
                   showRevert: true,
                   hiddenExtension: true,
-                  maxWidth: 1200,
+                  maxWidth: 1200
                 },
                 {
                   type: 'inline_edit_group',
@@ -1218,7 +1224,7 @@ export const uiSchema: {
                       type: 'label',
                       label: 'show a CAPCHA to the user.',
                       isBold: true
-                    },
+                    }
                   ],
                   field: {
                     type: 'checkbox',
@@ -1227,7 +1233,7 @@ export const uiSchema: {
                   },
                   showRevert: true,
                   hiddenExtension: true,
-                  maxWidth: 1200,
+                  maxWidth: 1200
                 },
                 {
                   type: 'inline_edit_group',
@@ -1282,7 +1288,7 @@ export const uiSchema: {
                   },
                   showRevert: true,
                   hiddenExtension: true,
-                  maxWidth: 1200,
+                  maxWidth: 1200
                 },
                 {
                   type: 'inline_edit_group',
@@ -1316,7 +1322,7 @@ export const uiSchema: {
                       type: 'label',
                       label: 'show a CAPCHA to the user.',
                       isBold: true
-                    },
+                    }
                   ],
                   field: {
                     type: 'checkbox',
@@ -1325,30 +1331,19 @@ export const uiSchema: {
                   },
                   hiddenExtension: true,
                   showRevert: true,
-                  maxWidth: 1200,
-                },
+                  maxWidth: 1200
+                }
               ]
             }
           ]
-        },
+        }
       ]
     }
   ]
 };
 
 export const jsonSchema = {
-  agent_settings_security_enabled: true,
-  agent_settings_security_idle_timeout: '100',
-  agent_settings_security_idle_timeout_action: '1000',
-  agent_settings_security_whitelist: '',
-  admin_settings_security_enabled: true,
-  admin_settings_security_idle_timeout_enabled: true,
-  admin_settings_security_idle_timeout: '200',
-  admin_settings_security_whitelist: '',
-  agent_notifications_enabled: true,
   display_custom_logo_enabled: true,
-  agent_keyboard_shortcuts_enabled: true,
-  forwards_out_of_helpdesk_enabled: true,
   helpdesk_settings_checkbox: ['admin'],
   general_settings_rate_limiting_checkbox_1: ['yes'],
   general_settings_rate_limiting_checkbox_2: ['yes'],
@@ -1401,21 +1396,7 @@ export const jsonSchema = {
   general_settings_guest_upload_value_3: 15,
   general_settings_guest_share_value_1: 3,
   general_settings_guest_share_value_2: 15,
-  // general_settings_rate_limiting_value_3: '3',
-  // general_settings_rate_limiting_value_5: '5',
-  // general_settings_rate_limiting_value_6: '6',
-  // general_settings_rate_limiting_value_15: '15',
-  // general_settings_rate_limiting_value_60: '60',
-  // general_settings_rate_limiting_value_x: 'x',
-  // general_settings_rate_limiting_value_y: 'y',
-  // general_settings_rate_limiting_upload_value_5: '5',
-  // general_settings_rate_limiting_upload_value_15: '15',
-  // general_settings_rate_limiting_value_capcha: 'show a CAPCHA to the user.',
-  // general_settings_rate_limiting_value_action: 'perform an action.',
-  // general_settings_rate_limiting_value_disabel: 'disabel the form',
-  // general_settings_rate_limiting_guest_checkbox_1: ['yes'],
   custom_policy_minimum_password_value: 8,
-  custom_policy_minimum_password_value_default: 8,
   agent_auth_sso_remember_device_field: 6,
   general_settings_date_and_time_enabled: true,
   general_settings_rate_limiting_enabel: true,
@@ -1430,187 +1411,138 @@ export const jsonSchema = {
   file_upload_unit_option_1: 'MB',
   file_upload_unit_value_2: '25.00',
   file_upload_unit_option_2: 'MB',
-  general_settings_file_uploads_select_1: { value: 'Allow all files', label: 'Allow all files' },
-  general_settings_file_uploads_select_2: { value: 'Only allow specific file extensions', label: 'Only allow specific file extensions' },
-  brand1_helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  brand1_helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  brand2_helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  brand2_helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  brand3_helpdes_setting_agent_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  brand3_helpdes_setting_user_message: 'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
-  agent_email_subscriptions: [
-    { name: 'Arthur Curry' },
-    { name: 'Bruce Wayne' },
-    { name: 'Clark Kent' },
-    { name: 'Diana Prince' },
-    { name: 'Harleen Quinzel' },
-    { name: 'Ignatius Ogilvy' },
-    { name: 'Jason Todd' },
-    { name: 'Pamela Lillian ' },
-    { name: 'Selina Kyle' }
-  ],
-  agent_keyboard_shortcuts: [
-    { name: 'Arthur Curry' },
-    { name: 'Bruce Wayne' },
-    { name: 'Clark Kent' },
-    { name: 'Diana Prince' },
-    { name: 'Harleen Quinzel' }
-  ],
+  general_settings_file_uploads_select_1: {
+    value: 'Allow all files',
+    label: 'Allow all files'
+  },
+  general_settings_file_uploads_select_2: {
+    value: 'Only allow specific file extensions',
+    label: 'Only allow specific file extensions'
+  },
+  brand1_helpdes_setting_agent_message:
+    'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand1_helpdes_setting_user_message:
+    'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand2_helpdes_setting_agent_message:
+    'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand2_helpdes_setting_user_message:
+    'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand3_helpdes_setting_agent_message:
+    'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
+  brand3_helpdes_setting_user_message:
+    'Our helpdesk is temorary offline for maintenance. We will be back up in about 10 minutes',
   general_settings_file_uploads_reopen_permissions: [
     '.txt',
     '.png',
     '.docx',
-    '.jpeg',
+    '.jpeg'
   ],
   general_settings_rate_limiting_reopen_permissions: [
     '217.138.85.2112',
     '267.138.85.450',
     '647.138.85.211',
-    '345.138.85.2134',
-  ],
-  brand1_default_email_account: 'support@brand1.deskpro.com',
-  brand2_default_email_account: 'support@brand2.deskpro.com',
-  brand3_default_email_account: 'support@brand3.deskpro.com',
-  agent_settings_help_center_knowledgebase: true,
-  agent_settings_help_center_news: true,
-  agent_settings_help_center_downloads: true,
-  agent_settings_help_center_community: true,
-  test_list_of_strings: [] as string[],
-  test_unit_value: '',
-  test_unit_option: 'minutes',
-  test_unit_checkbox_1: ['admin'],
-  test_unit_another_input_1: 'another',
-  test_unit_checkbox_2: ['stuff'],
-  test_unit_another_input_2: 'hello'
+    '345.138.85.2134'
+  ]
 };
 
 export const vaildationSchema = {
   type: 'object',
   properties: {
-    agent_settings_security_enabled: {
-      type: 'boolean'
-    },
-    agent_settings_security_idle_timeout: {
-      type: 'string',
-      pattern: '^[0-9]*$',
-      when: {
-        agent_settings_security_enabled: {
-          is: true,
-          then: {
-            required: true
-          }
-        }
-      }
-    },
-    agent_settings_security_idle_timeout_action: {
-      type: 'string'
-    },
-    agent_settings_security_whitelist: {
-      type: 'string',
-      pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-    },
-    admin_settings_security_enabled: {
-      type: 'boolean'
-    },
-    admin_settings_security_idle_timeout_enabled: {
-      type: 'string'
-    },
-    admin_settings_security_idle_timeout: {
-      type: 'string'
-    },
-    admin_settings_security_whitelist: {
-      type: 'string',
-      pattern: '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]).){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$'
-    },
-    agent_notifications_enabled: {
-      type: 'boolean'
-    },
-    agent_keyboard_shortcuts_enabled: {
-      type: 'boolean'
-    },
-    forwards_out_of_helpdesk_enabled: {
-      type: 'boolean'
-    },
-    agent_email_subscriptions: {
-      type: 'array'
-    },
-    agent_keyboard_shortcuts: {
-      type: 'array'
-    },
-    brand1_default_email_account: {
-      type: 'string',
-      format: 'email'
-    },
     brand1_helpdes_setting_agent_message: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     brand1_helpdes_setting_user_message: {
-      type: 'string'
-    },
-    brand2_default_email_account: {
       type: 'string',
-      format: 'email'
+      required: true
     },
     brand2_helpdes_setting_agent_message: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     brand2_helpdes_setting_user_message: {
-      type: 'string'
-    },
-    brand3_default_email_account: {
       type: 'string',
-      format: 'email'
+      required: true
     },
     brand3_helpdes_setting_agent_message: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     brand3_helpdes_setting_user_message: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
-    agent_settings_help_center_knowledgebase: {
-      type: 'boolean'
+    general_settings_date_and_time_input_2: {
+      type: 'string',
+      required: true
     },
-    agent_settings_help_center_news: {
-      type: 'boolean'
+    general_settings_date_and_time_input_3: {
+      type: 'string',
+      required: true
     },
-    agent_settings_help_center_downloads: {
-      type: 'boolean'
+    general_settings_date_and_time_input_4: {
+      type: 'string',
+      required: true
     },
-    agent_settings_help_center_community: {
-      type: 'boolean'
+    general_settings_date_and_time_input_5: {
+      type: 'string',
+      required: true
     },
-    test_list_of_strings: {
-      type: 'array'
+    general_settings_date_and_time_input_6: {
+      type: 'string',
+      required: true
     },
-    test_unit_value: {
-      type: 'string'
+    file_upload_unit_value_1: {
+      type: 'string',
+      required: true
     },
-    test_unit_option: {
-      type: 'string'
-    },
-    test_unit_checkbox_1: {
-      type: 'array'
-    },
-    test_unit_another_input_1: {
-      type: 'string'
-    },
-    test_unit_checkbox_2: {
-      type: 'array'
-    },
-    test_unit_another_input_2: {
-      type: 'string'
-    },
-  },
+    file_upload_unit_value_2: {
+      type: 'string',
+      required: true
+    }
+  }
 };
 
 export const validationConfig = {
   errMessages: {
-    agent_settings_security_idle_timeout: {
-      required: 'validation.required',
-      pattern: 'validation.numberNotValid'
+    brand1_helpdes_setting_agent_message: {
+      required: 'validation.required'
     },
-    agent_settings_security_whitelist: {
-      pattern: 'agent.settings.security_whitelist'
+    brand1_helpdes_setting_user_message: {
+      required: 'validation.required'
+    },
+    brand2_helpdes_setting_agent_message: {
+      required: 'validation.required'
+    },
+    brand2_helpdes_setting_user_message: {
+      required: 'validation.required'
+    },
+    brand3_helpdes_setting_agent_message: {
+      required: 'validation.required'
+    },
+    brand3_helpdes_setting_user_message: {
+      required: 'validation.required'
+    },
+    general_settings_date_and_time_input_2: {
+      required: 'validation.required'
+    },
+    general_settings_date_and_time_input_3: {
+      required: 'validation.required'
+    },
+    general_settings_date_and_time_input_4: {
+      required: 'validation.required'
+    },
+    general_settings_date_and_time_input_5: {
+      required: 'validation.required'
+    },
+    general_settings_date_and_time_input_6: {
+      required: 'validation.required'
+    },
+    file_upload_unit_value_1: {
+      required: 'validation.required'
+    },
+    file_upload_unit_value_2: {
+      required: 'validation.required'
     }
   }
 };
