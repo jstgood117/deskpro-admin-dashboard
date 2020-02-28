@@ -3,6 +3,7 @@ import { mount, shallow } from '../../test/enzyme';
 
 import SettingsData, { IProps } from './SettingsData';
 import AddCalendarForm from './AddCalendarForm';
+import { IProps as ICalendarProps } from './AddCalendarForm';
 
 describe('SettingsData', () => {
   let props: any;
@@ -122,7 +123,7 @@ jest.mock('react-dom', () => ({
 }));
 
 describe('SettingsData-AddCalendarForm', () => {
-  let props: any;
+  let props: ICalendarProps;
   let mountedCode: any;
 
   const wrapper = (bShallow: boolean) => {

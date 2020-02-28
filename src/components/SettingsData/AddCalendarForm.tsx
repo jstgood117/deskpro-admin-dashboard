@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -17,10 +17,13 @@ export interface IProps {
   styleType?: ButtonStyleType;
   icon?: string;
   text?: string;
+  id?: string;
+  type?: string;
+  formikProps?: any;
 }
 const requiredValidation = yup.string().required('validation.required');
 
-const AddCalendarForm = ({ ...props }) => {
+const AddCalendarForm: FC<IProps> = ({ ...props }) => {
   const ValidationSchema = () =>
     yup.object().shape({
       business_hours_add_calendar_form_input: requiredValidation
@@ -77,7 +80,10 @@ const AddCalendarForm = ({ ...props }) => {
             <Drawer
               open={isOpened}
               onClose={() => {
-                formikProps.setFieldTouched('business_hours_add_calendar_form_input', false);
+                formikProps.setFieldTouched(
+                  'business_hours_add_calendar_form_input',
+                  false
+                );
                 openDrawer(false);
               }}
             >
