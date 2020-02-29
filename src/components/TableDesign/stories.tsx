@@ -61,15 +61,15 @@ const BadeImage = styled.img`
 
 const Team: React.FC<{
   teamView: 'avatar' | 'avatar-text' | 'label' | 'avatar-label';
-  team: any;
+  teams: any;
   index: number;
-}> = ({ teamView, team, index }) => {
+}> = ({ teamView, teams, index }) => {
   switch (teamView) {
     case 'avatar':
       return (
         <Avatar
           type='text'
-          content={team.text}
+          content={teams.name}
           style={{ marginRight: 8 }}
           textBackgroundColor={getRandomColor().background}
           textColor={textColor}
@@ -80,19 +80,19 @@ const Team: React.FC<{
         <Flex style={{ margin: 5, alignItems: 'center' }}>
           <Avatar
             style={{ marginRight: 8 }}
-            type={team.image ? 'image' : 'text'}
-            content={team.image || team.text}
+            type={teams.image ? 'image' : 'text'}
+            content={teams.image || teams.name}
             textBackgroundColor={getRandomColor().background}
             textColor={textColor}
           />
-          <P1>{team.text}</P1>
+          <P1>{teams.name}</P1>
         </Flex>
       );
     case 'label':
       return (
         <div style={{ marginRight: 5 }}>
           <Label
-            label={team.text}
+            label={teams.name}
             styleType='filled'
             styles={{
               backgroundColor: getRandomColor().background,
@@ -105,14 +105,14 @@ const Team: React.FC<{
       return (
         <Flex style={{ margin: 5, alignItems: 'center' }}>
           <Label
-            label={team.text}
+            label={teams.name}
             styleType='filled'
             styles={{
               backgroundColor: getRandomColor().background,
               color: textColor
             }}
           >
-            {team.image && <BadeImage src={team.image} />}
+            {teams.image && <BadeImage src={teams.image} />}
           </Label>
         </Flex>
       );
@@ -176,7 +176,7 @@ const TableDesignComponent: React.FC = () => {
                 type='text'
                 textBackgroundColor={getRandomColor().background}
                 textColor={textColor}
-                content={item.team}
+                content={item.teams[0].name}
               />
             </TableCell>
             <TableCell>{item.permission_group}</TableCell>
@@ -238,11 +238,11 @@ const TableDesignTeamAvatarComponent: React.FC<{
             <TableCell>
               <Flex style={{ alignItems: 'center' }}>
                 {item.teams.map(
-                  (team, idx) =>
+                  (_teams, idx) =>
                     idx < 3 && (
                       <Team
-                        key={team.text}
-                        team={team}
+                        key={_teams.name}
+                        teams={_teams}
                         teamView={teamView}
                         index={idx}
                       />

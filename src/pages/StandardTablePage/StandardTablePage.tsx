@@ -8,6 +8,9 @@ import {
 } from 'react-router-dom';
 import { KeyValue, ColumnOrder } from '../../types';
 import { IViewData, ITableColumn } from '../../resources/interfaces';
+import {
+  buildColumnPropToTypeDictionary
+} from '../../utils/buildColumnPropToTypeDictionary';
 import { setupFilters } from '../../services/filters';
 import { FilterProps } from '../../resources/interfaces/filterMeta';
 import { runFilters } from '../../services/filters';
@@ -244,7 +247,14 @@ const StandardTablePage: FC<CombinedProps> = ({
   };
 
   const getUniqueValues = (columnName: string): string[] => {
-    return getColumnUniqueValues(tableData, columnName);
+
+    if(columnName === '') {
+      return [];
+    }
+
+    const colToTypeDictionary = buildColumnPropToTypeDictionary(currentView.tableDef.columns);
+
+    return getColumnUniqueValues(tableData, columnName, colToTypeDictionary);
   };
 
   const onNewClick = (_primaryPath: string) => {

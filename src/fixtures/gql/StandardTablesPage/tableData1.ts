@@ -12,17 +12,17 @@ export const testTableData = [
     active: true,
     teams: [
       {
-        text: 'Accounting',
+        name: 'Accounting',
         image:
           'https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=4000&q=80'
       },
       {
-        text: 'Business',
+        name: 'Business',
         image:
           'https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=4000&q=80'
       },
       {
-        text: 'Design',
+        name: 'Design',
         image:
           'https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=4000&q=80'
       }
@@ -56,12 +56,12 @@ export const testTableData = [
     active: true,
     teams: [
       {
-        text: 'Business',
+        name: 'Business',
         image:
           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       },
       {
-        text: 'Design',
+        name: 'Design',
         image:
           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
@@ -90,7 +90,7 @@ export const testTableData = [
     id: 45783,
     teams: [
       {
-        text: 'Design',
+        name: 'Design',
         image:
           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
@@ -119,22 +119,22 @@ export const testTableData = [
     id: 23561,
     teams: [
       {
-        text: 'Accounting',
+        name: 'Accounting',
         image:
           'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80'
       },
       {
-        text: 'Business',
+        name: 'Business',
         image:
           'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80'
       },
       {
-        text: 'Design',
+        name: 'Design',
         image:
           'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80'
       },
       {
-        text: 'HR',
+        name: 'HR',
         image:
           'https://images.unsplash.com/photo-1549459685-701565fe9ff1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=950&q=80'
       }
@@ -164,27 +164,27 @@ export const testTableData = [
     id: 34679,
     teams: [
       {
-        text: 'Accounting',
+        name: 'Accounting',
         image:
           'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       },
       {
-        text: 'Business',
+        name: 'Business',
         image:
           'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       },
       {
-        text: 'Design',
+        name: 'Design',
         image:
           'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       },
       {
-        text: 'HR',
+        name: 'HR',
         image:
           'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       },
       {
-        text: 'Sales',
+        name: 'Sales',
         image:
           'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
@@ -213,7 +213,7 @@ export const testTableData = [
     id: 95604,
     teams: [
       {
-        text: 'Finance',
+        name: 'Finance',
         image:
           'https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1002&q=80'
       }
@@ -242,7 +242,7 @@ export const testTableData = [
     id: 34672,
     teams: [
       {
-        text: 'Insurance',
+        name: 'Insurance',
         image:
           'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
       }
@@ -271,7 +271,7 @@ export const testTableData = [
     id: 87642,
     teams: [
       {
-        text: 'Marketing',
+        name: 'Marketing',
         image:
           'https://images.unsplash.com/photo-1495147334217-fcb3445babd5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80'
       }
@@ -304,7 +304,7 @@ export const testTableData = [
     id: 45726,
     teams: [
       {
-        text: 'Support',
+        name: 'Support',
         image:
           'https://images.unsplash.com/photo-1493106819501-66d381c466f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
@@ -333,7 +333,7 @@ export const testTableData = [
     id: 34567,
     teams: [
       {
-        text: 'IT',
+        name: 'IT',
         image:
           'https://images.unsplash.com/photo-1541647376583-8934aaf3448a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=4000&q=80'
       }
@@ -362,7 +362,7 @@ export const testTableData = [
     id: 13462,
     teams: [
       {
-        text: 'Enrollment',
+        name: 'Enrollment',
         image:
           'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80'
       }
@@ -391,7 +391,7 @@ export const testTableData = [
     id: 24672,
     teams: [
       {
-        text: 'Support',
+        name: 'Support',
         image:
           'https://images.unsplash.com/photo-1550639524-a6f58345a2ca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=944&q=80'
       }
@@ -420,7 +420,7 @@ export const testTableData = [
     id: 24662,
     teams: [
       {
-        text: 'Support',
+        name: 'Support',
         image:
           'https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=944&q=80'
       }
@@ -449,7 +449,7 @@ export const testTableData = [
     id: 23578,
     teams: [
       {
-        text: 'Sales',
+        name: 'Sales',
         image:
           'https://images.unsplash.com/photo-1543246239-7ae3ded686ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
@@ -478,7 +478,7 @@ export const testTableData = [
     id: 56894,
     teams: [
       {
-        text: 'Sales',
+        name: 'Sales',
         image:
           'https://images.unsplash.com/photo-1552237057-adf508b23140?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
@@ -507,7 +507,7 @@ export const testTableData = [
     id: 96744,
     teams: [
       {
-        text: 'IT',
+        name: 'IT',
         image:
           'https://images.unsplash.com/photo-1519058082700-08a0b56da9b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60'
       }
@@ -536,7 +536,7 @@ export const testTableData = [
     id: 34678,
     teams: [
       {
-        text: 'Insurance',
+        name: 'Insurance',
         image:
           'https://images.unsplash.com/photo-1542345812-d98b5cd6cf98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60'
       }
@@ -565,7 +565,7 @@ export const testTableData = [
     id: 24573,
     teams: [
       {
-        text: 'Insurance',
+        name: 'Insurance',
         image:
           'https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=935&q=80'
       }
@@ -594,7 +594,7 @@ export const testTableData = [
     id: 24688,
     teams: [
       {
-        text: 'Civil',
+        name: 'Civil',
         image:
           'https://images.unsplash.com/photo-1542513217-0b0eedf7005d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60'
       }
@@ -623,7 +623,7 @@ export const testTableData = [
     id: 97545,
     teams: [
       {
-        text: 'Marketing',
+        name: 'Marketing',
         image:
           'https://images.unsplash.com/photo-1513732822839-24f03a92f633?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
       }
