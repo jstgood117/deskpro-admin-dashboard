@@ -25,59 +25,54 @@ describe('Table', () => {
 
     cy.wait('@graphql').then((xhr: WaitXHR) => {
       const { request }: { request: ObjectLike} = xhr;
+      // expect(request.body).to.not.be(null);
       expect(request.body).to.not.null;
     });
 
     cy.get('h1').contains('Agent');
   });
 
-  it('Filters correctly', () => {
+  it('Check group by feature correctly', () => {
+    cy.server()
+      .route({
+        method: 'POST',
+        url: 'https://daily-newadmin.deskprodemo.com/admin-api/graphql',
+      }).as('graphql');
 
     cy.visit('/#/agents');
 
-    cy.get('button')
-      .contains('Filter')
-      .as('filterBtn');
+    cy.wait('@graphql').then((xhr: WaitXHR) => {
+      const { request }: { request: ObjectLike} = xhr;
+      expect(request.body.operationName).to.equal('initalSetup');
+    });
 
     cy.get('button')
-      .contains('Filter')
-      .as('filterBtn');
+      .contains('Group')
+      .as('groupBtn');
 
-    cy.get('@filterBtn').click();
+    cy.get('button')
+      .contains('Group')
+      .as('groupBtn');
 
-    // Filter Property Autocomplete
-    cy.get('.FilterOptions__StyledAutoComplete-bftfql-0.iSdaiG')
-      .find('input')
-      .as('propertyAutocomplete');
+    cy.get('@groupBtn').click();
+    cy.get('@groupBtn').click();
 
-    cy.get('@propertyAutocomplete')
-      .focus()
-      .type('Name{enter}');
+    // Group by teams
+    cy.get('.MenuStyles__StyledMenuItem-hq5g91-4')
+      .contains('Teams')
+      .as('applyGroupByBtn');
 
-    // Filter Operator Autocomplete
-    cy.get('.FilterOptions__StyledAutoComplete-bftfql-0.irhpPS')
-      .find('input')
-      .as('operatorAutocomplete');
-
-    cy.get('@operatorAutocomplete')
-      .focus()
-      .type('Contains{enter}');
-
-    // Value input
-    cy.get('.Helpers__InputStyled-jo9p83-0')
-      .as('valueAutocomplete');
-
-    cy.get('@valueAutocomplete')
-      .focus()
-      .type('John{enter}');
-
-    // Apply button
-    cy.get('.ButtonStyles__ButtonStyled-sc-1bcbueb-0.dhptZB')
-      .contains('Add Filter')
-      .as('applyFilterBtn');
-
-    cy.get('@applyFilterBtn')
+    cy.get('@applyGroupByBtn')
       .click();
 
+    cy.get('.groupTitle')
+      .find('svg')
+      .as('collapsedGroupByBtn');
+
+    cy.get('@collapsedGroupByBtn')
+      .click();
+
+    cy.get('@collapsedGroupByBtn')
+      .click();
   });
 });
