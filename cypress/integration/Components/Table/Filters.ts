@@ -180,9 +180,12 @@ describe('Table', () => {
     cy.get('@tableRows')
       .contains('John Doe');
 
+    cy.get(':nth-child(2) > .FilterItem__StyledItem-xaopp-0 > [style="display: flex;"] > svg')
+    .as('clearFilter2')
+    .click();
 
-    cy.get('.close-btn > .styled__button-avknkc-25')
-      .as('clearFilters')
+    cy.get(':nth-child(1) > .FilterItem__StyledItem-xaopp-0 > [style="display: flex;"] > svg')
+      .as('clearFilter1')
       .click();
 
     cy.get('@tableRows')

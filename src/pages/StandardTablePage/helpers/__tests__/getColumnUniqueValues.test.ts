@@ -11,7 +11,7 @@ describe('getColumnUniqueValues', () => {
 
   test('get all the unique values from a table column - data 1', () => {
 
-    const result = getColumnUniqueValues(data1, 'name');
+    const result = getColumnUniqueValues(data1, 'name', {'name': 'TableColumnText' });
     const expected =  [
       'Aaron Wood',       'Anthony Martin',
       'Braydon Jackson',  'Cynthia Clarke',
@@ -30,7 +30,7 @@ describe('getColumnUniqueValues', () => {
 
   test('get all the unique values from a table column - data 2', () => {
 
-    const result = getColumnUniqueValues(data2, 'name');
+    const result = getColumnUniqueValues(data2, 'name', {'name': 'TableColumnText' });
     const expected =  [
       'John Doe',
       'Pansy Mills',
@@ -51,7 +51,7 @@ describe('getColumnUniqueValues', () => {
 
   test('get all the unique values from a table column - data 3', () => {
 
-    const result = getColumnUniqueValues(data3, 'name');
+    const result = getColumnUniqueValues(data3, 'name', {'name': 'TableColumnText' });
     const expected =  [
       'Level 1',
       'Level 2',
@@ -65,7 +65,7 @@ describe('getColumnUniqueValues', () => {
 
   test('get all the unique values from a table column - data 4', () => {
 
-    const result = getColumnUniqueValues(data4, 'name');
+    const result = getColumnUniqueValues(data4, 'name', {'name': 'TableColumnText' });
     const expected =  [] as any;
 
     expect(result).toEqual(expected);
@@ -73,7 +73,7 @@ describe('getColumnUniqueValues', () => {
 
   test('get all the unique values from a table deep column', () => {
 
-    const result = getColumnUniqueValues(data1, 'team');
+    const result = getColumnUniqueValues(data1, 'teams', {'teams': 'TableColumnAgentTeamList' });
     const expected =  [
       'Accounting', 'Business',
       'Design',     'HR',
@@ -88,7 +88,7 @@ describe('getColumnUniqueValues', () => {
 
   test('return empy array if column name not found', () => {
 
-    const result1 = getColumnUniqueValues(data1, 'randomnotfound');
+    const result1 = getColumnUniqueValues(data1, 'randomnotfound', {'randomnotfound': 'TableColumnText' });
     const expected1 = [] as any[];
 
     expect(result1).toEqual(expected1);
