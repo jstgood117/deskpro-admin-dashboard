@@ -86,10 +86,93 @@ describe('getColumnUniqueValues', () => {
     expect(result).toEqual(expected);
   });
 
-  test('return empy array if column name not found', () => {
+  test('return empty array if column name not found', () => {
 
     const result1 = getColumnUniqueValues(data1, 'randomnotfound', {'randomnotfound': 'TableColumnText' });
     const expected1 = [] as any[];
+
+    expect(result1).toEqual(expected1);
+  });
+
+  test('return all values from comma separate lists', () => {
+
+    const result1 = getColumnUniqueValues(data4, 'namescomma', {'namescomma': 'TableColumnTextCommaSep' });
+    const expected1 = [
+      'test1',
+      'test2',
+      'test3',
+      'test4',
+      'test5',
+      'test6',
+    ] as any[];
+
+    expect(result1).toEqual(expected1);
+  });
+
+  test('return all values from comma separate lists', () => {
+
+    const result1 = getColumnUniqueValues(data4, 'namescomma', {'namescomma': 'TableColumnTextCommaSep' });
+    const expected1 = [
+      'test1',
+      'test2',
+      'test3',
+      'test4',
+      'test5',
+      'test6',
+    ] as any[];
+
+    expect(result1).toEqual(expected1);
+  });
+
+  test('return all unique names in TableColumnAgentTeamList type', () => {
+
+    const result1 = getColumnUniqueValues(data1, 'teams', {'teams': 'TableColumnAgentTeamList' });
+    const expected1 = [
+      'Accounting',
+      'Business',
+      'Design',
+      'HR',
+      'Sales',
+      'Finance',
+      'Insurance',
+      'Marketing',
+      'Support',
+      'IT',
+      'Enrollment',
+      'Civil',
+    ] as any[];
+
+    expect(result1).toEqual(expected1);
+  });
+
+  test('return all unique title in TableColumnTicketDepartmentList type', () => {
+
+    const result1 = getColumnUniqueValues(
+      data4,
+      'departments', {
+        'departments': 'TableColumnTicketDepartmentList'
+      });
+    const expected1 = [
+      'department1',
+      'department2',
+      'department3',
+      'department4',
+    ] as any[];
+
+    expect(result1).toEqual(expected1);
+  });
+
+  test('return yes, no values for TableColumnBoolYesNo', () => {
+
+    const result1 = getColumnUniqueValues(
+      data4,
+      'departments', {
+        'departments': 'TableColumnBoolYesNo'
+      });
+    const expected1 = [
+      'Yes',
+      'No',
+    ] as any[];
 
     expect(result1).toEqual(expected1);
   });
